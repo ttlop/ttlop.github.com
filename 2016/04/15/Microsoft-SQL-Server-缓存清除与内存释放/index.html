@@ -15,7 +15,7 @@
 <meta property="og:description" content="很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。
 这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：
 1.数据缓存：执行查询语句，SQL Server 会将相关的">
-<meta property="og:updated_time" content="2016-04-15T02:17:46.190Z">
+<meta property="og:updated_time" content="2016-04-15T02:20:56.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Microsoft SQL Server 缓存清除与内存释放">
 <meta name="twitter:description" content="很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。
@@ -100,12 +100,12 @@
 <p>1.数据缓存：执行查询语句，SQL Server 会将相关的数据页加载到内存中来，下一次如果再次请求此页的数据的时候，就无需读取磁盘了，大大提高了速度。</p>
 <p>2.执行命令缓存：在执行存储过程，自定函数时，SQL Server 需要先二进制编译再运行，编译后的结果也会缓存起来，再次调用时就无需再次编译。</p>
 <p>在我们执行完相应的查询语句，或存储过程，我们不在需要这些缓存时，可以将其清除，DBCC 管理命令缓存清除如下：</p>
-<p>[SQL]</p>
+<p>[SQL – 清除存储过程缓存]<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ DBCC FREEPROCCACHE</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin134qq20001iqm6ct452rfc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin138qxh0000jzm6nr76e6tc" class="article-share-link">Share</a>
       
       
     </footer>
