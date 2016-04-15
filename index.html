@@ -94,12 +94,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="静态编译"><a href="#静态编译" class="headerlink" title="静态编译"></a>静态编译</h2><p>在使用 ./configure 编译的时候，即没有使用 –enable-mods-shared=[module]或者 –enable-[module]=shared 这2个中的一个，那么所有的模块默认为静态。何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常：<ifmodule></ifmodule>来配置。所以搭建看到的配置都是<ifmodule module.c="">，很显然，module.c 这个东西已经存在httpd这个文件中了。</ifmodule></p>
+        <h2 id="静态编译"><a href="#静态编译" class="headerlink" title="静态编译"></a>静态编译</h2><p>在使用 ./configure 编译的时候，即没有使用如下两个中的一个，那么所有模块默认为静态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--enable-mods-shared=[module] </span><br><span class="line">或者</span><br><span class="line">--enable-[module]=shared</span><br></pre></td></tr></table></figure>
+<p>何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常使用如下配置的都是静态模块，很显然，module.c 这个东西已经存在 httpd 这个文件中了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ifmodule module.c&gt;&lt;/ifmodule&gt;</span><br></pre></td></tr></table></figure>
+<p>我们来看看默认静态编译安装有哪些模块：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@Zabbix3 httpd]<span class="comment"># apachectl -l</span></span><br><span class="line">Compiled <span class="keyword">in</span> modules:</span><br><span class="line">  core.c</span><br><span class="line">  mod_so.c</span><br><span class="line">  http_core.c</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin1doiib0001c8m6mwex5lj0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin1e1eq80001enm69b22dmkx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin1doii10000c8m625sqfucn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin1e1epy0000enm67lycblvd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin1doiij0003c8m63lwd7tgs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin1e1eqt0003enm6fi9opf9b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin1doiil0004c8m6r424yi8w" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin1e1eqv0004enm61a90eye7" class="article-share-link">Share</a>
       
       
     </footer>
