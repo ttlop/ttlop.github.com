@@ -68,6 +68,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Apache-静态编译和动态编译" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/15/Apache-静态编译和动态编译/" class="article-date">
+  <time datetime="2016-04-15T07:07:15.000Z" itemprop="datePublished">2016-04-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Apache/">Apache</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/15/Apache-静态编译和动态编译/">Apache 静态编译和动态编译</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="静态编译"><a href="#静态编译" class="headerlink" title="静态编译"></a>静态编译</h2><p>在使用 ./configure 编译的时候，即没有使用 –enable-mods-shared=[module]或者 –enable-[module]=shared 这2个中的一个，那么所有的模块默认为静态。何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常：<ifmodule></ifmodule>来配置。所以搭建看到的配置都是<ifmodule module.c="">，很显然，module.c 这个东西已经存在httpd这个文件中了。</ifmodule></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin1doiib0001c8m6mwex5lj0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Apache-里的-MPM-调优比较" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/15/Apache-里的-MPM-调优比较/" class="article-date">
@@ -114,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin1cxnz700006am6y9p46yyn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin1doii10000c8m625sqfucn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin1cxnzi00016am6hemqni6b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin1doiij0003c8m63lwd7tgs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -210,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin1cxnzs00036am618dpgb6y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin1doiil0004c8m6r424yi8w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -255,6 +296,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/04/15/Apache-静态编译和动态编译/">Apache 静态编译和动态编译</a>
+          </li>
         
           <li>
             <a href="/2016/04/15/Apache-里的-MPM-调优比较/">Apache 里的 MPM 调优比较</a>

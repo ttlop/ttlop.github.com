@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Microsoft SQL Server | 运维生存时间</title>
+  <title>Apache 静态编译和动态编译 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维生存时间ttlopoa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/Microsoft-SQL-Server/index.html">
+  <meta name="description" content="静态编译在使用 ./configure 编译的时候，即没有使用 –enable-mods-shared=[module]或者 –enable-[module]=shared 这2个中的一个，那么所有的模块默认为静态。何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常：来配置。所以搭建看到的配置都是，很显然，modul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache 静态编译和动态编译">
+<meta property="og:url" content="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维生存时间ttlopoa">
+<meta property="og:description" content="静态编译在使用 ./configure 编译的时候，即没有使用 –enable-mods-shared=[module]或者 –enable-[module]=shared 这2个中的一个，那么所有的模块默认为静态。何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常：来配置。所以搭建看到的配置都是，很显然，modul">
+<meta property="og:updated_time" content="2016-04-15T07:13:09.220Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维生存时间ttlopoa">
+<meta name="twitter:title" content="Apache 静态编译和动态编译">
+<meta name="twitter:description" content="静态编译在使用 ./configure 编译的时候，即没有使用 –enable-mods-shared=[module]或者 –enable-[module]=shared 这2个中的一个，那么所有的模块默认为静态。何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常：来配置。所以搭建看到的配置都是，很显然，modul">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -66,39 +67,56 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" class="archive-article-date">
-  <time datetime="2016-04-15T02:09:02.000Z" itemprop="datePublished">Apr 15</time>
+        <section id="main"><article id="post-Apache-静态编译和动态编译" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/15/Apache-静态编译和动态编译/" class="article-date">
+  <time datetime="2016-04-15T07:07:15.000Z" itemprop="datePublished">2016-04-15</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Apache/">Apache</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/">Microsoft SQL Server 缓存清除与内存释放</a>
+    <h1 class="article-title" itemprop="name">
+      Apache 静态编译和动态编译
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="静态编译"><a href="#静态编译" class="headerlink" title="静态编译"></a>静态编译</h2><p>在使用 ./configure 编译的时候，即没有使用 –enable-mods-shared=[module]或者 –enable-[module]=shared 这2个中的一个，那么所有的模块默认为静态。何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常：<ifmodule></ifmodule>来配置。所以搭建看到的配置都是<ifmodule module.c="">，很显然，module.c 这个东西已经存在httpd这个文件中了。</ifmodule></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin1doiib0001c8m6mwex5lj0" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/15/Apache-里的-MPM-调优比较/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Apache 里的 MPM 调优比较</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
