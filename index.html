@@ -94,13 +94,17 @@
 <p>这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：</p>
 <p>1.数据缓存：执行查询语句，SQL Server 会将相关的数据页加载到内存中来，下一次如果再次请求此页的数据的时候，就无需读取磁盘了，大大提高了速度。</p>
 <p>2.执行命令缓存：在执行存储过程，自定函数时，SQL Server 需要先二进制编译再运行，编译后的结果也会缓存起来，再次调用时就无需再次编译。</p>
-<p>在我们执行完相应的查询语句，或存储过程，我们不在需要这些缓存时，可以将其清除，DBCC 管理命令缓存清除如下：</p>
+<h2 id="缓存清除"><a href="#缓存清除" class="headerlink" title="缓存清除"></a>缓存清除</h2><p>在我们执行完相应的查询语句，或存储过程，我们不在需要这些缓存时，可以将其清除，DBCC 管理命令缓存清除如下：</p>
 <h3 id="SQL-–-清除存储过程缓存"><a href="#SQL-–-清除存储过程缓存" class="headerlink" title="SQL – 清除存储过程缓存"></a>SQL – 清除存储过程缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC FREEPROCCACHE</span><br></pre></td></tr></table></figure>
+<h3 id="SQL-–-清除会话缓存"><a href="#SQL-–-清除会话缓存" class="headerlink" title="SQL – 清除会话缓存"></a>SQL – 清除会话缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC FREESESSIONCACHE</span><br></pre></td></tr></table></figure>
+<h3 id="SQL-–-清除系统缓存"><a href="#SQL-–-清除系统缓存" class="headerlink" title="SQL – 清除系统缓存"></a>SQL – 清除系统缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC FREESYSTEMCACHE(<span class="string">'ALL'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="SQL-–-清除所有缓存"><a href="#SQL-–-清除所有缓存" class="headerlink" title="SQL – 清除所有缓存"></a>SQL – 清除所有缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC DROPCLEANBUFFERS</span><br></pre></td></tr></table></figure>
+<h2 id="内存释放"><a href="#内存释放" class="headerlink" title="内存释放"></a>内存释放</h2><p>虽然我们已经清楚了缓存，但是 SQL 并未释放相应的内存。它只是腾出新的空间为之后所执行脚本使用。SQL Server 并没有提供任何命令允许我们释放不用的内存。因此我们只能通过动态调整 SQL Server 可用物理内存设置来强迫它释放内存。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin13c2w20000lzm685afgyc0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin13lqmx0000omm6llybuxpe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -145,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin13c2wd0001lzm6ysds81yr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin13lqn70001omm6vcuzyfbk" class="article-share-link">Share</a>
       
       
     </footer>
