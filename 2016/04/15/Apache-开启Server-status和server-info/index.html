@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | 运维生存时间</title>
+  <title>Apache 开启Server-status和server-info | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="如果靠分析 Apache 的日志或者查看服务器进程来监视 Apache 运行状态的话，比较繁冗。不过在 Apache 1.3.2及以后的版本中就自带了一个查看 Apache 状态的功能模块 server-status，这样查看 apache 的一些相应状态信息会很方便。
+Apache Server Status加载模块如果你的 Apache 配置文件 httpd.conf 或者 conf.modu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://ttlop.com/2016/04/14/hello-world/index.html">
+<meta property="og:title" content="Apache 开启Server-status和server-info">
+<meta property="og:url" content="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-04-14T08:41:57.863Z">
+<meta property="og:description" content="如果靠分析 Apache 的日志或者查看服务器进程来监视 Apache 运行状态的话，比较繁冗。不过在 Apache 1.3.2及以后的版本中就自带了一个查看 Apache 状态的功能模块 server-status，这样查看 apache 的一些相应状态信息会很方便。
+Apache Server Status加载模块如果你的 Apache 配置文件 httpd.conf 或者 conf.modu">
+<meta property="og:updated_time" content="2016-04-15T07:47:32.953Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="Apache 开启Server-status和server-info">
+<meta name="twitter:description" content="如果靠分析 Apache 的日志或者查看服务器进程来监视 Apache 运行状态的话，比较繁冗。不过在 Apache 1.3.2及以后的版本中就自带了一个查看 Apache 状态的功能模块 server-status，这样查看 apache 的一些相应状态信息会很方便。
+Apache Server Status加载模块如果你的 Apache 配置文件 httpd.conf 或者 conf.modu">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -70,12 +70,16 @@ Quick">
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Apache-开启Server-status和server-info" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/14/hello-world/" class="article-date">
-  <time datetime="2016-04-14T08:41:57.863Z" itemprop="datePublished">2016-04-14</time>
+    <a href="/2016/04/15/Apache-开启Server-status和server-info/" class="article-date">
+  <time datetime="2016-04-15T07:37:07.000Z" itemprop="datePublished">2016-04-15</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Apache/">Apache</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -84,7 +88,7 @@ Quick">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Apache 开启Server-status和server-info
     </h1>
   
 
@@ -92,20 +96,14 @@ Quick">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p>如果靠分析 Apache 的日志或者查看服务器进程来监视 Apache 运行状态的话，比较繁冗。不过在 Apache 1.3.2及以后的版本中就自带了一个查看 Apache 状态的功能模块 server-status，这样查看 apache 的一些相应状态信息会很方便。</p>
+<h2 id="Apache-Server-Status"><a href="#Apache-Server-Status" class="headerlink" title="Apache Server Status"></a>Apache Server Status</h2><h3 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h3><p>如果你的 Apache 配置文件 httpd.conf 或者 conf.modules.d/00-base.conf 中有 LoadModule status_module modules/mod_status.so，说明你的 Apache 已经加载了此模块<br>如果 Apache 没有加载这个模块，如果是 Linux 服务器，就得重新编译 Apache，加上 –enable-module=so 参数即可；如果你是 windows 系统，无需任何编译，只要把刚才说的 LoadModule status_module modules/mod_status.so 这句加上，如果前面带有#号，开启的话，需要将#去除。</p>
+<h3 id="配置修改"><a href="#配置修改" class="headerlink" title="配置修改"></a>配置修改</h3><p>在httpd.conf最后添加如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Location /server-status&gt;</span><br><span class="line">    SetHandler server-status</span><br><span class="line">    Order Deny,Allow</span><br><span class="line">    Deny from all</span><br><span class="line">    Allow from 58.20.58.245</span><br><span class="line">&lt;/Location&gt;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin1ewrt20004kcm6i4j616pk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin1ewrs60000kcm6mjzzpvr4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,15 +112,11 @@ Quick">
     
 <nav id="article-nav">
   
-    <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Microsoft SQL Server 缓存清除与内存释放
-        
-      </div>
-    </a>
   
+    <a href="/2016/04/15/Apache-静态编译和动态编译/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Apache 静态编译和动态编译</div>
+    </a>
   
 </nav>
 
