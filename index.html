@@ -95,12 +95,12 @@
 <p>1.数据缓存：执行查询语句，SQL Server 会将相关的数据页加载到内存中来，下一次如果再次请求此页的数据的时候，就无需读取磁盘了，大大提高了速度。</p>
 <p>2.执行命令缓存：在执行存储过程，自定函数时，SQL Server 需要先二进制编译再运行，编译后的结果也会缓存起来，再次调用时就无需再次编译。</p>
 <p>在我们执行完相应的查询语句，或存储过程，我们不在需要这些缓存时，可以将其清除，DBCC 管理命令缓存清除如下：</p>
-<h3 id="SQL-–-清除存储过程缓存"><a href="#SQL-–-清除存储过程缓存" class="headerlink" title="SQL – 清除存储过程缓存"></a>SQL – 清除存储过程缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ DBCC FREEPROCCACHE</span><br></pre></td></tr></table></figure>
+<h3 id="SQL-–-清除存储过程缓存"><a href="#SQL-–-清除存储过程缓存" class="headerlink" title="SQL – 清除存储过程缓存"></a>SQL – 清除存储过程缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC FREEPROCCACHE</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin13agzt0000kym6zkh7861b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin13c2w20000lzm685afgyc0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -145,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin13ah030001kym6p21m79yk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin13c2wd0001lzm6ysds81yr" class="article-share-link">Share</a>
       
       
     </footer>
