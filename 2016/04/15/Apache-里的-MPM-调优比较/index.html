@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="什么是MPM?Apache 2.X 支持插入式并行处理模块，称为多路处理模块（MPM）。在编译apache时必须选择也只能选择一个 MPM，对类 UNIX 系统，有几个不同的 MPM 可供选择，它们会影响到 apache 的速度和可伸缩性。Multi-Processing Module (MPM) implements a hybrid multi-process multi-threaded s">
-<meta property="og:updated_time" content="2016-04-15T03:28:48.290Z">
+<meta property="og:updated_time" content="2016-04-15T03:37:22.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache 里的 MPM 调优比较">
 <meta name="twitter:description" content="什么是MPM?Apache 2.X 支持插入式并行处理模块，称为多路处理模块（MPM）。在编译apache时必须选择也只能选择一个 MPM，对类 UNIX 系统，有几个不同的 MPM 可供选择，它们会影响到 apache 的速度和可伸缩性。Multi-Processing Module (MPM) implements a hybrid multi-process multi-threaded s">
@@ -56,9 +56,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -97,14 +97,17 @@
 <h2 id="有多少种MPM"><a href="#有多少种MPM" class="headerlink" title="有多少种MPM?"></a>有多少种MPM?</h2><p>大致有：prefork MPM、worker MPM、BeOS MPM、NetWare MPM、OS/2 MPM、WinNT MPM。</p>
 <h2 id="怎么知道apache当前用的是哪个MPM"><a href="#怎么知道apache当前用的是哪个MPM" class="headerlink" title="怎么知道apache当前用的是哪个MPM?"></a>怎么知道apache当前用的是哪个MPM?</h2><p>linux及windows下都可以使用命令：“httpd -l ” 进行查询。</p>
 <h2 id="各个MPM是怎么工作的"><a href="#各个MPM是怎么工作的" class="headerlink" title="各个MPM是怎么工作的?"></a>各个MPM是怎么工作的?</h2><h3 id="Prefork-MPM"><a href="#Prefork-MPM" class="headerlink" title="Prefork MPM"></a>Prefork MPM</h3><p>这个多路处理模块(MPM)实现了一个非线程型的、预派生的 web 服务器，它的工作方式类似于 Apache 1.3。它适合没有线程安全库，需要避免线程兼容性问题的系统。它是要求每个请求相互独立的情况下最好的 MPM，这样若是一个请求出现问题就不会影响到其它请求。</p>
-<p>这个MPM具有很强的自我调节能力，只需要很少的配置指令调整。最重要的是</p>
+<p>这个MPM具有很强的自我调节能力，只需要很少的配置指令调整。最重要的是将 MaxClients 设置为一个足够大的数值以处理潜在的请求高峰，同时又不能太大，以致需要使用的内存超出物理内存的大小。</p>
+<h3 id="Worker-MPM"><a href="#Worker-MPM" class="headerlink" title="Worker MPM"></a>Worker MPM</h3><p>此多路处理模块(MPM)使网络服务器支持混合的多线程多进程。由于使用线程来处理请求，所以可以处理海量请求，而系统资源的开销小于基于进程的 MPM 。但是，它也使用了多进程，每个进程有多个线程，以获得基于进程的 MPM 的稳定性。</p>
+<p>每个进程可以拥有的线程数量是固定的。服务器会根据负载情况增加或减少进程数量。一个单独的控制进程(父进程)负责子进程的建立。每个子进程可以建立 ThreadsPerChild 数量的服务线程和一个监听线程，该监听线程监听接入请求并将其传递给服务线程处理和应答。</p>
+<p>不管是 Worker 模式或是 Prefork 模式，Apache 总是试图保持一些备用的(spare)或者空闲的子进程(空闲的服务线程池)用于迎接即将到来的请求。这样客户端就不需要在得到服务前等候子进程的产生。</p>
 <h2 id="各个MPM是应该如何优化"><a href="#各个MPM是应该如何优化" class="headerlink" title="各个MPM是应该如何优化?"></a>各个MPM是应该如何优化?</h2><p>(1)prefork MPM<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mpm_prefork_module&gt;</span><br><span class="line">    StartServers           10</span><br><span class="line">    M<span class="keyword">in</span>SpareServers        10</span><br><span class="line">    MaxSpareServers        15</span><br><span class="line">    ServerLimit            2000</span><br><span class="line">    MaxClients             1000</span><br><span class="line">    MaxRequestsPerChild    10000</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure></p>
 <p>启动时建立 StartServers 个子进程，然后按每秒创建指数级个进程直到达到 MinSpareServers 个进程（最多增到每秒32个）</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin15nzo6000071m6jo9pjwk2" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin15z0ss00009om6k9hvsttk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -115,7 +118,7 @@
   
   
     <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Microsoft SQL Server 缓存清除与内存释放</div>
     </a>
   
@@ -130,7 +133,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li></ul>
     </div>
@@ -155,7 +158,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -184,7 +187,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
