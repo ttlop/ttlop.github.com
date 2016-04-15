@@ -15,7 +15,7 @@
 <meta property="og:description" content="很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。
 这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：
 1.数据缓存：执行查询语句，SQL Server 会将相关的">
-<meta property="og:updated_time" content="2016-04-15T02:30:57.842Z">
+<meta property="og:updated_time" content="2016-04-15T02:36:04.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Microsoft SQL Server 缓存清除与内存释放">
 <meta name="twitter:description" content="很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。
@@ -105,11 +105,12 @@
 <h3 id="SQL-–-清除系统缓存"><a href="#SQL-–-清除系统缓存" class="headerlink" title="SQL – 清除系统缓存"></a>SQL – 清除系统缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC FREESYSTEMCACHE(<span class="string">'ALL'</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="SQL-–-清除所有缓存"><a href="#SQL-–-清除所有缓存" class="headerlink" title="SQL – 清除所有缓存"></a>SQL – 清除所有缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC DROPCLEANBUFFERS</span><br></pre></td></tr></table></figure>
 <h2 id="内存释放"><a href="#内存释放" class="headerlink" title="内存释放"></a>内存释放</h2><p>虽然我们已经清楚了缓存，但是 SQL 并未释放相应的内存。它只是腾出新的空间为之后所执行脚本使用。SQL Server 并没有提供任何命令允许我们释放不用的内存。因此我们只能通过动态调整 SQL Server 可用物理内存设置来强迫它释放内存。</p>
+<p>操作原理是调整内存配置大小。手动操作方法：<br>1.打开 SQL Server Management(企业管理器);<br>2.打开 SQL Server 实例的属性面板；<br>3.找到内存设置，改变其中的最大服务器内存使用即可。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin13lqmx0000omm6llybuxpe" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin13s78f0000q5m66p1ljhut" class="article-share-link">Share</a>
       
       
     </footer>
