@@ -5,22 +5,16 @@
   
   <title>Apache 静态编译和动态编译 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="静态编译在使用 ./configure 编译的时候，即没有使用如下两个中的一个，那么所有模块默认为静态：
-123--enable-mods-shared=[module] 或者--enable-[module]=shared
-何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常使用如下配置的都是静态模块，很显然，mod">
+  <meta name="description" content="status info 静态编译 动态编译 apachectl DUMP_MODULES">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Apache 静态编译和动态编译">
 <meta property="og:url" content="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="静态编译在使用 ./configure 编译的时候，即没有使用如下两个中的一个，那么所有模块默认为静态：
-123--enable-mods-shared=[module] 或者--enable-[module]=shared
-何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常使用如下配置的都是静态模块，很显然，mod">
-<meta property="og:updated_time" content="2016-04-15T07:31:17.629Z">
+<meta property="og:description" content="status info 静态编译 动态编译 apachectl DUMP_MODULES">
+<meta property="og:updated_time" content="2016-04-16T03:00:46.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache 静态编译和动态编译">
-<meta name="twitter:description" content="静态编译在使用 ./configure 编译的时候，即没有使用如下两个中的一个，那么所有模块默认为静态：
-123--enable-mods-shared=[module] 或者--enable-[module]=shared
-何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常使用如下配置的都是静态模块，很显然，mod">
+<meta name="twitter:description" content="status info 静态编译 动态编译 apachectl DUMP_MODULES">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -103,6 +97,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--enable-mods-shared=[module] </span><br><span class="line">或者</span><br><span class="line">--enable-[module]=shared</span><br></pre></td></tr></table></figure>
 <p>何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常使用如下配置的都是静态模块，很显然，module.c 这个东西已经存在 httpd 这个文件中了：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ifmodule module.c&gt;&lt;/ifmodule&gt;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="动态编译"><a href="#动态编译" class="headerlink" title="动态编译"></a>动态编译</h2><p>就是编译的时候，使用了如下命令来动态编译：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--enable-mods-shared=[module] </span><br><span class="line">或者</span><br><span class="line">--enable-[module]=shared</span><br></pre></td></tr></table></figure>
 <p>那么什么是动态？静态是直接编译进 httpd 中，那么动态很显然就不编译进去了，也就是你启动的时候根本不会加载这个模块，而是给你一个 module.so 文件，你一定要使用 loadmodule 这个语法来加载，这个模块才有效。</p>
@@ -112,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin2jxwx70003pbm6ruf7t6nn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin2jzdfh0003qom6mzs0a72k" class="article-share-link">Share</a>
       
       
     </footer>

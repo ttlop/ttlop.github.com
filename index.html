@@ -103,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin2jxwwp0000pbm6uyx7w7kd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin2jzdex0000qom6l30dhoqr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,16 +143,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--enable-mods-shared=[module] </span><br><span class="line">或者</span><br><span class="line">--enable-[module]=shared</span><br></pre></td></tr></table></figure>
 <p>何为静态？其实就是编译的时候所有的模块自己编译进 httpd 这个文件中，启动的时候这些模块就已经加载进来了，也就是可以使用了，通常使用如下配置的都是静态模块，很显然，module.c 这个东西已经存在 httpd 这个文件中了：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ifmodule module.c&gt;&lt;/ifmodule&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="动态编译"><a href="#动态编译" class="headerlink" title="动态编译"></a>动态编译</h2><p>就是编译的时候，使用了如下命令来动态编译：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--enable-mods-shared=[module] </span><br><span class="line">或者</span><br><span class="line">--enable-[module]=shared</span><br></pre></td></tr></table></figure>
-<p>那么什么是动态？静态是直接编译进 httpd 中，那么动态很显然就不编译进去了，也就是你启动的时候根本不会加载这个模块，而是给你一个 module.so 文件，你一定要使用 loadmodule 这个语法来加载，这个模块才有效。</p>
-<p>我们来看看 centos 系统中默认安装的 apache 静态编译和动态编译安装了哪些模块：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@Zabbix3 httpd]<span class="comment"># apachectl -t -D DUMP_MODULES</span></span><br><span class="line">Passing arguments to httpd using apachectl is no longer supported.</span><br><span class="line">You can only start/stop/restart httpd using this script.</span><br><span class="line">If you want to pass extra arguments to httpd, edit the</span><br><span class="line">/etc/sysconfig/httpd config file.</span><br><span class="line">Loaded Modules:</span><br><span class="line"> core_module (static)</span><br><span class="line"> so_module (static)</span><br><span class="line"> http_module (static)</span><br><span class="line"> access_compat_module (shared)</span><br><span class="line"> actions_module (shared)</span><br><span class="line"> <span class="built_in">alias</span>_module (shared)</span><br><span class="line"> allowmethods_module (shared)</span><br><span class="line"> auth_basic_module (shared)</span><br><span class="line"> auth_digest_module (shared)</span><br><span class="line"> authn_anon_module (shared)</span><br><span class="line"> authn_core_module (shared)</span><br><span class="line"> authn_dbd_module (shared)</span><br><span class="line"> authn_dbm_module (shared)</span><br><span class="line"> authn_file_module (shared)</span><br><span class="line"> authn_socache_module (shared)</span><br><span class="line"> authz_core_module (shared)</span><br><span class="line"> authz_dbd_module (shared)</span><br><span class="line"> authz_dbm_module (shared)</span><br><span class="line"> authz_groupfile_module (shared)</span><br><span class="line"> authz_host_module (shared)</span><br><span class="line"> authz_owner_module (shared)</span><br><span class="line"> authz_user_module (shared)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
+        
+          <p class="article-more-link">
+            <a href="/2016/04/15/Apache-静态编译和动态编译/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin2jxwx70003pbm6ruf7t6nn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin2jzdfh0003qom6mzs0a72k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin2jxwwy0001pbm6xppn7oon" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin2jzdf70001qom6cf5bs5uq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin2jxwxx0009pbm6y3jlllbc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin2jzdfn0005qom643wgss4g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -304,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin2jxwy0000apbm68s2lcd6u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/14/hello-world/" data-id="cin2jzdfk0004qom6vm9wr3uj" class="article-share-link">Share</a>
       
       
     </footer>

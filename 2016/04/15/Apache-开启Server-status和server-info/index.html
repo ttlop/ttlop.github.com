@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="Apache 运行状态 status info 监控">
-<meta property="og:updated_time" content="2016-04-16T02:56:08.835Z">
+<meta property="og:updated_time" content="2016-04-16T02:57:19.856Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache 开启Server-status和server-info">
 <meta name="twitter:description" content="Apache 运行状态 status info 监控">
@@ -93,7 +93,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如果靠分析 Apache 的日志或者查看服务器进程来监视 Apache 运行状态的话，比较繁冗。不过在 Apache 1.3.2及以后的版本中就自带了一个查看 Apache 状态的功能模块 server-status，这样查看 apache 的一些相应状态信息会很方便。<br><a id="more"></a><br>如果靠分析 Apache 的日志或者查看服务器进程来监视 Apache 运行状态的话，比较繁冗。不过在 Apache 1.3.2及以后的版本中就自带了一个查看 Apache 状态的功能模块 server-status，这样查看 apache 的一些相应状态信息会很方便。</p>
+        <p>如果靠分析 Apache 的日志或者查看服务器进程来监视 Apache 运行状态的话，比较繁冗。不过在 Apache 1.3.2及以后的版本中就自带了一个查看 Apache 状态的功能模块 server-status，这样查看 apache 的一些相应状态信息会很方便。<br><a id="more"></a></p>
 <h2 id="Apache-Server-Status"><a href="#Apache-Server-Status" class="headerlink" title="Apache Server Status"></a>Apache Server Status</h2><h3 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h3><p>如果你的 Apache 配置文件 httpd.conf 或者 conf.modules.d/00-base.conf 中有 LoadModule status_module modules/mod_status.so，说明你的 Apache 已经加载了此模块<br>如果 Apache 没有加载这个模块，如果是 Linux 服务器，就得重新编译 Apache，加上 –enable-module=so 参数即可；如果你是 windows 系统，无需任何编译，只要把刚才说的 LoadModule status_module modules/mod_status.so 这句加上，如果前面带有#号，开启的话，需要将#去除。</p>
 <h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>在httpd.conf最后添加如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Location /server-status&gt;   <span class="comment">#后面的内容可以自定义修改，即查看状态时的页面路径</span></span><br><span class="line">    SetHandler server-status</span><br><span class="line">    Order Deny,Allow</span><br><span class="line">    Deny from all</span><br><span class="line">    Allow from 58.20.58.245</span><br><span class="line">&lt;/Location&gt;</span><br></pre></td></tr></table></figure>
@@ -107,7 +107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin2jxwwp0000pbm6uyx7w7kd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin2jzdex0000qom6l30dhoqr" class="article-share-link">Share</a>
       
       
     </footer>
