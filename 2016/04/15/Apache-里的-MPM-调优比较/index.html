@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="MPM Perfork Wroker Event WinNT Apache 调优">
-<meta property="og:updated_time" content="2016-04-16T01:10:46.386Z">
+<meta property="og:updated_time" content="2016-04-16T03:12:09.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache 里的 MPM 调优比较">
 <meta name="twitter:description" content="MPM Perfork Wroker Event WinNT Apache 调优">
@@ -93,7 +93,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什么是MPM"><a href="#什么是MPM" class="headerlink" title="什么是MPM?"></a>什么是MPM?</h2><p>MPM 是 Apache 2 引入的一个概念，就是结构模块化。把核心任务处理作为一个可插拔的模块，即多路处理模块（MPM），使其能针对不同的环境进行优化。在编译apache时必须选择也只能选择一个 MPM，对类 UNIX 系统，有几个不同的 MPM 可供选择，它们会影响到 apache 的速度和可伸缩性。<br>Multi-Processing Module (MPM) implements a hybrid multi-process multi-threaded server。（多进程、多线程）</p>
+        <p>MPM 是 Apache 2 引入的一个概念，就是结构模块化。把核心任务处理作为一个可插拔的模块，即多路处理模块（MPM），使其能针对不同的环境进行优化。在编译apache时必须选择也只能选择一个 MPM，对类 UNIX 系统，有几个不同的 MPM 可供选择，它们会影响到 apache 的速度和可伸缩性。<br>Multi-Processing Module (MPM) implements a hybrid multi-process multi-threaded server。（多进程、多线程）<br><a id="more"></a></p>
 <h2 id="有多少种MPM"><a href="#有多少种MPM" class="headerlink" title="有多少种MPM?"></a>有多少种MPM?</h2><p>大致有：prefork MPM、worker MPM、BeOS MPM、NetWare MPM、OS/2 MPM、WinNT MPM。</p>
 <h2 id="怎么知道apache当前用的是哪个MPM"><a href="#怎么知道apache当前用的是哪个MPM" class="headerlink" title="怎么知道apache当前用的是哪个MPM?"></a>怎么知道apache当前用的是哪个MPM?</h2><p>linux及windows下都可以使用命令：“httpd -l ” 进行查询。</p>
 <h2 id="各个MPM是怎么工作的"><a href="#各个MPM是怎么工作的" class="headerlink" title="各个MPM是怎么工作的?"></a>各个MPM是怎么工作的?</h2><h3 id="Prefork-MPM"><a href="#Prefork-MPM" class="headerlink" title="Prefork MPM"></a>Prefork MPM</h3><p>这个多路处理模块(MPM)实现了一个非线程型的、预派生的 web 服务器，它的工作方式类似于 Apache 1.3。它适合没有线程安全库，需要避免线程兼容性问题的系统。它是要求每个请求相互独立的情况下最好的 MPM，这样若是一个请求出现问题就不会影响到其它请求。</p>
@@ -113,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin2kg0lr0001u6m64sqx7adz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin2kig1x0004v8m6cwkv5m3p" class="article-share-link">Share</a>
       
       
     </footer>
