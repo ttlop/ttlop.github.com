@@ -76,6 +76,10 @@
   <time datetime="2016-04-16T08:30:41.000Z" itemprop="datePublished">2016-04-16</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -92,11 +96,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>当通过命令得到类似结果时，可以确认你的系统是启用了IPv6的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># ip -6 addr show</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 </span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp9s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qlen 1000</span><br><span class="line">    inet6 fe80::225:90ff:feaf:7e74/64 scope link </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># lsmod | grep ipv6</span></span><br><span class="line">nf_conntrack_ipv6      18738  5 </span><br><span class="line">nf_defrag_ipv6         34651  1 nf_conntrack_ipv6</span><br><span class="line">nf_nat_ipv6            13279  1 ip6table_nat</span><br><span class="line">nf_nat                 21798  4 nf_nat_ipv4,nf_nat_ipv6,ip6table_nat,iptable_nat</span><br><span class="line">nf_conntrack          101024  8 nf_nat,nf_nat_ipv4,nf_nat_ipv6,xt_conntrack,ip6table_nat,iptable_nat,nf_conntrack_ipv4,nf_conntrack_ipv6</span><br></pre></td></tr></table></figure></p>
+<p>如何关闭呢？我们需要进行如下操作：</p>
+<p>编辑文件/etc/sysctl.conf，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.default.disable_ipv6 = 1</span><br><span class="line">net.ipv6.conf.all.disable_ipv6 = 1</span><br></pre></td></tr></table></figure></p>
+<p>如果你想要为特定的网卡禁用IPv6，比如，对于enp0s3，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.enp0s3.disable_ipv6 = 1</span><br></pre></td></tr></table></figure></p>
+<p>使用如下命令生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p>编辑文件/etc/sysconfig/network，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NETWORKING_IPV6=no</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cin2w4hmr0005irm61rg0lsl2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cin2whhc20008kxm66ton07bq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -141,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin2w4hmp0004irm6x1x04d4i" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin2whhbs0004kxm6ne7x3vwh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cin2w4hn4000airm6dfbb2mr5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cin2whhcd000dkxm6o5nbmkeq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -239,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cin2w4hmu0006irm6yprny19h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cin2whhby0006kxm66egugqqm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -284,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin2w4hm50001irm6wdty6jpt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin2whhbc0001kxm6onaa205i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin2w4hme0002irm6croz4cet" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin2whhbk0002kxm6t7kyky85" class="article-share-link">Share</a>
       
       
     </footer>
@@ -374,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin2w4hmz0008irm6n6to871k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin2whhbu0005kxm6ckhwyhqm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -422,7 +433,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin2w4hnc000cirm69w0yxh6j" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin2whhc6000akxm6pk5y9y58" class="article-share-link">Share</a>
       
       
     </footer>
