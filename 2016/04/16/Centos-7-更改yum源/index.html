@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ttlop.com/2016/04/16/Centos-7-更改yum源/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="centos 7 更改 网易 163 yum源">
-<meta property="og:updated_time" content="2016-04-16T08:23:38.885Z">
+<meta property="og:updated_time" content="2016-04-16T08:26:21.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos 7 更改yum源">
 <meta name="twitter:description" content="centos 7 更改 网易 163 yum源">
@@ -98,14 +98,14 @@
         <p>Centos 7 默认的源的网址[mirrorlist.centos.org]，属于国外的网站，可能出现连不上或者网速很慢的。网易(163) yum 源是国内最好的 yum 源之一，无论是速度还是软件版本，都非常不错，将 yum 源设置为163，可以提升软件包安装和更新的速度，同时避免一些常用软件版本无法找到。<br><a id="more"></a></p>
 <h3 id="切换到系统-yum-源目录"><a href="#切换到系统-yum-源目录" class="headerlink" title="切换到系统 yum 源目录"></a>切换到系统 yum 源目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br></pre></td></tr></table></figure>
 <h3 id="下载网易163的-yum-源"><a href="#下载网易163的-yum-源" class="headerlink" title="下载网易163的 yum 源"></a>下载网易163的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl http://mirrors.163.com/.help/CentOS7-Base-163.repo -o CentOS7-Base-163.repo</span><br><span class="line">or</span><br><span class="line">wget http://mirrors.163.com/.help/CentOS7-Base-163.repo</span><br></pre></td></tr></table></figure>
-<h3 id="更改网易的源为默认的-yum-源"><a href="#更改网易的源为默认的-yum-源" class="headerlink" title="更改网易的源为默认的 yum 源"></a>更改网易的源为默认的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp CentOS-Base.repo CentOS-Base.repo.bak20160416</span><br><span class="line">mv CentOS7-Base-163.repo CentOS-Base.repo</span><br></pre></td></tr></table></figure>
-<h3 id="生成缓存"><a href="#生成缓存" class="headerlink" title="生成缓存"></a>生成缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+<h3 id="更改网易的源为默认的-yum-源"><a href="#更改网易的源为默认的-yum-源" class="headerlink" title="更改网易的源为默认的 yum 源"></a>更改网易的源为默认的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp CentOS-Base.repo CentOS-Base.repo.bak20160416  <span class="comment">#首先备份哦！</span></span><br><span class="line">mv CentOS7-Base-163.repo CentOS-Base.repo</span><br></pre></td></tr></table></figure>
+<h3 id="生成缓存"><a href="#生成缓存" class="headerlink" title="生成缓存"></a>生成缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
 <p>至此，可以测试一下，看能否装上自己想要的软件。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin2vn0t90005eym6gfqnhpqt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin2vqjmk0005g5m6l0oirhp9" class="article-share-link">Share</a>
       
       
     </footer>
