@@ -5,22 +5,16 @@
   
   <title>Microsoft SQL Server 缓存清除与内存释放 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。
-这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：
-1.数据缓存：执行查询语句，SQL Server 会将相关的">
+  <meta name="description" content="SQL Server 内存 释放 free 缓存 清除">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Microsoft SQL Server 缓存清除与内存释放">
 <meta property="og:url" content="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。
-这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：
-1.数据缓存：执行查询语句，SQL Server 会将相关的">
-<meta property="og:updated_time" content="2016-04-15T02:58:34.736Z">
+<meta property="og:description" content="SQL Server 内存 释放 free 缓存 清除">
+<meta property="og:updated_time" content="2016-04-16T03:14:48.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Microsoft SQL Server 缓存清除与内存释放">
-<meta name="twitter:description" content="很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。
-这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：
-1.数据缓存：执行查询语句，SQL Server 会将相关的">
+<meta name="twitter:description" content="SQL Server 内存 释放 free 缓存 清除">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -103,6 +97,7 @@
 <p>这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：</p>
 <p>1.数据缓存：执行查询语句，SQL Server 会将相关的数据页加载到内存中来，下一次如果再次请求此页的数据的时候，就无需读取磁盘了，大大提高了速度。</p>
 <p>2.执行命令缓存：在执行存储过程，自定函数时，SQL Server 需要先二进制编译再运行，编译后的结果也会缓存起来，再次调用时就无需再次编译。</p>
+<a id="more"></a>
 <h2 id="缓存清除"><a href="#缓存清除" class="headerlink" title="缓存清除"></a>缓存清除</h2><p>在我们执行完相应的查询语句，或存储过程，我们不在需要这些缓存时，可以将其清除，DBCC 管理命令缓存清除如下：</p>
 <h3 id="SQL-–-清除存储过程缓存"><a href="#SQL-–-清除存储过程缓存" class="headerlink" title="SQL – 清除存储过程缓存"></a>SQL – 清除存储过程缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC FREEPROCCACHE</span><br></pre></td></tr></table></figure>
 <h3 id="SQL-–-清除会话缓存"><a href="#SQL-–-清除会话缓存" class="headerlink" title="SQL – 清除会话缓存"></a>SQL – 清除会话缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DBCC FREESESSIONCACHE</span><br></pre></td></tr></table></figure>
@@ -114,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin2kig1u0003v8m6zl7jh84p" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin2klv1y0004wgm6idla8dzg" class="article-share-link">Share</a>
       
       
     </footer>
