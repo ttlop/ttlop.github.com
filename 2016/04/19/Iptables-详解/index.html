@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Apache | 运维生存时间</title>
+  <title>Iptables 详解 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/Apache/index.html">
+  <meta name="description" content="iptables 详解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Iptables 详解">
+<meta property="og:url" content="http://ttlop.com/2016/04/19/Iptables-详解/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="iptables 详解">
+<meta property="og:updated_time" content="2016-04-19T02:49:46.771Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="Iptables 详解">
+<meta name="twitter:description" content="iptables 详解">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -68,77 +69,58 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-开启Server-status和server-info/" class="archive-article-date">
-  <time datetime="2016-04-15T07:37:07.000Z" itemprop="datePublished">Apr 15</time>
+        <section id="main"><article id="post-Iptables-详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/19/Iptables-详解/" class="article-date">
+  <time datetime="2016-04-19T02:38:42.000Z" itemprop="datePublished">2016-04-19</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-开启Server-status和server-info/">Apache 开启Server-status和server-info</a>
+    <h1 class="article-title" itemprop="name">
+      Iptables 详解
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-静态编译和动态编译/" class="archive-article-date">
-  <time datetime="2016-04-15T07:07:15.000Z" itemprop="datePublished">Apr 15</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-静态编译和动态编译/">Apache 静态编译和动态编译</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-里的-MPM-调优比较/" class="archive-article-date">
-  <time datetime="2016-04-15T03:04:07.000Z" itemprop="datePublished">Apr 15</time>
-</a>
+        <p>防火墙工作在主机/网络边缘，对于进出本主机/网络的数据报文，根据事先设定好的检查规则对其检查，对行迹可疑的报文一律按照事先定义好的处理机制作出相应处理。</p>
+<p>对Linux而言tcp/ip协议栈是在内核中，意味着报文的处理是在内核中进行的，也就说防火墙必须在内核中tcp/ip报文所流进位置，用规则进行检查，才真正能工作起来。</p>
+<p>iptables用来衡量tcp/ip报文的属性：源ip、目标ip、源端口、目标端口<br><a id="more"></a></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="iptables表"><a href="#iptables表" class="headerlink" title="iptables表"></a>iptables表</h3><h3 id="规则的属性定义"><a href="#规则的属性定义" class="headerlink" title="规则的属性定义"></a>规则的属性定义</h3><h3 id="iptables管理规则"><a href="#iptables管理规则" class="headerlink" title="iptables管理规则"></a>iptables管理规则</h3><h3 id="编写规则语法"><a href="#编写规则语法" class="headerlink" title="编写规则语法"></a>编写规则语法</h3><h2 id="匹配标准"><a href="#匹配标准" class="headerlink" title="匹配标准"></a>匹配标准</h2><h3 id="通用匹配"><a href="#通用匹配" class="headerlink" title="通用匹配"></a>通用匹配</h3><h3 id="扩展匹配"><a href="#扩展匹配" class="headerlink" title="扩展匹配"></a>扩展匹配</h3><h4 id="隐含扩展"><a href="#隐含扩展" class="headerlink" title="隐含扩展"></a>隐含扩展</h4><h4 id="协议匹配"><a href="#协议匹配" class="headerlink" title="协议匹配"></a>协议匹配</h4><h4 id="显式扩展"><a href="#显式扩展" class="headerlink" title="显式扩展"></a>显式扩展</h4><h4 id="对引用层进行匹配"><a href="#对引用层进行匹配" class="headerlink" title="对引用层进行匹配"></a>对引用层进行匹配</h4><h2 id="基于iptables实现NAT功能"><a href="#基于iptables实现NAT功能" class="headerlink" title="基于iptables实现NAT功能"></a>基于iptables实现NAT功能</h2><h3 id="基于SNAT功能的实现"><a href="#基于SNAT功能的实现" class="headerlink" title="基于SNAT功能的实现"></a>基于SNAT功能的实现</h3><h3 id="定义DNAT的实现"><a href="#定义DNAT的实现" class="headerlink" title="定义DNAT的实现"></a>定义DNAT的实现</h3>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-里的-MPM-调优比较/">Apache 里的 MPM 调优比较</a>
-    </h1>
-  
-
-    </header>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/19/Iptables-详解/" data-id="cin6u1y3x000cm1m6zdl9396z" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/19/Centos-7-使用iptables服务/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Centos 7 使用iptables服务</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
