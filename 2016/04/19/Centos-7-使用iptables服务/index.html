@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="iptables服务 firewall命令 selinux">
-<meta property="og:updated_time" content="2016-04-19T02:32:55.983Z">
+<meta property="og:updated_time" content="2016-04-19T02:33:49.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos 7 使用iptables服务">
 <meta name="twitter:description" content="iptables服务 firewall命令 selinux">
@@ -98,14 +98,12 @@
         <p>Centos 7用firewall命令”替代”iptables。在这里我们需要区分”iptables服务”和”iptables命令”。虽然firewalld是替代提供的防火墙管理iptables服务，但是它任然使用iptables对内核命令动态通信包过滤。所以它只是iptables服务代替，而不是iptables命令。</p>
 <p>如果想使用iptables服务，执行如下命令</p>
 <p>selinux可能会阻止启动iptables，此时可以先使用setenforce 0，再执行systemctl enable iptables</p>
-<p>`` bash<br>systemctl stop firewalld<br>systemctl disable firewalld</p>
-<p>yum install iptables-services<br>setenforce 0</p>
-<p>systemctl start iptables<br>systemctl enable iptables<br>```</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line"></span><br><span class="line">yum install iptables-services</span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line">systemctl start iptables</span><br><span class="line">systemctl <span class="built_in">enable</span> iptables</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cin6tfkf20005g7m6235fgyes" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cin6tgr760008h6m644yxntvq" class="article-share-link">Share</a>
       
       
     </footer>

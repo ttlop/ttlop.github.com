@@ -99,14 +99,12 @@
         <p>Centos 7用firewall命令”替代”iptables。在这里我们需要区分”iptables服务”和”iptables命令”。虽然firewalld是替代提供的防火墙管理iptables服务，但是它任然使用iptables对内核命令动态通信包过滤。所以它只是iptables服务代替，而不是iptables命令。</p>
 <p>如果想使用iptables服务，执行如下命令</p>
 <p>selinux可能会阻止启动iptables，此时可以先使用setenforce 0，再执行systemctl enable iptables</p>
-<p>`` bash<br>systemctl stop firewalld<br>systemctl disable firewalld</p>
-<p>yum install iptables-services<br>setenforce 0</p>
-<p>systemctl start iptables<br>systemctl enable iptables<br>```</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line"></span><br><span class="line">yum install iptables-services</span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line">systemctl start iptables</span><br><span class="line">systemctl <span class="built_in">enable</span> iptables</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cin6tfkf20005g7m6235fgyes" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cin6tgr760008h6m644yxntvq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -153,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cin6tfkfa0008g7m6xoelvpa8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cin6tgr720006h6m6e8t52hai" class="article-share-link">Share</a>
       
       
     </footer>
@@ -198,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin6tfkf60006g7m60qkglyzg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin6tgr6x0005h6m6qufv4t6a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -247,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cin6tfkg2000eg7m6ulf6xqeb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cin6tgr7z000eh6m6dmgdd2v7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -296,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cin6tfkfe000ag7m6wjzmtte4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cin6tgr7p000ah6m6cmrx469g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin6tfkeh0001g7m6myatnu0a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin6tgr6c0001h6m64halvkbs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -386,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin6tfkf00004g7m6mb1x3ytu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin6tgr6v0004h6m6pgobsb3p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -431,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin6tfker0002g7m6mqwagj4p" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin6tgr6l0002h6m6h0qtpjfz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -479,7 +477,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin6tfkfn000cg7m64bgbiy3a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin6tgr7w000ch6m6zp28s38x" class="article-share-link">Share</a>
       
       
     </footer>
