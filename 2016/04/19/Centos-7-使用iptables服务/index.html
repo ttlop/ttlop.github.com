@@ -3,17 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Hexo | 运维生存时间</title>
+  <title>Centos 7 使用iptables服务 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/Hexo/index.html">
+  <meta name="description" content="iptables服务 firewall命令 selinux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos 7 使用iptables服务">
+<meta property="og:url" content="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="iptables服务 firewall命令 selinux">
+<meta property="og:updated_time" content="2016-04-19T02:32:55.983Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="Centos 7 使用iptables服务">
+<meta name="twitter:description" content="iptables服务 firewall命令 selinux">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -68,58 +69,61 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/16/hello-world/" class="archive-article-date">
-  <time datetime="2016-04-16T03:35:15.184Z" itemprop="datePublished">Apr 16</time>
+        <section id="main"><article id="post-Centos-7-使用iptables服务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/19/Centos-7-使用iptables服务/" class="article-date">
+  <time datetime="2016-04-19T02:24:22.000Z" itemprop="datePublished">2016-04-19</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/16/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      Centos 7 使用iptables服务
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/16/Hexo-常用配置/" class="archive-article-date">
-  <time datetime="2016-04-16T03:20:22.000Z" itemprop="datePublished">Apr 16</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/16/Hexo-常用配置/">Hexo 常用配置</a>
-    </h1>
-  
+        <p>Centos 7用firewall命令”替代”iptables。在这里我们需要区分”iptables服务”和”iptables命令”。虽然firewalld是替代提供的防火墙管理iptables服务，但是它任然使用iptables对内核命令动态通信包过滤。所以它只是iptables服务代替，而不是iptables命令。</p>
+<p>如果想使用iptables服务，执行如下命令</p>
+<p>selinux可能会阻止启动iptables，此时可以先使用setenforce 0，再执行systemctl enable iptables</p>
+<p>`` bash<br>systemctl stop firewalld<br>systemctl disable firewalld</p>
+<p>yum install iptables-services<br>setenforce 0</p>
+<p>systemctl start iptables<br>systemctl enable iptables<br>```</p>
 
-    </header>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cin6tfkf20005g7m6235fgyes" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/16/Centos-7-禁用IPv6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Centos 7 禁用IPv6</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
