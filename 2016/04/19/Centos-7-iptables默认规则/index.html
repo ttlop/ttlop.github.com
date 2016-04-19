@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 iptables默认规则 | 运维生存时间</title>
+  <title>Centos 7 iptables默认策略 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="默认 缺省 iptables规则">
+  <meta name="description" content="默认 缺省 iptables 策略 规则">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 iptables默认规则">
+<meta property="og:title" content="Centos 7 iptables默认策略">
 <meta property="og:url" content="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="默认 缺省 iptables规则">
-<meta property="og:updated_time" content="2016-04-19T03:22:47.456Z">
+<meta property="og:description" content="默认 缺省 iptables 策略 规则">
+<meta property="og:updated_time" content="2016-04-19T08:13:59.888Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 iptables默认规则">
-<meta name="twitter:description" content="默认 缺省 iptables规则">
+<meta name="twitter:title" content="Centos 7 iptables默认策略">
+<meta name="twitter:description" content="默认 缺省 iptables 策略 规则">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -76,7 +76,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
   </div>
 
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Centos 7 iptables默认规则
+      Centos 7 iptables默认策略
     </h1>
   
 
@@ -95,12 +95,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sample configuration for iptables service</span></span><br><span class="line"><span class="comment"># you can edit this manually or use system-config-firewall</span></span><br><span class="line"><span class="comment"># please do not ask us to add additional ports/services to this default configuration</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示INPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示FORWARD表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示OUTPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line"><span class="comment">#意思是进入的数据包只能是刚刚我发出的数据包的回应</span></span><br><span class="line"><span class="comment">#ESTABLISHED:已建立的连接状态</span></span><br><span class="line"><span class="comment">#RELATED:该数据包与本机发出的数据包相关</span></span><br><span class="line"></span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line"><span class="comment">#这两条的意思是在INPUT表和FORWARD表中拒绝所有其它不符合上述任何一条规则的数据包，并且发送一条host prohibited的消息给被拒绝的主机</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
+        <p>如下为Centos 7系统下iptables的默认策略及解释：<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sample configuration for iptables service</span></span><br><span class="line"><span class="comment"># you can edit this manually or use system-config-firewall</span></span><br><span class="line"><span class="comment"># please do not ask us to add additional ports/services to this default configuration</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示INPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示FORWARD表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示OUTPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line"><span class="comment">#意思是进入的数据包只能是刚刚我发出的数据包的回应</span></span><br><span class="line"><span class="comment">#ESTABLISHED:已建立的连接状态</span></span><br><span class="line"><span class="comment">#RELATED:该数据包与本机发出的数据包相关</span></span><br><span class="line"></span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line"><span class="comment">#这两条的意思是在INPUT表和FORWARD表中拒绝所有其它不符合上述任何一条规则的数据包，并且发送一条host prohibited的消息给被拒绝的主机</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="cin6v7pi60005t9m6rfmg1er8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="cin75m6uw00052pm64fg8fg63" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,7 +128,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li></ul>
     </div>
   </div>
 
@@ -156,7 +156,7 @@
       <ul>
         
           <li>
-            <a href="/2016/04/19/Centos-7-iptables默认规则/">Centos 7 iptables默认规则</a>
+            <a href="/2016/04/19/Centos-7-iptables默认规则/">Centos 7 iptables默认策略</a>
           </li>
         
           <li>
