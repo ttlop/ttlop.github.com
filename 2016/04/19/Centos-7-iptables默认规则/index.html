@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 更改yum源 | 运维生存时间</title>
+  <title>Centos 7 iptables默认规则 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="centos 7 更改 网易 163 yum源">
+  <meta name="description" content="默认 缺省 iptables规则">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 更改yum源">
-<meta property="og:url" content="http://ttlop.com/2016/04/16/Centos-7-更改yum源/index.html">
+<meta property="og:title" content="Centos 7 iptables默认规则">
+<meta property="og:url" content="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="centos 7 更改 网易 163 yum源">
-<meta property="og:updated_time" content="2016-04-16T08:26:21.501Z">
+<meta property="og:description" content="默认 缺省 iptables规则">
+<meta property="og:updated_time" content="2016-04-19T03:22:47.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 更改yum源">
-<meta name="twitter:description" content="centos 7 更改 网易 163 yum源">
+<meta name="twitter:title" content="Centos 7 iptables默认规则">
+<meta name="twitter:description" content="默认 缺省 iptables规则">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -69,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-更改yum源" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Centos-7-iptables默认规则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/16/Centos-7-更改yum源/" class="article-date">
-  <time datetime="2016-04-16T08:14:49.000Z" itemprop="datePublished">2016-04-16</time>
+    <a href="/2016/04/19/Centos-7-iptables默认规则/" class="article-date">
+  <time datetime="2016-04-19T03:15:03.000Z" itemprop="datePublished">2016-04-19</time>
 </a>
     
   <div class="article-category">
@@ -87,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Centos 7 更改yum源
+      Centos 7 iptables默认规则
     </h1>
   
 
@@ -95,17 +95,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Centos 7 默认的源的网址[mirrorlist.centos.org]，属于国外的网站，可能出现连不上或者网速很慢的。网易(163) yum 源是国内最好的 yum 源之一，无论是速度还是软件版本，都非常不错，将 yum 源设置为163，可以提升软件包安装和更新的速度，同时避免一些常用软件版本无法找到。<br><a id="more"></a></p>
-<h3 id="切换到系统-yum-源目录"><a href="#切换到系统-yum-源目录" class="headerlink" title="切换到系统 yum 源目录"></a>切换到系统 yum 源目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br></pre></td></tr></table></figure>
-<h3 id="下载网易163的-yum-源"><a href="#下载网易163的-yum-源" class="headerlink" title="下载网易163的 yum 源"></a>下载网易163的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl http://mirrors.163.com/.help/CentOS7-Base-163.repo -o CentOS7-Base-163.repo</span><br><span class="line">or</span><br><span class="line">wget http://mirrors.163.com/.help/CentOS7-Base-163.repo</span><br></pre></td></tr></table></figure>
-<h3 id="更改网易的源为默认的-yum-源"><a href="#更改网易的源为默认的-yum-源" class="headerlink" title="更改网易的源为默认的 yum 源"></a>更改网易的源为默认的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp CentOS-Base.repo CentOS-Base.repo.bak20160416  <span class="comment">#首先备份哦！</span></span><br><span class="line">mv CentOS7-Base-163.repo CentOS-Base.repo</span><br></pre></td></tr></table></figure>
-<h3 id="生成缓存"><a href="#生成缓存" class="headerlink" title="生成缓存"></a>生成缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
-<p>至此，可以测试一下，看能否装上自己想要的软件。</p>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sample configuration for iptables service</span></span><br><span class="line"><span class="comment"># you can edit this manually or use system-config-firewall</span></span><br><span class="line"><span class="comment"># please do not ask us to add additional ports/services to this default configuration</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示INPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示FORWARD表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示OUTPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line"><span class="comment">#意思是进入的数据包只能是刚刚我发出的数据包的回应</span></span><br><span class="line"><span class="comment">#ESTABLISHED:已建立的连接状态</span></span><br><span class="line"><span class="comment">#RELATED:该数据包与本机发出的数据包相关</span></span><br><span class="line"></span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line"><span class="comment">#这两条的意思是在INPUT表和FORWARD表中拒绝所有其它不符合上述任何一条规则的数据包，并且发送一条host prohibited的消息给被拒绝的主机</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin6v7pib0006t9m65nrnt06l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="cin6v7pi60005t9m6rfmg1er8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,19 +109,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/04/16/Centos-7-禁用IPv6/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 禁用IPv6
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/04/19/Centos-7-使用iptables服务/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">Centos 7 使用iptables服务</div>
     </a>
   
 </nav>

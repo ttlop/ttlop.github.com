@@ -70,6 +70,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Centos-7-iptables默认规则" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/19/Centos-7-iptables默认规则/" class="article-date">
+  <time datetime="2016-04-19T03:15:03.000Z" itemprop="datePublished">2016-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/19/Centos-7-iptables默认规则/">Centos 7 iptables默认规则</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sample configuration for iptables service</span></span><br><span class="line"><span class="comment"># you can edit this manually or use system-config-firewall</span></span><br><span class="line"><span class="comment"># please do not ask us to add additional ports/services to this default configuration</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示INPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示FORWARD表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示OUTPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line"><span class="comment">#意思是进入的数据包只能是刚刚我发出的数据包的回应</span></span><br><span class="line"><span class="comment">#ESTABLISHED:已建立的连接状态</span></span><br><span class="line"><span class="comment">#RELATED:该数据包与本机发出的数据包相关</span></span><br><span class="line"></span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line"><span class="comment">#这两条的意思是在INPUT表和FORWARD表中拒绝所有其它不符合上述任何一条规则的数据包，并且发送一条host prohibited的消息给被拒绝的主机</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="cin6v7pi60005t9m6rfmg1er8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Centos-7-使用iptables服务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/19/Centos-7-使用iptables服务/" class="article-date">
@@ -104,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cin6um4l30005pqm6qp913iqe" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cin6v7pig0008t9m6myuiwm3g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cin6um4la0008pqm6zz1eqgmo" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cin6v7pij000at9m6fhqd4ffc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin6um4l70006pqm65ar3iqfw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin6v7pib0006t9m65nrnt06l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -245,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cin6um4m3000epqm6u44mkmc6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cin6v7pj9000gt9m6b1as4j6d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cin6um4lf000apqm6l93c4u47" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cin6v7pj2000ct9m66d7lqdbc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin6um4kf0001pqm6fcv0ojp7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cin6v7phj0001t9m66dqza55r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -384,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin6um4l10004pqm6ri5gy4wr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cin6v7phs0002t9m62cdjq00v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -429,7 +470,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin6um4kq0002pqm6y6hoq7zv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cin6v7pi30004t9m6afu3pum0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -477,7 +518,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin6um4m0000cpqm699d7rj8v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cin6v7pj5000et9m6zifzyeam" class="article-share-link">Share</a>
       
       
     </footer>
@@ -524,6 +565,10 @@
       <ul>
         
           <li>
+            <a href="/2016/04/19/Centos-7-iptables默认规则/">Centos 7 iptables默认规则</a>
+          </li>
+        
+          <li>
             <a href="/2016/04/19/Centos-7-使用iptables服务/">Centos 7 使用iptables服务</a>
           </li>
         
@@ -537,10 +582,6 @@
         
           <li>
             <a href="/2016/04/16/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/16/Hexo-常用配置/">Hexo 常用配置</a>
           </li>
         
       </ul>
