@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 更改yum源 | 运维生存时间</title>
+  <title>Centos 7 安装php5.5 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="centos 7 更改 网易 163 yum源">
+  <meta name="description" content="yum update  install php 5.5">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 更改yum源">
-<meta property="og:url" content="http://ttlop.com/2016/04/16/Centos-7-更改yum源/index.html">
+<meta property="og:title" content="Centos 7 安装php5.5">
+<meta property="og:url" content="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="centos 7 更改 网易 163 yum源">
-<meta property="og:updated_time" content="2016-04-16T08:26:21.501Z">
+<meta property="og:description" content="yum update  install php 5.5">
+<meta property="og:updated_time" content="2016-04-20T09:31:27.880Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 更改yum源">
-<meta name="twitter:description" content="centos 7 更改 网易 163 yum源">
+<meta name="twitter:title" content="Centos 7 安装php5.5">
+<meta name="twitter:description" content="yum update  install php 5.5">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -69,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-更改yum源" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Centos-7-安装php5-5" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/16/Centos-7-更改yum源/" class="article-date">
-  <time datetime="2016-04-16T08:14:49.000Z" itemprop="datePublished">2016-04-16</time>
+    <a href="/2016/04/20/Centos-7-安装php5-5/" class="article-date">
+  <time datetime="2016-04-20T09:25:45.000Z" itemprop="datePublished">2016-04-20</time>
 </a>
     
   <div class="article-category">
@@ -87,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Centos 7 更改yum源
+      Centos 7 安装php5.5
     </h1>
   
 
@@ -95,17 +95,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Centos 7 默认的源的网址[mirrorlist.centos.org]，属于国外的网站，可能出现连不上或者网速很慢的。网易(163) yum 源是国内最好的 yum 源之一，无论是速度还是软件版本，都非常不错，将 yum 源设置为163，可以提升软件包安装和更新的速度，同时避免一些常用软件版本无法找到。<br><a id="more"></a></p>
-<h3 id="切换到系统-yum-源目录"><a href="#切换到系统-yum-源目录" class="headerlink" title="切换到系统 yum 源目录"></a>切换到系统 yum 源目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br></pre></td></tr></table></figure>
-<h3 id="下载网易163的-yum-源"><a href="#下载网易163的-yum-源" class="headerlink" title="下载网易163的 yum 源"></a>下载网易163的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl http://mirrors.163.com/.help/CentOS7-Base-163.repo -o CentOS7-Base-163.repo</span><br><span class="line">or</span><br><span class="line">wget http://mirrors.163.com/.help/CentOS7-Base-163.repo</span><br></pre></td></tr></table></figure>
-<h3 id="更改网易的源为默认的-yum-源"><a href="#更改网易的源为默认的-yum-源" class="headerlink" title="更改网易的源为默认的 yum 源"></a>更改网易的源为默认的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp CentOS-Base.repo CentOS-Base.repo.bak20160416  <span class="comment">#首先备份哦！</span></span><br><span class="line">mv CentOS7-Base-163.repo CentOS-Base.repo</span><br></pre></td></tr></table></figure>
-<h3 id="生成缓存"><a href="#生成缓存" class="headerlink" title="生成缓存"></a>生成缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
-<p>至此，可以测试一下，看能否装上自己想要的软件。</p>
+        <p>Centos 7.2默认的php版本为5.4，如果需要升级安装5.5版本，怎么办？<br>可采用如下Yum安装的方式：<br>首先删除旧版本的PHP，通过yum list installed | grep php可以查看所有已安装的php软件<br>使用yum remove php 删除<br><a id="more"></a><br>通过一下命令可以查看Centos 7默认的php版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost yum.repos.d]<span class="comment"># yum list php</span></span><br><span class="line">已加载插件：fastestmirror</span><br><span class="line">Repository base is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository updates is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository extras is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Repository centosplus is listed more than once <span class="keyword">in</span> the configuration</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * epel: ftp.cuhk.edu.hk</span><br><span class="line"> * webtatic: sp.repo.webtatic.com</span><br><span class="line">可安装的软件包</span><br><span class="line">php.x86_64                                                    5.4.16-36.el7_1                                                    base</span><br></pre></td></tr></table></figure></p>
+<p>我们通过添加第三方yum源的方式安装更高版本的php，推荐安装webtatic<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</span><br><span class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</span><br><span class="line"></span><br><span class="line">php55w php55w-opcache</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cin8ntnax000akim661tzez5k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="cin8ntnas0008kim6wghxbbvr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,19 +110,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/04/16/Centos-7-禁用IPv6/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 禁用IPv6
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/04/19/Centos-7-iptables默认规则/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">Centos 7 iptables默认策略</div>
     </a>
   
 </nav>
