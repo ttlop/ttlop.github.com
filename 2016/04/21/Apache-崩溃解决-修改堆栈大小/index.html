@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="apache崩溃 堆栈空间 preg_match 正则表达式">
-<meta property="og:updated_time" content="2016-04-21T09:31:26.371Z">
+<meta property="og:updated_time" content="2016-04-22T01:06:03.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache 崩溃解决 -- 修改堆栈大小">
 <meta name="twitter:description" content="apache崩溃 堆栈空间 preg_match 正则表达式">
@@ -110,13 +110,13 @@ var _hmt = _hmt || [];
         <p>在Windows平台下用正则preg_match_all或preg_match分析比较长的字符串时，导致apache崩溃重启的原因是windows平台下默认分配的线程堆栈空间ThreadStackSize太小导致的。Windows 32默认只有256KB，而在Linux下默认值是8M，这就是为什么同样的程序在linux平台下正常，而在windows平台下不正常的原因。</p>
 <p>那么如何增加Windows平台下ThreadStackSize的大小呢？在apache的配置文件httpd.conf里启用”Include conf/extra/httpd-mpm.conf”，然后在httpd-mpm.conf文件里的mpm_winnt_module配置模块里设置”ThreadStackSIze 8400000”即可（大约8M）。<br>代码如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mpm_winnt_module&gt;</span><br><span class="line">    ThreadStackSize         8400000</span><br><span class="line">    <span class="comment">#ThreadsPerChild        150</span></span><br><span class="line">    ThreadsPerChild        350</span><br><span class="line">    <span class="comment">#MaxConnectionsPerChild   0</span></span><br><span class="line">    MaxConnectionsPerChild   10000</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
-<p>这里需要注意的是，32位的Apache程序智能最多使用大约2GB内存空间！因此，ThreadStackSize和ThreadsPerChild的值相乘后(8M*350)不应该超过2G，否则无法启动apache，出现的错误日志如下：</p>
+<p>这里需要注意的是，32位的Apache程序只能最多使用大约2GB内存空间！因此，ThreadStackSize和ThreadsPerChild的值相乘后(8M*350)不应该超过2G，否则无法启动apache，出现的错误日志如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Thu Apr 21 17:13:28.061948 2016] [mpm_winnt:crit] [pid 30660:tid 364] (OS 8)存储空间不足，无法处理此命令。  : AH00355: Child: CreateThread failed. Unable to create all worker threads. Created 212 of the 350 threads requested with the ThreadsPerChild configuration directive.</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="cina39hbt00016qm6pe0qvnw2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="cinb0ndsw00017vm64s6hdbsr" class="article-share-link">Share</a>
       
       
     </footer>
