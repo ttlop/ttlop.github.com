@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用Nagios监控网站登录是否成功 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nagios check_http 登录状态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Nagios监控网站登录是否成功">
+<meta property="og:url" content="http://ttlop.com/2016/04/22/使用Nagios监控网站登录是否成功/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="nagios check_http 登录状态">
+<meta property="og:updated_time" content="2016-04-22T02:50:55.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Nagios监控网站登录是否成功">
+<meta name="twitter:description" content="nagios check_http 登录状态">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-使用Nagios监控网站登录是否成功" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/22/使用Nagios监控网站登录是否成功/" class="article-date">
+  <time datetime="2016-04-22T02:06:12.000Z" itemprop="datePublished">2016-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用Nagios监控网站登录是否成功
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用Nagios自带的check_http工具检测网站是否可以登录。<br><a id="more"></a></p>
+<p>抓包工具：Fiddler</p>
+<p>操作步骤：</p>
+<p>1.打开Fiddler软件，打开浏览器输入我们需要监测的网址，进入登录页面；</p>
+<p>2.输入事先已注册好的帐号密码登录；</p>
+<p>3.在软件fiddler里面会捕获到整个登录过程，包括在浏览器中输入的网址、帐号密码、点击登录后返回的结果；</p>
+<p>4.记录下这些值，我们在nagios环境下测试，以zhgj.ezagoo.cn为例：</p>
+<p>fiddler抓包的结果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"data"</span>:&#123;<span class="string">"Token"</span>:<span class="string">""</span>,<span class="string">"UserGuid"</span>:<span class="string">""</span>,<span class="string">"Photo"</span>:<span class="string">""</span>,<span class="string">"Nickname"</span>:<span class="string">""</span>,<span class="string">"InviteCode"</span>:<span class="string">""</span>,<span class="string">"Sex"</span>:<span class="string">""</span>,<span class="string">"mstate"</span>:0&#125;,<span class="string">"code"</span>:<span class="string">"101"</span>,<span class="string">"msg"</span>:<span class="string">"账号或密码不正确"</span>&#125;</span><br><span class="line">&#123;<span class="string">"data"</span>:&#123;<span class="string">"Token"</span>:<span class="string">"a3c55975883a43d3996b9a2370918a16"</span>,<span class="string">"UserGuid"</span>:<span class="string">"2e138c7b8d774d5dafe1d2eb42cf496c"</span>,<span class="string">"Photo"</span>:<span class="string">"http://imgs5.ezagoo.com:8072/ZHGJAPPUserImage/jpg/2015/05/24/09/26/20150524092654024.jpg"</span>,<span class="string">"Nickname"</span>:<span class="string">"sinai"</span>,<span class="string">"InviteCode"</span>:<span class="string">"enp553"</span>,<span class="string">"Sex"</span>:<span class="string">"0"</span>,<span class="string">"mstate"</span>:0&#125;,<span class="string">"code"</span>:<span class="string">"100"</span>,<span class="string">"msg"</span>:<span class="string">"登录成功"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>以上分别是我们输入错误和正确的帐号/密码后返回的结果，从中我们可以看出code后面的数值是一个很明显的标识</p>
+<p>获取到这些值后我们使用nagios自带的check_http进行检测：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@mail libexec]<span class="comment"># ./check_http -H WisDomBusApi.ezagoo.com -u "/user/login.ashx?phone=18888888888&amp;pwd=890419" -s "100"</span></span><br><span class="line">HTTP CRITICAL: HTTP/1.1 200 OK - string <span class="string">'100'</span> not found on <span class="string">'http://WisDomBusApi.ezagoo.com:80/user/login.ashx?phone=18888888888&amp;pwd=890419'</span> - 382 bytes <span class="keyword">in</span> 0.155 second response time |time=0.154626s;;;0.000000 size=382B;;;0</span><br><span class="line">[root@mail libexec]<span class="comment"># ./check_http -H WisDomBusApi.ezagoo.com -u "/user/login.ashx?phone=18675850419&amp;pwd=890419" -s "100"</span></span><br><span class="line">HTTP OK: HTTP/1.1 200 OK - 534 bytes <span class="keyword">in</span> 1.351 second response time |time=1.350741s;;;0.000000 size=534B;;;0</span><br><span class="line">[root@mail libexec]<span class="comment"># ./check_http -H WisDomBusApi.ezagoo.com -u "/user/login.ashx?phone=18675850419&amp;pwd=890419" -s "101"</span></span><br><span class="line">HTTP CRITICAL: HTTP/1.1 200 OK - string <span class="string">'101'</span> not found on <span class="string">'http://WisDomBusApi.ezagoo.com:80/user/login.ashx?phone=18675850419&amp;pwd=890419'</span> - 534 bytes <span class="keyword">in</span> 0.485 second response time |time=0.484892s;;;0.000000 size=534B;;;0</span><br><span class="line">[root@mail libexec]<span class="comment"># ./check_http -H WisDomBusApi.ezagoo.com -u "/user/login.ashx?phone=18675850411&amp;pwd=890419" -s "101"</span></span><br><span class="line">HTTP OK: HTTP/1.1 200 OK - 382 bytes <span class="keyword">in</span> 0.112 second response time |time=0.112126s;;;0.000000 size=382B;;;0</span><br></pre></td></tr></table></figure>
+<p>以上的检测中：只有账号为18675850419，密码为890419才是正确的，可以看到返回结果与我们预想的一致</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/22/使用Nagios监控网站登录是否成功/" data-id="cinb47y27000mo3m6fqxwd8of" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Apache 崩溃解决 -- 修改堆栈大小</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/22/使用Nagios监控网站登录是否成功/">使用Nagios监控网站登录是否成功</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/">Apache 崩溃解决 -- 修改堆栈大小</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/21/默认主题landscape分页异常修复/">默认主题landscape分页异常修复</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/21/Hexo-添加百度统计代码/">Hexo 添加百度统计代码</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/20/Centos-7-安装php5-5/">Centos 7 安装php5.5</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
