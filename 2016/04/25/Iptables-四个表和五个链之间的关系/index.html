@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="netfilter iptables 包过滤 filter nat mangle raw">
-<meta property="og:updated_time" content="2016-04-25T08:28:40.305Z">
+<meta property="og:updated_time" content="2016-04-25T08:36:15.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Iptables 四个表和五个链之间的关系">
 <meta name="twitter:description" content="netfilter iptables 包过滤 filter nat mangle raw">
@@ -110,25 +110,38 @@ var _hmt = _hmt || [];
         <p>Netfileter/iptables IP 信息包过滤系统是一种功能强大的工具，可用于添加、编辑和除去规则，这些规则是在做信息包过滤决定时，防火墙所遵循和组成的规则。这些规则在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。</p>
 <a id="more"></a>
 <p>虽在 netfileter/iptables IP 信息包过滤系统被称为单个实体，但它实际上由两个组件 netfilter 和 iptables 组成。</p>
-<p>Netfilter 组建也称为内核空间（kernelspace），是内核的一部分，由一些信息包过滤表组成，这些表包含内核用来控制信息包过滤处理的规则集。</p>
-<p>Iptables 组建是一种恐惧，也称为用户空间（userspace），它使插入、修改和除去信息包过滤表中的规则变得容易。</p>
+<p>Netfilter 组件也称为内核空间（kernelspace），是内核的一部分，由一些信息包过滤表组成，这些表包含内核用来控制信息包过滤处理的规则集。</p>
+<p>Iptables 组件是一种工具，也称为用户空间（userspace），它使插入、修改和除去信息包过滤表中的规则变得容易。</p>
 <p>Iptables 包含4个表，5个链。其中表是按照对数据包的操作区分，链是按照不同的Hook点来区分，表和链实际上是netfilter的两个维度。</p>
 <p>4个表：filter,nat,mangle,raw，默认表是filter(没有指定表的时候就是filter表)。表的处理优先级：raw&gt;mangle&gt;nat&gt;filter</p>
-<p>filter: 一般的过滤功能</p>
-<p>nat: 用于nat功能（端口映射，地址映射等）</p>
-<p>mangle: 用于对特定数据包的修改</p>
-<p>raw: 优先级最高，设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能。</p>
+<ul>
+<li><p>filter: 一般的过滤功能</p>
+</li>
+<li><p>nat: 用于nat功能（端口映射，地址映射等）</p>
+</li>
+<li><p>mangle: 用于对特定数据包的修改</p>
+</li>
+<li><p>raw: 优先级最高，设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能。</p>
+</li>
+</ul>
 <p>5个链：PREROUTING,INPUT,FORWARD,OUTPUT,POSTROUTING。</p>
-<p>PREFROUTING: 数据包进入路由表之前</p>
-<p>INTPUT: 通过路由表后的目的为本机</p>
-<p>FORWARDING: 通过路由表后，目的地不为本机</p>
-<p>OUTPUT: 由本机产生，向外转发</p>
-<p>POSTROUTING: 发送到网卡接口之前</p>
+<ul>
+<li><p>PREFROUTING: 数据包进入路由表之前</p>
+</li>
+<li><p>INTPUT: 通过路由表后的目的为本机</p>
+</li>
+<li><p>FORWARDING: 通过路由表后，目的地不为本机</p>
+</li>
+<li><p>OUTPUT: 由本机产生，向外转发</p>
+</li>
+<li><p>POSTROUTING: 发送到网卡接口之前</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="cinfqs6ep000mp1m6xvzuolc4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="cinfr1x7e000lrpm651oaa783" class="article-share-link">Share</a>
       
       
     </footer>
