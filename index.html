@@ -82,6 +82,59 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Iptables-概念" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/25/Iptables-概念/" class="article-date">
+  <time datetime="2016-04-25T08:44:42.000Z" itemprop="datePublished">2016-04-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/25/Iptables-概念/">Iptables 概念</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2></li>
+</ul>
+<p>防火墙工作在主机/网络边缘，对于进出本主机/网络的数据报文，根据实现设定好的检查规则对齐进行检查，对行迹可疑的报文一律依照事先定义好的处理机制作出相应处理。</p>
+<p>对linux而言，tcp/ip协议栈实在内核当中，意味着报文的处理实在内核中进行的，也就是说防火墙必须在内核中tcp/ip报文所流经的位置，用规则去检查，才真正工作起来。</p>
+<p>Iptables用来衡量tcp/ip报文的属性：源ip、目标ip、源端口、目标端口。</p>
+<ul>
+<li><h2 id="Iptables-表"><a href="#Iptables-表" class="headerlink" title="Iptables 表"></a>Iptables 表</h2></li>
+</ul>
+<p>filter: 这是一个默认防火墙表。它包含这些内置的链：INPUT、FORWARD、OUTPUT</p>
+<p>nat: 这是跟网络地址相关的表。它包含这些内置的链：PREROUTING、OUTPUT、POSTROUTING</p>
+<p>mangle: 这是跟流量整型相关的表，它包含这些内置链：PREROUTING、OUTPUT、INTPUT、FORWARD、POSTROUTING</p>
+<p>raw: 这个表的动作是NOTRACK，不追踪匹配的数据，它包含的链有：PREROUTING、OUTPUT</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="cinfrnc1y000mwvm6swgip3am" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Iptables-四个表和五个链之间的关系" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/25/Iptables-四个表和五个链之间的关系/" class="article-date">
@@ -117,7 +170,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="cinfr6bmt000ltxm6448c1lsn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="cinfrnc1w000lwvm6kom22p5n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +215,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/22/使用Nagios监控网站登录是否成功/" data-id="cinfr6bn0000rtxm63p7b02zr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/22/使用Nagios监控网站登录是否成功/" data-id="cinfrnc2o000uwvm6bkq7rxgq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +260,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="cinfr6blc0001txm685dcegmy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="cinfrnc060001wvm689bh5cb4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +304,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="cinfr6bnb000utxm6e0g7nunc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="cinfrnc2s000wwvm6w994l6xk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +351,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="cinfr6bmq000jtxm6gqdj8upr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="cinfrnc1s000jwvm6bgscogyp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -343,7 +396,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="cinfr6bm8000atxm67ytga4i8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="cinfrnc1j000dwvm67f0prgxs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +441,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="cinfr6bm00006txm6ff0wo0t9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="cinfrnc0y0006wvm6078akf2o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -432,7 +485,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cinfr6bm30008txm68yhufp54" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cinfrnc120008wvm6v00a1tth" class="article-share-link">Share</a>
       
       
     </footer>
@@ -479,52 +532,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cinfr6bml000ftxm6p8f81qaq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Centos-7-更改yum源" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/16/Centos-7-更改yum源/" class="article-date">
-  <time datetime="2016-04-16T08:14:49.000Z" itemprop="datePublished">2016-04-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/16/Centos-7-更改yum源/">Centos 7 更改yum源</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Centos 7 默认的源的网址[mirrorlist.centos.org]，属于国外的网站，可能出现连不上或者网速很慢的。网易(163) yum 源是国内最好的 yum 源之一，无论是速度还是软件版本，都非常不错，将 yum 源设置为163，可以提升软件包安装和更新的速度，同时避免一些常用软件版本无法找到。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/16/Centos-7-更改yum源/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cinfr6bmg000dtxm664w7bh1n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cinfrnc1l000fwvm6qcixvm63" class="article-share-link">Share</a>
       
       
     </footer>
@@ -576,6 +584,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/04/25/Iptables-概念/">Iptables 概念</a>
+          </li>
+        
+          <li>
             <a href="/2016/04/25/Iptables-四个表和五个链之间的关系/">Iptables 四个表和五个链之间的关系</a>
           </li>
         
@@ -589,10 +601,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/04/21/默认主题landscape分页异常修复/">默认主题landscape分页异常修复</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/21/Hexo-添加百度统计代码/">Hexo 添加百度统计代码</a>
           </li>
         
       </ul>
