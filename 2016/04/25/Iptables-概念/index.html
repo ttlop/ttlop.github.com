@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/04/25/Iptables-概念/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="iptables详解 基本概念">
-<meta property="og:updated_time" content="2016-04-25T08:55:16.758Z">
+<meta property="og:updated_time" content="2016-04-26T03:40:06.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Iptables 概念">
 <meta name="twitter:description" content="iptables详解 基本概念">
@@ -107,24 +107,48 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2></li>
-</ul>
-<p>防火墙工作在主机/网络边缘，对于进出本主机/网络的数据报文，根据实现设定好的检查规则对其进行检查，对行迹可疑的报文一律依照事先定义好的处理机制作出相应处理。</p>
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>防火墙工作在主机/网络边缘，对于进出本主机/网络的数据报文，根据事先设定好的检查规则对其进行检查，对行迹可疑的报文一律依照事先定义好的处理机制作出相应处理。</p>
 <p>对linux而言，tcp/ip协议栈是在内核当中，意味着报文的处理是在内核中进行的，也就是说防火墙必须在内核中tcp/ip报文所流经的位置，用规则去检查，才真正工作起来。</p>
 <p>Iptables用来衡量tcp/ip报文的属性：源ip、目标ip、源端口、目标端口。</p>
-<ul>
-<li><h2 id="Iptables-表"><a href="#Iptables-表" class="headerlink" title="Iptables 表"></a>Iptables 表</h2></li>
+<h2 id="Iptables-表"><a href="#Iptables-表" class="headerlink" title="Iptables 表"></a>Iptables 表</h2><ul>
+<li><p>filter: 这是一个默认防火墙表。它包含这些内置的链：INPUT、FORWARD、OUTPUT</p>
+</li>
+<li><p>nat: 这是跟网络地址相关的表。它包含这些内置的链：PREROUTING、OUTPUT、POSTROUTING</p>
+</li>
+<li><p>mangle: 这是跟流量整型相关的表，它包含这些内置链：PREROUTING、OUTPUT、INTPUT、FORWARD、POSTROUTING</p>
+</li>
+<li><p>raw: 这个表的动作是NOTRACK，不追踪匹配的数据，它包含的链有：PREROUTING、OUTPUT</p>
+</li>
 </ul>
-<p>filter: 这是一个默认防火墙表。它包含这些内置的链：INPUT、FORWARD、OUTPUT</p>
-<p>nat: 这是跟网络地址相关的表。它包含这些内置的链：PREROUTING、OUTPUT、POSTROUTING</p>
-<p>mangle: 这是跟流量整型相关的表，它包含这些内置链：PREROUTING、OUTPUT、INTPUT、FORWARD、POSTROUTING</p>
-<p>raw: 这个表的动作是NOTRACK，不追踪匹配的数据，它包含的链有：PREROUTING、OUTPUT</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
+<li><p>匹配（match）：符合指定的条件，比如指定的IP地址和端口。</p>
+</li>
+<li><p>丢弃（drop）：当一个包到达时，简单的丢弃，不做其它任何处理。</p>
+</li>
+<li><p>接受（accept）：和丢弃相反，接受这个包，让这个包通过。</p>
+</li>
+<li><p>拒绝（reject）：和丢弃相似，但它还会向发送这个包的源主机发送错误消息。这个错误消息可以指定，也可以自动产生。</p>
+</li>
+<li><p>目标（target）：指定的动作，说明如何处理一个包，比如：丢弃，接受，或拒绝。</p>
+</li>
+<li><p>跳转（jump）：和目标类似，不过它指定的不是一个具体的动作，而是另一个链，表示要跳转到那个链上。</p>
+</li>
+<li><p>规则（rule）：一个或多个匹配及其对应的目标。</p>
+</li>
+<li><p>链（chain）：每条链都包含一系列的规则，这些规则被依次应用到每个遍历该链的数据包上。</p>
+</li>
+<li><p>表（table）：每个表包含若干不同的链。</p>
+</li>
+<li><p>策略（police）：我们在这里提到的策略是指对于iptables某条链，当所有规则都不匹配成功时其默认的处理动作。</p>
+</li>
+<li><p>连接跟踪（connection track）：又称为动态过滤，可以根据指定连接的状态进行一些适当的过滤，是一个很强大的功能，但同时也比较消耗内存资源。</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="cingverus000p2am6trok5ho0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="cingvwwgu000p54m67u7g4p1f" class="article-share-link">Share</a>
       
       
     </footer>
