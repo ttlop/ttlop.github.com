@@ -24,7 +24,7 @@ var _hmt = _hmt || [];
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="iptables 数据包流程图">
 <meta property="og:image" content="http://www.opsers.org/wp-content/uploads/2010/03/123.png">
-<meta property="og:updated_time" content="2016-04-26T03:00:14.106Z">
+<meta property="og:updated_time" content="2016-04-26T03:21:58.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Iptables 数据包的流程（图）">
 <meta name="twitter:description" content="iptables 数据包流程图">
@@ -142,16 +142,41 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 <blockquote>
-<p>另一种情况是，数据包就是发给本地主机的，那么它会一次穿过：</p>
+<p>另一种情况是，数据包就是发给本地主机的，那么它会依次穿过：</p>
 </blockquote>
 <ol>
-<li></li>
+<li><p>进入 <strong>mangle</strong> 表的 <strong>INPUT</strong> 链，这里是在路由之后，交由本地主机之前，我们也可以进行一些相应的修改。</p>
+</li>
+<li><p>进入 <strong>filter</strong> 表的 <strong>INPUT</strong> 链，在这里我们可以对流入的所有数据包进行过滤，不管它来自哪个网络接口。</p>
+</li>
+<li><p>交给本地主机的应用程序进行处理。</p>
+</li>
+<li><p>处理完毕后进行路由决定，看该往哪里发出。</p>
+</li>
+<li><p>进入 <strong>raw</strong> 表的 <strong>OUTPUT</strong> 链，这里是在连接跟踪处理本地的数据包之前。</p>
+</li>
+<li><p>连接跟踪对本地的数据包进行处理。</p>
+</li>
+<li><p>进入 <strong>mangle</strong> 表的 <strong>OUTPUT</strong> 链，在这里我们可以修改数据包，但不要做过滤。</p>
+</li>
+<li><p>进入 <strong>nat</strong> 表的 <strong>OUTPUT</strong> 链，可以对防火墙自己发出的数据做NAT。</p>
+</li>
+<li><p>再次进行路由决定。</p>
+</li>
+<li><p>进入 <strong>filter</strong> 表的 <strong>OUTPUT</strong> 链，可以对本地出去的数据包进行过滤。</p>
+</li>
+<li><p>进入 <strong>mangle</strong> 表的 <strong>POSTROUTING</strong> 链，同上一种情况的第3步。注意，这里不光对经过防火墙的数据包进行处理，还对防火墙自己产生的数据包进行处理。</p>
+</li>
+<li><p>进入 <strong>nat</strong> 表的 <strong>POSTROUTING</strong> 链，同上一种情况的第4步。</p>
+</li>
+<li><p>进入出去的网络接口。完毕。</p>
+</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/26/Iptables-数据包的流程（图）/" data-id="cinguhmlg000munm644tudi9c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/26/Iptables-数据包的流程（图）/" data-id="cingv6lcz000pyym6lcpd7uuh" class="article-share-link">Share</a>
       
       
     </footer>
