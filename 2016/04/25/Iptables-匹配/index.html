@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/04/25/Iptables-匹配/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="iptables匹配">
-<meta property="og:updated_time" content="2016-04-26T01:36:35.659Z">
+<meta property="og:updated_time" content="2016-04-26T02:09:31.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Iptables 匹配">
 <meta name="twitter:description" content="iptables匹配">
@@ -134,11 +134,17 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <p>进来的请求状态是NEW，而出去的状态则为ESTABLISHED，如果自动连接别人，状态肯定为NEW，如果正常去响应别人那么状态肯定是ESTABLISHED。</p>
-<h3 id="4-应用层匹配"><a href="#4-应用层匹配" class="headerlink" title="4. 应用层匹配"></a>4. 应用层匹配</h3>
+<h3 id="4-应用层匹配"><a href="#4-应用层匹配" class="headerlink" title="4. 应用层匹配"></a>4. 应用层匹配</h3><p>对应用层编码字符串作相似匹配，常用算法使用–algo来指定，算法一般为bm和kmp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-m string --string <span class="string">""</span> --algo &#123;bm|kmp&#125;</span><br></pre></td></tr></table></figure>
+<p>例如:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A OUTPUT <span class="_">-s</span> 10.0.10.62 -p tcp --sport 80 -m string --string <span class="string">"hello"</span> --algo kmp -j REJECT</span><br></pre></td></tr></table></figure>
+<p>基于时间限制</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定日期起止范围</span></span><br><span class="line">-m time --datestart</span><br><span class="line">-m time --datestop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定时间的起止范围</span></span><br><span class="line">-m time --timestart</span><br><span class="line">-m time --timestop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定星期x范围</span></span><br><span class="line">-m time --weekdays</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定月份</span></span><br><span class="line">-m time --monthdays</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-匹配/" data-id="cingri576000lc0m6c93jphxf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-匹配/" data-id="cingsofcp000li2m64jsok5zt" class="article-share-link">Share</a>
       
       
     </footer>
