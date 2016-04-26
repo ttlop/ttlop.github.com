@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/04/25/Iptables-概念/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="iptables详解 基本概念">
-<meta property="og:updated_time" content="2016-04-26T03:40:06.136Z">
+<meta property="og:updated_time" content="2016-04-26T03:42:54.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Iptables 概念">
 <meta name="twitter:description" content="iptables详解 基本概念">
@@ -107,9 +107,10 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>防火墙工作在主机/网络边缘，对于进出本主机/网络的数据报文，根据事先设定好的检查规则对其进行检查，对行迹可疑的报文一律依照事先定义好的处理机制作出相应处理。</p>
+        <p>防火墙工作在主机/网络边缘，对于进出本主机/网络的数据报文，根据事先设定好的检查规则对其进行检查，对行迹可疑的报文一律依照事先定义好的处理机制作出相应处理。</p>
 <p>对linux而言，tcp/ip协议栈是在内核当中，意味着报文的处理是在内核中进行的，也就是说防火墙必须在内核中tcp/ip报文所流经的位置，用规则去检查，才真正工作起来。</p>
 <p>Iptables用来衡量tcp/ip报文的属性：源ip、目标ip、源端口、目标端口。</p>
+<a id="more"></a>
 <h2 id="Iptables-表"><a href="#Iptables-表" class="headerlink" title="Iptables 表"></a>Iptables 表</h2><ul>
 <li><p>filter: 这是一个默认防火墙表。它包含这些内置的链：INPUT、FORWARD、OUTPUT</p>
 </li>
@@ -148,7 +149,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="cingvwwgu000p54m67u7g4p1f" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="cingw0i94000r6dm6ary91z4x" class="article-share-link">Share</a>
       
       
     </footer>
