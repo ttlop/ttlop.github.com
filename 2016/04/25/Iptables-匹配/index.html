@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/04/25/Iptables-匹配/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="iptables匹配">
-<meta property="og:updated_time" content="2016-04-25T09:24:31.413Z">
+<meta property="og:updated_time" content="2016-04-26T01:36:35.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Iptables 匹配">
 <meta name="twitter:description" content="iptables匹配">
@@ -120,11 +120,25 @@ var _hmt = _hmt || [];
 <h3 id="1-隐含扩展"><a href="#1-隐含扩展" class="headerlink" title="1. 隐含扩展"></a>1. 隐含扩展</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-p tcp --sport | --dport 21-80 <span class="comment">#连续端口</span></span><br><span class="line">-p tcp --dport 22 <span class="comment">#指定端口</span></span><br><span class="line">-p tcp --sport | --dport !21-80 <span class="comment">#端口取反</span></span><br><span class="line">-p tcp --tcp-flags SYN,ACK,RST,FIN,SYN <span class="comment">#检查报文中的标志位</span></span><br></pre></td></tr></table></figure>
 <h3 id="2-协议匹配"><a href="#2-协议匹配" class="headerlink" title="2. 协议匹配"></a>2. 协议匹配</h3><p>通常对协议做匹配时使用-p参数来指定协议即可<br>匹配UDP：UDP只有端口的匹配，没有任何可用扩展，格式如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-p udp --sport | --dport</span><br><span class="line">匹配ICMP格式如下</span><br><span class="line">-p icmp --icmp-[number]</span><br><span class="line">icp常见类型：请求为8(<span class="built_in">echo</span> -request),响应为0(<span class="built_in">echo</span> -reply)</span><br></pre></td></tr></table></figure>
-<h3 id="3-显式扩展"><a href="#3-显式扩展" class="headerlink" title="3. 显式扩展"></a>3. 显式扩展</h3><h3 id="4-应用层匹配"><a href="#4-应用层匹配" class="headerlink" title="4. 应用层匹配"></a>4. 应用层匹配</h3>
+<h3 id="3-显式扩展"><a href="#3-显式扩展" class="headerlink" title="3. 显式扩展"></a>3. 显式扩展</h3><p>在iptables中数据包和被跟踪连接的四种不同状态相关联，这四种状态分别是NEW,ESTABLISHED,RELATED及INVALID。除了本机产生的数据包由NAT表的OUTPUT链处理外，所有链接跟踪都是在NAT表的PREROUTING链中进行处理的，也就是说iptables在NAT表的PREROUTING链里重新计算所有数据包的状态。如果发送一个流的初始化数据，状态就会在NAT表的OUTPUT链被设置为NEW，当收到回应的数据包时，状态就会在NAT表的PREROUTING链里被设置为ESTABLISHED，如果第一个数据包不是本机产生的，那就会在NAT表PREROUTING链里被设置为NEW状态</p>
+<p>使用-m来指定其状态并赋予匹配规则，语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-m state --state 状态</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>NEW: NEW状态说明这个数据包是收到的第一个数据包。比如收到一个SYN数据包，它是连接的第一个数据包，就会匹配NEW状态。第一个包也可能不是SYN包，但它仍会被认为是NEW状态</p>
+</li>
+<li><p>ESTABLISHED: 只要发送并接到应答，一个数据链接就会从NEW变为ESTABLISHED，而且该状态会继续匹配这个链接后续数据包</p>
+</li>
+<li><p>RELATED: 当一个链接和某个已处于ESTABLISHED状态的链接有关系时，就被认为是RELATED，也就是说，一个链接想要RELATED，首先要有个ESTABLISHED的链接，这个ESTABLISHED链接在产生一个主链接之外的连接，这个新连接就是RELATED</p>
+</li>
+<li><p>INVALID: 说明数据包不能被识别属于哪个链接或没有任何状态</p>
+</li>
+</ul>
+<p>进来的请求状态是NEW，而出去的状态则为ESTABLISHED，如果自动连接别人，状态肯定为NEW，如果正常去响应别人那么状态肯定是ESTABLISHED。</p>
+<h3 id="4-应用层匹配"><a href="#4-应用层匹配" class="headerlink" title="4. 应用层匹配"></a>4. 应用层匹配</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-匹配/" data-id="cinfsrz4f000r54m6hhabogbt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-匹配/" data-id="cingri576000lc0m6c93jphxf" class="article-share-link">Share</a>
       
       
     </footer>
