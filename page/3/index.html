@@ -15,18 +15,17 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | 运维生存时间</title>
+  <title>运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="hexo new server generate deploy">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://ttlop.com/2016/04/16/hello-world/index.html">
+  <meta name="description" content="运维 生存时间 ttl op oa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="运维生存时间">
+<meta property="og:url" content="http://ttlop.com/page/3/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="hexo new server generate deploy">
-<meta property="og:updated_time" content="2016-04-16T03:35:15.075Z">
+<meta property="og:description" content="运维 生存时间 ttl op oa">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="hexo new server generate deploy">
+<meta name="twitter:title" content="运维生存时间">
+<meta name="twitter:description" content="运维 生存时间 ttl op oa">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +80,16 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-Microsoft-SQL-Server-缓存清除与内存释放" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/16/hello-world/" class="article-date">
-  <time datetime="2016-04-16T03:35:15.184Z" itemprop="datePublished">2016-04-16</time>
+    <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" class="article-date">
+  <time datetime="2016-04-15T02:09:02.000Z" itemprop="datePublished">2016-04-15</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
   </div>
 
   </div>
@@ -98,8 +99,8 @@ var _hmt = _hmt || [];
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Hello World
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/">Microsoft SQL Server 缓存清除与内存释放</a>
     </h1>
   
 
@@ -107,47 +108,33 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+        <p>很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。</p>
+<p>这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：</p>
+<p>1.数据缓存：执行查询语句，SQL Server 会将相关的数据页加载到内存中来，下一次如果再次请求此页的数据的时候，就无需读取磁盘了，大大提高了速度。</p>
+<p>2.执行命令缓存：在执行存储过程，自定函数时，SQL Server 需要先二进制编译再运行，编译后的结果也会缓存起来，再次调用时就无需再次编译。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cinsal97z000z7vm6bj5vqdlh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cinsal97p000u7vm6i9rhvzq0" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2016/04/16/Centos-7-更改yum源/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 更改yum源
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/04/16/Hexo-常用配置/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hexo 常用配置</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
-</article>
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         
