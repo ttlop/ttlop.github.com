@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="Zabbix Agent install configure">
-<meta property="og:updated_time" content="2016-05-04T05:42:20.100Z">
+<meta property="og:updated_time" content="2016-05-04T08:38:59.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Agent Installing And Configuration">
 <meta name="twitter:description" content="Zabbix Agent install configure">
@@ -110,13 +110,13 @@ var _hmt = _hmt || [];
         <h4 id="CentOS"><a href="#CentOS" class="headerlink" title="* CentOS"></a>* CentOS</h4><p>Supported for version: Centos 7</p>
 <h4 id="Installing-repository-configuration-package"><a href="#Installing-repository-configuration-package" class="headerlink" title="* Installing repository configuration package"></a>* Installing repository configuration package</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm</span><br></pre></td></tr></table></figure>
 <h4 id="Installing-Zabbix-agent"><a href="#Installing-Zabbix-agent" class="headerlink" title="* Installing Zabbix agent"></a>* Installing Zabbix agent</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zabbix-agent</span><br></pre></td></tr></table></figure>
-<h4 id="Configuration"><a href="#Configuration" class="headerlink" title="* Configuration"></a>* Configuration</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT <span class="_">-s</span> 192.168.1.110/32 -p tcp -mstate --state NEW -m tcp --dport 10050 -j ACCEPT  <span class="comment">#vim /etc/sysconfig/iptables</span></span><br><span class="line">Server=127.0.0.1,192.168.1.110  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br><span class="line">Hostname=[hostname]  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br></pre></td></tr></table></figure>
+<h4 id="Configuration"><a href="#Configuration" class="headerlink" title="* Configuration"></a>* Configuration</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT <span class="_">-s</span> 192.168.1.110/32 -p tcp -mstate --state NEW -m tcp --dport 10050 -j ACCEPT  <span class="comment">#vim /etc/sysconfig/iptables</span></span><br><span class="line">Server=192.168.1.110,127.0.0.1  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br><span class="line">ServerActive=192.168.1.110,127.0.0.1  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br><span class="line">Hostname=[hostname]  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br></pre></td></tr></table></figure>
 <h4 id="Testing"><a href="#Testing" class="headerlink" title="* Testing"></a>* Testing</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zabbix_get <span class="_">-s</span> 192.168.1.107 -p 10050 -k <span class="string">"system.cpu.load[all,avg1]"</span>  <span class="comment">#Zabbix-server</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" data-id="cinsfsxkp000wr0m6m1vdac1g" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" data-id="cinsm45mh000woum66ui1j2kb" class="article-share-link">Share</a>
       
       
     </footer>
