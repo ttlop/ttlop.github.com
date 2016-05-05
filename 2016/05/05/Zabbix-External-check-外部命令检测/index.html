@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix external check">
-<meta property="og:updated_time" content="2016-05-05T07:51:11.400Z">
+<meta property="og:updated_time" content="2016-05-05T07:58:18.449Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix External check 外部命令检测">
 <meta name="twitter:description" content="zabbix external check">
@@ -109,7 +109,7 @@ var _hmt = _hmt || [];
       
         <p>Zabbix server 运行脚本或者二进制文件来执行外部检测，外部检测不需要在被监控段运行任何 agentd。</p>
 <a id="more"></a>
-<p>Item key 语法如下：</p>
+<h3 id="1-语法"><a href="#1-语法" class="headerlink" title="1. 语法"></a>1. 语法</h3><p>Item key 语法如下：</p>
 <table>
 <thead>
 <tr>
@@ -128,11 +128,18 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
-
+<p>如果不想传递任何参数，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script[]或者script</span><br></pre></td></tr></table></figure>
+<p>Zabbix server 会在定义好的目录里面执行外部脚本（zabbix server 中的配置 ExternalScripts），这个脚本将使用 zabbix server 的运行用户身份运行。请注意权限以及只有指定目录中的命令才能够被执行。</p>
+<p>Zabbix 脚本使用标准输出方式使出（完整输出但是会删除末尾的空白），标准错误和退出代码将会被丢弃。</p>
+<blockquote>
+<p>备注：不要过度使用外部检测，会严重降低 zabbix 系统性能。</p>
+</blockquote>
+<h3 id="2-范例"><a href="#2-范例" class="headerlink" title="2. 范例"></a>2. 范例</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cintzuhdq000zv2m6mtscxd3c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cinu03mk5000xysm66rggzays" class="article-share-link">Share</a>
       
       
     </footer>
