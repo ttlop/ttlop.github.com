@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix external check">
-<meta property="og:updated_time" content="2016-05-05T07:58:18.449Z">
+<meta property="og:updated_time" content="2016-05-05T08:02:26.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix External check 外部命令检测">
 <meta name="twitter:description" content="zabbix external check">
@@ -135,11 +135,15 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>备注：不要过度使用外部检测，会严重降低 zabbix 系统性能。</p>
 </blockquote>
-<h3 id="2-范例"><a href="#2-范例" class="headerlink" title="2. 范例"></a>2. 范例</h3>
+<h3 id="2-范例"><a href="#2-范例" class="headerlink" title="2. 范例"></a>2. 范例</h3><p>执行带参数脚本 check_http.sh “-h <host ip="" address="">“.</host></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check_http.sh[<span class="string">"-h"</span>,<span class="string">"&#123;HOST.CONN&#125;"</span>]</span><br></pre></td></tr></table></figure>
+<p>zabbix 将会执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check_http.sh <span class="string">"-h"</span> <span class="string">"192.168.1.107"</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cinu03mk5000xysm66rggzays" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cinu08xip000z26m67aj9fm6j" class="article-share-link">Share</a>
       
       
     </footer>
