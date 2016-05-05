@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix item key">
-<meta property="og:updated_time" content="2016-05-05T07:12:24.856Z">
+<meta property="og:updated_time" content="2016-05-05T07:17:44.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix item key 详解">
 <meta name="twitter:description" content="zabbix item key">
@@ -70,9 +70,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -120,7 +120,7 @@ var _hmt = _hmt || [];
 <h3 id="4-Key-参数"><a href="#4-Key-参数" class="headerlink" title="4. Key 参数"></a>4. Key 参数</h3><p>Item key 可以有多个参数，他们之间用逗号’,’分开，key 参数可以是带引号的字符串、不带引号的字符串以及数组。</p>
 <p>参数如果设置为空，那么将使用它设置的默认值。</p>
 <p>例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system.swap.size[,pfree] <span class="comment">##其中第一个为空的参数值使用默认值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system.swap.size[,pfree] <span class="comment">#其中第一个为空的参数值使用默认值</span></span><br></pre></td></tr></table></figure>
 <h4 id="4-1-参数-带引号"><a href="#4-1-参数-带引号" class="headerlink" title="4.1 参数 - 带引号"></a>4.1 参数 - 带引号</h4><p>如果 key 参数带引号，那么任何 unicode 数据都合法，如果参数里面带有双引号，那么要使用”\”来转义。</p>
 <h4 id="4-2-参数-不带引号"><a href="#4-2-参数-不带引号" class="headerlink" title="4.2 参数 - 不带引号"></a>4.2 参数 - 不带引号</h4><p>如果 key 参数是一个不带引号的字符串，除了逗号和右中括号其它任何 unicode 字符串都合法。</p>
 <h4 id="4-3-参数-数组"><a href="#4-3-参数-数组" class="headerlink" title="4.3 参数 - 数组"></a>4.3 参数 - 数组</h4><p>如果 key 参数是一个数组，那么数组要多加一对中括号，并且数组里面的参数同样要遵循参数规范。</p>
@@ -128,7 +128,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cintygmcy000zawm6vns9q98l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cintynj1o000zffm67tgnijz2" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -139,7 +139,7 @@ var _hmt = _hmt || [];
   
   
     <a href="/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">Zabbix 在系统已有的Templates中增加Graphs</div>
     </a>
   
@@ -154,7 +154,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -179,7 +179,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -216,7 +216,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
