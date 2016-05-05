@@ -15,17 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Apache | 运维生存时间</title>
+  <title>Zabbix 自定义用户 key 与参数 UserParameter | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/Apache/index.html">
+  <meta name="description" content="zabbix userparameter key">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zabbix 自定义用户 key 与参数 UserParameter">
+<meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="zabbix userparameter key">
+<meta property="og:updated_time" content="2016-05-05T09:08:37.371Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="Zabbix 自定义用户 key 与参数 UserParameter">
+<meta name="twitter:description" content="zabbix userparameter key">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -80,97 +81,62 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/" class="archive-article-date">
-  <time datetime="2016-04-21T09:16:57.000Z" itemprop="datePublished">Apr 21</time>
+        <section id="main"><article id="post-Zabbix-自定义用户-key-与参数-UserParameter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" class="article-date">
+  <time datetime="2016-05-05T08:48:52.000Z" itemprop="datePublished">2016-05-05</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/">Apache 崩溃解决 -- 修改堆栈大小</a>
+    <h1 class="article-title" itemprop="name">
+      Zabbix 自定义用户 key 与参数 UserParameter
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-开启Server-status和server-info/" class="archive-article-date">
-  <time datetime="2016-04-15T07:37:07.000Z" itemprop="datePublished">Apr 15</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-开启Server-status和server-info/">Apache 开启Server-status和server-info</a>
-    </h1>
-  
+        <p>如果我们想被监控段执行一个 zabbix agent 没有预定义的指令，zabbix 的用户自定义参数功能提供了这个方法。我们可以在客户端配置文件 zabbix_agentd.conf 里面配置 UserParameter。</p>
+<a id="more"></a>
+<h3 id="1-语法"><a href="#1-语法" class="headerlink" title="1. 语法"></a>1. 语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=&lt;key&gt;,&lt;shell <span class="built_in">command</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>用户自定义参数包含一个 key 和一个命令你个，key 必须整个系统唯一，配置好之后重启客户端。然后配置 item，在 key 的位置填上我们自定义的 key 即可。用户自定义参数里指定的脚本由 zabbix agent 来执行，最大返回 512KB 的数据。</p>
+<h3 id="2-范例"><a href="#2-范例" class="headerlink" title="2. 范例"></a>2. 范例</h3><p><strong>简单点的*</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=<span class="built_in">echo</span>1,<span class="built_in">echo</span> 2</span><br></pre></td></tr></table></figure>
+<p>如果调用 echo1 这个key，将会收到返回值 2。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-静态编译和动态编译/" class="archive-article-date">
-  <time datetime="2016-04-15T07:07:15.000Z" itemprop="datePublished">Apr 15</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-静态编译和动态编译/">Apache 静态编译和动态编译</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-里的-MPM-调优比较/" class="archive-article-date">
-  <time datetime="2016-04-15T03:04:07.000Z" itemprop="datePublished">Apr 15</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinu20hbw0016pgm6j6cw3l5u" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-里的-MPM-调优比较/">Apache 里的 MPM 调优比较</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2016/05/05/Zabbix-External-check-外部命令检测/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Zabbix External check 外部命令检测</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
