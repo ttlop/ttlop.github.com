@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix item key">
-<meta property="og:updated_time" content="2016-05-05T06:47:27.551Z">
+<meta property="og:updated_time" content="2016-05-05T06:59:52.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix item key 详解">
 <meta name="twitter:description" content="zabbix item key">
@@ -119,11 +119,14 @@ var _hmt = _hmt || [];
 <p>即所有数字、大小写字母、下划线、减号、点，key 名称从左到右，只要有一个字符不符合，那么 key 就不合法。</p>
 <h3 id="4-Key-参数"><a href="#4-Key-参数" class="headerlink" title="4. Key 参数"></a>4. Key 参数</h3><p>Item key 可以有多个参数，他们之间用逗号’,’分开，key 参数可以是带引号的字符串、不带引号的字符串以及数组。</p>
 <p>参数如果设置为空，那么将使用它设置的默认值。</p>
-<h4 id="4-1-参数-带引号"><a href="#4-1-参数-带引号" class="headerlink" title="4.1 参数 - 带引号"></a>4.1 参数 - 带引号</h4><h4 id="4-2-参数-不带引号"><a href="#4-2-参数-不带引号" class="headerlink" title="4.2 参数 - 不带引号"></a>4.2 参数 - 不带引号</h4><h4 id="4-3-参数-数组"><a href="#4-3-参数-数组" class="headerlink" title="4.3 参数 - 数组"></a>4.3 参数 - 数组</h4>
+<h4 id="4-1-参数-带引号"><a href="#4-1-参数-带引号" class="headerlink" title="4.1 参数 - 带引号"></a>4.1 参数 - 带引号</h4><p>如果 key 参数带引号，那么任何 unicode 数据都合法，如果参数里面带有双引号，那么要使用”\”来转义。</p>
+<h4 id="4-2-参数-不带引号"><a href="#4-2-参数-不带引号" class="headerlink" title="4.2 参数 - 不带引号"></a>4.2 参数 - 不带引号</h4><p>如果 key 参数是一个不带引号的字符串，除了逗号和右中括号其它任何 unicode 字符串都合法。</p>
+<h4 id="4-3-参数-数组"><a href="#4-3-参数-数组" class="headerlink" title="4.3 参数 - 数组"></a>4.3 参数 - 数组</h4><p>如果 key 参数是一个数组，那么数组要多加一对中括号，并且数组里面的参数同样要遵循参数规范。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cintxkim5000wynm633eft6pt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cinty0hhv00114im6c71h08e4" class="article-share-link">Share</a>
       
       
     </footer>
