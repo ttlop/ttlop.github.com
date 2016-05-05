@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix item key">
-<meta property="og:updated_time" content="2016-05-05T06:30:38.186Z">
+<meta property="og:updated_time" content="2016-05-05T06:47:27.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix item key 详解">
 <meta name="twitter:description" content="zabbix item key">
@@ -108,17 +108,22 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>zabbix的items用来从主机获取数据，通常情况下，我们称item为监控项。例如我们服务器需要监控它的CPU负载，那么实现这个方法的东西就叫做item。</p>
-<p>item的主要构成就是key+参数组成。</p>
 <p>监控项需要获取cpu信息，则需要一个对应的监控key：system.cpu.load。如果是获取网卡流量，那么获取网卡这个监控项需要key：net.if.in或者net.if.out。</p>
 <p>一般情况下key要与参数结合起来使用，例如获取5分钟的负载情况：system.cpu.load[avg5]，avg5是对应的参数。</p>
 <a id="more"></a>
 <h3 id="1-灵活的参数"><a href="#1-灵活的参数" class="headerlink" title="1. 灵活的参数"></a>1. 灵活的参数</h3><p>参数位置可用接受任意参数则是灵活的。例如vfs.fs.size[<em>],”</em>“星号可以使用任意的参数，例如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vfs.fs.size[/]</span><br><span class="line">vfs.fs.size[/opt]</span><br></pre></td></tr></table></figure>
-
+<h3 id="2-Key-格式"><a href="#2-Key-格式" class="headerlink" title="2. Key 格式"></a>2. Key 格式</h3><p>Item key 格式包含 key 名称和它的参数，参数必须符合规范。key的定义要遵循从左到右的规则，如果都符合，那这个 key 合法，否则不合法。</p>
+<h3 id="3-Key-名称"><a href="#3-Key-名称" class="headerlink" title="3. Key 名称"></a>3. Key 名称</h3><p>Key 允许如下字符作为名称：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0-9a-zA-Z_-.</span><br></pre></td></tr></table></figure>
+<p>即所有数字、大小写字母、下划线、减号、点，key 名称从左到右，只要有一个字符不符合，那么 key 就不合法。</p>
+<h3 id="4-Key-参数"><a href="#4-Key-参数" class="headerlink" title="4. Key 参数"></a>4. Key 参数</h3><p>Item key 可以有多个参数，他们之间用逗号’,’分开，key 参数可以是带引号的字符串、不带引号的字符串以及数组。</p>
+<p>参数如果设置为空，那么将使用它设置的默认值。</p>
+<h4 id="4-1-参数-带引号"><a href="#4-1-参数-带引号" class="headerlink" title="4.1 参数 - 带引号"></a>4.1 参数 - 带引号</h4><h4 id="4-2-参数-不带引号"><a href="#4-2-参数-不带引号" class="headerlink" title="4.2 参数 - 不带引号"></a>4.2 参数 - 不带引号</h4><h4 id="4-3-参数-数组"><a href="#4-3-参数-数组" class="headerlink" title="4.3 参数 - 数组"></a>4.3 参数 - 数组</h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cintwyvov0014qzm6c7npj7rj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cintxkim5000wynm633eft6pt" class="article-share-link">Share</a>
       
       
     </footer>
