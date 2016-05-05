@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 更改yum源 | 运维生存时间</title>
+  <title>Zabbix item key 详解 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="centos 7 更改 网易 163 yum源">
+  <meta name="description" content="zabbix item key">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 更改yum源">
-<meta property="og:url" content="http://ttlop.com/2016/04/16/Centos-7-更改yum源/index.html">
+<meta property="og:title" content="Zabbix item key 详解">
+<meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="centos 7 更改 网易 163 yum源">
-<meta property="og:updated_time" content="2016-04-16T08:26:21.501Z">
+<meta property="og:description" content="zabbix item key">
+<meta property="og:updated_time" content="2016-05-05T06:30:38.186Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 更改yum源">
-<meta name="twitter:description" content="centos 7 更改 网易 163 yum源">
+<meta name="twitter:title" content="Zabbix item key 详解">
+<meta name="twitter:description" content="zabbix item key">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-更改yum源" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Zabbix-item-key-详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/16/Centos-7-更改yum源/" class="article-date">
-  <time datetime="2016-04-16T08:14:49.000Z" itemprop="datePublished">2016-04-16</time>
+    <a href="/2016/05/05/Zabbix-item-key-详解/" class="article-date">
+  <time datetime="2016-05-05T06:18:50.000Z" itemprop="datePublished">2016-05-05</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Centos 7 更改yum源
+      Zabbix item key 详解
     </h1>
   
 
@@ -107,17 +107,18 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Centos 7 默认的源的网址[mirrorlist.centos.org]，属于国外的网站，可能出现连不上或者网速很慢的。网易(163) yum 源是国内最好的 yum 源之一，无论是速度还是软件版本，都非常不错，将 yum 源设置为163，可以提升软件包安装和更新的速度，同时避免一些常用软件版本无法找到。<br><a id="more"></a></p>
-<h3 id="切换到系统-yum-源目录"><a href="#切换到系统-yum-源目录" class="headerlink" title="切换到系统 yum 源目录"></a>切换到系统 yum 源目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br></pre></td></tr></table></figure>
-<h3 id="下载网易163的-yum-源"><a href="#下载网易163的-yum-源" class="headerlink" title="下载网易163的 yum 源"></a>下载网易163的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl http://mirrors.163.com/.help/CentOS7-Base-163.repo -o CentOS7-Base-163.repo</span><br><span class="line">or</span><br><span class="line">wget http://mirrors.163.com/.help/CentOS7-Base-163.repo</span><br></pre></td></tr></table></figure>
-<h3 id="更改网易的源为默认的-yum-源"><a href="#更改网易的源为默认的-yum-源" class="headerlink" title="更改网易的源为默认的 yum 源"></a>更改网易的源为默认的 yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp CentOS-Base.repo CentOS-Base.repo.bak20160416  <span class="comment">#首先备份哦！</span></span><br><span class="line">mv CentOS7-Base-163.repo CentOS-Base.repo</span><br></pre></td></tr></table></figure>
-<h3 id="生成缓存"><a href="#生成缓存" class="headerlink" title="生成缓存"></a>生成缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
-<p>至此，可以测试一下，看能否装上自己想要的软件。</p>
+        <p>zabbix的items用来从主机获取数据，通常情况下，我们称item为监控项。例如我们服务器需要监控它的CPU负载，那么实现这个方法的东西就叫做item。</p>
+<p>item的主要构成就是key+参数组成。</p>
+<p>监控项需要获取cpu信息，则需要一个对应的监控key：system.cpu.load。如果是获取网卡流量，那么获取网卡这个监控项需要key：net.if.in或者net.if.out。</p>
+<p>一般情况下key要与参数结合起来使用，例如获取5分钟的负载情况：system.cpu.load[avg5]，avg5是对应的参数。</p>
+<a id="more"></a>
+<h3 id="1-灵活的参数"><a href="#1-灵活的参数" class="headerlink" title="1. 灵活的参数"></a>1. 灵活的参数</h3><p>参数位置可用接受任意参数则是灵活的。例如vfs.fs.size[<em>],”</em>“星号可以使用任意的参数，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vfs.fs.size[/]</span><br><span class="line">vfs.fs.size[/opt]</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cintwyvns000dqzm6ewmcfr5z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cintwyvov0014qzm6c7npj7rj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,19 +127,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/16/Centos-7-禁用IPv6/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 禁用IPv6
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">Zabbix 在系统已有的Templates中增加Graphs</div>
     </a>
   
 </nav>
