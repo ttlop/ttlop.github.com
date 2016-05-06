@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix triggers">
-<meta property="og:updated_time" content="2016-05-06T06:07:16.065Z">
+<meta property="og:updated_time" content="2016-05-06T06:11:06.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Triggers 触发器">
 <meta name="twitter:description" content="zabbix triggers">
@@ -109,7 +109,7 @@ var _hmt = _hmt || [];
       
         <p>触发器使用逻辑表达式来评估通过 item 获取得到数据是处于哪种状态。Item 每次获取到一个新值都会使用触发器表达式去计算它的状态，在触发器表达式中我们可以定义哪些值是合理的，哪些是不合理的，如果出现不合理的值，触发器会把状态改为 PROBLEM。</p>
 <a id="more"></a>
-<h3 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h3><ol>
+<h3 id="1-创建触发器"><a href="#1-创建触发器" class="headerlink" title="1. 创建触发器"></a>1. 创建触发器</h3><ol>
 <li><p>点击 <strong>Configuration</strong> -&gt; <strong>Hosts</strong></p>
 </li>
 <li><p>点击 <strong>Hosts</strong> 相关行的 <strong>Triggers</strong> </p>
@@ -119,7 +119,7 @@ var _hmt = _hmt || [];
 <li><p>在表单中输入相应的信息</p>
 </li>
 </ol>
-<h3 id="Trigger-表单"><a href="#Trigger-表单" class="headerlink" title="Trigger 表单"></a>Trigger 表单</h3><table>
+<h3 id="2-Trigger-表单"><a href="#2-Trigger-表单" class="headerlink" title="2. Trigger 表单"></a>2. Trigger 表单</h3><table>
 <thead>
 <tr>
 <th style="text-align:left">参数</th>
@@ -157,7 +157,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
-<h4 id="Tigger-severity"><a href="#Tigger-severity" class="headerlink" title="Tigger severity"></a>Tigger severity</h4><p>Severity 通常用来定义当前 item 的一个状态严重性。我们根据不同的严重性来定义不同的时间，例如报警。</p>
+<h4 id="2-1-Tigger-severity"><a href="#2-1-Tigger-severity" class="headerlink" title="2.1 Tigger severity"></a>2.1 Tigger severity</h4><p>Severity 通常用来定义当前 item 的一个状态严重性。我们根据不同的严重性来定义不同的时间，例如报警。</p>
 <p>Zabbix 自带如下严重性定义。</p>
 <table>
 <thead>
@@ -200,11 +200,15 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+<h4 id="2-2-Severity-用途"><a href="#2-2-Severity-用途" class="headerlink" title="2.2 Severity 用途"></a>2.2 Severity 用途</h4><p>*. 可视化显示，不同级别显示不同颜色</p>
+<p>*. 声音报警，不同级别不同声音</p>
+<p>*. 使用用户自定义媒体报警，例如严重问题发短信，其它问题发送邮件</p>
+<p>*. 根据严重性来定义是否报警</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinvbkrzf0014dqm6len89kby" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinvbpm4c0014gfm6880pd0t7" class="article-share-link">Share</a>
       
       
     </footer>
