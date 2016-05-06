@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Iptables 四个表和五个链之间的关系 | 运维生存时间</title>
+  <title>Zabbix Simple check 简单检测 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="netfilter iptables 包过滤 filter nat mangle raw">
+  <meta name="description" content="zabbix simple check">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Iptables 四个表和五个链之间的关系">
-<meta property="og:url" content="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/index.html">
+<meta property="og:title" content="Zabbix Simple check 简单检测">
+<meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="netfilter iptables 包过滤 filter nat mangle raw">
-<meta property="og:updated_time" content="2016-04-25T08:39:40.216Z">
+<meta property="og:description" content="zabbix simple check">
+<meta property="og:updated_time" content="2016-05-06T02:05:42.929Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Iptables 四个表和五个链之间的关系">
-<meta name="twitter:description" content="netfilter iptables 包过滤 filter nat mangle raw">
+<meta name="twitter:title" content="Zabbix Simple check 简单检测">
+<meta name="twitter:description" content="zabbix simple check">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Iptables-四个表和五个链之间的关系" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Zabbix-Simple-check-简单检测" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/25/Iptables-四个表和五个链之间的关系/" class="article-date">
-  <time datetime="2016-04-25T08:13:54.000Z" itemprop="datePublished">2016-04-25</time>
+    <a href="/2016/05/06/Zabbix-Simple-check-简单检测/" class="article-date">
+  <time datetime="2016-05-06T01:59:06.000Z" itemprop="datePublished">2016-05-06</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Iptables 四个表和五个链之间的关系
+      Zabbix Simple check 简单检测
     </h1>
   
 
@@ -107,41 +107,16 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Netfileter/iptables IP 信息包过滤系统是一种功能强大的工具，可用于添加、编辑和除去规则，这些规则是在做信息包过滤决定时，防火墙所遵循和组成的规则。这些规则在专用的信息包过滤表中，而这些表集成在 Linux 内核中。在信息包过滤表中，规则被分组放在我们所谓的链（chain）中。</p>
+        <p>Simple check 通常用来检查远程未安装代理或者客户端的服务。使用 simple check，被监控客户端无需安装 zabbix agent，zabbix server 直接使用 simple check 来收集数据，基本上都是用来检测远程服务器某端口是否在监听。</p>
 <a id="more"></a>
-<p>虽在 netfileter/iptables IP 信息包过滤系统被称为单个实体，但它实际上由两个组件 netfilter 和 iptables 组成。</p>
-<p>Netfilter 组件也称为内核空间（kernelspace），是内核的一部分，由一些信息包过滤表组成，这些表包含内核用来控制信息包过滤处理的规则集。</p>
-<p>Iptables 组件是一种工具，也称为用户空间（userspace），它使插入、修改和除去信息包过滤表中的规则变得容易。</p>
-<p>Iptables 包含4个表，5个链。其中表是按照对数据包的操作区分，链是按照不同的Hook点来区分，表和链实际上是netfilter的两个维度。</p>
-<p>4个表：filter,nat,mangle,raw，默认表是filter(没有指定表的时候就是filter表)。表的处理优先级：raw&gt;mangle&gt;nat&gt;filter</p>
-<ul>
-<li><p>filter: 一般的过滤功能</p>
-</li>
-<li><p>nat: 用于nat功能（端口映射，地址映射等）</p>
-</li>
-<li><p>mangle: 用于对特定数据包的修改</p>
-</li>
-<li><p>raw: 优先级最高，设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能。</p>
-</li>
-</ul>
-<p>5个链：PREROUTING,INPUT,FORWARD,OUTPUT,POSTROUTING。</p>
-<ul>
-<li><p>PREFROUTING: 数据包进入路由表之前</p>
-</li>
-<li><p>INTPUT: 通过路由表后的目的为本机</p>
-</li>
-<li><p>FORWARDING: 通过路由表后，目的地不为本机</p>
-</li>
-<li><p>OUTPUT: 由本机产生，向外转发</p>
-</li>
-<li><p>POSTROUTING: 发送到网卡接口之前</p>
-</li>
-</ul>
+<p>如下为 simple check:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net.tcp.service[ftp,,155]</span><br><span class="line">net.tcp.service[http]</span><br><span class="line">net.tcp.service.perf[http]</span><br></pre></td></tr></table></figure>
+<p><strong>此处特别需要注意添加 item 时 Type of information的选择，例如我们使用 net.tcp.service.perf来监控 http ，返回值一般为0.00xx，此时如果 Type of information 选择Numeric (unsigned)，则结果将显示为0，会误判。</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="cinv2ypwi000m3tm66e4df4gd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cinv2ypxa00113tm6s1ifan36" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,19 +125,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/25/Iptables-概念/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Iptables 概念
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/22/使用Nagios监控网站登录是否成功/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">使用Nagios监控网站登录是否成功</div>
+      <div class="article-nav-title">Zabbix 自定义用户 key 与参数 UserParameter</div>
     </a>
   
 </nav>
