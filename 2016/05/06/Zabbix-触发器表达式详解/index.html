@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix Simple check 简单检测 | 运维生存时间</title>
+  <title>Zabbix 触发器表达式详解 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix simple check">
+  <meta name="description" content="zabbix 触发器 表达式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix Simple check 简单检测">
-<meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/index.html">
+<meta property="og:title" content="Zabbix 触发器表达式详解">
+<meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix simple check">
-<meta property="og:updated_time" content="2016-05-06T02:15:32.229Z">
+<meta property="og:description" content="zabbix 触发器 表达式">
+<meta property="og:updated_time" content="2016-05-06T08:12:57.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix Simple check 简单检测">
-<meta name="twitter:description" content="zabbix simple check">
+<meta name="twitter:title" content="Zabbix 触发器表达式详解">
+<meta name="twitter:description" content="zabbix 触发器 表达式">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,10 +81,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-Simple-check-简单检测" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Zabbix-触发器表达式详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-Simple-check-简单检测/" class="article-date">
-  <time datetime="2016-05-06T01:59:06.000Z" itemprop="datePublished">2016-05-06</time>
+    <a href="/2016/05/06/Zabbix-触发器表达式详解/" class="article-date">
+  <time datetime="2016-05-06T08:08:32.000Z" itemprop="datePublished">2016-05-06</time>
 </a>
     
   <div class="article-category">
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix Simple check 简单检测
+      Zabbix 触发器表达式详解
     </h1>
   
 
@@ -107,16 +107,14 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Simple check 通常用来检查远程未安装代理或者客户端的服务。使用 simple check，被监控客户端无需安装 zabbix agent，zabbix server 直接使用 simple check 来收集数据，基本上都是用来检测远程服务器某端口是否在监听。</p>
-<a id="more"></a>
-<p>如下为 simple check:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.tcp.service[ftp,,155]</span><br><span class="line">net.tcp.service[http]</span><br><span class="line">net.tcp.service.perf[http]</span><br><span class="line">icmpping   <span class="comment">#使用外部命令 fping 处理 ICMP ping。需要安装 yum install fping</span></span><br></pre></td></tr></table></figure>
-<p><strong>此处特别需要注意添加 item 时 Type of information的选择，例如我们使用 net.tcp.service.perf来监控 http ，返回值一般为0.00xx，此时如果 Type of information 选择Numeric (unsigned)，则结果将显示为0，会误判。</strong></p>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>触发器中的表达式使用很灵活，我们可以据此创建一个复杂的逻辑测试监控，触发器表达式形式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&lt;server&gt;:&lt;key&gt;.&lt;<span class="keyword">function</span>&gt;(&lt;parameter)&#125;&lt;operator&gt;&lt;constant&gt;</span><br><span class="line">例如：</span><br><span class="line">&#123;(mail.geak.cn:vfs.file.chksum[/etc/passwd].diff(0)&#125;&gt;0</span><br></pre></td></tr></table></figure>
+<p>{主机:key.函数(参数)}&lt;表达式&gt;常数</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cinvg2d9o0011bjm6v0u3kgec" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cinvg2da9001gbjm6q5n9cn8n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,19 +123,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/06/Zabbix-Value-mapping-值映射/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix Value mapping 值映射
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/06/Zabbix-单位符号-Unit-symbols/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix 自定义用户 key 与参数 UserParameter</div>
+      <div class="article-nav-title">Zabbix 单位符号 Unit symbols</div>
     </a>
   
 </nav>

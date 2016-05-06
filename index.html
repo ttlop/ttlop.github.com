@@ -82,6 +82,49 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-触发器表达式详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/06/Zabbix-触发器表达式详解/" class="article-date">
+  <time datetime="2016-05-06T08:08:32.000Z" itemprop="datePublished">2016-05-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/06/Zabbix-触发器表达式详解/">Zabbix 触发器表达式详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>触发器中的表达式使用很灵活，我们可以据此创建一个复杂的逻辑测试监控，触发器表达式形式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&lt;server&gt;:&lt;key&gt;.&lt;<span class="keyword">function</span>&gt;(&lt;parameter)&#125;&lt;operator&gt;&lt;constant&gt;</span><br><span class="line">例如：</span><br><span class="line">&#123;(mail.geak.cn:vfs.file.chksum[/etc/passwd].diff(0)&#125;&gt;0</span><br></pre></td></tr></table></figure>
+<p>{主机:key.函数(参数)}&lt;表达式&gt;常数</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cinvg2da9001gbjm6q5n9cn8n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-单位符号-Unit-symbols" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/06/Zabbix-单位符号-Unit-symbols/" class="article-date">
@@ -117,7 +160,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cinvfqe9v001a5mm611bgafgz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cinvg2d9y001abjm66epzy118" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +205,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinvfqe9n00115mm6oot74wjz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinvg2d9q0014bjm6qqumc0o2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +250,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cinvfqe9s00195mm635e7j36y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cinvg2d9s0016bjm6jkuy2lfa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -252,7 +295,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cinvfqe9p00145mm6ffl7d8m8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cinvg2d9o0011bjm6v0u3kgec" class="article-share-link">Share</a>
       
       
     </footer>
@@ -297,7 +340,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinvfqea2001e5mm6v9r8ntiq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinvg2da1001dbjm6cyab6mu6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -342,7 +385,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cinvfqe9l000z5mm65zv13l70" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cinvg2d9l000zbjm6w3woww6a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -389,7 +432,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cinvfqe9q00165mm6sqp4mrm7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cinvg2d9u0019bjm61079lvwe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -434,7 +477,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" data-id="cinvfqe9x001d5mm6rwzyho4d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" data-id="cinvg2da6001ebjm6oa6ljves" class="article-share-link">Share</a>
       
       
     </footer>
@@ -478,49 +521,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" data-id="cinvfqe9i000w5mm6eboybnyy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-查看linux系统版本命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/26/查看linux系统版本命令/" class="article-date">
-  <time datetime="2016-04-26T06:23:25.000Z" itemprop="datePublished">2016-04-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/26/查看linux系统版本命令/">查看linux系统版本命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="查看内核版本命令"><a href="#查看内核版本命令" class="headerlink" title="* 查看内核版本命令"></a>* 查看内核版本命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]<span class="comment"># cat /proc/version</span></span><br><span class="line">Linux version 3.10.0-229.14.1.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.3 20140911 (Red Hat 4.8.3-9) (GCC) ) <span class="comment">#1 SMP Tue Sep 15 15:05:51 UTC 2015</span></span><br><span class="line">[root@mail ~]<span class="comment"># uname -r</span></span><br><span class="line">3.10.0-229.14.1.el7.x86_64</span><br><span class="line">[root@mail ~]<span class="comment"># uname -a</span></span><br><span class="line">Linux mail.xxxx.cn 3.10.0-229.14.1.el7.x86_64 <span class="comment">#1 SMP Tue Sep 15 15:05:51 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># cat /proc/version </span></span><br><span class="line">Linux version 2.6.18-308.el5 (mockbuild@builder10.centos.org) (gcc version 4.1.2 20080704 (Red Hat 4.1.2-52)) <span class="comment">#1 SMP Tue Feb 21 20:06:06 EST 2012</span></span><br><span class="line">[root@localhost ~]<span class="comment"># uname -r</span></span><br><span class="line">2.6.18-308.el5</span><br><span class="line">[root@localhost ~]<span class="comment"># uname -a</span></span><br><span class="line">Linux localhost.localdomain 2.6.18-308.el5 <span class="comment">#1 SMP Tue Feb 21 20:06:06 EST 2012 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line"></span><br><span class="line">controller-xxxx:~ <span class="comment"># cat /proc/version </span></span><br><span class="line">Linux version 3.0.101-0.40-default (geeko@buildhost) (gcc version 4.3.4 [gcc-4_3-branch revision 152973] (SUSE Linux) ) <span class="comment">#1 SMP Thu Sep 18 13:09:38 UTC 2014 (44b8c95)</span></span><br><span class="line">controller-xxxx:~ <span class="comment"># uname -r</span></span><br><span class="line">3.0.101-0.40-default</span><br><span class="line">controller-xxxx:~ <span class="comment"># uname -a</span></span><br><span class="line">Linux controller-xxxx 3.0.101-0.40-default <span class="comment">#1 SMP Thu Sep 18 13:09:38 UTC 2014 (44b8c95) x86_64 x86_64 x86_64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
-<h2 id="查看linux版本"><a href="#查看linux版本" class="headerlink" title="* 查看linux版本"></a>* 查看linux版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># lsb_release -a</span></span><br><span class="line">LSB Version:	:core-4.0-amd64:core-4.0-ia32:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-ia32:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-ia32:printing-4.0-noarch</span><br><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS release 5.11 (Final)</span><br><span class="line">Release:	5.11</span><br><span class="line">Codename:	Final</span><br><span class="line">---</span><br><span class="line">[root@localhost ~]<span class="comment"># cat /etc/issue</span></span><br><span class="line">CentOS release 5.11 (Final)</span><br><span class="line">Kernel \r on an \m</span><br><span class="line"></span><br><span class="line">controller-xxxx:~ <span class="comment"># lsb_release -a</span></span><br><span class="line">LSB Version:	core-2.0-noarch:core-3.2-noarch:core-4.0-noarch:core-2.0-x86_64:core-3.2-x86_64:core-4.0-x86_64:desktop-4.0-amd64:desktop-4.0-noarch:graphics-2.0-amd64:graphics-2.0-noarch:graphics-3.2-amd64:graphics-3.2-noarch:graphics-4.0-amd64:graphics-4.0-noarch</span><br><span class="line">Distributor ID:	SUSE LINUX</span><br><span class="line">Description:	SUSE Linux Enterprise Server 11 (x86_64)</span><br><span class="line">Release:	11</span><br><span class="line">Codename:	n/a</span><br><span class="line">---</span><br><span class="line">controller-192-168-1-100:~ <span class="comment"># cat /etc/issue</span></span><br><span class="line"></span><br><span class="line">Welcome to SUSE Linux Enterprise Server 11 SP3  (x86_64) - Kernel \r (\l).</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/26/查看linux系统版本命令/" data-id="cinvfqea6001i5mm64bybkym0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" data-id="cinvg2d9i000wbjm6duevy127" class="article-share-link">Share</a>
       
       
     </footer>
@@ -572,6 +573,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/05/06/Zabbix-触发器表达式详解/">Zabbix 触发器表达式详解</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/06/Zabbix-单位符号-Unit-symbols/">Zabbix 单位符号 Unit symbols</a>
           </li>
         
@@ -585,10 +590,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/05/06/Zabbix-Simple-check-简单检测/">Zabbix Simple check 简单检测</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/">Zabbix 自定义用户 key 与参数 UserParameter</a>
           </li>
         
       </ul>
