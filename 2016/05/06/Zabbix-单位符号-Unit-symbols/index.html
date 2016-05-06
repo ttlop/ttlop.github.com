@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix unit symbols">
-<meta property="og:updated_time" content="2016-05-06T07:47:43.166Z">
+<meta property="og:updated_time" content="2016-05-06T08:03:35.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 单位符号 Unit symbols">
 <meta name="twitter:description" content="zabbix unit symbols">
@@ -107,13 +107,37 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在 zabbix 里面，我们不需要使用大数字，例如可以不是用 86400 来表示一天，这个数字不容易理解也容易出错，用什么办法可以解决呢？我们使用单位来简化，例如简化 zabbix 触发器表达式或者 item key。所以，我们可以使用 1d 来取代 86400 ，’d’ 就是单位后缀，表示为天。</p>
+        <p>在 zabbix 里面，我们不需要使用大数字，例如可以不使用 86400 来表示一天，这个数字不容易理解也容易出错，用什么办法可以解决呢？我们使用单位来简化，例如简化 zabbix 触发器表达式或者 item key。所以，我们可以使用 1d 来取代 86400 ，’d’ 就是单位后缀，表示天。</p>
+<a id="more"></a>
+<h3 id="时间单位后缀"><a href="#时间单位后缀" class="headerlink" title="时间单位后缀"></a>时间单位后缀</h3><ul>
+<li><p>s - 秒，一般来书来说不用写 s，就表示 s 了</p>
+</li>
+<li><p>m - 分</p>
+</li>
+<li><p>h - 小时 </p>
+</li>
+<li><p>d - 天</p>
+</li>
+<li><p>w - 周</p>
+</li>
+</ul>
+<h3 id="单位符号"><a href="#单位符号" class="headerlink" title="单位符号"></a>单位符号</h3><ul>
+<li><p>K</p>
+</li>
+<li><p>M</p>
+</li>
+<li><p>G</p>
+</li>
+<li><p>T</p>
+</li>
+</ul>
+<p>如果 item 值的单位不是 B、Bps，那么 1000 为基数，1000 将会显示成 1k，2000 显示为 2k。如果单位是 B 或者 Bps，那么基数就是 1024 了，item的值为 1024 将会被展示为 1k。所以单位上面，一定要切记。例如流量单位改为 B，访问量/次数不填写单位。</p>
 <h3 id="范例"><a href="#范例" class="headerlink" title="范例"></a>范例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;mail.geak.cn:system.cpu.load[percpu,avg1].avg(5m)&#125;&gt;5  <span class="comment">#5m即为5分钟，明显比avg(300)更好理解及维护</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cinvf5wij001aw0m6a0towku7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cinvfqe9v001a5mm611bgafgz" class="article-share-link">Share</a>
       
       
     </footer>
