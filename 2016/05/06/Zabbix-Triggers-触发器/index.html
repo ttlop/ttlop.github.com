@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix triggers">
-<meta property="og:updated_time" content="2016-05-06T06:11:06.124Z">
+<meta property="og:updated_time" content="2016-05-06T06:46:57.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Triggers 触发器">
 <meta name="twitter:description" content="zabbix triggers">
@@ -204,11 +204,13 @@ var _hmt = _hmt || [];
 <p>*. 声音报警，不同级别不同声音</p>
 <p>*. 使用用户自定义媒体报警，例如严重问题发短信，其它问题发送邮件</p>
 <p>*. 根据严重性来定义是否报警</p>
+<h4 id="3-Zabbix-触发器依赖关系"><a href="#3-Zabbix-触发器依赖关系" class="headerlink" title="3. Zabbix 触发器依赖关系"></a>3. Zabbix 触发器依赖关系</h4><p>触发器可以设置依赖性，例如配置了两个触发器，一个触发器监控主机是否运行，一个触发器监控网络是否通畅。假如网络出现故障，主机并未出现故障，我们依旧会收到这两个触发器给到的故障通知。</p>
+<p>现在的问题很明显，主机是正常的，肯定不希望收到它的故障信息。所以在配置触发器的时候，我们需要增加依赖关系，依赖网络是否畅通这个触发器，一旦网络出现故障，将不会触发主机故障的通知。单个触发器可以依赖于多个触发器。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinvbpm4c0014gfm6880pd0t7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinvczq750014ykm6hjkok0qz" class="article-share-link">Share</a>
       
       
     </footer>
