@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix 触发器 表达式">
-<meta property="og:updated_time" content="2016-05-06T08:29:14.648Z">
+<meta property="og:updated_time" content="2016-05-06T08:58:07.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 触发器表达式详解">
 <meta name="twitter:description" content="zabbix 触发器 表达式">
@@ -129,11 +129,40 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+<h3 id="触发器示例"><a href="#触发器示例" class="headerlink" title="触发器示例"></a>触发器示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;mail.geak.cn:system.cpu.load[percpu,avg1].avg(5m)&#125;&gt;5</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">mail.geak.cn</td>
+<td style="text-align:left">host 名称</td>
+</tr>
+<tr>
+<td style="text-align:left">system.cpu.load[percpu.avg1]</td>
+<td style="text-align:left">item 值，一分钟内 cpu 平均负载值负载值</td>
+</tr>
+<tr>
+<td style="text-align:left">avg(5m)</td>
+<td style="text-align:left">5 分钟内的平均数据</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt;5</td>
+<td style="text-align:left">大于5</td>
+</tr>
+</tbody>
+</table>
+<p>如上所述，mail.geak.cn 这个数据的监控项，5 分钟内如果 cpu 的 1 分钟负载大于 5，表达式会返回 true，触发器状态就会改变为 “problem”了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cinvgn9g8001gl4m6uh7ci14x" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cinvhoek0001g02m6kufj39cy" class="article-share-link">Share</a>
       
       
     </footer>
