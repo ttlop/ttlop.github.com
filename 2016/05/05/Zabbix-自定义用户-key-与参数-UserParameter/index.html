@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix userparameter key">
-<meta property="og:updated_time" content="2016-05-06T01:12:12.777Z">
+<meta property="og:updated_time" content="2016-05-06T01:24:38.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 自定义用户 key 与参数 UserParameter">
 <meta name="twitter:description" content="zabbix userparameter key">
@@ -139,12 +139,15 @@ var _hmt = _hmt || [];
 <p><strong>示例1</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=<span class="built_in">echo</span>[*],<span class="built_in">echo</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
 <p>echo[1] - 将一直返回1<br>echo[aaa] - 将一直返回’aaa’</p>
-<p><strong>示例2*</strong></p>
+<p><strong>示例2</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=wc[*],grep -c <span class="string">"<span class="variable">$2</span>"</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
+<p>如下方法将会返回我呢见中出现指定字符的行数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wc[/etc/passwd,root]</span><br><span class="line">wc[/etc/services,zabbix]</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinv1192i0014cvm6ag2z2hzj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinv1h8m80013jom68jfsz4u0" class="article-share-link">Share</a>
       
       
     </footer>
