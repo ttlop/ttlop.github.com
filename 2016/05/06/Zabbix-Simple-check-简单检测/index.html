@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix simple check">
-<meta property="og:updated_time" content="2016-05-06T02:05:42.929Z">
+<meta property="og:updated_time" content="2016-05-06T02:15:32.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Simple check 简单检测">
 <meta name="twitter:description" content="zabbix simple check">
@@ -110,13 +110,13 @@ var _hmt = _hmt || [];
         <p>Simple check 通常用来检查远程未安装代理或者客户端的服务。使用 simple check，被监控客户端无需安装 zabbix agent，zabbix server 直接使用 simple check 来收集数据，基本上都是用来检测远程服务器某端口是否在监听。</p>
 <a id="more"></a>
 <p>如下为 simple check:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net.tcp.service[ftp,,155]</span><br><span class="line">net.tcp.service[http]</span><br><span class="line">net.tcp.service.perf[http]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.tcp.service[ftp,,155]</span><br><span class="line">net.tcp.service[http]</span><br><span class="line">net.tcp.service.perf[http]</span><br><span class="line">icmpping   <span class="comment">#使用外部命令 fping 处理 ICMP ping。需要安装 yum install fping</span></span><br></pre></td></tr></table></figure>
 <p><strong>此处特别需要注意添加 item 时 Type of information的选择，例如我们使用 net.tcp.service.perf来监控 http ，返回值一般为0.00xx，此时如果 Type of information 选择Numeric (unsigned)，则结果将显示为0，会误判。</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cinv2ypxa00113tm6s1ifan36" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cinv3ao8000119sm6o200q0qm" class="article-share-link">Share</a>
       
       
     </footer>
