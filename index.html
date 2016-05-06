@@ -111,11 +111,30 @@ var _hmt = _hmt || [];
         <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>触发器中的表达式使用很灵活，我们可以据此创建一个复杂的逻辑测试监控，触发器表达式形式如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&lt;server&gt;:&lt;key&gt;.&lt;<span class="keyword">function</span>&gt;(&lt;parameter&gt;)&#125;&lt;operator&gt;&lt;constant&gt;</span><br><span class="line">例如：</span><br><span class="line">&#123;mail.geak.cn:vfs.file.chksum[/etc/passwd].diff(0)&#125;&gt;0</span><br></pre></td></tr></table></figure>
 <p>{主机:key.函数(参数)}&lt;表达式&gt;常数</p>
+<h3 id="Function-参数"><a href="#Function-参数" class="headerlink" title="Function 参数"></a>Function 参数</h3><p>大多数数值 functions 可以使用秒来作为参数。你可以使用”#”来表示它有不同的含义</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">sum(600)</td>
+<td style="text-align:left">600 秒内的总和</td>
+</tr>
+<tr>
+<td style="text-align:left">sum(#5)</td>
+<td style="text-align:left">最新 5 个值的和</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cinvg7gqe001gebm60z0n2cyk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cinvgn9g8001gl4m6uh7ci14x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -160,7 +179,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cinvg7gq20019ebm6y7qevx7m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cinvgn9fw001al4m6kepvl64x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -205,7 +224,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinvg7gps0014ebm6a5xwwtq3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinvgn9fo0014l4m6jdbq7gn5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -250,7 +269,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cinvg7gpu0015ebm66kj1mymg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cinvgn9fq0016l4m64rbwgpn7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -295,7 +314,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cinvg7gpr0011ebm6rnklb5yb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cinvgn9fl0011l4m6e5uz9ow0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -340,7 +359,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinvg7gqa001debm6c7vsncuv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinvgn9g6001el4m610ptow5q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -385,7 +404,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cinvg7gpo000zebm6fi79ysbo" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cinvgn9fi000zl4m6oel5xvg0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -432,7 +451,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cinvg7gpx0018ebm6cwmj1s9n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cinvgn9fs0019l4m6yukwqrkw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -477,7 +496,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" data-id="cinvg7gq5001cebm6exihvz4g" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" data-id="cinvgn9fz001dl4m6puad9z45" class="article-share-link">Share</a>
       
       
     </footer>
@@ -521,7 +540,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" data-id="cinvg7gpj000webm6iay191tm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" data-id="cinvgn9fc000ul4m6tof0wqvc" class="article-share-link">Share</a>
       
       
     </footer>
