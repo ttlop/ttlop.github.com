@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix userparameter key">
-<meta property="og:updated_time" content="2016-05-05T09:31:25.314Z">
+<meta property="og:updated_time" content="2016-05-06T01:12:12.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 自定义用户 key 与参数 UserParameter">
 <meta name="twitter:description" content="zabbix userparameter key">
@@ -111,14 +111,40 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <h3 id="1-语法"><a href="#1-语法" class="headerlink" title="1. 语法"></a>1. 语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=&lt;key&gt;,&lt;shell <span class="built_in">command</span>&gt;</span><br></pre></td></tr></table></figure>
 <p>用户自定义参数包含一个 key 和一个命令，key 必须整个系统唯一，配置好之后重启客户端。然后配置 item，在 key 的位置填上我们自定义的 key 即可。用户自定义参数里指定的脚本由 zabbix agent 来执行，最大返回 512KB 的数据。</p>
-<h3 id="2-范例"><a href="#2-范例" class="headerlink" title="2. 范例"></a>2. 范例</h3><p><strong>简单点的</strong></p>
+<h3 id="2-范例"><a href="#2-范例" class="headerlink" title="2. 范例"></a>2. 范例</h3><p><strong>简单点的例子</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=<span class="built_in">echo</span>1,<span class="built_in">echo</span> 2</span><br></pre></td></tr></table></figure>
 <p>如果调用 echo1 这个key，将会收到返回值 2。</p>
+<p><strong>复杂点的例子</strong></p>
+<p>参见配置文件：vim /etc/zabbix/zabbix_agentd.d/userparameter_mysql.conf</p>
+<p><strong>灵活的自定义key</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=key[*],<span class="built_in">command</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">key</td>
+<td style="text-align:left">唯一。[*]表示里面可以传递多个参数</td>
+</tr>
+<tr>
+<td style="text-align:left">Command</td>
+<td style="text-align:left">需要执行的脚本，key的[]里面的参数一一对应$1到$9，一共9个参数。$0表示脚本命令。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例1</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=<span class="built_in">echo</span>[*],<span class="built_in">echo</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
+<p>echo[1] - 将一直返回1<br>echo[aaa] - 将一直返回’aaa’</p>
+<p><strong>示例2*</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinu3fduf0016afm65nt5jdo7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cinv1192i0014cvm6ag2z2hzj" class="article-share-link">Share</a>
       
       
     </footer>
