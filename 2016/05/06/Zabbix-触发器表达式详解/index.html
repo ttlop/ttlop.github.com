@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix 触发器 表达式">
-<meta property="og:updated_time" content="2016-05-06T08:12:57.785Z">
+<meta property="og:updated_time" content="2016-05-06T08:16:57.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 触发器表达式详解">
 <meta name="twitter:description" content="zabbix 触发器 表达式">
@@ -108,13 +108,13 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>触发器中的表达式使用很灵活，我们可以据此创建一个复杂的逻辑测试监控，触发器表达式形式如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&lt;server&gt;:&lt;key&gt;.&lt;<span class="keyword">function</span>&gt;(&lt;parameter)&#125;&lt;operator&gt;&lt;constant&gt;</span><br><span class="line">例如：</span><br><span class="line">&#123;(mail.geak.cn:vfs.file.chksum[/etc/passwd].diff(0)&#125;&gt;0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&lt;server&gt;:&lt;key&gt;.&lt;<span class="keyword">function</span>&gt;(&lt;parameter&gt;)&#125;&lt;operator&gt;&lt;constant&gt;</span><br><span class="line">例如：</span><br><span class="line">&#123;mail.geak.cn:vfs.file.chksum[/etc/passwd].diff(0)&#125;&gt;0</span><br></pre></td></tr></table></figure>
 <p>{主机:key.函数(参数)}&lt;表达式&gt;常数</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cinvg2da9001gbjm6q5n9cn8n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cinvg7gqe001gebm60z0n2cyk" class="article-share-link">Share</a>
       
       
     </footer>
