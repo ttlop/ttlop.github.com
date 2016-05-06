@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>默认主题landscape分页异常修复 | 运维生存时间</title>
+  <title>Zabbix Triggers 触发器 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="landscape next prev 显示异常">
+  <meta name="description" content="zabbix triggers">
 <meta property="og:type" content="article">
-<meta property="og:title" content="默认主题landscape分页异常修复">
-<meta property="og:url" content="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/index.html">
+<meta property="og:title" content="Zabbix Triggers 触发器">
+<meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="landscape next prev 显示异常">
-<meta property="og:updated_time" content="2016-04-21T02:29:18.572Z">
+<meta property="og:description" content="zabbix triggers">
+<meta property="og:updated_time" content="2016-05-06T03:48:27.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="默认主题landscape分页异常修复">
-<meta name="twitter:description" content="landscape next prev 显示异常">
+<meta name="twitter:title" content="Zabbix Triggers 触发器">
+<meta name="twitter:description" content="zabbix triggers">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-默认主题landscape分页异常修复" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Zabbix-Triggers-触发器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/21/默认主题landscape分页异常修复/" class="article-date">
-  <time datetime="2016-04-21T02:24:45.000Z" itemprop="datePublished">2016-04-21</time>
+    <a href="/2016/05/06/Zabbix-Triggers-触发器/" class="article-date">
+  <time datetime="2016-05-06T03:40:00.000Z" itemprop="datePublished">2016-05-06</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      默认主题landscape分页异常修复
+      Zabbix Triggers 触发器
     </h1>
   
 
@@ -107,15 +107,23 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>hexo默认安装的主题是landscape，当文章过多页面自动分页时会出现页面下部分页条显示异常</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__(<span class="string">'next'</span>) »</span><br></pre></td></tr></table></figure>
-<p>通过修改代码themes/landscape/layout/_partial/archive.ejs可以修复此问题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- paginator(&#123;</span><br><span class="line">      prev_text: <span class="string">"&amp;laquo; __('prev')"</span>,</span><br><span class="line">      next_text: <span class="string">"__('next') &amp;raquo;"</span></span><br><span class="line">    &#125;) %&gt;</span><br><span class="line">替换为</span><br><span class="line">&lt;%- paginator(&#123;</span><br><span class="line">      prev_text: <span class="string">"&amp;laquo; Prev"</span>,</span><br><span class="line">      next_text: <span class="string">"Next &amp;raquo;"</span></span><br><span class="line">    &#125;) %&gt;</span><br></pre></td></tr></table></figure>
+        <p>触发器使用逻辑表达式来评估通过 item 获取得到数据是处于哪种状态。Item 每次获取到一个新值都会使用触发器表达式去计算它的状态，在触发器表达式中我们可以定义哪些值是合理的，哪些是不合理的，如果出现不合理的值，触发器会把状态改为 PROBLEM。</p>
+<a id="more"></a>
+<h3 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h3><ol>
+<li><p>点击 <strong>Configuration</strong> -&gt; <strong>Hosts</strong></p>
+</li>
+<li><p>点击 <strong>Hosts</strong> 相关行的 <strong>Triggers</strong> </p>
+</li>
+<li><p>点击右上角的 <strong>Create trigger</strong>，你也可以修改列表中的触发器</p>
+</li>
+<li><p>在表单中输入相应的信息</p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="cinv6m62y001kidm60xy847tq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cinv6m6290014idm6yt8i6jtg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -124,19 +132,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Apache 崩溃解决 -- 修改堆栈大小
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/21/Hexo-添加百度统计代码/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/06/Zabbix-Value-mapping-值映射/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hexo 添加百度统计代码</div>
+      <div class="article-nav-title">Zabbix Value mapping 值映射</div>
     </a>
   
 </nav>
