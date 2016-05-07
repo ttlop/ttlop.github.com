@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/07/Zabbix-事件/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix 事件 通知 来源">
-<meta property="og:updated_time" content="2016-05-07T02:15:40.339Z">
+<meta property="og:updated_time" content="2016-05-07T02:31:33.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 事件">
 <meta name="twitter:description" content="zabbix 事件 通知 来源">
@@ -161,11 +161,87 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+<h3 id="2-Zabbix-事件来源"><a href="#2-Zabbix-事件来源" class="headerlink" title="2. Zabbix 事件来源"></a>2. Zabbix 事件来源</h3><h4 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h4><p>在 trigger 的文章内，我们已经讲到过事件，zabbix 事件一共有三种，分别为：触发器事件、发现事件、内部事件、自动注册事件。</p>
+<h4 id="2-2-Zabbix-内部事件"><a href="#2-2-Zabbix-内部事件" class="headerlink" title="2.2 Zabbix 内部事件"></a>2.2 Zabbix 内部事件</h4><p>内部事件是从 zabbix 2.2 版本开始引入，主要目的是为了可以通知管理员 zabbix 的某些 item 不可用。</p>
+<ul>
+<li><p>监控项 item 状态从 normal 变为 unsupported，或者从 unsupported 变为 normal</p>
+</li>
+<li><p>low-level 发现规则状态从 normal 变为 unsupported，或者从 unsupported 变为 normal</p>
+</li>
+<li><p>触发器状态从 normal 变为 unknown，或者从 unknown 转为 normal</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">正常</td>
+</tr>
+<tr>
+<td style="text-align:left">unsupported</td>
+<td style="text-align:left">不正常</td>
+</tr>
+<tr>
+<td style="text-align:left">unknown</td>
+<td style="text-align:left">未知</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-3-Zabbix-发现事件"><a href="#2-3-Zabbix-发现事件" class="headerlink" title="2.3 Zabbix 发现事件"></a>2.3 Zabbix 发现事件</h4><p>在我们配置玩 zabbix 网络发现规则之后，zabbix 会定期按照这个规则去扫描 IP 段，一旦有发现主机和服务，变生成一个事件。事件如下列表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">事件</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Service Up</td>
+<td style="text-align:left">每当 zabbix 检测到 active service</td>
+</tr>
+<tr>
+<td style="text-align:left">Service Down</td>
+<td style="text-align:left">每当 zabbix 检测不到 service</td>
+</tr>
+<tr>
+<td style="text-align:left">Host Up</td>
+<td style="text-align:left">目标IP，至少有一个 service 是 UP</td>
+</tr>
+<tr>
+<td style="text-align:left">Host Down</td>
+<td style="text-align:left">所有 services 都没有响应</td>
+</tr>
+<tr>
+<td style="text-align:left">Service Discovered</td>
+<td style="text-align:left">service 在维护时间之后恢复或者第一次被发现</td>
+</tr>
+<tr>
+<td style="text-align:left">Service Lost</td>
+<td style="text-align:left">service 在 up 之后丢失了</td>
+</tr>
+<tr>
+<td style="text-align:left">Host Discovered</td>
+<td style="text-align:left">主机在维护时间之后恢复或者第一次被发现</td>
+</tr>
+<tr>
+<td style="text-align:left">Host Lost</td>
+<td style="text-align:left">主机在 up 之后丢失</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-4-Zabbix-触发器事件"><a href="#2-4-Zabbix-触发器事件" class="headerlink" title="2.4 Zabbix 触发器事件"></a>2.4 Zabbix 触发器事件</h4><p>触发器在 zabbix 事件当中是最重要也是最常用的事件（例如定义action等）。每当触发器状态发生变化都会产生一个包含详细状态信息的触发器事件：例如事件什么时候发送的以及当前状态是什么。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cinwiqp16001auvm6mijp8fh2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cinwjb4uu001a3bm6ig59qtnk" class="article-share-link">Share</a>
       
       
     </footer>
