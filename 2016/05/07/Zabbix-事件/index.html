@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/07/Zabbix-事件/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix 事件 通知 来源">
-<meta property="og:updated_time" content="2016-05-07T01:37:46.666Z">
+<meta property="og:updated_time" content="2016-05-07T02:15:40.339Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 事件">
 <meta name="twitter:description" content="zabbix 事件 通知 来源">
@@ -70,9 +70,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -117,11 +117,55 @@ var _hmt = _hmt || [];
 <li>配置 action</li>
 </ul>
 <p>Action 由 conditions (条件)和 operations (操作)组成。当满足指定的条件，然后执行操作。这就是一个 action。</p>
+<h4 id="1-3-事件通知配置"><a href="#1-3-事件通知配置" class="headerlink" title="1.3 事件通知配置"></a>1.3 事件通知配置</h4><ul>
+<li><p>选择 <strong>Configuration -&gt; Actions</strong></p>
+</li>
+<li><p>点击右上角 <strong>Create action</strong></p>
+</li>
+<li><p>配置条件标签页 Conditions</p>
+</li>
+<li><p>配置操作标签页 Operations</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:left">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Default operation step duration</td>
+<td style="text-align:left">默认配置，表示这次发送报警后，下一次发送是在多少秒之后</td>
+</tr>
+<tr>
+<td style="text-align:left">Steps</td>
+<td style="text-align:left">发送次数</td>
+</tr>
+<tr>
+<td style="text-align:left">Step duration</td>
+<td style="text-align:left">发送间隔，如果设置为0，使用默认值</td>
+</tr>
+<tr>
+<td style="text-align:left">Operation type</td>
+<td style="text-align:left">发送介质</td>
+</tr>
+<tr>
+<td style="text-align:left">Send to User groups</td>
+<td style="text-align:left">发送到哪个用户组</td>
+</tr>
+<tr>
+<td style="text-align:left">Send to Users</td>
+<td style="text-align:left">发送给哪个用户</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cinwhdyni001aaom6p4vljy5u" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cinwiqp16001auvm6mijp8fh2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -132,7 +176,7 @@ var _hmt = _hmt || [];
   
   
     <a href="/2016/05/06/Zabbix-触发器表达式详解/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Zabbix 触发器表达式详解</div>
     </a>
   
@@ -147,7 +191,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -172,7 +216,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -209,7 +253,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
