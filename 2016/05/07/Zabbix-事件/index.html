@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/07/Zabbix-事件/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix 事件 通知 来源">
-<meta property="og:updated_time" content="2016-05-07T02:32:55.094Z">
+<meta property="og:updated_time" content="2016-05-07T02:51:48.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 事件">
 <meta name="twitter:description" content="zabbix 事件 通知 来源">
@@ -118,14 +118,68 @@ var _hmt = _hmt || [];
 </ul>
 <p>Action 由 conditions (条件)和 operations (操作)组成。当满足指定的条件，然后执行操作。这就是一个 action。</p>
 <h4 id="1-3-事件通知配置"><a href="#1-3-事件通知配置" class="headerlink" title="1.3 事件通知配置"></a>1.3 事件通知配置</h4><ul>
-<li><p>选择 <strong>Configuration -&gt; Actions</strong></p>
+<li><p>点击 <strong>Configuration -&gt; Actions</strong></p>
 </li>
 <li><p>点击右上角 <strong>Create action</strong></p>
 </li>
-<li><p>配置条件标签页 Conditions</p>
-</li>
-<li><p>配置操作标签页 Operations</p>
-</li>
+</ul>
+<p>此处我们选择右上角 <strong>Event source</strong> 为 <strong>Triggers</strong></p>
+<ul>
+<li>配置 Action 标签页</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:left">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Name</td>
+<td style="text-align:left">action 名称</td>
+</tr>
+<tr>
+<td style="text-align:left">Default subject</td>
+<td style="text-align:left">报警通知的主题，一般是邮件主题</td>
+</tr>
+<tr>
+<td style="text-align:left">Default message</td>
+<td style="text-align:left">通知内容，一般就是邮件内容</td>
+</tr>
+<tr>
+<td style="text-align:left">Recovery message</td>
+<td style="text-align:left">勾上它，监控项恢复后也会收到通知</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>配置 Conditions 标签页</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:left">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Type of calculation</td>
+<td style="text-align:left">各条件之间的关系</td>
+</tr>
+<tr>
+<td style="text-align:left">Conditions</td>
+<td style="text-align:left">条件列表</td>
+</tr>
+<tr>
+<td style="text-align:left">New condition</td>
+<td style="text-align:left">此处可以添加更多的条件</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>配置 Operations 标签页</li>
 </ul>
 <table>
 <thead>
@@ -241,7 +295,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cinwjf43700195qm65hu6hk57" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cinwk16u6001af7m6yam5vota" class="article-share-link">Share</a>
       
       
     </footer>
