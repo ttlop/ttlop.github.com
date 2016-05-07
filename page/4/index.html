@@ -15,18 +15,17 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix 在系统已有的Templates中增加Graphs | 运维生存时间</title>
+  <title>运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="templates add graphs">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix 在系统已有的Templates中增加Graphs">
-<meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/index.html">
+  <meta name="description" content="运维 生存时间 ttl op oa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="运维生存时间">
+<meta property="og:url" content="http://ttlop.com/page/4/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="templates add graphs">
-<meta property="og:updated_time" content="2016-05-05T02:12:58.159Z">
+<meta property="og:description" content="运维 生存时间 ttl op oa">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix 在系统已有的Templates中增加Graphs">
-<meta name="twitter:description" content="templates add graphs">
+<meta name="twitter:title" content="运维生存时间">
+<meta name="twitter:description" content="运维 生存时间 ttl op oa">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +80,16 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-在系统已有的Templates中增加Graphs" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-Microsoft-SQL-Server-缓存清除与内存释放" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" class="article-date">
-  <time datetime="2016-05-05T01:59:46.000Z" itemprop="datePublished">2016-05-05</time>
+    <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" class="article-date">
+  <time datetime="2016-04-15T02:09:02.000Z" itemprop="datePublished">2016-04-15</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
   </div>
 
   </div>
@@ -98,8 +99,8 @@ var _hmt = _hmt || [];
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Zabbix 在系统已有的Templates中增加Graphs
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/">Microsoft SQL Server 缓存清除与内存释放</a>
     </h1>
   
 
@@ -107,46 +108,33 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这里讲述如何在zabbix系统自带的templates中增加graphs项。<br>zabbix版本：zabbix 3.0.1<br>templates名：Template OS Linux</p>
-<a id="more"></a>
-<p>1.选择点击导航条上的<strong>Configuration-Tempplates</strong></p>
-<p>2.选择<strong>Template OS Linux</strong>，点击后面的<strong>Graphs</strong></p>
-<p>3.点击右上角<strong>Create graph</strong></p>
-<p>4.在<strong>Name</strong>中输入我们创建的这个<strong>Graph</strong>的名字，在<strong>items</strong>中选择我们创建的这个<strong>Graph</strong>上需要显示的数据项</p>
-<p>5.点击<strong>Add</strong>完成创建</p>
-<p>6.可以通过<strong>Configuration-Hosts</strong>中添加的主机的<strong>Graphs</strong>查看我们创建的<strong>graph</strong>是否成功<br>注：前提是我们在主机中应用了前面所说的<strong>Template OS Linux</strong></p>
-
+        <p>很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。</p>
+<p>这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：</p>
+<p>1.数据缓存：执行查询语句，SQL Server 会将相关的数据页加载到内存中来，下一次如果再次请求此页的数据的时候，就无需读取磁盘了，大大提高了速度。</p>
+<p>2.执行命令缓存：在执行存储过程，自定函数时，SQL Server 需要先二进制编译再运行，编译后的结果也会缓存起来，再次调用时就无需再次编译。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" data-id="cinwhahal001d7im6z822cvjs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cinwhah9v000u7im66uxwhnf5" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2016/05/05/Zabbix-item-key-详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix item key 详解
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix Agent Installing And Configuration</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
-</article>
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
 
 </section>
         

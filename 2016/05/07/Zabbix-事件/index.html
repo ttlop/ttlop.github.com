@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix 在系统已有的Templates中增加Graphs | 运维生存时间</title>
+  <title>Zabbix 事件 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="templates add graphs">
+  <meta name="description" content="zabbix 事件 通知 来源">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix 在系统已有的Templates中增加Graphs">
-<meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/index.html">
+<meta property="og:title" content="Zabbix 事件">
+<meta property="og:url" content="http://ttlop.com/2016/05/07/Zabbix-事件/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="templates add graphs">
-<meta property="og:updated_time" content="2016-05-05T02:12:58.159Z">
+<meta property="og:description" content="zabbix 事件 通知 来源">
+<meta property="og:updated_time" content="2016-05-07T01:35:04.212Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix 在系统已有的Templates中增加Graphs">
-<meta name="twitter:description" content="templates add graphs">
+<meta name="twitter:title" content="Zabbix 事件">
+<meta name="twitter:description" content="zabbix 事件 通知 来源">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,10 +81,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-在系统已有的Templates中增加Graphs" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Zabbix-事件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" class="article-date">
-  <time datetime="2016-05-05T01:59:46.000Z" itemprop="datePublished">2016-05-05</time>
+    <a href="/2016/05/07/Zabbix-事件/" class="article-date">
+  <time datetime="2016-05-07T01:28:02.000Z" itemprop="datePublished">2016-05-07</time>
 </a>
     
   <div class="article-category">
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix 在系统已有的Templates中增加Graphs
+      Zabbix 事件
     </h1>
   
 
@@ -107,19 +107,15 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这里讲述如何在zabbix系统自带的templates中增加graphs项。<br>zabbix版本：zabbix 3.0.1<br>templates名：Template OS Linux</p>
-<a id="more"></a>
-<p>1.选择点击导航条上的<strong>Configuration-Tempplates</strong></p>
-<p>2.选择<strong>Template OS Linux</strong>，点击后面的<strong>Graphs</strong></p>
-<p>3.点击右上角<strong>Create graph</strong></p>
-<p>4.在<strong>Name</strong>中输入我们创建的这个<strong>Graph</strong>的名字，在<strong>items</strong>中选择我们创建的这个<strong>Graph</strong>上需要显示的数据项</p>
-<p>5.点击<strong>Add</strong>完成创建</p>
-<p>6.可以通过<strong>Configuration-Hosts</strong>中添加的主机的<strong>Graphs</strong>查看我们创建的<strong>graph</strong>是否成功<br>注：前提是我们在主机中应用了前面所说的<strong>Template OS Linux</strong></p>
+        <h2 id="1-Zabbix-事件通知"><a href="#1-Zabbix-事件通知" class="headerlink" title="1. Zabbix 事件通知"></a>1. Zabbix 事件通知</h2><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h3><p>我们花费大量时间去配置 item、tirgger 都是为了发送报警做准备的，什么是事件通知？简单说就是故障发生了，zabbix 会发邮件或者短信给你，告诉你服务器的一些状况。</p>
+<h3 id="1-2-通知条件"><a href="#1-2-通知条件" class="headerlink" title="1.2 通知条件"></a>1.2 通知条件</h3><p>发送通知，需要有如下步骤：</p>
+<h4 id="定义一个通知介质"><a href="#定义一个通知介质" class="headerlink" title="*. 定义一个通知介质"></a>*. 定义一个通知介质</h4><p>这个介质包含 email、shell 脚本、sms 短信网关等。zabbix 将需要发送的内容传递给这些介质，然后这些介质把需要发送的内容给到对应的终端。</p>
+<h4 id="配置-action"><a href="#配置-action" class="headerlink" title="*. 配置 action"></a>*. 配置 action</h4><p>Action 由 conditions (条件)和 operations (操作)组成。当满足指定的条件，然后执行操作。这就是一个 action。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" data-id="cinwhahal001d7im6z822cvjs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cinwhahah001a7im6x317xc3h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,19 +124,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/05/Zabbix-item-key-详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix item key 详解
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/06/Zabbix-触发器表达式详解/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix Agent Installing And Configuration</div>
+      <div class="article-nav-title">Zabbix 触发器表达式详解</div>
     </a>
   
 </nav>
