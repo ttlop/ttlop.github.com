@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix system cpu load 使用率">
-<meta property="og:updated_time" content="2016-05-11T09:11:11.768Z">
+<meta property="og:updated_time" content="2016-05-11T09:16:01.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 的 system.cpu.load 与 CPU 使用率">
 <meta name="twitter:description" content="zabbix system cpu load 使用率">
@@ -118,16 +118,21 @@ var _hmt = _hmt || [];
 </li>
 <li><p>为了统计平均负载情况，我们每 <strong>5</strong> 秒统计一次人数，并在第1、5、15分钟的时候对统计情况取平均值，从而形成第1、5、15的平均负载</p>
 </li>
-<li><p>有的人拿起打卡机就打卡，一直到 <strong>5</strong> 秒钟结束，而有的人可能前 <strong>2</strong> 没有操作，后 <strong>3</strong> 秒才真正在打卡</p>
+</ol>
+<hr>
+<ol>
+<li><p>有的人拿起打卡机就打卡，一直到 <strong>5</strong> 秒钟结束，而有的人可能前 <strong>2</strong> 秒没有操作，后 <strong>3</strong> 秒才真正在打卡</p>
 </li>
 <li><p>如果把打卡机比作CPU， 任务看作任务，我们就说前一个人的 CPU 利用率高，后一个人的 CPU 利用率低，但无论 CPU 的利用率高低，跟后面有多少任务在排队没有必然关系</p>
+</li>
+<li><p>除非后一秒打卡的人因为浪费了时间导致打卡不成功需要重新排队打卡，由于排队人数相当于任务数，任务数增加会导致负载变大，此时 CPU 的利用率低才会对负载有影响</p>
 </li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="cio2nch09001iotm6imvb245o" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="cio2niogd001isim66ou2m4w7" class="article-share-link">Share</a>
       
       
     </footer>
