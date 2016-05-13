@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/13/Mysql-mysql-user/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="mysql user">
-<meta property="og:updated_time" content="2016-05-13T07:50:34.200Z">
+<meta property="og:updated_time" content="2016-05-13T07:54:28.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql mysql.user">
 <meta name="twitter:description" content="mysql user">
@@ -107,7 +107,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前言：近几日，在学习使用 Zabbix 3 监控其他服务器的 Mysql，学习过程中碰到一个很奇怪的问题，由此学习到下面的知识，还有很有意义的。</p>
+        <p>前言：近几日，在学习使用 <strong>Zabbix 3</strong> 监控其他服务器的 <strong>Mysql</strong> ，学习过程中碰到一个很奇怪的问题，由此学习到下面的知识，还有很有意义的，记录如下。</p>
 <p>问题是这样发现的：</p>
 <ol>
 <li><p>在两台 <strong>Centos 7</strong> 系统中使用 <strong>Yum</strong> 方式分别安装了 <strong>zabbix-server</strong> 和 <strong>zabbix-agent</strong>，并且在装有 <strong>zabbix-agent</strong> 的服务器上使用 <strong>Yum</strong> 安装了 <strong>mariadb-server</strong>。</p>
@@ -122,7 +122,7 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <p>以下是如何发现问题并进行测试的步骤：</p>
 <h3 id="查看-mysql-user-表"><a href="#查看-mysql-user-表" class="headerlink" title="查看 mysql.user 表"></a>查看 mysql.user 表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| Host                  | User | Password                                  |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| localhost             | root | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">| localhost.localdomain | root |                                           |</span><br><span class="line">| 127.0.0.1             | root |                                           |</span><br><span class="line">| ::1                   | root |                                           |</span><br><span class="line">| localhost             |      |                                           |</span><br><span class="line">| localhost.localdomain |      |                                           |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">6 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
-<p>从中我们可以看到最后两行记录的 <strong>User</strong> 列和 <strong>Password</strong> 列是空的，细思恐极，难道可以在本机使用空账号和密码可以随便登陆数据库吗？</p>
+<p>从中我们可以看到最后两行记录的 <strong>User</strong> 列和 <strong>Password</strong> 列是空的，细思恐极，难道在本机使用空账号和密码可以随便登陆数据库吗？</p>
 <h3 id="空账号密码登陆测试"><a href="#空账号密码登陆测试" class="headerlink" title="空账号密码登陆测试"></a>空账号密码登陆测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix]<span class="comment"># mysql -u -p</span></span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 574</span><br><span class="line">Server version: 5.5.47-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt;</span><br></pre></td></tr></table></figure>
 <p>测试发现确实可以使用空账号密码登陆数据库，为了验证确实是这条记录生效了，我们删掉数据库中的这条记录，再次进行登陆测试</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; drop user <span class="string">''</span>@localhost;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| Host                  | User | Password                                  |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| localhost             | root | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">| localhost.localdomain | root |                                           |</span><br><span class="line">| 127.0.0.1             | root |                                           |</span><br><span class="line">| ::1                   | root |                                           |</span><br><span class="line">| localhost.localdomain |      |                                           |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br></pre></td></tr></table></figure>
@@ -135,7 +135,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="cio5fchxm000ym6m6qxp0jczi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="cio5fhi74000yoym6mtaxv1mn" class="article-share-link">Share</a>
       
       
     </footer>
