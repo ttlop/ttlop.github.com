@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/14/Mysql-权限/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="mysql 数据库 权限">
-<meta property="og:updated_time" content="2016-05-14T05:51:22.194Z">
+<meta property="og:updated_time" content="2016-05-14T05:56:54.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql 权限">
 <meta name="twitter:description" content="mysql 数据库 权限">
@@ -115,6 +115,7 @@ var _hmt = _hmt || [];
 <tr>
 <th style="text-align:left">Privilege</th>
 <th style="text-align:left">Comment</th>
+<th style="text-align:left"></th>
 </tr>
 </thead>
 <tbody>
@@ -129,6 +130,7 @@ var _hmt = _hmt || [];
 <tr>
 <td style="text-align:left">create</td>
 <td style="text-align:left">To create new databases and tables</td>
+<td style="text-align:left">必须有create权限，才可以使用create database或者create table</td>
 </tr>
 <tr>
 <td style="text-align:left">create routine</td>
@@ -209,6 +211,7 @@ var _hmt = _hmt || [];
 <tr>
 <td style="text-align:left">select</td>
 <td style="text-align:left">To retrieve rows from table</td>
+<td style="text-align:left">必须有select权限，才可以使用select table</td>
 </tr>
 <tr>
 <td style="text-align:left">show database</td>
@@ -241,6 +244,7 @@ var _hmt = _hmt || [];
 <tr>
 <td style="text-align:left">usage</td>
 <td style="text-align:left">No privileges - allow connect only</td>
+<td style="text-align:left">创建一个用户自动授予的权限，只能用于登陆数据库，不能执行任何操作，且不能被回收</td>
 </tr>
 </tbody>
 </table>
@@ -248,7 +252,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cio6qj1s700109nm6nycx1dr6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cio6qqawh0011dpm6mdum0705" class="article-share-link">Share</a>
       
       
     </footer>
