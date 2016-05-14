@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/14/Mysql-权限/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="mysql 数据库 权限">
-<meta property="og:updated_time" content="2016-05-14T03:44:55.351Z">
+<meta property="og:updated_time" content="2016-05-14T05:37:10.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql 权限">
 <meta name="twitter:description" content="mysql 数据库 权限">
@@ -70,9 +70,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -152,20 +152,60 @@ var _hmt = _hmt || [];
 <td style="text-align:left">To drop databases, tables, and views</td>
 </tr>
 <tr>
-<td style="text-align:left">usage</td>
-<td style="text-align:left">No privileges - allow connect only</td>
+<td style="text-align:left">event</td>
+<td style="text-align:left">To create, alter, drop and execute events</td>
 </tr>
 <tr>
-<td style="text-align:left">update</td>
-<td style="text-align:left">To update existing rows</td>
+<td style="text-align:left">execute</td>
+<td style="text-align:left">To execute stored routines</td>
 </tr>
 <tr>
-<td style="text-align:left">select</td>
-<td style="text-align:left">To retrieve rows from table</td>
+<td style="text-align:left">file</td>
+<td style="text-align:left">To read and write files on the server</td>
+</tr>
+<tr>
+<td style="text-align:left">grant option</td>
+<td style="text-align:left">To give to other users those privileges you possess</td>
+</tr>
+<tr>
+<td style="text-align:left">index</td>
+<td style="text-align:left">To create or drop indexes</td>
 </tr>
 <tr>
 <td style="text-align:left">insert</td>
 <td style="text-align:left">To insert data into tables</td>
+</tr>
+<tr>
+<td style="text-align:left">lock tables</td>
+<td style="text-align:left">To use LOCK TABLES (together with SELECT privilege)</td>
+</tr>
+<tr>
+<td style="text-align:left">process</td>
+<td style="text-align:left">To view the plain text of currently executing queries</td>
+</tr>
+<tr>
+<td style="text-align:left">proxy</td>
+<td style="text-align:left">To make proxy user possible</td>
+</tr>
+<tr>
+<td style="text-align:left">references</td>
+<td style="text-align:left">To have references on tables</td>
+</tr>
+<tr>
+<td style="text-align:left">reload</td>
+<td style="text-align:left">To reload or refresh tables, logs and privileges</td>
+</tr>
+<tr>
+<td style="text-align:left">replication client</td>
+<td style="text-align:left">To ask where the slave or master servers are</td>
+</tr>
+<tr>
+<td style="text-align:left">replication slave</td>
+<td style="text-align:left">To read binary log events from the master</td>
+</tr>
+<tr>
+<td style="text-align:left">select</td>
+<td style="text-align:left">To retrieve rows from table</td>
 </tr>
 <tr>
 <td style="text-align:left">show database</td>
@@ -176,8 +216,28 @@ var _hmt = _hmt || [];
 <td style="text-align:left">To see views with SHOW CREATE VIEW</td>
 </tr>
 <tr>
-<td style="text-align:left">index</td>
-<td style="text-align:left">To create or drop indexes</td>
+<td style="text-align:left">shutdown</td>
+<td style="text-align:left">To shut down the server</td>
+</tr>
+<tr>
+<td style="text-align:left">super</td>
+<td style="text-align:left">To use KILL thread, SET GLOBAL, CHANGE MASTER, etc.</td>
+</tr>
+<tr>
+<td style="text-align:left">trigger</td>
+<td style="text-align:left">To use triggers</td>
+</tr>
+<tr>
+<td style="text-align:left">create tablespace</td>
+<td style="text-align:left">To create/alter/drop tablespaces</td>
+</tr>
+<tr>
+<td style="text-align:left">update</td>
+<td style="text-align:left">To update existing rows</td>
+</tr>
+<tr>
+<td style="text-align:left">usage</td>
+<td style="text-align:left">No privileges - allow connect only</td>
 </tr>
 </tbody>
 </table>
@@ -185,7 +245,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cio6m0fj40010gsm6v0qj6pzr" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cio6q0sy10010w5m6aeux0jz0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,7 +256,7 @@ var _hmt = _hmt || [];
   
   
     <a href="/2016/05/13/Mysql-mysql-user/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Mysql mysql.user</div>
     </a>
   
@@ -211,7 +271,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -236,7 +296,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -273,7 +333,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
