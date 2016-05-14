@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix 的 system.cpu.load 与 CPU 使用率 | 运维生存时间</title>
+  <title>Mysql 权限 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix system cpu load 使用率">
+  <meta name="description" content="mysql 数据库 权限">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix 的 system.cpu.load 与 CPU 使用率">
-<meta property="og:url" content="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/index.html">
+<meta property="og:title" content="Mysql 权限">
+<meta property="og:url" content="http://ttlop.com/2016/05/14/Mysql-权限/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix system cpu load 使用率">
-<meta property="og:updated_time" content="2016-05-11T09:16:01.263Z">
+<meta property="og:description" content="mysql 数据库 权限">
+<meta property="og:updated_time" content="2016-05-14T03:32:08.589Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix 的 system.cpu.load 与 CPU 使用率">
-<meta name="twitter:description" content="zabbix system cpu load 使用率">
+<meta name="twitter:title" content="Mysql 权限">
+<meta name="twitter:description" content="mysql 数据库 权限">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-的-system-cpu-load-与-CPU-使用率" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Mysql-权限" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" class="article-date">
-  <time datetime="2016-05-11T08:46:20.000Z" itemprop="datePublished">2016-05-11</time>
+    <a href="/2016/05/14/Mysql-权限/" class="article-date">
+  <time datetime="2016-05-14T03:27:51.000Z" itemprop="datePublished">2016-05-14</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix 的 system.cpu.load 与 CPU 使用率
+      Mysql 权限
     </h1>
   
 
@@ -107,32 +107,29 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="CPU-使用率"><a href="#CPU-使用率" class="headerlink" title="CPU 使用率"></a>CPU 使用率</h3><p>CPU 使用率显示的是程序在运行期间实时占用的 CPU 百分比</p>
-<h3 id="CPU-load"><a href="#CPU-load" class="headerlink" title="CPU load"></a>CPU load</h3><p>CPU load 显示的是一段时间内正在使用和等待使用 CPU 的平均任务数，即负载。所以 CPU 使用率高，并不意味着负载就一定大。</p>
-<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><ol>
-<li><p>公司上下班需打卡，每次只能有一个人在打卡且限定 <strong>5</strong> 秒钟，其他人等待，每人限定打一次，若一次不成功，只能重新排队，等待下一轮打卡</p>
-</li>
-<li><p>打卡机就相当于 CPU，而正在或等待打卡的人就相当于任务数</p>
-</li>
-<li><p>在打卡过程中，肯定会有人打完就走掉，有人没有打完而选择重新排队打卡，更会有新增的人在这儿排队，这个人数的变化就相当于任务数的增减</p>
-</li>
-<li><p>为了统计平均负载情况，我们每 <strong>5</strong> 秒统计一次人数，并在第1、5、15分钟的时候对统计情况取平均值，从而形成第1、5、15的平均负载</p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><p>有的人拿起打卡机就打卡，一直到 <strong>5</strong> 秒钟结束，而有的人可能前 <strong>2</strong> 秒没有操作，后 <strong>3</strong> 秒才真正在打卡</p>
-</li>
-<li><p>如果把打卡机比作CPU， 任务看作任务，我们就说前一个人的 CPU 利用率高，后一个人的 CPU 利用率低，但无论 CPU 的利用率高低，跟后面有多少任务在排队没有必然关系</p>
-</li>
-<li><p>除非后一秒打卡的人因为浪费了时间导致打卡不成功需要重新排队打卡，由于排队人数相当于任务数，任务数增加会导致负载变大，此时 CPU 的利用率低才会对负载有影响</p>
-</li>
-</ol>
+        <table>
+<thead>
+<tr>
+<th style="text-align:left">Privilege</th>
+<th style="text-align:left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">usage</td>
+<td style="text-align:left">No privileges - allow connect only</td>
+</tr>
+<tr>
+<td style="text-align:left">update</td>
+<td style="text-align:left">To update existing rows</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="cio6lk2jl001o6nm6av0pz89z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cio6lk2ii000z6nm669lyrs5d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -141,19 +138,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/12/Centos-7-关闭-SELinux/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 关闭 SELinux
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/13/Mysql-mysql-user/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix agent 在 Windows 上安装部署</div>
+      <div class="article-nav-title">Mysql mysql.user</div>
     </a>
   
 </nav>
