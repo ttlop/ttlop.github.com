@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/14/Mysql-权限/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="mysql 数据库 权限">
-<meta property="og:updated_time" content="2016-05-14T05:56:54.203Z">
+<meta property="og:updated_time" content="2016-05-14T06:14:50.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql 权限">
 <meta name="twitter:description" content="mysql 数据库 权限">
@@ -113,138 +113,165 @@ var _hmt = _hmt || [];
 <table>
 <thead>
 <tr>
-<th style="text-align:left">Privilege</th>
-<th style="text-align:left">Comment</th>
-<th style="text-align:left"></th>
+<th style="text-align:left">权限级别</th>
+<th style="text-align:left">权限</th>
+<th style="text-align:left">权限说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">alter</td>
 <td style="text-align:left">To alter the table</td>
 </tr>
 <tr>
+<td style="text-align:left">存储过程</td>
 <td style="text-align:left">alter routine</td>
 <td style="text-align:left">To alter or drop stored functions/procedures</td>
 </tr>
 <tr>
+<td style="text-align:left">数据库、表或索引</td>
 <td style="text-align:left">create</td>
 <td style="text-align:left">To create new databases and tables</td>
-<td style="text-align:left">必须有create权限，才可以使用create database或者create table</td>
 </tr>
 <tr>
+<td style="text-align:left">数据库</td>
 <td style="text-align:left">create routine</td>
 <td style="text-align:left">To use CREATE FUNCTION/PROCEDURE</td>
 </tr>
 <tr>
+<td style="text-align:left">数据库</td>
 <td style="text-align:left">create temporary tables</td>
 <td style="text-align:left">To use CREATE TEMPORARY TABLE</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">create user</td>
 <td style="text-align:left">To create new users</td>
 </tr>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">create view</td>
 <td style="text-align:left">To create new views</td>
 </tr>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">delete</td>
 <td style="text-align:left">To delete existing rows</td>
 </tr>
 <tr>
+<td style="text-align:left">数据库或表</td>
 <td style="text-align:left">drop</td>
 <td style="text-align:left">To drop databases, tables, and views</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">event</td>
 <td style="text-align:left">To create, alter, drop and execute events</td>
 </tr>
 <tr>
+<td style="text-align:left">存储过程</td>
 <td style="text-align:left">execute</td>
 <td style="text-align:left">To execute stored routines</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器主机上的文件访问</td>
 <td style="text-align:left">file</td>
 <td style="text-align:left">To read and write files on the server</td>
 </tr>
 <tr>
+<td style="text-align:left">数据库、表或存储过程</td>
 <td style="text-align:left">grant option</td>
 <td style="text-align:left">To give to other users those privileges you possess</td>
 </tr>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">index</td>
 <td style="text-align:left">To create or drop indexes</td>
 </tr>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">insert</td>
 <td style="text-align:left">To insert data into tables</td>
 </tr>
 <tr>
+<td style="text-align:left">数据库</td>
 <td style="text-align:left">lock tables</td>
 <td style="text-align:left">To use LOCK TABLES (together with SELECT privilege)</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">process</td>
 <td style="text-align:left">To view the plain text of currently executing queries</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">proxy</td>
 <td style="text-align:left">To make proxy user possible</td>
 </tr>
 <tr>
+<td style="text-align:left">数据库、表</td>
 <td style="text-align:left">references</td>
 <td style="text-align:left">To have references on tables</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">reload</td>
 <td style="text-align:left">To reload or refresh tables, logs and privileges</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">replication client</td>
 <td style="text-align:left">To ask where the slave or master servers are</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">replication slave</td>
 <td style="text-align:left">To read binary log events from the master</td>
 </tr>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">select</td>
 <td style="text-align:left">To retrieve rows from table</td>
-<td style="text-align:left">必须有select权限，才可以使用select table</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">show database</td>
 <td style="text-align:left">To see all databases with SHOW DATABASES</td>
 </tr>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">show view</td>
 <td style="text-align:left">To see views with SHOW CREATE VIEW</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">shutdown</td>
 <td style="text-align:left">To shut down the server</td>
 </tr>
 <tr>
-<td style="text-align:left">super</td>
+<td style="text-align:left">服务器管理super</td>
 <td style="text-align:left">To use KILL thread, SET GLOBAL, CHANGE MASTER, etc.</td>
 </tr>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">trigger</td>
 <td style="text-align:left">To use triggers</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">create tablespace</td>
 <td style="text-align:left">To create/alter/drop tablespaces</td>
 </tr>
 <tr>
+<td style="text-align:left">表</td>
 <td style="text-align:left">update</td>
 <td style="text-align:left">To update existing rows</td>
 </tr>
 <tr>
+<td style="text-align:left">服务器管理</td>
 <td style="text-align:left">usage</td>
 <td style="text-align:left">No privileges - allow connect only</td>
-<td style="text-align:left">创建一个用户自动授予的权限，只能用于登陆数据库，不能执行任何操作，且不能被回收</td>
 </tr>
 </tbody>
 </table>
@@ -252,7 +279,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cio6qqawh0011dpm6mdum0705" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cio6rd80c0013tpm6qvp5jhgu" class="article-share-link">Share</a>
       
       
     </footer>
