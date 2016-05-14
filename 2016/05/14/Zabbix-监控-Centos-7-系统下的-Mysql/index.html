@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Zabbix 监控 Centos 7 系统下的 Mysql | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="zabbix moniter centos mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zabbix 监控 Centos 7 系统下的 Mysql">
+<meta property="og:url" content="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="zabbix moniter centos mysql">
+<meta property="og:updated_time" content="2016-05-14T07:06:04.639Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zabbix 监控 Centos 7 系统下的 Mysql">
+<meta name="twitter:description" content="zabbix moniter centos mysql">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Zabbix-监控-Centos-7-系统下的-Mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" class="article-date">
+  <time datetime="2016-05-14T06:52:09.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Zabbix 监控 Centos 7 系统下的 Mysql
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-数据库配置"><a href="#1-数据库配置" class="headerlink" title="1. 数据库配置"></a>1. 数据库配置</h3><h4 id="1-1-登陆数据库，查看账号信息"><a href="#1-1-登陆数据库，查看账号信息" class="headerlink" title="1.1 登陆数据库，查看账号信息"></a>1.1 登陆数据库，查看账号信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 17107</span><br><span class="line">Server version: 5.5.47-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| Host                  | User | Password                                  |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| localhost             | root | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">| localhost.localdomain | root |                                           |</span><br><span class="line">| 127.0.0.1             | root |                                           |</span><br><span class="line">| ::1                   | root |                                           |</span><br><span class="line">| localhost             |      |                                           |</span><br><span class="line">| localhost.localdomain |      |                                           |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">6 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line">`` </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 1.2 删掉空账号，新建监控账号</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">''</span>@<span class="string">'localhost'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">''</span>@<span class="string">'localhost.localdomain'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'localhost.localdomain'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'127.0.0.1'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'::1'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">| Host      | User | Password                                  |</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">| localhost | root | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; grant usage on *.* to <span class="string">'zabbix'</span>@<span class="string">'localhost'</span> identified by <span class="string">'zabbix'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">| Host      | User   | Password                                  |</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">| localhost | root   | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">| localhost | zabbix | *DEEF4D7D88CD046ECA02A80393B7780A63E7E789 |</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
+<h4 id="1-3-测试数据库账号是否正常"><a href="#1-3-测试数据库账号是否正常" class="headerlink" title="1.3 测试数据库账号是否正常"></a>1.3 测试数据库账号是否正常</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix]<span class="comment"># mysql -u zabbix -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 17137</span><br><span class="line">Server version: 5.5.47-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; status;</span><br><span class="line">--------------</span><br><span class="line">mysql  Ver 15.1 Distrib 5.5.47-MariaDB, <span class="keyword">for</span> Linux (x86_64) using readline 5.1</span><br><span class="line"></span><br><span class="line">Connection id:		17137</span><br><span class="line">Current database:	</span><br><span class="line">Current user:		zabbix@localhost</span><br><span class="line">SSL:			Not <span class="keyword">in</span> use</span><br><span class="line">Current pager:		stdout</span><br><span class="line">Using outfile:		<span class="string">''</span></span><br><span class="line">Using delimiter:	;</span><br><span class="line">Server:			MariaDB</span><br><span class="line">Server version:		5.5.47-MariaDB MariaDB Server</span><br><span class="line">Protocol version:	10</span><br><span class="line">Connection:		Localhost via UNIX socket</span><br><span class="line">Server characterset:	latin1</span><br><span class="line">Db     characterset:	latin1</span><br><span class="line">Client characterset:	utf8</span><br><span class="line">Conn.  characterset:	utf8</span><br><span class="line">UNIX socket:		/var/lib/mysql/mysql.sock</span><br><span class="line">Uptime:			1 day 3 hours 47 min 2 sec</span><br><span class="line"></span><br><span class="line">Threads: 2  Questions: 48301  Slow queries: 0  Opens: 15  Flush tables: 2  Open tables: 41  Queries per second avg: 0.482</span><br><span class="line">--------------</span><br></pre></td></tr></table></figure>
+<h3 id="2-配置文件修改"><a href="#2-配置文件修改" class="headerlink" title="2. 配置文件修改"></a>2. 配置文件修改</h3><h4 id="2-1-修改-my-cnf-文件（-etc-zabbix目录）"><a href="#2-1-修改-my-cnf-文件（-etc-zabbix目录）" class="headerlink" title="2.1 修改 .my.cnf 文件（/etc/zabbix目录）"></a>2.1 修改 <strong>.my.cnf</strong> 文件（/etc/zabbix目录）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line">host=localhost</span><br><span class="line">user=zabbix</span><br><span class="line">password=zabbix</span><br><span class="line">[mysqladmin]</span><br><span class="line">host=localhost</span><br><span class="line">user=zabbix</span><br><span class="line">password=zabbix</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-修改-userparameter-mysql-cnf-文件（-etc-zabbix-zabbix-agentd-d目录）"><a href="#2-2-修改-userparameter-mysql-cnf-文件（-etc-zabbix-zabbix-agentd-d目录）" class="headerlink" title="2.2 修改 userparameter_mysql.cnf 文件（/etc/zabbix/zabbix_agentd.d目录）"></a>2.2 修改 <strong>userparameter_mysql.cnf</strong> 文件（/etc/zabbix/zabbix_agentd.d目录）</h4><blockquote>
+<p>主要关注 <strong>HOME</strong> 变量值是否是上面 <strong>.my.cnf</strong> 文件目录</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># For all the following commands HOME should be set to the directory that has .my.cnf file with password information.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Flexible parameter to grab global variables. On the frontend side, use keys like mysql.status[Com_insert].</span></span><br><span class="line"><span class="comment"># Key syntax is mysql.status[variable].</span></span><br><span class="line">UserParameter=mysql.status[*],<span class="built_in">echo</span> <span class="string">"show global status where Variable_name='<span class="variable">$1</span>';"</span> | HOME=/etc/zabbix mysql -N | awk <span class="string">'&#123;print $$2&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Flexible parameter to determine database or table size. On the frontend side, use keys like mysql.size[zabbix,history,data].</span></span><br><span class="line"><span class="comment"># Key syntax is mysql.size[&lt;database&gt;,&lt;table&gt;,&lt;type&gt;].</span></span><br><span class="line"><span class="comment"># Database may be a database name or "all". Default is "all".</span></span><br><span class="line"><span class="comment"># Table may be a table name or "all". Default is "all".</span></span><br><span class="line"><span class="comment"># Type may be "data", "index", "free" or "both". Both is a sum of data and index. Default is "both".</span></span><br><span class="line"><span class="comment"># Database is mandatory if a table is specified. Type may be specified always.</span></span><br><span class="line"><span class="comment"># Returns value in bytes.</span></span><br><span class="line"><span class="comment"># 'sum' on data_length or index_length alone needed when we are getting this information for whole database instead of a single table</span></span><br><span class="line">UserParameter=mysql.size[*],<span class="built_in">echo</span> <span class="string">"select sum(<span class="variable">$(case "$3" in both|"")</span> echo "</span>data_length+index_length<span class="string">";; data|index) echo "</span><span class="variable">$3_length</span><span class="string">";; free) echo "</span>data_free<span class="string">";; esac)) from information_schema.tables<span class="variable">$([[ "$1" = "all" || ! "$1" ]] || echo " where table_schema='$1'")</span><span class="variable">$([[ "$2" = "all" || ! "$2" ]] || echo "and table_name='$2'")</span>;"</span> | HOME=/etc/zabbix mysql -N</span><br><span class="line"></span><br><span class="line">UserParameter=mysql.ping,HOME=/etc/zabbix mysqladmin ping | grep -c alive</span><br><span class="line">UserParameter=mysql.version,mysql -V</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-测试本机-zabbix-agent-是否可以正确获取到数据"><a href="#2-3-测试本机-zabbix-agent-是否可以正确获取到数据" class="headerlink" title="2.3 测试本机 zabbix-agent 是否可以正确获取到数据"></a>2.3 测试本机 <strong>zabbix-agent</strong> 是否可以正确获取到数据</h4><blockquote>
+<p>注意看最后几行结果是否如下所示</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zabbix_agent -p</span><br><span class="line">mysql.status                                  [t|]</span><br><span class="line">mysql.size                                    [t|73728]</span><br><span class="line">mysql.ping                                    [t|1]</span><br><span class="line">mysql.version                                 [t|mysql  Ver 15.1 Distrib 5.5.47-MariaDB, <span class="keyword">for</span> Linux (x86_64) using readline 5.1]</span><br></pre></td></tr></table></figure>
+<h4 id="2-4-测试-zabbix-server-是否可以获取到-zabbix-agent-端数据"><a href="#2-4-测试-zabbix-server-是否可以获取到-zabbix-agent-端数据" class="headerlink" title="2.4 测试 zabbix-server 是否可以获取到 zabbix-agent 端数据"></a>2.4 测试 <strong>zabbix-server</strong> 是否可以获取到 <strong>zabbix-agent</strong> 端数据</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@Zabbix3 ttlop]<span class="comment"># zabbix_get -s 192.168.1.202 -p 10050 -k "mysql.status[Bytes_received]"</span></span><br></pre></td></tr></table></figure>
+<p>至此，如可以获取到值，说明配置正常，如需要监控别的项目，修改客户端 <strong>userparameter_mysql.conf</strong> 文件即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="cio6t74ej001q0fm625kr6tzb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/14/Mysql-权限/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Mysql 权限</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/">Zabbix 监控 Centos 7 系统下的 Mysql</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/14/Mysql-权限/">Mysql 权限</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/13/Mysql-mysql-user/">Mysql mysql.user</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/12/Centos-7-关闭-SELinux/">Centos 7 关闭 SELinux</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/">Zabbix 的 system.cpu.load 与 CPU 使用率</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
