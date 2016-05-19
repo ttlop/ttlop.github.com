@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix 自定义用户 key 与参数 UserParameter | 运维生存时间</title>
+  <title>Zabbix 配置第三方邮件服务器实现邮件预警 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix userparameter key">
+  <meta name="description" content="zabbix email smtp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix 自定义用户 key 与参数 UserParameter">
-<meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/index.html">
+<meta property="og:title" content="Zabbix 配置第三方邮件服务器实现邮件预警">
+<meta property="og:url" content="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix userparameter key">
-<meta property="og:updated_time" content="2016-05-06T01:24:38.893Z">
+<meta property="og:description" content="zabbix email smtp">
+<meta property="og:updated_time" content="2016-05-19T07:52:32.421Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix 自定义用户 key 与参数 UserParameter">
-<meta name="twitter:description" content="zabbix userparameter key">
+<meta name="twitter:title" content="Zabbix 配置第三方邮件服务器实现邮件预警">
+<meta name="twitter:description" content="zabbix email smtp">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,10 +81,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-自定义用户-key-与参数-UserParameter" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Zabbix-配置第三方邮件服务器实现邮件预警" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" class="article-date">
-  <time datetime="2016-05-05T08:48:52.000Z" itemprop="datePublished">2016-05-05</time>
+    <a href="/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" class="article-date">
+  <time datetime="2016-05-19T07:27:58.000Z" itemprop="datePublished">2016-05-19</time>
 </a>
     
   <div class="article-category">
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix 自定义用户 key 与参数 UserParameter
+      Zabbix 配置第三方邮件服务器实现邮件预警
     </h1>
   
 
@@ -107,47 +107,84 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如果我们想被监控端执行一个 zabbix agent 没有预定义的指令，zabbix 的用户自定义参数功能提供了这个方法。我们可以在客户端配置文件 zabbix_agentd.conf 里面配置 UserParameter。</p>
-<a id="more"></a>
-<h3 id="1-语法"><a href="#1-语法" class="headerlink" title="1. 语法"></a>1. 语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=&lt;key&gt;,&lt;shell <span class="built_in">command</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>用户自定义参数包含一个 key 和一个命令，key 必须整个系统唯一，配置好之后重启客户端。然后配置 item，在 key 的位置填上我们自定义的 key 即可。用户自定义参数里指定的脚本由 zabbix agent 来执行，最大返回 512KB 的数据。</p>
-<h3 id="2-范例"><a href="#2-范例" class="headerlink" title="2. 范例"></a>2. 范例</h3><p><strong>简单点的例子</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=<span class="built_in">echo</span>1,<span class="built_in">echo</span> 2</span><br></pre></td></tr></table></figure>
-<p>如果调用 echo1 这个key，将会收到返回值 2。</p>
-<p><strong>复杂点的例子</strong></p>
-<p>参见配置文件：vim /etc/zabbix/zabbix_agentd.d/userparameter_mysql.conf</p>
-<p><strong>灵活的自定义key</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=key[*],<span class="built_in">command</span></span><br></pre></td></tr></table></figure>
+        <h3 id="Media-Types-Configuration"><a href="#Media-Types-Configuration" class="headerlink" title="Media Types Configuration"></a>Media Types Configuration</h3><p>我们使用联通的 <strong>wo</strong> 邮箱发送报警邮件到 <strong>qq</strong> 邮箱</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
+<th style="text-align:left">Item</th>
+<th style="text-align:left">Value</th>
+<th style="text-align:left">Comment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">key</td>
-<td style="text-align:left">唯一。[*]表示里面可以传递多个参数</td>
+<td style="text-align:left">Name</td>
+<td style="text-align:left">Email</td>
+<td style="text-align:left">媒介名称，自定义设置</td>
 </tr>
 <tr>
-<td style="text-align:left">Command</td>
-<td style="text-align:left">需要执行的脚本，key的[]里面的参数一一对应$1到$9，一共9个参数。$0表示脚本命令。</td>
+<td style="text-align:left">Type</td>
+<td style="text-align:left">Email</td>
+<td style="text-align:left">本篇文章我们以 Email 为例</td>
+</tr>
+<tr>
+<td style="text-align:left">SMTP server</td>
+<td style="text-align:left">smtp.wo.cn</td>
+<td style="text-align:left">smtp服务器地址，我们使用联通的</td>
+</tr>
+<tr>
+<td style="text-align:left">SMTP server port</td>
+<td style="text-align:left">25</td>
+<td style="text-align:left">smtp连接端口</td>
+</tr>
+<tr>
+<td style="text-align:left">SMTP helo</td>
+<td style="text-align:left">smtp helo值，通常是顶级域名，这个地方需要输入 smtp.wo.cn</td>
+</tr>
+<tr>
+<td style="text-align:left">Connection security</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left">是否加密，这里选择 None</td>
+</tr>
+<tr>
+<td style="text-align:left">Authentication</td>
+<td style="text-align:left">Normal password</td>
+<td style="text-align:left">认证方式，这里选择 Normal password</td>
+</tr>
+<tr>
+<td style="text-align:left">Username</td>
+<td style="text-align:left">18675850419</td>
+<td style="text-align:left">输入 wo 邮箱账号，必须要加后缀部分</td>
+</tr>
+<tr>
+<td style="text-align:left">Password</td>
+<td style="text-align:left">xxxx</td>
+<td style="text-align:left">输入对应的 wo 邮箱密码</td>
+</tr>
+<tr>
+<td style="text-align:left">Enabled</td>
+<td style="text-align:left">勾选</td>
+<td style="text-align:left">勾选启用</td>
 </tr>
 </tbody>
 </table>
-<p><strong>示例1</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=<span class="built_in">echo</span>[*],<span class="built_in">echo</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
-<p>echo[1] - 将一直返回1<br>echo[aaa] - 将一直返回’aaa’</p>
-<p><strong>示例2</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=wc[*],grep -c <span class="string">"<span class="variable">$2</span>"</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
-<p>如下方法将会返回我呢见中出现指定字符的行数</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wc[/etc/passwd,root]</span><br><span class="line">wc[/etc/services,zabbix]</span><br></pre></td></tr></table></figure>
+<h3 id="Users-Configuration"><a href="#Users-Configuration" class="headerlink" title="Users Configuration"></a>Users Configuration</h3><ol>
+<li><p>这里我们配置系统默认的 <strong>Admin</strong> 账户，在 <strong>Media</strong> 页添加上一步新增的介质</p>
+</li>
+<li><p>需要配置 <strong>Send to</strong>，其后填写接收报警信息的邮件地址，此处我填写我的 <strong>411383444@qq.com</strong> 邮箱</p>
+</li>
+</ol>
+<h3 id="Actions-Configuration"><a href="#Actions-Configuration" class="headerlink" title="Actions Configuration"></a>Actions Configuration</h3><ol>
+<li><p>这里我们配置系统默认的 <strong>Report problems to Zabbix administors</strong> action</p>
+</li>
+<li><p>需要勾选 <strong>Action</strong> 页的 <strong>Enabled</strong>，如需要，也请一并勾选 <strong>Recovery message</strong></p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cioe024ux001rgapv0ja7dmnm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="cioe024v7001ygapv1aekp0kc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -156,19 +193,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/06/Zabbix-Simple-check-简单检测/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix Simple check 简单检测
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/05/Zabbix-External-check-外部命令检测/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix External check 外部命令检测</div>
+      <div class="article-nav-title">Zabbix Template Windows 2008 R2 IIS Servers</div>
     </a>
   
 </nav>

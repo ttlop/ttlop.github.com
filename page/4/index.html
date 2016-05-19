@@ -82,6 +82,50 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Centos-7-使用iptables服务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/19/Centos-7-使用iptables服务/" class="article-date">
+  <time datetime="2016-04-19T02:24:22.000Z" itemprop="datePublished">2016-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/19/Centos-7-使用iptables服务/">Centos 7 使用iptables服务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Centos 7用firewall命令”替代”iptables。在这里我们需要区分”iptables服务”和”iptables命令”。虽然firewalld是替代提供的防火墙管理iptables服务，但是它任然使用iptables对内核命令动态通信包过滤。所以它只是iptables服务代替，而不是iptables命令。</p>
+<p>如果想使用iptables服务，执行如下命令</p>
+<p>selinux可能会阻止启动iptables，此时可以先使用setenforce 0，再执行systemctl enable iptables</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line"></span><br><span class="line">yum install iptables-services</span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line">systemctl start iptables</span><br><span class="line">systemctl <span class="built_in">enable</span> iptables</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cioe024sm000agapv4s4muegi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Centos-7-禁用IPv6" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/16/Centos-7-禁用IPv6/" class="article-date">
@@ -119,7 +163,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="ciodnmt5b000hyopvy26ksodw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cioe024t1000hgapv59lljs74" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +208,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="ciodnmt59000fyopvvwo2dkbm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cioe024sy000fgapvnzq35rjf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -213,7 +257,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="ciodnmt74001zyopv93kxbmqq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cioe024v90020gapvyxqjns8h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,7 +306,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="ciodnmt5d000jyopv26ydhyqa" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cioe024t5000jgapv6emufsvp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,7 +351,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="ciodnmt4f0002yopvshh4hjuk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cioe024s20002gapvu9zczlqi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -352,7 +396,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="ciodnmt4p0005yopvyg0a3ppp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cioe024sc0005gapvzv4e3ref" class="article-share-link">Share</a>
       
       
     </footer>
@@ -397,7 +441,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="ciodnmt4n0004yopvaztxub06" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cioe024sa0004gapv21tq7lsj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -445,7 +489,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="ciodnmt5v000vyopvap5c8bae" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cioe024tr000vgapvmsbvmavj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,6 +541,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/">Zabbix 配置第三方邮件服务器实现邮件预警</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/">Zabbix Template Windows 2008 R2 IIS Servers</a>
           </li>
         
@@ -510,10 +558,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/05/13/Mysql-mysql-user/">Mysql mysql.user</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/12/Centos-7-关闭-SELinux/">Centos 7 关闭 SELinux</a>
           </li>
         
       </ul>
