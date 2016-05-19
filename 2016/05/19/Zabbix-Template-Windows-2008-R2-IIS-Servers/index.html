@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix template iis">
-<meta property="og:updated_time" content="2016-05-19T01:50:43.018Z">
+<meta property="og:updated_time" content="2016-05-19T01:59:11.006Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Template Windows 2008 R2 IIS Servers">
 <meta name="twitter:description" content="zabbix template iis">
@@ -159,13 +159,48 @@ var _hmt = _hmt || [];
 <td style="text-align:left">perf_counter[“\Web Service(_Total)\Get Requests/sec”,300]</td>
 <td style="text-align:left">每秒使用 GET 方法对 WWW 服务进行的HTTP 请求数</td>
 </tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Service IIS World Side Web Publishing</td>
+<td style="text-align:left">service_state[W3SVC]</td>
+<td style="text-align:left">当前是否有开启W3SVC服务</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Service IIS Admin</td>
+<td style="text-align:left">service_state[IISAdmin]</td>
+<td style="text-align:left">当前是否有开启IISAdmin服务</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Bytes Received/sec</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Bytes Received/sec”,300]</td>
+<td style="text-align:left">WWW 服务每秒接收的数据字节数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Bytes Sent/sec</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Bytes Sent/sec”,300]</td>
+<td style="text-align:left">WWW 服务每秒发送的数据字节数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Current Connections</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Current Connections”,300]</td>
+<td style="text-align:left">当前与 WWW 服务建立连接的数量</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Bytes Total/sec</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Bytes Total/sec”,300]</td>
+<td style="text-align:left">bytes sent/sec 和 bytes received/sec 的总和</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Port 80HTTP</td>
+<td style="text-align:left">net.tcp.listen[80]</td>
+<td style="text-align:left">当前是否有侦听TCP80端口</td>
+</tr>
 </tbody>
 </table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="ciodn4trb001ammpvs1vpemr6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="ciodnfq25001atwpvubl366jc" class="article-share-link">Share</a>
       
       
     </footer>
