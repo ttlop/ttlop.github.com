@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix monitor web">
-<meta property="og:updated_time" content="2016-05-21T05:45:53.013Z">
+<meta property="og:updated_time" content="2016-05-21T05:53:05.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Web Monitoring">
 <meta name="twitter:description" content="zabbix monitor web">
@@ -111,11 +111,30 @@ var _hmt = _hmt || [];
 <p>To perform web monitoring Zabbix server must be initially configured with cURL(libcurl) support.</p>
 <p>To activate web monitoring you need to define web scenarios. A web scenario consists of one or several HTTP requests or “steps”. The steps are periodically executed by Zabbix server in a pre-defined order.</p>
 <p>Since Zabbix 2.2 web scenarios are attached to hosts/templates in the same way as items, tirggers, etc. That means that web scenarios can also be created on a template level and then applied to multiple hosts in one move.</p>
+<a id="more"></a>
+<p>The following information is collected in any web scenario</p>
+<ul>
+<li><p>average download speed per second for all steps of whole scenario</p>
+</li>
+<li><p>number of the step that failed</p>
+</li>
+<li><p>last error message</p>
+</li>
+</ul>
+<p>The following information is collected in any web scenario step</p>
+<ul>
+<li><p>download speed per second</p>
+</li>
+<li><p>response time</p>
+</li>
+<li><p>response code</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="ciogqeydw001kplpv5q57uz9j" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="ciogqo7re001k6upviwp017jv" class="article-share-link">Share</a>
       
       
     </footer>
