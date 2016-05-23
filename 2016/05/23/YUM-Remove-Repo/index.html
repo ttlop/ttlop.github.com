@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/23/YUM-Remove-Repo/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="yum remove disabled repo repository">
-<meta property="og:updated_time" content="2016-05-23T04:10:01.539Z">
+<meta property="og:updated_time" content="2016-05-23T05:45:17.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="YUM Remove Repo">
 <meta name="twitter:description" content="yum remove disabled repo repository">
@@ -118,12 +118,15 @@ var _hmt = _hmt || [];
 <h4 id="If-RPM-package-found-then-simply-remove-whols-RPM-package-with-following-command"><a href="#If-RPM-package-found-then-simply-remove-whols-RPM-package-with-following-command" class="headerlink" title="If RPM-package found then simply remove whols RPM-package with following command:"></a>If RPM-package found then simply remove whols RPM-package with following command:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm <span class="_">-e</span> some-repository-rpm-package-package</span><br></pre></td></tr></table></figure>
 <p><strong>Example:</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm <span class="_">-e</span> zabbix-release-3.0-1.el7.noarch</span><br></pre></td></tr></table></figure>
-<h4 id="If-RPM-package-not-found-then-simply-remove-repo-file-with-following-command"><a href="#If-RPM-package-not-found-then-simply-remove-repo-file-with-following-command" class="headerlink" title="If RPM-package not found then simply remove repo file with following command:"></a>If RPM-package not found then simply remove repo file with following command:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm /etc/yum.repos.d/repo-file.repo</span><br><span class="line"></span><br><span class="line"><span class="comment">## OR</span></span><br><span class="line">mv /etc/yum.repos.d/repo-file.repo /etc/yum.repos.d/repo-file.repo.bak</span><br></pre></td></tr></table></figure>
+<h4 id="If-RPM-package-not-found-then-simply-remove-repo-file-with-following-command"><a href="#If-RPM-package-not-found-then-simply-remove-repo-file-with-following-command" class="headerlink" title="If RPM-package not found then simply remove repo file with following command:"></a>If RPM-package not found then simply remove repo file with following command:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm /etc/yum.repos.d/repo-file.repo</span><br><span class="line"><span class="comment">## OR</span></span><br><span class="line">mv /etc/yum.repos.d/repo-file.repo /etc/yum.repos.d/repo-file.repo.bak</span><br></pre></td></tr></table></figure>
+<h3 id="Disable-YUM-Repo-Repository"><a href="#Disable-YUM-Repo-Repository" class="headerlink" title="Disable YUM Repo (Repository)"></a>Disable YUM Repo (Repository)</h3><h4 id="Disable-YUM-Repo"><a href="#Disable-YUM-Repo" class="headerlink" title="Disable YUM Repo"></a>Disable YUM Repo</h4><p>Edit repo file on <strong>/etc/yum.repos.d/</strong> as root and change enabled to 0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Change</span></span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line"><span class="comment">## To</span></span><br><span class="line">enabled=0</span><br></pre></td></tr></table></figure>
+<h4 id="Disable-YUM-Repo-using-YUM"><a href="#Disable-YUM-Repo-using-YUM" class="headerlink" title="Disable YUM Repo using YUM"></a>Disable YUM Repo using YUM</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum --enablerepo=some-disabled-repository install some-package</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciojhvfyj0015dppvivibh9em" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciojl9y3x00155ppvckqhe3lk" class="article-share-link">Share</a>
       
       
     </footer>
