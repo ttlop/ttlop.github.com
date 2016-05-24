@@ -24,7 +24,7 @@ var _hmt = _hmt || [];
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix discovery file system">
 <meta property="og:image" content="https://www.zabbix.com/documentation/3.0/_media/manual/discovery/low_level_discovery/lld_rule_fs.png">
-<meta property="og:updated_time" content="2016-05-24T08:24:52.444Z">
+<meta property="og:updated_time" content="2016-05-24T08:43:30.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Discovery of file systems">
 <meta name="twitter:description" content="zabbix discovery file system">
@@ -131,13 +131,41 @@ var _hmt = _hmt || [];
 <td style="text-align:left">Name</td>
 <td style="text-align:left">Name of discovery rule.</td>
 </tr>
+<tr>
+<td style="text-align:left">Type</td>
+<td style="text-align:left">The type of check to perform discovery: should be zabbix agent or zabbix agent (active) for file system discovery.</td>
+</tr>
+<tr>
+<td style="text-align:left">Key</td>
+<td style="text-align:left">An item with “vfs.fs.discovery” key is built into the zabbix agent.</td>
+</tr>
+<tr>
+<td style="text-align:left">Update interval (in sec)</td>
+<td style="text-align:left">This field specifies how often Zabbix performs discovery. In the beginning, when you are just setting up file system discovery, you might wish to set it to a small interval, but once you know it works you can set it to 30 minutes or more, because file systems usually do not change very often.</td>
+</tr>
+<tr>
+<td style="text-align:left">Custom intervals</td>
+<td style="text-align:left">You can create custom rules for checking the item</td>
+</tr>
+<tr>
+<td style="text-align:left">Keep lost resources period (in days)</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Description</td>
+<td style="text-align:left">Enter a description.</td>
+</tr>
+<tr>
+<td style="text-align:left">Enabled</td>
+<td style="text-align:left">If checked, the rule will be processed.</td>
+</tr>
 </tbody>
 </table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="ciol6eyz5001bw6pvabcl7its" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="ciol72xzt001acgpv28mbm9qw" class="article-share-link">Share</a>
       
       
     </footer>
