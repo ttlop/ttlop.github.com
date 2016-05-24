@@ -108,13 +108,16 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>下面是 <strong>net.if.discovery</strong> 返回的 <strong>json</strong> 数据:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ttlop]# zabbix_get -s 192.168.1.101  -p 10050 -k &quot;net.if.discovery&quot;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;:</span><br><span class="line">    [</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IP)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IPv6)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(网络监视器)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Microsoft 内核调试网络适配器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IP)-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IP)-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟交换机扩展适配器-Hyper-V Virtual Switch Extension Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟交换机扩展适配器-WFP vSwitch Layers LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟以太网适配器 #2&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCIe GBE 系列控制器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IPv6)-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IPv6)-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCIe GBE 系列控制器-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器-WFP 802.3 MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器 #2&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Microsoft Hyper-V Network Switch Default Miniport&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟交换机扩展适配器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(网络监视器)-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(网络监视器)-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟以太网适配器 #2-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟以太网适配器 #2-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟以太网适配器 #2-WFP 802.3 MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(PPPOE)&quot;&#125;,&#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;RAS 同步适配器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Software Loopback Interface 1&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(L2TP)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(SSTP)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN Miniport (IKEv2)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(PPTP)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Microsoft ISATAP Adapter #2&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Teredo Tunneling Pseudo-Interface&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Microsoft 6to4 Adapter&quot;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>Low-level discovery provides a way to automatically create items, triggers, and graphs for different entities on a computer. Zabbix can automatically start monitoring file systems or network interfaces on your machine, without the need to create items for each file system or network interface manually. Additionally it is possible to configure Zabbix to remove unneeded entities automatically based on actual results of periodically performed discovery.</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/24/Zabbix-Discovery-rules-net-if-discovery/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-rules-net-if-discovery/" data-id="ciokx04ve001a9hpv71i9xfj2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-rules-net-if-discovery/" data-id="ciol2rg5k001bdapvrxb81ke4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,7 +170,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="ciokx04vn001e9hpv33d7cqt9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="ciol2rg5s001fdapvck8pirg9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +217,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciokx04v400139hpvk0awx55t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciol2rg5g0016dapvvca8h8rk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,7 +265,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="ciokx04w5001q9hpvmp30dsic" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="ciol2rg6b001sdapv1k50ybz1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -352,7 +355,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/20/Linux-命令行快捷键/" data-id="ciokx04ur000v9hpv4sb994uu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/20/Linux-命令行快捷键/" data-id="ciol2rg52000wdapvb503o6qb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -476,7 +479,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/20/Zabbix-Template-App-MySQL/" data-id="ciokx04vr001h9hpvmh7epvro" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/20/Zabbix-Template-App-MySQL/" data-id="ciol2rg5w001hdapvmk3rx90v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -589,7 +592,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="ciokx04wy002b9hpvdobo7v62" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="ciol2rg6x002adapvohspkz9n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -721,7 +724,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="ciokx04vw001k9hpv6kul7l5h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="ciol2rg61001ldapv66a5jlhy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -775,7 +778,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="ciokx04ws00239hpvcqip2n2m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="ciol2rg6u0025dapvnf1ldjrr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -984,7 +987,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="ciokx04v000109hpv7hmp5vbu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="ciol2rg5a0011dapvhy0mbpl4" class="article-share-link">Share</a>
       
       
     </footer>
