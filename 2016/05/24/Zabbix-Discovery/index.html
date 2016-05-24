@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/24/Zabbix-Discovery/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix discovery">
-<meta property="og:updated_time" content="2016-05-24T08:02:08.530Z">
+<meta property="og:updated_time" content="2016-05-24T08:11:43.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Discovery">
 <meta name="twitter:description" content="zabbix discovery">
@@ -70,9 +70,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -121,6 +121,7 @@ var _hmt = _hmt || [];
 <p>The general architecture of the discovery process is as follows.</p>
 <p>First, a user creates a discovery rule in “Configuration” –&gt; “Templates” –&gt; “Discovery” column. A discovery rule consists of (1) an item that discovers the necessary entities (for instance, filesystems or network interface) and (2) prototypes of items, triggers, and graphs that should be created based on the value of that item.</p>
 <p>An item that discovers the necessary entities is like a regular item seen elsewhere: the server asks a Zabbix agent (or whatever the type of the item is set to) for a value of that item, the agent responds with a textual value. The difference is that the value the agent responds with should contain a list of discovered entities in a specific JSON format. While the details of this format are only important for implementers of custom discovery checks, it is necessary to know that the returned value contains a list of macro → value pairs. For instance, item “net.if.discovery” might return two pairs: “#IFNAME” → “lo” and “#IFNAME” → “eth0”.</p>
+<p>When the server receives a value for a discovery item, it looks at the macro → value pairs and <strong>for each</strong> pair generates real items, triggers, and graphs, based on their prototypes. In the example with “net.if.discovery” above, the server would generate one set of items, triggers, and graphs for the loopback interface “lo”, and another set for interface “eth0”. </p>
 <a id="more"></a>
 <p>下面是 <strong>net.if.discovery</strong> 返回的 <strong>json</strong> 数据:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ttlop]# zabbix_get -s 192.168.1.101  -p 10050 -k &quot;net.if.discovery&quot;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;:</span><br><span class="line">    [</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IP)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IPv6)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(网络监视器)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Microsoft 内核调试网络适配器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IP)-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IP)-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟交换机扩展适配器-Hyper-V Virtual Switch Extension Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟交换机扩展适配器-WFP vSwitch Layers LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟以太网适配器 #2&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCIe GBE 系列控制器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IPv6)-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(IPv6)-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCIe GBE 系列控制器-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器-WFP 802.3 MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Realtek PCI GBE 系列控制器 #2&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Microsoft Hyper-V Network Switch Default Miniport&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟交换机扩展适配器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(网络监视器)-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(网络监视器)-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟以太网适配器 #2-WFP Native MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟以太网适配器 #2-QoS Packet Scheduler-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Hyper-V 虚拟以太网适配器 #2-WFP 802.3 MAC Layer LightWeight Filter-0000&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(PPPOE)&quot;&#125;,&#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;RAS 同步适配器&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Software Loopback Interface 1&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(L2TP)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(SSTP)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN Miniport (IKEv2)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;WAN 微型端口(PPTP)&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Microsoft ISATAP Adapter #2&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Teredo Tunneling Pseudo-Interface&quot;&#125;,</span><br><span class="line">      &#123;&quot;&#123;#IFNAME&#125;&quot;:&quot;Microsoft 6to4 Adapter&quot;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -128,7 +129,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="ciol5l14m001a34pvndazfd28" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="ciol5y273001av8pvhoat5kox" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -139,7 +140,7 @@ var _hmt = _hmt || [];
   
   
     <a href="/2016/05/24/Zabbix-Server-Installing-And-Configuration/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">Zabbix Server Installing And Configuration</div>
     </a>
   
@@ -154,7 +155,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -179,7 +180,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -216,7 +217,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
