@@ -82,6 +82,62 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Mysql-mysql-user" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/13/Mysql-mysql-user/" class="article-date">
+  <time datetime="2016-05-13T07:01:22.000Z" itemprop="datePublished">2016-05-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/13/Mysql-mysql-user/">Mysql mysql.user</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前言：近几日，在学习使用 <strong>Zabbix 3</strong> 监控其他服务器的 <strong>Mysql</strong> ，学习过程中碰到一个很奇怪的问题，由此学习到下面的知识，还有很有意义的，记录如下。</p>
+<p>问题是这样发现的：</p>
+<ol>
+<li><p>在两台 <strong>Centos 7</strong> 系统中使用 <strong>Yum</strong> 方式分别安装了 <strong>zabbix-server</strong> 和 <strong>zabbix-agent</strong>，并且在装有 <strong>zabbix-agent</strong> 的服务器上使用 <strong>Yum</strong> 安装了 <strong>mariadb-server</strong>。</p>
+</li>
+<li><p>按照网上的一些资料，此处我应该要添加 <strong>.my.cnf</strong> 文件用来指定连接数据库的账号、密码，但是我这个人学习一个新的东西习惯先发现问题再去解决问题，觉得这样才知道每一步配置的具体用意。哎，坑爹的习惯啊。</p>
+</li>
+<li><p>噩梦开始，我在没有配置 <strong>.my.cnf</strong> 文件的前提下，<strong>zabbix-server</strong> 也可以监控到安装有 <strong>zabbix-agent</strong> 的服务器的数据库信息，数据库安装好之后我可是专门使用 <strong>mysaladmin</strong> 命令修改过账号密码的，为毛？</p>
+</li>
+<li><p>折腾了好几天，最后在一位技术圈的伙伴的提醒下，从数据库本身着手，才发现问题的根由。</p>
+</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/13/Mysql-mysql-user/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="ciokwu79j000yw7pvvnkywuna" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Centos-7-关闭-SELinux" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/12/Centos-7-关闭-SELinux/" class="article-date">
@@ -117,7 +173,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciokulyyv0008ahpv0vf14z7m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciokwu789000aw7pvva2arqt4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +234,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciokulz1f001xahpvo6je06i0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciokwu7b80022w7pvswk7cz7w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +299,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciokulz16001qahpvckigbq4f" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciokwu7aw001rw7pvny2031k9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -467,7 +523,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="ciokulz18001sahpvely7zzws" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="ciokwu7b2001vw7pv2c4c9dji" class="article-share-link">Share</a>
       
       
     </footer>
@@ -558,7 +614,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="ciokulz1l0024ahpv31a5cmcr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="ciokwu7bh0028w7pvqsv1d3hh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -603,7 +659,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="ciokulz1b001uahpvfe6anump" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="ciokwu7b6001yw7pv892rz9fw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -648,7 +704,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="ciokulz0v001jahpvbv723ug5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="ciokwu7ak001mw7pvma7779jo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -693,7 +749,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="ciokulz0y001kahpv6e4vjxv4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="ciokwu7ap001ow7pvr1mr75cx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -738,52 +794,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="ciokulz0i001bahpv8mjwntee" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-自定义用户-key-与参数-UserParameter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" class="article-date">
-  <time datetime="2016-05-05T08:48:52.000Z" itemprop="datePublished">2016-05-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/">Zabbix 自定义用户 key 与参数 UserParameter</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果我们想被监控端执行一个 zabbix agent 没有预定义的指令，zabbix 的用户自定义参数功能提供了这个方法。我们可以在客户端配置文件 zabbix_agentd.conf 里面配置 UserParameter。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="ciokulz1k0021ahpv0nydb5mp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="ciokwu7aa001hw7pvxb2ike89" class="article-share-link">Share</a>
       
       
     </footer>
@@ -835,6 +846,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/05/24/Zabbix-Discovery-rules-net-if-discovery/">Zabbix Discovery rules net.if.discovery</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/24/Zabbix-Server-Installing-And-Configuration/">Zabbix Server Installing And Configuration</a>
           </li>
         
@@ -848,10 +863,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/05/20/Linux-命令行快捷键/">Linux 命令行快捷键</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/20/Zabbix-Template-App-MySQL/">Zabbix Template App MySQL</a>
           </li>
         
       </ul>
