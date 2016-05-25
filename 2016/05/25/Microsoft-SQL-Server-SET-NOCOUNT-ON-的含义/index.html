@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Iptables 概念 | 运维生存时间</title>
+  <title>Microsoft SQL Server SET NOCOUNT ON 的含义 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iptables详解 基本概念">
+  <meta name="description" content="sql server set nocount on">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Iptables 概念">
-<meta property="og:url" content="http://ttlop.com/2016/04/25/Iptables-概念/index.html">
+<meta property="og:title" content="Microsoft SQL Server SET NOCOUNT ON 的含义">
+<meta property="og:url" content="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="iptables详解 基本概念">
-<meta property="og:updated_time" content="2016-04-26T03:42:54.484Z">
+<meta property="og:description" content="sql server set nocount on">
+<meta property="og:updated_time" content="2016-05-25T03:28:35.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Iptables 概念">
-<meta name="twitter:description" content="iptables详解 基本概念">
+<meta name="twitter:title" content="Microsoft SQL Server SET NOCOUNT ON 的含义">
+<meta name="twitter:description" content="sql server set nocount on">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Iptables-概念" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/25/Iptables-概念/" class="article-date">
-  <time datetime="2016-04-25T08:44:42.000Z" itemprop="datePublished">2016-04-25</time>
+    <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" class="article-date">
+  <time datetime="2016-05-25T03:07:56.000Z" itemprop="datePublished">2016-05-25</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Iptables 概念
+      Microsoft SQL Server SET NOCOUNT ON 的含义
     </h1>
   
 
@@ -107,49 +107,36 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>防火墙工作在主机/网络边缘，对于进出本主机/网络的数据报文，根据事先设定好的检查规则对其进行检查，对行迹可疑的报文一律依照事先定义好的处理机制作出相应处理。</p>
-<p>对linux而言，tcp/ip协议栈是在内核当中，意味着报文的处理是在内核中进行的，也就是说防火墙必须在内核中tcp/ip报文所流经的位置，用规则去检查，才真正工作起来。</p>
-<p>Iptables用来衡量tcp/ip报文的属性：源ip、目标ip、源端口、目标端口。</p>
+        <p>每次我们在使用查询分析器调试SQL语句的时候，通常会看到一些信息，提醒我们当前有多少个行受到了影响，这是些什么信息？在我们调用的时候这些信息有用吗？是否可以关闭呢？ </p>
+<p>答案是这些信息在我们的客户端的应用程序中是没有用的，这些信息是存储过程中的每个语句的DONE_IN_PROC 信息。 </p>
+<p>我们可以利用SET NOCOUNT 来控制这些信息，以达到提高程序性能的目的。</p>
 <a id="more"></a>
-<h2 id="Iptables-表"><a href="#Iptables-表" class="headerlink" title="Iptables 表"></a>Iptables 表</h2><ul>
-<li><p>filter: 这是一个默认防火墙表。它包含这些内置的链：INPUT、FORWARD、OUTPUT</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SET NOCOUNT &#123; ON | OFF &#125; #使返回的结果中不包含有关受 Transact-SQL 语句影响的行数的信息。</span><br></pre></td></tr></table></figure>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
+<li><p>当 <strong>SET NOCOUNT</strong> 为 <strong>ON</strong> 时，不返回计数（表示受 Transact-SQL 语句影响的行数）。当 <strong>SET NOCOUNT</strong> 为 <strong>OFF</strong> 时，返回计数。</p>
 </li>
-<li><p>nat: 这是跟网络地址相关的表。它包含这些内置的链：PREROUTING、OUTPUT、POSTROUTING</p>
+<li><p>当 <strong>SET NOCOUNT</strong> 为 <strong>ON</strong> 时，将不给客户端发送存储过程中的每个语句的 DONE_IN_PROC 信息。当使用  Microsoft SQL Server 提供的实用工具执行查询时，在 Transact-SQL 语句（如 SELECT、INSERT、 UPDATE 和 DELETE）结束时将不会在查询结果中显示”nn rows affected”。 </p>
 </li>
-<li><p>mangle: 这是跟流量整型相关的表，它包含这些内置链：PREROUTING、OUTPUT、INTPUT、FORWARD、POSTROUTING</p>
+<li><p>如果存储过程中包含的一些语句并不返回许多实际的数据，则该设置由于大量减少了网络流量，因此可显著提高性能。</p>
 </li>
-<li><p>raw: 这个表的动作是NOTRACK，不追踪匹配的数据，它包含的链有：PREROUTING、OUTPUT</p>
+<li><p><strong>SET NOCOUNT</strong> 设置是在执行或运行时设置，而不是在分析时设置。 </p>
 </li>
 </ul>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
-<li><p>匹配（match）：符合指定的条件，比如指定的IP地址和端口。</p>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><p><strong>SET NOCOUNT</strong> 权限默认授予所有用户。</p>
+<p>结论：我们应该在存储过程的头部加上 <strong>SET NOCOUNT ON</strong> 这样的话，在退出存储过程的时候加上 <strong>SET NOCOUNT OFF</strong> 这样的话，以达到优化存储过程的目的。 </p>
+<hr>
+<p>还有一种说法：</p>
+<ul>
+<li><p>前台一般是一个返回就当一个结果集,不管这个返回是结果集,还是操作的反馈信息.</p>
 </li>
-<li><p>丢弃（drop）：当一个包到达时，简单的丢弃，不做其它任何处理。</p>
-</li>
-<li><p>接受（accept）：和丢弃相反，接受这个包，让这个包通过。</p>
-</li>
-<li><p>拒绝（reject）：和丢弃相似，但它还会向发送这个包的源主机发送错误消息。这个错误消息可以指定，也可以自动产生。</p>
-</li>
-<li><p>目标（target）：指定的动作，说明如何处理一个包，比如：丢弃，接受，或拒绝。</p>
-</li>
-<li><p>跳转（jump）：和目标类似，不过它指定的不是一个具体的动作，而是另一个链，表示要跳转到那个链上。</p>
-</li>
-<li><p>规则（rule）：一个或多个匹配及其对应的目标。</p>
-</li>
-<li><p>链（chain）：每条链都包含一系列的规则，这些规则被依次应用到每个遍历该链的数据包上。</p>
-</li>
-<li><p>表（table）：每个表包含若干不同的链。</p>
-</li>
-<li><p>策略（police）：我们在这里提到的策略是指对于iptables某条链，当所有规则都不匹配成功时其默认的处理动作。</p>
-</li>
-<li><p>连接跟踪（connection track）：又称为动态过滤，可以根据指定连接的状态进行一些适当的过滤，是一个很强大的功能，但同时也比较消耗内存资源。</p>
+<li><p>为了保证前台得到的只是真实的记录集,而不是反馈信息,因此得使用 <strong>set nocount on</strong></p>
 </li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="ciomb9srf000td3pvl05mud4q" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="ciomb9srn000yd3pvf0wf6l74" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,19 +145,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/25/Iptables-匹配/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Iptables 匹配
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/25/Iptables-四个表和五个链之间的关系/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/25/Zabbix-Template-SQL-Server/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Iptables 四个表和五个链之间的关系</div>
+      <div class="article-nav-title">Zabbix Template SQL Server</div>
     </a>
   
 </nav>

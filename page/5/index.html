@@ -82,6 +82,98 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Centos-7-禁用IPv6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/16/Centos-7-禁用IPv6/" class="article-date">
+  <time datetime="2016-04-16T08:30:41.000Z" itemprop="datePublished">2016-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/Centos-7-禁用IPv6/">Centos 7 禁用IPv6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当通过命令得到类似结果时，可以确认你的系统是启用了IPv6的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># ip -6 addr show</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 </span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp9s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qlen 1000</span><br><span class="line">    inet6 fe80::225:90ff:feaf:7e74/64 scope link </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># lsmod | grep ipv6</span></span><br><span class="line">nf_conntrack_ipv6      18738  5 </span><br><span class="line">nf_defrag_ipv6         34651  1 nf_conntrack_ipv6</span><br><span class="line">nf_nat_ipv6            13279  1 ip6table_nat</span><br><span class="line">nf_nat                 21798  4 nf_nat_ipv4,nf_nat_ipv6,ip6table_nat,iptable_nat</span><br><span class="line">nf_conntrack          101024  8 nf_nat,nf_nat_ipv4,nf_nat_ipv6,xt_conntrack,ip6table_nat,iptable_nat,nf_conntrack_ipv4,nf_conntrack_ipv6</span><br></pre></td></tr></table></figure></p>
+<p>如何关闭呢？我们需要进行如下操作：</p>
+<p>编辑文件/etc/sysctl.conf，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.default.disable_ipv6 = 1</span><br><span class="line">net.ipv6.conf.all.disable_ipv6 = 1</span><br></pre></td></tr></table></figure></p>
+<p>如果你想要为特定的网卡禁用IPv6，比如，对于enp0s3，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.enp0s3.disable_ipv6 = 1</span><br></pre></td></tr></table></figure></p>
+<p>使用如下命令生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p>编辑文件/etc/sysconfig/network，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NETWORKING_IPV6=no</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="ciomb9sqx000hd3pvy0558p4s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Centos-7-更改yum源" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/16/Centos-7-更改yum源/" class="article-date">
+  <time datetime="2016-04-16T08:14:49.000Z" itemprop="datePublished">2016-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/Centos-7-更改yum源/">Centos 7 更改yum源</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Centos 7 默认的源的网址[mirrorlist.centos.org]，属于国外的网站，可能出现连不上或者网速很慢的。网易(163) yum 源是国内最好的 yum 源之一，无论是速度还是软件版本，都非常不错，将 yum 源设置为163，可以提升软件包安装和更新的速度，同时避免一些常用软件版本无法找到。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/16/Centos-7-更改yum源/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="ciomb9sqv000fd3pvjlym9lzx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/16/hello-world/" class="article-date">
@@ -121,7 +213,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="ciol7dz8x002bzcpvnkcq84v2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="ciomb9stg002kd3pv7vevub4y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +262,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="ciol7dz6s000jzcpvos5gtnrc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="ciomb9sr0000jd3pvupql20ot" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +307,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="ciol7dz5h0001zcpvdoe19u37" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="ciomb9spu0002d3pve5qtgifp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -260,7 +352,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="ciol7dz600005zcpvm339cqzj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="ciomb9sq50005d3pvpvn18vul" class="article-share-link">Share</a>
       
       
     </footer>
@@ -305,7 +397,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="ciol7dz5p0002zcpv20h53loy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="ciomb9sq20004d3pvnayyxtp1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -353,7 +445,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="ciol7dz7g000yzcpvbphckv8w" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="ciomb9srp0010d3pvt5kjqdrv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -405,6 +497,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/">Microsoft SQL Server SET NOCOUNT ON 的含义</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/25/Zabbix-Template-SQL-Server/">Zabbix Template SQL Server</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/24/Zabbix-Discovery-of-file-systems/">Zabbix Discovery of file systems</a>
           </li>
         
@@ -414,14 +514,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/05/24/Zabbix-Server-Installing-And-Configuration/">Zabbix Server Installing And Configuration</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/23/YUM-Remove-Repo/">YUM Remove Repo</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/21/Zabbix-Web-Monitoring/">Zabbix Web Monitoring</a>
           </li>
         
       </ul>
