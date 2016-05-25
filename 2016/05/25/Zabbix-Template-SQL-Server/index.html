@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix sql server 2008">
-<meta property="og:updated_time" content="2016-05-25T03:06:53.733Z">
+<meta property="og:updated_time" content="2016-05-25T06:16:54.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix Template SQL Server">
 <meta name="twitter:description" content="zabbix sql server 2008">
@@ -107,11 +107,96 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <table>
+<thead>
+<tr>
+<th style="text-align:left">KEY</th>
+<th style="text-align:left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">perf_counter[“\Process(sqlservr)\% Processor Time”]</td>
+<td style="text-align:left">处理器时间百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Buffer Manager\Page Life Expectancy”]</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Buffer Manager\Database pages”]</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:General Statistics\Processes blocked”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190697(v=sql.105" target="_blank" rel="external">当前阻塞的进程数。</a>.aspx)</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:General Statistics\User Connections”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190697(v=sql.105" target="_blank" rel="external">当前与 SQL Server 连接的用户数。</a>.aspx)</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Locks(_Total)\Lock Waits/sec”]</td>
+<td style="text-align:left">每秒要求调用者等待的锁请求数。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Transactions\Longest Transaction Running Time”]</td>
+<td style="text-align:left">比任何其他当前事务活动时间都长的事务启动后运行的时间长度（秒）。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Locks(_Total)\Number of Deadlocks/sec”]</td>
+<td style="text-align:left">每秒导致死锁的锁请求数。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Transactions/sec”]</td>
+<td style="text-align:left">每秒为所有数据库启动的事务数。</td>
+</tr>
+<tr>
+<td style="text-align:left">service_state[MSSQLSERVER]</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Transactions/sec”]</td>
+<td style="text-align:left">每秒为数据库启动的事务数。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Memory Manager\Total Server Memory (KB)”]</td>
+<td style="text-align:left">从缓冲池提交的内存 (KB)。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Data File(s) Size (KB)”]</td>
+<td style="text-align:left"></td>
+<td>数据库中所有数据文件的累计大小 (KB)，包括任何自动增长。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Data File(s) Size (KB)”]</td>
+<td style="text-align:left">所有数据库数据文件的累计大小 (KB)，包括任何自动增长。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Log File(s) Size (KB)”]</td>
+<td style="text-align:left">数据库中所有事务日志文件的累计大小 (KB)。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Log File(s) Used Size (KB)”]</td>
+<td style="text-align:left">数据库中所有日志文件的累计已用大小。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Log File(s) Size (KB)”]</td>
+<td style="text-align:left">所有数据库事务日志文件的累计大小 (KB)。</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLAgent:Jobs(_Total)\Failed jobs”]</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>参考：<a href="https://technet.microsoft.com/zh-cn/library/ms191246(v=sql.105).aspx" target="_blank" rel="external">https://technet.microsoft.com/zh-cn/library/ms191246(v=sql.105).aspx</a></p>
+</blockquote>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="ciomb9ssg001od3pva6wt9s0m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="ciomha9jt001o4fpv8z9pkp3m" class="article-share-link">Share</a>
       
       
     </footer>
