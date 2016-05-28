@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix 单位符号 Unit symbols | 运维生存时间</title>
+  <title>Nginx 的进程模型 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix unit symbols">
+  <meta name="description" content="nginx master worker 进程模型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix 单位符号 Unit symbols">
-<meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/index.html">
+<meta property="og:title" content="Nginx 的进程模型">
+<meta property="og:url" content="http://ttlop.com/2016/05/28/Nginx-的进程模型/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix unit symbols">
-<meta property="og:updated_time" content="2016-05-06T08:03:35.849Z">
+<meta property="og:description" content="nginx master worker 进程模型">
+<meta property="og:updated_time" content="2016-05-28T07:54:24.659Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix 单位符号 Unit symbols">
-<meta name="twitter:description" content="zabbix unit symbols">
+<meta name="twitter:title" content="Nginx 的进程模型">
+<meta name="twitter:description" content="nginx master worker 进程模型">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-单位符号-Unit-symbols" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Nginx-的进程模型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-单位符号-Unit-symbols/" class="article-date">
-  <time datetime="2016-05-06T07:42:36.000Z" itemprop="datePublished">2016-05-06</time>
+    <a href="/2016/05/28/Nginx-的进程模型/" class="article-date">
+  <time datetime="2016-05-28T07:37:57.000Z" itemprop="datePublished">2016-05-28</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+    <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix 单位符号 Unit symbols
+      Nginx 的进程模型
     </h1>
   
 
@@ -107,37 +107,20 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在 zabbix 里面，我们不需要使用大数字，例如可以不使用 86400 来表示一天，这个数字不容易理解也容易出错，用什么办法可以解决呢？我们使用单位来简化，例如简化 zabbix 触发器表达式或者 item key。所以，我们可以使用 1d 来取代 86400 ，’d’ 就是单位后缀，表示天。</p>
-<a id="more"></a>
-<h3 id="时间单位后缀"><a href="#时间单位后缀" class="headerlink" title="时间单位后缀"></a>时间单位后缀</h3><ul>
-<li><p>s - 秒，一般来书来说不用写 s，就表示 s 了</p>
-</li>
-<li><p>m - 分</p>
-</li>
-<li><p>h - 小时 </p>
-</li>
-<li><p>d - 天</p>
-</li>
-<li><p>w - 周</p>
-</li>
-</ul>
-<h3 id="单位符号"><a href="#单位符号" class="headerlink" title="单位符号"></a>单位符号</h3><ul>
-<li><p>K</p>
-</li>
-<li><p>M</p>
-</li>
-<li><p>G</p>
-</li>
-<li><p>T</p>
-</li>
-</ul>
-<p>如果 item 值的单位不是 B、Bps，那么 1000 为基数，1000 将会显示成 1k，2000 显示为 2k。如果单位是 B 或者 Bps，那么基数就是 1024 了，item的值为 1024 将会被展示为 1k。所以单位上面，一定要切记。例如流量单位改为 B，访问量/次数不填写单位。</p>
-<h3 id="范例"><a href="#范例" class="headerlink" title="范例"></a>范例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;mail.geak.cn:system.cpu.load[percpu,avg1].avg(5m)&#125;&gt;5  <span class="comment">#5m即为5分钟，明显比avg(300)更好理解及维护</span></span><br></pre></td></tr></table></figure>
+        <pre><code>工作方式上，Nginx 分为单工作进程和多工作进程模式。在单工作进程模式下，除主进程外，还有一个工作进程。工作进程是单线程的；在多工作进程模式下，每个工作进程包含多个线程。Nginx 默认为单工作进程模式。
 
+Nginx 启动后，洄游一个 master 进程和多个 worker 进程。
+</code></pre><a id="more"></a>
+<h3 id="master-进程"><a href="#master-进程" class="headerlink" title="master 进程"></a>master 进程</h3><pre><code>主要用来管理 worker 进程，包含：接收来自外界的信号，向各个 worker 进程发送信号，监控 worker 进程的运行状态，当 worker 进程退出后（异常情况下），会自动重新启动新的 worker 进程。
+
+master 进程充当整个进程组与用户的交互接口，同时对进程进行监控。它不需要处理网络事件，不负责业务的执行，只会通过管理 worker 进程来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能。
+
+我们要控制 nginx，只需要通过 kill 向 master 进程发送进程信号就行了。比如 kill -HUP pid，则是告诉 nginx，从容的重启 nginx，我们一般用这个信号来重启 nginx，或重新加载配置，因为是从容地重启，因此服务是不中断的。master 进程在接收到 HUP 信号后是怎么做的呢？首先 master 进程在接到信号后，会先重新加载配置文件，然后再启动新的 worker 进程，并向所有老的 worker 进程发送信号，告诉他们可以光荣退休了。新的 worker 在启动后，就开始接收新的请求，而老的 worker 在收到来自 master 的信号后，就不再接收新的请求，并且在当前进程中的所有未处理完的请求处理完成后，再退出。当然，直接给 master 进程发送信号，这是比较老的操作方式， nginx 在 0.8 版本之后，引入了一系列命令行参数，来方便我们管理。比如，./nginx -s reload，就是来重启 nginx，./nginx -s stop，就是来停止 nginx 的运行。如何做到的呢？我们还是拿 reload 来说，我们看到，执行命令时，我们是启动一个新的 nginx 进程，而新的nginx进程在解析到 reload 参数后，就知道我们的目的是控制 nginx 来重新加载配置文件了，它会向 master 进程发送信号，然后接下来的动作，就和我们直接向 master 进程发送信号一样了。
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cioqv37jx00266bpvlr1jhzlf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cioqv37ip00186bpv12m58r8v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -146,19 +129,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/06/Zabbix-触发器表达式详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix 触发器表达式详解
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/06/Zabbix-Triggers-触发器/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix Triggers 触发器</div>
+      <div class="article-nav-title">Microsoft SQL Server SET NOCOUNT ON 的含义</div>
     </a>
   
 </nav>
