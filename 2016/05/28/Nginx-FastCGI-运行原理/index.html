@@ -15,17 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Apache | 运维生存时间</title>
+  <title>Nginx FastCGI 运行原理 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/Apache/index.html">
+  <meta name="description" content="nginx fastcgi php-fpm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx FastCGI 运行原理">
+<meta property="og:url" content="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="nginx fastcgi php-fpm">
+<meta property="og:updated_time" content="2016-05-28T08:38:32.848Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="Nginx FastCGI 运行原理">
+<meta name="twitter:description" content="nginx fastcgi php-fpm">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -80,97 +81,59 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/" class="archive-article-date">
-  <time datetime="2016-04-21T09:16:57.000Z" itemprop="datePublished">Apr 21</time>
+        <section id="main"><article id="post-Nginx-FastCGI-运行原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/28/Nginx-FastCGI-运行原理/" class="article-date">
+  <time datetime="2016-05-28T08:29:48.000Z" itemprop="datePublished">2016-05-28</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/">Apache 崩溃解决 -- 修改堆栈大小</a>
+    <h1 class="article-title" itemprop="name">
+      Nginx FastCGI 运行原理
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-开启Server-status和server-info/" class="archive-article-date">
-  <time datetime="2016-04-15T07:37:07.000Z" itemprop="datePublished">Apr 15</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-开启Server-status和server-info/">Apache 开启Server-status和server-info</a>
-    </h1>
-  
+        <p>FastCGI 是一个可伸缩地、高速地在 HTTP server 和动态脚本语言间通信的接口。多数流行的 HTTP server 都支持 FastCGI，包括 Apache、Nginx、lighttpd等。同时，FastCGI 也被许多脚本语言支持，其中就有 PHP。</p>
+<p>FastCGI 是从 CGI 发展改进迩来的。传统 CGI 接口方式的主要特点是性能很差，因为每次 HTTP 服务器遇到动态程序使都需要重新启动脚本解释器来执行解析，然后将结果返回给 HTTP 服务器。这在处理高并发访问时几乎是不可用的。另外传统的 CGI 接口方式安全性也很差，现在已经很少用了。</p>
+<p>FastCGI 接口方式采用 C/S 架构，可以将 HTTP 服务器和脚本解析服务器分开，同时在脚本解析服务器上启动一个或多哥脚本解析守护进程。当 HTTP 服务器每次遇到动态程序时，可以直接交付给 FastCGI 进程来执行，然后将得到的结果返回给浏览器。这种方式可以让 HTTP 服务器专一地处理静态请求或者将动态脚本服务器的结果返回给客户端，这在很大程度上提高了整个应用系统的性能。</p>
+<a id="more"></a>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-静态编译和动态编译/" class="archive-article-date">
-  <time datetime="2016-04-15T07:07:15.000Z" itemprop="datePublished">Apr 15</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-静态编译和动态编译/">Apache 静态编译和动态编译</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/15/Apache-里的-MPM-调优比较/" class="archive-article-date">
-  <time datetime="2016-04-15T03:04:07.000Z" itemprop="datePublished">Apr 15</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cioqwnypn0018cnpv9lrnbq8o" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/15/Apache-里的-MPM-调优比较/">Apache 里的 MPM 调优比较</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2016/05/28/Nginx-的进程模型/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Nginx 的进程模型</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
