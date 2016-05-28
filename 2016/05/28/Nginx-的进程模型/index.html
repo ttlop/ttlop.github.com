@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/28/Nginx-的进程模型/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="nginx master worker 进程模型">
-<meta property="og:updated_time" content="2016-05-28T07:56:55.103Z">
+<meta property="og:updated_time" content="2016-05-28T07:58:06.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx 的进程模型">
 <meta name="twitter:description" content="nginx master worker 进程模型">
@@ -107,14 +107,17 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>工作方式上，Nginx 分为单工作进程和多工作进程模式。在单工作进程模式下，除主进程外，还有一个工作进程。工作进程是单线程的；在多工作进程模式下，每个工作进程包含多个线程。Nginx 默认为单工作进程模式。<br>Nginx 启动后，洄游一个 master 进程和多个 worker 进程。</p>
+        <p>工作方式上，Nginx 分为单工作进程和多工作进程模式。在单工作进程模式下，除主进程外，还有一个工作进程。工作进程是单线程的；在多工作进程模式下，每个工作进程包含多个线程。Nginx 默认为单工作进程模式。</p>
+<p>Nginx 启动后，洄游一个 master 进程和多个 worker 进程。</p>
 <a id="more"></a>
-<h3 id="master-进程"><a href="#master-进程" class="headerlink" title="master 进程"></a>master 进程</h3><p>主要用来管理 worker 进程，包含：接收来自外界的信号，向各个 worker 进程发送信号，监控 worker 进程的运行状态，当 worker 进程退出后（异常情况下），会自动重新启动新的 worker 进程。<br>master 进程充当整个进程组与用户的交互接口，同时对进程进行监控。它不需要处理网络事件，不负责业务的执行，只会通过管理 worker 进程来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能。<br>我们要控制 nginx，只需要通过 kill 向 master 进程发送进程信号就行了。比如 kill -HUP pid，则是告诉 nginx，从容的重启 nginx，我们一般用这个信号来重启 nginx，或重新加载配置，因为是从容地重启，因此服务是不中断的。master 进程在接收到 HUP 信号后是怎么做的呢？首先 master 进程在接到信号后，会先重新加载配置文件，然后再启动新的 worker 进程，并向所有老的 worker 进程发送信号，告诉他们可以光荣退休了。新的 worker 在启动后，就开始接收新的请求，而老的 worker 在收到来自 master 的信号后，就不再接收新的请求，并且在当前进程中的所有未处理完的请求处理完成后，再退出。当然，直接给 master 进程发送信号，这是比较老的操作方式， nginx 在 0.8 版本之后，引入了一系列命令行参数，来方便我们管理。比如，./nginx -s reload，就是来重启 nginx，./nginx -s stop，就是来停止 nginx 的运行。如何做到的呢？我们还是拿 reload 来说，我们看到，执行命令时，我们是启动一个新的 nginx 进程，而新的nginx进程在解析到 reload 参数后，就知道我们的目的是控制 nginx 来重新加载配置文件了，它会向 master 进程发送信号，然后接下来的动作，就和我们直接向 master 进程发送信号一样了。</p>
+<h3 id="master-进程"><a href="#master-进程" class="headerlink" title="master 进程"></a>master 进程</h3><p>主要用来管理 worker 进程，包含：接收来自外界的信号，向各个 worker 进程发送信号，监控 worker 进程的运行状态，当 worker 进程退出后（异常情况下），会自动重新启动新的 worker 进程。</p>
+<p>master 进程充当整个进程组与用户的交互接口，同时对进程进行监控。它不需要处理网络事件，不负责业务的执行，只会通过管理 worker 进程来实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能。</p>
+<p>我们要控制 nginx，只需要通过 kill 向 master 进程发送进程信号就行了。比如 kill -HUP pid，则是告诉 nginx，从容的重启 nginx，我们一般用这个信号来重启 nginx，或重新加载配置，因为是从容地重启，因此服务是不中断的。master 进程在接收到 HUP 信号后是怎么做的呢？首先 master 进程在接到信号后，会先重新加载配置文件，然后再启动新的 worker 进程，并向所有老的 worker 进程发送信号，告诉他们可以光荣退休了。新的 worker 在启动后，就开始接收新的请求，而老的 worker 在收到来自 master 的信号后，就不再接收新的请求，并且在当前进程中的所有未处理完的请求处理完成后，再退出。当然，直接给 master 进程发送信号，这是比较老的操作方式， nginx 在 0.8 版本之后，引入了一系列命令行参数，来方便我们管理。比如，./nginx -s reload，就是来重启 nginx，./nginx -s stop，就是来停止 nginx 的运行。如何做到的呢？我们还是拿 reload 来说，我们看到，执行命令时，我们是启动一个新的 nginx 进程，而新的nginx进程在解析到 reload 参数后，就知道我们的目的是控制 nginx 来重新加载配置文件了，它会向 master 进程发送信号，然后接下来的动作，就和我们直接向 master 进程发送信号一样了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cioqv6fk9001885pvki3zgy0b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cioqv7ypt001891pveuqqapuu" class="article-share-link">Share</a>
       
       
     </footer>
