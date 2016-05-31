@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="nginx fastcgi php-fpm">
-<meta property="og:updated_time" content="2016-05-28T09:26:09.113Z">
+<meta property="og:updated_time" content="2016-05-31T02:06:13.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx FastCGI 运行原理">
 <meta name="twitter:description" content="nginx fastcgi php-fpm">
@@ -108,17 +108,17 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>FastCGI 是一个可伸缩地、高速地在 HTTP server 和动态脚本语言间通信的接口。多数流行的 HTTP server 都支持 FastCGI，包括 Apache、Nginx、lighttpd等。同时，FastCGI 也被许多脚本语言支持，其中就有 PHP。</p>
-<p>FastCGI 是从 CGI 发展改进迩来的。传统 CGI 接口方式的主要特点是性能很差，因为每次 HTTP 服务器遇到动态程序使都需要重新启动脚本解释器来执行解析，然后将结果返回给 HTTP 服务器。这在处理高并发访问时几乎是不可用的。另外传统的 CGI 接口方式安全性也很差，现在已经很少用了。</p>
-<p>FastCGI 接口方式采用 C/S 架构，可以将 HTTP 服务器和脚本解析服务器分开，同时在脚本解析服务器上启动一个或多哥脚本解析守护进程。当 HTTP 服务器每次遇到动态程序时，可以直接交付给 FastCGI 进程来执行，然后将得到的结果返回给浏览器。这种方式可以让 HTTP 服务器专一地处理静态请求或者将动态脚本服务器的结果返回给客户端，这在很大程度上提高了整个应用系统的性能。</p>
+<p>FastCGI 是从 CGI 发展改进来的。传统 CGI 接口方式的主要特点是性能很差，因为每次 HTTP 服务器遇到动态程序使都需要重新启动脚本解释器来执行解析，然后将结果返回给 HTTP 服务器。这在处理高并发访问时几乎是不可用的。另外传统的 CGI 接口方式安全性也很差，现在已经很少用了。</p>
+<p>FastCGI 接口方式采用 C/S 架构，可以将 HTTP 服务器和脚本解析服务器分开，同时在脚本解析服务器上启动一个或多个脚本解析守护进程。当 HTTP 服务器每次遇到动态程序时，可以直接交付给 FastCGI 进程来执行，然后将得到的结果返回给浏览器。这种方式可以让 HTTP 服务器专一地处理静态请求或者将动态脚本服务器的结果返回给客户端，这在很大程度上提高了整个应用系统的性能。</p>
 <a id="more"></a>
 <h3 id="Nginx-FastCGI-运行原理"><a href="#Nginx-FastCGI-运行原理" class="headerlink" title="Nginx FastCGI 运行原理"></a>Nginx FastCGI 运行原理</h3><p>Nginx 不支持对外部程序的直接调用或者解析，所有的外部程序（包括 PHP）必须通过 FastCGI 接口来调用。FastCGI 接口在 Linux 下是 socket（这个 socket 可以是文件 socket，也可以是 ip socket）。</p>
-<p>wrapper：为了调用 CGI 程序，还需要一个 FastCGI 的 wrapper（wrapper 可以理解为用于启动另一个程序的程序），这个 wrapper 绑定在某个固定 socket 上，如端口或者文件 socket。当 Nginx 将 CGI 请求发送给这个 socket 的时候，通过 FastCGI 接口，wrapper 接收到请求，然后 Fork（派生）出一个新的线程，这个线程调用解释器或者外部程序处理脚本并读取返回数据；接着，wrapper 在将返回的数据通过 FastCGI 接口，沿着固定的 socket 传递给 Nginx；最后，Nginx 将返回的数据（html页面或者图片）发送给客户段。这就是 Nginx + FastCGI 的整个运行过程。</p>
+<p>wrapper：为了调用 CGI 程序，还需要一个 FastCGI 的 wrapper（wrapper 可以理解为用于启动另一个程序的程序），这个 wrapper 绑定在某个固定 socket 上，如端口或者文件 socket。当 Nginx 将 CGI 请求发送给这个 socket 的时候，通过 FastCGI 接口，wrapper 接收到请求，然后 Fork（派生）出一个新的线程，这个线程调用解释器或者外部程序处理脚本并读取返回数据；接着，wrapper 在将返回的数据通过 FastCGI 接口，沿着固定的 socket 传递给 Nginx；最后，Nginx 将返回的数据（html页面或者图片）发送给客户端。这就是 Nginx + FastCGI 的整个运行过程。</p>
 <h3 id="spawn-fcgi-与-PHP-FPM"><a href="#spawn-fcgi-与-PHP-FPM" class="headerlink" title="spawn-fcgi 与 PHP-FPM"></a>spawn-fcgi 与 PHP-FPM</h3><p>FastCGI 接口方式在脚本解析服务器上启动一个或多个守护进程对动态脚本进行解析，这些进程就是 FastCGI 进程管理器，或者称为 FastCGI 引擎。spawn-fcgi 与 PHP-FPM 就是支持 PHP 的两个 FastCGI 进程管理器。因此 HTTP Server 完全解放出来，可以更好的进行响应和并发处理。</p>
 <p>spawn-fcgi 与 PHP-FPM 的异同：</p>
 <ol>
 <li><p>spawn-fcgi 是 HTTP 服务器 lighttpd 的一部分，目前已独立成为一个项目，一般与 lighttpd 配合使用来支持 PHP，但是 lighttpd 的 spwan-fcgi 在高并发访问的时候，会出现内存泄漏甚至自动重启 FastCGI 的问题。即：PHP 脚本处理器宕机，这个时候如果用户访问的话，可能就会出现白页（即 PHP 不能被解析或者解析出错）。</p>
 </li>
-<li><p>Nginx 是个轻量级的 HTTP server，必须借助第三方的 FastCGI 处理器才可以对 PHP 进行揭西，因此其实这样看来 nginx 是非常灵活的，它可以和任何第三方提供解析的处理器实现连接从而实现对 PHP 的解析（在 nginx.conf 中很容易设置）。nginx 也可以使用 spawn-fcgi（需要一同安装 lighttpd ，但是需要为 nginx 避开端口，但是由于 spawn-fcgi 具有上述的用户逐渐发现的缺陷，现在慢慢减少用 nginx + spawn-fcgi 组合了。</p>
+<li><p>Nginx 是个轻量级的 HTTP server，必须借助第三方的 FastCGI 处理器才可以对 PHP 进行解析，因此其实这样看来 nginx 是非常灵活的，它可以和任何第三方提供解析的处理器实现连接从而实现对 PHP 的解析（在 nginx.conf 中很容易设置）。nginx 也可以使用 spawn-fcgi（需要一同安装 lighttpd ，但是需要为 nginx 避开端口，但是由于 spawn-fcgi 具有上述的用户逐渐发现的缺陷，现在慢慢减少用 nginx + spawn-fcgi 组合了。</p>
 </li>
 </ol>
 <p>由于 spawn-fcgi 的缺陷，现在出现了第三方（比前已经加入到 PHP core中）的 PHP 的 FastCGI 处理器 PHP-FPM，它和 spawn-fcgi 比较起来有如下优点：</p>
@@ -128,7 +128,7 @@ var _hmt = _hmt || [];
 <li><p>同时它在处理高并发方面也优于 spawn-fcgi，至少不会自动重启 fastcgi 处理器。因此，推荐使用 Nginx + PHP/PHP-FPM 这个组合对 PHP 进行解析。</p>
 </li>
 </ol>
-<p>FastCGI 的主要优点是把动态语言和 HTTP Server 分离开来，所以 Nginx 与 PHP/PHP-FPM 进程被部署在不同服务器上，以分担前端 Nginx 服务器压力，使 Nginx 专一处理井台请求和转发动态请求，而 PHP/PHP-FPM 服务器专一解析 PHP 动态请求。</p>
+<p>FastCGI 的主要优点是把动态语言和 HTTP Server 分离开来，所以 Nginx 与 PHP/PHP-FPM 进程被部署在不同服务器上，以分担前端 Nginx 服务器压力，使 Nginx 专一处理静态请求和转发动态请求，而 PHP/PHP-FPM 服务器专一解析 PHP 动态请求。</p>
 <h3 id="Nginx-PHP-FPM"><a href="#Nginx-PHP-FPM" class="headerlink" title="Nginx + PHP-FPM"></a>Nginx + PHP-FPM</h3><p>PHP-FPM 是管理 FastCGI 的一个管理器，它作为 PHP 的插件存在，在安装 PHP 要想使用 PHP-FPM 时在老 php 的老版本（php 5.3.3）之前就需要把 PHP-FPM 以补丁的形式安装到 PHP 中，而且 PHP 要与 PHP-FPM 版本一致，这是必须的。</p>
 <p>PHP-FPM 其实是 PHP 源代码的一个补丁，旨在将 FastCGI 进程管理整合进 PHP 包中，必须将它 patch 到你的 PHP 源代码中，在编译安装 PHP 后才可以使用。</p>
 <p>PHP 5.3.3 已经集成 php-fpm 了，不再是第三方的包了。PHP-FPM 提供更好的 PHP 进程管理方式，而已有效控制内存和进程、可以平滑重载 PHP 配置，比 spawn-fcgi 具有更多优点，所以被 PHP 官方收录了。在 ./configure 的时候带 –enable-fpm 参数既可开启 PHP-FPM。</p>
@@ -146,11 +146,14 @@ var _hmt = _hmt || [];
 <li><p>FastCGI 子进程接着等待并处理来自 FastCGI 进程管理器（运行在 WebServer中）的下一个连接。</p>
 </li>
 </ol>
+<h3 id="Nginx-PHP-正确配置"><a href="#Nginx-PHP-正确配置" class="headerlink" title="Nginx + PHP 正确配置"></a>Nginx + PHP 正确配置</h3><p>一般 WEB 服务器都作统一入口：把 PHP 请求都发送到同一个文件上，然后在此文件里通过解析 <strong>REQUEST_URL</strong> 实现路由。</p>
+<p>Nginx 配置文件分为好多块，常见的从外到内依次是 <strong>http</strong>、<strong>server</strong>、<strong>location</strong> 等等，缺省的继承关系是从外到内，也就是内层块会自动获取外层块的值作为缺省值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name foo.com;</span><br><span class="line">    root /path;</span><br><span class="line">    location / &#123;</span><br><span class="line">        index index.html index.htm index.php;</span><br><span class="line">        if (!-e $request_filename) &#123;</span><br><span class="line">            rewrite . /index.php last;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME /path$fastcgi_script_name;</span><br><span class="line">        fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cioqyd6o10019gepvyyqlew2k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="ciousyztm0018abpvdkak3mig" class="article-share-link">Share</a>
       
       
     </footer>
