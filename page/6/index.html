@@ -15,18 +15,17 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 使用iptables服务 | 运维生存时间</title>
+  <title>运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iptables服务 firewall命令 selinux">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 使用iptables服务">
-<meta property="og:url" content="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/index.html">
+  <meta name="description" content="运维 生存时间 ttl op oa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="运维生存时间">
+<meta property="og:url" content="http://ttlop.com/page/6/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="iptables服务 firewall命令 selinux">
-<meta property="og:updated_time" content="2016-04-19T02:33:49.480Z">
+<meta property="og:description" content="运维 生存时间 ttl op oa">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 使用iptables服务">
-<meta name="twitter:description" content="iptables服务 firewall命令 selinux">
+<meta name="twitter:title" content="运维生存时间">
+<meta name="twitter:description" content="运维 生存时间 ttl op oa">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +80,16 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-使用iptables服务" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-Microsoft-SQL-Server-缓存清除与内存释放" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/19/Centos-7-使用iptables服务/" class="article-date">
-  <time datetime="2016-04-19T02:24:22.000Z" itemprop="datePublished">2016-04-19</time>
+    <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" class="article-date">
+  <time datetime="2016-04-15T02:09:02.000Z" itemprop="datePublished">2016-04-15</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
   </div>
 
   </div>
@@ -98,8 +99,8 @@ var _hmt = _hmt || [];
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Centos 7 使用iptables服务
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/">Microsoft SQL Server 缓存清除与内存释放</a>
     </h1>
   
 
@@ -107,42 +108,33 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Centos 7用firewall命令”替代”iptables。在这里我们需要区分”iptables服务”和”iptables命令”。虽然firewalld是替代提供的防火墙管理iptables服务，但是它任然使用iptables对内核命令动态通信包过滤。所以它只是iptables服务代替，而不是iptables命令。</p>
-<p>如果想使用iptables服务，执行如下命令</p>
-<p>selinux可能会阻止启动iptables，此时可以先使用setenforce 0，再执行systemctl enable iptables</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line"></span><br><span class="line">yum install iptables-services</span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line">systemctl start iptables</span><br><span class="line">systemctl <span class="built_in">enable</span> iptables</span><br></pre></td></tr></table></figure>
-
+        <p>很多时候我们会发现运行 SQL Server 的系统内存往往会居高不下。这时由于它对于内存使用的策略是有多少闲置的内存就占用多少，直到内存使用率达到系统峰值时，才会清除一些缓存释放少量的内存为新的缓存腾出空间。</p>
+<p>这些内存一般都是 SQL Server 运行时候用作缓存的，例如你运行了一个 select 语句，执行整个存储过程，调用函数：</p>
+<p>1.数据缓存：执行查询语句，SQL Server 会将相关的数据页加载到内存中来，下一次如果再次请求此页的数据的时候，就无需读取磁盘了，大大提高了速度。</p>
+<p>2.执行命令缓存：在执行存储过程，自定函数时，SQL Server 需要先二进制编译再运行，编译后的结果也会缓存起来，再次调用时就无需再次编译。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="ciov5q4s10008aspvwhcw0t7m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="ciov5q4ta0010aspvzlnfetf8" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2016/04/19/Centos-7-iptables默认规则/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 iptables默认策略
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/04/16/Centos-7-禁用IPv6/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Centos 7 禁用IPv6</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
-</article>
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+  </nav>
 
 </section>
         
