@@ -113,64 +113,29 @@ var _hmt = _hmt || [];
 <thead>
 <tr>
 <th style="text-align:left">Key</th>
-<th style="text-align:left">Parameter</th>
 <th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">system.cpu.num[type]</td>
-<td style="text-align:left"><strong>type</strong>-可用值: online(default),max</td>
-<td style="text-align:left">处理器个数</td>
+<td style="text-align:left">处理器个数。<strong>type</strong>-可用值: online(default),max</td>
 </tr>
 <tr>
 <td style="text-align:left">system.cpu.switches]</td>
-<td style="text-align:left">老命名方式：system[switches]</td>
-<td style="text-align:left">上下文交换次数</td>
+<td style="text-align:left">上下文交换次数。老命名方式：system[switches]</td>
 </tr>
 <tr>
 <td style="text-align:left">system.cpu.util[<cpu>,<type>,<mode>]</mode></type></cpu></td>
-<td style="text-align:left"><strong>cpu</strong>-cpu数量(默认是所有CPU) <strong>type</strong>-可用值: idle,nice,user(default),system(windows default),iowait,interrupt,softirq,steal <strong>mode</strong>-可用值:avg1(default),avg5,avg15</td>
-<td style="text-align:left">利用率百分比</td>
+<td style="text-align:left">利用率百分比。<strong>cpu</strong>-cpu数量(默认是所有CPU) <strong>type</strong>-可用值: idle,nice,user(default),system(windows default),iowait,interrupt,softirq,steal <strong>mode</strong>-可用值:avg1(default),avg5,avg15</td>
 </tr>
 <tr>
-<td style="text-align:left">system.cpu.util[,system]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
+<td style="text-align:left">system.cpu.load[<cpu>,<mode>]</mode></cpu></td>
+<td style="text-align:left">CPU负载。<strong>cpu</strong>-可用值:all(default),percpu(所有在线cpu的负载) <strong>mode</strong>-可用值:avg1,avg5,avg15</td>
 </tr>
 <tr>
-<td style="text-align:left">system.cpu.util[,user]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,steal]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,idle]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,softirq]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,interrupt]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,nice]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,iowait]</td>
-<td style="text-align:left"></td>
+<td style="text-align:left">system.cpu.intr</td>
+<td style="text-align:left">设备中断次数</td>
 </tr>
 </tbody>
 </table>
@@ -178,7 +143,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="ciov5q4tt001haspvg86s9a9i" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="ciov5z4ob001icbpvll79h59a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,7 +190,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="ciov5q4th0018aspvwkzikej2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="ciov5z4nz001acbpv9699l7rq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -271,7 +236,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="ciov5q4tk001aaspvomjcom6j" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="ciov5z4o2001ccbpv87yd9kce" class="article-share-link">Share</a>
       
       
     </footer>
@@ -318,7 +283,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="ciov5q4t3000vaspvxd83l8p7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="ciov5z4nq0010cbpvuxurzu4q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -439,7 +404,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="ciov5q4uc001uaspv8des5d3b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="ciov5z4ot001vcbpvuh5pphzp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -490,7 +455,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="ciov5q4tv001iaspveqbsut66" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="ciov5z4oc001kcbpv3co4xcyi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -549,7 +514,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="ciov5q4u0001kaspv11dfq5xp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="ciov5z4og001ncbpvxw3n2ny8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -602,7 +567,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="ciov5q4u6001oaspvug4h4xn1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="ciov5z4p1001zcbpvk6k4ybbz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -649,7 +614,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciov5q4tm001daspvubaq73s6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciov5z4o5001ecbpvk1qco9iu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -697,7 +662,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="ciov5q4ul0022aspvrrz6kj2t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="ciov5z4p50024cbpvgzl7bcf8" class="article-share-link">Share</a>
       
       
     </footer>

@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix cpu key">
-<meta property="og:updated_time" content="2016-05-31T08:03:15.384Z">
+<meta property="og:updated_time" content="2016-05-31T08:10:14.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix CPU 类型 Key">
 <meta name="twitter:description" content="zabbix cpu key">
@@ -112,64 +112,29 @@ var _hmt = _hmt || [];
 <thead>
 <tr>
 <th style="text-align:left">Key</th>
-<th style="text-align:left">Parameter</th>
 <th style="text-align:left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">system.cpu.num[type]</td>
-<td style="text-align:left"><strong>type</strong>-可用值: online(default),max</td>
-<td style="text-align:left">处理器个数</td>
+<td style="text-align:left">处理器个数。<strong>type</strong>-可用值: online(default),max</td>
 </tr>
 <tr>
 <td style="text-align:left">system.cpu.switches]</td>
-<td style="text-align:left">老命名方式：system[switches]</td>
-<td style="text-align:left">上下文交换次数</td>
+<td style="text-align:left">上下文交换次数。老命名方式：system[switches]</td>
 </tr>
 <tr>
 <td style="text-align:left">system.cpu.util[<cpu>,<type>,<mode>]</mode></type></cpu></td>
-<td style="text-align:left"><strong>cpu</strong>-cpu数量(默认是所有CPU) <strong>type</strong>-可用值: idle,nice,user(default),system(windows default),iowait,interrupt,softirq,steal <strong>mode</strong>-可用值:avg1(default),avg5,avg15</td>
-<td style="text-align:left">利用率百分比</td>
+<td style="text-align:left">利用率百分比。<strong>cpu</strong>-cpu数量(默认是所有CPU) <strong>type</strong>-可用值: idle,nice,user(default),system(windows default),iowait,interrupt,softirq,steal <strong>mode</strong>-可用值:avg1(default),avg5,avg15</td>
 </tr>
 <tr>
-<td style="text-align:left">system.cpu.util[,system]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
+<td style="text-align:left">system.cpu.load[<cpu>,<mode>]</mode></cpu></td>
+<td style="text-align:left">CPU负载。<strong>cpu</strong>-可用值:all(default),percpu(所有在线cpu的负载) <strong>mode</strong>-可用值:avg1,avg5,avg15</td>
 </tr>
 <tr>
-<td style="text-align:left">system.cpu.util[,user]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,steal]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,idle]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,softirq]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,interrupt]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,nice]</td>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.util[,iowait]</td>
-<td style="text-align:left"></td>
+<td style="text-align:left">system.cpu.intr</td>
+<td style="text-align:left">设备中断次数</td>
 </tr>
 </tbody>
 </table>
@@ -177,7 +142,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="ciov5q4tt001haspvg86s9a9i" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="ciov5z4ob001icbpvll79h59a" class="article-share-link">Share</a>
       
       
     </footer>
