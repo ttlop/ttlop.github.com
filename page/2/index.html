@@ -82,6 +82,53 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-YUM-Remove-Repo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/23/YUM-Remove-Repo/" class="article-date">
+  <time datetime="2016-05-23T03:52:48.000Z" itemprop="datePublished">2016-05-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/23/YUM-Remove-Repo/">YUM Remove Repo</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Howto remove and disable YUM repo (repository). Yum command ifself does not contain any way to remove repository. Yum repo files is located in <strong>/etc/yum.repos.d/</strong> directory.</p>
+<p>I use <strong>zabbix.repo</strong> file with following content as example on this guid:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[zabbix]</span><br><span class="line">name=Zabbix Official Repository - <span class="variable">$basearch</span></span><br><span class="line">baseurl=http://repo.zabbix.com/zabbix/3.0/rhel/7/<span class="variable">$basearch</span>/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span><br><span class="line"></span><br><span class="line">[zabbix-non-supported]</span><br><span class="line">name=Zabbix Official Repository non-supported - <span class="variable">$basearch</span></span><br><span class="line">baseurl=http://repo.zabbix.com/non-supported/rhel/7/<span class="variable">$basearch</span>/</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span><br><span class="line">gpgcheck=1</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/23/YUM-Remove-Repo/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciowkng9o001ha2pvglmj1pw9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-Web-Monitoring" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/21/Zabbix-Web-Monitoring/" class="article-date">
@@ -120,7 +167,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="ciowh540v002660pvur0hshaq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="ciowkngag0026a2pv26kk4bav" class="article-share-link">Share</a>
       
       
     </footer>
@@ -210,7 +257,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/20/Linux-命令行快捷键/" data-id="ciowh53zb000v60pvqt6mp0hy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/20/Linux-命令行快捷键/" data-id="ciowkng8y000va2pv0gqnsv6q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -334,7 +381,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/20/Zabbix-Template-App-MySQL/" data-id="ciowh540h001u60pvz07csoyp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/20/Zabbix-Template-App-MySQL/" data-id="ciowknga8001va2pvkrmw6pqs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,7 +494,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="ciowh5418002n60pvhpz9p8dc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="ciowkngb0002pa2pv292pwxce" class="article-share-link">Share</a>
       
       
     </footer>
@@ -579,7 +626,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="ciowh540p001y60pv16sofwta" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="ciowkngac001za2pv0bd52vj4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -633,7 +680,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="ciowh5414002i60pvw4auircs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="ciowkngau002ia2pvya3bv4qm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -842,7 +889,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="ciowh53zk001360pvvxd7343d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="ciowkng960015a2pvjwsvaau0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -898,7 +945,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="ciowh53zl001560pvuapw368r" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="ciowkng950013a2pvr4naw6qh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -943,68 +990,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciowh53yf000a60pvo7lpugtn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-的-system-cpu-load-与-CPU-使用率" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" class="article-date">
-  <time datetime="2016-05-11T08:46:20.000Z" itemprop="datePublished">2016-05-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/">Zabbix 的 system.cpu.load 与 CPU 使用率</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="CPU-使用率"><a href="#CPU-使用率" class="headerlink" title="CPU 使用率"></a>CPU 使用率</h3><p>CPU 使用率显示的是程序在运行期间实时占用的 CPU 百分比</p>
-<h3 id="CPU-load"><a href="#CPU-load" class="headerlink" title="CPU load"></a>CPU load</h3><p>CPU load 显示的是一段时间内正在使用和等待使用 CPU 的平均任务数，即负载。所以 CPU 使用率高，并不意味着负载就一定大。</p>
-<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><ol>
-<li><p>公司上下班需打卡，每次只能有一个人在打卡且限定 <strong>5</strong> 秒钟，其他人等待，每人限定打一次，若一次不成功，只能重新排队，等待下一轮打卡</p>
-</li>
-<li><p>打卡机就相当于 CPU，而正在或等待打卡的人就相当于任务数</p>
-</li>
-<li><p>在打卡过程中，肯定会有人打完就走掉，有人没有打完而选择重新排队打卡，更会有新增的人在这儿排队，这个人数的变化就相当于任务数的增减</p>
-</li>
-<li><p>为了统计平均负载情况，我们每 <strong>5</strong> 秒统计一次人数，并在第1、5、15分钟的时候对统计情况取平均值，从而形成第1、5、15的平均负载</p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><p>有的人拿起打卡机就打卡，一直到 <strong>5</strong> 秒钟结束，而有的人可能前 <strong>2</strong> 秒没有操作，后 <strong>3</strong> 秒才真正在打卡</p>
-</li>
-<li><p>如果把打卡机比作CPU， 任务看作任务，我们就说前一个人的 CPU 利用率高，后一个人的 CPU 利用率低，但无论 CPU 的利用率高低，跟后面有多少任务在排队没有必然关系</p>
-</li>
-<li><p>除非后一秒打卡的人因为浪费了时间导致打卡不成功需要重新排队打卡，由于排队人数相当于任务数，任务数增加会导致负载变大，此时 CPU 的利用率低才会对负载有影响</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciowh5413002f60pvts351y48" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciowkng84000aa2pvfz9recgt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1056,6 +1042,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/06/01/Nginx-nginx-status/">Nginx nginx-status</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/01/Nginx-Location-Configuration/">Nginx Location Configuration</a>
           </li>
         
@@ -1069,10 +1059,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/05/28/Nginx-的进程模型/">Nginx 的进程模型</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/">Microsoft SQL Server SET NOCOUNT ON 的含义</a>
           </li>
         
       </ul>
