@@ -141,12 +141,29 @@ var _hmt = _hmt || [];
 </li>
 <li><p>访问 <strong><a href="http://localhost/a.PNG" target="_blank" rel="external">http://localhost/a.PNG</a></strong> 则匹配规则 <strong>ruleE</strong>，不匹配规则 <strong>ruleD</strong>，因为规则 <strong>ruleE</strong> 不区分大小写</p>
 </li>
+<li><p>访问 <strong><a href="http://localhost/a.xhtml" target="_blank" rel="external">http://localhost/a.xhtml</a></strong> 不会匹配规则 <strong>ruleF</strong> 和 <strong>ruleG</strong>，<strong><a href="http://localhost/a.XHTML" target="_blank" rel="external">http://localhost/a.XHTML</a></strong> 不会匹配规则 <strong>ruleG</strong>。规则 <strong>ruleF</strong> 和 <strong>ruleG</strong> 属于排除法，符合匹配规则但是不会匹配。</p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/category/id/1111" target="_blank" rel="external">http://localhost/category/id/1111</a></strong> 则最终匹配到规则 <strong>ruleH</strong>，因为以上规则都不进行匹配</p>
+</li>
 </ol>
+<p>所以在实际使用中，个人觉得至少有三个匹配规则定义，如下：</p>
+<ul>
+<li>直接匹配网站根，通过域名访问网站守业比较频繁，使用这个会加速处理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location = / &#123;</span><br><span class="line">    proxy_pass http://tomcat:8080/index</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理静态文件请求，这是 <strong>nginx</strong> 作为 <strong>http</strong> 服务器的强项</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /static/ &#123;</span><br><span class="line">    root /webroot/static;</span><br><span class="line">&#125;</span><br><span class="line">#or</span><br><span class="line">location ~* \.(gif|jpg|jpeg|png|css|js|ico)$ &#123;</span><br><span class="line">    root /webroot/res/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>转发动态请求到后端应用服务器</li>
+</ul>
+<p>location / {<br>    proxy_pass <a href="http://tomcat:8080/" target="_blank" rel="external">http://tomcat:8080/</a><br>}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="ciowghe6c001a1ypv89zuqfr2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="ciowh0dkk001a40pvm3ynn9y0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -217,7 +234,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="ciowghe6n001i1ypvy1mgx1fu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="ciowh0dkw001i40pvx96sageb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,7 +281,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="ciowghe6800181ypvt5rteutt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="ciowh0dki001840pv2eyqq83l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -310,7 +327,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="ciowghe6e001d1ypv8xq1l9l5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="ciowh0dkn001d40pv75k8c1e5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -357,7 +374,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="ciowghe5z000y1ypv3n35l65u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="ciowh0dk7000y40pvodoog5r6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -478,7 +495,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="ciowghe77001v1ypv8crw9sl0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="ciowh0dlh001y40pvz23hbzk9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -529,7 +546,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="ciowghe6p001k1ypvs2gsv87v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="ciowh0dkz001k40pvak257q9b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -588,7 +605,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="ciowghe6r001m1ypvrj71g3f6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="ciowh0dl2001m40pvbsf6ratt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -641,7 +658,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="ciowghe6x001q1ypv8d7nfkuw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="ciowh0dlb001u40pvk4v1bmfq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -688,7 +705,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciowghe6i001e1ypvwojq6qat" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="ciowh0dks001e40pv7yji8wfi" class="article-share-link">Share</a>
       
       
     </footer>

@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="nginx location">
-<meta property="og:updated_time" content="2016-06-01T05:53:40.782Z">
+<meta property="og:updated_time" content="2016-06-01T06:06:55.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx Location Configuration">
 <meta name="twitter:description" content="nginx location">
@@ -140,12 +140,29 @@ var _hmt = _hmt || [];
 </li>
 <li><p>访问 <strong><a href="http://localhost/a.PNG" target="_blank" rel="external">http://localhost/a.PNG</a></strong> 则匹配规则 <strong>ruleE</strong>，不匹配规则 <strong>ruleD</strong>，因为规则 <strong>ruleE</strong> 不区分大小写</p>
 </li>
+<li><p>访问 <strong><a href="http://localhost/a.xhtml" target="_blank" rel="external">http://localhost/a.xhtml</a></strong> 不会匹配规则 <strong>ruleF</strong> 和 <strong>ruleG</strong>，<strong><a href="http://localhost/a.XHTML" target="_blank" rel="external">http://localhost/a.XHTML</a></strong> 不会匹配规则 <strong>ruleG</strong>。规则 <strong>ruleF</strong> 和 <strong>ruleG</strong> 属于排除法，符合匹配规则但是不会匹配。</p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/category/id/1111" target="_blank" rel="external">http://localhost/category/id/1111</a></strong> 则最终匹配到规则 <strong>ruleH</strong>，因为以上规则都不进行匹配</p>
+</li>
 </ol>
+<p>所以在实际使用中，个人觉得至少有三个匹配规则定义，如下：</p>
+<ul>
+<li>直接匹配网站根，通过域名访问网站守业比较频繁，使用这个会加速处理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location = / &#123;</span><br><span class="line">    proxy_pass http://tomcat:8080/index</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理静态文件请求，这是 <strong>nginx</strong> 作为 <strong>http</strong> 服务器的强项</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /static/ &#123;</span><br><span class="line">    root /webroot/static;</span><br><span class="line">&#125;</span><br><span class="line">#or</span><br><span class="line">location ~* \.(gif|jpg|jpeg|png|css|js|ico)$ &#123;</span><br><span class="line">    root /webroot/res/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>转发动态请求到后端应用服务器</li>
+</ul>
+<p>location / {<br>    proxy_pass <a href="http://tomcat:8080/" target="_blank" rel="external">http://tomcat:8080/</a><br>}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="ciowghe6c001a1ypv89zuqfr2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="ciowh0dkk001a40pvm3ynn9y0" class="article-share-link">Share</a>
       
       
     </footer>
