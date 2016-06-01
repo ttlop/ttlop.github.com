@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/01/Nginx-nginx-status/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="nginx stat stub_status">
-<meta property="og:updated_time" content="2016-06-01T07:48:50.662Z">
+<meta property="og:updated_time" content="2016-06-01T07:52:07.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx nginx-status">
 <meta name="twitter:description" content="nginx stat stub_status">
@@ -107,9 +107,9 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如何察看 Nginx 状态？</p>
+        <p>如何查看 Nginx 状态？</p>
 <a id="more"></a>
-<h3 id="获取-Nginx-状态（HTTP-Stub-Status）"><a href="#获取-Nginx-状态（HTTP-Stub-Status）" class="headerlink" title="获取 Nginx 状态（HTTP Stub Status）"></a>获取 Nginx 状态（HTTP Stub Status）</h3><p>确认有加入状态监控模块。</p>
+<h3 id="获取-Nginx-状态（HTTP-Stub-Status）"><a href="#获取-Nginx-状态（HTTP-Stub-Status）" class="headerlink" title="获取 Nginx 状态（HTTP Stub Status）"></a>获取 Nginx 状态（HTTP Stub Status）</h3><p>确认有加入状态监控模块</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# /usr/local/nginx/sbin/nginx -V</span><br><span class="line">nginx version: nginx/1.8.0</span><br><span class="line">built by gcc 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC) </span><br><span class="line">built with OpenSSL 1.0.1c 10 May 2012</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: --prefix=/usr/local/nginx --with-openssl=/usr/local/hongdian/openssl-1.0.1c --with-http_stub_status_module --with-http_ssl_module</span><br></pre></td></tr></table></figure>
 <h3 id="配置-nginx-conf"><a href="#配置-nginx-conf" class="headerlink" title="配置 nginx.conf"></a>配置 nginx.conf</h3><p>Add the following configuration to you Nginx configuration file</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location ~ /nginx_status &#123;</span><br><span class="line">    stub_status on;  # Turn on nginx stats</span><br><span class="line">    access_log off;  # We do not need logs for stats</span><br><span class="line">    allow 127.0.0.1; # security: Only allow access from ip</span><br><span class="line">    deny all;        # Deny requests from the other of the world</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -131,7 +131,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="ciowkng9d001aa2pv5sto48m6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="ciowkrok0001db6pvog2tqdp3" class="article-share-link">Share</a>
       
       
     </footer>
