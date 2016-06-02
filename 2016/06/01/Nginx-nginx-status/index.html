@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/01/Nginx-nginx-status/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="nginx stat stub_status">
-<meta property="og:updated_time" content="2016-06-01T07:52:07.930Z">
+<meta property="og:updated_time" content="2016-06-02T01:42:09.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx nginx-status">
 <meta name="twitter:description" content="nginx stat stub_status">
@@ -70,9 +70,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -115,23 +115,23 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location ~ /nginx_status &#123;</span><br><span class="line">    stub_status on;  # Turn on nginx stats</span><br><span class="line">    access_log off;  # We do not need logs for stats</span><br><span class="line">    allow 127.0.0.1; # security: Only allow access from ip</span><br><span class="line">    deny all;        # Deny requests from the other of the world</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Nginx-监控项解释"><a href="#Nginx-监控项解释" class="headerlink" title="Nginx 监控项解释"></a>Nginx 监控项解释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# curl http://localhost:61503/nginx_status</span><br><span class="line">Active connections: 1 </span><br><span class="line">server accepts handled requests</span><br><span class="line"> 28 28 25 </span><br><span class="line">Reading: 0 Writing: 1 Waiting: 0</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>Active Connections: 对后端发起的活动连结数</p>
+<li><p>Active Connections: 当前正处理的活动连结数</p>
 </li>
-<li><p>Server accepts handled requests: Nginx 共处理了多少个连结，成功创建了多少次握手，总共处理了多少个请求</p>
+<li><p>Server accepts handled requests: Nginx 共处理了多少个连接，成功创建了多少次握手，总共处理了多少个请求</p>
 </li>
 <li><p>Reading: nginx 读取到客户端的 Header 信息数</p>
 </li>
 <li><p>Writing: Nginx 返回给客户端的 Header 信息数</p>
 </li>
-<li><p>Waiting: 开启 keep-alive 的情况下，这个值等于 active -(reading + writing)，意思是 Nginx 已经处理完成，正在等待下一次请求指令的的驻留连结数</p>
+<li><p>Waiting: 开启 keep-alive 的情况下，这个值等于 <strong>active - (reading + writing)</strong>，意思是 Nginx 已经处理完成，正在等待下一次请求指令的的驻留连接数</p>
 </li>
 </ul>
-<p>在访问效率很高，请求很快被处理完毕的情况下，Waiting 数比较多是正常的，如果 reading + writing 数较多，则说明并发访问两很大，正在处理过程中。</p>
+<p>在访问效率很高，请求很快被处理完毕的情况下，Waiting 数比较多是正常的，如果 reading + writing 数较多，则说明并发访问量很大，正在处理过程中。可能是因为后端的动态应用程序处理慢（如php，jsp），拖了后腿。而一般来说，动态程序之所以慢就就两方面的原因：一是一位数据库，另外一个原因很可能就是IO慢（目前的机器CPU或内存不够的情况很少。而设备的主要瓶颈在硬盘IO上），或者客户端网络慢。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="ciowkrok0001db6pvog2tqdp3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cioxmzqp4001erbpvb8tlnnv0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -142,7 +142,7 @@ var _hmt = _hmt || [];
   
   
     <a href="/2016/06/01/Nginx-Location-Configuration/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">Nginx Location Configuration</div>
     </a>
   
@@ -157,7 +157,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -182,7 +182,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -219,7 +219,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
