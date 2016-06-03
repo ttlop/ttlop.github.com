@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Redis | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="redis configuration">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://ttlop.com/2016/06/03/Redis/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="redis configuration">
+<meta property="og:updated_time" content="2016-06-03T02:11:23.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis">
+<meta name="twitter:description" content="redis configuration">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Redis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/03/Redis/" class="article-date">
+  <time datetime="2016-06-03T01:36:54.000Z" itemprop="datePublished">2016-06-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Redis/">Redis</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Redis 是一种高级的 key-value 数据库。它跟 memcached 类似，不过数据可以持久化，而且支持的数据类型很丰富。有字符串、链表、哈希、集合和有序集合 5 种。支持在服务器端计算集合的并、交和补集等，还支持多种排序功能。所以 Redis 也可以被看成是一个数据结构服务器。Redis 的所有数据都是保存在内存中，然后不定期的通过异步方式保存到磁盘上（这称为“半持久化模式”）；也可以把每一次数据裱画都写入到一个 append only file (aof) 里面（这称为“全持久化模式”）。</p>
+<a id="more"></a>
+<h3 id="Redis-监控"><a href="#Redis-监控" class="headerlink" title="Redis 监控"></a>Redis 监控</h3><ul>
+<li>首先判断客户端和服务器连接是否正常</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 客户端和服务器连接正常，返回 PONG</span><br><span class="line">[root@localhost ~]# redis-cli </span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Redis 监控最直接的方法就是使用系统提供的 info 命令，只需要执行下面一条命令，就能获得 Redis 系统的状态报告</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"># 结果会返回 Server、Clients、Memory、Persistence、Stats、Replication、CPU、Cluster、Keyspace 9个部分。</span><br><span class="line">127.0.0.1:6379&gt; info</span><br><span class="line"># Server</span><br><span class="line">redis_version:3.0.1    # Redis版本</span><br><span class="line">redis_git_sha1:00000000</span><br><span class="line">redis_git_dirty:0</span><br><span class="line">redis_build_id:5da013bcc394f8f</span><br><span class="line">redis_mode:standalone</span><br><span class="line">os:Linux 2.6.32-573.7.1.el6.x86_64 x86_64</span><br><span class="line">arch_bits:64</span><br><span class="line">multiplexing_api:epoll</span><br><span class="line">gcc_version:4.4.7    # gcc 版本</span><br><span class="line">process_id:7479    # 当前 Redis 服务器进程 id</span><br><span class="line">run_id:7656b0843fe21081a4aba316a39c5592aad7f3b8</span><br><span class="line">tcp_port:6379</span><br><span class="line">uptime_in_seconds:1544487    # 运行时间（秒）</span><br><span class="line">uptime_in_days:17    # 运行时间（天）</span><br><span class="line">hz:10</span><br><span class="line">lru_clock:5300843</span><br><span class="line">config_file:/etc/redis.conf</span><br><span class="line"></span><br><span class="line"># Clients</span><br><span class="line">connected_clients:543    # 连接的客户端数量</span><br><span class="line">client_longest_output_list:0</span><br><span class="line">client_biggest_input_buf:3</span><br><span class="line">blocked_clients:0</span><br><span class="line"></span><br><span class="line"># Memory</span><br><span class="line">used_memory:717689960    # Redis 分配的内存总量</span><br><span class="line">used_memory_human:684.44M</span><br><span class="line">used_memory_rss:790581248    # Redis 分配的内存总量（包括内存碎片）</span><br><span class="line">used_memory_peak:1611224216</span><br><span class="line">used_memory_peak_human:1.50G    # Redis 所用内容的高峰值</span><br><span class="line">used_memory_lua:2677760</span><br><span class="line">mem_fragmentation_ratio:1.10    # 内存碎片比率</span><br><span class="line">mem_allocator:jemalloc-3.6.0</span><br><span class="line"></span><br><span class="line"># Persistence</span><br><span class="line">loading:0</span><br><span class="line">rdb_changes_since_last_save:75858    # 上次保存数据库后，执行命令的次数</span><br><span class="line">rdb_bgsave_in_progress:0    # 后台进行中的 save 操作的数量</span><br><span class="line">rdb_last_save_time:1464918608    # 最后一次成功保存的时间点，以 UNIX 时间戳格式显示</span><br><span class="line">rdb_last_bgsave_status:ok</span><br><span class="line">rdb_last_bgsave_time_sec:8</span><br><span class="line">rdb_current_bgsave_time_sec:-1</span><br><span class="line">aof_enabled:0    # Redis 是否开启了 aof</span><br><span class="line">aof_rewrite_in_progress:0</span><br><span class="line">aof_rewrite_scheduled:0</span><br><span class="line">aof_last_rewrite_time_sec:-1</span><br><span class="line">aof_current_rewrite_time_sec:-1</span><br><span class="line">aof_last_bgrewrite_status:ok</span><br><span class="line">aof_last_write_status:ok</span><br><span class="line"></span><br><span class="line"># Stats</span><br><span class="line">total_connections_received:8808165    # 运行以来连接过的客户端总数量</span><br><span class="line">total_commands_processed:2427430678    # 运行以来执行过的命令的总数量</span><br><span class="line">instantaneous_ops_per_sec:50</span><br><span class="line">total_net_input_bytes:163068257927</span><br><span class="line">total_net_output_bytes:139812877155</span><br><span class="line">instantaneous_input_kbps:12.10</span><br><span class="line">instantaneous_output_kbps:1.51</span><br><span class="line">rejected_connections:0</span><br><span class="line">sync_full:0</span><br><span class="line">sync_partial_ok:0</span><br><span class="line">sync_partial_err:0</span><br><span class="line">expired_keys:4219001    # 运行以来过期的 key 的数量</span><br><span class="line">evicted_keys:0    # 运行以来删除过的 key 的数量</span><br><span class="line">keyspace_hits:936471301    # 命令 key 的次数</span><br><span class="line">keyspace_misses:10098063    # 没命中 key 的参数</span><br><span class="line">pubsub_channels:0</span><br><span class="line">pubsub_patterns:0</span><br><span class="line">latest_fork_usec:19445</span><br><span class="line">migrate_cached_sockets:0</span><br><span class="line"></span><br><span class="line"># Replication</span><br><span class="line">role:master    # 当前实例的角色 master 还是 slave</span><br><span class="line">connected_slaves:0</span><br><span class="line">master_repl_offset:0</span><br><span class="line">repl_backlog_active:0</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:0</span><br><span class="line">repl_backlog_histlen:0</span><br><span class="line"></span><br><span class="line"># CPU</span><br><span class="line">used_cpu_sys:4835.17</span><br><span class="line">used_cpu_user:73095.71</span><br><span class="line">used_cpu_sys_children:5589.98</span><br><span class="line">used_cpu_user_children:57200.07</span><br><span class="line"></span><br><span class="line"># Cluster</span><br><span class="line">cluster_enabled:0</span><br><span class="line"></span><br><span class="line"># Keyspace</span><br><span class="line">db0:keys=53234,expires=38416,avg_ttl=2255944    # 各个数据库的 key 的数量，以及带有生存期的 key 的数量</span><br><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="内存使用"><a href="#内存使用" class="headerlink" title="内存使用"></a>内存使用</h4><p>如果 Redis 使用的内存超出了可用的物理内存，那么 Redis 很可能会被系统 Kill。针对这一点，应该通过 info 命令对 used_memary 和 used_memory_peak 进行监控，为使用内存量设定阀值，并设定相应的报警处理机制。</p>
+<h4 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h4><p>如果因为你的机器或 Redis 本身的问题导致 Redis 崩溃了，那么你唯一的救命稻草可能就是</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cioz3h6sv001jphpvy15tfhdi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/02/Zabbix-Monitor-Nginx/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Zabbix Monitor Nginx</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/03/Redis/">Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/02/Zabbix-Monitor-Nginx/">Zabbix Monitor Nginx</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/01/Nginx-nginx-status/">Nginx nginx-status</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/01/Nginx-Location-Configuration/">Nginx Location Configuration</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/31/Zabbix-CPU-类型-Key/">Zabbix CPU 类型 Key</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
