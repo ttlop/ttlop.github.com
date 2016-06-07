@@ -82,6 +82,59 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-监控-windows-进程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/07/Zabbix-监控-windows-进程/" class="article-date">
+  <time datetime="2016-06-07T05:31:49.000Z" itemprop="datePublished">2016-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 监控进程的数量</span><br><span class="line">proc.num[&lt;name&gt;,&lt;user&gt;,&lt;state&gt;,&lt;cmdline&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><name> 进程名字</name></p>
+</li>
+<li><p><user> 运行进程的用户名</user></p>
+</li>
+<li><p><state> 进程的状态 all(default)、run、sleep、zomb</state></p>
+</li>
+<li><p><cmdline> 进程名中包含的字符</cmdline></p>
+</li>
+</ul>
+<p><strong>On Windows, only <name> and <user> are supported.</user></name></strong></p>
+<h3 id="Item-Keys"><a href="#Item-Keys" class="headerlink" title="Item Keys"></a>Item Keys</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proc.num[ChuanAPI.Winfrm.exe]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="cip50litp002sckpve1bl9kov" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-windows-性能计数器使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/06/Zabbix-windows-性能计数器使用/" class="article-date">
@@ -119,7 +172,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cip3g6jxc004bfrpvos8hvdm8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cip50liuv004dckpvnaa98q6e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +217,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cip3g6jvh001wfrpvi7k77ufq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cip50lit00020ckpvg230bap9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -209,7 +262,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cip3g6juu001efrpvo8bmqwhu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cip50lisa001hckpvpxlh9vuz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -254,7 +307,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cip3g6jve001vfrpv8kjqg6f0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cip50liss001vckpvok2tccq4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +352,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cip3g6jup001dfrpvsv1xdzhw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cip50lis2001dckpvmxz7txrk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -390,7 +443,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="cip3g6jum001afrpv3fc92vni" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="cip50lirz001ackpve5n59wpj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -461,7 +514,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cip3g6jv6001ofrpv7qjj32gg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cip50lisj001mckpvg10zo3tz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -508,7 +561,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cip3g6jui0018frpvawickkoi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cip50lirt0015ckpvbo0icibm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -554,54 +607,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cip3g6jux001hfrpvceqrwv0s" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" class="article-date">
-  <time datetime="2016-05-25T03:07:56.000Z" itemprop="datePublished">2016-05-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/">Microsoft SQL Server SET NOCOUNT ON 的含义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>每次我们在使用查询分析器调试SQL语句的时候，通常会看到一些信息，提醒我们当前有多少个行受到了影响，这是些什么信息？在我们调用的时候这些信息有用吗？是否可以关闭呢？ </p>
-<p>答案是这些信息在我们的客户端的应用程序中是没有用的，这些信息是存储过程中的每个语句的DONE_IN_PROC 信息。 </p>
-<p>我们可以利用SET NOCOUNT 来控制这些信息，以达到提高程序性能的目的。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="cip3g6ju9000yfrpvgnuzazsg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cip50lis7001eckpvzu70cepl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -653,6 +659,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/06/Zabbix-windows-性能计数器使用/">Zabbix windows 性能计数器使用</a>
           </li>
         
@@ -666,10 +676,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/06/02/Zabbix-Monitor-Nginx/">Zabbix Monitor Nginx</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/01/Nginx-nginx-status/">Nginx nginx-status</a>
           </li>
         
       </ul>
