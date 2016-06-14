@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/14/Postfix-configuration-files/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="postfix basic configuration">
-<meta property="og:updated_time" content="2016-06-14T06:15:12.270Z">
+<meta property="og:updated_time" content="2016-06-14T06:20:26.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Postfix configuration files">
 <meta name="twitter:description" content="postfix basic configuration">
@@ -107,7 +107,8 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Postfix 的配置文件 main.cf 有数百个配置参数，幸运的是，所有参数都由合理的默认配置项 。大部分时候，只需要配置两三个参数即可。</p>
+        <p>Postfix 的配置文件 main.cf 有数百个配置参数，幸运的是，所有参数都由合理的默认配置项 。大部分时候，只需要配置两三个参数即可。</p>
+<a id="more"></a>
 <h3 id="Postfix-配置语法"><a href="#Postfix-配置语法" class="headerlink" title="Postfix 配置语法"></a>Postfix 配置语法</h3><p>Postfix 的配置文件默认在 /etc/postfix。主要配置文件是 main.cf 和 master.cf。用户权限必须是 root 的。</p>
 <p>/etc/postfix/main.cf 配置语法有两个要点：不用引号，可以使用 $ 来引用参数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">You specify a configuration parameter as: </span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    parameter = value</span><br><span class="line"></span><br><span class="line">and you use it by putting a &quot;$&quot; character in front of its name: </span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    other_parameter = $parameter</span><br></pre></td></tr></table></figure>
@@ -136,7 +137,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="cipf25ptn001hdlpviwy1jxtq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="cipf27u9j001eexpvbthi9tmq" class="article-share-link">Share</a>
       
       
     </footer>
