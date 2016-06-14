@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix 触发器表达式详解 | 运维生存时间</title>
+  <title>Zabbix 配置本地邮件服务器实现邮件报警 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix 触发器 表达式">
+  <meta name="description" content="zabbix postfix mail">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix 触发器表达式详解">
-<meta property="og:url" content="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/index.html">
+<meta property="og:title" content="Zabbix 配置本地邮件服务器实现邮件报警">
+<meta property="og:url" content="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix 触发器 表达式">
-<meta property="og:updated_time" content="2016-05-06T09:00:13.925Z">
+<meta property="og:description" content="zabbix postfix mail">
+<meta property="og:updated_time" content="2016-06-14T07:38:21.633Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix 触发器表达式详解">
-<meta name="twitter:description" content="zabbix 触发器 表达式">
+<meta name="twitter:title" content="Zabbix 配置本地邮件服务器实现邮件报警">
+<meta name="twitter:description" content="zabbix postfix mail">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,10 +81,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-触发器表达式详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Zabbix-配置本地邮件服务器实现邮件报警" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-触发器表达式详解/" class="article-date">
-  <time datetime="2016-05-06T08:08:32.000Z" itemprop="datePublished">2016-05-06</time>
+    <a href="/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" class="article-date">
+  <time datetime="2016-06-14T07:34:33.000Z" itemprop="datePublished">2016-06-14</time>
 </a>
     
   <div class="article-category">
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix 触发器表达式详解
+      Zabbix 配置本地邮件服务器实现邮件报警
     </h1>
   
 
@@ -107,62 +107,13 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>触发器中的表达式使用很灵活，我们可以据此创建一个复杂的逻辑测试监控，触发器表达式形式如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&lt;server&gt;:&lt;key&gt;.&lt;<span class="keyword">function</span>&gt;(&lt;parameter&gt;)&#125;&lt;operator&gt;&lt;constant&gt;</span><br><span class="line">例如：</span><br><span class="line">&#123;mail.geak.cn:vfs.file.chksum[/etc/passwd].diff(0)&#125;&gt;0</span><br></pre></td></tr></table></figure>
-<p>{主机:key.函数(参数)}&lt;表达式&gt;常数</p>
-<h3 id="Function-参数"><a href="#Function-参数" class="headerlink" title="Function 参数"></a>Function 参数</h3><p>大多数数值 functions 可以使用秒来作为参数。你可以使用”#”来表示它有不同的含义</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">函数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">sum(600)</td>
-<td style="text-align:left">600 秒内的总和</td>
-</tr>
-<tr>
-<td style="text-align:left">sum(#5)</td>
-<td style="text-align:left">最新 5 个值的和</td>
-</tr>
-</tbody>
-</table>
-<h3 id="触发器示例"><a href="#触发器示例" class="headerlink" title="触发器示例"></a>触发器示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;mail.geak.cn:system.cpu.load[percpu,avg1].avg(5m)&#125;&gt;5</span><br></pre></td></tr></table></figure>
-<p>说明：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">mail.geak.cn</td>
-<td style="text-align:left">host 名称</td>
-</tr>
-<tr>
-<td style="text-align:left">system.cpu.load[percpu.avg1]</td>
-<td style="text-align:left">item 值，一分钟内 cpu 平均负载值负载值</td>
-</tr>
-<tr>
-<td style="text-align:left">avg(5m)</td>
-<td style="text-align:left">5 分钟内的平均数据</td>
-</tr>
-<tr>
-<td style="text-align:left">&gt;5</td>
-<td style="text-align:left">大于5</td>
-</tr>
-</tbody>
-</table>
-<p>如上所述，mail.geak.cn 这个数据的监控项，5 分钟的平均 cpu 的 1 分钟负载大于 5，表达式会返回 true，触发器状态就会改变为 “problem”了。</p>
-
+        <p>前面我们介绍了 <a href="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/">Zabbix 配置第三方邮件服务器使用邮件报警</a>的过程，发现连通性不胜理想，本章我们介绍如何配置本地的邮件服务器来发送报警邮件</p>
+<a id="more"></a>
+<h3 id="Postfix-配置"><a href="#Postfix-配置" class="headerlink" title="Postfix 配置"></a>Postfix 配置</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><h4 id="域名设置"><a href="#域名设置" class="headerlink" title="域名设置"></a>域名设置</h4><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><h3 id="Zabbix-配置"><a href="#Zabbix-配置" class="headerlink" title="Zabbix 配置"></a>Zabbix 配置</h3><h4 id="Media配置"><a href="#Media配置" class="headerlink" title="Media配置"></a>Media配置</h4><h4 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cipf501hl002ymwpv7tx7aahq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipf501hw0033mwpv0o4yrnqu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -171,19 +122,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/07/Zabbix-事件/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix 事件
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/06/Zabbix-单位符号-Unit-symbols/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/06/14/Postfix-configuration-files/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix 单位符号 Unit symbols</div>
+      <div class="article-nav-title">Postfix configuration files</div>
     </a>
   
 </nav>
