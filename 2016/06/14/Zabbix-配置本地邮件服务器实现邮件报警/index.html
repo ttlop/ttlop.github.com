@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix postfix mail">
-<meta property="og:updated_time" content="2016-06-14T08:04:33.309Z">
+<meta property="og:updated_time" content="2016-06-14T08:15:32.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 配置本地邮件服务器实现邮件报警">
 <meta name="twitter:description" content="zabbix postfix mail">
@@ -140,7 +140,12 @@ var _hmt = _hmt || [];
 </tbody>
 </table>
 <p>x.x.x.x 值为我在上一步配置中配置的路由器的外网IP。</p>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@mail log]# telnet 192.168.200.91 25</span><br><span class="line">Trying 192.168.200.91...</span><br><span class="line">Connected to 192.168.200.91.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line">220 mail.tasksc.com ESMTP &quot;Mail Server&quot;</span><br><span class="line">ehlo mail.tasksc.com</span><br><span class="line">250-mail.tasksc.com</span><br><span class="line">250-PIPELINING</span><br><span class="line">250-SIZE 10240000</span><br><span class="line">250-VRFY</span><br><span class="line">250-ETRN</span><br><span class="line">250-ENHANCEDSTATUSCODES</span><br><span class="line">250-8BITMIME</span><br><span class="line">250 DSN</span><br><span class="line">mail from:root</span><br><span class="line">250 2.1.0 Ok</span><br><span class="line">rcpt to:&lt;18675850419@wo.cn&gt;</span><br><span class="line">250 2.1.5 Ok</span><br><span class="line">data</span><br><span class="line">354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;</span><br><span class="line">Subject:Test</span><br><span class="line">This is a test Email!</span><br><span class="line">.</span><br><span class="line">250 2.0.0 Ok: queued as 5501BC08AD14</span><br><span class="line">quit</span><br><span class="line">221 2.0.0 Bye</span><br><span class="line">Connection closed by foreign host.</span><br></pre></td></tr></table></figure>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ol>
+<li><p>echo “请查收邮件” | mail -s “OK: SQL Default Instance: Many Blocked Processes: 2”  18675850419@wo.cn</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@mail log]# telnet 192.168.200.91 25</span><br><span class="line">Trying 192.168.200.91...</span><br><span class="line">Connected to 192.168.200.91.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br><span class="line">220 mail.tasksc.com ESMTP &quot;Mail Server&quot;</span><br><span class="line">ehlo mail.tasksc.com</span><br><span class="line">250-mail.tasksc.com</span><br><span class="line">250-PIPELINING</span><br><span class="line">250-SIZE 10240000</span><br><span class="line">250-VRFY</span><br><span class="line">250-ETRN</span><br><span class="line">250-ENHANCEDSTATUSCODES</span><br><span class="line">250-8BITMIME</span><br><span class="line">250 DSN</span><br><span class="line">mail from:root</span><br><span class="line">250 2.1.0 Ok</span><br><span class="line">rcpt to:&lt;18675850419@wo.cn&gt;</span><br><span class="line">250 2.1.5 Ok</span><br><span class="line">data</span><br><span class="line">354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;</span><br><span class="line">Subject:Test</span><br><span class="line">This is a test Email!</span><br><span class="line">.</span><br><span class="line">250 2.0.0 Ok: queued as 5501BC08AD14</span><br><span class="line">quit</span><br><span class="line">221 2.0.0 Bye</span><br><span class="line">Connection closed by foreign host.</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>如收到邮件配置成功，也可以通过查看日志获取邮件发送情况，请分别参考 </p>
 <ol>
 <li>/var/log/maillog</li>
@@ -197,7 +202,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipf5zb860033qxpvlhefiy8m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipf6bv9h0031s8pv2ffc2hhh" class="article-share-link">Share</a>
       
       
     </footer>
