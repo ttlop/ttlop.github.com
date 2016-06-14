@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Postfix configuration files | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="postfix basic configuration">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Postfix configuration files">
+<meta property="og:url" content="http://ttlop.com/2016/06/14/Postfix-configuration-files/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="postfix basic configuration">
+<meta property="og:updated_time" content="2016-06-14T06:15:12.270Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Postfix configuration files">
+<meta name="twitter:description" content="postfix basic configuration">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Postfix-configuration-files" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/14/Postfix-configuration-files/" class="article-date">
+  <time datetime="2016-06-14T05:49:52.000Z" itemprop="datePublished">2016-06-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Postfix/">Postfix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Postfix configuration files
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Postfix 的配置文件 main.cf 有数百个配置参数，幸运的是，所有参数都由合理的默认配置项 。大部分时候，只需要配置两三个参数即可。</p>
+<h3 id="Postfix-配置语法"><a href="#Postfix-配置语法" class="headerlink" title="Postfix 配置语法"></a>Postfix 配置语法</h3><p>Postfix 的配置文件默认在 /etc/postfix。主要配置文件是 main.cf 和 master.cf。用户权限必须是 root 的。</p>
+<p>/etc/postfix/main.cf 配置语法有两个要点：不用引号，可以使用 $ 来引用参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">You specify a configuration parameter as: </span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    parameter = value</span><br><span class="line"></span><br><span class="line">and you use it by putting a &quot;$&quot; character in front of its name: </span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    other_parameter = $parameter</span><br></pre></td></tr></table></figure>
+<p>修改 main.cf 或者 master.cf 之后，需要 postfix reload 重新载入配置文件。</p>
+<h3 id="配置对外发送域名"><a href="#配置对外发送域名" class="headerlink" title="配置对外发送域名"></a>配置对外发送域名</h3><p>myorigin 参数指定邮件中显示的发送域名，默认使用当前主机名 $myhostname。一般来说，我们会把 myorigin 设置成顶级域名 $mydomain。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    myorigin = $myhostname (default: send mail as &quot;user@$myhostname&quot;)</span><br><span class="line">    myorigin = $mydomain   (probably desirable: &quot;user@$mydomain&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="配置接收域名"><a href="#配置接收域名" class="headerlink" title="配置接收域名"></a>配置接收域名</h3><p>mydestination 参数配置了本地直接接收的域名，而不会再对外发送。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 默认配置</span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    mydestination = $myhostname localhost.$mydomain localhost</span><br><span class="line"></span><br><span class="line"># 对整个域名生效</span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    mydestination = $myhostname localhost.$mydomain localhost $mydomain</span><br><span class="line"></span><br><span class="line"># 对多个 DNS 域名生效</span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    mydestination = $myhostname localhost.$mydomain localhost </span><br><span class="line">        www.$mydomain ftp.$mydomain</span><br></pre></td></tr></table></figure>
+<h3 id="配置允许从哪些地方接收"><a href="#配置允许从哪些地方接收" class="headerlink" title="配置允许从哪些地方接收"></a>配置允许从哪些地方接收</h3><p>默认情况下，Postfix 仅发送信任网络的邮件。信任网络配置在 mynetworks 参数中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">使用下列任意一个</span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    mynetworks_style = subnet  (default: authorize subnetworks)</span><br><span class="line">    mynetworks_style = host    (safe: authorize local machine only)</span><br><span class="line">    mynetworks = 127.0.0.0/8   (safe: authorize local machine only)</span><br><span class="line">    mynetworks = 127.0.0.0/8 168.100.189.2/32 (authorize local machine) </span><br><span class="line">还可以这样配置</span><br><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    mynetworks = 168.100.189.0/28, 127.0.0.0/8</span><br></pre></td></tr></table></figure>
+<h3 id="配置允许发送到的域名"><a href="#配置允许发送到的域名" class="headerlink" title="配置允许发送到的域名"></a>配置允许发送到的域名</h3><p>默认情况下，非信任网络仅仅被允许从发送邮件到特定域名。默认值是 mydestination 下面的所有域名（包括子域名）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    relay_domains = $mydestination (default)</span><br><span class="line">    relay_domains =           (safe: never forward mail from strangers)</span><br><span class="line">    relay_domains = $mydomain (forward mail to my domain and subdomains)</span><br></pre></td></tr></table></figure>
+<h3 id="配置递送方式：间接或直接"><a href="#配置递送方式：间接或直接" class="headerlink" title="配置递送方式：间接或直接"></a>配置递送方式：间接或直接</h3><p>默认情况下，Postfix 会直接投递邮件到因特网。有时候你的服务器在防火墙后面或者无法直接连接互联网，那就需要将邮件递送到另外一个 relay host。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    relayhost =                   (default: direct delivery to Internet)</span><br><span class="line">    relayhost = $mydomain         (deliver via local mailhub)</span><br><span class="line">    relayhost = [mail.$mydomain]  (deliver via local mailhub)</span><br><span class="line">    relayhost = [mail.isp.tld]    (deliver via provider mailhub)</span><br></pre></td></tr></table></figure>
+<h3 id="代理-NAT配置"><a href="#代理-NAT配置" class="headerlink" title="代理/NAT配置"></a>代理/NAT配置</h3><p>有时候需要通过代理或者NAT连接互联网。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    proxy_interfaces = 1.2.3.4 (the proxy/NAT external network address)</span><br></pre></td></tr></table></figure>
+<h3 id="配置机器名"><a href="#配置机器名" class="headerlink" title="配置机器名"></a>配置机器名</h3><p>myhostname 手工指定了 FQDN。它被其它好几个域名相关的地方引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    myhostname = host.local.domain (machine name is not FQDN)</span><br><span class="line">    myhostname = host.virtual.domain (virtual interface)</span><br><span class="line">    myhostname = virtual.domain (virtual interface)</span><br></pre></td></tr></table></figure>
+<h3 id="配置域名"><a href="#配置域名" class="headerlink" title="配置域名"></a>配置域名</h3><p>使用 mydomain 配置，这个参数被很多地方引用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    mydomain = local.domain</span><br><span class="line">    mydomain = virtual.domain (virtual interface)</span><br></pre></td></tr></table></figure>
+<h3 id="配置网络地址"><a href="#配置网络地址" class="headerlink" title="配置网络地址"></a>配置网络地址</h3><p>inet_interface 配置侦听网络。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    inet_interfaces = all</span><br></pre></td></tr></table></figure>
+<p>多个虚拟邮件服务器配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/postfix/main.cf:</span><br><span class="line">    inet_interfaces = virtual.host.tld         (virtual Postfix)</span><br><span class="line">    inet_interfaces = $myhostname localhost... (non-virtual Postfix)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="cipf25ptn001hdlpviwy1jxtq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/07/Zabbix-监控-windows-进程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Zabbix 监控 windows 进程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/14/Postfix-configuration-files/">Postfix configuration files</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/06/Zabbix-windows-性能计数器使用/">Zabbix windows 性能计数器使用</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/03/Zabbix-Monitor-Redis/">Zabbix Monitor Redis</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/03/Redis/">Redis</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
