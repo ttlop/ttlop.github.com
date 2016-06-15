@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="kill sp_who">
-<meta property="og:updated_time" content="2016-06-15T09:21:40.762Z">
+<meta property="og:updated_time" content="2016-06-15T09:26:10.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Microsoft SQL Server 删除阻塞进程 sp_who">
 <meta name="twitter:description" content="kill sp_who">
@@ -107,30 +107,12 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>列出全部当前进程 </li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who</span><br></pre></td></tr></table></figure>
-<ol>
-<li>列出特定用户的进程</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;sa&apos;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>显示所有活动进程</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;active&apos;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>显示会话ID标识的特定进程</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;10&apos;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>删除阻塞的进程</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">kill &apos;10&apos;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>sp_who 返回包括以下信息的结果集</li>
-</ol>
-<table>
+        <h3 id="列出全部当前进程"><a href="#列出全部当前进程" class="headerlink" title="列出全部当前进程"></a>列出全部当前进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who</span><br></pre></td></tr></table></figure>
+<h3 id="列出特定用户的进程"><a href="#列出特定用户的进程" class="headerlink" title="列出特定用户的进程"></a>列出特定用户的进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;sa&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="显示所有活动进程"><a href="#显示所有活动进程" class="headerlink" title="显示所有活动进程"></a>显示所有活动进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;active&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="显示会话ID标识的特定进程"><a href="#显示会话ID标识的特定进程" class="headerlink" title="显示会话ID标识的特定进程"></a>显示会话ID标识的特定进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;10&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="删除阻塞的进程"><a href="#删除阻塞的进程" class="headerlink" title="删除阻塞的进程"></a>删除阻塞的进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">kill &apos;10&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="sp-who-返回包括以下信息的结果集"><a href="#sp-who-返回包括以下信息的结果集" class="headerlink" title="sp_who 返回包括以下信息的结果集"></a>sp_who 返回包括以下信息的结果集</h3><table>
 <thead>
 <tr>
 <th style="text-align:left">列</th>
@@ -176,7 +158,8 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
-<p>status：可以有的值:<br><em>. dormant: SQL Server 正在重置会话
+<p>status：可以有的值:</p>
+<p><em>. dormant: SQL Server 正在重置会话
 </em>. running: 会话正在运行一个或多个批处理，多个活动的结果集（MARS）启用后会话可以运行多个批处理<br><em>. background: 会话正在运行一个后台任务，例如死锁检测
 </em>. rollback: 会话正在处理事物回滚<br><em>. pending: 会话正在等待工作线程变为可用
 </em>. runnable: 会话的任务在等待获取 Scheduler 来运行的可执行队列中<br><em>. spinloop: 会话的任务正在等待调节锁变为可用
@@ -185,7 +168,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipgo7gv50010ompvuv5xmdwg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipgoaj880013pkpv1066dpdx" class="article-share-link">Share</a>
       
       
     </footer>

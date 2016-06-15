@@ -108,30 +108,12 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>列出全部当前进程 </li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who</span><br></pre></td></tr></table></figure>
-<ol>
-<li>列出特定用户的进程</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;sa&apos;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>显示所有活动进程</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;active&apos;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>显示会话ID标识的特定进程</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;10&apos;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>删除阻塞的进程</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">kill &apos;10&apos;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>sp_who 返回包括以下信息的结果集</li>
-</ol>
-<table>
+        <h3 id="列出全部当前进程"><a href="#列出全部当前进程" class="headerlink" title="列出全部当前进程"></a>列出全部当前进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who</span><br></pre></td></tr></table></figure>
+<h3 id="列出特定用户的进程"><a href="#列出特定用户的进程" class="headerlink" title="列出特定用户的进程"></a>列出特定用户的进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;sa&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="显示所有活动进程"><a href="#显示所有活动进程" class="headerlink" title="显示所有活动进程"></a>显示所有活动进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;active&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="显示会话ID标识的特定进程"><a href="#显示会话ID标识的特定进程" class="headerlink" title="显示会话ID标识的特定进程"></a>显示会话ID标识的特定进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;10&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="删除阻塞的进程"><a href="#删除阻塞的进程" class="headerlink" title="删除阻塞的进程"></a>删除阻塞的进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">kill &apos;10&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="sp-who-返回包括以下信息的结果集"><a href="#sp-who-返回包括以下信息的结果集" class="headerlink" title="sp_who 返回包括以下信息的结果集"></a>sp_who 返回包括以下信息的结果集</h3><table>
 <thead>
 <tr>
 <th style="text-align:left">列</th>
@@ -177,7 +159,8 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
-<p>status：可以有的值:<br><em>. dormant: SQL Server 正在重置会话
+<p>status：可以有的值:</p>
+<p><em>. dormant: SQL Server 正在重置会话
 </em>. running: 会话正在运行一个或多个批处理，多个活动的结果集（MARS）启用后会话可以运行多个批处理<br><em>. background: 会话正在运行一个后台任务，例如死锁检测
 </em>. rollback: 会话正在处理事物回滚<br><em>. pending: 会话正在等待工作线程变为可用
 </em>. runnable: 会话的任务在等待获取 Scheduler 来运行的可执行队列中<br><em>. spinloop: 会话的任务正在等待调节锁变为可用
@@ -186,7 +169,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipgo7gv50010ompvuv5xmdwg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipgoaj880013pkpv1066dpdx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -231,7 +214,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipgo7gv80013ompvvan8x235" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipgoaj8a0015pkpvnlp5y180" class="article-share-link">Share</a>
       
       
     </footer>
@@ -283,7 +266,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipgo7gxq0039ompvre0unh68" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipgoajaq003epkpvrfgfdwc6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,7 +311,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipgo7gxl0031ompvv8b8idnk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipgoajaj0034pkpvfqemuxcw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -373,7 +356,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="cipgo7gvw001jompvx4mw0g95" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="cipgoaj8s001ipkpvtnmt2jws" class="article-share-link">Share</a>
       
       
     </footer>
@@ -426,7 +409,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="cipgo7gxi002xompv6hz3ykmn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="cipgoajaf002xpkpv3jrqnpsy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -473,7 +456,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cipgo7gyn004zompv9p1l2kn7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cipgoajbk004spkpv6n37b9pb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -518,7 +501,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cipgo7gwi0021ompvbykz676n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cipgoaj9i0024pkpvjal01m6b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -563,7 +546,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cipgo7gvy001kompv4fwmla5m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cipgoaj8u001kpkpvdg5ehw91" class="article-share-link">Share</a>
       
       
     </footer>
@@ -608,7 +591,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cipgo7gwf001xompvrbfko2f3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cipgoaj9f0020pkpv7zghai9r" class="article-share-link">Share</a>
       
       
     </footer>
