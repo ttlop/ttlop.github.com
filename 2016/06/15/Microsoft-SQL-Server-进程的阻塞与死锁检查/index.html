@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="sys.sysprocesses sys.sysdatabases 阻塞">
-<meta property="og:updated_time" content="2016-06-15T07:32:55.892Z">
+<meta property="og:updated_time" content="2016-06-15T08:06:53.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Microsoft SQL Server 进程的阻塞与死锁检查">
 <meta name="twitter:description" content="sys.sysprocesses sys.sysdatabases 阻塞">
@@ -183,12 +183,18 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
-<p>status：进程ID状态，进程ID 状态，dormant = 正在重置回话 ; running = 回话正在运行一个或多个批处理 ; background = 回话正在运行一个后台任务 ; rollback = 会话正在处理事务回滚 ; pending = 回话正在等待工作现成变为可用 ; runnable = 会话中的任务在等待获取 Scheduler 来运行的可执行队列中 ; spinloop = 会话中的任务正在等待自旋锁变为可用 ; suspended = 会话正在等待事件完成</p>
+<p>status：进程ID 状态，dormant = 正在重置回话 ; running = 回话正在运行一个或多个批处理 ; background = 回话正在运行一个后台任务 ; rollback = 会话正在处理事务回滚 ; pending = 回话正在等待工作现成变为可用 ; runnable = 会话中的任务在等待获取 Scheduler 来运行的可执行队列中 ; spinloop = 会话中的任务正在等待自旋锁变为可用 ; suspended = 会话正在等待事件完成</p>
+<h3 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h3><ol>
+<li><p>先找到哪个链接的 blocked 字段不为 0。如 spid 53 的 blocked 字段是 52，spid 52 的 bloecked 为 0，就可以得出结论：此时有阻塞发生，53 被 52 阻塞了。如果你发现一个连接的 blocked 字段等于自己，那说明这个连接正在做磁盘读写，要等它自己的 I/O 做完。</p>
+</li>
+<li><p>查找链接在哪个数据库上<br>检查 dbid 即可，得到 dbid，可以运行一下查询得到数据库的名字：SELECT * FROM [master].[sys].[sysdatabases]。</p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipgk8wos0011inpv2ylb2qeg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipglglqt0014kxpv1i3hhjad" class="article-share-link">Share</a>
       
       
     </footer>
