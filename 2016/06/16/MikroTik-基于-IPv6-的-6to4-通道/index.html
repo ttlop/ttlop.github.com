@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="mikrotik ipv6 dhcpv6 6to4">
-<meta property="og:updated_time" content="2016-06-16T07:30:57.081Z">
+<meta property="og:updated_time" content="2016-06-16T08:12:21.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MikroTik 基于 IPv6 的 6to4 通道">
 <meta name="twitter:description" content="mikrotik ipv6 dhcpv6 6to4">
@@ -124,7 +124,7 @@ var _hmt = _hmt || [];
 <h4 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h4><p>打开我们熟悉的 WinBox，点击 <strong>New Terminal</strong>，然后将上述代码复制到里面去，注意检查命令是否有错误并且查看执行情况！</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/interface 6to4 add comment=&quot;Hurricane Electric IPv6 Tunnel Broker&quot; disabled=no local-address=222.240.236.201 mtu=1280 name=sit1 remote-address=74.82.46.6</span><br><span class="line">/ipv6 route add comment=&quot;&quot; disabled=no distance=1 dst-address=2000::/3 gateway=2001:470:23:16b::1 scope=30 target-scope=10</span><br><span class="line">/ipv6 address add address=2001:470:23:16b::2/64 advertise=no disabled=no eui-64=no interface=sit1</span><br></pre></td></tr></table></figure>
 <ol>
-<li><p>三样都添加上去后，打开网页！还是不能访问 <strong>IPv6</strong> 站点，为什么呢？这是因为没有做路由！路由器只知道你要用 <strong>IPv6</strong> 地址来访问 <strong>HE</strong> 提供的通道，但是它却不知道你要用 <strong>IPv6</strong> 通过 <strong>HE</strong> 的 <strong>6to4</strong> 路由器实现对其它网站的访问！</p>
+<li><p>上述三行代码都添加上去后，打开网页！还是不能访问 <strong>IPv6</strong> 站点，为什么呢？这是因为没有做路由！路由器只知道你要用 <strong>IPv6</strong> 地址来访问 <strong>HE</strong> 提供的通道，但是它却不知道你要用 <strong>IPv6</strong> 通过 <strong>HE</strong> 的 <strong>6to4</strong> 路由器实现对其它网站的访问！</p>
 </li>
 <li><p>修改DNS，建议修改辅助 DNS 为谷歌的，主 <strong>DNS</strong> 还是设置为网络服务商的。这样访问国内站点也没有影响。</p>
 </li>
@@ -132,7 +132,7 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[admin@MikroTik] &gt; /ipv6 route print detail   </span><br><span class="line">Flags: X - disabled, A - active, D - dynamic, </span><br><span class="line">C - connect, S - static, r - rip, o - ospf, b - bgp, U - unreachable </span><br><span class="line"> 0 A S  dst-address=::/0 gateway=sit1 gateway-status=sit1 reachable distance=1 </span><br><span class="line">        scope=30 target-scope=10 </span><br><span class="line"></span><br><span class="line"> 1 A S  dst-address=2000::/3 gateway=2001:470:23:16b::1 </span><br><span class="line">        gateway-status=2001:470:23:16b::1 reachable via  sit1 distance=1 </span><br><span class="line">        scope=30 target-scope=10 </span><br><span class="line"></span><br><span class="line"> 2 ADC  dst-address=2001:470:23:16b::/64 gateway=sit1 </span><br><span class="line">        gateway-status=sit1 reachable distance=0 scope=10 </span><br><span class="line"></span><br><span class="line"> 3 ADC  dst-address=2001:470:24:16b::/64 gateway=bridge </span><br><span class="line">        gateway-status=bridge reachable distance=0 scope=10</span><br></pre></td></tr></table></figure>
-<h4 id="注"><a href="#注" class="headerlink" title="注"></a>注</h4><p>为什么 <strong>ROS</strong> 路由器可以 ping 的通谷歌的 IPv6 地址，我上网设备却不行呢？</p>
+<h4 id="注"><a href="#注" class="headerlink" title="注"></a>注</h4><p>为什么 <strong>ROS</strong> 路由器可以 <strong>ping</strong> 通谷歌的 IPv6 地址，我其它上网设备却不行呢？</p>
 <p>答：此处需要检查你的路由器内网（LAN）是否设置了指定了路由前缀 <strong>Routed IPv6 Prefixes</strong></p>
 <p>下述编号为 <strong>4</strong> 的即为我们添加的内网IPv6地址前缀</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[admin@MikroTik] &gt; ipv6 address print detail </span><br><span class="line">Flags: X - disabled, I - invalid, D - dynamic, G - global, L - link-local </span><br><span class="line"> 0 DL address=fe80::e68d:8cff:fe41:a630/64 from-pool=&quot;&quot; interface=bridge </span><br><span class="line">      actual-interface=bridge eui-64=no advertise=no </span><br><span class="line"></span><br><span class="line"> 1 DL address=fe80::e68d:8cff:fe41:a62f/64 from-pool=&quot;&quot; interface=Wan </span><br><span class="line">      actual-interface=Wan eui-64=no advertise=no </span><br><span class="line"></span><br><span class="line"> 2 DL address=fe80::fefd:0/64 from-pool=&quot;&quot; interface=sit1 actual-interface=sit1 </span><br><span class="line">      eui-64=no advertise=no </span><br><span class="line"></span><br><span class="line"> 3  G address=2001:470:23:16b::2/64 from-pool=&quot;&quot; interface=sit1 </span><br><span class="line">      actual-interface=sit1 eui-64=no advertise=no </span><br><span class="line"></span><br><span class="line"> 4  G address=2001:470:24:16b::/64 from-pool=&quot;&quot; interface=bridge </span><br><span class="line">      actual-interface=bridge eui-64=no advertise=yes</span><br></pre></td></tr></table></figure>
@@ -140,7 +140,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciphzm7rh0019fnpvvkdvhxdi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipi13gxj0018i0pvcj49085u" class="article-share-link">Share</a>
       
       
     </footer>
