@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/17/什么是-Web-框架/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="web framework">
-<meta property="og:updated_time" content="2016-06-17T03:18:03.153Z">
+<meta property="og:updated_time" content="2016-06-17T03:31:52.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="什么是 Web 框架?">
 <meta name="twitter:description" content="web framework">
@@ -115,20 +115,20 @@ var _hmt = _hmt || [];
 <p>Web 应用如何知道发送什么到浏览器？它发送浏览器请求的任何东西。</p>
 <h4 id="1-1-1-HTTP"><a href="#1-1-1-HTTP" class="headerlink" title="1.1.1 HTTP"></a>1.1.1 HTTP</h4><p>浏览器从 Web 服务器（或者叫做应用服务器）上使用 HTTP 协议下载网站，HTTP 协议是基于请求-响应（request-response）模型的。客户端（你的浏览器）从运行在物理机器上的 Web 应用请求数据，Web 应用反过来对你的浏览器进行响应。</p>
 <p>重要的一点是，要记住通信总是由客户端（你的浏览器）发起的，服务器（也就是 Web 服务器）没有办法创建一个链接，发送没有经过请求的数据给你的浏览器。如果你从 Web 服务器上接收到数据，一定是因为你的浏览器显示的发送了请求。</p>
-<h4 id="1-1-2-HTTP-Method"><a href="#1-1-2-HTTP-Method" class="headerlink" title="1.1.2 HTTP Method"></a>1.1.2 HTTP Method</h4><p>在 HTTP 协议中，每条报文都关联访法（method 或者 verb），不同的 HTTP 访法对应客户端可以发送的逻辑上不同类型的请求，反过来也代表了客户端的不同意图。例如，请求一个 Web 页面的 HTML，与提交一个表单在逻辑上是不同的，所以这两种行为就需要使用不同的访法。</p>
-<h5 id="HTTP-GET"><a href="#HTTP-GET" class="headerlink" title="*. HTTP GET"></a>*. HTTP GET</h5><p>GET 方法就像其听起来的那样，从 Web 服务器上 get（请求）数据。GET 请求是到目前为止最常的一种 HTTP 请求，在一次 GET 请求过程中，Web 应用对请求页面的 HTML 进行响应之外，就不需要做任何事情了。特别的，Web 应用在 GET 请求的结果中，不应该改变应用的的状态（比如，不能基于 GET 请求创建一个新帐号）。正在因为这个原因，GET 请求通常认为是“安全”的，因为他们不会导致应用的改变。</p>
+<h4 id="1-1-2-HTTP-Method"><a href="#1-1-2-HTTP-Method" class="headerlink" title="1.1.2 HTTP Method"></a>1.1.2 HTTP Method</h4><p>在 HTTP 协议中，每条报文都关联方法（method），不同的 HTTP 方法对应客户端可以发送逻辑上不同类型的请求，反过来也代表了客户端的不同意图。例如，请求一个 Web 页面的 HTML，与提交一个表单在逻辑上是不同的，所以这两种行为就需要使用不同的方法。</p>
+<h5 id="HTTP-GET"><a href="#HTTP-GET" class="headerlink" title="*. HTTP GET"></a>*. HTTP GET</h5><p>GET 方法就像其听起来的那样，从 Web 服务器上 get（请求）数据。GET 请求是到目前为止最常见的一种 HTTP 请求，在一次 GET 请求过程中，Web 应用对请求页面的 HTML 进行响应之外，就不需要做任何事情了。特别要注意的是，Web 应用在 GET 请求的结果中，不应该改变应用的的状态（比如，不能基于 GET 请求创建一个新帐号）。正在因为这个原因，GET 请求通常认为是“安全”的，因为他们不会导致应用的改变。</p>
 <h5 id="HTTP-POST"><a href="#HTTP-POST" class="headerlink" title="*. HTTP POST"></a>*. HTTP POST</h5><p>显然，除了简单的查看页面之外，应该还有更多与网站进行交互的操作。我们也能够向应用发送数据，例如提交表单。为了达到这样的目的，就需要一种不同类型的请求方法：POST。POST 请求通常携带由用户输入的数据，Web 应用收到之后会产生一些行为。通过在表单里输入你的信息登录一个网站，就是 POST 表单的数据给 Web 应用的。</p>
-<p>不同于 Get 请求，POST 请求通常会导致应用状态的改变。不同于 GET 请求，POST 请求不总是生成一个新的 HTML 页面发送到客户端，而是客户端使用相应的响应码（response code）来判断对应用的操作是否成功。</p>
+<p>不同于 Get 请求，POST 请求通常会导致应用状态的改变。POST 请求不总是生成一个新的 HTML 页面发送到客户端，而是客户端使用相应的响应码（response code）来判断对应用的操作是否成功。</p>
 <h4 id="1-1-3-HTTP-Response-Codes"><a href="#1-1-3-HTTP-Response-Codes" class="headerlink" title="1.1.3 HTTP Response Codes"></a>1.1.3 HTTP Response Codes</h4><p>通常来说，Web 服务器返回 200 的响应码，意思是“我已经完成了你要求我做的事情，一切都正常”。响应码总是一个三位数的代号，Web 应用在每个响应的同时都发送一个这样的代号，表明给定的请求的结果。响应码 200 字面意思是“OK”，是响应一个 GET 请求大多情况下都使用的代号。然而对于 POST 请求，可能会有 204 发送回来，意思是“一切都正常，但是我不准备向你显示任何东西”。</p>
-<p>POST 请求任然会发送一个特殊的 URL，这个 URL 可能和提交数据的页面不同，意识这一点是至关重要的。POST 请求要发送的位置在表单的 HTML 中有特别标明。</p>
+<p>POST 请求仍然会发送一个特殊的 URL，这个 URL 可能和提交数据的页面不同，意识这一点是至关重要的。POST 请求要发送的位置在表单的 HTML 中有特别标明。</p>
 <h3 id="1-2-Web-应用"><a href="#1-2-Web-应用" class="headerlink" title="1.2 Web 应用"></a>1.2 Web 应用</h3><p>你可以仅仅使用 HTTP GET 和 POST 做很多事情。一个应用程序负责去接收一个 HTTP 请求，同时给予 HTTP 响应，通常包含了请求页面的 HTML。POST 请求会引起 Web 应用做一些行为，可能是在数据库中添加一条记录这样的。还有很多其它的 HTTP 方法，但是我们目前只关注 GET 和 POST。</p>
 <p>那么最简单的 Web 应用是什么样的呢？我们可以写一个应用，让它一直侦听 80 端口（著名的 HTTP 端口，几乎所有 HTTP 都发送到这个端口上）。一旦它接收到客户端发送的请求链接，就会回复一些简单的 HTML。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import socket</span><br><span class="line">HOST = &apos;&apos;</span><br><span class="line">PORT = 80</span><br><span class="line">listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">listen_socket.bind((HOST, PORT))</span><br><span class="line">listen_socket.listen(1)</span><br><span class="line">connection, address = listen_socket.accept()</span><br><span class="line">request = connection.recv(1024)</span><br><span class="line">connection.sendall(b&quot;&quot;&quot;HTTP/1.1 200 OK</span><br><span class="line">Content-type: text/html</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;Hello, World!&lt;/h1&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;&quot;&quot;&quot;)</span><br><span class="line">connection.close()</span><br></pre></td></tr></table></figure>
 <p>（如果上面的代码不工作，试着将 PORT 改为类似 8080 这样的端口。）</p>
 <p>这个代码接收简单的链接和简单的请求，不管请求的 URL 是什么，它都会响应 HTTP 200（所以这不是一个真正意义上的 web 服务器）。</p>
 <h4 id="1-2-1-请求的剖析"><a href="#1-2-1-请求的剖析" class="headerlink" title="1.2.1 请求的剖析"></a>1.2.1 请求的剖析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# curl -i http://localhost:8080</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-type: text/html</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;Hello, World!&lt;/h1&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>测试上面的 HTTP 请求，你会发现它和 HTTP 响应非常类似。第一行 HTTP Method、URL、 HTTP Version。这个例子是 HTTP/1.1。第一行之后就是一些类似 Accpet: <em>/</em> 这样的头（意思是我们希望在相应中接受任何内容）。</p>
-<p>我们响应和请求有着类似的第一行，接下来是头部，与请求的头部有着相同的格式。最后是响应的实际包含的内容。注意：这会被解释为一个字符串或者二进制文件，Content-type 头高数客户端怎样去解释响应。</p>
+<p>测试上面的 HTTP 请求，你会发现它和 HTTP 响应非常类似。第一行 HTTP Method、URL、 HTTP Version。这个例子是 HTTP/1.1。第一行之后就是一些类似 Accpet: <em>/</em> 这样的头（意思是我们希望在响应中接受任何内容）。</p>
+<p>我们的响应和请求有着类似的第一行，接下来是头部，与请求的头部有着相同的格式。最后是响应的实际包含的内容。注意：这会被解释为一个字符串或者二进制文件，Content-type 头告诉客户端怎样去解释响应。</p>
 <h2 id="2-Web-服务器之殇"><a href="#2-Web-服务器之殇" class="headerlink" title="2. Web 服务器之殇"></a>2. Web 服务器之殇</h2><p>如果我们继续以上面的例子为基础创建 Web 应用，我们还需要解决很多问题：</p>
 <ol>
 <li>我们怎样检查请求的 URL 以及返回正确的页面？</li>
@@ -165,7 +165,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipj60u9g003d5vpvytkbuzql" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipj6im4v003a79pv180ma5z7" class="article-share-link">Share</a>
       
       
     </footer>
