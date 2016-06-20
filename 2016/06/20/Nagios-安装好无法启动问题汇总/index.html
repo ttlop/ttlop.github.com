@@ -15,17 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Category: MikroTik | 运维生存时间</title>
+  <title>Nagios - 安装好无法启动问题汇总 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/MikroTik/index.html">
+  <meta name="description" content="nagios no running">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nagios - 安装好无法启动问题汇总">
+<meta property="og:url" content="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="nagios no running">
+<meta property="og:updated_time" content="2016-06-20T08:50:50.494Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="Nagios - 安装好无法启动问题汇总">
+<meta name="twitter:description" content="nagios no running">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -80,40 +81,61 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" class="archive-article-date">
-  <time datetime="2016-06-16T06:55:26.000Z" itemprop="datePublished">Jun 16</time>
+        <section id="main"><article id="post-Nagios-安装好无法启动问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/20/Nagios-安装好无法启动问题汇总/" class="article-date">
+  <time datetime="2016-06-20T08:48:17.000Z" itemprop="datePublished">2016-06-20</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/">MikroTik 基于 IPv6 的 6to4 通道</a>
+    <h1 class="article-title" itemprop="name">
+      Nagios - 安装好无法启动问题汇总
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>提示 <strong>qh: Failed to init socket ‘/usr/local/nagios/var/rw/nagios.qh’</strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1466408082] Nagios 4.1.1 starting... (PID=22890)</span><br><span class="line">[1466408082] Local time is Mon Jun 20 15:34:42 CST 2016</span><br><span class="line">[1466408082] LOG VERSION: 2.0</span><br><span class="line">[1466408082] qh: Failed to init socket &apos;/usr/local/nagios/var/rw/nagios.qh&apos;. bind() failed: No such file or directory</span><br><span class="line">[1466408082] Error: Failed to initialize query handler. Aborting</span><br></pre></td></tr></table></figure>
+<p>如下步骤即可解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/nagios/var/rw</span><br><span class="line">chown nagios:nagios /usr/local/nagios/var/rw</span><br></pre></td></tr></table></figure>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipns8d37001hjopvuam0ggat" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Nagios - Installing Nagios Core From Source</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

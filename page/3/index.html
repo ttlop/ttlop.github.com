@@ -82,6 +82,127 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-Template-SQL-Server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/25/Zabbix-Template-SQL-Server/" class="article-date">
+  <time datetime="2016-05-25T02:56:00.000Z" itemprop="datePublished">2016-05-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/25/Zabbix-Template-SQL-Server/">Zabbix Template SQL Server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <table>
+<thead>
+<tr>
+<th style="text-align:left">KEY</th>
+<th style="text-align:left">DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">perf_counter[“\Process(sqlservr)\% Processor Time”]</td>
+<td style="text-align:left">处理器时间百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Buffer Manager\Page Life Expectancy”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189628(v=sql.105).aspx" target="_blank" rel="external">页若不被引用将在缓冲池中停留的秒数</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Buffer Manager\Database pages”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189628(v=sql.105).aspx" target="_blank" rel="external">缓冲池中有数据库内容的页数</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:General Statistics\Processes blocked”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190697(v=sql.105).aspx" target="_blank" rel="external">当前阻塞的进程数</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:General Statistics\User Connections”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190697(v=sql.105).aspx" target="_blank" rel="external">当前与 SQL Server 连接的用户数</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Memory Manager\Total Server Memory (KB)”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190924(v=sql.105).aspx" target="_blank" rel="external">从缓冲池提交的内存(KB),这不是 SQL Server 使用的总内存</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Transactions\Longest Transaction Running Time”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189038(v=sql.105).aspx" target="_blank" rel="external">比任何其他当前事务活动时间都长的事务启动后运行的时间长度（秒）</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Locks(_Total)\Lock Waits/sec”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190216(v=sql.105).aspx" target="_blank" rel="external">每秒要求调用者等待的锁请求数</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Locks(_Total)\Number of Deadlocks/sec”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190216(v=sql.105).aspx" target="_blank" rel="external">每秒导致死锁的锁请求数</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Transactions/sec”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">每秒为所有数据库启动的事务数</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Transactions/sec”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">每秒为数据库启动的事务数</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Data File(s) Size (KB)”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">数据库中所有数据文件的累计大小(KB)，包括任何自动增长</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Data File(s) Size (KB)”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">所有数据库数据文件的累计大小(KB)，包括任何自动增长</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Log File(s) Size (KB)”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">数据库中所有事务日志文件的累计大小(KB)</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Log File(s) Used Size (KB)”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">数据库中所有日志文件的累计已用大小</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Log File(s) Size (KB)”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">所有数据库事务日志文件的累计大小(KB)</a></td>
+</tr>
+<tr>
+<td style="text-align:left">perf_counter[“\SQLAgent:Jobs(_Total)\Failed jobs”]</td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms177481(v=sql.105).aspx" target="_blank" rel="external">该计数器报告失败退出的作业数</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>参考：<a href="https://technet.microsoft.com/zh-cn/library/ms191246(v=sql.105).aspx" target="_blank" rel="external">https://technet.microsoft.com/zh-cn/library/ms191246(v=sql.105).aspx</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="cipns8d49002gjopvbm7n5new" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-Discovery-of-file-systems" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/24/Zabbix-Discovery-of-file-systems/" class="article-date">
@@ -123,7 +244,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="cipno9hwp001yefpvqrkuke95" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="cipns8d3v0020jopv43qserlf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +303,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="cipno9hwr0020efpvcs58kyqt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="cipns8d3x0023jopv7r7h8xie" class="article-share-link">Share</a>
       
       
     </footer>
@@ -235,7 +356,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="cipno9hww0027efpvlo17u2nd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="cipns8d410028jopvnecv2xdb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,7 +403,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="cipno9hwi001refpvy3f95elp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="cipns8d3m001rjopv24f423uc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -330,7 +451,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="cipno9hxa002kefpvxmhyiani" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="cipns8d4f002ojopvws5e3uj7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +541,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/20/Linux-命令行快捷键/" data-id="cipno9hva000tefpved5fkomb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/20/Linux-命令行快捷键/" data-id="cipns8d2j000wjopv5hw86u7e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -544,7 +665,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/20/Zabbix-Template-App-MySQL/" data-id="cipno9hx0002cefpvfcex3axd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/20/Zabbix-Template-App-MySQL/" data-id="cipns8d46002fjopvt9wj0l5e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -660,7 +781,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="cipno9hy00039efpv1vu3oe0u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="cipns8d57003cjopv8lk4n5w4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -792,61 +913,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="cipno9hx6002gefpvo9nd98xc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-监控-Centos-7-系统下的-Mysql" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" class="article-date">
-  <time datetime="2016-05-14T06:52:09.000Z" itemprop="datePublished">2016-05-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/">Zabbix 监控 Centos 7 系统下的 Mysql</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-数据库配置"><a href="#1-数据库配置" class="headerlink" title="1. 数据库配置"></a>1. 数据库配置</h3><h4 id="1-1-登陆数据库，查看账号信息"><a href="#1-1-登陆数据库，查看账号信息" class="headerlink" title="1.1 登陆数据库，查看账号信息"></a>1.1 登陆数据库，查看账号信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 17107</span><br><span class="line">Server version: 5.5.47-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| Host                  | User | Password                                  |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| localhost             | root | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">| localhost.localdomain | root |                                           |</span><br><span class="line">| 127.0.0.1             | root |                                           |</span><br><span class="line">| ::1                   | root |                                           |</span><br><span class="line">| localhost             |      |                                           |</span><br><span class="line">| localhost.localdomain |      |                                           |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">6 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h4 id="1-2-删掉空账号，新建监控账号"><a href="#1-2-删掉空账号，新建监控账号" class="headerlink" title="1.2 删掉空账号，新建监控账号"></a>1.2 删掉空账号，新建监控账号</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; drop user <span class="string">''</span>@<span class="string">'localhost'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">''</span>@<span class="string">'localhost.localdomain'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'localhost.localdomain'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'127.0.0.1'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'::1'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">| Host      | User | Password                                  |</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">| localhost | root | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; grant usage on *.* to <span class="string">'zabbix'</span>@<span class="string">'localhost'</span> identified by <span class="string">'zabbix'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">| Host      | User   | Password                                  |</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">| localhost | root   | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">| localhost | zabbix | *DEEF4D7D88CD046ECA02A80393B7780A63E7E789 |</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
-<h4 id="1-3-测试数据库账号是否正常"><a href="#1-3-测试数据库账号是否正常" class="headerlink" title="1.3 测试数据库账号是否正常"></a>1.3 测试数据库账号是否正常</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix]<span class="comment"># mysql -u zabbix -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 17137</span><br><span class="line">Server version: 5.5.47-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; status;</span><br><span class="line">--------------</span><br><span class="line">mysql  Ver 15.1 Distrib 5.5.47-MariaDB, <span class="keyword">for</span> Linux (x86_64) using readline 5.1</span><br><span class="line"></span><br><span class="line">Connection id:		17137</span><br><span class="line">Current database:	</span><br><span class="line">Current user:		zabbix@localhost</span><br><span class="line">SSL:			Not <span class="keyword">in</span> use</span><br><span class="line">Current pager:		stdout</span><br><span class="line">Using outfile:		<span class="string">''</span></span><br><span class="line">Using delimiter:	;</span><br><span class="line">Server:			MariaDB</span><br><span class="line">Server version:		5.5.47-MariaDB MariaDB Server</span><br><span class="line">Protocol version:	10</span><br><span class="line">Connection:		Localhost via UNIX socket</span><br><span class="line">Server characterset:	latin1</span><br><span class="line">Db     characterset:	latin1</span><br><span class="line">Client characterset:	utf8</span><br><span class="line">Conn.  characterset:	utf8</span><br><span class="line">UNIX socket:		/var/lib/mysql/mysql.sock</span><br><span class="line">Uptime:			1 day 3 hours 47 min 2 sec</span><br><span class="line"></span><br><span class="line">Threads: 2  Questions: 48301  Slow queries: 0  Opens: 15  Flush tables: 2  Open tables: 41  Queries per second avg: 0.482</span><br><span class="line">--------------</span><br></pre></td></tr></table></figure>
-<h3 id="2-配置文件修改"><a href="#2-配置文件修改" class="headerlink" title="2. 配置文件修改"></a>2. 配置文件修改</h3><h4 id="2-1-修改-my-cnf-文件（-etc-zabbix目录）"><a href="#2-1-修改-my-cnf-文件（-etc-zabbix目录）" class="headerlink" title="2.1 修改 .my.cnf 文件（/etc/zabbix目录）"></a>2.1 修改 <strong>.my.cnf</strong> 文件（/etc/zabbix目录）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line">host=localhost</span><br><span class="line">user=zabbix</span><br><span class="line">password=zabbix</span><br><span class="line">[mysqladmin]</span><br><span class="line">host=localhost</span><br><span class="line">user=zabbix</span><br><span class="line">password=zabbix</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-修改-userparameter-mysql-cnf-文件（-etc-zabbix-zabbix-agentd-d目录）"><a href="#2-2-修改-userparameter-mysql-cnf-文件（-etc-zabbix-zabbix-agentd-d目录）" class="headerlink" title="2.2 修改 userparameter_mysql.cnf 文件（/etc/zabbix/zabbix_agentd.d目录）"></a>2.2 修改 <strong>userparameter_mysql.cnf</strong> 文件（/etc/zabbix/zabbix_agentd.d目录）</h4><blockquote>
-<p>主要关注 <strong>HOME</strong> 变量值是否是上面 <strong>.my.cnf</strong> 文件目录，且以下配置文件仅支持 <strong>linux</strong> 系统，在 <strong>Cenots 7</strong> 系统下进行调试过，<strong>windows</strong> 不支持。</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># For all the following commands HOME should be set to the directory that has .my.cnf file with password information.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Flexible parameter to grab global variables. On the frontend side, use keys like mysql.status[Com_insert].</span></span><br><span class="line"><span class="comment"># Key syntax is mysql.status[variable].</span></span><br><span class="line">UserParameter=mysql.status[*],<span class="built_in">echo</span> <span class="string">"show global status where Variable_name='<span class="variable">$1</span>';"</span> | HOME=/etc/zabbix mysql -N | awk <span class="string">'&#123;print $$2&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Flexible parameter to determine database or table size. On the frontend side, use keys like mysql.size[zabbix,history,data].</span></span><br><span class="line"><span class="comment"># Key syntax is mysql.size[&lt;database&gt;,&lt;table&gt;,&lt;type&gt;].</span></span><br><span class="line"><span class="comment"># Database may be a database name or "all". Default is "all".</span></span><br><span class="line"><span class="comment"># Table may be a table name or "all". Default is "all".</span></span><br><span class="line"><span class="comment"># Type may be "data", "index", "free" or "both". Both is a sum of data and index. Default is "both".</span></span><br><span class="line"><span class="comment"># Database is mandatory if a table is specified. Type may be specified always.</span></span><br><span class="line"><span class="comment"># Returns value in bytes.</span></span><br><span class="line"><span class="comment"># 'sum' on data_length or index_length alone needed when we are getting this information for whole database instead of a single table</span></span><br><span class="line">UserParameter=mysql.size[*],<span class="built_in">echo</span> <span class="string">"select sum(<span class="variable">$(case "$3" in both|"")</span> echo "</span>data_length+index_length<span class="string">";; data|index) echo "</span><span class="variable">$3_length</span><span class="string">";; free) echo "</span>data_free<span class="string">";; esac)) from information_schema.tables<span class="variable">$([[ "$1" = "all" || ! "$1" ]] || echo " where table_schema='$1'")</span><span class="variable">$([[ "$2" = "all" || ! "$2" ]] || echo "and table_name='$2'")</span>;"</span> | HOME=/etc/zabbix mysql -N</span><br><span class="line"></span><br><span class="line">UserParameter=mysql.ping,HOME=/etc/zabbix mysqladmin ping | grep -c alive</span><br><span class="line">UserParameter=mysql.version,mysql -V</span><br></pre></td></tr></table></figure>
-<h4 id="2-3-测试本机-zabbix-agent-是否可以正确获取到数据"><a href="#2-3-测试本机-zabbix-agent-是否可以正确获取到数据" class="headerlink" title="2.3 测试本机 zabbix-agent 是否可以正确获取到数据"></a>2.3 测试本机 <strong>zabbix-agent</strong> 是否可以正确获取到数据</h4><blockquote>
-<p>注意看最后几行结果是否如下所示</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zabbix_agent -p</span><br><span class="line">mysql.status                                  [t|]</span><br><span class="line">mysql.size                                    [t|73728]</span><br><span class="line">mysql.ping                                    [t|1]</span><br><span class="line">mysql.version                                 [t|mysql  Ver 15.1 Distrib 5.5.47-MariaDB, <span class="keyword">for</span> Linux (x86_64) using readline 5.1]</span><br></pre></td></tr></table></figure>
-<h4 id="2-4-测试-zabbix-server-是否可以获取到-zabbix-agent-端数据"><a href="#2-4-测试-zabbix-server-是否可以获取到-zabbix-agent-端数据" class="headerlink" title="2.4 测试 zabbix-server 是否可以获取到 zabbix-agent 端数据"></a>2.4 测试 <strong>zabbix-server</strong> 是否可以获取到 <strong>zabbix-agent</strong> 端数据</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@Zabbix3 ttlop]<span class="comment"># zabbix_get -s 192.168.1.202 -p 10050 -k "mysql.status[Bytes_received]"</span></span><br></pre></td></tr></table></figure>
-<p>至此，如可以获取到值，说明配置正常，如需要监控别的项目，修改客户端 <strong>userparameter_mysql.conf</strong> 文件即可。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="cipno9hxu0030efpvm721g9dd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="cipns8d4b002ijopvq905yjd0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -898,6 +965,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/06/20/Nagios-安装好无法启动问题汇总/">Nagios - 安装好无法启动问题汇总</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/">Nagios - Installing Nagios Core From Source</a>
           </li>
         
@@ -911,10 +982,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/">Microsoft SQL Server 删除阻塞进程 sp_who</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/">Microsoft SQL Server 进程的阻塞与死锁检查</a>
           </li>
         
       </ul>
