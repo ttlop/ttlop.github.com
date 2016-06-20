@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Nagios - Installing Nagios Core From Source | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="naigos source install">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nagios - Installing Nagios Core From Source">
+<meta property="og:url" content="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="naigos source install">
+<meta property="og:updated_time" content="2016-06-20T06:59:45.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nagios - Installing Nagios Core From Source">
+<meta name="twitter:description" content="naigos source install">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Nagios-Installing-Nagios-Core-From-Source" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" class="article-date">
+  <time datetime="2016-06-20T06:10:44.000Z" itemprop="datePublished">2016-06-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Nagios - Installing Nagios Core From Source
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><p>For RHEL/CentOS users:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget httpd php gcc glibc glibc-common gd gd-devel make net-snmp</span><br></pre></td></tr></table></figure>
+<h3 id="Download-Nagios-Core-and-Nagios-Plugins-Tarballs"><a href="#Download-Nagios-Core-and-Nagios-Plugins-Tarballs" class="headerlink" title="Download Nagios Core and Nagios Plugins Tarballs"></a>Download Nagios Core and Nagios Plugins Tarballs</h3><p>For all systems, run the following commands in your terminal:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.1.1.tar.gz</span><br><span class="line">wget http://nagios-plugins.org/download/nagios-plugins-2.1.1.tar.gz</span><br></pre></td></tr></table></figure>
+<h3 id="Adding-the-Nagios-User-and-Group"><a href="#Adding-the-Nagios-User-and-Group" class="headerlink" title="Adding the Nagios User and Group"></a>Adding the Nagios User and Group</h3><p>Next add the appropriate user and group for the Nagios process the run:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd nagios</span><br><span class="line">groupadd nagcmd</span><br><span class="line">usermod -a -G nagcmd nagios</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-Core-Installation"><a href="#Nagios-Core-Installation" class="headerlink" title="Nagios Core Installation"></a>Nagios Core Installation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf nagios-4.1.1.tar.gz</span><br><span class="line">tar zxvf nagios-plugins-2.1.1.tar.gz</span><br></pre></td></tr></table></figure>
+<p><strong>Change to the New Nagios directory and install the packages:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nagios-4.1.1</span><br></pre></td></tr></table></figure>
+<p><strong>For RHEL/CentOS users:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-command-group=nagcmd</span><br></pre></td></tr></table></figure>
+<p><strong>All systems:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">make all</span><br><span class="line">make install</span><br><span class="line">make install-init</span><br><span class="line">make install-config</span><br><span class="line">make install-commandmode</span><br><span class="line">make instlal-webconf</span><br><span class="line"></span><br><span class="line">cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/</span><br><span class="line">chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers</span><br><span class="line"></span><br><span class="line">/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg</span><br><span class="line">/etc/init.d/nagios start</span><br></pre></td></tr></table></figure>
+<p><strong>For RHEL/CentOS users:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/httpd start</span><br></pre></td></tr></table></figure>
+<h3 id="Create-a-Default-User-for-Web-Access"><a href="#Create-a-Default-User-for-Web-Access" class="headerlink" title="Create a Default User for Web Access."></a>Create a Default User for Web Access.</h3><p>Add a default user for Web Interface Access:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-Plugin-Installation"><a href="#Nagios-Plugin-Installation" class="headerlink" title="Nagios Plugin Installation"></a>Nagios Plugin Installation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp/nagios-plugins-2.1.1</span><br><span class="line">./configure --with-nagios-user=nagios --with-nagios-group=nagios</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-Service-Setup"><a href="#Nagios-Service-Setup" class="headerlink" title="Nagios Service Setup"></a>Nagios Service Setup</h3><p>The following commands will register the Nagios daemon to be run upon system startup.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add nagios</span><br><span class="line">chkconfig --level 35 nagios on</span><br><span class="line"></span><br><span class="line">chkconfig --add httpd</span><br><span class="line">chkconfig --level 35 httpd on</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-Web-Interface"><a href="#Nagios-Web-Interface" class="headerlink" title="Nagios Web Interface"></a>Nagios Web Interface</h3><p>After correctly following the procedures you should now be abel to access your Nagios Core installation from a web browser.</p>
+<p>Simply use the following:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://&lt;your.nagios.server.ip&gt;/nagios</span><br></pre></td></tr></table></figure>
+<p>And log in with credentials you chose when adding the nagiosadmin user to the htpasswd.users file.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipno9hw1001eefpvs7to5scg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/17/什么是-Web-框架/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">什么是 Web 框架?</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/">Nagios - Installing Nagios Core From Source</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/17/什么是-Web-框架/">什么是 Web 框架?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/">MikroTik 基于 IPv6 的 6to4 通道</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/">Microsoft SQL Server 删除阻塞进程 sp_who</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/">Microsoft SQL Server 进程的阻塞与死锁检查</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
