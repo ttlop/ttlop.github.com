@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/22/Shell-语法简介/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="shell 语法">
-<meta property="og:updated_time" content="2016-06-22T03:55:11.643Z">
+<meta property="og:updated_time" content="2016-06-22T03:56:44.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell 语法简介">
 <meta name="twitter:description" content="shell 语法">
@@ -147,16 +147,16 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh </span><br><span class="line"></span><br><span class="line">echo &quot;What is your favourite OS?&quot; </span><br><span class="line">select var in &quot;Linux&quot; &quot;Gnu Hurd&quot; &quot;Free BSD&quot; &quot;Other&quot;; do </span><br><span class="line">break </span><br><span class="line">done </span><br><span class="line">echo &quot;You have selected $var&quot;</span><br></pre></td></tr></table></figure>
 <p>下面是该脚本的运行结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ./select.sh </span><br><span class="line">What is your favourite OS?</span><br><span class="line">1) Linux</span><br><span class="line">2) Gnu Hurd</span><br><span class="line">3) Free BSD</span><br><span class="line">4) Other</span><br><span class="line">#? 1</span><br><span class="line">You have selected Linux</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
-<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="5-while"><a href="#5-while" class="headerlink" title="5. while"></a>5. while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>当 while 表达式的值为真时，将一直循环。<br>可以用关键字 “break” 用来跳出循环，也可以用关键字 “continue” 用来不执行余下的部分而直接跳到下一个循环。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">num=10</span><br><span class="line">while [ ! &quot;$num&quot; = &quot;0&quot; ]; do</span><br><span class="line">num=`expr &quot;$num&quot; &quot;-&quot; &quot;1&quot;`</span><br><span class="line">echo $num</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>for 表达式查看一个字符串列表（字符串用空格分隔），然后将其赋给一个变量：</p>
+<h3 id="6-for"><a href="#6-for" class="headerlink" title="6. for"></a>6. for</h3><p>for 表达式查看一个字符串列表（字符串用空格分隔），然后将其赋给一个变量：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for var in ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqcjvna001v7ppvogdwz6ic" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqcluz7001v90pvvsd2ndsp" class="article-share-link">Share</a>
       
       
     </footer>

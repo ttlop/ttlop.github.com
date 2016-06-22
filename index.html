@@ -148,16 +148,16 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh </span><br><span class="line"></span><br><span class="line">echo &quot;What is your favourite OS?&quot; </span><br><span class="line">select var in &quot;Linux&quot; &quot;Gnu Hurd&quot; &quot;Free BSD&quot; &quot;Other&quot;; do </span><br><span class="line">break </span><br><span class="line">done </span><br><span class="line">echo &quot;You have selected $var&quot;</span><br></pre></td></tr></table></figure>
 <p>下面是该脚本的运行结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ./select.sh </span><br><span class="line">What is your favourite OS?</span><br><span class="line">1) Linux</span><br><span class="line">2) Gnu Hurd</span><br><span class="line">3) Free BSD</span><br><span class="line">4) Other</span><br><span class="line">#? 1</span><br><span class="line">You have selected Linux</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
-<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="5-while"><a href="#5-while" class="headerlink" title="5. while"></a>5. while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <p>当 while 表达式的值为真时，将一直循环。<br>可以用关键字 “break” 用来跳出循环，也可以用关键字 “continue” 用来不执行余下的部分而直接跳到下一个循环。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">num=10</span><br><span class="line">while [ ! &quot;$num&quot; = &quot;0&quot; ]; do</span><br><span class="line">num=`expr &quot;$num&quot; &quot;-&quot; &quot;1&quot;`</span><br><span class="line">echo $num</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>for 表达式查看一个字符串列表（字符串用空格分隔），然后将其赋给一个变量：</p>
+<h3 id="6-for"><a href="#6-for" class="headerlink" title="6. for"></a>6. for</h3><p>for 表达式查看一个字符串列表（字符串用空格分隔），然后将其赋给一个变量：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for var in ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqcjvna001v7ppvogdwz6ic" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqcluz7001v90pvvsd2ndsp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -209,7 +209,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cipqcjvmk001h7ppvsa8zwr0h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cipqcluyq001h90pvgl450gi6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -255,7 +255,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipqcjvmn001i7ppvmolkm3m2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipqcluyr001i90pvkn7zoq72" class="article-share-link">Share</a>
       
       
     </footer>
@@ -319,7 +319,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipqcjvmh001e7ppva82alviz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipqcluyn001e90pvcvj0n1qy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -364,7 +364,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipqcjvpp003k7ppvbogdhreu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipqclv0y003k90pvw220d43d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -409,7 +409,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipqcjvm3001a7ppvwpqkr5ph" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipqcluyd001890pvmu5soi3m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -506,7 +506,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipqcjvlq00107ppvjnu79tkj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipqcluy9001390pvn7yjpehn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -551,7 +551,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipqcjvlv00157ppvjrqcfve5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipqcluyb001590pve6bwvzk8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -603,7 +603,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipqcjvpu003o7ppv0gxgi6hm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipqclv12003o90pv5atwrcyg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -648,7 +648,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipqcjvph003e7ppvbgebikvy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipqclv0v003h90pvah47noj8" class="article-share-link">Share</a>
       
       
     </footer>
