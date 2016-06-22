@@ -82,6 +82,67 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Shell-语法简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/22/Shell-语法简介/" class="article-date">
+  <time datetime="2016-06-22T02:53:37.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/22/Shell-语法简介/">Shell 语法简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="1-shell-文件开头"><a href="#1-shell-文件开头" class="headerlink" title="1. shell 文件开头"></a>1. shell 文件开头</h3><p>shell 文件必须以下面的行开始 （必须放在文件的第一行）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br></pre></td></tr></table></figure>
+<p>符号 #! 用来告诉系统它后面的参数是用来执行该文件的程序。<br>当编辑好脚本时，如果要执行该脚本，还必须使其可执行。要使脚本可执行，运行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod u+x filename</span><br></pre></td></tr></table></figure>
+<h3 id="2-注释"><a href="#2-注释" class="headerlink" title="2. 注释"></a>2. 注释</h3><p>在进行 shell 编程时，以 # 开头的句子表示注释，直到这一行的结束。我们建议在程序中使用注释。<br>如果您使用了注释，那么即使相当长的时间内没有使用该脚本，您也能在很短的时间内明白该脚本的作用及工作原理。</p>
+<h3 id="3-变量"><a href="#3-变量" class="headerlink" title="3. 变量"></a>3. 变量</h3><p>在 shell 编程中，所有的变量都由字符串组成，并且您不需要对变量进行声明，直接赋值就可以，应用变量的话，用 <strong>$变量名</strong> 的形式。<br>要赋值给一个变量，可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=&quot;hello world&quot;</span><br><span class="line">num=2</span><br></pre></td></tr></table></figure>
+<p>现在打印变量的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $a</span><br><span class="line">echo &quot;this is the $&#123;num&#125;nd&quot;  #有时候变量名很容易与其他文字混淆,可以使用花括号来告诉 shell 我们要打印的是 num 变量</span><br></pre></td></tr></table></figure>
+<h2 id="概念：管道、重定向和-backtick"><a href="#概念：管道、重定向和-backtick" class="headerlink" title="概念：管道、重定向和 backtick"></a>概念：管道、重定向和 backtick</h2><p>这些不是系统命令，但是非常重要</p>
+<h3 id="1-管道"><a href="#1-管道" class="headerlink" title="1. 管道"></a>1. 管道</h3><p>管道将一个命令的输出作为另外一个命令的输入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;hello&quot; file.txt | wc -l  #在file.txt中搜索包含有”hello”的行并计算其行数。 在这里grep命令的输出作为wc命令的输入。当然您可以使用多个命令。</span><br></pre></td></tr></table></figure>
+<h3 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2. 重定向"></a>2. 重定向</h3><p>重定向将命令的结果输出到文件，而不是标准输出（屏幕）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 写入文件并覆盖旧文件 </span><br><span class="line">&gt;&gt; 加到文件的尾部，保留旧文件内容。</span><br></pre></td></tr></table></figure>
+<h3 id="3-反短斜线"><a href="#3-反短斜线" class="headerlink" title="3. 反短斜线"></a>3. 反短斜线</h3><p>使用反短斜线(“`”)可以将一个命令的输出作为另外一个命令的一个命令行参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -mtime -1 -type f -print   #用来查找过去24小时（-mtime –2则表示过去48小时）内修改过的文件</span><br></pre></td></tr></table></figure>
+<p>如果您想将所有查找到的文件打一个包，则可以使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -czvf lastmod.tar.gz `find . -mtime -1 -type f -print`</span><br></pre></td></tr></table></figure>
+<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><h3 id="1-if"><a href="#1-if" class="headerlink" title="1. if"></a>1. if</h3><p>如果条件为真，则执行 then 后面的部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if ...; then</span><br><span class="line">...</span><br><span class="line">elif ...; then</span><br><span class="line">...</span><br><span class="line">else</span><br><span class="line">...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>大多数情况下，可以使用测试命令来对条件进行测试。比如可以比较字符串、判断文件是否存在是否可读等等。</p>
+<h3 id="2-快捷操作符-amp-amp-和"><a href="#2-快捷操作符-amp-amp-和" class="headerlink" title="2. 快捷操作符 &amp;&amp; 和 ||"></a>2. 快捷操作符 &amp;&amp; 和 ||</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqb4oby001u17pv3xcsqztb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Nagios-使用问题解决" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/21/Nagios-使用问题解决/" class="article-date">
@@ -124,7 +185,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cipp40q14001haxpvdxdi2rgr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cipqb4obh001h17pvzt8t58lv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +231,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipp40q16001iaxpvnxcv8wh6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipqb4obj001i17pv1yu3i71f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -234,7 +295,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipp40q12001eaxpv8ebguz7c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipqb4obf001e17pvmy10uhi8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -279,7 +340,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipp40q3e003haxpv4qcxx5ce" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipqb4odo003i17pvpe0wyz65" class="article-share-link">Share</a>
       
       
     </footer>
@@ -324,7 +385,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipp40q0q0018axpvatzchcjq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipqb4ob2001817pvn4wa2cyb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -421,7 +482,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipp40q0k0010axpvtv5xj1c7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipqb4oaz001317pvzdtueenq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +527,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipp40q0o0015axpvi507ubnh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipqb4ob1001517pvnyl4hhdz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -518,7 +579,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipp40q3i003maxpvvlyid33q" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipqb4odu003o17pvymohuni9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -563,52 +624,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipp40q37003caxpvwei3ioo7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Postfix-configuration-files" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/14/Postfix-configuration-files/" class="article-date">
-  <time datetime="2016-06-14T05:49:52.000Z" itemprop="datePublished">2016-06-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Postfix/">Postfix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/14/Postfix-configuration-files/">Postfix configuration files</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Postfix 的配置文件 main.cf 有数百个配置参数，幸运的是，所有参数都由合理的默认配置项 。大部分时候，只需要配置两三个参数即可。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/14/Postfix-configuration-files/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="cipp40q1k001raxpvpr8wqqks" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipqb4odj003e17pvcvlylav5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -660,6 +676,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/06/22/Shell-语法简介/">Shell 语法简介</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/21/Nagios-使用问题解决/">Nagios 使用问题解决</a>
           </li>
         
@@ -673,10 +693,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/06/17/什么是-Web-框架/">什么是 Web 框架?</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/">MikroTik 基于 IPv6 的 6to4 通道</a>
           </li>
         
       </ul>
