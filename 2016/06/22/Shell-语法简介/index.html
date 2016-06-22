@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/22/Shell-语法简介/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="shell 语法">
-<meta property="og:updated_time" content="2016-06-22T03:40:47.128Z">
+<meta property="og:updated_time" content="2016-06-22T03:55:11.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell 语法简介">
 <meta name="twitter:description" content="shell 语法">
@@ -141,11 +141,22 @@ var _hmt = _hmt || [];
 <p>下面是一个叫做 smartzip 的脚本，该脚本可以自动解压 bzip2，gzip 和 zip 类型的压缩文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">ftype=`file &quot;$1&quot;`</span><br><span class="line"></span><br><span class="line">case &quot;ftype&quot; in</span><br><span class="line">&quot;$1: Zip archive&quot;*)</span><br><span class="line">unzip &quot;$1&quot; ;;</span><br><span class="line">&quot;$1: gzip compressed&quot;*)</span><br><span class="line">gunzip &quot;$1&quot; ;;</span><br><span class="line">&quot;$1: bzip2 compressed&quot;*)</span><br><span class="line">bunzip2 &quot;$1&quot; ;;</span><br><span class="line">*) echo &quot;File $1 can not be uncompressed with smartzip&quot;;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 <p>特殊变量 $1 包含了传递给该程序的第一个参数值。也就是说当我们运行：<strong>smargzip articles.zip</strong>，$1 就是字符串 articles.zip</p>
-<h3 id="4-select"><a href="#4-select" class="headerlink" title="4. select"></a>4. select</h3>
+<h3 id="4-select"><a href="#4-select" class="headerlink" title="4. select"></a>4. select</h3><p>select 表达式是一种 bash 的扩展应用，尤其擅长与交互式使用。用户可以从一组不同的值中进行使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select var in ...; do</span><br><span class="line">break</span><br><span class="line">done</span><br><span class="line">... now $var can be used...</span><br></pre></td></tr></table></figure>
+<p>下面是一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh </span><br><span class="line"></span><br><span class="line">echo &quot;What is your favourite OS?&quot; </span><br><span class="line">select var in &quot;Linux&quot; &quot;Gnu Hurd&quot; &quot;Free BSD&quot; &quot;Other&quot;; do </span><br><span class="line">break </span><br><span class="line">done </span><br><span class="line">echo &quot;You have selected $var&quot;</span><br></pre></td></tr></table></figure>
+<p>下面是该脚本的运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ./select.sh </span><br><span class="line">What is your favourite OS?</span><br><span class="line">1) Linux</span><br><span class="line">2) Gnu Hurd</span><br><span class="line">3) Free BSD</span><br><span class="line">4) Other</span><br><span class="line">#? 1</span><br><span class="line">You have selected Linux</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>当 while 表达式的值为真时，将一直循环。<br>可以用关键字 “break” 用来跳出循环，也可以用关键字 “continue” 用来不执行余下的部分而直接跳到下一个循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">num=10</span><br><span class="line">while [ ! &quot;$num&quot; = &quot;0&quot; ]; do</span><br><span class="line">num=`expr &quot;$num&quot; &quot;-&quot; &quot;1&quot;`</span><br><span class="line">echo $num</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>for 表达式查看一个字符串列表（字符串用空格分隔），然后将其赋给一个变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for var in ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqc0yyw001v5ppvlk2be749" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqcjvna001v7ppvogdwz6ic" class="article-share-link">Share</a>
       
       
     </footer>
