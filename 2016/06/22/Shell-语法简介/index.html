@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/22/Shell-语法简介/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="shell 语法">
-<meta property="og:updated_time" content="2016-06-22T03:15:23.512Z">
+<meta property="og:updated_time" content="2016-06-22T03:25:50.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell 语法简介">
 <meta name="twitter:description" content="shell 语法">
@@ -128,11 +128,19 @@ var _hmt = _hmt || [];
 <h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><h3 id="1-if"><a href="#1-if" class="headerlink" title="1. if"></a>1. if</h3><p>如果条件为真，则执行 then 后面的部分：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if ...; then</span><br><span class="line">...</span><br><span class="line">elif ...; then</span><br><span class="line">...</span><br><span class="line">else</span><br><span class="line">...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <p>大多数情况下，可以使用测试命令来对条件进行测试。比如可以比较字符串、判断文件是否存在是否可读等等。</p>
-<h3 id="2-快捷操作符-amp-amp-和"><a href="#2-快捷操作符-amp-amp-和" class="headerlink" title="2. 快捷操作符 &amp;&amp; 和 ||"></a>2. 快捷操作符 &amp;&amp; 和 ||</h3>
+<h3 id="2-快捷操作符-amp-amp-和"><a href="#2-快捷操作符-amp-amp-和" class="headerlink" title="2. 快捷操作符 &amp;&amp; 和 ||"></a>2. 快捷操作符 &amp;&amp; 和 ||</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ -f &quot;/etc/shadow&quot; ] &amp;&amp; echo &quot;This computer uses shadow passwors&quot;</span><br></pre></td></tr></table></figure>
+<p>这里 &amp;&amp; 就是一个快捷操作符，如果左边的表达式为真则执行右边的语句。<br>您也可以认为是逻辑运算中的与操作。上例中表示如果/etc/shadow文件存在则打印 ”This computer uses shadow passwors”。</p>
+<p>同样或操作(||)在shell编程中也是可用的。这里有个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">mailfolder=/var/spool/mail/root</span><br><span class="line">[ -r &quot;$mailfolder&quot;] || &#123; echo &quot;Can not read $mailfolder&quot;; exit 1; &#125;</span><br><span class="line">echo &quot;$mailfolder has mail from:&quot;</span><br><span class="line">grep &quot;^From &quot; $mailfolder</span><br></pre></td></tr></table></figure>
+<p>该脚本首先判断 mailfolder 是否可读。如果可读则打印该文件中的 “From” 一行。<br>如果不可读则或操作生效，打印错误信息后脚本退出。这里有个问题，那就是我们必须有两个命令：</p>
+<p><em>. -打印错误信息
+</em>. -退出程序</p>
+<p>我们使用花括号以匿名函数的形式将两个命令放到一起作为一个命令使用。<br>一般函数将在下文提及。不用与和或操作符，我们也可以用if表达式作任何事情，但是使用与或操作符会更便利很多。</p>
+<h3 id="3-case"><a href="#3-case" class="headerlink" title="3. case"></a>3. case</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqb4oby001u17pv3xcsqztb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqbi4fg001u2bpv6s8fpjmi" class="article-share-link">Share</a>
       
       
     </footer>
