@@ -112,11 +112,15 @@ var _hmt = _hmt || [];
 <h3 id="2-使用-while-方法1"><a href="#2-使用-while-方法1" class="headerlink" title="2. 使用 while 方法1"></a>2. 使用 while 方法1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cat $1 | while read line</span><br><span class="line">do</span><br><span class="line">	echo $line</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 <h3 id="3-使用-while-方法2"><a href="#3-使用-while-方法2" class="headerlink" title="3. 使用 while 方法2"></a>3. 使用 while 方法2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while read line</span><br><span class="line">do</span><br><span class="line">	echo $line</span><br><span class="line">done &lt; $1</span><br></pre></td></tr></table></figure>
 <h3 id="4-awk"><a href="#4-awk" class="headerlink" title="4. awk"></a>4. awk</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">awk &apos;&#123;print $0&#125;&apos; $1</span><br></pre></td></tr></table></figure>
+<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>for 逐行读和 while 逐行读是有区别的，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat file</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333 444 555</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat file | while read line; do echo $line; done</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333 444 555</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for line in `cat $1`; do echo $line; done</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333</span><br><span class="line">444</span><br><span class="line">555</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="cipqhf3t9001vi3pv89gi0wck" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="cipqi22yw001vjapvkp65u884" class="article-share-link">Share</a>
       
       
     </footer>
@@ -204,7 +208,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqhf3tb001yi3pv3eoywiyr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqi22yy001yjapvsx2sjliz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -256,7 +260,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cipqhf3sn001ei3pvoyo2affs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cipqi22yc001hjapv2wiayd1z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,7 +306,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipqhf3sq001ii3pvpm3bcc7c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipqi22yd001ijapvwgbsu731" class="article-share-link">Share</a>
       
       
     </footer>
@@ -366,7 +370,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipqhf3sp001hi3pv0xplut62" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipqi22ya001ejapvytf5o3qn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -411,7 +415,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipqhf3uy003ni3pv3cqgljgi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipqi230o003njapv7a1ifhhd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,7 +460,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipqhf3sb0018i3pvq4f014o5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipqi22xz0018japv5eo01a7t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -553,7 +557,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipqhf3s70010i3pv7ed5sj05" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipqi22xr000yjapv82f6jxod" class="article-share-link">Share</a>
       
       
     </footer>
@@ -598,7 +602,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipqhf3s80013i3pv540ap883" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipqi22xy0015japvxhbbc1n1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -650,7 +654,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipqhf3v3003si3pvhsk0ebnx" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipqi230w003xjapvdiz9qz75" class="article-share-link">Share</a>
       
       
     </footer>
