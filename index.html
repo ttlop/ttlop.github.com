@@ -134,14 +134,19 @@ var _hmt = _hmt || [];
 <p>同样或操作(||)在shell编程中也是可用的。这里有个例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">mailfolder=/var/spool/mail/root</span><br><span class="line">[ -r &quot;$mailfolder&quot;] || &#123; echo &quot;Can not read $mailfolder&quot;; exit 1; &#125;</span><br><span class="line">echo &quot;$mailfolder has mail from:&quot;</span><br><span class="line">grep &quot;^From &quot; $mailfolder</span><br></pre></td></tr></table></figure>
 <p>该脚本首先判断 mailfolder 是否可读。如果可读则打印该文件中的 “From” 一行。<br>如果不可读则或操作生效，打印错误信息后脚本退出。这里有个问题，那就是我们必须有两个命令：</p>
-<p>*. -打印错误信息</p>
-<p>*. -退出程序</p>
+<p><em>. -打印错误信息
+</em>. -退出程序</p>
 <p>我们使用花括号以匿名函数的形式将两个命令放到一起作为一个命令使用。<br>一般函数将在下文提及。不用与和或操作符，我们也可以用if表达式作任何事情，但是使用与或操作符会更便利很多。</p>
-<h3 id="3-case"><a href="#3-case" class="headerlink" title="3. case"></a>3. case</h3>
+<h3 id="3-case"><a href="#3-case" class="headerlink" title="3. case"></a>3. case</h3><p>case 用来匹配一个给定的字符串，而不是数字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">case ... in</span><br><span class="line">...) do something here;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>下面是一个叫做 smartzip 的脚本，该脚本可以自动解压 bzip2，gzip 和 zip 类型的压缩文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">ftype=`file &quot;$1&quot;`</span><br><span class="line"></span><br><span class="line">case &quot;ftype&quot; in</span><br><span class="line">&quot;$1: Zip archive&quot;*)</span><br><span class="line">unzip &quot;$1&quot; ;;</span><br><span class="line">&quot;$1: gzip compressed&quot;*)</span><br><span class="line">gunzip &quot;$1&quot; ;;</span><br><span class="line">&quot;$1: bzip2 compressed&quot;*)</span><br><span class="line">bunzip2 &quot;$1&quot; ;;</span><br><span class="line">*) echo &quot;File $1 can not be uncompressed with smartzip&quot;;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>特殊变量 $1 包含了传递给该程序的第一个参数值。也就是说当我们运行：<strong>smargzip articles.zip</strong>，$1 就是字符串 articles.zip</p>
+<h3 id="4-select"><a href="#4-select" class="headerlink" title="4. select"></a>4. select</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqboexo001v4bpvb8myd6dw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqc0yyw001v5ppvlk2be749" class="article-share-link">Share</a>
       
       
     </footer>
@@ -193,7 +198,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cipqboex4001h4bpvvbeviy1w" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cipqc0yye001i5ppvvez2621b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -239,7 +244,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipqboex5001i4bpvpp86pxn0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipqc0yyd001h5ppvm5i51fqm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -303,7 +308,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipqboex2001e4bpvd2c6e2cc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cipqc0yya001e5ppvtq394o0r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -348,7 +353,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipqboezb003k4bpv7kwutd83" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cipqc0z0m003k5ppv8gaxje6p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -393,7 +398,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipqboewr00184bpv2hz1ifkj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cipqc0yxy00185ppvr4z8ms3g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -490,7 +495,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipqboewl00104bpvqh4z8g3p" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cipqc0yxu00135ppv073krd21" class="article-share-link">Share</a>
       
       
     </footer>
@@ -535,7 +540,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipqboewq00154bpvu8frmzww" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cipqc0yxw00155ppvh7d1ecvr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -587,7 +592,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipqboezf003o4bpvidrb915h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cipqc0z0q003o5ppvjbnv2yw8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -632,7 +637,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipqboez5003e4bpv14w8yf71" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cipqc0z0h003e5ppvvcd1u9t3" class="article-share-link">Share</a>
       
       
     </footer>
