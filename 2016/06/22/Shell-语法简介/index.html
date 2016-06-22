@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/22/Shell-语法简介/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="shell 语法">
-<meta property="og:updated_time" content="2016-06-22T03:29:26.654Z">
+<meta property="og:updated_time" content="2016-06-22T03:30:44.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell 语法简介">
 <meta name="twitter:description" content="shell 语法">
@@ -133,14 +133,14 @@ var _hmt = _hmt || [];
 <p>同样或操作(||)在shell编程中也是可用的。这里有个例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">mailfolder=/var/spool/mail/root</span><br><span class="line">[ -r &quot;$mailfolder&quot;] || &#123; echo &quot;Can not read $mailfolder&quot;; exit 1; &#125;</span><br><span class="line">echo &quot;$mailfolder has mail from:&quot;</span><br><span class="line">grep &quot;^From &quot; $mailfolder</span><br></pre></td></tr></table></figure>
 <p>该脚本首先判断 mailfolder 是否可读。如果可读则打印该文件中的 “From” 一行。<br>如果不可读则或操作生效，打印错误信息后脚本退出。这里有个问题，那就是我们必须有两个命令：</p>
-<p><em>. 打印错误信息
-</em>. 退出程序</p>
+<p>*. -打印错误信息</p>
+<p>*. -退出程序</p>
 <p>我们使用花括号以匿名函数的形式将两个命令放到一起作为一个命令使用。<br>一般函数将在下文提及。不用与和或操作符，我们也可以用if表达式作任何事情，但是使用与或操作符会更便利很多。</p>
 <h3 id="3-case"><a href="#3-case" class="headerlink" title="3. case"></a>3. case</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqbmqzh001v39pvfmvws54n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cipqboexo001v4bpvb8myd6dw" class="article-share-link">Share</a>
       
       
     </footer>
