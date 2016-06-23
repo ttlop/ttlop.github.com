@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Nginx nginx-status | 运维生存时间</title>
+  <title>Linux之cut命令的用法 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nginx stat stub_status">
+  <meta name="description" content="cut">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx nginx-status">
-<meta property="og:url" content="http://ttlop.com/2016/06/01/Nginx-nginx-status/index.html">
+<meta property="og:title" content="Linux之cut命令的用法">
+<meta property="og:url" content="http://ttlop.com/2016/06/23/Linux之cut命令的用法/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="nginx stat stub_status">
-<meta property="og:updated_time" content="2016-06-02T02:57:51.842Z">
+<meta property="og:description" content="cut">
+<meta property="og:updated_time" content="2016-06-23T08:37:45.822Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nginx nginx-status">
-<meta name="twitter:description" content="nginx stat stub_status">
+<meta name="twitter:title" content="Linux之cut命令的用法">
+<meta name="twitter:description" content="cut">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Nginx-nginx-status" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Linux之cut命令的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/01/Nginx-nginx-status/" class="article-date">
-  <time datetime="2016-06-01T06:43:29.000Z" itemprop="datePublished">2016-06-01</time>
+    <a href="/2016/06/23/Linux之cut命令的用法/" class="article-date">
+  <time datetime="2016-06-23T08:15:43.000Z" itemprop="datePublished">2016-06-23</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Nginx nginx-status
+      Linux之cut命令的用法
     </h1>
   
 
@@ -107,31 +107,53 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如何查看 Nginx 状态？</p>
+        <p>cut - 输出文件行的选定部分到标准输出。<br>如果不指定 File 参数，cut 命令将读取标准输入。必须指定 -b、-c 或 -f 标志之一。</p>
 <a id="more"></a>
-<h3 id="获取-Nginx-状态（HTTP-Stub-Status）"><a href="#获取-Nginx-状态（HTTP-Stub-Status）" class="headerlink" title="获取 Nginx 状态（HTTP Stub Status）"></a>获取 Nginx 状态（HTTP Stub Status）</h3><p>确认有加入状态监控模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# /usr/local/nginx/sbin/nginx -V</span><br><span class="line">nginx version: nginx/1.8.0</span><br><span class="line">built by gcc 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC) </span><br><span class="line">built with OpenSSL 1.0.1c 10 May 2012</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: --prefix=/usr/local/nginx --with-openssl=/usr/local/hongdian/openssl-1.0.1c --with-http_stub_status_module --with-http_ssl_module</span><br></pre></td></tr></table></figure>
-<h3 id="配置-nginx-conf"><a href="#配置-nginx-conf" class="headerlink" title="配置 nginx.conf"></a>配置 nginx.conf</h3><p>Add the following configuration to you Nginx configuration file</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location ~ /nginx_status &#123;</span><br><span class="line">    stub_status on;  # Turn on nginx stats</span><br><span class="line">    access_log off;  # We do not need logs for stats</span><br><span class="line">    allow 127.0.0.1; # security: Only allow access from ip</span><br><span class="line">    deny all;        # Deny requests from the other of the world</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Nginx-监控项解释"><a href="#Nginx-监控项解释" class="headerlink" title="Nginx 监控项解释"></a>Nginx 监控项解释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# curl http://localhost:61503/nginx_status</span><br><span class="line">Active connections: 1 </span><br><span class="line">server accepts handled requests</span><br><span class="line"> 28 28 25 </span><br><span class="line">Reading: 0 Writing: 1 Waiting: 0</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Active Connections: 当前正处理的活动连结数</p>
-</li>
-<li><p>Server accepts handled requests: Nginx 共处理了多少个连接，成功创建了多少次握手，总共处理了多少个请求</p>
-</li>
-<li><p>Reading: nginx 读取到客户端的 Header 信息数</p>
-</li>
-<li><p>Writing: Nginx 返回给客户端的 Header 信息数</p>
-</li>
-<li><p>Waiting: 开启 keep-alive 的情况下，这个值等于 <strong>active - (reading + writing)</strong>，意思是 Nginx 已经处理完成，正在等待下一次请求指令的的驻留连接数</p>
-</li>
-</ul>
-<p>在访问效率很高，请求很快被处理完毕的情况下，Waiting 数比较多是正常的，如果 reading + writing 数较多，则说明并发访问量很大，正在处理过程中。可能是因为后端的动态应用程序处理慢（如php，jsp），拖了后腿。而一般来说，动态程序之所以慢就就两方面的原因：一是一位数据库，另外一个原因很可能就是IO慢（目前的机器CPU或内存不够的情况很少。而设备的主要瓶颈在硬盘IO上），或者客户端网络慢。</p>
+<h2 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">Option</th>
+<th style="text-align:left">Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-b</td>
+<td style="text-align:left">以字节为单位进行分隔。这些字节位置将忽略多字节字符边界，除非也指定了 -n 标志</td>
+</tr>
+<tr>
+<td style="text-align:left">-c</td>
+<td style="text-align:left">以字符为单位进行分隔</td>
+</tr>
+<tr>
+<td style="text-align:left">-d</td>
+<td style="text-align:left">自定义分隔符，默认为制表符</td>
+</tr>
+<tr>
+<td style="text-align:left">-f</td>
+<td style="text-align:left">与 -d 一起使用，指定显示哪个区域</td>
+</tr>
+<tr>
+<td style="text-align:left">-n</td>
+<td style="text-align:left">取消分隔多字节支付。仅和 -b 一起使用。如果字符的最后一个字节落在由 -b 标志的 list 参数指示的范围之内，该字符将被写出；否则，该字符将被排除</td>
+</tr>
+</tbody>
+</table>
+<h3 id="以字节定位"><a href="#以字节定位" class="headerlink" title="以字节定位"></a>以<strong>字节</strong>定位</h3><p>举例：当你执行 who 命令时，会输出如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# who</span><br><span class="line">root     pts/0        2016-06-22 10:52 (10.1.80.159)</span><br><span class="line">root     pts/1        2016-06-22 11:10 (10.1.80.159)</span><br></pre></td></tr></table></figure>
+<p>如果我们想提取每一行的第 4 个字节，就这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# who | cut -b 4</span><br><span class="line">t</span><br><span class="line">t</span><br></pre></td></tr></table></figure>
+<p>如果我想提取第1、2、4个字节，怎么办？有些面方法可以使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# who | cut -b 1-2,4</span><br><span class="line">rot</span><br><span class="line">rot</span><br></pre></td></tr></table></figure>
+<p>类似 “1-2” 这样的小技巧，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# who | cut -b -2,4</span><br><span class="line">rot</span><br><span class="line">rot</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# who | cut -b 2-</span><br><span class="line">oot     pts/0        2016-06-22 10:52 (10.1.80.159)</span><br><span class="line">oot     pts/1        2016-06-22 11:10 (10.1.80.159)</span><br></pre></td></tr></table></figure>
+<p>想必你看出来了，-2 表示从第一个字节到第二个字节，2- 表示从第二个字节到行尾。如果你细心，你可以看到这种情况，都包含了第二个字节 “0”。<br>如果我执行 who | cut -2,2，你觉得会如何呢？答案是输出正行，不会出现连服两个重叠的第二列的情况，看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root     pts/0        2016-06-22 10:52 (10.1.80.159)</span><br><span class="line">root     pts/1        2016-06-22 11:10 (10.1.80.159)</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cips2341t001wqjpvilm2m4yp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="cips2340m0014qjpve8q05xg3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,19 +162,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/06/02/Zabbix-Monitor-Nginx/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix Monitor Nginx
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/06/01/Nginx-Location-Configuration/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Nginx Location Configuration</div>
+      <div class="article-nav-title">Crontab 定时执行任务 命令格式与详细例子</div>
     </a>
   
 </nav>
