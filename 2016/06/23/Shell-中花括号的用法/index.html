@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Microsoft SQL Server 进程的阻塞与死锁检查 | 运维生存时间</title>
+  <title>Shell 中花括号的用法 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="sys.sysprocesses sys.sysdatabases 阻塞">
+  <meta name="description" content="shell 花括号 中括号 小括号">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Microsoft SQL Server 进程的阻塞与死锁检查">
-<meta property="og:url" content="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/index.html">
+<meta property="og:title" content="Shell 中花括号的用法">
+<meta property="og:url" content="http://ttlop.com/2016/06/23/Shell-中花括号的用法/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="sys.sysprocesses sys.sysdatabases 阻塞">
-<meta property="og:updated_time" content="2016-06-15T09:23:29.524Z">
+<meta property="og:description" content="shell 花括号 中括号 小括号">
+<meta property="og:updated_time" content="2016-06-23T09:06:41.928Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Microsoft SQL Server 进程的阻塞与死锁检查">
-<meta name="twitter:description" content="sys.sysprocesses sys.sysdatabases 阻塞">
+<meta name="twitter:title" content="Shell 中花括号的用法">
+<meta name="twitter:description" content="shell 花括号 中括号 小括号">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Microsoft-SQL-Server-进程的阻塞与死锁检查" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Shell-中花括号的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" class="article-date">
-  <time datetime="2016-06-15T07:09:56.000Z" itemprop="datePublished">2016-06-15</time>
+    <a href="/2016/06/23/Shell-中花括号的用法/" class="article-date">
+  <time datetime="2016-06-23T09:04:52.000Z" itemprop="datePublished">2016-06-23</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Microsoft SQL Server 进程的阻塞与死锁检查
+      Shell 中花括号的用法
     </h1>
   
 
@@ -107,98 +107,12 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[master].[sys].[sysprocesses] 系统表是一个很重要的系统视图，主要用来定位与解决 sql server 的阻塞与死锁。这个表查询出的内容包含正在 sql server 实例上运行的进程的相关信息。这些进程可以是客户端进程或系统进程。</p>
-<a id="more"></a>
-<h3 id="视图中的主要字段"><a href="#视图中的主要字段" class="headerlink" title="视图中的主要字段"></a>视图中的主要字段</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">字段</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">spid</td>
-<td style="text-align:left">Sql Server 会话ID</td>
-</tr>
-<tr>
-<td style="text-align:left">kpid</td>
-<td style="text-align:left">Windows 线程ID</td>
-</tr>
-<tr>
-<td style="text-align:left">blocked</td>
-<td style="text-align:left">正在阻塞请求的会话ID。如果此列为Null，则标识请求未被阻塞</td>
-</tr>
-<tr>
-<td style="text-align:left">waittype</td>
-<td style="text-align:left">当前连接的等待资源编号，标识是否等待资源，0或Null表示不需要等待任何资源</td>
-</tr>
-<tr>
-<td style="text-align:left">watitime</td>
-<td style="text-align:left">当前等待时间，单位为毫秒，0表示没有等待</td>
-</tr>
-<tr>
-<td style="text-align:left">dbid</td>
-<td style="text-align:left">当前正由进程使用的数据库ID</td>
-</tr>
-<tr>
-<td style="text-align:left">uid</td>
-<td style="text-align:left">执行命令的用户ID</td>
-</tr>
-<tr>
-<td style="text-align:left">login_time</td>
-<td style="text-align:left">客户端进程登录到服务器的时间</td>
-</tr>
-<tr>
-<td style="text-align:left">last_batch</td>
-<td style="text-align:left">上次执行存储过程或Execute语句的时间。对于系统进程，将存储sql server的启动时间</td>
-</tr>
-<tr>
-<td style="text-align:left">open_tran</td>
-<td style="text-align:left">进程的打开事物个数。如果有嵌套事物，就会大于1</td>
-</tr>
-<tr>
-<td style="text-align:left">status</td>
-<td style="text-align:left">进程ID状态</td>
-</tr>
-<tr>
-<td style="text-align:left">hostname</td>
-<td style="text-align:left">建立链接的客户端工作站的名称</td>
-</tr>
-<tr>
-<td style="text-align:left">program_name</td>
-<td style="text-align:left">应用程序的名称，就是连接字符串中配的 Application Name</td>
-</tr>
-<tr>
-<td style="text-align:left">hostprocess</td>
-<td style="text-align:left">建立连接的应用程序在客户端工作站的进程ID号</td>
-</tr>
-<tr>
-<td style="text-align:left">cmd</td>
-<td style="text-align:left">当前正在执行的命令</td>
-</tr>
-<tr>
-<td style="text-align:left">loginname</td>
-<td style="text-align:left">登录名</td>
-</tr>
-</tbody>
-</table>
-<p>status：进程ID 状态<br><em>, dormant = 正在重置会话 ; 
-</em>. running = 会话正在运行一个或多个批处理 ;<br><em>. background = 会话正在运行一个后台任务 ; 
-</em>. rollback = 会话正在处理事务回滚 ;<br><em>. pending = 会话正在等待工作线程变为可用 ; 
-</em>. runnable = 会话中的任务在等待获取 Scheduler 来运行的可执行队列中 ;<br><em>. spinloop = 会话中的任务正在等待调节锁变为可用 ; 
-</em>. suspended = 会话正在等待事件完成</p>
-<h3 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h3><ol>
-<li><p>先找到哪个链接的 blocked 字段不为 0。如 spid 53 的 blocked 字段是 52，spid 52 的 bloecked 为 0，就可以得出结论：此时有阻塞发生，53 被 52 阻塞了。如果你发现一个连接的 blocked 字段等于自己，那说明这个连接正在做磁盘读写，要等它自己的 I/O 做完。</p>
-</li>
-<li><p>查找链接在哪个数据库上<br>检查 dbid 即可，得到 dbid，可以运行一下查询得到数据库的名字：SELECT * FROM [master].[sys].[sysdatabases]。</p>
-</li>
-</ol>
+        <p><strong>当变量名和后面的内容都是变量命名所允许的内容时，这个时候直接使用$var是不行的，的用{}把变量名括起来。</strong></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cips34b79001evnpvqb789bip" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="cips34b840024vnpvimdm8921" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,19 +121,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Microsoft SQL Server 删除阻塞进程 sp_who
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/06/15/客户端请求-WEB-流程/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/06/23/Linux之cut命令的用法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">客户端请求 WEB 流程</div>
+      <div class="article-nav-title">Linux之cut命令的用法</div>
     </a>
   
 </nav>
