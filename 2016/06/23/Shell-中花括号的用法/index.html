@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/23/Shell-中花括号的用法/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="shell 花括号 中括号 小括号">
-<meta property="og:updated_time" content="2016-06-23T09:12:59.808Z">
+<meta property="og:updated_time" content="2016-06-23T09:14:48.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell 中花括号的用法">
 <meta name="twitter:description" content="shell 花括号 中括号 小括号">
@@ -107,15 +107,15 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>当变量名和后面的内容都是变量命名所允许的内容时，这个时候直接使用$var是不行的，得用{}把变量名括起来。</strong></p>
+        <h3 id="var"><a href="#var" class="headerlink" title="${var}"></a>${var}</h3><p><strong>当变量名和后面的内容都是变量命名所允许的内容时，这个时候直接使用$var是不行的，得用{}把变量名括起来。</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo &quot;Legion$var&quot;</span><br><span class="line">Legionlookback</span><br><span class="line">[root@localhost ~]# echo &quot;$varLegion&quot;</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# echo &quot;$&#123;var&#125;Legion&quot;</span><br><span class="line">lookbackLegion</span><br></pre></td></tr></table></figure>
-<p><strong>当变量var值为空时${var:-a}会把a作为值返回，当变量不为空时，${var:-a}会把var的值作为结果返回</strong><br>注意：表达式并会不修改变量var的值</p>
+<h3 id="var-string"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</h3><p><strong>当变量var值为空时${var:-a}会把a作为值返回，当变量不为空时，${var:-a}会把var的值作为结果返回</strong><br>注意：表达式并会不修改变量var的值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# var=lookbak</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">lookbak</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="cips3cew50024wxpvae0gdpp9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="cips3eqcq0024xupvi5r31ymf" class="article-share-link">Share</a>
       
       
     </footer>
