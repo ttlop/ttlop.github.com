@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux dirname pwd">
-<meta property="og:updated_time" content="2016-06-23T03:29:22.545Z">
+<meta property="og:updated_time" content="2016-06-23T03:31:47.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 获取当前正在执行脚本的绝对路径">
 <meta name="twitter:description" content="linux dirname pwd">
@@ -109,11 +109,11 @@ var _hmt = _hmt || [];
       
         <p>常见的误区是使用 <strong>pwd</strong> 命令，该命令的作用是 <strong>pwd - print name of current/working directory</strong>，这才是此命令的含义，当前的工作目录。这里没有任何意思说明，这个目录就是脚本存放的目录，我们可以如下测试：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# pwd</span><br><span class="line">/root</span><br><span class="line">[root@mail ~]# cat /tmp/a.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line">pwd</span><br><span class="line">[root@mail ~]# /tmp/a.sh </span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
-<p>你会发现，显示的执行的是执行命令的路径 <strong>/root</strong>，而不是脚本所在的路径 <strong>/tmp</strong>。</p>
+<p>你会发现，显示的是执行命令的路径 <strong>/root</strong>，而不是脚本所在的路径 <strong>/tmp</strong>。</p>
 <p>另一个错误的答案是 $0，这个也是不对的，这个 $0 是 <strong>Bash</strong> 环境下的特殊变量，真实含义如下：</p>
 <ol>
-<li>使用一个文件调用 bash，那么 $0 的值是那个文件的名字），不是绝对路径咯</li>
-<li>使用 -c 选项启动 bash 的话，真真执行的命令会从一个字符串中读取，字符串后面还有别的参数的话，使用从 $0 开始的特殊变量引用</li>
+<li>使用一个文件调用 bash，那么 $0 的值是那个文件的名字，不是绝对路径咯</li>
+<li>使用 -c 选项启动 bash 的话，真正执行的命令会从一个字符串中读取，字符串后面还有别的参数的话，使用从 $0 开始的特殊变量引用</li>
 <li>除此之外，$0 会被设置成调用 bash 的那个文件的名字，没说是绝对路径咯</li>
 </ol>
 <p>下面是正确答案</p>
@@ -129,7 +129,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="ciprr2jub0010t8pvvscibnpf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="ciprr5mcy0010uppvguaeikh6" class="article-share-link">Share</a>
       
       
     </footer>
