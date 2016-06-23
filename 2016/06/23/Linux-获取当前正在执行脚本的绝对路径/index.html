@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 iptables默认策略 | 运维生存时间</title>
+  <title>Linux 获取当前正在执行脚本的绝对路径 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="默认 缺省 iptables 策略 规则">
+  <meta name="description" content="linux dirname pwd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 iptables默认策略">
-<meta property="og:url" content="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/index.html">
+<meta property="og:title" content="Linux 获取当前正在执行脚本的绝对路径">
+<meta property="og:url" content="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="默认 缺省 iptables 策略 规则">
-<meta property="og:updated_time" content="2016-04-19T08:13:59.888Z">
+<meta property="og:description" content="linux dirname pwd">
+<meta property="og:updated_time" content="2016-06-23T03:29:22.545Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 iptables默认策略">
-<meta name="twitter:description" content="默认 缺省 iptables 策略 规则">
+<meta name="twitter:title" content="Linux 获取当前正在执行脚本的绝对路径">
+<meta name="twitter:description" content="linux dirname pwd">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-iptables默认规则" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Linux-获取当前正在执行脚本的绝对路径" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/19/Centos-7-iptables默认规则/" class="article-date">
-  <time datetime="2016-04-19T03:15:03.000Z" itemprop="datePublished">2016-04-19</time>
+    <a href="/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" class="article-date">
+  <time datetime="2016-06-23T03:15:14.000Z" itemprop="datePublished">2016-06-23</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Centos 7 iptables默认策略
+      Linux 获取当前正在执行脚本的绝对路径
     </h1>
   
 
@@ -107,12 +107,29 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如下为Centos 7系统下iptables的默认策略及解释：<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sample configuration for iptables service</span></span><br><span class="line"><span class="comment"># you can edit this manually or use system-config-firewall</span></span><br><span class="line"><span class="comment"># please do not ask us to add additional ports/services to this default configuration</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示INPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示FORWARD表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示OUTPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line"><span class="comment">#意思是进入的数据包只能是刚刚我发出的数据包的回应</span></span><br><span class="line"><span class="comment">#ESTABLISHED:已建立的连接状态</span></span><br><span class="line"><span class="comment">#RELATED:该数据包与本机发出的数据包相关</span></span><br><span class="line"></span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line"><span class="comment">#这两条的意思是在INPUT表和FORWARD表中拒绝所有其它不符合上述任何一条规则的数据包，并且发送一条host prohibited的消息给被拒绝的主机</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure></p>
+        <p>常见的误区是使用 <strong>pwd</strong> 命令，该命令的作用是 <strong>pwd - print name of current/working directory</strong>，这才是此命令的含义，当前的工作目录。这里没有任何意思说明，这个目录就是脚本存放的目录，我们可以如下测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# pwd</span><br><span class="line">/root</span><br><span class="line">[root@mail ~]# cat /tmp/a.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line">pwd</span><br><span class="line">[root@mail ~]# /tmp/a.sh </span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
+<p>你会发现，显示的执行的是执行命令的路径 <strong>/root</strong>，而不是脚本所在的路径 <strong>/tmp</strong>。</p>
+<p>另一个错误的答案是 $0，这个也是不对的，这个 $0 是 <strong>Bash</strong> 环境下的特殊变量，真实含义如下：</p>
+<ol>
+<li>使用一个文件调用 bash，那么 $0 的值是那个文件的名字），不是绝对路径咯</li>
+<li>使用 -c 选项启动 bash 的话，真真执行的命令会从一个字符串中读取，字符串后面还有别的参数的话，使用从 $0 开始的特殊变量引用</li>
+<li>除此之外，$0 会被设置成调用 bash 的那个文件的名字，没说是绝对路径咯</li>
+</ol>
+<p>下面是正确答案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">basepath=$(cd `dirname $0`; pwd)</span><br></pre></td></tr></table></figure>
+<p>在此进行解释如下：</p>
+<ol>
+<li>dirname $0，取得当前执行的脚本文件的父目录</li>
+<li>cd <code>dirname $0</code>，进入这个目录（切换到当前工作目录）</li>
+<li>pwd，显示当前工作目录（cd执行后的结果）</li>
+</ol>
+<p>由此，我们获得了当前正在执行的脚本的存放路径。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="ciprr2jsa0005t8pvun6ocl67" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="ciprr2jub0010t8pvvscibnpf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -121,19 +138,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/20/Centos-7-安装php5-5/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 安装php5.5
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/19/Centos-7-使用iptables服务/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/06/23/Find-查找最近修改的文件/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Centos 7 使用iptables服务</div>
+      <div class="article-nav-title">Find 查找最近修改的文件</div>
     </a>
   
 </nav>

@@ -15,18 +15,17 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 iptables默认策略 | 运维生存时间</title>
+  <title>Archives: 2016/6 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="默认 缺省 iptables 策略 规则">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 iptables默认策略">
-<meta property="og:url" content="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/index.html">
+  <meta name="description" content="运维 生存时间 ttl op oa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="运维生存时间">
+<meta property="og:url" content="http://ttlop.com/archives/2016/06/page/3/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="默认 缺省 iptables 策略 规则">
-<meta property="og:updated_time" content="2016-04-19T08:13:59.888Z">
+<meta property="og:description" content="运维 生存时间 ttl op oa">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 iptables默认策略">
-<meta name="twitter:description" content="默认 缺省 iptables 策略 规则">
+<meta name="twitter:title" content="运维生存时间">
+<meta name="twitter:description" content="运维 生存时间 ttl op oa">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,65 +80,44 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-iptables默认规则" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/19/Centos-7-iptables默认规则/" class="article-date">
-  <time datetime="2016-04-19T03:15:03.000Z" itemprop="datePublished">2016-04-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Centos 7 iptables默认策略
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/06/01/Nginx-Location-Configuration/" class="archive-article-date">
+  <time datetime="2016-06-01T02:59:50.000Z" itemprop="datePublished">Jun 1</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/06/01/Nginx-Location-Configuration/">Nginx Location Configuration</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如下为Centos 7系统下iptables的默认策略及解释：<br><a id="more"></a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sample configuration for iptables service</span></span><br><span class="line"><span class="comment"># you can edit this manually or use system-config-firewall</span></span><br><span class="line"><span class="comment"># please do not ask us to add additional ports/services to this default configuration</span></span><br><span class="line">*filter</span><br><span class="line">:INPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示INPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示FORWARD表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line"><span class="comment">#该规则表示OUTPUT表默认策略是ACCEPT</span></span><br><span class="line"></span><br><span class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line"><span class="comment">#意思是进入的数据包只能是刚刚我发出的数据包的回应</span></span><br><span class="line"><span class="comment">#ESTABLISHED:已建立的连接状态</span></span><br><span class="line"><span class="comment">#RELATED:该数据包与本机发出的数据包相关</span></span><br><span class="line"></span><br><span class="line">-A INPUT -p icmp -j ACCEPT</span><br><span class="line">-A INPUT -i lo -j ACCEPT</span><br><span class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</span><br><span class="line"><span class="comment">#这两条的意思是在INPUT表和FORWARD表中拒绝所有其它不符合上述任何一条规则的数据包，并且发送一条host prohibited的消息给被拒绝的主机</span></span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="ciprr2jsa0005t8pvun6ocl67" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/04/20/Centos-7-安装php5-5/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 安装php5.5
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/04/19/Centos-7-使用iptables服务/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Centos 7 使用iptables服务</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/archives/2016/06/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/2016/06/">1</a><a class="page-number" href="/archives/2016/06/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         
