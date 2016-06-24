@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/24/Shell-中中括号的用法/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="shell 中括号">
-<meta property="og:updated_time" content="2016-06-24T03:44:53.431Z">
+<meta property="og:updated_time" content="2016-06-24T03:51:11.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell 中中括号的用法">
 <meta name="twitter:description" content="shell 中括号">
@@ -107,17 +107,27 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-单中括号"><a href="#1-单中括号" class="headerlink" title="1. 单中括号"></a>1. 单中括号</h3><ol>
+        <h3 id="单中括号"><a href="#单中括号" class="headerlink" title="单中括号"></a>单中括号</h3><ol>
 <li><p>bash 的内部命令，[ 和 test 是等同的。如果我们不用绝对路径指明，通常我们用的都是 bash 自带的命令。if/test 结构中的左中括号都是调用 test 的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。</p>
 </li>
 <li><p>Test 和 [] 中可用的比较运算符只有 == 和 !=，两者都是用于比较字符串的，不可用于整数比较，整数比较只能使用 -eq、-gt这种形式。无论是字符串比较还是整数比较都不支持大于号小于号。如果实在想用，对于字符串比较可以使用转义形式。[] 中的逻辑与和逻辑或使用 -a 和 -o 表示。</p>
 </li>
 </ol>
-<h3 id="2-双中括号"><a href="#2-双中括号" class="headerlink" title="2. 双中括号"></a>2. 双中括号</h3>
+<h3 id="双中括号"><a href="#双中括号" class="headerlink" title="双中括号"></a>双中括号</h3><ol>
+<li><p>bash 的关键字，并不是一个命令。[[]]结构比[]更加通用。在[[和]]之间所有的字符都不会发生文件名扩展或者单词分隔，但是会发生参数扩展和命令替换。</p>
+</li>
+<li><p>支持字符串的模式匹配，使用 =~ 操作符甚至支持 shell 的正则表达式。字符串比较时可以把右边作为一个模式，而不仅仅是一个字符串，比如 [[ hello == hell? ]]，结果为真。[[]]中匹配字符串或通配符，不需要引号。</p>
+</li>
+<li><p>使用[[…]]条件判断结构，而不是[…]，能够防止脚本中的许多逻辑错误。比如 &amp;&amp;、||、&lt; 和 &gt; 操作符能够正常存在于 [[]]条件判断结构中。</p>
+</li>
+<li><p>bash 把双括号中的表达式看作一个单独的元素，并返回一个退出状态码。</p>
+</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="cipt72bnw002453pv91dfjqyq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="cipt7afb6002468pvua0g9410" class="article-share-link">Share</a>
       
       
     </footer>
