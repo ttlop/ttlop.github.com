@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/06/24/Shell-中小括号的用法/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="shell 小括号">
-<meta property="og:updated_time" content="2016-06-24T05:42:09.308Z">
+<meta property="og:updated_time" content="2016-06-24T05:48:22.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell 中小括号的用法">
 <meta name="twitter:description" content="shell 小括号">
@@ -116,11 +116,17 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ttlopBackup]# (echo &quot;a&quot;; echo &quot;b&quot;;) | awk &apos;&#123;print NR, $0&#125;&apos;</span><br><span class="line">1 a</span><br><span class="line">2 b</span><br></pre></td></tr></table></figure>
 <h3 id="用法-1"><a href="#用法-1" class="headerlink" title="$() 用法"></a>$() 用法</h3><p>在bash shell中，$( )与<code> </code> (反引号)都是用来做命令替换用(command substitution)的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# echo &quot;$(ls -l)&quot;</span><br><span class="line">total 0</span><br><span class="line">drwx------. 3 root root 16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-httpd.service-uSB35m</span><br><span class="line">drwx------. 3 root root 16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-mariadb.service-stR07S</span><br><span class="line"></span><br><span class="line">[root@localhost tmp]# echo &quot;date&quot;</span><br><span class="line">date</span><br><span class="line">[root@localhost tmp]# echo &quot;$(date)&quot;</span><br><span class="line">Fri Jun 24 13:41:20 CST 2016</span><br></pre></td></tr></table></figure>
-<h3 id="用法-2"><a href="#用法-2" class="headerlink" title="$(()) 用法"></a>$(()) 用法</h3>
+<h3 id="用法-2"><a href="#用法-2" class="headerlink" title="$(()) 用法"></a>$(()) 用法</h3><p><strong>算术运算</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# echo $((3+2))</span><br><span class="line">5</span><br><span class="line">[root@localhost tmp]# echo 3+2</span><br><span class="line">3+2</span><br><span class="line">[root@localhost tmp]# echo $((10/2))</span><br><span class="line">5</span><br><span class="line">[root@localhost tmp]# echo $((3-2))</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p><strong>三目运算</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# echo $((35&gt;2?2:3))</span><br><span class="line">2</span><br><span class="line">[root@localhost tmp]# echo $((35&lt;2?2:3))</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<p><strong>其它运算</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# echo $a</span><br><span class="line">a</span><br><span class="line">[root@localhost tmp]# echo $((a=2+3))</span><br><span class="line">5</span><br><span class="line">[root@localhost tmp]# echo $a</span><br><span class="line">5</span><br><span class="line">[root@localhost tmp]# echo $((a+=3))</span><br><span class="line">8</span><br><span class="line">[root@localhost tmp]# echo $a</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="ciptb949n0026d3pvcqamz6xi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="ciptbh45f0027e2pvdc7vup5a" class="article-share-link">Share</a>
       
       
     </footer>
