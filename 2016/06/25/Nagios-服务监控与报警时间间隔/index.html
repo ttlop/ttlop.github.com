@@ -15,18 +15,21 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Nagios - 安装好无法启动问题汇总 | 运维生存时间</title>
+  <title>Nagios 服务监控与报警时间间隔 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nagios no running">
+  <meta name="description" content="我们看看默认的配置文件是怎样的：
+123456789101112131415161718192021222324define service&amp;#123;        name                            generic-service         ; The &amp;apos;name&amp;apos; of this service template        activ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nagios - 安装好无法启动问题汇总">
-<meta property="og:url" content="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/index.html">
+<meta property="og:title" content="Nagios 服务监控与报警时间间隔">
+<meta property="og:url" content="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="nagios no running">
-<meta property="og:updated_time" content="2016-06-20T08:50:50.494Z">
+<meta property="og:description" content="我们看看默认的配置文件是怎样的：
+123456789101112131415161718192021222324define service&amp;#123;        name                            generic-service         ; The &amp;apos;name&amp;apos; of this service template        activ">
+<meta property="og:updated_time" content="2016-06-25T02:42:48.018Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nagios - 安装好无法启动问题汇总">
-<meta name="twitter:description" content="nagios no running">
+<meta name="twitter:title" content="Nagios 服务监控与报警时间间隔">
+<meta name="twitter:description" content="我们看看默认的配置文件是怎样的：
+123456789101112131415161718192021222324define service&amp;#123;        name                            generic-service         ; The &amp;apos;name&amp;apos; of this service template        activ">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,10 +84,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Nagios-安装好无法启动问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Nagios-服务监控与报警时间间隔" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/20/Nagios-安装好无法启动问题汇总/" class="article-date">
-  <time datetime="2016-06-20T08:48:17.000Z" itemprop="datePublished">2016-06-20</time>
+    <a href="/2016/06/25/Nagios-服务监控与报警时间间隔/" class="article-date">
+  <time datetime="2016-06-25T02:21:54.000Z" itemprop="datePublished">2016-06-25</time>
 </a>
     
   <div class="article-category">
@@ -99,7 +102,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Nagios - 安装好无法启动问题汇总
+      Nagios 服务监控与报警时间间隔
     </h1>
   
 
@@ -107,17 +110,21 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>提示 <strong>qh: Failed to init socket ‘/usr/local/nagios/var/rw/nagios.qh’</strong></li>
+        <p>我们看看默认的配置文件是怎样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">define service&#123;</span><br><span class="line">        name                            generic-service         ; The &apos;name&apos; of this service template</span><br><span class="line">        active_checks_enabled           1                       ; Active service checks are enabled</span><br><span class="line">        passive_checks_enabled          1                       ; Passive service checks are enabled/accepted</span><br><span class="line">        parallelize_check               1                       ; Active service checks should be parallelized (disabling this can lead to major performance problems)</span><br><span class="line">        obsess_over_service             1                       ; We should obsess over this service (if necessary)</span><br><span class="line">        check_freshness                 0                       ; Default is to NOT check service &apos;freshness&apos;</span><br><span class="line">        notifications_enabled           1                       ; Service notifications are enabled</span><br><span class="line">        event_handler_enabled           1                       ; Service event handler is enabled</span><br><span class="line">        flap_detection_enabled          1                       ; Flap detection is enabled</span><br><span class="line">        process_perf_data               1                       ; Process performance data</span><br><span class="line">        retain_status_information       1                       ; Retain status information across program restarts</span><br><span class="line">        retain_nonstatus_information    1                       ; Retain non-status information across program restarts</span><br><span class="line">        is_volatile                     0                       ; The service is not volatile</span><br><span class="line">        check_period                    24x7                    ; The service can be checked at any time of the day</span><br><span class="line">        max_check_attempts              3                       ; Re-check the service up to 3 times in order to determine its final (hard) state</span><br><span class="line">        normal_check_interval           10                      ; Check the service every 10 minutes under normal conditions</span><br><span class="line">        retry_check_interval            2                       ; Re-check the service every two minutes until a hard state can be determined</span><br><span class="line">        contact_groups                  admins                  ; Notifications get sent out to everyone in the &apos;admins&apos; group</span><br><span class="line">        notification_options            w,u,c,r                 ; Send notifications about warning, unknown, critical, and recovery events</span><br><span class="line">        notification_interval           60                      ; Re-notify about service problems every hour</span><br><span class="line">        notification_period             24x7                    ; Notifications can be sent out at any time</span><br><span class="line">         register                        0                      ; DONT REGISTER THIS DEFINITION - ITS NOT A REAL SERVICE, JUST A TEMPLATE!</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>normal_check_interval 表示在正常情况下每10分钟检查一次服务状态</p>
+</li>
+<li><p>retry_check_interval 检测到服务状态发生变化后每两分钟检查一次服务，直到确定服务异常</p>
+</li>
+<li><p>max_check_attempts 与 retry_check_interval 配合使用，即检查服务状态发生变化后重复检查达到这个次数即确定服务状态改变</p>
+</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1466408082] Nagios 4.1.1 starting... (PID=22890)</span><br><span class="line">[1466408082] Local time is Mon Jun 20 15:34:42 CST 2016</span><br><span class="line">[1466408082] LOG VERSION: 2.0</span><br><span class="line">[1466408082] qh: Failed to init socket &apos;/usr/local/nagios/var/rw/nagios.qh&apos;. bind() failed: No such file or directory</span><br><span class="line">[1466408082] Error: Failed to initialize query handler. Aborting</span><br></pre></td></tr></table></figure>
-<p>如下步骤即可解决：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/nagios/var/rw</span><br><span class="line">chown nagios:nagios /usr/local/nagios/var/rw</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cipukabrf001sbkpvufbtdnaz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="cipukabrj001ubkpv4t0m1duj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,19 +133,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/06/21/Nagios-使用问题解决/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Nagios 使用问题解决
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/06/24/Nagios-主机监控与报警时间间隔/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Nagios - Installing Nagios Core From Source</div>
+      <div class="article-nav-title">Nagios 主机监控与报警时间间隔</div>
     </a>
   
 </nav>
