@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Find atime ctime mtime 用法与区别总结 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="find atime ctime mtime n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Find atime ctime mtime 用法与区别总结">
+<meta property="og:url" content="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="find atime ctime mtime n">
+<meta property="og:updated_time" content="2016-06-30T05:41:28.465Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Find atime ctime mtime 用法与区别总结">
+<meta name="twitter:description" content="find atime ctime mtime n">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Find-atime-ctime-mtime-用法与区别总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" class="article-date">
+  <time datetime="2016-06-30T03:28:49.000Z" itemprop="datePublished">2016-06-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Find atime ctime mtime 用法与区别总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="atime、ctime和mtime"><a href="#atime、ctime和mtime" class="headerlink" title="atime、ctime和mtime"></a>atime、ctime和mtime</h2><p>atime 是指 access time，即文件被读取或者执行的时间，修改文件是不会改变 access time 的。</p>
+<p>ctime 即 change time 文件状态改变时间，指文件的节点被修改的时间。</p>
+<p>mtime 即 modify time，指文件内容被修改的时间。</p>
+<h2 id="find-mtime-中的参数-n"><a href="#find-mtime-中的参数-n" class="headerlink" title="find  -mtime 中的参数 n"></a>find  -mtime 中的参数 n</h2><p>find . -mtime n 中的n指的是 24<em>n，+n、-n、n分别表示大于、小于等于24</em>n。</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># 最后一次修改发生在 n+1 天以前，距离当前时间为 (n+1)*24 小时</span><br><span class="line">[root@host-001 ezagooDomainResolv]# find . -mtime +1  -name &quot;2016*&quot;</span><br><span class="line">./20160627-203001</span><br><span class="line">./20160627-210001</span><br><span class="line">./20160627-213001</span><br><span class="line">./20160627-170001</span><br><span class="line">./20160627-173001</span><br><span class="line">./20160627-180001</span><br><span class="line">./20160627-183001</span><br><span class="line">./20160627-190001</span><br><span class="line">./20160627-193001</span><br><span class="line">./20160627-200001</span><br><span class="line">./20160627-220001</span><br><span class="line">./20160627-223001</span><br><span class="line">./20160627-230001</span><br><span class="line">./20160627-233001</span><br><span class="line">./20160628-000001</span><br><span class="line">./20160628-003001</span><br><span class="line">./20160628-010001</span><br><span class="line">./20160628-013001</span><br><span class="line">./20160628-020001</span><br><span class="line">./20160628-023001</span><br><span class="line">./20160628-030001</span><br><span class="line">./20160628-033001</span><br><span class="line">./20160628-040001</span><br><span class="line">./20160628-043001</span><br><span class="line">./20160628-050001</span><br><span class="line">./20160628-053001</span><br><span class="line">./20160628-060001</span><br><span class="line">./20160628-063001</span><br><span class="line">./20160628-070001</span><br><span class="line">./20160628-073001</span><br><span class="line">./20160628-080002</span><br><span class="line">./20160628-083001</span><br><span class="line">./20160628-090001</span><br><span class="line">./20160628-093001</span><br><span class="line">./20160628-100001</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"># 最后一次修改发生在 n 天以内，距离当前时间为 n*24 小时以内</span><br><span class="line">[root@host-001 ezagooDomainResolv]# find . -mtime -1  -name &quot;2016*&quot;</span><br><span class="line">./20160630-080001</span><br><span class="line">./20160630-093001</span><br><span class="line">./20160630-110001</span><br><span class="line">./20160630-120001</span><br><span class="line">./20160630-130001</span><br><span class="line">./20160629-140001</span><br><span class="line">./20160629-150001</span><br><span class="line">./20160629-160001</span><br><span class="line">./20160629-170001</span><br><span class="line">./20160629-180001</span><br><span class="line">./20160629-190001</span><br><span class="line">./20160629-200001</span><br><span class="line">./20160629-210001</span><br><span class="line">./20160629-220001</span><br><span class="line">./20160629-230001</span><br><span class="line">./20160630-000002</span><br><span class="line">./20160630-010001</span><br><span class="line">./20160630-020001</span><br><span class="line">./20160630-030001</span><br><span class="line">./20160630-040001</span><br><span class="line">./20160630-050001</span><br><span class="line">./20160630-060001</span><br><span class="line">./20160630-070001</span><br><span class="line">./20160630-083001</span><br><span class="line">./20160630-100001</span><br><span class="line">./20160630-103001</span><br><span class="line">./20160630-113001</span><br><span class="line">./20160630-123001</span><br><span class="line">./20160630-133001</span><br><span class="line">./20160629-143001</span><br><span class="line">./20160629-153001</span><br><span class="line">./20160629-163001</span><br><span class="line">./20160629-173001</span><br><span class="line">./20160629-183001</span><br><span class="line">./20160629-193001</span><br><span class="line">./20160629-203001</span><br><span class="line">./20160629-213001</span><br><span class="line">./20160629-223001</span><br><span class="line">./20160629-233001</span><br><span class="line">./20160630-003001</span><br><span class="line">./20160630-013001</span><br><span class="line">./20160630-023001</span><br><span class="line">./20160630-033001</span><br><span class="line">./20160630-043001</span><br><span class="line">./20160630-053001</span><br><span class="line">./20160630-063001</span><br><span class="line">./20160630-073001</span><br><span class="line">./20160630-090001</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" data-id="ciq1vx602000l75pvddu5c2mi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/25/Nagios-服务监控与报警时间间隔/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Nagios 服务监控与报警时间间隔</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/">Find atime ctime mtime 用法与区别总结</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/25/Nagios-服务监控与报警时间间隔/">Nagios 服务监控与报警时间间隔</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/24/Nagios-主机监控与报警时间间隔/">Nagios 主机监控与报警时间间隔</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/24/Shell-中小括号的用法/">Shell 中小括号的用法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/24/Shell-中中括号的用法/">Shell 中中括号的用法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
