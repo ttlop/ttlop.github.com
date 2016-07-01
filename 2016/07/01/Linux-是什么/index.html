@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 是什么 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="linux是什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 是什么">
+<meta property="og:url" content="http://ttlop.com/2016/07/01/Linux-是什么/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="linux是什么">
+<meta property="og:updated_time" content="2016-07-01T03:48:25.536Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 是什么">
+<meta name="twitter:description" content="linux是什么">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-是什么" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/01/Linux-是什么/" class="article-date">
+  <time datetime="2016-07-01T02:44:34.000Z" itemprop="datePublished">2016-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 是什么
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux 可划分以下四部分：<br><em>. linux 内核
+</em>. GNU 工具组建<br><em>. 图形化桌面环境
+</em>. 应用软件</p>
+<a id="more"></a>
+<h3 id="深入探究-Linux-内核"><a href="#深入探究-Linux-内核" class="headerlink" title="深入探究 Linux 内核"></a>深入探究 Linux 内核</h3><p>Linux 系统的核心是内核。内核控制着计算机系统上的所有硬件和软件：必要时分配硬件，有需要时执行软件。<br>内核基本负责以下四项主要功能：<br><em>. 系统内存管理
+</em>. 软件程序管理<br><em>. 硬件设备管理
+</em>. 文件系统管理</p>
+<h4 id="系统内存管理"><a href="#系统内存管理" class="headerlink" title="系统内存管理"></a>系统内存管理</h4><p>操作系统内核的基本功能之一就是内存管理。内核不仅管理服务器上可用物理内存，还可以创建和管理虚拟内存（即并不实际存在的内存）。<br>内核通过硬盘上的存储空间来实现虚拟内存，这块区域称为交换空间（swap space）。内核不断的在交换空间和实例的物理内存之间反复交换虚拟内存存储单元中的内容。这使得系统以为它拥有比物理内存更多的可用内存。<br>内存存储单元会被按组分成很多块，这些块称作页面（page）。内核会将每个页面放在物理内存或交换空间。然后，内核会维护一个内存页面表，来指明哪些页面位于物理内存内，哪些页面被换到磁盘上。<br>内核会记录哪些内存页面正在使用中，并自动把一段时间未访问的内存页面复制到交换空间区域（称之为换出，swapping out）–即使还有可用内存。当程序要访问一个已被换出的内存页面时，内核必须从物理内存换成另外一个内存页面来给它让出空间，然后从交换空间换入（swapping in）请求的内存页面。显然，这个过程要花费时间，并使得运行中的进程变慢。只要 Linux 系统在运行，为运行中的程序换出内存页面的过程就不会停歇。<br>可以查看专门的 /proc/meminfo 文件来观察 linux 系统上虚拟内存的当前状态。下面是一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /proc/meminfo </span><br><span class="line">MemTotal:        3875024 kB</span><br><span class="line">MemFree:          149792 kB</span><br><span class="line">MemAvailable:    3052040 kB</span><br><span class="line">Buffers:               0 kB</span><br><span class="line">Cached:          3080508 kB</span><br><span class="line">SwapCached:          196 kB</span><br><span class="line">Active:          1038308 kB</span><br><span class="line">Inactive:        2354280 kB</span><br><span class="line">Active(anon):      89336 kB</span><br><span class="line">Inactive(anon):   291728 kB</span><br><span class="line">Active(file):     948972 kB</span><br><span class="line">Inactive(file):  2062552 kB</span><br><span class="line">Unevictable:           0 kB</span><br><span class="line">Mlocked:               0 kB</span><br><span class="line">SwapTotal:       4079612 kB</span><br><span class="line">SwapFree:        4074456 kB</span><br><span class="line">Dirty:                20 kB</span><br><span class="line">Writeback:             0 kB</span><br><span class="line">AnonPages:        311892 kB</span><br><span class="line">Mapped:            25520 kB</span><br><span class="line">Shmem:             68984 kB</span><br><span class="line">Slab:             176532 kB</span><br><span class="line">SReclaimable:     119320 kB</span><br><span class="line">SUnreclaim:        57212 kB</span><br><span class="line">KernelStack:        5600 kB</span><br><span class="line">PageTables:         9228 kB</span><br><span class="line">NFS_Unstable:          0 kB</span><br><span class="line">Bounce:                0 kB</span><br><span class="line">WritebackTmp:          0 kB</span><br><span class="line">CommitLimit:     6017124 kB</span><br><span class="line">Committed_AS:    1017664 kB</span><br><span class="line">VmallocTotal:   34359738367 kB</span><br><span class="line">VmallocUsed:       91668 kB</span><br><span class="line">VmallocChunk:   34359644160 kB</span><br><span class="line">HardwareCorrupted:     0 kB</span><br><span class="line">AnonHugePages:    215040 kB</span><br><span class="line">HugePages_Total:       0</span><br><span class="line">HugePages_Free:        0</span><br><span class="line">HugePages_Rsvd:        0</span><br><span class="line">HugePages_Surp:        0</span><br><span class="line">Hugepagesize:       2048 kB</span><br><span class="line">DirectMap4k:       92096 kB</span><br><span class="line">DirectMap2M:     4102144 kB</span><br></pre></td></tr></table></figure>
+<p>默认情况下，运行在 linux 系统上的每个进程都有各自的内存页面。进程不能访问其它进程正在使用的内存页面。内核维护着它自己的内存区域。出去安全考虑，用户进程不能访问内核进程使用的内存。<br>为了方便共享数据，你可以创建一些共享内存页面，多个进程可在同一块公用内存区域进行读取和写入操作。内核负责维护和管理这块公用内存区域并控制每个进程访问这块共享区域。<br>ipcs 命令专门用来查看系统上当前共享内存页面，以下是输出例子；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ipcs -m</span><br><span class="line"></span><br><span class="line">------ Shared Memory Segments --------</span><br><span class="line">key        shmid      owner      perms      bytes      nattch     status      </span><br><span class="line">0x01121fe3 753664     root       600        1000       6</span><br></pre></td></tr></table></figure>
+<p>每个共享内存段都有个所有者，也就是创建它的用户。每个段也都有标准的 linux 权限设置来设定其它用户是否可以访问该段。这个键值用来限定其它用户是否可以访问共享内存段。</p>
+<h4 id="软件程序管理"><a href="#软件程序管理" class="headerlink" title="软件程序管理"></a>软件程序管理</h4><p>linux 操作系统称运行中的程序为进程。进程可以在前台运行，将输出显示在屏幕上；也可以在后台运行，隐藏到幕后。内核控制着 linux 系统如何管理运行在系统上的所有进程i<br>。<br>内核创建了第一个进程（称为init进程）来启动系统上所有其它进程。当内核启动时，它会将 init 进程加载到虚拟内存中。内核在启动任何其它进程时，都会在虚拟内存中给新进程分配一段专有区域来存储该进程用到的数据和代码。</p>
+<h4 id="硬件设备管理"><a href="#硬件设备管理" class="headerlink" title="硬件设备管理"></a>硬件设备管理</h4><p>内核的另一个职责是管理硬件设备。任何 linux 系统需要与之通信的设备，都需要在内核代码中加入其驱动程序代码（driver code）。驱动程序代码相当于应用程序和硬件设备的中间人，允许内核同设备交换数据。在 linux 内核中有两种方法来插入设备驱动代码：<br><em>. 编译进内核的设备驱动代码
+</em>. 可插入内核的设备驱动模块</p>
+<p>以前，插入设备驱动代码的唯一途径是重新编译内核。每次给系统添加新设备时，你都要重新编译一遍内核代码。随着 linux 内核支持越来越多的硬件设备，这个过程也变得越来越低效。不过好在 linux 开发人员设计出了一种更好的将驱动代码插入运行中的内核的方法。<br>开发人员提出了内核模块的概念。它允许将驱动代码插入到运行中的内核而无需重新编译内核。同时，当设备不再使用时也可以将内核模块从内核中移走。这种方式极大地简化和推动了硬件设备在 linux 系统上的使用。<br>linux 系统将硬件设备当成特殊的文件，称之为设备文件。设备文件有3中不同分类：<br><em>. 字符型设备文件
+</em>. 块设备文件<br>*. 网络设备文件<br>字符设备文件是指处理数据时每次只能处理一个字符的设备。大多数类型的调制解调器和终端都是作为字符型设备文件创建的。块设备文件是指处理数据时每次都能处理大块数据的设备，比如硬盘。<br>网络设备文件是指采用数据包发送和接收数据的设备，包括各种网卡和一个特殊的回环设备。这个回环设备允许 linux 系统使用通用的网络编程协议同自己通信。<br>Linux 为系统上的每个设备都创建一个唯一的数值对，称为“节点”。与设备的所有通信都是通过设备节点完成的。每个节点都有一个唯一的数值对供 linux 内核标识它。数值对包括一个主设备号和一个次设备号。类似的设备被划分到同样的主设备号下。此设备号用于标识同一主设备号下的某个特殊设备。举例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost dev]# cd /dev</span><br><span class="line">[root@localhost dev]# ls -al sda* ttyS*</span><br><span class="line">brw-rw----. 1 root disk    8,  0 May 16 09:55 sda</span><br><span class="line">brw-rw----. 1 root disk    8,  1 May 16 09:55 sda1</span><br><span class="line">brw-rw----. 1 root disk    8,  2 May 16 09:55 sda2</span><br><span class="line">crw-rw----. 1 root dialout 4, 64 May 16 17:55 ttyS0</span><br><span class="line">crw-rw----. 1 root dialout 4, 65 May 16 17:55 ttyS1</span><br><span class="line">crw-rw----. 1 root dialout 4, 66 May 16 17:55 ttyS2</span><br><span class="line">crw-rw----. 1 root dialout 4, 67 May 16 17:55 ttyS3</span><br></pre></td></tr></table></figure>
+<h4 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h4><p>不同于其它一些操作系统，Linux 内核支持多种不同类型的文件系统来从硬盘中读取或写入数据。内核必须在编译时就加入对所有可能用到的文件系统的支持。<br>Linux 内核采用虚拟文件系统作为和每个文件系统交互的接口。这为Linux 内核同任何类型文件系统通信提供了一个标准接口。当每个文件系统被挂载和使用时，VPS将信息都缓存在内存中。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/01/Linux-是什么/" data-id="ciq36qth60014a9pvw27zgvoj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/30/Rsync-同步常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Rsync 同步常用命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/01/Linux-是什么/">Linux 是什么</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/30/Rsync-同步常用命令/">Rsync 同步常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/30/Rsync-安装使用详解/">Rsync 安装使用详解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/">Find atime ctime mtime 用法与区别总结</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/25/Nagios-服务监控与报警时间间隔/">Nagios 服务监控与报警时间间隔</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
