@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix item key 详解 | 运维生存时间</title>
+  <title>Linux 定位系统环境变量 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix item key">
+  <meta name="description" content="bash shell profile">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix item key 详解">
-<meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/index.html">
+<meta property="og:title" content="Linux 定位系统环境变量">
+<meta property="og:url" content="http://ttlop.com/2016/07/05/Linux-定位系统环境变量/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix item key">
-<meta property="og:updated_time" content="2016-05-05T07:17:44.119Z">
+<meta property="og:description" content="bash shell profile">
+<meta property="og:updated_time" content="2016-07-05T01:56:46.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix item key 详解">
-<meta name="twitter:description" content="zabbix item key">
+<meta name="twitter:title" content="Linux 定位系统环境变量">
+<meta name="twitter:description" content="bash shell profile">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-item-key-详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Linux-定位系统环境变量" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-item-key-详解/" class="article-date">
-  <time datetime="2016-05-05T06:18:50.000Z" itemprop="datePublished">2016-05-05</time>
+    <a href="/2016/07/05/Linux-定位系统环境变量/" class="article-date">
+  <time datetime="2016-07-05T01:50:19.000Z" itemprop="datePublished">2016-07-05</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix item key 详解
+      Linux 定位系统环境变量
     </h1>
   
 
@@ -107,28 +107,19 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>zabbix的items用来从主机获取数据，通常情况下，我们称item为监控项。例如我们服务器需要监控它的CPU负载，那么实现这个方法的东西就叫做item。</p>
-<p>监控项需要获取cpu信息，则需要一个对应的监控key：system.cpu.load。如果是获取网卡流量，那么获取网卡这个监控项需要key：net.if.in或者net.if.out。</p>
-<p>一般情况下key要与参数结合起来使用，例如获取5分钟的负载情况：system.cpu.load[avg5]，avg5是对应的参数。</p>
+        <p>Linux 系统用环境变量来在程序和脚本中标识它自己。这为你的程序提供了获得信息的一个简便方法。问题是如何设置这些变量。<br>在你登录 Linux 系统启动一个 bash shell 时，默认情况下 bash 在几个文件中查找命令。这些文件称作启动文件。bash 检查的启动文件取决与你启动 bash shell 的方式。启动 bash shell 有3种方式：</p>
+<p><em>. 登录时当作默认登录 shell；
+</em>. 作为非登录 shell 的交互式 shell；<br>*. 作为运行脚本的非交互式 shell。</p>
 <a id="more"></a>
-<h3 id="1-灵活的参数"><a href="#1-灵活的参数" class="headerlink" title="1. 灵活的参数"></a>1. 灵活的参数</h3><p>参数位置可用接受任意参数则是灵活的。例如vfs.fs.size[<em>],”</em>“星号可以使用任意的参数，例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vfs.fs.size[/]</span><br><span class="line">vfs.fs.size[/opt]</span><br></pre></td></tr></table></figure>
-<h3 id="2-Key-格式"><a href="#2-Key-格式" class="headerlink" title="2. Key 格式"></a>2. Key 格式</h3><p>Item key 格式包含 key 名称和它的参数，参数必须符合规范。key的定义要遵循从左到右的规则，如果都符合，那这个 key 合法，否则不合法。</p>
-<h3 id="3-Key-名称"><a href="#3-Key-名称" class="headerlink" title="3. Key 名称"></a>3. Key 名称</h3><p>Key 允许如下字符作为名称：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0-9a-zA-Z_-.</span><br></pre></td></tr></table></figure>
-<p>即所有数字、大小写字母、下划线、减号、点，key 名称从左到右，只要有一个字符不符合，那么 key 就不合法。</p>
-<h3 id="4-Key-参数"><a href="#4-Key-参数" class="headerlink" title="4. Key 参数"></a>4. Key 参数</h3><p>Item key 可以有多个参数，他们之间用逗号’,’分开，key 参数可以是带引号的字符串、不带引号的字符串以及数组。</p>
-<p>参数如果设置为空，那么将使用它设置的默认值。</p>
-<p>例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system.swap.size[,pfree] <span class="comment">#其中第一个为空的参数值使用默认值</span></span><br></pre></td></tr></table></figure>
-<h4 id="4-1-参数-带引号"><a href="#4-1-参数-带引号" class="headerlink" title="4.1 参数 - 带引号"></a>4.1 参数 - 带引号</h4><p>如果 key 参数带引号，那么任何 unicode 数据都合法，如果参数里面带有双引号，那么要使用”\”来转义。</p>
-<h4 id="4-2-参数-不带引号"><a href="#4-2-参数-不带引号" class="headerlink" title="4.2 参数 - 不带引号"></a>4.2 参数 - 不带引号</h4><p>如果 key 参数是一个不带引号的字符串，除了逗号和右中括号其它任何 unicode 字符串都合法。</p>
-<h4 id="4-3-参数-数组"><a href="#4-3-参数-数组" class="headerlink" title="4.3 参数 - 数组"></a>4.3 参数 - 数组</h4><p>如果 key 参数是一个数组，那么数组要多加一对中括号，并且数组里面的参数同样要遵循参数规范。</p>
+<h3 id="登录-SHELL"><a href="#登录-SHELL" class="headerlink" title="登录 SHELL"></a>登录 SHELL</h3><p>当你登录 Linux 系统时，bash shell 会作为登录 shell 启动。登录 shell 会从4个不同的启动文件里读取命令。下面是 bash shell 处理这些文件的次序：</p>
+<p><em>. /etc/profile；
+</em>. $HOME/.bash_profile；<br><em>. $HOME/.bash_login;
+</em>. $HOME/.profile.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="ciq8t1o2r0040g3pvcezkh205" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/07/05/Linux-定位系统环境变量/" data-id="ciq8t1nz00017g3pv7oikwhxz" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -137,19 +128,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/05/Zabbix-External-check-外部命令检测/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          Zabbix External check 外部命令检测
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/07/01/Linux-GNU-工具链/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">Zabbix 在系统已有的Templates中增加Graphs</div>
+      <div class="article-nav-title">Linux GNU 工具链</div>
     </a>
   
 </nav>
