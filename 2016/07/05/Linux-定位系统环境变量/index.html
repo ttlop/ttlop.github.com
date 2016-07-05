@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/05/Linux-定位系统环境变量/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="bash shell profile">
-<meta property="og:updated_time" content="2016-07-05T01:58:53.864Z">
+<meta property="og:updated_time" content="2016-07-05T02:30:38.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 定位系统环境变量">
 <meta name="twitter:description" content="bash shell profile">
@@ -108,8 +108,11 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>Linux 系统用环境变量来在程序和脚本中标识它自己。这为你的程序提供了获得信息的一个简便方法。问题是如何设置这些变量。<br>在你登录 Linux 系统启动一个 bash shell 时，默认情况下 bash 在几个文件中查找命令。这些文件称作启动文件。bash 检查的启动文件取决与你启动 bash shell 的方式。启动 bash shell 有3种方式：</p>
-<p><em>. 登录时当作默认登录 shell；
-</em>. 作为非登录 shell 的交互式 shell；<br>*. 作为运行脚本的非交互式 shell。</p>
+<ul>
+<li>登录时当作默认登录 shell；</li>
+<li>作为非登录 shell 的交互式 shell；</li>
+<li>作为运行脚本的非交互式 shell。</li>
+</ul>
 <a id="more"></a>
 <h3 id="登录-SHELL"><a href="#登录-SHELL" class="headerlink" title="登录 SHELL"></a>登录 SHELL</h3><p>当你登录 Linux 系统时，bash shell 会作为登录 shell 启动。登录 shell 会从4个不同的启动文件里读取命令。下面是 bash shell 处理这些文件的次序：</p>
 <ul>
@@ -118,11 +121,19 @@ var _hmt = _hmt || [];
 <li>$HOME/.bash_login;</li>
 <li>$HOME/.profile.</li>
 </ul>
+<ol>
+<li><p>/etc/profile 文件<br>/etc/profile 文件是系统上默认的 bash shell 的主启动文件。系统上的每个用户登录时都会执行这个启动文件。另外3个启动文件是用户专有的，所以可根据每个用户的具体需求定制。<br>这个文件中设置的环境变量都会导出，这保证了这些环境变量对这个登录 shell 创建的所有子进程都有效。<br>profile 文件还有一个复杂的特性。它有个 for 语句，会逐一访问位于 /etc/profile.d 目录的每个文件。它为 linux 系统提供了一个集中存放用户登录时要执行的应用专属的启动文件的地方。</p>
+</li>
+<li><p>$HOME 目录下的启动文件<br>剩下的 3 个启动文件都起着同一个作用：提供一个用户专属的启动文件来定义用户专有的环境变量。大多数 Linux 发行版只用其中一个。</p>
+</li>
+</ol>
+<h3 id="交互式-SHELL"><a href="#交互式-SHELL" class="headerlink" title="交互式 SHELL"></a>交互式 SHELL</h3><p>如果你的 bash shell 不是登录系统时启动的（比如你在命令提示符下敲入bash启动），你启动的 shell 称作交互式 shell。交互式 shell 不像登录 shell 一样运行，但它仍然提供了命令行提示符来输入命令。<br>如果 bash 是作为交互式 shell 启动的，它不会去访问 /etc/profile 文件，而会去用户的 HOME 目录检查 .bashrc 是否存在。<br>.bashrc 文件有两个作用：一是查看 /etc 目录下的共用 bashrc 文件，二是为用户提供一个定制自己命令别名和私有脚本函数的地方。</p>
+<h3 id="非交互式-SHELL"><a href="#非交互式-SHELL" class="headerlink" title="非交互式 SHELL"></a>非交互式 SHELL</h3><p>最后一种类型的 shell 是非交互式 shell。系统执行 shell 脚本时用的就是这种 shell。你不用担心它没有命令行提示符，但当你每次在系统上运行脚本时仍要运行特定的启动命令。<br>为了处理这种情况，bash shell 提供了 BASH_ENV 环境变量。当 shell 启动一个非交互式 shell 进程时，它会检查这个环境变量来查看要执行的启动文件。如果有执行，shell 会执行文件里的命令。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/05/Linux-定位系统环境变量/" data-id="ciq8t5z1u0017hypvtcuiu919" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/05/Linux-定位系统环境变量/" data-id="ciq8trj940014k4pvcywyp72i" class="article-share-link">Share</a>
       
       
     </footer>
