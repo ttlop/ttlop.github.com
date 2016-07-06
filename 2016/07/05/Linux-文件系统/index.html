@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 文件系统 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="linux 文件系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 文件系统">
+<meta property="og:url" content="http://ttlop.com/2016/07/05/Linux-文件系统/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="linux 文件系统">
+<meta property="og:updated_time" content="2016-07-06T01:49:57.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 文件系统">
+<meta name="twitter:description" content="linux 文件系统">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-文件系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/05/Linux-文件系统/" class="article-date">
+  <time datetime="2016-07-05T09:05:54.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 文件系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>文件系统为 Linux 提供了从硬盘存写的 0 和 1 到你在应用中用到的文件和目录之间的桥梁。<br>Linux 支持多种类型的文件系统来管理文件和目录。每种文件系统都在存储设备上实现了虚拟目录，只是特性略不相同。</p>
+<a id="more"></a>
+<h2 id="探索-Linux-文件系统"><a href="#探索-Linux-文件系统" class="headerlink" title="探索 Linux 文件系统"></a>探索 Linux 文件系统</h2><h3 id="基本的文件系统"><a href="#基本的文件系统" class="headerlink" title="基本的文件系统"></a>基本的文件系统</h3><ol>
+<li>ext 文件系统</li>
+</ol>
+<p>Linux 操作系统中引入的最早的文件系统：使用虚拟目录来操作硬件设备，在物理设备上按定长的块来存储数据。<br>ext 文件系统采用称作索引节点的系统来存放虚拟目录中所存储文件的信息。存储在虚拟目录中的每一个文件在索引节点中都有一个条目。条目名称的扩展部分来自其跟踪的每个文件的额外数据，包括文件名、大小、属主、属组、访问权限、指向数据文件的硬盘块指针。<br>Linux 通过唯一的数值（称作索引节点号）来引用索引节点表中的每个索引节点，这个值是创建文件时由文件系统分配。文件系统通过索引节点号而不是文件全名及路径来标识文件。</p>
+<ol>
+<li>ext2 文件系统</li>
+</ol>
+<p>ext2 文件系统是ext 文件系统的一个扩展，但维护着同样的结构。ext2 文件系统扩展了索引节点表的格式来保存系统上每个文件的更多信息。如追踪文件访问情况、文件大小从2G增加到2T，除了索引节点外，ext2文件系统还改变了文件在数据块中存储的方式。ext2 文件系统通过按组分配磁盘块来减轻碎片化。通过将数据块分组，文件系统不需要为了数据库查找整个物理设备来读取文件。</p>
+<p>多年来，ext 文件系统都是Linux发行版采用的默认文件系统。但它也有一些限制。索引节点表虽然支持文件系统保存有关文件的更多信息，但会造成对系统来说致命的问题。文件系统每次存储或更新文件，它都要用新信息来更新索引节点。但它并不是连成一气的。<br>如果存储文件和更新索引节点的过程中，计算机系统发生了什么事情，这二者就不同步。ext2文件系统由于容易在系统崩溃或断电时损坏而臭名昭著。这样即使文件数据正常保存到物理设备上，如果索引节点表记录未更新，ext2文件系统甚至都不知道那个文件存在。</p>
+<h3 id="日志文件系统"><a href="#日志文件系统" class="headerlink" title="日志文件系统"></a>日志文件系统</h3><p>日志文件系统给 Linux 系统增加了一层安全性。日志文件系统先将文件的更改写入到临时文件（称作日志）中，然后在数据成功写到存储设备和索引节点表之后，再删除对应的日志条目。<br>如果系统在数据被写入到存储设备之前崩溃或断电了，日志文件系统下次会读取日志文件并处理上次留下的未写入的数据。<br>Linux 中有3中不同的广泛使用的日志方法</p>
+<ul>
+<li>数据模式：索引节点和文件都写入日志，丢失数据风险低，但性能差</li>
+<li>排序模式：只写入索引节点数据到日志，但只有数据成功写入后才删除，性能和安全之间的良好折中</li>
+<li>回写模式：只写入索引节点数据到日志，但不管文件数据合适写入，丢失数据风险高，但仍比不用日志好</li>
+</ul>
+<h3 id="扩展的-Linux-日志文件系统"><a href="#扩展的-Linux-日志文件系统" class="headerlink" title="扩展的 Linux 日志文件系统"></a>扩展的 Linux 日志文件系统</h3><ol>
+<li>ext3 文件系统</li>
+</ol>
+<p>采用和 ext2 文件系统相同的索引节点结构，但给每个存储设备增加了一个日志文件，来将准备写入存储设备的数据先写入日志文件。默认采用排序模式的日志功能，可以在创建文件系统时用简单的命令行将日志方法改成数据模式或回写模式。</p>
+<ol>
+<li>ext4 文件系统</li>
+</ol>
+<p>支持数据压缩和加密，还支持称作区段的特性。区段在存储设备上按块分配空间，但在索引节点表中只保存起始块的位置。由于无需列出所有存储文件中数据的数据块，可以在索引节点表中节省一些空间。</p>
+<ol>
+<li>Reiser 文件系统</li>
+</ol>
+<p>只支持日志回写模式，但有两个有意思的特性：在线调整已有文件系统的大小；采用尾部压缩技术</p>
+<ol>
+<li>JFS 文件系统</li>
+</ol>
+<p>采用顺序日志方法，除了 IBM Linux 版本外，很少使用。</p>
+<ol>
+<li>XFS 文件系统</li>
+</ol>
+<p>类似于 Reiser 文件系统，除了 XFS 文件系统只可扩大不能缩小。</p>
+<h2 id="操作文件系统"><a href="#操作文件系统" class="headerlink" title="操作文件系统"></a>操作文件系统</h2><h3 id="创建分区"><a href="#创建分区" class="headerlink" title="创建分区"></a>创建分区</h3><p>必须在存储设备上创建分区来容纳文件系统，分区可以是硬盘，也可以是硬盘的一部分，来容纳虚拟目录的一部分。<br>fdisk 工具用来安装在系统上的任何存储设备上的分区。</p>
+<h3 id="创建文件系统"><a href="#创建文件系统" class="headerlink" title="创建文件系统"></a>创建文件系统</h3><p>将数据存储到分区之前，必须采用某种我呢见系统格式化它，这样 Linux 才能使用它。</p>
+<h2 id="逻辑卷管理器"><a href="#逻辑卷管理器" class="headerlink" title="逻辑卷管理器"></a>逻辑卷管理器</h2><p>如果用标准分区在硬盘上创建了文件系统，往已有文件系统添加额外的空间在某种意义上会是个痛苦的过程。简单的方法是将另外硬盘上的分区加到已有的文件系统来动态地向已有文件系统添加空间。Linux 逻辑卷管理器（LVM）软件包正好是用来做这个的。</p>
+<h3 id="逻辑卷管理布局"><a href="#逻辑卷管理布局" class="headerlink" title="逻辑卷管理布局"></a>逻辑卷管理布局</h3><p>逻辑卷管理的核心是如何处理安装了系统上的硬盘分区。在逻辑卷管理的世界里，硬盘称作物理卷。每个物理卷都会映射到硬盘上创建的某一个物理分区。多个物理卷元素集中在一起可以组成一个卷组。逻辑卷管理系统会把卷组当作物理硬盘一样对待，卷组提供了一个创建逻辑分区的平台，而这些逻辑分区事实上包含了文件系统。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/05/Linux-文件系统/" data-id="ciqa88q600019v3pvpmj47v3p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/05/Linux-文件权限/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux 文件权限</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/05/Linux-文件系统/">Linux 文件系统</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/05/Linux-文件权限/">Linux 文件权限</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/05/Linux-定位系统环境变量/">Linux 定位系统环境变量</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/01/Linux-GNU-工具链/">Linux GNU 工具链</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/01/Linux-是什么/">Linux 是什么</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
