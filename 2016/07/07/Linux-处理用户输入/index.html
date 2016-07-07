@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Linux 处理用户输入 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="linux 参数 选项 输入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 处理用户输入">
+<meta property="og:url" content="http://ttlop.com/2016/07/07/Linux-处理用户输入/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="linux 参数 选项 输入">
+<meta property="og:updated_time" content="2016-07-07T03:40:03.203Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 处理用户输入">
+<meta name="twitter:description" content="linux 参数 选项 输入">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Linux-处理用户输入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/07/Linux-处理用户输入/" class="article-date">
+  <time datetime="2016-07-07T01:13:27.000Z" itemprop="datePublished">2016-07-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux 处理用户输入
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>bash shell 提供了一些不同的方法来从用户处获得数据，包括命令行参数（添加在命令后的数据值）、命令行选项（可修改命令行为的单字母值）以及直接从键盘读取输入的能力。<br><a id="more"></a></p>
+<h3 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h3><p>向 shell 脚本传数据的最基本方法是使用命令行参数。脚本会通过特殊的变量（位置参数）来处理命令行参数。位置参数变量是标准的数字：$0是程序名，$1是第一个参数，依此类推直到第9个参数$9。</p>
+<p>每个参数都是用空格分隔的，所以 shell 会将空格当成分隔两个值的分隔符。要在参数值中包含空格，必须要用引号。</p>
+<p>在 shell 脚本中使用命令参数时如果脚本不加参数运行，可能会出现问题，所以在使用数居前检查数据确实已经存在是很有必要的。</p>
+<h3 id="特殊参数命令"><a href="#特殊参数命令" class="headerlink" title="特殊参数命令"></a>特殊参数命令</h3><p>通常在脚本中使用命令行参数之前应该检查一下命令行参数。对于多个命令行参数的脚本来说，这有点麻烦。bash shell 为此提供了一个特殊变量 $#。$# 特殊变量含有脚本运行时就有的命令行参数的个数。</p>
+<p>有些情况下，你指向抓取命令上提供的所有参数然后遍历它们，你可以使用一组其它的特殊变量而不用先用 $# 变量来判断命令行上有多少个参数然后遍历他们。</p>
+<p>$<em> 和 $@ 变量提供了对所有参数的快速访问。$</em> 变量会将命令行上提供的所有参数当作单个单词保存。基本上，$* 变量会将这些都当作一个参数，而不是多个对象。$@ 变量则会将命令行上提供的所有参数都当作同一个字符串中的多个独立的单词，它允许你遍历所有的值，将提供的每个参数分隔开来。</p>
+<h3 id="移动变量"><a href="#移动变量" class="headerlink" title="移动变量"></a>移动变量</h3><p>bash shell 提供了 shift 命令来帮助操作命令行参数。在使用 shift 命令时，默认情况下它会将每个参数变量减一，所以，变量 $3 的值会移到 $2，变量 $2 的值会移到 $1，而变量 $1 的值则无法被删除，注意，变量 $0 的值也就是程序名不会被改变。这事遍历命令行参数的另一个绝妙方法，尤其是在你不知道到底有多少参数时。</p>
+<h3 id="命令行选项"><a href="#命令行选项" class="headerlink" title="命令行选项"></a>命令行选项</h3><p>选项是跟在单破折线后面的单个字母，能改变命令的行为。表面上看，命令行选项也没什么特殊的，他们紧跟着脚本名之后，就跟命令行参数一样。</p>
+<p>你会经常遇到在 shell 脚本中同时使用选项和参数的情况，linux 处理这个问题的标准方法是用特殊字符将二者分开，该字符告诉脚本选项何时结束以及普通参数何时开始。</p>
+<p>当命令行选项要求额外的参数值时，脚本必须能检查并能正确处理。此时我们就可以使用 shift 的特性，额外的参数值有几个，我们处理之后就使用 shift 命令移动几个位置。</p>
+<p>然后还是会有一些限制，比如如果想将多个选项放进一个参数中，即合并选项，应该如何处理呢？使用 getopt 命令。</p>
+<p>getopt 命令是一个处理命令选项和参数时非常方便的工具，它能够识别命令行参数，从而在脚本中解析它们时更方便。可以接受一系列任意形式的命令行选项和参数，并启动将它们转换成适当的格式，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getopt options opstring parameters</span><br></pre></td></tr></table></figure>
+<p>optstring 是这个过程的关键所在，它定义了命令行有效的选项字母，还定义了哪些选项字母需要数值。首先，在 optstring 中列出你要在脚本中用到的每个命令行选项字母，然后在每个需要参数值的选项字母后加一个冒号。getopt 命令会基于你定义的 optstring 解析提供的参数。</p>
+<p>可以在脚本中使用 getopt 来格式化输入给脚本的任何命令行选项。方法是用 getopt 命令生成的格式化后的版本替换已有的命令行选项和参数。用 set 命令能够做到。</p>
+<p>set 命令的选项之一就是双破折线，该方法会将原始的脚本的命令行参数传给 getopt 命令，之后再将 getopt 命令的输出传给 set 命令。getopt 命令并不擅长处理带空格的参数值。它会将空格当作参数分隔符，而不是根据双引号将二者当作一个参数。我们使用更高级的 getopts 可以解决这个问题。</p>
+<p>与 getopt 将命令行上找到的选项和参数处理后只生成一个输出不同，getopts 命令能够和已有的 shell 参数变量对应的顺序工作。</p>
+<h3 id="获得用户输入"><a href="#获得用户输入" class="headerlink" title="获得用户输入"></a>获得用户输入</h3><p>read 命令接受从标准输入或另一个文件描述符的输入，在收到输入后，read 命令会将数据放进一个标准变量。</p>
+<ul>
+<li>read 命令包含一个 -p 选项，允许你直接在 read 命令行指定提示符；</li>
+<li>可以在 read 命令行不指定变量，read 命令会将它收到的任何数据都放进特殊环境变量 REPLY 中；</li>
+<li>-t 选项指定了 read 命令等待输入的秒数，当计时器过期后，read 命令会返回一个非零退出状态码；</li>
+<li>-n 选项可以让 read 命令来对输入的字符计数，当输入的字符达到预设的字符时，自动退出而不必按回车键；</li>
+<li>-s 选项会阻止将传给 read 命令的数据显示在显示器上（实际上，数据会被显示，只是 read 命令会将文本颜色设成跟背景色一样）；</li>
+<li>也可以用 read 命令来读取 Linux 系统上文件里保存的数据。每次调用 read 命令会从文件读取一样，当文件中再没有内容时，read 命令会退出并返回非零退出状态码。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/07/Linux-处理用户输入/" data-id="ciqbrm6by00174fpvfie4aaq2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/06/Linux-更多结构化命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux 更多结构化命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/07/Linux-处理用户输入/">Linux 处理用户输入</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/06/Linux-更多结构化命令/">Linux 更多结构化命令</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/06/Linux-结构化命令/">Linux 结构化命令</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/05/Linux-文件系统/">Linux 文件系统</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/05/Linux-文件权限/">Linux 文件权限</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
