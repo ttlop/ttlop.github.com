@@ -82,6 +82,66 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Rsync-同步常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/30/Rsync-同步常用命令/" class="article-date">
+  <time datetime="2016-06-30T08:28:21.000Z" itemprop="datePublished">2016-06-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/30/Rsync-同步常用命令/">Rsync 同步常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="t-选项"><a href="#t-选项" class="headerlink" title="-t 选项"></a>-t 选项</h4><ol>
+<li>使用 -t 选项后，rsync 总会想做一件事，就是将源文件的 “modify time” 同步到目标机器</li>
+<li>带有 -t 选项的 rsync 会变得更聪明些，它会在同步前先对比两边文件的时间戳和大小，如果一致，则认为两边文件一样，对此文件就不采取更新动作</li>
+</ol>
+<h4 id="v-选项"><a href="#v-选项" class="headerlink" title="-v 选项"></a>-v 选项</h4><p>让 rsync 输出更多的信息，越多的 v 可以获得越多的日志信息</p>
+<h4 id="z-选项"><a href="#z-选项" class="headerlink" title="-z 选项"></a>-z 选项</h4><p>使用这个选项，rsync 就会把发向对端的数据先进行压缩再传输</p>
+<h4 id="r-选项"><a href="#r-选项" class="headerlink" title="-r 选项"></a>-r 选项</h4><p>使用这个选项，rsync 会同步文件夹</p>
+<h4 id="p-选项"><a href="#p-选项" class="headerlink" title="-p 选项"></a>-p 选项</h4><p>保持权限的意思。如果不使用此选项，rsync 这样处理权限问题：</p>
+<ol>
+<li>如果目的端没有此文件，那么在同步后将目的端文件权限保持与源端一致</li>
+<li>如果目的端存在此文件，那么只同步文件内容，权限报纸不变</li>
+</ol>
+<h4 id="o-g-选项"><a href="#o-g-选项" class="headerlink" title="-o -g 选项"></a>-o -g 选项</h4><p>这两个选项是一对，用来保持文件的属组和属主</p>
+<h4 id="–progress-选项"><a href="#–progress-选项" class="headerlink" title="–progress 选项"></a>–progress 选项</h4><p>使用这个选项，rsync 会显示出传输进度信息</p>
+<h4 id="–delete、–delete-excluded、–delete-after"><a href="#–delete、–delete-excluded、–delete-after" class="headerlink" title="–delete、–delete-excluded、–delete-after"></a>–delete、–delete-excluded、–delete-after</h4><ol>
+<li>delete 如果源端没有此文件，则删除目的端的此文件，需要搭配 -r 使用</li>
+<li>delete-excluded 指定一些要在目的端删除的文件</li>
+<li>delete-after 默认情况下，rsync 会先清理目的端的文件再开始数据同步，如果使用此选项，则 rsync 会先进行数据同步，都完成后再删除那些需要清理的文件</li>
+</ol>
+<h4 id="–partial-选项"><a href="#–partial-选项" class="headerlink" title="–partial 选项"></a>–partial 选项</h4><p>断点续传，默认情况下，rsync 会删除那些传输中断的文件，然后重新传输，但在一些特别情况下，我们不希望重传而是续传</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/30/Rsync-同步常用命令/" data-id="ciqc3o2is0035n0pvtkfhit0p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Rsync-安装使用详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/30/Rsync-安装使用详解/" class="article-date">
@@ -118,7 +178,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Rsync-安装使用详解/" data-id="ciqc19q8s0034iqpvuzgzn21a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/30/Rsync-安装使用详解/" data-id="ciqc3o2iu0036n0pvtk474tit" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,7 +225,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" data-id="ciqc19q5n000jiqpvme801gzp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" data-id="ciqc3o2fu000mn0pv88mqyvau" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +275,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="ciqc19q82002fiqpvmnqwr5hc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="ciqc3o2id002nn0pvggdi8249" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,7 +328,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="ciqc19q8c002niqpvx9sglewc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="ciqc3o2hz002in0pvphwewk3c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -323,7 +383,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="ciqc19q8x0035iqpvogc78l7b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="ciqc3o2iy003bn0pvvc8b5vf9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -379,7 +439,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="ciqc19q8y0037iqpvabggj0ig" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="ciqc3o2iv0038n0pvckx16pjv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -436,7 +496,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="ciqc19q90003aiqpvk55fg3ma" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="ciqc3o2j0003dn0pvdst6mw8a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -481,7 +541,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="ciqc19q74001qiqpvu81j40nh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="ciqc3o2he001vn0pvvhbbozp1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -526,65 +586,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="ciqc19q5p000liqpv4flnfxjy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-获取当前正在执行脚本的绝对路径" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" class="article-date">
-  <time datetime="2016-06-23T03:15:14.000Z" itemprop="datePublished">2016-06-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/">Linux 获取当前正在执行脚本的绝对路径</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>常见的误区是使用 <strong>pwd</strong> 命令，该命令的作用是 <strong>pwd - print name of current/working directory</strong>，这才是此命令的含义，当前的工作目录。这里没有任何意思说明，这个目录就是脚本存放的目录，我们可以如下测试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# pwd</span><br><span class="line">/root</span><br><span class="line">[root@mail ~]# cat /tmp/a.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line">pwd</span><br><span class="line">[root@mail ~]# /tmp/a.sh </span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
-<p>你会发现，显示的是执行命令的路径 <strong>/root</strong>，而不是脚本所在的路径 <strong>/tmp</strong>。</p>
-<p>另一个错误的答案是 $0，这个也是不对的，这个 $0 是 <strong>Bash</strong> 环境下的特殊变量，真实含义如下：</p>
-<ol>
-<li>使用一个文件调用 bash，那么 $0 的值是那个文件的名字，不是绝对路径咯</li>
-<li>使用 -c 选项启动 bash 的话，真正执行的命令会从一个字符串中读取，字符串后面还有别的参数的话，使用从 $0 开始的特殊变量引用</li>
-<li>除此之外，$0 会被设置成调用 bash 的那个文件的名字，没说是绝对路径咯</li>
-</ol>
-<p>下面是正确答案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">basepath=$(cd `dirname $0`; pwd)</span><br></pre></td></tr></table></figure>
-<p>在此进行解释如下：</p>
-<ol>
-<li>dirname $0，取得当前执行的脚本文件的父目录</li>
-<li>cd <code>dirname $0</code>，进入这个目录（切换到当前工作目录）</li>
-<li>pwd，显示当前工作目录（cd执行后的结果）</li>
-</ol>
-<p>由此，我们获得了当前正在执行的脚本的存放路径。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="ciqc19q72001oiqpvfminwl8l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="ciqc3o2fr000jn0pvmtjc7q6p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -636,6 +638,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/07/07/Linux-控制脚本/">Linux 控制脚本</a>
+          </li>
+        
+          <li>
             <a href="/2016/07/07/Linux-呈现数据/">Linux 呈现数据</a>
           </li>
         
@@ -649,10 +655,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/07/06/Linux-结构化命令/">Linux 结构化命令</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/05/Linux-文件系统/">Linux 文件系统</a>
           </li>
         
       </ul>
