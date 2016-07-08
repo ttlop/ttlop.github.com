@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>LinuxShell 创建函数 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="linux shell 函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LinuxShell 创建函数">
+<meta property="og:url" content="http://ttlop.com/2016/07/08/LinuxShell-创建函数/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="linux shell 函数">
+<meta property="og:updated_time" content="2016-07-08T06:01:28.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LinuxShell 创建函数">
+<meta name="twitter:description" content="linux shell 函数">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LinuxShell-创建函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/08/LinuxShell-创建函数/" class="article-date">
+  <time datetime="2016-07-08T03:01:01.000Z" itemprop="datePublished">2016-07-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LinuxShell 创建函数
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>bash shell 支持用户定义的函数，用来解决多次重写大段代码的痛苦问题。你可以将 shell 脚本代码放进函数封装起来。这样就能在脚本的后续位置多次使用它了。</p>
+<a id="more"></a>
+<h3 id="函数创建、使用及返回值"><a href="#函数创建、使用及返回值" class="headerlink" title="函数创建、使用及返回值"></a>函数创建、使用及返回值</h3><p>有两种格式可以用来在 bash shell 脚本中创建函数，第一种格式采用关键字 function，后跟分配给该代码快的函数名：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function name &#123;</span><br><span class="line">    commands</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>name 属性定义了赋予函数的唯一名称，commands 是构成函数的一条或多条 bash shell 命令。<br>第二种格式跟在其它编程语言中定义函数很像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">name() &#123;</span><br><span class="line">    commands</span><br><span class="line">&#125;</span><br><span class="line">函数名后面的圆括号为空，表明正在定义的是一个函数。</span><br><span class="line"></span><br><span class="line">要在脚本中使用函数，在行上指定函数名就行了，跟使用其它 shell 命令一样。函数定义不必是 shell 脚本中最前面的事情，但函数必须在被使用前定义。函数名也必须是唯一的，否则也会出现问题。如果你重定义了函数，新定义会覆盖原来函数的定义，而不会产生任何错误消息。</span><br><span class="line"></span><br><span class="line">bash shell 会把函数当作小型脚本，运行结束时会返回一个退出状态码。有3中不同的方法来为函数产生退出状态码。</span><br><span class="line"></span><br><span class="line">* 默认退出状态码</span><br><span class="line">默认情况下，函数的退出状态码是函数中最后一条命令返回的退出状态码。在函数执行结束后，你可以用标准的 $? 变量来确定函数的退出状态码。</span><br><span class="line"></span><br><span class="line">* 使用 return 命令</span><br><span class="line">bash shell 可以使用 return 命令来退出函数并返回特定的退出状态码。当使用这种方法时注意两点：函数一结束就取返回值、退出状态码必须在0~255之间。如果你在用 $? 变量提取函数返回值之前执行了其它命令，函数的返回值可能会丢失，因为 $? 变量会返回执行的最后一条命令的退出状态码。另外任何大于 256 的值都会返回一个错误值。</span><br><span class="line"></span><br><span class="line">* 使用函数输出</span><br><span class="line">正如同可以将命令的输出保存到 shell 变量一样，也可以将函数的输出保存到 shell 变量中。可以用这种技术来获得任何类型的函数输出，并将其保存到变量中。</span><br><span class="line"></span><br><span class="line">### 在函数中使用变量</span><br><span class="line"></span><br><span class="line">bash shell 会将函数当作小型脚本对待，这意味着你可以向函数传递参数，就跟普通脚本一样。函数可以使用标准的参数环境变量来代表命令上传给函数的参数。在脚本中指定函数时，必须将参数和函数放在同一行，由于函数使用特殊参数环境变量作为自己的参数值，它不能直接从脚本的命令行获取脚本的参数值。</span><br><span class="line"></span><br><span class="line">函数中定义的变量可以跟普通变量的作用于不同，也就是说它们可以在脚本的其它地方隐藏起来，函数会用两种类型的变量：</span><br><span class="line"></span><br><span class="line">* 全局变量</span><br><span class="line">全局变量是在 shell 脚本中任何地方都有效的变量。如果你在脚本的主体部分定了一个全局变量，那么你可以在函数内读取它的值，类似的，如果你在函数内定义了一个全局变量，你可以在脚本的主体部分读取它的值。默认情况下，你在脚本中定义的任何变量都是全局变量，在函数外地址的变量可在函数内正常访问。</span><br><span class="line"></span><br><span class="line">* 局部变量</span><br><span class="line">函数内部使用的任何变量都可以被声明成局部变量，要那么做时，只要在变量声明的前面加上 local 关键字就可以了，也可以在给变量赋值的时候在赋值语句中使用 local 关键字。local 关键字保证了变量只局限在该函数中。如果脚本中在该函数之外有同样名字的变量，那么 shell 将会保持这两个变量的值是分离的。</span><br><span class="line"></span><br><span class="line">### 数组变量和函数</span><br><span class="line"></span><br><span class="line">如果试图将数组变量当成一个函数参数，函数只会取数组变量的第一个值，你必须将数组变量的值分解成单个值然后将这些值作为函数参数使用，即 $&#123;variable[*]&#125;，然后在函数内部，将所有的参数重组到新的数组变量中，即 myarra=(`echo &quot;$@&quot;`)。</span><br><span class="line"></span><br><span class="line">从函数里向 shell 脚本传回数组变量也用类似的方法，函数用 echo 语句按正确顺序输出单个数组值，然后脚本再将它们重新放进一个新的数组变量中。</span><br><span class="line"></span><br><span class="line">### 函数递归</span><br><span class="line"></span><br><span class="line">局部函数变量提供的一个特性是自成体系。自成体系的函数不需要使用任何外部资源，除了脚本在命令行上传给它的变量。这个特性使得函数可以递归的调用，即函数可以调用自己得到的结果。通常递归函数都有一个最终可以迭代到的基准值。</span><br><span class="line"></span><br><span class="line">```code</span><br><span class="line">function factorial &#123;</span><br><span class="line">    if [ $1 -eq 1 ]</span><br><span class="line">    then</span><br><span class="line">        echo 1</span><br><span class="line">    else</span><br><span class="line">        local temp=$[ $1 -1 ]</span><br><span class="line">        local result=`factorial $temp`</span><br><span class="line">        echo $[ $result * $1 ]</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="创建库"><a href="#创建库" class="headerlink" title="创建库"></a>创建库</h3><p>单个脚本中，使用函数可以省去一些键入的工作，但如果碰巧要在脚本间使用同一个代码块，函数库文件可以解决这个问题。两个步骤：</p>
+<ol>
+<li>创建包含所需函数的公用库文件；</li>
+<li>在要用这些函数的脚本文件中包含库文件。</li>
+</ol>
+<p>第一步很简单，新建一个文本，键入几个函数即可，后面开始，事情就变得复杂了。问题出在 shell 函数的作用域上，和环境变量一样，shell 函数只对定义它的 shell 会话有效。如果你在 shell 命令行界面的提示符下运行函数库脚本，shell 会创建新的 shell 并在新的 shell 中运行这个脚本，但当你运行另外一个用到这些函数的脚本时，他们却不可用，这同样适用于脚本。这里需要使用库函数的关键命令 source。source 命令会在当前的 shell 上下文中执行命令，可以用 source 命令来在 shell 脚本中运行库文件，这样函数就对脚本可用了。source 命令有个快捷别名，称作点操作符。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/08/LinuxShell-创建函数/" data-id="ciqdc3wct001yq5pvzhnurzqw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/08/Linux-作业控制/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux 作业控制</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/08/LinuxShell-创建函数/">LinuxShell 创建函数</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/08/Linux-作业控制/">Linux 作业控制</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/07/Linux-控制脚本/">Linux 控制脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/07/Linux-呈现数据/">Linux 呈现数据</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/07/Linux-处理用户输入/">Linux 处理用户输入</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

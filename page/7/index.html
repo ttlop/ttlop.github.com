@@ -82,6 +82,51 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Centos-7-关闭-SELinux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/12/Centos-7-关闭-SELinux/" class="article-date">
+  <time datetime="2016-05-12T02:23:07.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/12/Centos-7-关闭-SELinux/">Centos 7 关闭 SELinux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="查看-SELinux-状态"><a href="#查看-SELinux-状态" class="headerlink" title="查看 SELinux 状态"></a>查看 SELinux 状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># /usr/sbin/sestatus </span></span><br><span class="line">SELinux status:                 enabled</span><br><span class="line">SELinuxfs mount:                /sys/fs/selinux</span><br><span class="line">SELinux root directory:         /etc/selinux</span><br><span class="line">Loaded policy name:             targeted</span><br><span class="line">Current mode:                   enforcing</span><br><span class="line">Mode from config file:          disabled</span><br><span class="line">Policy MLS status:              enabled</span><br><span class="line">Policy deny_unknown status:     allowed</span><br><span class="line">Max kernel policy version:      28</span><br><span class="line">或者</span><br><span class="line">[root@localhost ~]<span class="comment"># getenforce </span></span><br><span class="line">Permissive</span><br></pre></td></tr></table></figure>
+<h3 id="临时关闭-SELinux"><a href="#临时关闭-SELinux" class="headerlink" title="临时关闭 SELinux"></a>临时关闭 SELinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># setenforce 0</span></span><br></pre></td></tr></table></figure>
+<p>此时再次查看状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># /usr/sbin/sestatus </span></span><br><span class="line">SELinux status:                 enabled</span><br><span class="line">SELinuxfs mount:                /sys/fs/selinux</span><br><span class="line">SELinux root directory:         /etc/selinux</span><br><span class="line">Loaded policy name:             targeted</span><br><span class="line">Current mode:                   permissive</span><br><span class="line">Mode from config file:          disabled</span><br><span class="line">Policy MLS status:              enabled</span><br><span class="line">Policy deny_unknown status:     allowed</span><br><span class="line">Max kernel policy version:      28</span><br></pre></td></tr></table></figure>
+<h3 id="永久关闭-SELinux-需要重启服务器"><a href="#永久关闭-SELinux-需要重启服务器" class="headerlink" title="永久关闭 SELinux (需要重启服务器)"></a>永久关闭 SELinux (需要重启服务器)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br><span class="line">将</span><br><span class="line">SELINUX=enforcing</span><br><span class="line">修改为</span><br><span class="line">SELINUX=disabled</span><br><span class="line">重启服务器即可</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciqdc3wap000dq5pvwtxy4qr3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-的-system-cpu-load-与-CPU-使用率" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" class="article-date">
@@ -133,7 +178,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciqd4qppq0051dopvw5vzptsg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciqdc3wg00055q5pvfi6nomlo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -198,7 +243,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciqd4qppb004pdopvp2d7rwdv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciqdc3wfq004sq5pvfclmpjk8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -422,7 +467,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="ciqd4qpph004udopvv5hn77ga" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="ciqdc3wfv004xq5pv523uhvl0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -513,7 +558,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="ciqd4qpq1005bdopvupyaz2d8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="ciqdc3wg6005fq5pv0phvvdkl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -558,7 +603,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="ciqd4qppk004wdopvbsuypm8d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="ciqdc3wfx0050q5pvhbnnkqds" class="article-share-link">Share</a>
       
       
     </footer>
@@ -603,7 +648,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="ciqd4qpp3004hdopvdm41fwq9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="ciqdc3wfk004mq5pvm3rmp7ak" class="article-share-link">Share</a>
       
       
     </footer>
@@ -648,7 +693,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="ciqd4qpp6004ldopvd746tmd9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="ciqdc3wfl004nq5pv7pti0s4q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -693,7 +738,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="ciqd4qpou0048dopv2k0f0ztx" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="ciqdc3wfd004dq5pvge1mt9ha" class="article-share-link">Share</a>
       
       
     </footer>
@@ -738,52 +783,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="ciqd4qppy0059dopvo197lpnt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-External-check-外部命令检测" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-External-check-外部命令检测/" class="article-date">
-  <time datetime="2016-05-05T07:35:28.000Z" itemprop="datePublished">2016-05-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/05/Zabbix-External-check-外部命令检测/">Zabbix External check 外部命令检测</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Zabbix server 运行脚本或者二进制文件来执行外部检测，外部检测不需要在被监控段运行任何 agentd。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/05/Zabbix-External-check-外部命令检测/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="ciqd4qpon0041dopvyimvpaaf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="ciqdc3wg4005cq5pv50u6qsim" class="article-share-link">Share</a>
       
       
     </footer>
@@ -835,6 +835,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/07/08/LinuxShell-创建函数/">LinuxShell 创建函数</a>
+          </li>
+        
+          <li>
             <a href="/2016/07/08/Linux-作业控制/">Linux 作业控制</a>
           </li>
         
@@ -848,10 +852,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/07/07/Linux-处理用户输入/">Linux 处理用户输入</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/06/Linux-更多结构化命令/">Linux 更多结构化命令</a>
           </li>
         
       </ul>
