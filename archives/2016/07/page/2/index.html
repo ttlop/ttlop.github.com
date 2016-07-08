@@ -15,18 +15,17 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix 配置第三方邮件服务器实现邮件预警 | 运维生存时间</title>
+  <title>Archives: 2016/7 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix email smtp">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix 配置第三方邮件服务器实现邮件预警">
-<meta property="og:url" content="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/index.html">
+  <meta name="description" content="运维 生存时间 ttl op oa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="运维生存时间">
+<meta property="og:url" content="http://ttlop.com/archives/2016/07/page/2/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix email smtp">
-<meta property="og:updated_time" content="2016-06-12T01:14:30.200Z">
+<meta property="og:description" content="运维 生存时间 ttl op oa">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix 配置第三方邮件服务器实现邮件预警">
-<meta name="twitter:description" content="zabbix email smtp">
+<meta name="twitter:title" content="运维生存时间">
+<meta name="twitter:description" content="运维 生存时间 ttl op oa">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,140 +80,44 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-配置第三方邮件服务器实现邮件预警" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" class="article-date">
-  <time datetime="2016-05-19T07:27:58.000Z" itemprop="datePublished">2016-05-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Zabbix 配置第三方邮件服务器实现邮件预警
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/07/01/Linux-是什么/" class="archive-article-date">
+  <time datetime="2016-07-01T02:44:34.000Z" itemprop="datePublished">Jul 1</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/07/01/Linux-是什么/">Linux 是什么</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Media-Types-Configuration"><a href="#Media-Types-Configuration" class="headerlink" title="Media Types Configuration"></a>Media Types Configuration</h3><p>我们使用联通的 <strong>wo</strong> 邮箱发送报警邮件到 <strong>qq</strong> 邮箱</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Item</th>
-<th style="text-align:left">Value</th>
-<th style="text-align:left">Comment</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Name</td>
-<td style="text-align:left">Email</td>
-<td style="text-align:left">媒介名称，自定义设置</td>
-</tr>
-<tr>
-<td style="text-align:left">Type</td>
-<td style="text-align:left">Email</td>
-<td style="text-align:left">本篇文章我们以 Email 为例</td>
-</tr>
-<tr>
-<td style="text-align:left">SMTP server</td>
-<td style="text-align:left">smtp.wo.cn</td>
-<td style="text-align:left">smtp服务器地址，我们使用联通的</td>
-</tr>
-<tr>
-<td style="text-align:left">SMTP server port</td>
-<td style="text-align:left">25</td>
-<td style="text-align:left">smtp连接端口</td>
-</tr>
-<tr>
-<td style="text-align:left">SMTP helo</td>
-<td style="text-align:left">smtp helo值，通常是顶级域名，这个地方需要输入 smtp.wo.cn</td>
-</tr>
-<tr>
-<td style="text-align:left">Connection security</td>
-<td style="text-align:left">None</td>
-<td style="text-align:left">是否加密，这里选择 None</td>
-</tr>
-<tr>
-<td style="text-align:left">Authentication</td>
-<td style="text-align:left">Normal password</td>
-<td style="text-align:left">认证方式，这里选择 Normal password</td>
-</tr>
-<tr>
-<td style="text-align:left">Username</td>
-<td style="text-align:left">18675850419</td>
-<td style="text-align:left">输入 wo 邮箱账号，必须要加后缀部分</td>
-</tr>
-<tr>
-<td style="text-align:left">Password</td>
-<td style="text-align:left">xxxx</td>
-<td style="text-align:left">输入对应的 wo 邮箱密码</td>
-</tr>
-<tr>
-<td style="text-align:left">Enabled</td>
-<td style="text-align:left">勾选</td>
-<td style="text-align:left">勾选启用</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Users-Configuration"><a href="#Users-Configuration" class="headerlink" title="Users Configuration"></a>Users Configuration</h3><ol>
-<li><p>这里我们配置系统默认的 <strong>Admin</strong> 账户，在 <strong>Media</strong> 页添加上一步新增的介质</p>
-</li>
-<li><p>需要配置 <strong>Send to</strong>，其后填写接收报警信息的邮件地址，此处我填写我的 <strong>411383444@qq.com</strong> 邮箱</p>
-</li>
-</ol>
-<h3 id="Actions-Configuration"><a href="#Actions-Configuration" class="headerlink" title="Actions Configuration"></a>Actions Configuration</h3><ol>
-<li><p>这里我们配置系统默认的 <strong>Report problems to Zabbix administors</strong> action</p>
-</li>
-<li><p>需要勾选 <strong>Action</strong> 页的 <strong>Enabled</strong>，如需要，也请一并勾选 <strong>Recovery message</strong></p>
-</li>
-</ol>
-<blockquote>
-<p>注意: 配置的第三方邮件服务器时常发生预警邮件发送失败的情况,后面将专门使用一章来介绍使用本地的邮件服务器发送预警邮件.</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="ciqd4cvs3005gb7pvngpppi3b" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/05/20/Zabbix-Template-App-MySQL/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix Template App MySQL
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix Template Windows 2008 R2 IIS Servers</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/archives/2016/07/">&laquo; Prev</a><a class="page-number" href="/archives/2016/07/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </section>
         
