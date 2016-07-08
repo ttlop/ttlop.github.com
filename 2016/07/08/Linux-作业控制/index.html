@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/08/Linux-作业控制/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux job cron">
-<meta property="og:updated_time" content="2016-07-08T02:24:30.670Z">
+<meta property="og:updated_time" content="2016-07-08T02:29:03.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 作业控制">
 <meta name="twitter:description" content="linux job cron">
@@ -107,9 +107,9 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>你已经知道如何用组合键停止 shell 中真该运行的作业，在作业停止后，Linux 系统可以让你无条件终止或重启它。你可以用 kill 命令终止该进程，要重启停止的进程需要想其发送一个 SIGCONT 信号。<br>启动、停止、无条件终止以及恢复作业的这些功能统称为作业控制。通过作业控制，你就能完全控制 shell 中正在运行的所有作业了。</p>
+        <p>你已经知道如何用组合键停止 shell 中正在运行的作业，在作业停止后，Linux 系统可以让你无条件终止或重启它。你可以用 kill 命令终止该进程，要重启停止的进程需要想其发送一个 SIGCONT 信号。<br>启动、停止、无条件终止以及恢复作业的这些功能统称为作业控制。通过作业控制，你就能完全控制 shell 中正在运行的所有作业了。</p>
 <a id="more"></a>
-<h3 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h3><p>作业控制中的关键命令是 jobs 命令，我们用 jobs 命令来查看分配给 shell 的作业。jobs 命令会显示作业已经它们的作业号、作业中使用的命令。</p>
+<h3 id="作业控制"><a href="#作业控制" class="headerlink" title="作业控制"></a>作业控制</h3><p>作业控制中的关键命令是 jobs 命令，我们用 jobs 命令来查看分配给 shell 的作业。jobs 命令会显示作业以及它们的作业号、作业中使用的命令。</p>
 <p>你会注意到 jobs 命令输出中的加号和减号。带加号的作业会被当作默认的作业，在使用作业控制命令时，如果未在命令行指定任何作业号，该作业会被当成操作对象。带减号的作业则会在当前默认作业完成处理时称为下一个默认作业。任何时候都只有一个带加号的作业和一个带减号的作业，不管 shell 中有多少个正在运行的作业。</p>
 <p>在 bash 作业控制中，你可以将已停止的工作作为后台进程或前台进程重启。注意前台进程会接管你当前工作的终端，所以在使用该功能时要特别小心。</p>
 <p>要以后台模式重启一个作业，可以用 bg 命令加上作业号，由于作业是以后台模式重启的，命令行界面的提示符会出现，允许输入其它命令。要以前台模式重启作业，可以用 fg 命令加上作业号，由于作业是以前台模式运行的，命令行界面的提示符不会出现，直到该作业完成。</p>
@@ -122,7 +122,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h3 id="定时运行作业"><a href="#定时运行作业" class="headerlink" title="定时运行作业"></a>定时运行作业</h3><p>Linux 系统使用 cron 程序来计划要定期执行的作业。cron 程序会在后台运行并检查特殊的称作 cron 时间表的表，来获得计划执行的作业。</p>
-<p>cron 时间表采用一个特别的格式来指定作业合适运行，cron 时间表的格式如下：</p>
+<p>cron 时间表采用一个特别的格式来指定作业何时运行，cron 时间表的格式如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">min hour dayofmonth month dayofweek command command</span><br></pre></td></tr></table></figure>
 <p>cron 时间表允许你用特定值、值范围或者是通配符来指定条目，例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">15 10 * * * command</span><br></pre></td></tr></table></figure>
@@ -139,7 +139,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/08/Linux-作业控制/" data-id="ciqd4cvnv000zb7pvdictbzpz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/08/Linux-作业控制/" data-id="ciqd4ipor0014c4pvj9hnuk09" class="article-share-link">Share</a>
       
       
     </footer>
