@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/08/Linux-作业控制/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux job cron">
-<meta property="og:updated_time" content="2016-07-08T02:29:03.174Z">
+<meta property="og:updated_time" content="2016-07-08T02:35:15.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 作业控制">
 <meta name="twitter:description" content="linux job cron">
@@ -134,12 +134,12 @@ var _hmt = _hmt || [];
 <h3 id="启动时运行"><a href="#启动时运行" class="headerlink" title="启动时运行"></a>启动时运行</h3><p>启动 shell 脚本的最后一种方法是，在 linux 系统刚开机或用户启动一个新的 bash shell 会话时启动。</p>
 <p>大多数 Linux 发行版提供了一个本地开机文件专门让系统管理员添加开机时运行的脚本。在本地开机文件中，你可以指定特定命令或语句，或者输入任何你想在开机时启动的脚本。</p>
 <p>每个用户的主目录下都有两个文件，bash shell 会用他们来自动启动脚本并设置环境变量：.bash_profile、.bashrc。</p>
-<p>当新 shell 是新的登录生成的话，bash shell 会运行 .bash_pofile 文件，可以把任何登录时要运行的脚本放到该文件中。</p>
+<p>当新 shell 是新的登录生成的话，bash shell 会运行 .bash_pofile 文件，可以把任何登录时要运行的脚本放到该文件中。当新 shell 启动时，包括有新的登录情况，bash shell 会运行 .bashrc 文件。如果你想为系统上的所有用户运行一个脚本，大多数 Linux 发行版提供了 /etc/bashrc 文件，每次有用户在系统上启动了一个新的 bash shell 时，bash shell 就会执行该文件中的语句。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/08/Linux-作业控制/" data-id="ciqd4ipor0014c4pvj9hnuk09" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/08/Linux-作业控制/" data-id="ciqd4qpk40012dopvs9jycc30" class="article-share-link">Share</a>
       
       
     </footer>
