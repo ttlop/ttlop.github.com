@@ -15,17 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Nagios | 运维生存时间</title>
+  <title>理解 inode | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/Nagios/index.html">
+  <meta name="description" content="inode linux 索引节点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解 inode">
+<meta property="og:url" content="http://ttlop.com/2016/07/12/理解-inode/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="inode linux 索引节点">
+<meta property="og:updated_time" content="2016-07-12T08:59:55.893Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="理解 inode">
+<meta name="twitter:description" content="inode linux 索引节点">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -80,135 +81,62 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/25/Nagios-服务监控与报警时间间隔/" class="archive-article-date">
-  <time datetime="2016-06-25T02:21:54.000Z" itemprop="datePublished">Jun 25</time>
+        <section id="main"><article id="post-理解-inode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/12/理解-inode/" class="article-date">
+  <time datetime="2016-07-12T07:37:59.000Z" itemprop="datePublished">2016-07-12</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/25/Nagios-服务监控与报警时间间隔/">Nagios 服务监控与报警时间间隔</a>
+    <h1 class="article-title" itemprop="name">
+      理解 inode
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/24/Nagios-主机监控与报警时间间隔/" class="archive-article-date">
-  <time datetime="2016-06-24T07:43:45.000Z" itemprop="datePublished">Jun 24</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/24/Nagios-主机监控与报警时间间隔/">Nagios 主机监控与报警时间间隔</a>
-    </h1>
-  
+        <h3 id="1-inode-是什么？"><a href="#1-inode-是什么？" class="headerlink" title="1. inode 是什么？"></a>1. inode 是什么？</h3><p>文件存储在硬盘上，硬盘的最小存储单位叫做“扇区”，每个扇区存储 512 字节，相当于（0.5KB），操作系统读取硬盘的时候，不会一个一个扇区的读取，这样效率太低，而是一次性连续读取多个扇区，即一次性读取一个块（block），这种由多个扇区组成的“块”是文件存取的最小单位，“块”的大小，最常见的是 4KB，即连续八个 sector 组成一个 block，文件数据都存储在“块”中，那么很显然，我们还必须找到一个地方存储文件的元信息，比如文件的创建者、文件的创建日期、文件的大小等等。这种存储文件元信息的区域就叫做 inode，中文译名“索引节点”。每个文件都有对应的 inode，里面包含了该文件有关的一些信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 136.4 GB, 136365211648 bytes, 266338304 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes   # 扇区 512</span><br></pre></td></tr></table></figure>
+<p>inode 包含文件的元信息，可以用 stat 命令查看某个文件的 inode 信息，其具体包含以下内容：文件字节数、uid、gid、读写执行权限、时间戳、链接数，总之除了文件名以外的所有文件信息都存在 inode 之中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# stat for.sh </span><br><span class="line">  File: ‘for.sh’</span><br><span class="line">  Size: 52        	Blocks: 8          IO Block: 4096   regular file  # Block 4096</span><br><span class="line">Device: fd01h/64769d	Inode: 201906130   Links: 1</span><br><span class="line">Access: (0744/-rwxr--r--)  Uid: (    0/    root)   Gid: (    0/    root)</span><br><span class="line">Context: unconfined_u:object_r:admin_home_t:s0</span><br><span class="line">Access: 2016-06-22 14:07:37.778177900 +0800</span><br><span class="line">Modify: 2016-06-22 14:07:34.668177900 +0800</span><br><span class="line">Change: 2016-06-22 14:07:34.802177900 +0800</span><br><span class="line"> Birth: -</span><br><span class="line">[root@localhost ~]# ls -al for.sh </span><br><span class="line">-rwxr--r--. 1 root root 52 Jun 22 14:07 for.sh</span><br></pre></td></tr></table></figure>
+<p>inode 会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域：数据区存放数据，inode区存放inode信息。</p>
+<h3 id="2-inode-号码"><a href="#2-inode-号码" class="headerlink" title="2. inode 号码"></a>2. inode 号码</h3><p>每个 inode 都有一个号码，操作系统用个 inode 号码来识别不同的文件，表面上，用户通过文件名打开文件，实际上，系统内部这个过程分成三步：首先，系统找到了这个文件名对应的 inode 号码，其次通过 inode 号码，获取 inode 信息，最后根据 inode 信息，找到文件所在的 block ，读取数据。使用 ls -i 命令，可以查看文件名对应的 inode 号码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -i for.sh </span><br><span class="line">201906130 for.sh</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/21/Nagios-使用问题解决/" class="archive-article-date">
-  <time datetime="2016-06-21T06:54:45.000Z" itemprop="datePublished">Jun 21</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/21/Nagios-使用问题解决/">Nagios 使用问题解决</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/20/Nagios-安装好无法启动问题汇总/" class="archive-article-date">
-  <time datetime="2016-06-20T08:48:17.000Z" itemprop="datePublished">Jun 20</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/12/理解-inode/" data-id="ciqj88suf0063qcpvi06nivtc" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/20/Nagios-安装好无法启动问题汇总/">Nagios - 安装好无法启动问题汇总</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" class="archive-article-date">
-  <time datetime="2016-06-20T06:10:44.000Z" itemprop="datePublished">Jun 20</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/">Nagios - Installing Nagios Core From Source</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/22/使用Nagios监控网站登录是否成功/" class="archive-article-date">
-  <time datetime="2016-04-22T02:06:12.000Z" itemprop="datePublished">Apr 22</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/22/使用Nagios监控网站登录是否成功/">使用Nagios监控网站登录是否成功</a>
-    </h1>
   
+    <a href="/2016/07/12/服务器与磁盘阵列连接的几种方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">服务器与磁盘阵列连接的几种方式</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-  
-    </div></section>
-  
-
 
 </section>
         
