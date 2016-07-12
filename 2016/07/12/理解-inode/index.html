@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/12/理解-inode/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="inode linux 索引节点">
-<meta property="og:updated_time" content="2016-07-12T08:59:55.893Z">
+<meta property="og:updated_time" content="2016-07-12T09:24:23.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="理解 inode">
 <meta name="twitter:description" content="inode linux 索引节点">
@@ -114,11 +114,15 @@ var _hmt = _hmt || [];
 <p>inode 会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域：数据区存放数据，inode区存放inode信息。</p>
 <h3 id="2-inode-号码"><a href="#2-inode-号码" class="headerlink" title="2. inode 号码"></a>2. inode 号码</h3><p>每个 inode 都有一个号码，操作系统用个 inode 号码来识别不同的文件，表面上，用户通过文件名打开文件，实际上，系统内部这个过程分成三步：首先，系统找到了这个文件名对应的 inode 号码，其次通过 inode 号码，获取 inode 信息，最后根据 inode 信息，找到文件所在的 block ，读取数据。使用 ls -i 命令，可以查看文件名对应的 inode 号码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -i for.sh </span><br><span class="line">201906130 for.sh</span><br></pre></td></tr></table></figure>
+<h3 id="3-链接"><a href="#3-链接" class="headerlink" title="3. 链接"></a>3. 链接</h3><p>一般情况下，文件名和 inode 号码是一一对应关系，每个 inode 号码对应一个文件名，但是 Unix/Linux 系统允许多个文件名指向同一个 inode 号码。这意味着可以用不同文件名访问同样的内容，对文件内容进行修改会影响到所有文件名；但是删除一个文件名，不影响另一个文件名的访问，这种情况就被称为“硬链接”。<br>ln 命令可以创建硬链接：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln 源文件 目标文件</span><br></pre></td></tr></table></figure>
+<p>创建目录时，默认会生成两个两个目录项：”.”和”..”，前者的 inode 号码就是当前目录的，等同于当前目录的“硬链接”，后者的 inode 号码就是父目录的，等同于父目录的“硬链接”。所以，任何一个目录的“硬链接”总数总是等于2加上它的子目录总数。</p>
+<p>除了硬链接外还有一个软链接，与硬链接最大区别是软链接指向的是文件名而不是inode号码，所以链接数不会发生变化。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/12/理解-inode/" data-id="ciqj88suf0063qcpvi06nivtc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/12/理解-inode/" data-id="ciqj949lo0063t3pv19fw20wa" class="article-share-link">Share</a>
       
       
     </footer>
