@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>lspci 命令详解 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="lspci pciutils">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lspci 命令详解">
+<meta property="og:url" content="http://ttlop.com/2016/07/14/lspci-命令详解/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="lspci pciutils">
+<meta property="og:updated_time" content="2016-07-14T02:33:04.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="lspci 命令详解">
+<meta name="twitter:description" content="lspci pciutils">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-lspci-命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/14/lspci-命令详解/" class="article-date">
+  <time datetime="2016-07-14T02:00:25.000Z" itemprop="datePublished">2016-07-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      lspci 命令详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>lspci 是一个用来显示系统中所有 PCI 总线设备或连接到该总线上所有设备的工具。</p>
+<a id="more"></a>
+<p>参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-v		使得 lspci 以冗余模式显示所有设备的详细信息，-vv 显示更详细的信息</span><br><span class="line">-s [[[[&lt;domain&gt;]:]&lt;bus&gt;]:][&lt;slot&gt;][.[&lt;func&gt;]]	仅显示指定总线、插槽上的设备或设备上的功能块信息。设备地址的任何部分都可以忽略，或以「*」代替 (意味著所有值)。所有数字都是十六进制。例如：「0：」指的是在0号总线上的所有设备；「0」指的是在任意总线上0号设备的所有功能块；「0.3」选择 了所有总线上0号设备的第三个功能块；「.4」则是只列出每一设备上的第四个功能块。</span><br></pre></td></tr></table></figure>
+<p>实例一：不加任何选项，显示出目前的的硬件配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# lspci </span><br><span class="line">00:00.0 Host bridge: Intel Corporation 5520 I/O Hub to ESI Port (rev 22)</span><br><span class="line">00:01.0 PCI bridge: Intel Corporation 5520/5500/X58 I/O Hub PCI Express Root Port 1 (rev 22)</span><br><span class="line">00:02.0 PCI bridge: Intel Corporation 5520/5500/X58 I/O Hub PCI Express Root Port 2 (rev 22)</span><br><span class="line">00:03.0 PCI bridge: Intel Corporation 5520/5500/X58 I/O Hub PCI Express Root Port 3 (rev 22)</span><br></pre></td></tr></table></figure>
+<p>实例二：查看一般详细信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# lspci -v</span><br><span class="line">00:00.0 Host bridge: Intel Corporation 5520 I/O Hub to ESI Port (rev 22)</span><br><span class="line">	Subsystem: IBM Device 7270</span><br><span class="line">	Flags: fast devsel, IRQ 255</span><br><span class="line">	Capabilities: [60] MSI: Enable- Count=1/2 Maskable+ 64bit-</span><br><span class="line">	Capabilities: [90] Express Root Port (Slot-), MSI 00</span><br><span class="line">	Capabilities: [e0] Power Management version 3</span><br><span class="line">	Capabilities: [100] Advanced Error Reporting</span><br><span class="line">	Capabilities: [150] Access Control Services</span><br><span class="line">	Capabilities: [160] Vendor Specific Information: ID=0002 Rev=0 Len=00c &lt;?&gt;</span><br><span class="line"></span><br><span class="line">00:01.0 PCI bridge: Intel Corporation 5520/5500/X58 I/O Hub PCI Express Root Port 1 (rev 22) (prog-if 00 [Normal decode])</span><br><span class="line">	Flags: bus master, fast devsel, latency 0</span><br><span class="line">	Bus: primary=00, secondary=0b, subordinate=0f, sec-latency=0</span><br><span class="line">	Memory behind bridge: 92000000-95ffffff</span><br><span class="line">	Capabilities: [40] Subsystem: IBM Device 3408</span><br><span class="line">	Capabilities: [60] MSI: Enable- Count=1/2 Maskable+ 64bit-</span><br><span class="line">	Capabilities: [90] Express Root Port (Slot-), MSI 00</span><br><span class="line">	Capabilities: [e0] Power Management version 3</span><br><span class="line">	Capabilities: [100] Advanced Error Reporting</span><br><span class="line">	Capabilities: [150] Access Control Services</span><br><span class="line">	Capabilities: [160] Vendor Specific Information: ID=0002 Rev=0 Len=00c &lt;?&gt;</span><br><span class="line">	Kernel driver in use: pcieport</span><br></pre></td></tr></table></figure>
+<p>实例三：查看指定详细信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# lspci -s 1f:00.0 -vv</span><br><span class="line">1f:00.0 Serial Attached SCSI controller: LSI Logic / Symbios Logic SAS2008 PCI-Express Fusion-MPT SAS-2 [Falcon] (rev 03)</span><br><span class="line">	Subsystem: IBM Device 03ca</span><br><span class="line">	Physical Slot: 4</span><br><span class="line">	Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr+ Stepping- SERR- FastB2B- DisINTx+</span><br><span class="line">	Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast &gt;TAbort- &lt;TAbort- &lt;MAbort- &gt;SERR- &lt;PERR- INTx-</span><br><span class="line">	Latency: 0, Cache Line Size: 64 bytes</span><br><span class="line">	Interrupt: pin A routed to IRQ 28</span><br><span class="line">	Region 0: I/O ports at 2000 [size=256]</span><br><span class="line">	Region 1: Memory at 97a40000 (64-bit, non-prefetchable) [size=16K]</span><br><span class="line">	Region 3: Memory at 97a00000 (64-bit, non-prefetchable) [size=256K]</span><br><span class="line">	Expansion ROM at 97a80000 [disabled] [size=512K]</span><br><span class="line">	Capabilities: [50] Power Management version 3</span><br><span class="line">		Flags: PMEClk- DSI- D1+ D2+ AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)</span><br><span class="line">		Status: D0 NoSoftRst+ PME-Enable- DSel=0 DScale=0 PME-</span><br><span class="line">	Capabilities: [68] Express (v2) Endpoint, MSI 00</span><br><span class="line">		DevCap:	MaxPayload 4096 bytes, PhantFunc 0, Latency L0s &lt;64ns, L1 &lt;1us</span><br><span class="line">			ExtTag+ AttnBtn- AttnInd- PwrInd- RBE+ FLReset+</span><br><span class="line">		DevCtl:	Report errors: Correctable+ Non-Fatal+ Fatal+ Unsupported+</span><br><span class="line">			RlxdOrd+ ExtTag+ PhantFunc- AuxPwr- NoSnoop+ FLReset-</span><br><span class="line">			MaxPayload 256 bytes, MaxReadReq 4096 bytes</span><br><span class="line">		DevSta:	CorrErr+ UncorrErr- FatalErr- UnsuppReq+ AuxPwr- TransPend-</span><br><span class="line">		LnkCap:	Port #0, Speed 5GT/s, Width x8, ASPM L0s, Exit Latency L0s &lt;64ns, L1 &lt;1us</span><br><span class="line">			ClockPM- Surprise- LLActRep- BwNot-</span><br><span class="line">		LnkCtl:	ASPM Disabled; RCB 64 bytes Disabled- CommClk+</span><br><span class="line">			ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-</span><br><span class="line">		LnkSta:	Speed 5GT/s, Width x8, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-</span><br><span class="line">		DevCap2: Completion Timeout: Range BC, TimeoutDis+, LTR-, OBFF Not Supported</span><br><span class="line">		DevCtl2: Completion Timeout: 260ms to 900ms, TimeoutDis-, LTR-, OBFF Disabled</span><br><span class="line">		LnkCtl2: Target Link Speed: 5GT/s, EnterCompliance- SpeedDis-</span><br><span class="line">			 Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-</span><br><span class="line">			 Compliance De-emphasis: -6dB</span><br><span class="line">		LnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete-, EqualizationPhase1-</span><br><span class="line">			 EqualizationPhase2-, EqualizationPhase3-, LinkEqualizationRequest-</span><br><span class="line">	Capabilities: [d0] Vital Product Data</span><br><span class="line">		Unknown small resource type 00, will not decode more.</span><br><span class="line">	Capabilities: [a8] MSI: Enable- Count=1/1 Maskable- 64bit+</span><br><span class="line">		Address: 0000000000000000  Data: 0000</span><br><span class="line">	Capabilities: [c0] MSI-X: Enable+ Count=15 Masked-</span><br><span class="line">		Vector table: BAR=1 offset=00002000</span><br><span class="line">		PBA: BAR=1 offset=00003800</span><br><span class="line">	Capabilities: [100 v1] Advanced Error Reporting</span><br><span class="line">		UESta:	DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-</span><br><span class="line">		UEMsk:	DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq+ ACSViol-</span><br><span class="line">		UESvrt:	DLP+ SDES+ TLP+ FCP+ CmpltTO+ CmpltAbrt- UnxCmplt- RxOF+ MalfTLP+ ECRC+ UnsupReq- ACSViol-</span><br><span class="line">		CESta:	RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr+</span><br><span class="line">		CEMsk:	RxErr+ BadTLP+ BadDLLP+ Rollover+ Timeout+ NonFatalErr+</span><br><span class="line">		AERCap:	First Error Pointer: 00, GenCap+ CGenEn- ChkCap+ ChkEn-</span><br><span class="line">	Capabilities: [138 v1] Power Budgeting &lt;?&gt;</span><br><span class="line">	Capabilities: [150 v1] Single Root I/O Virtualization (SR-IOV)</span><br><span class="line">		IOVCap:	Migration-, Interrupt Message Number: 000</span><br><span class="line">		IOVCtl:	Enable- Migration- Interrupt- MSE- ARIHierarchy+</span><br><span class="line">		IOVSta:	Migration-</span><br><span class="line">		Initial VFs: 16, Total VFs: 16, Number of VFs: 0, Function Dependency Link: 00</span><br><span class="line">		VF offset: 1, stride: 1, Device ID: 0072</span><br><span class="line">		Supported Page Size: 00000553, System Page Size: 00000001</span><br><span class="line">		Region 0: Memory at 0000000000000000 (64-bit, non-prefetchable)</span><br><span class="line">		Region 2: Memory at 0000000000000000 (64-bit, non-prefetchable)</span><br><span class="line">		VF Migration: offset: 00000000, BIR: 0</span><br><span class="line">	Capabilities: [190 v1] Alternative Routing-ID Interpretation (ARI)</span><br><span class="line">		ARICap:	MFVC- ACS-, Next Function: 0</span><br><span class="line">		ARICtl:	MFVC- ACS-, Function Group: 0</span><br><span class="line">	Kernel driver in use: mpt2sas</span><br></pre></td></tr></table></figure>
+<p>注：</p>
+<ul>
+<li>如果没有 lspci，需要使用 yum install pciutils 安装即可。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/14/lspci-命令详解/" data-id="ciqlpb0b8005tozpvbrpzttfr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/13/Linux-fdisk-介绍/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux fdisk 介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/14/lspci-命令详解/">lspci 命令详解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/13/Linux-fdisk-介绍/">Linux fdisk 介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/12/理解-inode/">理解 inode</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/12/服务器与磁盘阵列连接的几种方式/">服务器与磁盘阵列连接的几种方式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/09/LinuxShell-sed编辑器基础/">LinuxShell sed编辑器基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,94 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Shell-语法简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/22/Shell-语法简介/" class="article-date">
+  <time datetime="2016-06-22T02:53:37.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/22/Shell-语法简介/">Shell 语法简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="1-shell-文件开头"><a href="#1-shell-文件开头" class="headerlink" title="1. shell 文件开头"></a>1. shell 文件开头</h3><p>shell 文件必须以下面的行开始 （必须放在文件的第一行）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br></pre></td></tr></table></figure>
+<p>符号 #! 用来告诉系统它后面的参数是用来执行该文件的程序。<br>当编辑好脚本时，如果要执行该脚本，还必须使其可执行。要使脚本可执行，运行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod u+x filename</span><br></pre></td></tr></table></figure>
+<h3 id="2-注释"><a href="#2-注释" class="headerlink" title="2. 注释"></a>2. 注释</h3><p>在进行 shell 编程时，以 # 开头的句子表示注释，直到这一行的结束。我们建议在程序中使用注释。<br>如果您使用了注释，那么即使相当长的时间内没有使用该脚本，您也能在很短的时间内明白该脚本的作用及工作原理。</p>
+<h3 id="3-变量"><a href="#3-变量" class="headerlink" title="3. 变量"></a>3. 变量</h3><p>在 shell 编程中，所有的变量都由字符串组成，并且您不需要对变量进行声明，直接赋值就可以，应用变量的话，用 <strong>$变量名</strong> 的形式。<br>要赋值给一个变量，可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=&quot;hello world&quot;</span><br><span class="line">num=2</span><br></pre></td></tr></table></figure>
+<p>现在打印变量的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $a</span><br><span class="line">echo &quot;this is the $&#123;num&#125;nd&quot;  #有时候变量名很容易与其他文字混淆,可以使用花括号来告诉 shell 我们要打印的是 num 变量</span><br></pre></td></tr></table></figure>
+<h2 id="概念：管道、重定向和-backtick"><a href="#概念：管道、重定向和-backtick" class="headerlink" title="概念：管道、重定向和 backtick"></a>概念：管道、重定向和 backtick</h2><p>这些不是系统命令，但是非常重要</p>
+<h3 id="1-管道"><a href="#1-管道" class="headerlink" title="1. 管道"></a>1. 管道</h3><p>管道将一个命令的输出作为另外一个命令的输入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;hello&quot; file.txt | wc -l  #在file.txt中搜索包含有”hello”的行并计算其行数。 在这里grep命令的输出作为wc命令的输入。当然您可以使用多个命令。</span><br></pre></td></tr></table></figure>
+<h3 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2. 重定向"></a>2. 重定向</h3><p>重定向将命令的结果输出到文件，而不是标准输出（屏幕）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 写入文件并覆盖旧文件 </span><br><span class="line">&gt;&gt; 加到文件的尾部，保留旧文件内容。</span><br></pre></td></tr></table></figure>
+<h3 id="3-反短斜线"><a href="#3-反短斜线" class="headerlink" title="3. 反短斜线"></a>3. 反短斜线</h3><p>使用反短斜线(“`”)可以将一个命令的输出作为另外一个命令的一个命令行参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -mtime -1 -type f -print   #用来查找过去24小时（-mtime –2则表示过去48小时）内修改过的文件</span><br></pre></td></tr></table></figure>
+<p>如果您想将所有查找到的文件打一个包，则可以使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -czvf lastmod.tar.gz `find . -mtime -1 -type f -print`</span><br></pre></td></tr></table></figure>
+<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><h3 id="1-if"><a href="#1-if" class="headerlink" title="1. if"></a>1. if</h3><p>如果条件为真，则执行 then 后面的部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if ...; then</span><br><span class="line">...</span><br><span class="line">elif ...; then</span><br><span class="line">...</span><br><span class="line">else</span><br><span class="line">...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>大多数情况下，可以使用测试命令来对条件进行测试。比如可以比较字符串、判断文件是否存在是否可读等等。</p>
+<h3 id="2-快捷操作符-amp-amp-和"><a href="#2-快捷操作符-amp-amp-和" class="headerlink" title="2. 快捷操作符 &amp;&amp; 和 ||"></a>2. 快捷操作符 &amp;&amp; 和 ||</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ -f &quot;/etc/shadow&quot; ] &amp;&amp; echo &quot;This computer uses shadow passwors&quot;</span><br></pre></td></tr></table></figure>
+<p>这里 &amp;&amp; 就是一个快捷操作符，如果左边的表达式为真则执行右边的语句。<br>您也可以认为是逻辑运算中的与操作。上例中表示如果/etc/shadow文件存在则打印 ”This computer uses shadow passwors”。</p>
+<p>同样或操作(||)在shell编程中也是可用的。这里有个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">mailfolder=/var/spool/mail/root</span><br><span class="line">[ -r &quot;$mailfolder&quot;] || &#123; echo &quot;Can not read $mailfolder&quot;; exit 1; &#125;</span><br><span class="line">echo &quot;$mailfolder has mail from:&quot;</span><br><span class="line">grep &quot;^From &quot; $mailfolder</span><br></pre></td></tr></table></figure>
+<p>该脚本首先判断 mailfolder 是否可读。如果可读则打印该文件中的 “From” 一行。<br>如果不可读则或操作生效，打印错误信息后脚本退出。这里有个问题，那就是我们必须有两个命令：</p>
+<p><em>. -打印错误信息
+</em>. -退出程序</p>
+<p>我们使用花括号以匿名函数的形式将两个命令放到一起作为一个命令使用。<br>一般函数将在下文提及。不用与和或操作符，我们也可以用if表达式作任何事情，但是使用与或操作符会更便利很多。</p>
+<h3 id="3-case"><a href="#3-case" class="headerlink" title="3. case"></a>3. case</h3><p>case 用来匹配一个给定的字符串，而不是数字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">case ... in</span><br><span class="line">...) do something here;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>下面是一个叫做 smartzip 的脚本，该脚本可以自动解压 bzip2，gzip 和 zip 类型的压缩文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">ftype=`file &quot;$1&quot;`</span><br><span class="line"></span><br><span class="line">case &quot;ftype&quot; in</span><br><span class="line">&quot;$1: Zip archive&quot;*)</span><br><span class="line">unzip &quot;$1&quot; ;;</span><br><span class="line">&quot;$1: gzip compressed&quot;*)</span><br><span class="line">gunzip &quot;$1&quot; ;;</span><br><span class="line">&quot;$1: bzip2 compressed&quot;*)</span><br><span class="line">bunzip2 &quot;$1&quot; ;;</span><br><span class="line">*) echo &quot;File $1 can not be uncompressed with smartzip&quot;;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>特殊变量 $1 包含了传递给该程序的第一个参数值。也就是说当我们运行：<strong>smargzip articles.zip</strong>，$1 就是字符串 articles.zip</p>
+<h3 id="4-select"><a href="#4-select" class="headerlink" title="4. select"></a>4. select</h3><p>select 表达式是一种 bash 的扩展应用，尤其擅长与交互式使用。用户可以从一组不同的值中进行使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select var in ...; do</span><br><span class="line">break</span><br><span class="line">done</span><br><span class="line">... now $var can be used...</span><br></pre></td></tr></table></figure>
+<p>下面是一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh </span><br><span class="line"></span><br><span class="line">echo &quot;What is your favourite OS?&quot; </span><br><span class="line">select var in &quot;Linux&quot; &quot;Gnu Hurd&quot; &quot;Free BSD&quot; &quot;Other&quot;; do </span><br><span class="line">break </span><br><span class="line">done </span><br><span class="line">echo &quot;You have selected $var&quot;</span><br></pre></td></tr></table></figure>
+<p>下面是该脚本的运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ./select.sh </span><br><span class="line">What is your favourite OS?</span><br><span class="line">1) Linux</span><br><span class="line">2) Gnu Hurd</span><br><span class="line">3) Free BSD</span><br><span class="line">4) Other</span><br><span class="line">#? 1</span><br><span class="line">You have selected Linux</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<h3 id="5-while"><a href="#5-while" class="headerlink" title="5. while"></a>5. while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>当 while 表达式的值为真时，将一直循环。<br>可以用关键字 “break” 用来跳出循环，也可以用关键字 “continue” 用来不执行余下的部分而直接跳到下一个循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">num=10</span><br><span class="line">while [ ! &quot;$num&quot; = &quot;0&quot; ]; do</span><br><span class="line">num=`expr &quot;$num&quot; &quot;-&quot; &quot;1&quot;`</span><br><span class="line">echo $num</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="6-for"><a href="#6-for" class="headerlink" title="6. for"></a>6. for</h3><p>for 表达式查看一个字符串列表（字符串用空格分隔），然后将其赋给一个变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for var in ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h2 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h2><p>在向程序传递任何参数之前，程序会扩展通配符和变量。这里所谓扩展的意思程序会把通配符（比如*）替换成合适的文件名，将变量替换成变量值。为了防止程序作这种替换，可以使用引号。<br>假设在当前目录下有一些文件，两个 sh 文件，break.sh select.sh。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# echo *.sh</span><br><span class="line">break.sh select.sh</span><br><span class="line">[root@localhost ~]# echo &quot;*.sh&quot;</span><br><span class="line">*.sh</span><br><span class="line">[root@localhost ~]# echo &apos;*.sh&apos;</span><br><span class="line">*.sh</span><br></pre></td></tr></table></figure>
+<p>这里单引号更严格一些。它可以防止任何变量扩展。双引号可以防止通配符扩展但允许变量扩展。<br>还有一种防止这种扩展的方法，那就是使用转义字符–反斜杠。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="ciqlpb09q003tozpvjc73lqvs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Nagios-使用问题解决" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -124,7 +212,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="ciqkbcg9v00309mpv3du2wwts" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="ciqlpb08v002tozpvc6avx9v0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +258,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciqkbcg9q002t9mpvksd0aogu" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciqlpb08w002vozpvxvrrnqwj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -234,7 +322,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciqkbcg9n002o9mpvb7yeyv4u" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciqlpb08r002oozpvxticwg4d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -279,7 +367,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciqkbcgc4005v9mpvibs4t64p" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciqlpb0b9005vozpvu145cqj4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -324,7 +412,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciqkbcg9k002j9mpvr8hprwaz" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciqlpb08o002jozpvi1yvdfny" class="article-share-link">Share</a>
       
       
     </footer>
@@ -421,7 +509,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciqkbcg9a002a9mpv4fiv7wfb" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciqlpb08a002cozpvmeawgw4c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +554,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciqkbcg9d002e9mpvuoigwqyg" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciqlpb08c002eozpva43sl33v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -518,7 +606,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciqkbcgc700609mpvpt6hqeva" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciqlpb0bb005yozpvnzxq28d8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -563,52 +651,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciqkbcgbz005n9mpvhc2iwzcf" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Postfix-configuration-files" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/14/Postfix-configuration-files/" class="article-date">
-  <time datetime="2016-06-14T05:49:52.000Z" itemprop="datePublished">2016-06-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Postfix/">Postfix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/14/Postfix-configuration-files/">Postfix configuration files</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Postfix 的配置文件 main.cf 有数百个配置参数，幸运的是，所有参数都由合理的默认配置项 。大部分时候，只需要配置两三个参数即可。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/14/Postfix-configuration-files/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciqkbcga4003a9mpvkjb0ebfh" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciqlpb0b3005lozpvd7ssjihe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -630,7 +673,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -655,9 +698,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/07/14/lspci-命令详解/">lspci 命令详解</a>
+          </li>
         
           <li>
             <a href="/2016/07/13/Linux-fdisk-介绍/">Linux fdisk 介绍</a>
@@ -675,10 +722,6 @@ var _hmt = _hmt || [];
             <a href="/2016/07/09/LinuxShell-sed编辑器基础/">LinuxShell sed编辑器基础</a>
           </li>
         
-          <li>
-            <a href="/2016/07/08/LinuxShell-创建函数/">LinuxShell 创建函数</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -692,7 +735,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
