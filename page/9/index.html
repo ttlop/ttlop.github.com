@@ -82,6 +82,50 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-Agent-Installing-And-Configuration" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" class="article-date">
+  <time datetime="2016-05-04T03:08:51.000Z" itemprop="datePublished">2016-05-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/04/Zabbix-Agent-Installing-And-Configuration/">Zabbix Agent Installing And Configuration</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Installing-repository-configuration-package"><a href="#Installing-repository-configuration-package" class="headerlink" title="* Installing repository configuration package"></a>* Installing repository configuration package</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Supported <span class="keyword">for</span> version: Centos 7</span><br><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm</span><br><span class="line"></span><br><span class="line">Supported <span class="keyword">for</span> version: Centos 6</span><br><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/6/x86_64/zabbix-release-3.0-1.el6.noarch.rpm</span><br><span class="line"></span><br><span class="line">Supported <span class="keyword">for</span> version: Centos 5</span><br><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/5/x86_64/zabbix-release-3.0-1.el5.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="Installing-Zabbix-agent"><a href="#Installing-Zabbix-agent" class="headerlink" title="* Installing Zabbix agent"></a>* Installing Zabbix agent</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zabbix-agent</span><br></pre></td></tr></table></figure>
+<h4 id="Configuration"><a href="#Configuration" class="headerlink" title="* Configuration"></a>* Configuration</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT <span class="_">-s</span> 192.168.1.110/32 -p tcp -mstate --state NEW -m tcp --dport 10050 -j ACCEPT  <span class="comment">#vim /etc/sysconfig/iptables</span></span><br><span class="line">Server=192.168.1.110,127.0.0.1  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br><span class="line">ServerActive=192.168.1.110,127.0.0.1  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br><span class="line">Hostname=[hostname]  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br></pre></td></tr></table></figure>
+<h4 id="Testing"><a href="#Testing" class="headerlink" title="* Testing"></a>* Testing</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zabbix_get <span class="_">-s</span> 192.168.1.107 -p 10050 -k <span class="string">"system.cpu.load[all,avg1]"</span>  <span class="comment">#Zabbix-server</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" data-id="ciqn41m9000431wpvtj279w6w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-查看linux系统版本命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/26/查看linux系统版本命令/" class="article-date">
@@ -114,7 +158,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/26/查看linux系统版本命令/" data-id="ciqn3b3xe0068yzpvgqgiiqhx" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/26/查看linux系统版本命令/" data-id="ciqn41mah006b1wpvf6ct2616" class="article-share-link">Share</a>
       
       
     </footer>
@@ -159,7 +203,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/26/Iptables-数据包的流程（图）/" data-id="ciqn3b3sp000yyzpv1kzr55m8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/26/Iptables-数据包的流程（图）/" data-id="ciqn41m5s00111wpvoywuo8h2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -204,7 +248,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-匹配/" data-id="ciqn3b3sk000uyzpv1cnnt7qi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-匹配/" data-id="ciqn41m5o000x1wpvwiay7rgb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +295,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="ciqn3b3ss0011yzpvlxvosla5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="ciqn41m5v00131wpvlq2m8v4u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -296,7 +340,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="ciqn3b3sm000xyzpvs0ytxw36" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="ciqn41m5q000y1wpvwu5s7suf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,7 +385,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/22/使用Nagios监控网站登录是否成功/" data-id="ciqn3b3x70060yzpverdbetzz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/22/使用Nagios监控网站登录是否成功/" data-id="ciqn41mab00641wpvjk6gfezb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -386,7 +430,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="ciqn3b3r10001yzpvyqron610" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="ciqn41m4500011wpvovd27ax9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -430,7 +474,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="ciqn3b3xh006dyzpvf9ggviwg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="ciqn41mak006g1wpvnxmc0z2h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -477,52 +521,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="ciqn3b3sg000tyzpv1my03fnf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Centos-7-安装php5-5" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/20/Centos-7-安装php5-5/" class="article-date">
-  <time datetime="2016-04-20T09:25:45.000Z" itemprop="datePublished">2016-04-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/20/Centos-7-安装php5-5/">Centos 7 安装php5.5</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Centos 7.2默认的php版本为5.4，如果需要升级安装5.5版本，怎么办？<br>可采用如下Yum安装的方式：<br>首先删除旧版本的PHP，通过yum list installed | grep php可以查看所有已安装的php软件<br>使用yum remove php 删除<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/20/Centos-7-安装php5-5/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="ciqn3b3rx000dyzpvi4he8bgy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="ciqn41m5m000u1wpvblha63g9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -535,7 +534,7 @@ var _hmt = _hmt || [];
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -574,6 +573,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/07/15/Hexo-博客添加图片、音乐、视频/">Hexo 博客添加图片、音乐、视频</a>
+          </li>
+        
+          <li>
             <a href="/2016/07/14/Centos-7-连接-SAS-磁盘阵列-DS3512/">Centos 7 连接 SAS 磁盘阵列 DS3512</a>
           </li>
         
@@ -587,10 +590,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/07/12/理解-inode/">理解 inode</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/12/服务器与磁盘阵列连接的几种方式/">服务器与磁盘阵列连接的几种方式</a>
           </li>
         
       </ul>
