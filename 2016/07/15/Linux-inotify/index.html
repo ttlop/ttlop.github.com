@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix item key 详解 | 运维生存时间</title>
+  <title>Linux inotify | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix item key">
+  <meta name="description" content="inotify">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix item key 详解">
-<meta property="og:url" content="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/index.html">
+<meta property="og:title" content="Linux inotify">
+<meta property="og:url" content="http://ttlop.com/2016/07/15/Linux-inotify/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix item key">
-<meta property="og:updated_time" content="2016-05-05T07:17:44.119Z">
+<meta property="og:description" content="inotify">
+<meta property="og:updated_time" content="2016-07-15T08:15:51.370Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix item key 详解">
-<meta name="twitter:description" content="zabbix item key">
+<meta name="twitter:title" content="Linux inotify">
+<meta name="twitter:description" content="inotify">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-item-key-详解" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Linux-inotify" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-item-key-详解/" class="article-date">
-  <time datetime="2016-05-05T06:18:50.000Z" itemprop="datePublished">2016-05-05</time>
+    <a href="/2016/07/15/Linux-inotify/" class="article-date">
+  <time datetime="2016-07-15T07:40:37.000Z" itemprop="datePublished">2016-07-15</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix item key 详解
+      Linux inotify
     </h1>
   
 
@@ -107,28 +107,47 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>zabbix的items用来从主机获取数据，通常情况下，我们称item为监控项。例如我们服务器需要监控它的CPU负载，那么实现这个方法的东西就叫做item。</p>
-<p>监控项需要获取cpu信息，则需要一个对应的监控key：system.cpu.load。如果是获取网卡流量，那么获取网卡这个监控项需要key：net.if.in或者net.if.out。</p>
-<p>一般情况下key要与参数结合起来使用，例如获取5分钟的负载情况：system.cpu.load[avg5]，avg5是对应的参数。</p>
+        <p>Inotify 是一个内核用于通知用户空间程序文件系统变化的机制，如文件增加、删除等事件可以立刻让用户态得知，Linux 内核从 2.6.13 开始引入。<br>如何知道你的 Linux 内核是否支持 Inotify 机制？很简单，执行下面这条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep INOTIFY_USER /boot/config-$(uname -r)</span><br><span class="line">CONFIG_INOTIFY_USER=y</span><br></pre></td></tr></table></figure>
+<p>如果输出<strong>CONFIG_INOTIFY_USER=y</strong>，那么可以马上享受 Inotify 之旅了。</p>
 <a id="more"></a>
-<h3 id="1-灵活的参数"><a href="#1-灵活的参数" class="headerlink" title="1. 灵活的参数"></a>1. 灵活的参数</h3><p>参数位置可用接受任意参数则是灵活的。例如vfs.fs.size[<em>],”</em>“星号可以使用任意的参数，例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vfs.fs.size[/]</span><br><span class="line">vfs.fs.size[/opt]</span><br></pre></td></tr></table></figure>
-<h3 id="2-Key-格式"><a href="#2-Key-格式" class="headerlink" title="2. Key 格式"></a>2. Key 格式</h3><p>Item key 格式包含 key 名称和它的参数，参数必须符合规范。key的定义要遵循从左到右的规则，如果都符合，那这个 key 合法，否则不合法。</p>
-<h3 id="3-Key-名称"><a href="#3-Key-名称" class="headerlink" title="3. Key 名称"></a>3. Key 名称</h3><p>Key 允许如下字符作为名称：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0-9a-zA-Z_-.</span><br></pre></td></tr></table></figure>
-<p>即所有数字、大小写字母、下划线、减号、点，key 名称从左到右，只要有一个字符不符合，那么 key 就不合法。</p>
-<h3 id="4-Key-参数"><a href="#4-Key-参数" class="headerlink" title="4. Key 参数"></a>4. Key 参数</h3><p>Item key 可以有多个参数，他们之间用逗号’,’分开，key 参数可以是带引号的字符串、不带引号的字符串以及数组。</p>
-<p>参数如果设置为空，那么将使用它设置的默认值。</p>
-<p>例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system.swap.size[,pfree] <span class="comment">#其中第一个为空的参数值使用默认值</span></span><br></pre></td></tr></table></figure>
-<h4 id="4-1-参数-带引号"><a href="#4-1-参数-带引号" class="headerlink" title="4.1 参数 - 带引号"></a>4.1 参数 - 带引号</h4><p>如果 key 参数带引号，那么任何 unicode 数据都合法，如果参数里面带有双引号，那么要使用”\”来转义。</p>
-<h4 id="4-2-参数-不带引号"><a href="#4-2-参数-不带引号" class="headerlink" title="4.2 参数 - 不带引号"></a>4.2 参数 - 不带引号</h4><p>如果 key 参数是一个不带引号的字符串，除了逗号和右中括号其它任何 unicode 字符串都合法。</p>
-<h4 id="4-3-参数-数组"><a href="#4-3-参数-数组" class="headerlink" title="4.3 参数 - 数组"></a>4.3 参数 - 数组</h4><p>如果 key 参数是一个数组，那么数组要多加一对中括号，并且数组里面的参数同样要遵循参数规范。</p>
+<h3 id="1-主要功能"><a href="#1-主要功能" class="headerlink" title="1. 主要功能"></a>1. 主要功能</h3><p>事实上，在 inotify 之前已经存在一种类似的机制叫 dnotify，但是它存在许多缺陷：</p>
+<ol>
+<li>对于想监视的每一个目录，用户都需要打开一个文件描述符，因此如果需要监视的目录较多，将导致打开许多文件描述符，特别是，如果被监视目录在移动介质上（如光盘和 USB 盘），将导致无法 umount 这些文件系统，因为使用 dnotify 的应用打开的文件描述符在使用该文件系统。</li>
+<li>dnotify 是基于目录的，它只能得到目录变化事件，当然在目录内的文件的变化会影响到其所在目录从而引发目录变化事件，但是要想通过目录事件来得知哪个文件变化，需要缓存许多 stat 结构的数据。 </li>
+<li>Dnotify 的接口非常不友好，它使用 signal。</li>
+</ol>
+<p>Inotify 是为替代 dnotify 而设计的，它克服了 dnotify 的缺陷，提供了更好用的、简洁而强大的文件变化通知机制：</p>
+<ol>
+<li>Inotify 不需要对被监视的目标打开文件描述符，而且如果被监视目标在可移动介质上，那么在 umount 该介质上的文件系统后，被监视目标对应的 watch 将被自动删除，并且会产生一个 umount 事件。 </li>
+<li>Inotify 既可以监视文件，也可以监视目录。</li>
+<li>Inotify 使用系统调用而非 SIGIO 来通知文件系统事件。</li>
+<li>Inotify 使用文件描述符作为接口，因而可以使用通常的文件 I/O 操作select 和 poll 来监视文件系统的变化。</li>
+</ol>
+<p>Inotify 可以监视的文件系统事件包括：</p>
+<ul>
+<li>IN_ACCESS：文件被访问</li>
+<li>IN_MODIFY：文件被写入</li>
+<li>IN_ATTRIB：文件属性被修改</li>
+<li>IN_CLOSE_WRITE：可写文件被关闭</li>
+<li>IN_CLOSE_NOWRITE：不可写文件被关闭</li>
+<li>IN_OPEN：文件被打开</li>
+<li>IN_MOVED_FROM：文件被移走</li>
+<li>IN_MOVED_TO：文件被移来</li>
+<li>IN_CREATE：创建新文件</li>
+<li>IN_DELETE：文件被删除</li>
+<li>IN_DELETE_SELF：自删除，即一个可执行文件在执行时删除自己</li>
+<li>IN_MOVE_SELF：自移动，即一个可执行我呢见在执行时移动自己</li>
+<li>IN_UNMOUNT：宿主文件系统被 umount</li>
+<li>IN_CLOSE：文件被关闭，等同于（IN_CLOSE_WRITE | IN_CLOSE_NOWRITE）</li>
+<li>IN_MOVE：文件被移动，等同于（IN_MOVE_FROM | IN_MOVE_TO）</li>
+</ul>
+<p>注：上面所说的文件包括目录。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="ciqngzo9g0057uypvf6ucl2ev" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="ciqngzo5r001duypvi7g2k577" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,19 +156,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/05/Zabbix-External-check-外部命令检测/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix External check 外部命令检测
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/07/15/Hexo-博客添加图片、音乐、视频/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix 在系统已有的Templates中增加Graphs</div>
+      <div class="article-nav-title">Hexo 博客添加图片、音乐、视频</div>
     </a>
   
 </nav>

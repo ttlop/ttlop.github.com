@@ -82,6 +82,53 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Hexo-添加百度统计代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/21/Hexo-添加百度统计代码/" class="article-date">
+  <time datetime="2016-04-21T01:34:14.000Z" itemprop="datePublished">2016-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/21/Hexo-添加百度统计代码/">Hexo 添加百度统计代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="主题-landscape"><a href="#主题-landscape" class="headerlink" title="主题:landscape"></a>主题:landscape</h3><p>编辑文件 themes/landscape_config.yml，添加一行配置，可以删除原来的google analytics</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baidu_tongji: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>新建 themes/landscape/layout/_partial/baidu_tongji.ejs 内容如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%<span class="keyword">if</span> (theme.baidu_tongji) &#123; %&gt;</span><br><span class="line"><span class="comment">#申请的百度统计代码</span></span><br><span class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">var _hmt = _hmt || [];</span><br><span class="line">(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  var hm = document.createElement(<span class="string">"script"</span>);</span><br><span class="line">  hm.src = <span class="string">"//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a"</span>;</span><br><span class="line">  var s = document.getElementsByTagName(<span class="string">"script"</span>)[0];</span><br><span class="line">  s.parentNode.insertBefore(hm, s);</span><br><span class="line">&#125;)();</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<p>编辑 themes/landscape/layout/_partial/head.ejs 在前添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- partial(<span class="string">"baidu_tongji"</span>) %&gt;</span><br></pre></td></tr></table></figure>
+<p>重新生产部署站点即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="ciqngzo4u000quypv1auhqpxk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Centos-7-安装php5-5" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/20/Centos-7-安装php5-5/" class="article-date">
@@ -117,7 +164,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="ciqn41m51000d1wpvzyx0xusg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="ciqngzo4h000duypv9ek9zm3f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +209,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="ciqn41m4o00061wpvmn7e71k8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="ciqngzo430006uypv8ml3w52g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +253,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="ciqn41m4r00081wpveb8f4j0w" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="ciqngzo470008uypvxipy1q37" class="article-share-link">Share</a>
       
       
     </footer>
@@ -253,7 +300,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="ciqn41m54000h1wpv0s6v8xrj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="ciqngzo4l000huypvkgc0tewg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +345,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="ciqn41m53000f1wpvb7zrcxy3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="ciqngzo4j000fuypvfn131t6n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -347,7 +394,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="ciqn41ma6005w1wpvsznf8wrw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="ciqngzo9z005yuypvvbxiwwkh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -396,7 +443,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="ciqn41m5h000t1wpvx61epo10" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="ciqngzo4y000tuypvnw9lvnt4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -441,7 +488,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="ciqn41m4c00021wpvuugyx1h3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="ciqngzo3r0002uypv2si9eu8c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -486,52 +533,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="ciqn41m4l00051wpvv7labspq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Apache-里的-MPM-调优比较" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/15/Apache-里的-MPM-调优比较/" class="article-date">
-  <time datetime="2016-04-15T03:04:07.000Z" itemprop="datePublished">2016-04-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Apache/">Apache</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/15/Apache-里的-MPM-调优比较/">Apache 里的 MPM 调优比较</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>MPM 是 Apache 2 引入的一个概念，就是结构模块化。把核心任务处理作为一个可插拔的模块，即多路处理模块（MPM），使其能针对不同的环境进行优化。在编译apache时必须选择也只能选择一个 MPM，对类 UNIX 系统，有几个不同的 MPM 可供选择，它们会影响到 apache 的速度和可伸缩性。<br>Multi-Processing Module (MPM) implements a hybrid multi-process multi-threaded server。（多进程、多线程）<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/15/Apache-里的-MPM-调优比较/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="ciqn41m4j00041wpv0hwn8co1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="ciqngzo400005uypvhpzqppu7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -583,6 +585,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/07/15/Linux-inotify/">Linux inotify</a>
+          </li>
+        
+          <li>
             <a href="/2016/07/15/Hexo-博客添加图片、音乐、视频/">Hexo 博客添加图片、音乐、视频</a>
           </li>
         
@@ -596,10 +602,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/07/13/Linux-fdisk-结果介绍/">Linux fdisk 结果介绍</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/12/理解-inode/">理解 inode</a>
           </li>
         
       </ul>
