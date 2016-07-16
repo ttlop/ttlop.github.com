@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Linux inotify | 运维生存时间</title>
+  <title>LinuxShell 正则表达式 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="inotify">
+  <meta name="description" content="正则表达式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux inotify">
-<meta property="og:url" content="http://ttlop.com/2016/07/15/Linux-inotify/index.html">
+<meta property="og:title" content="LinuxShell 正则表达式">
+<meta property="og:url" content="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="inotify">
-<meta property="og:updated_time" content="2016-07-15T08:35:55.224Z">
+<meta property="og:description" content="正则表达式">
+<meta property="og:updated_time" content="2016-07-16T06:23:58.320Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux inotify">
-<meta name="twitter:description" content="inotify">
+<meta name="twitter:title" content="LinuxShell 正则表达式">
+<meta name="twitter:description" content="正则表达式">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,10 +81,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Linux-inotify" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LinuxShell-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/15/Linux-inotify/" class="article-date">
-  <time datetime="2016-07-15T07:40:37.000Z" itemprop="datePublished">2016-07-15</time>
+    <a href="/2016/07/16/LinuxShell-正则表达式/" class="article-date">
+  <time datetime="2016-07-16T05:39:53.000Z" itemprop="datePublished">2016-07-16</time>
 </a>
     
   <div class="article-category">
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Linux inotify
+      LinuxShell 正则表达式
     </h1>
   
 
@@ -107,47 +107,41 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Inotify 是一个内核用于通知用户空间程序文件系统变化的机制，如文件增加、删除等事件可以立刻让用户态得知，Linux 内核从 2.6.13 开始引入。<br>如何知道你的 Linux 内核是否支持 Inotify 机制？很简单，执行下面这条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep INOTIFY_USER /boot/config-$(uname -r)</span><br><span class="line">CONFIG_INOTIFY_USER=y</span><br></pre></td></tr></table></figure>
-<p>如果输出<strong>CONFIG_INOTIFY_USER=y</strong>，那么可以马上享受 Inotify 之旅了。</p>
+        <p>正则表达式是你定义的、Linux工具用来过滤文本的模式模板。Linux 工具能够在数据流向工具时对数据进行正则表达式模式匹配。如果数据匹配模式，它就会被接受并进一步处理。如果数据不匹配模式，它就会被滤掉。正则表达式模式利用通配符来代表数据流中的一个或多个字符。</p>
 <a id="more"></a>
-<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>事实上，在 inotify 之前已经存在一种类似的机制叫 dnotify，但是它存在许多缺陷：</p>
-<ol>
-<li>对于想监视的每一个目录，用户都需要打开一个文件描述符，因此如果需要监视的目录较多，将导致打开许多文件描述符，特别是，如果被监视目录在移动介质上（如光盘和 USB 盘），将导致无法 umount 这些文件系统，因为使用 dnotify 的应用打开的文件描述符在使用该文件系统。</li>
-<li>dnotify 是基于目录的，它只能得到目录变化事件，当然在目录内的文件的变化会影响到其所在目录从而引发目录变化事件，但是要想通过目录事件来得知哪个文件变化，需要缓存许多 stat 结构的数据。 </li>
-<li>Dnotify 的接口非常不友好，它使用 signal。</li>
-</ol>
-<p>Inotify 是为替代 dnotify 而设计的，它克服了 dnotify 的缺陷，提供了更好用的、简洁而强大的文件变化通知机制：</p>
-<ol>
-<li>Inotify 不需要对被监视的目标打开文件描述符，而且如果被监视目标在可移动介质上，那么在 umount 该介质上的文件系统后，被监视目标对应的 watch 将被自动删除，并且会产生一个 umount 事件。 </li>
-<li>Inotify 既可以监视文件，也可以监视目录。</li>
-<li>Inotify 使用系统调用而非 SIGIO 来通知文件系统事件。</li>
-<li>Inotify 使用文件描述符作为接口，因而可以使用通常的文件 I/O 操作select 和 poll 来监视文件系统的变化。</li>
-</ol>
-<p>Inotify 可以监视的文件系统事件包括：</p>
+<hr>
+<p>使用正则表达式最大的问题在于有不止一种类型的正则表达式。Linux 中的不同应用程序可能会用不同类型的正则表达式。这包括各种应用程序，如编程语言（Java、Perl和Python）、Linux 工具（sed、gawk和grep）以及主流应用（Mysql、PostgreSQL）。</p>
+<p>正则表达式是用正则表达式引擎实现的，正则表达式引擎是解释正则表达式模式并使用这些模式进行文本匹配的底层软件。</p>
+<p>在 Linux 中，有两种流行的正则表示引擎：</p>
 <ul>
-<li>IN_ACCESS：文件被访问</li>
-<li>IN_MODIFY：文件被写入</li>
-<li>IN_ATTRIB：文件属性被修改</li>
-<li>IN_CLOSE_WRITE：可写文件被关闭</li>
-<li>IN_CLOSE_NOWRITE：不可写文件被关闭</li>
-<li>IN_OPEN：文件被打开</li>
-<li>IN_MOVED_FROM：文件被移走</li>
-<li>IN_MOVED_TO：文件被移来</li>
-<li>IN_CREATE：创建新文件</li>
-<li>IN_DELETE：文件被删除</li>
-<li>IN_DELETE_SELF：自删除，即一个可执行文件在执行时删除自己</li>
-<li>IN_MOVE_SELF：自移动，即一个可执行我呢见在执行时移动自己</li>
-<li>IN_UNMOUNT：宿主文件系统被 umount</li>
-<li>IN_CLOSE：文件被关闭，等同于（IN_CLOSE_WRITE | IN_CLOSE_NOWRITE）</li>
-<li>IN_MOVE：文件被移动，等同于（IN_MOVE_FROM | IN_MOVE_TO）</li>
+<li>POSIX 基本正则表达式（BRE）引擎</li>
+<li>POSIX 扩展正则表达式（ERE）引擎</li>
 </ul>
-<p>注：上面所说的文件包括目录。</p>
+<h3 id="BRE-模式"><a href="#BRE-模式" class="headerlink" title="BRE 模式"></a>BRE 模式</h3><p>最基本的 BRE 模式是匹配数据流中的文本字符。</p>
+<ul>
+<li>纯文本</li>
+<li>特殊字符：.*[]^${}+?|()<br>正则表达式赋给了一些字符特别的意思，如果要在文本模式中使用这些字符，会得到不期望的结果</li>
+<li>锚字符：^$<br>脱字符（^）定义从数据流中问本行的首位置开始的模式，如果模式位于其它位置而不是行首，则不匹配<br>美元符（$）定义了行尾锚点，指明数据行必须以该文本模式结尾</li>
+<li>点字符：.<br>点特殊字符（.）用来匹配任意的单字符，除了换行符，且必须匹配一个字符</li>
+<li>字符组<br>点特殊字符在用任意字符来匹配某个字符位置时很有用，但使用字符组则可以限定匹配哪些字符，要定义一个字符组，使用方括号，方括号中应该含有你要在该组中包含的任意字符</li>
+<li>排除字符组<br>在字符组的开头加个脱字符可以反转字符组的作用，即寻找组中没有的任意字符</li>
+<li>区间<br>可以用单破折线符号来在字符组中使用字符区间，正则表达式包含在这个指定区间内的任意字符</li>
+<li>特殊字符组<br>除了自己定义的字符组外，BRE 还包含可用来匹配特殊字符类型的特殊字符组</li>
+<li>星号<br>字符后面放置星号说明该字符将会在匹配模式的文本中出现0次或多次</li>
+</ul>
+<h3 id="ERE-模式"><a href="#ERE-模式" class="headerlink" title="ERE 模式"></a>ERE 模式</h3><p>gawk程序能够识别 ERE 模式，但 sed 编辑器不能。</p>
+<ul>
+<li>问号<br>类似于星号，表示前面的字符出现0次或1此，且只限于此，不匹配多次出现该字符</li>
+<li>加号<br>类似于星号，表示前面的字符出现1次或多次，但必须出现1此，如果不出现，不匹配</li>
+<li>花括号<br>ERE 中的花括号允许为重复的正则表达式指定一个上限，这个特性可以微调允许字符或字符集在模式中具体出现多少次</li>
+<li>管道符号<br>管道符号允许你在检查数据流时，用逻辑 OR 方式指定正则表达式引擎要用的两个或多个模式，如果任何一个模式匹配了数据流文本，则文本就通过</li>
+<li>聚合表达式<br>正则表达式也可以用圆括号聚合起来，当你聚合正则表达式模式时，该组就会被当成标准字符</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="ciqosmm4i001bjkpv71dw64vb" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="ciqosmm61002cjkpvro4i4mzf" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -156,19 +150,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/07/16/LinuxShell-正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          LinuxShell 正则表达式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/07/15/Hexo-博客添加图片、音乐、视频/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/07/15/Linux-inotify/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">Hexo 博客添加图片、音乐、视频</div>
+      <div class="article-nav-title">Linux inotify</div>
     </a>
   
 </nav>

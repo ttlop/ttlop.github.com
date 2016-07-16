@@ -15,18 +15,17 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Linux inotify | 运维生存时间</title>
+  <title>Archives: 2016/7 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="inotify">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux inotify">
-<meta property="og:url" content="http://ttlop.com/2016/07/15/Linux-inotify/index.html">
+  <meta name="description" content="运维 生存时间 ttl op oa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="运维生存时间">
+<meta property="og:url" content="http://ttlop.com/archives/2016/07/page/3/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="inotify">
-<meta property="og:updated_time" content="2016-07-15T08:35:55.224Z">
+<meta property="og:description" content="运维 生存时间 ttl op oa">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux inotify">
-<meta name="twitter:description" content="inotify">
+<meta name="twitter:title" content="运维生存时间">
+<meta name="twitter:description" content="运维 生存时间 ttl op oa">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,100 +80,44 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Linux-inotify" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/15/Linux-inotify/" class="article-date">
-  <time datetime="2016-07-15T07:40:37.000Z" itemprop="datePublished">2016-07-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      Linux inotify
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2016/07/01/Linux-是什么/" class="archive-article-date">
+  <time datetime="2016-07-01T02:44:34.000Z" itemprop="datePublished">Jul 1</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/07/01/Linux-是什么/">Linux 是什么</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Inotify 是一个内核用于通知用户空间程序文件系统变化的机制，如文件增加、删除等事件可以立刻让用户态得知，Linux 内核从 2.6.13 开始引入。<br>如何知道你的 Linux 内核是否支持 Inotify 机制？很简单，执行下面这条命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep INOTIFY_USER /boot/config-$(uname -r)</span><br><span class="line">CONFIG_INOTIFY_USER=y</span><br></pre></td></tr></table></figure>
-<p>如果输出<strong>CONFIG_INOTIFY_USER=y</strong>，那么可以马上享受 Inotify 之旅了。</p>
-<a id="more"></a>
-<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>事实上，在 inotify 之前已经存在一种类似的机制叫 dnotify，但是它存在许多缺陷：</p>
-<ol>
-<li>对于想监视的每一个目录，用户都需要打开一个文件描述符，因此如果需要监视的目录较多，将导致打开许多文件描述符，特别是，如果被监视目录在移动介质上（如光盘和 USB 盘），将导致无法 umount 这些文件系统，因为使用 dnotify 的应用打开的文件描述符在使用该文件系统。</li>
-<li>dnotify 是基于目录的，它只能得到目录变化事件，当然在目录内的文件的变化会影响到其所在目录从而引发目录变化事件，但是要想通过目录事件来得知哪个文件变化，需要缓存许多 stat 结构的数据。 </li>
-<li>Dnotify 的接口非常不友好，它使用 signal。</li>
-</ol>
-<p>Inotify 是为替代 dnotify 而设计的，它克服了 dnotify 的缺陷，提供了更好用的、简洁而强大的文件变化通知机制：</p>
-<ol>
-<li>Inotify 不需要对被监视的目标打开文件描述符，而且如果被监视目标在可移动介质上，那么在 umount 该介质上的文件系统后，被监视目标对应的 watch 将被自动删除，并且会产生一个 umount 事件。 </li>
-<li>Inotify 既可以监视文件，也可以监视目录。</li>
-<li>Inotify 使用系统调用而非 SIGIO 来通知文件系统事件。</li>
-<li>Inotify 使用文件描述符作为接口，因而可以使用通常的文件 I/O 操作select 和 poll 来监视文件系统的变化。</li>
-</ol>
-<p>Inotify 可以监视的文件系统事件包括：</p>
-<ul>
-<li>IN_ACCESS：文件被访问</li>
-<li>IN_MODIFY：文件被写入</li>
-<li>IN_ATTRIB：文件属性被修改</li>
-<li>IN_CLOSE_WRITE：可写文件被关闭</li>
-<li>IN_CLOSE_NOWRITE：不可写文件被关闭</li>
-<li>IN_OPEN：文件被打开</li>
-<li>IN_MOVED_FROM：文件被移走</li>
-<li>IN_MOVED_TO：文件被移来</li>
-<li>IN_CREATE：创建新文件</li>
-<li>IN_DELETE：文件被删除</li>
-<li>IN_DELETE_SELF：自删除，即一个可执行文件在执行时删除自己</li>
-<li>IN_MOVE_SELF：自移动，即一个可执行我呢见在执行时移动自己</li>
-<li>IN_UNMOUNT：宿主文件系统被 umount</li>
-<li>IN_CLOSE：文件被关闭，等同于（IN_CLOSE_WRITE | IN_CLOSE_NOWRITE）</li>
-<li>IN_MOVE：文件被移动，等同于（IN_MOVE_FROM | IN_MOVE_TO）</li>
-</ul>
-<p>注：上面所说的文件包括目录。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="ciqosmm4i001bjkpv71dw64vb" class="article-share-link">Partager</a>
-      
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/07/16/LinuxShell-正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          LinuxShell 正则表达式
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/07/15/Hexo-博客添加图片、音乐、视频/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">Hexo 博客添加图片、音乐、视频</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/archives/2016/07/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/2016/07/">1</a><a class="page-number" href="/archives/2016/07/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 
 </section>
         
