@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="inotify inotify-tools inotifywait rsync">
-<meta property="og:updated_time" content="2016-07-20T02:25:53.843Z">
+<meta property="og:updated_time" content="2016-07-20T02:28:19.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Intofiy+Rsync 实现 Linux 文件实时同步">
 <meta name="twitter:description" content="inotify inotify-tools inotifywait rsync">
@@ -123,7 +123,7 @@ var _hmt = _hmt || [];
 <h3 id="2-源服务器（需要备份文件的服务器）rsync-配置"><a href="#2-源服务器（需要备份文件的服务器）rsync-配置" class="headerlink" title="2. 源服务器（需要备份文件的服务器）rsync 配置"></a>2. 源服务器（需要备份文件的服务器）rsync 配置</h3><ul>
 <li>安装 Rsync 客户端软件<br>使用 whereis 查看系统是否已经安装 rsync，可以直接从服务器拷贝一个执行文件即可</li>
 <li><p>创建密码认证文件 vim /etc/passwd.txt</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ziplog:20160720</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">20160720</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>权限修改</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 600 /etc/passwd.txt</span><br></pre></td></tr></table></figure>
@@ -135,15 +135,18 @@ var _hmt = _hmt || [];
 <h3 id="3-源服务器安装-notify-tools-工具，实时触发-rsync-进行同步"><a href="#3-源服务器安装-notify-tools-工具，实时触发-rsync-进行同步" class="headerlink" title="3. 源服务器安装 notify-tools 工具，实时触发 rsync 进行同步"></a>3. 源服务器安装 notify-tools 工具，实时触发 rsync 进行同步</h3><ul>
 <li>查看服务器内核是否支持 inotify</li>
 <li>安装 inotify-tools 可以使用源码安装或者使用 yum install inotify-tools</li>
-<li>使用 inotifywait 工具检测监测是否正常<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inotifywait -mrq --timefmt &apos;%d/%m/%y/%H:%M&apos; --format &apos;%T %w %f&apos; -e modify,delete,create,attrib /ziplog</span><br></pre></td></tr></table></figure>
+<li><p>使用 inotifywait 工具检测监测是否正常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inotifywait -mrq --timefmt &apos;%d/%m/%y/%H:%M&apos; --format &apos;%T %w %f&apos; -e modify,delete,create,attrib /ziplog</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 shell 脚本进行自动同步 vim autorsync.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">src=/home/data/unzip/jsonFile</span><br><span class="line">dst=/hdlog/</span><br><span class="line">dstip=192.168.16.66</span><br><span class="line"></span><br><span class="line">inotifywait -mrq --timefmt &apos;%d/%m/%y/%H:%M&apos; --format &apos;%T %w %f&apos; -e modify,delete,create,attrib $&#123;src&#125; | \</span><br><span class="line">while read file</span><br><span class="line">do</span><br><span class="line">    /usr/bin/rsync -vzrtopg --progress $src hongdian_ziplog@$&#123;dstip&#125;::hongdian_ziplog --password-file=/etc/passwd.txt &amp;&amp;</span><br><span class="line">    echo &quot;$&#123;src&#125; was rsynced&quot;</span><br><span class="line">    echo &quot;------&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><em>*</em> 使用 shell 脚本进行自动同步 vim autorsync.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">src=/home/data/unzip/jsonFile</span><br><span class="line">dst=/hdlog/</span><br><span class="line">dstip=192.168.16.66</span><br><span class="line"></span><br><span class="line">inotifywait -mrq --timefmt &apos;%d/%m/%y/%H:%M&apos; --format &apos;%T %w %f&apos; -e modify,delete,create,attrib $&#123;src&#125; | \</span><br><span class="line">while read file</span><br><span class="line">do</span><br><span class="line">    /usr/bin/rsync -vzrtopg --progress $src hongdian_ziplog@$&#123;dstip&#125;::hongdian_ziplog --password-file=/etc/passwd.txt &amp;&amp;</span><br><span class="line">    echo &quot;$&#123;src&#125; was rsynced&quot;</span><br><span class="line">    echo &quot;------&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="ciqu9ovo6000xgvpv6dfgnac4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="ciqu9s00t000xhtpvcy8vju3w" class="article-share-link">Share</a>
       
       
     </footer>
