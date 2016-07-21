@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="inotify inotify-tools inotifywait rsync">
-<meta property="og:updated_time" content="2016-07-21T01:08:27.985Z">
+<meta property="og:updated_time" content="2016-07-21T01:13:09.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Intofiy+Rsync 实现 Linux 文件实时同步">
 <meta name="twitter:description" content="inotify inotify-tools inotifywait rsync">
@@ -143,12 +143,12 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <hr>
-<p>在上述脚本中我们我们没有指定需要同步到的目的目录，这是因为我们使用了 hongdian_ziplog 和 hongdian_ziplog2 来定位，相应的目录写在 rsync 服务端的配置文件中，另外我们添加了 –chmod 参数，这是因为 rsync 在同步的时候目录权限也会进行同步，而我们有其中一份文件是对外公开访问了，所以针对这一份同步我添加了 –chmod 选项来修改同步后的目录、文件权限为 777。</p>
+<p>在上述脚本中我们没有指定需要同步到的目的目录，这是因为我们使用了 hongdian_ziplog 和 hongdian_ziplog2 来定位，相应的目录写在 rsync 服务端的配置文件中，另外在第二个 rsync 中我们添加了 -R 参数来同步目录结构，使用 –include 和 –exclude 的组合来同步指定文件（注意此时不会再同步之前已存在的文件，而只会同步实时更新的文件），使用–chmod 参数修改同步后的目录、文件权限为 777。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="ciqvmd5mv000x9kpvc4g5uxoe" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="ciqvmfo1e000yaopv9lhejsrg" class="article-share-link">Share</a>
       
       
     </footer>
