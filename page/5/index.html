@@ -82,6 +82,52 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nagios-安装好无法启动问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/20/Nagios-安装好无法启动问题汇总/" class="article-date">
+  <time datetime="2016-06-20T08:48:17.000Z" itemprop="datePublished">2016-06-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/20/Nagios-安装好无法启动问题汇总/">Nagios - 安装好无法启动问题汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>提示 <strong>qh: Failed to init socket ‘/usr/local/nagios/var/rw/nagios.qh’</strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1466408082] Nagios 4.1.1 starting... (PID=22890)</span><br><span class="line">[1466408082] Local time is Mon Jun 20 15:34:42 CST 2016</span><br><span class="line">[1466408082] LOG VERSION: 2.0</span><br><span class="line">[1466408082] qh: Failed to init socket &apos;/usr/local/nagios/var/rw/nagios.qh&apos;. bind() failed: No such file or directory</span><br><span class="line">[1466408082] Error: Failed to initialize query handler. Aborting</span><br></pre></td></tr></table></figure>
+<p>如下步骤即可解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/nagios/var/rw</span><br><span class="line">chown nagios:nagios /usr/local/nagios/var/rw</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciqxc2z0v003bkypv9dnpejko" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Nagios-Installing-Nagios-Core-From-Source" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" class="article-date">
@@ -136,7 +182,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciqvmfo3s0033aopv724051et" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciqxc2z0n0034kypvmem2orbd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -181,7 +227,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciqvmfo68006eaopvk19e1upz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciqxc2z49006ikypv49cnhmfq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -226,7 +272,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciqvmfo3k002vaopv4625qals" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciqxc2z07002ukypv5vkf9ewp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -323,7 +369,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciqvmfo3g002oaopv2842lget" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciqxc2z03002pkypv6sb7wlpi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -368,7 +414,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciqvmfo3j002taopv1dqw54lr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciqxc2z05002skypvb8ehzzgj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +466,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciqvmfo69006gaopvo32ltmfq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciqxc2z47006gkypv8jwggtgl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -465,7 +511,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciqvmfo5y0061aopvt5aopulw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciqxc2z3t0063kypv5sti0gy7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -510,7 +556,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciqvmfo4c003paopv3tw25lyn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciqxc2z1i003okypvocxbwmxm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -563,54 +609,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="ciqvmfo5u005uaopviass9cq5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-windows-性能计数器使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/06/Zabbix-windows-性能计数器使用/" class="article-date">
-  <time datetime="2016-06-06T03:09:27.000Z" itemprop="datePublished">2016-06-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/06/Zabbix-windows-性能计数器使用/">Zabbix windows 性能计数器使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>windows 下的性能计数器让 zabbix 监控更加轻松，直接获取性能计数器的数值即可完成 windows 监控。性能计数器如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perf_counter[\234(_Total)\1402]</span><br></pre></td></tr></table></figure>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perf_counter[&quot;\LogicalDisk(_Total)\Disk Transfers/sec&quot;,300]</span><br></pre></td></tr></table></figure></p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/06/Zabbix-windows-性能计数器使用/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="ciqvmfo6p0075aopvkh1io0fw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="ciqxc2z3n005wkypvg5lm72q1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -662,6 +661,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/07/22/LinuxShell-sed-进阶/">LinuxShell sed 进阶</a>
+          </li>
+        
+          <li>
             <a href="/2016/07/20/Linux-SMB-配置/">Linux SMB 配置</a>
           </li>
         
@@ -675,10 +678,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/07/16/LinuxShell-正则表达式/">LinuxShell 正则表达式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/15/Linux-inotify/">Linux inotify</a>
           </li>
         
       </ul>
