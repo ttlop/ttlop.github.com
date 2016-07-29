@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 Apachetop 实时监测 web 服务器运行状态 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="apachetop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Apachetop 实时监测 web 服务器运行状态">
+<meta property="og:url" content="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="apachetop">
+<meta property="og:updated_time" content="2016-07-29T02:34:40.417Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Apachetop 实时监测 web 服务器运行状态">
+<meta name="twitter:description" content="apachetop">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-使用-Apachetop-实时监测-web-服务器运行状态" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" class="article-date">
+  <time datetime="2016-07-29T02:04:26.000Z" itemprop="datePublished">2016-07-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Apache/">Apache</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 Apachetop 实时监测 web 服务器运行状态
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于 Linux 下使用 Apache 作为 Web 服务器来说，大家也许经常会需要查看服务器的实时运行情况，比如哪些 URL 的访问量最大，服务器每秒的请求数，等等。 apachetop 就是这样一个工具， 能够让你实时的监测 apache 服务器的运行状况。</p>
+<a id="more"></a>
+<p>apachetop 是一个命令行工具，它的运行原理是通过分析 apache 服务器的日志文件，来向用户展示服务器的运行情况。</p>
+<h3 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h3><ul>
+<li>以 Centos 为例，输入如下命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install apachetop</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 apachetop</li>
+</ul>
+<p>安装完成后，可以在命令行输入 apachetop 来使用它，如果成功找到日志文件，apachetop 就会在命令行中显示类似如下的内容，并且这些内容会自动刷新：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">last hit: 02:17:16         atop runtime:  0 days, 00:05:35             02:17:17</span><br><span class="line">All:       372511 reqs (1112.0/sec)         19.2M (   58.6K/sec)      54.0B/req</span><br><span class="line">2xx:	 797 ( 0.2%) 3xx:  362566 (97.3%) 4xx:  9148 ( 2.5%) 5xx:     0 ( 0.0%)</span><br><span class="line">R ( 30s):   36717 reqs (1223.9/sec)        946.7K (   31.6K/sec)      26.4B/req</span><br><span class="line">2xx:	  57 ( 0.2%) 3xx:   35866 (97.7%) 4xx:   794 ( 2.2%) 5xx:     0 ( 0.0%)</span><br><span class="line"></span><br><span class="line"> REQS REQ/S    KB KB/S URL</span><br><span class="line">35895 1196.5 172.2  5.*/index.php</span><br><span class="line">  787 26.23 159.9  5.3 /index.html</span><br><span class="line">    7  0.28   1.4  0.1 /favicon.ico</span><br><span class="line">    5  0.19 497.1 19.1 /server-status</span><br><span class="line">    5  0.28   0.0  0.0 /common/http_api/common.php</span><br><span class="line">    5  0.17   6.0  0.2 /interface/getindeximg.php</span><br><span class="line">    3  0.23  29.0  2.2 /portal/web/portal.php</span><br><span class="line">    3  1.50  80.7 40.3 /advertisement/image/head/dm.jpg</span><br><span class="line">    2  0.50   0.0  0.0 /common/api/upload_data.php</span><br><span class="line">    2  0.50   0.0  0.0 /portal/web/index.php</span><br><span class="line">    1  0.17   0.0  0.0 /internet/web/freewifi.php</span><br><span class="line">    1  0.20   0.0  0.0 /advertisement/image/start/full_1.jpg</span><br><span class="line">    1  0.03   0.4  0.0 /interface/appupdate.php</span><br></pre></td></tr></table></figure>
+<p>上面的命令行输出，向我们展示了 apache 服务器当前的运行状况，我们可以逐行进行分析：</p>
+<ol>
+<li>第一行显示 apachetop 最后请求时间以及已经运行的时间</li>
+<li>第二行显示 apachetop 运行以来所有的请求次数以及每秒平均的请求次数、接收到的字节数以及每秒接收的字节数、每次请求平均的字节数</li>
+<li>服务端发出的 HTTP 响应代码情况，例如，2xx 表示请求成功的相应代码发送的次数</li>
+<li>下面两行与前两行各个属性的含义是一样的，唯一不同的是它们跨越的时段不一样，前两行是统计自从 apachetop 启动以来所有的请求，而这两行默认统计的是 30 秒之内的请求</li>
+<li>再往后就是具体每一个 URL 的请求状况了，这里面列出的是指定时间段（上面所说的30s）内对每一个 URL 分别的请求数量，每秒的请求次数，这些请求的字节数以及每秒平均的字节数</li>
+</ol>
+<h3 id="apachetop-的各种视图模式"><a href="#apachetop-的各种视图模式" class="headerlink" title="apachetop 的各种视图模式"></a>apachetop 的各种视图模式</h3><ul>
+<li><p>可以按住 d 键，在 URL/HOST/REFERRER 这三个列表视图之间进行切换</p>
+</li>
+<li><p>星号代表当前选中的这一行，可以按上下键来选择其它行，可以按 -&gt; 键进入该行的详细信息界面</p>
+</li>
+<li><p>可以按 f 键对列表进行筛选</p>
+</li>
+</ul>
+<h3 id="apachetop-的命令行参数"><a href="#apachetop-的命令行参数" class="headerlink" title="apachetop 的命令行参数"></a>apachetop 的命令行参数</h3><ul>
+<li><p>默认情况下，apachetop 会在 apache http 服务器的默认日志路径上面来查找日志文件，可以使用 -f 参数来明确的指定日志文件的位置</p>
+</li>
+<li><p>默认情况下，不显示出 URL 参数，可以使用 -q 参数显示</p>
+</li>
+<li><p>默认情况下，apachetop 使用缓存区域来存放一定数量的日志记录，以生成最终的实时检测报告，默认情况下保存 30 秒之内的请求记录，-H num 以请求数来计算，-T sec 以时间进行来计算</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="cir74yu4w006kmqpvuhjjzaw0" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/28/Zabbix-TCP-连接数监控/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">Zabbix TCP 连接数监控</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categorieën</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/">使用 Apachetop 实时监测 web 服务器运行状态</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/28/Zabbix-TCP-连接数监控/">Zabbix TCP 连接数监控</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/28/Linux-大量-TIME-WAIT-解决办法/">Linux 大量 TIME_WAIT 解决办法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/22/LinuxShell-sed-进阶/">LinuxShell sed 进阶</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/20/Linux-SMB-配置/">Linux SMB 配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
