@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/30/TCP-连接的状态/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux tcp 端口状态">
-<meta property="og:updated_time" content="2016-08-01T06:52:04.965Z">
+<meta property="og:updated_time" content="2016-08-01T06:56:40.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接的状态">
 <meta name="twitter:description" content="linux tcp 端口状态">
@@ -140,21 +140,21 @@ var _hmt = _hmt || [];
 <p><strong>ESTABLISHED</strong> 状态是表示两台机器正在传输数据，观察这个状态最主要的就是看哪个程序正在处于 <strong>ESTABLISHED</strong> 状态。</p>
 <p>当客户端未主动 <strong>close</strong> 的时候就断开连接：即客户端发送的 FIN 丢失或未发送。这时候若客户端断开的时候发送了 FIN 包，则服务端将会处于 <strong>CLOSE_WAIT</strong> 状态；若客户端断开的时候未发送 <strong>FIN</strong> 包，则服务端处还是显示 <strong>ESTABLISHED</strong> 状态；结果客户端重新连接服务器。而新连接上来的客户端（也就是刚才断掉的重新连上来了）在服务端肯定是 <strong>ESTABLISHED</strong> ; 如果客户端重复的上演这种情况，那么服务端将会出现大量的假的 <strong>ESTABLISHED</strong> 连接和 <strong>CLOSE_WAIT</strong> 连接。最终结果就是新的其他客户端无法连接上来，但是利用 <strong>netstat</strong> 还是能看到一条连接已经建立，并显示 <strong>ESTABLISHED</strong>，但始终无法进入程序代码。</p>
 <ul>
-<li><strong>FIN-WAIT-1：等待远程 </strong>TCP<strong> 连接中断请求，或先前的连接中断请求的确认</strong></li>
+<li><strong>FIN-WAIT-1：等待远程 TCP 连接中断请求，或先前的连接中断请求的确认</strong></li>
 </ul>
 <p>主动关闭<strong>(active close)</strong>端应用程序调用 <strong>close</strong> ，于是其 <strong>TCP</strong> 发出 <strong>FIN</strong> 请求主动关闭连接，之后进入 <strong>FIN_WAIT1</strong> 状态。<br><em>The socket is closed, and the connection is shutting down. 等待远程TCP的连接中断请求，或先前的连接中断请求的确认</em></p>
 <p>如果服务器出现 <strong>shutdown</strong> 再重启，使用 <strong>netstat -nat</strong> 查看，就会看到很多 <strong>FIN-WAIT-1</strong> 的状态。就是因为服务器当前有很多客户端连接，直接关闭服务器后，无法接收到客户端的ACK。</p>
 <ul>
-<li>FIN-WAIT-2：从远程TCP等待连接中断请求</li>
+<li><strong>FIN-WAIT-2：从远程TCP等待连接中断请求</strong></li>
 </ul>
-<p>主动关闭端接到 <strong>ACK</strong> 后，就进入了 <strong>FIN-WAIT-2</strong>。<br>/<em> Connection is closed, and the socket is waiting for a shutdown from the remote end. 从远程TCP等待连接中断请求 </em>/</p>
+<p>主动关闭端接到 <strong>ACK</strong> 后，就进入了 <strong>FIN-WAIT-2</strong>。<br><em>Connection is closed, and the socket is waiting for a shutdown from the remote end. 从远程TCP等待连接中断请求</em></p>
 <p>这就是著名的半关闭的状态了，这是在关闭连接时，客户端和服务器两次握手之后的状态。在这个状态下，应用程序还有接受数据的能力，但是已经无法发送数据，但是也有一种可能是，客户端一直处于 <strong>FIN_WAIT_2</strong> 状态，而服务器则一直处于 <strong>WAIT_CLOSE</strong> 状态，而直到应用层来决定关闭这个状态。</p>
 <ul>
-<li>CLOSE-WAIT：等待从本地用户发来的连接中断请求</li>
+<li><strong>CLOSE-WAIT：等待从本地用户发来的连接中断请求</strong></li>
 </ul>
-<p>被动关闭<strong>(passive close)</strong>端 <strong>TCP</strong> 接到 <strong>FIN</strong> 后，就发出 <strong>ACK</strong> 以回应 <strong>FIN</strong> 请求(它的接收也作为文件结束符传递给上层应用程序),并进入 <strong>CLOSE_WAIT</strong>。<br>/<em> The remote end has shut down, waiting for the socket to close. 等待从本地用户发来的连接中断请求 </em>/</p>
+<p>被动关闭<strong>(passive close)</strong>端 <strong>TCP</strong> 接到 <strong>FIN</strong> 后，就发出 <strong>ACK</strong> 以回应 <strong>FIN</strong> 请求(它的接收也作为文件结束符传递给上层应用程序),并进入 <strong>CLOSE_WAIT</strong>。<br><em>The remote end has shut down, waiting for the socket to close. 等待从本地用户发来的连接中断请求</em></p>
 <ul>
-<li>CLOSING：等待远程TCP对连接中断的确认</li>
+<li><strong>CLOSING：等待远程TCP对连接中断的确认</strong></li>
 </ul>
 <p>比较少见.<br>/<em> Both sockets are shut down but we still don’t have all our data sent. 等待远程TCP对连接中断的确认 </em>/</p>
 <ul>
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbohfb3004jgfpvnc6qsorf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirboncw5004ihepvtaowxcy3" class="article-share-link">Share</a>
       
       
     </footer>
