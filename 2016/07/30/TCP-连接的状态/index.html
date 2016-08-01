@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/30/TCP-连接的状态/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux tcp 端口状态">
-<meta property="og:updated_time" content="2016-08-01T06:42:43.156Z">
+<meta property="og:updated_time" content="2016-08-01T06:46:49.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接的状态">
 <meta name="twitter:description" content="linux tcp 端口状态">
@@ -128,11 +128,11 @@ var _hmt = _hmt || [];
 <p>当请求连接时客户端首先要发送同步信号给要访问的机器，此时状态为 <strong>SYN_SENT</strong>，如果连接成功了就变为 <strong>ESTABLISHED</strong>，正常情况下 <strong>SYN_SENT</strong> 状态非常短暂。例如要访问网站 <strong><a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a></strong>，如果是正常连接的话，用 <strong>TCPView</strong> 观察 IEXPLORE.EXE（IE）建立的连接会发现很快从 <strong>SYN_SENT</strong> 变为 <strong>ESTABLISHED</strong>，表示连接成功。<strong>SYN_SENT</strong> 状态快的也许看不到。</p>
 <p>如果发现有很多 <strong>SYN_SENT</strong> 出现，那一般有这么几种情况，一是你要访问的网站不存在或线路不好，二是用扫描软件扫描一个网段的机器，也会出出现很多 <strong>SYN_SENT</strong>，另外就是可能中了病毒了，例如中了”冲击波”，病毒发作时会扫描其它机器，这样会有很多 SYN_SENT 出现。</p>
 <ul>
-<li><strong>SYN-RECEIVED：服务器端 </strong>SYN_RCVD<strong> 状态</strong></li>
+<li><strong>SYN-RECEIVED：服务器端 SYN_RCVD 状态</strong></li>
 </ul>
 <p>收到和发送一个连接请求后等待对方对连接请求的确认。</p>
-<p>当服务器收到客户端发送的同步信号时，将标志位 ACK 和 SYN 置 1 发送给客户端，此时服务器端处于 SYN_RCVD 状态，如果连接成功了就变为ESTABLISHED，正常情况下 SYN_RCVD 状态非常短暂。如果发现有很多 SYN_RCVD 状态，那你的机器有可能被 SYN Flood 的 DoS(拒绝服务攻击) 攻击了。</p>
-<p>SYN Flood的攻击原理是：<br>在进行三次握手时，攻击软件向被攻击的服务器发送 <strong>SYN_SENT</strong> （握手的第一步），但是这个地址是伪造的，服务器在收到连接请求时将标志位 ACK 和 SYN 置 1 发送给客户端（握手的第二步），但是这些客户端的IP地址都是伪造的，服务器根本找不到客户机，也就是说握手的第三步不可能完成。</p>
+<p>当服务器收到客户端发送的同步信号时，将标志位 <strong>ACK</strong> 和 <strong>SYN</strong> 置 1 发送给客户端，此时服务器端处于 <strong>SYN_RCVD</strong> 状态，如果连接成功了就变为 <strong>ESTABLISHED</strong>，正常情况下 <strong>SYN_RCVD</strong> 状态非常短暂。如果发现有很多 <strong>SYN_RCVD</strong> 状态，那你的机器有可能被 <strong>SYN Flood</strong> 的 <strong>DoS</strong>(拒绝服务攻击) 攻击了。</p>
+<p><strong>SYN Flood</strong> 的攻击原理是：<br>在进行三次握手时，攻击软件向被攻击的服务器发送 <strong>SYN_SENT</strong> （握手的第一步），但是这个地址是伪造的，服务器在收到连接请求时将标志位 <strong>ACK</strong> 和 <strong>SYN</strong> 置 1 发送给客户端（握手的第二步），但是这些客户端的IP地址都是伪造的，服务器根本找不到客户机，也就是说握手的第三步不可能完成。</p>
 <p>这种情况下服务器端一般会重试（再次发送 <strong>SYN+ACK</strong> 给客户端）并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为 <strong>SYN Timeout</strong>，一般来说这个时间是分钟的数量级（大约为30秒-2分钟）；一个用户出现异常导致服务器的一个线程等待1分钟并不是什么很大的问题，但如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的 <strong>CPU</strong> 时间和内存，何况还要不断对这个列表中的 <strong>IP </strong>进行 <strong>SYN+ACK</strong> 的重试。此时从正常客户的角度看来，服务器失去响应，这种情况我们称做：服务器端受到了 <strong>SYN Flood</strong> 攻击（SYN洪水攻击）</p>
 <ul>
 <li><strong>ESTABLISHED：代表一个打开的连接</strong></li>
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbo5dnv004ie5pvgkdnsf2w" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbo9y79004if1pvmhl78k3y" class="article-share-link">Share</a>
       
       
     </footer>
