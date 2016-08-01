@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/30/TCP-连接的状态/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux tcp 端口状态">
-<meta property="og:updated_time" content="2016-08-01T06:46:49.710Z">
+<meta property="og:updated_time" content="2016-08-01T06:52:04.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接的状态">
 <meta name="twitter:description" content="linux tcp 端口状态">
@@ -133,12 +133,12 @@ var _hmt = _hmt || [];
 <p>收到和发送一个连接请求后等待对方对连接请求的确认。</p>
 <p>当服务器收到客户端发送的同步信号时，将标志位 <strong>ACK</strong> 和 <strong>SYN</strong> 置 1 发送给客户端，此时服务器端处于 <strong>SYN_RCVD</strong> 状态，如果连接成功了就变为 <strong>ESTABLISHED</strong>，正常情况下 <strong>SYN_RCVD</strong> 状态非常短暂。如果发现有很多 <strong>SYN_RCVD</strong> 状态，那你的机器有可能被 <strong>SYN Flood</strong> 的 <strong>DoS</strong>(拒绝服务攻击) 攻击了。</p>
 <p><strong>SYN Flood</strong> 的攻击原理是：<br>在进行三次握手时，攻击软件向被攻击的服务器发送 <strong>SYN_SENT</strong> （握手的第一步），但是这个地址是伪造的，服务器在收到连接请求时将标志位 <strong>ACK</strong> 和 <strong>SYN</strong> 置 1 发送给客户端（握手的第二步），但是这些客户端的IP地址都是伪造的，服务器根本找不到客户机，也就是说握手的第三步不可能完成。</p>
-<p>这种情况下服务器端一般会重试（再次发送 <strong>SYN+ACK</strong> 给客户端）并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为 <strong>SYN Timeout</strong>，一般来说这个时间是分钟的数量级（大约为30秒-2分钟）；一个用户出现异常导致服务器的一个线程等待1分钟并不是什么很大的问题，但如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的 <strong>CPU</strong> 时间和内存，何况还要不断对这个列表中的 <strong>IP </strong>进行 <strong>SYN+ACK</strong> 的重试。此时从正常客户的角度看来，服务器失去响应，这种情况我们称做：服务器端受到了 <strong>SYN Flood</strong> 攻击（SYN洪水攻击）</p>
+<p>这种情况下服务器端一般会重试（再次发送 <strong>SYN+ACK</strong> 给客户端）并等待一段时间后丢弃这个未完成的连接，这段时间的长度我们称为 <strong>SYN Timeout</strong>，一般来说这个时间是分钟的数量级（大约为30秒-2分钟）；一个用户出现异常导致服务器的一个线程等待1分钟并不是什么很大的问题，但如果有一个恶意的攻击者大量模拟这种情况，服务器端将为了维护一个非常大的半连接列表而消耗非常多的资源—-数以万计的半连接，即使是简单的保存并遍历也会消耗非常多的 <strong>CPU</strong> 时间和内存，何况还要不断对这个列表中的 <strong>IP </strong>进行 <strong>SYN+ACK</strong> 的重试。此时从正常客户的角度看来，服务器失去响应，这种情况我们称做：服务器端受到了 <strong>SYN Flood</strong> 攻击</p>
 <ul>
 <li><strong>ESTABLISHED：代表一个打开的连接</strong></li>
 </ul>
 <p><strong>ESTABLISHED</strong> 状态是表示两台机器正在传输数据，观察这个状态最主要的就是看哪个程序正在处于 <strong>ESTABLISHED</strong> 状态。</p>
-<p>当客户端未主动 close 的时候就断开连接：即客户端发送的FIN丢失或未发送。这时候若客户端断开的时候发送了FIN包，则服务端将会处于CLOSE_WAIT状态；这时候若客户端断开的时候未发送FIN包，则服务端处还是显示ESTABLISHED状态；结果客户端重新连接服务器。而新连接上来的客户端（也就是刚才断掉的重新连上来了）在服务端肯定是 ESTABLISHED ; 如果客户端重复的上演这种情况，那么服务端将会出现大量的假的 ESTABLISHED 连接和 CLOSE_WAIT 连接。最终结果就是新的其他客户端无法连接上来，但是利用netstat还是能看到一条连接已经建立，并显示ESTABLISHED，但始终无法进入程序代码。</p>
+<p>当客户端未主动 <strong>close</strong> 的时候就断开连接：即客户端发送的 FIN 丢失或未发送。这时候若客户端断开的时候发送了 FIN 包，则服务端将会处于 <strong>CLOSE_WAIT</strong> 状态；若客户端断开的时候未发送 <strong>FIN</strong> 包，则服务端处还是显示 <strong>ESTABLISHED</strong> 状态；结果客户端重新连接服务器。而新连接上来的客户端（也就是刚才断掉的重新连上来了）在服务端肯定是 <strong>ESTABLISHED</strong> ; 如果客户端重复的上演这种情况，那么服务端将会出现大量的假的 <strong>ESTABLISHED</strong> 连接和 <strong>CLOSE_WAIT</strong> 连接。最终结果就是新的其他客户端无法连接上来，但是利用 <strong>netstat</strong> 还是能看到一条连接已经建立，并显示 <strong>ESTABLISHED</strong>，但始终无法进入程序代码。</p>
 <ul>
 <li><strong>FIN-WAIT-1：等待远程 </strong>TCP<strong> 连接中断请求，或先前的连接中断请求的确认</strong></li>
 </ul>
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbo9y79004if1pvmhl78k3y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbohfb3004jgfpvnc6qsorf" class="article-share-link">Share</a>
       
       
     </footer>
