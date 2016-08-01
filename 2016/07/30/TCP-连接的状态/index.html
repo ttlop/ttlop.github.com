@@ -24,7 +24,7 @@ var _hmt = _hmt || [];
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux tcp 端口状态">
 <meta property="og:image" content="http://images.cnitblog.com/blog/88420/201402/181351206012825.png">
-<meta property="og:updated_time" content="2016-08-01T07:06:13.865Z">
+<meta property="og:updated_time" content="2016-08-01T07:20:32.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接的状态">
 <meta name="twitter:description" content="linux tcp 端口状态">
@@ -110,12 +110,21 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>我们通过了解各个 <strong>TCP</strong> 状态，可以排除和定位网络或系统故障。</p>
-<p><strong>TCP/IP</strong> 协议中，<strong>TCP</strong> 协议提供可靠的连接服务，采用三次握手建立一个连接</p>
+<h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><p><strong>TCP/IP</strong> 协议中，<strong>TCP</strong> 协议提供可靠的连接服务，采用三次握手建立一个连接</p>
 <ol>
 <li>第一次握手：建立连接时，客户端发送 <strong>SYN</strong> 包到服务器，并进入 <strong>SYN_SENT</strong> 状态，等待服务器确认</li>
 <li>第二次握手：服务器收到 <strong>SYN</strong> 包，必须确认客户端的 <strong>SYN</strong>，同时自己也发送一个 <strong>SYN</strong> 包，即 <strong>SYN + ACK</strong>，此时服务器进入 <strong>SYN_RECV</strong> 状态</li>
 <li>第三次握手：客户端收到服务器发送的 <strong>SYN+ACK</strong> 包，向服务器发送确认 <strong>ACK</strong>，此包发送完毕，客户端和服务器进入 <strong>ESTABLISHED</strong> 状态，完成三次握手</li>
 </ol>
+<h3 id="关闭连接"><a href="#关闭连接" class="headerlink" title="关闭连接"></a>关闭连接</h3><p>由于 <strong>TCP</strong> 连接是全双工的，因此每个方向都必须单独进行关闭。这个原则是当一方完成它的数据发送任务后就能发送一个 <strong>FIN</strong> 来终止这个方向的连接。收到一个 FIN 只意味着这一方向没有数据流动，一个 <strong>TCP</strong> 连接在收到一个 <strong>FIN</strong> 后仍能发送数据。首先进行关闭的一房将执行主动关闭，而另一方执行被动关闭。</p>
+<p><strong>TCP</strong> 的连接断开需要发送四个包，因此称为四次握手。客户端或服务器均可主动发起，在 <strong>socket</strong> 编程中，任何一方执行 <strong>close()</strong> 操作即可产生。</p>
+<ol>
+<li>客户端发送一个 <strong>FIN</strong>，用来关闭客户端到服务端的数据传送，此时进入 <strong>FIN_WAIT1</strong> 状态</li>
+<li>服务器收到这个 <strong>FIN</strong>，它发送一个 <strong>ACK</strong>，确认号为收到的序号加 1， 和 <strong>SYN</strong> 一样，一个 <strong>FIN</strong> 将占用一个序号，此时服务端进入 <strong>CLOSE_WAIT</strong> 状态，客户端接收到 <strong>ACK</strong> 后进入 <strong>FIN_WAIT2</strong> 状态（即半连接状态）</li>
+<li>服务器关闭与客户端的连接，发送一个 <strong>FIN</strong> 给客户端，此时服务端进入 <strong>LAST_ACK</strong> 状态</li>
+<li>客户端发回 <strong>ACK</strong> 报文确认，并将确认序号设置为收到序号加 1，此时客户端进入 <strong>TIME_WAIT</strong> 状态，服务端进入 <strong>CLOSED</strong> 状态</li>
+</ol>
+<p><img src="http://images.cnitblog.com/blog/88420/201402/181351206012825.png" alt="TCP状态"></p>
 <a id="more"></a>
 <h3 id="各个端口状态意义如下"><a href="#各个端口状态意义如下" class="headerlink" title="各个端口状态意义如下"></a>各个端口状态意义如下</h3><ul>
 <li><strong>LISTENING：侦听来自远方 TCP 端口的连接请求</strong></li>
@@ -174,12 +183,11 @@ var _hmt = _hmt || [];
 <li><strong>CLOSED：没有任何连接状态</strong></li>
 </ul>
 <p>被动关闭端在接受到 <strong>ACK</strong> 包后，就进入了 <strong>closed</strong> 的状态。连接结束<br><em>The socket is not being used. 没有任何连接状态</em></p>
-<p><img src="http://images.cnitblog.com/blog/88420/201402/181351206012825.png" alt="TCP状态"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbozmqf004fnhpvvx8q85oq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbpi181004ioupvhddg43eh" class="article-share-link">Share</a>
       
       
     </footer>
