@@ -23,10 +23,12 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/30/TCP-连接的状态/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux tcp 端口状态">
-<meta property="og:updated_time" content="2016-08-01T07:00:54.722Z">
+<meta property="og:image" content="http://images.cnitblog.com/blog/88420/201402/181351206012825.png">
+<meta property="og:updated_time" content="2016-08-01T07:02:51.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接的状态">
 <meta name="twitter:description" content="linux tcp 端口状态">
+<meta name="twitter:image" content="http://images.cnitblog.com/blog/88420/201402/181351206012825.png">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -160,7 +162,7 @@ var _hmt = _hmt || [];
 <ul>
 <li><strong>LAST-ACK：等待原来的发向远程 TCP 的连接中断请求的确认</strong></li>
 </ul>
-<p>被动关闭端一段时间后，接收到文件结束符的应用程序将调用 <strong>CLOSE</strong> 关闭连接。这导致它的 <strong>TCP</strong> 也发送一个 <strong>FIN</strong>，等待对方的 <strong>ACK</strong>。就进入了LAST-ACK。<br><em>The remote end has shut down, and the socket is closed. Waiting for acknowledgement. 等待原来发向远程TCP的连接中断请求的确认。</em></p>
+<p>被动关闭端一段时间后，接收到文件结束符的应用程序将调用 <strong>CLOSE</strong> 关闭连接。这导致它的 <strong>TCP</strong> 也发送一个 <strong>FIN</strong>，等待对方的 <strong>ACK</strong>。就进入了 <strong>LAST-ACK</strong>。<br><em>The remote end has shut down, and the socket is closed. Waiting for acknowledgement. 等待原来发向远程TCP的连接中断请求的确认。</em></p>
 <p>使用并发压力测试的时候，突然断开压力测试客户端，服务器会看到很多 <strong>LAST-ACK</strong>。</p>
 <ul>
 <li><strong>TIME-WAIT：等待足够的时间以确保远程 TCP 接收到连接中断请求的确认</strong></li>
@@ -171,13 +173,13 @@ var _hmt = _hmt || [];
 <ul>
 <li><strong>CLOSED：没有任何连接状态</strong></li>
 </ul>
-<p>被动关闭端在接受到 <strong>ACK</strong> 包后，就进入了 <strong>closed</strong> 的状态。连接结束./<em> The socket is not being used. 没有任何连接状态</em>/</p>
-<p><a href="http://images.cnitblog.com/blog/88420/201402/181351206012825.png" target="_blank" rel="external">TCP状态</a></p>
+<p>被动关闭端在接受到 <strong>ACK</strong> 包后，就进入了 <strong>closed</strong> 的状态。连接结束<br><em>The socket is not being used. 没有任何连接状态</em></p>
+<p><img src="http://images.cnitblog.com/blog/88420/201402/181351206012825.png" alt="TCP状态"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbosss3004hkspv4e0wfma4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbou7r8004im8pvwn74cf2w" class="article-share-link">Share</a>
       
       
     </footer>
