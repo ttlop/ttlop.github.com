@@ -24,7 +24,7 @@ var _hmt = _hmt || [];
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux tcp 端口状态">
 <meta property="og:image" content="http://images.cnitblog.com/blog/88420/201402/181351206012825.png">
-<meta property="og:updated_time" content="2016-08-01T07:02:51.078Z">
+<meta property="og:updated_time" content="2016-08-01T07:06:13.865Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接的状态">
 <meta name="twitter:description" content="linux tcp 端口状态">
@@ -168,8 +168,8 @@ var _hmt = _hmt || [];
 <li><strong>TIME-WAIT：等待足够的时间以确保远程 TCP 接收到连接中断请求的确认</strong></li>
 </ul>
 <p>在主动关闭端接收到 <strong>FIN</strong> 后，<strong>TCP</strong> 就发送 <strong>ACK</strong> 包，并进入 <strong>TIME-WAIT</strong> 状态。<br><em>The socket is waiting after close to handle packets still in the network.等待足够的时间以确保远程TCP接收到连接中断请求的确认</em></p>
-<p>TIME_WAIT等待状态，这个状态又叫做2MSL状态，说的是在 <strong>TIME_WAIT2</strong> 发送了最后一个 <strong>ACK数据包</strong> 以后，要进入 <strong>TIME_WAIT</strong> 状态，这个状态是防止最后一次握手的数据包没有传送到对方那里而准备的（注意这不是四次握手，这是第四次握手的保险状态）。这个状态在很大程度上保证了双方都可以正常结束，但是，问题也来了。</p>
-<p>由于插口的2MSL状态（插口是IP和端口对的意思，socket），使得应用程序在 <strong>2MSL</strong> 时间内是无法再次使用同一个插口的，对于客户程序还好一些，但是对于服务程序，例如 <strong>httpd</strong>，它总是要使用同一个端口来进行服务，而在 <strong>2MSL</strong> 时间内，启动 <strong>httpd</strong> 就会出现错误（插口被使用）。为了避免这个错误，服务器给出了一个平静时间的概念，这是说在 <strong>2MSL</strong> 时间内，虽然可以重新启动服务器，但是这个服务器还是要平静的等待 <strong>2MSL</strong> 时间的过去才能进行下一次连接。</p>
+<p><strong>TIME_WAIT</strong> 等待状态，这个状态又叫做 <strong>2MSL</strong> 状态，说的是在 <strong>TIME_WAIT2</strong> 发送了最后一个 <strong>ACK数据包</strong> 以后，要进入 <strong>TIME_WAIT</strong> 状态，这个状态是防止最后一次握手的数据包没有传送到对方那里而准备的（注意这不是四次握手，这是第四次握手的保险状态）。这个状态在很大程度上保证了双方都可以正常结束，但是，问题也来了。</p>
+<p>由于插口的 <strong>2MSL</strong> 状态（插口是 <strong>IP</strong> 和端口对的意思，<strong>socket</strong>），使得应用程序在 <strong>2MSL</strong> 时间内是无法再次使用同一个插口的，对于客户程序还好一些，但是对于服务程序，例如 <strong>httpd</strong>，它总是要使用同一个端口来进行服务，而在 <strong>2MSL</strong> 时间内，启动 <strong>httpd</strong> 就会出现错误（插口被使用）。为了避免这个错误，服务器给出了一个平静时间的概念，这是说在 <strong>2MSL</strong> 时间内，虽然可以重新启动服务器，但是这个服务器还是要平静的等待 <strong>2MSL</strong> 时间的过去才能进行下一次连接。</p>
 <ul>
 <li><strong>CLOSED：没有任何连接状态</strong></li>
 </ul>
@@ -179,7 +179,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbou7r8004im8pvwn74cf2w" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbozmqf004fnhpvvx8q85oq" class="article-share-link">Share</a>
       
       
     </footer>
