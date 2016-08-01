@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/30/TCP-连接的状态/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux tcp 端口状态">
-<meta property="og:updated_time" content="2016-08-01T06:37:03.682Z">
+<meta property="og:updated_time" content="2016-08-01T06:38:22.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接的状态">
 <meta name="twitter:description" content="linux tcp 端口状态">
@@ -115,10 +115,7 @@ var _hmt = _hmt || [];
 <li>第三次握手：客户端收到服务器发送的 <strong>SYN+ACK</strong> 包，向服务器发送确认 <strong>ACK</strong>，此包发送完毕，客户端和服务器进入 <strong>ESTABLISHED</strong> 状态，完成三次握手</li>
 </ol>
 <a id="more"></a>
-<h3 id="各个端口状态意义如下"><a href="#各个端口状态意义如下" class="headerlink" title="各个端口状态意义如下"></a>各个端口状态意义如下</h3><ul>
-<li>LISTENING：侦听来自远方 TCP 端口的连接请求</li>
-</ul>
-<p>端口提供某种服务才会处于 <strong>LISTENING</strong> 状态。提供服务时服务端需要打开一个 <strong>socket</strong> 进行监听，状态为 <strong>LISTEN</strong>。</p>
+<h3 id="各个端口状态意义如下"><a href="#各个端口状态意义如下" class="headerlink" title="各个端口状态意义如下"></a>各个端口状态意义如下</h3><h4 id="LISTENING：侦听来自远方-TCP-端口的连接请求"><a href="#LISTENING：侦听来自远方-TCP-端口的连接请求" class="headerlink" title="LISTENING：侦听来自远方 TCP 端口的连接请求"></a>LISTENING：侦听来自远方 TCP 端口的连接请求</h4><p>端口提供某种服务才会处于 <strong>LISTENING</strong> 状态。提供服务时服务端需要打开一个 <strong>socket</strong> 进行监听，状态为 <strong>LISTEN</strong>。</p>
 <p>例如：提供www服务默认开的是80端口，提供ftp服务默认的端口为21，当提供的服务没有被连接时就处于 <strong>LISTENING</strong> 状态。FTP服务启动后首先处于侦听（LISTENING）状态。处于侦听LISTENING状态时，该端口是开放的，等待连接，但还没有被连接。就像你房子的门已经敞开的，但还没有人进来。</p>
 <p>看 <strong>LISTENING</strong> 状态最主要的是看本机开了哪些端口，这些端口都是哪个程序开的，关闭不必要的端口是保证安全的一个非常重要的方面，服务端口都对应一个服务（应用程序），停止该服务就关闭了该端口。</p>
 <ul>
@@ -177,7 +174,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbny3t3004fb9pv01mbbpw1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbnztjj004rc5pv11oygbfl" class="article-share-link">Share</a>
       
       
     </footer>
