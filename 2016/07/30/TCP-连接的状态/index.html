@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/07/30/TCP-连接的状态/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="linux tcp 端口状态">
-<meta property="og:updated_time" content="2016-08-01T06:59:49.266Z">
+<meta property="og:updated_time" content="2016-08-01T07:00:54.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP 连接的状态">
 <meta name="twitter:description" content="linux tcp 端口状态">
@@ -158,18 +158,18 @@ var _hmt = _hmt || [];
 </ul>
 <p>比较少见.<br><em>Both sockets are shut down but we still don’t have all our data sent. 等待远程TCP对连接中断的确认</em></p>
 <ul>
-<li><strong>LAST-ACK：等待原来的发向远程 </strong>TCP<strong> 的连接中断请求的确认</strong></li>
+<li><strong>LAST-ACK：等待原来的发向远程 TCP 的连接中断请求的确认</strong></li>
 </ul>
 <p>被动关闭端一段时间后，接收到文件结束符的应用程序将调用 <strong>CLOSE</strong> 关闭连接。这导致它的 <strong>TCP</strong> 也发送一个 <strong>FIN</strong>，等待对方的 <strong>ACK</strong>。就进入了LAST-ACK。<br><em>The remote end has shut down, and the socket is closed. Waiting for acknowledgement. 等待原来发向远程TCP的连接中断请求的确认。</em></p>
 <p>使用并发压力测试的时候，突然断开压力测试客户端，服务器会看到很多 <strong>LAST-ACK</strong>。</p>
 <ul>
-<li><strong>TIME-WAIT：等待足够的时间以确保远程TCP接收到连接中断请求的确认</strong></li>
+<li><strong>TIME-WAIT：等待足够的时间以确保远程 TCP 接收到连接中断请求的确认</strong></li>
 </ul>
 <p>在主动关闭端接收到 <strong>FIN</strong> 后，<strong>TCP</strong> 就发送 <strong>ACK</strong> 包，并进入 <strong>TIME-WAIT</strong> 状态。<br><em>The socket is waiting after close to handle packets still in the network.等待足够的时间以确保远程TCP接收到连接中断请求的确认</em></p>
 <p>TIME_WAIT等待状态，这个状态又叫做2MSL状态，说的是在 <strong>TIME_WAIT2</strong> 发送了最后一个 <strong>ACK数据包</strong> 以后，要进入 <strong>TIME_WAIT</strong> 状态，这个状态是防止最后一次握手的数据包没有传送到对方那里而准备的（注意这不是四次握手，这是第四次握手的保险状态）。这个状态在很大程度上保证了双方都可以正常结束，但是，问题也来了。</p>
 <p>由于插口的2MSL状态（插口是IP和端口对的意思，socket），使得应用程序在 <strong>2MSL</strong> 时间内是无法再次使用同一个插口的，对于客户程序还好一些，但是对于服务程序，例如 <strong>httpd</strong>，它总是要使用同一个端口来进行服务，而在 <strong>2MSL</strong> 时间内，启动 <strong>httpd</strong> 就会出现错误（插口被使用）。为了避免这个错误，服务器给出了一个平静时间的概念，这是说在 <strong>2MSL</strong> 时间内，虽然可以重新启动服务器，但是这个服务器还是要平静的等待 <strong>2MSL</strong> 时间的过去才能进行下一次连接。</p>
 <ul>
-<li>CLOSED：没有任何连接状态</li>
+<li><strong>CLOSED：没有任何连接状态</strong></li>
 </ul>
 <p>被动关闭端在接受到 <strong>ACK</strong> 包后，就进入了 <strong>closed</strong> 的状态。连接结束./<em> The socket is not being used. 没有任何连接状态</em>/</p>
 <p><a href="http://images.cnitblog.com/blog/88420/201402/181351206012825.png" target="_blank" rel="external">TCP状态</a></p>
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbordh3004lj8pv5ode9ckt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cirbosss3004hkspv4e0wfma4" class="article-share-link">Share</a>
       
       
     </footer>
