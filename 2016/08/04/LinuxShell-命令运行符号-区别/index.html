@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Linux 控制脚本 | 运维生存时间</title>
+  <title>LinuxShell 命令运行符号 &amp; ; &amp;&amp; 区别 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="linux 信号">
+  <meta name="description" content="shell and 符号区别">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 控制脚本">
-<meta property="og:url" content="http://ttlop.com/2016/07/07/Linux-控制脚本/index.html">
+<meta property="og:title" content="LinuxShell 命令运行符号 & ; && 区别">
+<meta property="og:url" content="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="linux 信号">
-<meta property="og:updated_time" content="2016-07-07T09:17:27.250Z">
+<meta property="og:description" content="shell and 符号区别">
+<meta property="og:updated_time" content="2016-08-04T08:24:42.701Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux 控制脚本">
-<meta name="twitter:description" content="linux 信号">
+<meta name="twitter:title" content="LinuxShell 命令运行符号 & ; && 区别">
+<meta name="twitter:description" content="shell and 符号区别">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,10 +81,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Linux-控制脚本" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LinuxShell-命令运行符号-区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/07/Linux-控制脚本/" class="article-date">
-  <time datetime="2016-07-07T08:23:13.000Z" itemprop="datePublished">2016-07-07</time>
+    <a href="/2016/08/04/LinuxShell-命令运行符号-区别/" class="article-date">
+  <time datetime="2016-08-04T08:21:15.000Z" itemprop="datePublished">2016-08-04</time>
 </a>
     
   <div class="article-category">
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Linux 控制脚本
+      LinuxShell 命令运行符号 &amp; ; &amp;&amp; 区别
     </h1>
   
 
@@ -107,25 +107,14 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>目前为止，我们运行脚本的唯一方式就是以实时模式在命令行界面上直接运行。但这并不是 Linux 上运行脚本的唯一方式，还有其它一些运行 shell 脚本的选择。本章我们会介绍控制何时以及如何在系统上运行 shell 脚本的不同方法。</p>
-<h3 id="处理信号"><a href="#处理信号" class="headerlink" title="处理信号"></a>处理信号</h3><p>Linux 通过信号来在运行在系统上的进程之间通信。默认情况下，bash shell 会忽略收到的任何 SIGQUIT 和 SIGTERM 信号。但是 bash shell 会处理收到的 SIGHUP 和 SIGINT 信号。bash shell 允许用键盘上的键组合生成两种基本的 Linux 信号。这个特性在需要停止或暂停跑飞了的程序时就能派上用场。</p>
-<ul>
-<li>终止进程 Ctrl+C 组合键会生成 SIGINT 信号，会停止 shell 中运行的当前进程。</li>
-<li>暂停进程 Ctrl+Z 组合键会生成 SIGTSTP 信号，会暂停一个进程，跟终止不同，暂停进程会让程序继续保留在内存中，并能从上次停止的位置继续运行。</li>
-</ul>
-<p>你也可以不忽略信号，在信号出现时捕捉它们并执行其它命令。trap 命令允许你来指定 shell 脚本要观察哪些 Linux 信号并从 shell 中拦截。如果脚本收到了 trap 命令中列出的信号，它会阻止它被 shell 处理，而在本地处理它。</p>
-<p>trap 命令的格式是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trap commands signals</span><br></pre></td></tr></table></figure>
-<p>在 trap 命令行上，你只要列出你想要 shell 执行的命令，以及一组用空格分开的你想要捕捉的信号。你可以用数值或者 Linux 信号名来指定信号。</p>
-<h3 id="以后台模式运行脚本"><a href="#以后台模式运行脚本" class="headerlink" title="以后台模式运行脚本"></a>以后台模式运行脚本</h3><p>直接在命令界面运行脚本有时不怎么方便，好在我们有一个很简单的方法，即在命令后加 &amp; 符号，在后台模式运行 shell 脚本。在后台模式中，进程运行时不会和终端会话上的 STDIN、STDOUT 以及 STDERR 关联。</p>
-<p>当 &amp; 符放到命令后时，它会将命令和 bash shell 分离开来，并将它作为系统上的独立后台进程运行。每次启动新作业时，Linux 系统都会为其分配一个新的作业号和 PID，在终端会话中使用后台进程时，必须特别小心。每个后台进程都绑定到了该终端会话上，如果进程会话退出了，后台进程也会退出。如果你有关联到该终端的还在运行的后台进程，有的终端模拟器会提醒器，有的甚至不会，如果你想退出控制台后，脚本继续以后台形式运行，我们有其它办法解决，看下节。</p>
-<h3 id="在非控制台下运行脚本"><a href="#在非控制台下运行脚本" class="headerlink" title="在非控制台下运行脚本"></a>在非控制台下运行脚本</h3><p>有时需要在终端会话中启动的脚本一直在后台运行，直到其完成，即使你退出了终端会话。可以用 nohup 命令来实现。</p>
-<p>nohup 命令运行另外一个命令来阻断所有发送给该进程的 SIGHUP 信号。这会在退出终端会话时阻止进程退出。由于 nohup 命令会从终端解除进程的关联，进程会丢掉到 STDOUT 和 STDERR 的链接，为了保存该命令产生的输出，nohup 命令会自动将 STDOUT 和 STDERR 的消息重定向到另一个名为 nohup.out 的文件中。在运行同目录中的多个命令时，因为所有的输出都会发送到同一个 nohup.out 文件，可能会有点叫人困惑。</p>
+        <h3 id="三个命令同时执行"><a href="#三个命令同时执行" class="headerlink" title="三个命令同时执行"></a>三个命令同时执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 &amp; echo 2 &amp; echo 3</span><br><span class="line">[1] 26124</span><br><span class="line">[2] 26125</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h3 id="不管前面的命令执行成功没有，后面的命令继续执行"><a href="#不管前面的命令执行成功没有，后面的命令继续执行" class="headerlink" title="不管前面的命令执行成功没有，后面的命令继续执行"></a>不管前面的命令执行成功没有，后面的命令继续执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 ; echo 2 ; echo 3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">[1]-  完成                  echo 1</span><br><span class="line">[2]+  完成                  echo 2</span><br></pre></td></tr></table></figure>
+<h3 id="只有前面的命令执行成功，后面命令才继续执行"><a href="#只有前面的命令执行成功，后面命令才继续执行" class="headerlink" title="只有前面的命令执行成功，后面命令才继续执行"></a>只有前面的命令执行成功，后面命令才继续执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 &amp;&amp; echo 2 &amp;&amp; echo 3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/07/Linux-控制脚本/" data-id="cirg22wl200271rpvs63b41mu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="cirg244iy00002mpvshvz8m4i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,19 +123,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/07/08/Linux-作业控制/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Linux 作业控制
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/07/07/Linux-呈现数据/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/04/Linux-shell-多进程实现（一）/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Linux 呈现数据</div>
+      <div class="article-nav-title">Linux shell 多进程实现（一）</div>
     </a>
   
 </nav>
