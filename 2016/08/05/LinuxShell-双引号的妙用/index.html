@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Linux 获取当前正在执行脚本的绝对路径 | 运维生存时间</title>
+  <title>LinuxShell 双引号的妙用 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="linux dirname pwd">
+  <meta name="description" content="shell 双引号">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 获取当前正在执行脚本的绝对路径">
-<meta property="og:url" content="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/index.html">
+<meta property="og:title" content="LinuxShell 双引号的妙用">
+<meta property="og:url" content="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="linux dirname pwd">
-<meta property="og:updated_time" content="2016-06-23T03:31:47.925Z">
+<meta property="og:description" content="shell 双引号">
+<meta property="og:updated_time" content="2016-08-05T07:36:07.627Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux 获取当前正在执行脚本的绝对路径">
-<meta name="twitter:description" content="linux dirname pwd">
+<meta name="twitter:title" content="LinuxShell 双引号的妙用">
+<meta name="twitter:description" content="shell 双引号">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,10 +81,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Linux-获取当前正在执行脚本的绝对路径" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LinuxShell-双引号的妙用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" class="article-date">
-  <time datetime="2016-06-23T03:15:14.000Z" itemprop="datePublished">2016-06-23</time>
+    <a href="/2016/08/05/LinuxShell-双引号的妙用/" class="article-date">
+  <time datetime="2016-08-05T07:31:45.000Z" itemprop="datePublished">2016-08-05</time>
 </a>
     
   <div class="article-category">
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Linux 获取当前正在执行脚本的绝对路径
+      LinuxShell 双引号的妙用
     </h1>
   
 
@@ -107,29 +107,15 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>常见的误区是使用 <strong>pwd</strong> 命令，该命令的作用是 <strong>pwd - print name of current/working directory</strong>，这才是此命令的含义，当前的工作目录。这里没有任何意思说明，这个目录就是脚本存放的目录，我们可以如下测试：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# pwd</span><br><span class="line">/root</span><br><span class="line">[root@mail ~]# cat /tmp/a.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line">pwd</span><br><span class="line">[root@mail ~]# /tmp/a.sh </span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
-<p>你会发现，显示的是执行命令的路径 <strong>/root</strong>，而不是脚本所在的路径 <strong>/tmp</strong>。</p>
-<p>另一个错误的答案是 $0，这个也是不对的，这个 $0 是 <strong>Bash</strong> 环境下的特殊变量，真实含义如下：</p>
-<ol>
-<li>使用一个文件调用 bash，那么 $0 的值是那个文件的名字，不是绝对路径咯</li>
-<li>使用 -c 选项启动 bash 的话，真正执行的命令会从一个字符串中读取，字符串后面还有别的参数的话，使用从 $0 开始的特殊变量引用</li>
-<li>除此之外，$0 会被设置成调用 bash 的那个文件的名字，没说是绝对路径咯</li>
-</ol>
-<p>下面是正确答案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">basepath=$(cd `dirname $0`; pwd)</span><br></pre></td></tr></table></figure>
-<p>在此进行解释如下：</p>
-<ol>
-<li>dirname $0，取得当前执行的脚本文件的父目录</li>
-<li>cd <code>dirname $0</code>，进入这个目录（切换到当前工作目录）</li>
-<li>pwd，显示当前工作目录（cd执行后的结果）</li>
-</ol>
-<p>由此，我们获得了当前正在执行的脚本的存放路径。</p>
+        <p>如果我们需要脚本将读取到的内容按照内容实际的格式展示给我们，那么加上双引号是一个不错的选择，什么意思呢，我们来看例子。</p>
+<h3 id="例子一：不加双引号"><a href="#例子一：不加双引号" class="headerlink" title="例子一：不加双引号"></a>例子一：不加双引号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat testh2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">function Flagment_Log()&#123;</span><br><span class="line">        ReqPerSecTotal=2</span><br><span class="line">        FlagmentLog=`tail -n $ReqPerSecTotal /var/log/httpd/access_log`</span><br><span class="line">        echo &quot;$FlagmentLog&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a=`Flagment_Log`</span><br><span class="line">echo $a</span><br><span class="line">[root@localhost ~]# ./testh2.sh </span><br><span class="line">113.57.100.162 - - [05/Aug/2016:15:38:49 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot; 122.189.126.29 - - [05/Aug/2016:15:38:49 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat testh2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">function Flagment_Log()&#123;</span><br><span class="line">        ReqPerSecTotal=2</span><br><span class="line">        FlagmentLog=`tail -n $ReqPerSecTotal /var/log/httpd/access_log`</span><br><span class="line">        echo $FlagmentLog</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a=`Flagment_Log`</span><br><span class="line">echo &quot;$a&quot;</span><br><span class="line">[root@localhost ~]# ./testh2.sh </span><br><span class="line">223.156.95.247 - - [05/Aug/2016:15:39:40 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot; 113.247.9.85 - - [05/Aug/2016:15:39:40 +0800] &quot;POST /index.html HTTP/1.1&quot; 404 208 &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="例子二：加双引号"><a href="#例子二：加双引号" class="headerlink" title="例子二：加双引号"></a>例子二：加双引号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat testh2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">function Flagment_Log()&#123;</span><br><span class="line">        ReqPerSecTotal=2</span><br><span class="line">        FlagmentLog=`tail -n $ReqPerSecTotal /var/log/httpd/access_log`</span><br><span class="line">        echo &quot;$FlagmentLog&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a=`Flagment_Log`</span><br><span class="line">echo &quot;$a&quot;</span><br><span class="line">[root@localhost ~]# ./testh2.sh </span><br><span class="line">125.39.51.250 - - [05/Aug/2016:15:38:19 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot;</span><br><span class="line">122.189.126.8 - - [05/Aug/2016:15:38:19 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="cirhftit0002ktxpv6jml0n07" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/" data-id="cirhftit9002wtxpvx638390y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -138,19 +124,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Crontab 定时执行任务 命令格式与详细例子
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/06/23/Find-查找最近修改的文件/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/05/LinuxShell-for使用换行符作为分隔符/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Find 查找最近修改的文件</div>
+      <div class="article-nav-title">LinuxShell for使用换行符作为分隔符</div>
     </a>
   
 </nav>
