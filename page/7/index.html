@@ -82,6 +82,106 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-监控-windows-进程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/07/Zabbix-监控-windows-进程/" class="article-date">
+  <time datetime="2016-06-07T05:31:49.000Z" itemprop="datePublished">2016-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 监控进程的数量</span><br><span class="line">proc.num[&lt;name&gt;,&lt;user&gt;,&lt;state&gt;,&lt;cmdline&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>name 进程名字</p>
+</li>
+<li><p>user 运行进程的用户名</p>
+</li>
+<li><p>state 进程的状态 all(default)、run、sleep、zomb</p>
+</li>
+<li><p>cmdline 进程名中包含的字符</p>
+</li>
+</ul>
+<p><strong>On Windows, only name and user are supported.</strong></p>
+<h3 id="Item-Keys"><a href="#Item-Keys" class="headerlink" title="Item Keys"></a>Item Keys</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proc.num[ChuanAPI.Winfrm.exe]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="cirhfiu0s006frypv8rxscopo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Zabbix-windows-性能计数器使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/06/Zabbix-windows-性能计数器使用/" class="article-date">
+  <time datetime="2016-06-06T03:09:27.000Z" itemprop="datePublished">2016-06-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/06/Zabbix-windows-性能计数器使用/">Zabbix windows 性能计数器使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>windows 下的性能计数器让 zabbix 监控更加轻松，直接获取性能计数器的数值即可完成 windows 监控。性能计数器如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perf_counter[\234(_Total)\1402]</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perf_counter[&quot;\LogicalDisk(_Total)\Disk Transfers/sec&quot;,300]</span><br></pre></td></tr></table></figure></p>
+        
+          <p class="article-more-link">
+            <a href="/2016/06/06/Zabbix-windows-性能计数器使用/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cirhfiu1i007urypvexphnznh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-Monitor-Redis" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/03/Zabbix-Monitor-Redis/" class="article-date">
@@ -117,7 +217,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cirg22wni00561rpvu09eq3ka" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cirhfiu04005crypv4kxnjycb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +262,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cirg22wmp00431rpv1jojh7gv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cirhfitzc0049rypvykfqickw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +307,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cirg22wng00531rpv5u65uzp2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cirhfiu010059rypvcrb9viaw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -252,7 +352,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cirg22wmi003t1rpv15whqmju" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cirhfitz4003zrypv8n4rhju1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -343,7 +443,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="cirg22wmh003r1rpv26drf4iu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="cirhfitz2003xrypvee6g1drz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -414,7 +514,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cirg22wna004t1rpvzn13l61u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cirhfitzt004zrypvaykj95ns" class="article-share-link">Share</a>
       
       
     </footer>
@@ -461,7 +561,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cirg22wme003o1rpvoj5ehv6u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cirhfitz0003urypvt43a0fe2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -507,175 +607,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cirg22wml003w1rpva3lkirvf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" class="article-date">
-  <time datetime="2016-05-25T03:07:56.000Z" itemprop="datePublished">2016-05-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/">Microsoft SQL Server SET NOCOUNT ON 的含义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>每次我们在使用查询分析器调试SQL语句的时候，通常会看到一些信息，提醒我们当前有多少个行受到了影响，这是些什么信息？在我们调用的时候这些信息有用吗？是否可以关闭呢？ </p>
-<p>答案是这些信息在我们的客户端的应用程序中是没有用的，这些信息是存储过程中的每个语句的DONE_IN_PROC 信息。 </p>
-<p>我们可以利用SET NOCOUNT 来控制这些信息，以达到提高程序性能的目的。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="cirg22wlp002v1rpvbi3gwx8h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Template-SQL-Server" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/25/Zabbix-Template-SQL-Server/" class="article-date">
-  <time datetime="2016-05-25T02:56:00.000Z" itemprop="datePublished">2016-05-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/25/Zabbix-Template-SQL-Server/">Zabbix Template SQL Server</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <table>
-<thead>
-<tr>
-<th style="text-align:left">KEY</th>
-<th style="text-align:left">DESCRIPTION</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">perf_counter[“\Process(sqlservr)\% Processor Time”]</td>
-<td style="text-align:left">处理器时间百分比</td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Buffer Manager\Page Life Expectancy”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189628(v=sql.105).aspx" target="_blank" rel="external">页若不被引用将在缓冲池中停留的秒数</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Buffer Manager\Database pages”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189628(v=sql.105).aspx" target="_blank" rel="external">缓冲池中有数据库内容的页数</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:General Statistics\Processes blocked”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190697(v=sql.105).aspx" target="_blank" rel="external">当前阻塞的进程数</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:General Statistics\User Connections”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190697(v=sql.105).aspx" target="_blank" rel="external">当前与 SQL Server 连接的用户数</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Memory Manager\Total Server Memory (KB)”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190924(v=sql.105).aspx" target="_blank" rel="external">从缓冲池提交的内存(KB),这不是 SQL Server 使用的总内存</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Transactions\Longest Transaction Running Time”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189038(v=sql.105).aspx" target="_blank" rel="external">比任何其他当前事务活动时间都长的事务启动后运行的时间长度（秒）</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Locks(_Total)\Lock Waits/sec”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190216(v=sql.105).aspx" target="_blank" rel="external">每秒要求调用者等待的锁请求数</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Locks(_Total)\Number of Deadlocks/sec”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms190216(v=sql.105).aspx" target="_blank" rel="external">每秒导致死锁的锁请求数</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Transactions/sec”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">每秒为所有数据库启动的事务数</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Transactions/sec”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">每秒为数据库启动的事务数</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Data File(s) Size (KB)”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">数据库中所有数据文件的累计大小(KB)，包括任何自动增长</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Data File(s) Size (KB)”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">所有数据库数据文件的累计大小(KB)，包括任何自动增长</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Log File(s) Size (KB)”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">数据库中所有事务日志文件的累计大小(KB)</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Databases(model)\Log File(s) Used Size (KB)”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">数据库中所有日志文件的累计已用大小</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLServer:Databases(_Total)\Log File(s) Size (KB)”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms189883(v=sql.105).aspx" target="_blank" rel="external">所有数据库事务日志文件的累计大小(KB)</a></td>
-</tr>
-<tr>
-<td style="text-align:left">perf_counter[“\SQLAgent:Jobs(_Total)\Failed jobs”]</td>
-<td style="text-align:left"><a href="https://technet.microsoft.com/zh-cn/library/ms177481(v=sql.105).aspx" target="_blank" rel="external">该计数器报告失败退出的作业数</a></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>参考：<a href="https://technet.microsoft.com/zh-cn/library/ms191246(v=sql.105).aspx" target="_blank" rel="external">https://technet.microsoft.com/zh-cn/library/ms191246(v=sql.105).aspx</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="cirg22wnr005h1rpvcqxumvdc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cirhfitz50042rypvn3kvzpq7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -727,6 +659,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/05/LinuxShell-for使用换行符作为分隔符/">LinuxShell for使用换行符作为分隔符</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/05/LinuxAwk-引用外部变量/">LinuxAwk 引用外部变量</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/04/LinuxShell-命令运行符号-区别/">LinuxShell 命令运行符号 &amp; ; &amp;&amp; 区别</a>
           </li>
         
@@ -736,14 +676,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/02/PHP-预定义变量/">PHP 预定义变量</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/30/TCP-连接的状态/">TCP 连接的状态</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/30/Linux-apache-access-log-Analy/">Linux apache access_log Analy</a>
           </li>
         
       </ul>

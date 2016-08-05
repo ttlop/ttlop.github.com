@@ -15,17 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2016 | 运维生存时间</title>
+  <title>LinuxShell for使用换行符作为分隔符 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/archives/2016/page/7/index.html">
+  <meta name="description" content="shell 分隔符 换行符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LinuxShell for使用换行符作为分隔符">
+<meta property="og:url" content="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="shell 分隔符 换行符">
+<meta property="og:updated_time" content="2016-08-05T07:27:50.884Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="LinuxShell for使用换行符作为分隔符">
+<meta name="twitter:description" content="shell 分隔符 换行符">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -80,215 +81,60 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/07/Zabbix-监控-windows-进程/" class="archive-article-date">
-  <time datetime="2016-06-07T05:31:49.000Z" itemprop="datePublished">Jun 7</time>
+        <section id="main"><article id="post-LinuxShell-for使用换行符作为分隔符" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/05/LinuxShell-for使用换行符作为分隔符/" class="article-date">
+  <time datetime="2016-08-05T07:17:55.000Z" itemprop="datePublished">2016-08-05</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
+    <h1 class="article-title" itemprop="name">
+      LinuxShell for使用换行符作为分隔符
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/06/Zabbix-windows-性能计数器使用/" class="archive-article-date">
-  <time datetime="2016-06-06T03:09:27.000Z" itemprop="datePublished">Jun 6</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/Zabbix-windows-性能计数器使用/">Zabbix windows 性能计数器使用</a>
-    </h1>
-  
+        <p>在使用 <strong>shell</strong> 编写脚本的过程中，无可避免有时候我们需要使用 <strong>for</strong> 循环来遍历一个函数返回的结果。有时候返回的结果是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 11 111</span><br><span class="line">2 22 222</span><br><span class="line">3 33 333</span><br></pre></td></tr></table></figure>
+<p>这时候如果我们需要按行来输出，使用 <strong>while read line</strong> 是一个不错的选择，那么使用 <strong>for</strong> 循环可以吗，答案是肯定的，但是需要修改分隔符 <strong>IFS</strong>，下面我们使用例子来说明。</p>
+<h3 id="实例一：修改分隔符为换行符"><a href="#实例一：修改分隔符为换行符" class="headerlink" title="实例一：修改分隔符为换行符"></a>实例一：修改分隔符为换行符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat test1.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">OLDIFS=$IFS</span><br><span class="line">IFS=&quot;\n&quot;</span><br><span class="line">for line in `cat test.txt`</span><br><span class="line">do</span><br><span class="line">	echo &quot;$line&quot;</span><br><span class="line">done</span><br><span class="line">IFS=&quot;$OLDIFS&quot;</span><br><span class="line">[root@localhost ~]# ./test1.sh </span><br><span class="line">1 11 111</span><br><span class="line">2 22 222</span><br><span class="line">3 33 333</span><br></pre></td></tr></table></figure>
+<h3 id="实例二：不修改分隔符"><a href="#实例二：不修改分隔符" class="headerlink" title="实例二：不修改分隔符"></a>实例二：不修改分隔符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat test2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">for line in `cat test.txt`</span><br><span class="line">do</span><br><span class="line">	echo &quot;$line&quot;</span><br><span class="line">done</span><br><span class="line">[root@localhost ~]# ./test2.sh </span><br><span class="line">1</span><br><span class="line">11</span><br><span class="line">111</span><br><span class="line">2</span><br><span class="line">22</span><br><span class="line">222</span><br><span class="line">3</span><br><span class="line">33</span><br><span class="line">333</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/03/Zabbix-Monitor-Redis/" class="archive-article-date">
-  <time datetime="2016-06-03T05:18:23.000Z" itemprop="datePublished">Jun 3</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/03/Zabbix-Monitor-Redis/">Zabbix Monitor Redis</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/03/Redis/" class="archive-article-date">
-  <time datetime="2016-06-03T01:36:54.000Z" itemprop="datePublished">Jun 3</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="cirhfitxy002nrypvtzfnz0po" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/03/Redis/">Redis</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/02/Zabbix-Monitor-Nginx/" class="archive-article-date">
-  <time datetime="2016-06-02T02:58:06.000Z" itemprop="datePublished">Jun 2</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/02/Zabbix-Monitor-Nginx/">Zabbix Monitor Nginx</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/05/LinuxAwk-引用外部变量/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LinuxAwk 引用外部变量</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/01/Nginx-nginx-status/" class="archive-article-date">
-  <time datetime="2016-06-01T06:43:29.000Z" itemprop="datePublished">Jun 1</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/01/Nginx-nginx-status/">Nginx nginx-status</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/01/Nginx-Location-Configuration/" class="archive-article-date">
-  <time datetime="2016-06-01T02:59:50.000Z" itemprop="datePublished">Jun 1</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/01/Nginx-Location-Configuration/">Nginx Location Configuration</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/31/Zabbix-CPU-类型-Key/" class="archive-article-date">
-  <time datetime="2016-05-31T07:47:07.000Z" itemprop="datePublished">May 31</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/31/Zabbix-CPU-类型-Key/">Zabbix CPU 类型 Key</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/28/Nginx-FastCGI-运行原理/" class="archive-article-date">
-  <time datetime="2016-05-28T08:29:48.000Z" itemprop="datePublished">May 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/28/Nginx-FastCGI-运行原理/">Nginx FastCGI 运行原理</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/28/Nginx-的进程模型/" class="archive-article-date">
-  <time datetime="2016-05-28T07:37:57.000Z" itemprop="datePublished">May 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/28/Nginx-的进程模型/">Nginx 的进程模型</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/archives/2016/page/6/">&laquo; Prev</a><a class="page-number" href="/archives/2016/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2016/page/5/">5</a><a class="page-number" href="/archives/2016/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/2016/page/8/">8</a><a class="page-number" href="/archives/2016/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2016/page/12/">12</a><a class="extend next" rel="next" href="/archives/2016/page/8/">Next &raquo;</a>
-  </nav>
 
 </section>
         
