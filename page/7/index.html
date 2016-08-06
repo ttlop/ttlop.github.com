@@ -82,6 +82,103 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Microsoft-SQL-Server-删除阻塞进程-sp-who" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" class="article-date">
+  <time datetime="2016-06-15T08:56:21.000Z" itemprop="datePublished">2016-06-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/">Microsoft SQL Server 删除阻塞进程 sp_who</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="列出全部当前进程"><a href="#列出全部当前进程" class="headerlink" title="列出全部当前进程"></a>列出全部当前进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who</span><br></pre></td></tr></table></figure>
+<h3 id="列出特定用户的进程"><a href="#列出特定用户的进程" class="headerlink" title="列出特定用户的进程"></a>列出特定用户的进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;sa&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="显示所有活动进程"><a href="#显示所有活动进程" class="headerlink" title="显示所有活动进程"></a>显示所有活动进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;active&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="显示会话ID标识的特定进程"><a href="#显示会话ID标识的特定进程" class="headerlink" title="显示会话ID标识的特定进程"></a>显示会话ID标识的特定进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">exec sp_who &apos;10&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="删除阻塞的进程"><a href="#删除阻塞的进程" class="headerlink" title="删除阻塞的进程"></a>删除阻塞的进程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use master</span><br><span class="line">go</span><br><span class="line">kill &apos;10&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="sp-who-返回包括以下信息的结果集"><a href="#sp-who-返回包括以下信息的结果集" class="headerlink" title="sp_who 返回包括以下信息的结果集"></a>sp_who 返回包括以下信息的结果集</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">列</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">spid</td>
+<td style="text-align:left">会话ID</td>
+</tr>
+<tr>
+<td style="text-align:left">ecid</td>
+<td style="text-align:left">与特定会话ID相关的给定线程的执行上下文ID</td>
+</tr>
+<tr>
+<td style="text-align:left">status</td>
+<td style="text-align:left">进程状态</td>
+</tr>
+<tr>
+<td style="text-align:left">loginame</td>
+<td style="text-align:left">与特定进程相关联的登录名</td>
+</tr>
+<tr>
+<td style="text-align:left">hostname</td>
+<td style="text-align:left">每个进程的主机或计算机名</td>
+</tr>
+<tr>
+<td style="text-align:left">blk</td>
+<td style="text-align:left">如果存在阻塞进程，则是阻塞进程的会话ID，否则该列为零</td>
+</tr>
+<tr>
+<td style="text-align:left">dbname</td>
+<td style="text-align:left">进程使用的数据库</td>
+</tr>
+<tr>
+<td style="text-align:left">cmd</td>
+<td style="text-align:left">为该进程执行的数据库引擎命令</td>
+</tr>
+<tr>
+<td style="text-align:left">request_id</td>
+<td style="text-align:left">特定会话中运行的请求的ID</td>
+</tr>
+</tbody>
+</table>
+<p>status：可以有的值:</p>
+<p><em>. dormant: SQL Server 正在重置会话
+</em>. running: 会话正在运行一个或多个批处理，多个活动的结果集（MARS）启用后会话可以运行多个批处理<br><em>. background: 会话正在运行一个后台任务，例如死锁检测
+</em>. rollback: 会话正在处理事物回滚<br><em>. pending: 会话正在等待工作线程变为可用
+</em>. runnable: 会话的任务在等待获取 Scheduler 来运行的可执行队列中<br><em>. spinloop: 会话的任务正在等待调节锁变为可用
+</em>. suspended: 会话正在等待事件完成</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cirito3f80038y9pv4quwtmt7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Microsoft-SQL-Server-进程的阻塞与死锁检查" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" class="article-date">
@@ -117,7 +214,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cirite9n2003cwwpv0yyykjh8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cirito3fb003dy9pvz3tsks49" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +266,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cirite9pu007bwwpva96xeerj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cirito3ii007dy9pvznrgr8c8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +311,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cirite9pi006twwpv2rjhvqyy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cirito3i6006wy9pv0s3fuh8l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +356,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="cirite9ny004gwwpvfr66f94h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="cirito3gf004iy9pv6tvztt2r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -312,7 +409,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="cirite9pe006mwwpvf3yzv0b6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="cirito3i1006oy9pv7c53tn79" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,7 +456,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cirite9q60086wwpvcw4mrxw4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cirito3iy008by9pvglvrodxe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -404,7 +501,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cirite9ot005pwwpv09y6jl50" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cirito3ha005my9pv9kftq0ai" class="article-share-link">Share</a>
       
       
     </footer>
@@ -449,7 +546,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cirite9nz004hwwpvjgkedhr6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cirito3gh004ly9pvgcm6yclp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -494,52 +591,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cirite9op005hwwpv9lt8wztz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Nginx-nginx-status" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/01/Nginx-nginx-status/" class="article-date">
-  <time datetime="2016-06-01T06:43:29.000Z" itemprop="datePublished">2016-06-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/01/Nginx-nginx-status/">Nginx nginx-status</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如何查看 Nginx 状态？</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/01/Nginx-nginx-status/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cirite9no0043wwpv961vw2hj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cirito3h8005ky9pv5ijoa07y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -591,6 +643,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/06/PHP-fgets-函数/">PHP fgets() 函数</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/06/PHP-feof-函数/">PHP feof() 函数</a>
           </li>
         
@@ -604,10 +660,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/05/LinuxShell-双引号的妙用/">LinuxShell 双引号的妙用</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/05/LinuxShell-for使用换行符作为分隔符/">LinuxShell for使用换行符作为分隔符</a>
           </li>
         
       </ul>
