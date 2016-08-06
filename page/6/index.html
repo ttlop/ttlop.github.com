@@ -82,6 +82,56 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nagios-服务监控与报警时间间隔" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/25/Nagios-服务监控与报警时间间隔/" class="article-date">
+  <time datetime="2016-06-25T02:21:54.000Z" itemprop="datePublished">2016-06-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/25/Nagios-服务监控与报警时间间隔/">Nagios 服务监控与报警时间间隔</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们看看默认的配置文件是怎样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">define service&#123;</span><br><span class="line">        name                            generic-service         ; The &apos;name&apos; of this service template</span><br><span class="line">        active_checks_enabled           1                       ; Active service checks are enabled</span><br><span class="line">        passive_checks_enabled          1                       ; Passive service checks are enabled/accepted</span><br><span class="line">        parallelize_check               1                       ; Active service checks should be parallelized (disabling this can lead to major performance problems)</span><br><span class="line">        obsess_over_service             1                       ; We should obsess over this service (if necessary)</span><br><span class="line">        check_freshness                 0                       ; Default is to NOT check service &apos;freshness&apos;</span><br><span class="line">        notifications_enabled           1                       ; Service notifications are enabled</span><br><span class="line">        event_handler_enabled           1                       ; Service event handler is enabled</span><br><span class="line">        flap_detection_enabled          1                       ; Flap detection is enabled</span><br><span class="line">        process_perf_data               1                       ; Process performance data</span><br><span class="line">        retain_status_information       1                       ; Retain status information across program restarts</span><br><span class="line">        retain_nonstatus_information    1                       ; Retain non-status information across program restarts</span><br><span class="line">        is_volatile                     0                       ; The service is not volatile</span><br><span class="line">        check_period                    24x7                    ; The service can be checked at any time of the day</span><br><span class="line">        max_check_attempts              3                       ; Re-check the service up to 3 times in order to determine its final (hard) state</span><br><span class="line">        normal_check_interval           10                      ; Check the service every 10 minutes under normal conditions</span><br><span class="line">        retry_check_interval            2                       ; Re-check the service every two minutes until a hard state can be determined</span><br><span class="line">        contact_groups                  admins                  ; Notifications get sent out to everyone in the &apos;admins&apos; group</span><br><span class="line">        notification_options            w,u,c,r                 ; Send notifications about warning, unknown, critical, and recovery events</span><br><span class="line">        notification_interval           60                      ; Re-notify about service problems every hour</span><br><span class="line">        notification_period             24x7                    ; Notifications can be sent out at any time</span><br><span class="line">         register                        0                      ; DONT REGISTER THIS DEFINITION - ITS NOT A REAL SERVICE, JUST A TEMPLATE!</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>normal_check_interval 表示在正常情况下每10分钟检查一次服务状态</p>
+</li>
+<li><p>retry_check_interval 检测到服务状态发生变化后每两分钟检查一次服务，直到确定服务异常</p>
+</li>
+<li><p>max_check_attempts 与 retry_check_interval 配合使用，即检查服务状态发生变化后重复检查达到这个次数即确定服务状态改变</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="cirix1a91003wadpvkf4a3rp6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Nagios-主机监控与报警时间间隔" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/24/Nagios-主机监控与报警时间间隔/" class="article-date">
@@ -125,7 +175,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="ciriws2j6003o8zpvuj1arzwk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="cirix1a8v003oadpv6pmogsum" class="article-share-link">Share</a>
       
       
     </footer>
@@ -180,7 +230,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="ciriws2k700528zpv1pvvzz75" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="cirix1a9x0053adpvjjcd0s1m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -236,7 +286,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="ciriws2k5004z8zpv4qgmf5ma" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="cirix1a9w0051adpv03vl4bho" class="article-share-link">Share</a>
       
       
     </footer>
@@ -293,7 +343,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="ciriws2k800548zpvoi15ywjc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="cirix1aa20056adpvui4qg6t1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -338,7 +388,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="ciriws2ip00338zpvx1cf75av" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="cirix1a8f0033adpvwdjhsiy2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -383,7 +433,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="ciriws2fo000p8zpveeqvop2z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="cirix1a5e000madpv0bfk42uc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -441,7 +491,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="ciriws2i8002l8zpvsnjdm7gg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="cirix1a7z002ladpv5cy6dyry" class="article-share-link">Share</a>
       
       
     </footer>
@@ -489,7 +539,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="ciriws2fs000r8zpvfap46n95" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="cirix1a5k000radpvzgpnlw1e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -537,95 +587,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="ciriws2kb00578zpv6o1hmrgv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Shell-语法简介" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/22/Shell-语法简介/" class="article-date">
-  <time datetime="2016-06-22T02:53:37.000Z" itemprop="datePublished">2016-06-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/22/Shell-语法简介/">Shell 语法简介</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="1-shell-文件开头"><a href="#1-shell-文件开头" class="headerlink" title="1. shell 文件开头"></a>1. shell 文件开头</h3><p>shell 文件必须以下面的行开始 （必须放在文件的第一行）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br></pre></td></tr></table></figure>
-<p>符号 #! 用来告诉系统它后面的参数是用来执行该文件的程序。<br>当编辑好脚本时，如果要执行该脚本，还必须使其可执行。要使脚本可执行，运行如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod u+x filename</span><br></pre></td></tr></table></figure>
-<h3 id="2-注释"><a href="#2-注释" class="headerlink" title="2. 注释"></a>2. 注释</h3><p>在进行 shell 编程时，以 # 开头的句子表示注释，直到这一行的结束。我们建议在程序中使用注释。<br>如果您使用了注释，那么即使相当长的时间内没有使用该脚本，您也能在很短的时间内明白该脚本的作用及工作原理。</p>
-<h3 id="3-变量"><a href="#3-变量" class="headerlink" title="3. 变量"></a>3. 变量</h3><p>在 shell 编程中，所有的变量都由字符串组成，并且您不需要对变量进行声明，直接赋值就可以，应用变量的话，用 <strong>$变量名</strong> 的形式。<br>要赋值给一个变量，可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=&quot;hello world&quot;</span><br><span class="line">num=2</span><br></pre></td></tr></table></figure>
-<p>现在打印变量的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $a</span><br><span class="line">echo &quot;this is the $&#123;num&#125;nd&quot;  #有时候变量名很容易与其他文字混淆,可以使用花括号来告诉 shell 我们要打印的是 num 变量</span><br></pre></td></tr></table></figure>
-<h2 id="概念：管道、重定向和-backtick"><a href="#概念：管道、重定向和-backtick" class="headerlink" title="概念：管道、重定向和 backtick"></a>概念：管道、重定向和 backtick</h2><p>这些不是系统命令，但是非常重要</p>
-<h3 id="1-管道"><a href="#1-管道" class="headerlink" title="1. 管道"></a>1. 管道</h3><p>管道将一个命令的输出作为另外一个命令的输入。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;hello&quot; file.txt | wc -l  #在file.txt中搜索包含有”hello”的行并计算其行数。 在这里grep命令的输出作为wc命令的输入。当然您可以使用多个命令。</span><br></pre></td></tr></table></figure>
-<h3 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2. 重定向"></a>2. 重定向</h3><p>重定向将命令的结果输出到文件，而不是标准输出（屏幕）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 写入文件并覆盖旧文件 </span><br><span class="line">&gt;&gt; 加到文件的尾部，保留旧文件内容。</span><br></pre></td></tr></table></figure>
-<h3 id="3-反短斜线"><a href="#3-反短斜线" class="headerlink" title="3. 反短斜线"></a>3. 反短斜线</h3><p>使用反短斜线(“`”)可以将一个命令的输出作为另外一个命令的一个命令行参数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -mtime -1 -type f -print   #用来查找过去24小时（-mtime –2则表示过去48小时）内修改过的文件</span><br></pre></td></tr></table></figure>
-<p>如果您想将所有查找到的文件打一个包，则可以使用以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -czvf lastmod.tar.gz `find . -mtime -1 -type f -print`</span><br></pre></td></tr></table></figure>
-<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><h3 id="1-if"><a href="#1-if" class="headerlink" title="1. if"></a>1. if</h3><p>如果条件为真，则执行 then 后面的部分：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if ...; then</span><br><span class="line">...</span><br><span class="line">elif ...; then</span><br><span class="line">...</span><br><span class="line">else</span><br><span class="line">...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>大多数情况下，可以使用测试命令来对条件进行测试。比如可以比较字符串、判断文件是否存在是否可读等等。</p>
-<h3 id="2-快捷操作符-amp-amp-和"><a href="#2-快捷操作符-amp-amp-和" class="headerlink" title="2. 快捷操作符 &amp;&amp; 和 ||"></a>2. 快捷操作符 &amp;&amp; 和 ||</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ -f &quot;/etc/shadow&quot; ] &amp;&amp; echo &quot;This computer uses shadow passwors&quot;</span><br></pre></td></tr></table></figure>
-<p>这里 &amp;&amp; 就是一个快捷操作符，如果左边的表达式为真则执行右边的语句。<br>您也可以认为是逻辑运算中的与操作。上例中表示如果/etc/shadow文件存在则打印 ”This computer uses shadow passwors”。</p>
-<p>同样或操作(||)在shell编程中也是可用的。这里有个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">mailfolder=/var/spool/mail/root</span><br><span class="line">[ -r &quot;$mailfolder&quot;] || &#123; echo &quot;Can not read $mailfolder&quot;; exit 1; &#125;</span><br><span class="line">echo &quot;$mailfolder has mail from:&quot;</span><br><span class="line">grep &quot;^From &quot; $mailfolder</span><br></pre></td></tr></table></figure>
-<p>该脚本首先判断 mailfolder 是否可读。如果可读则打印该文件中的 “From” 一行。<br>如果不可读则或操作生效，打印错误信息后脚本退出。这里有个问题，那就是我们必须有两个命令：</p>
-<p><em>. -打印错误信息
-</em>. -退出程序</p>
-<p>我们使用花括号以匿名函数的形式将两个命令放到一起作为一个命令使用。<br>一般函数将在下文提及。不用与和或操作符，我们也可以用if表达式作任何事情，但是使用与或操作符会更便利很多。</p>
-<h3 id="3-case"><a href="#3-case" class="headerlink" title="3. case"></a>3. case</h3><p>case 用来匹配一个给定的字符串，而不是数字。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">case ... in</span><br><span class="line">...) do something here;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
-<p>下面是一个叫做 smartzip 的脚本，该脚本可以自动解压 bzip2，gzip 和 zip 类型的压缩文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">ftype=`file &quot;$1&quot;`</span><br><span class="line"></span><br><span class="line">case &quot;ftype&quot; in</span><br><span class="line">&quot;$1: Zip archive&quot;*)</span><br><span class="line">unzip &quot;$1&quot; ;;</span><br><span class="line">&quot;$1: gzip compressed&quot;*)</span><br><span class="line">gunzip &quot;$1&quot; ;;</span><br><span class="line">&quot;$1: bzip2 compressed&quot;*)</span><br><span class="line">bunzip2 &quot;$1&quot; ;;</span><br><span class="line">*) echo &quot;File $1 can not be uncompressed with smartzip&quot;;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
-<p>特殊变量 $1 包含了传递给该程序的第一个参数值。也就是说当我们运行：<strong>smargzip articles.zip</strong>，$1 就是字符串 articles.zip</p>
-<h3 id="4-select"><a href="#4-select" class="headerlink" title="4. select"></a>4. select</h3><p>select 表达式是一种 bash 的扩展应用，尤其擅长与交互式使用。用户可以从一组不同的值中进行使用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select var in ...; do</span><br><span class="line">break</span><br><span class="line">done</span><br><span class="line">... now $var can be used...</span><br></pre></td></tr></table></figure>
-<p>下面是一个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh </span><br><span class="line"></span><br><span class="line">echo &quot;What is your favourite OS?&quot; </span><br><span class="line">select var in &quot;Linux&quot; &quot;Gnu Hurd&quot; &quot;Free BSD&quot; &quot;Other&quot;; do </span><br><span class="line">break </span><br><span class="line">done </span><br><span class="line">echo &quot;You have selected $var&quot;</span><br></pre></td></tr></table></figure>
-<p>下面是该脚本的运行结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ./select.sh </span><br><span class="line">What is your favourite OS?</span><br><span class="line">1) Linux</span><br><span class="line">2) Gnu Hurd</span><br><span class="line">3) Free BSD</span><br><span class="line">4) Other</span><br><span class="line">#? 1</span><br><span class="line">You have selected Linux</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
-<h3 id="5-while"><a href="#5-while" class="headerlink" title="5. while"></a>5. while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>当 while 表达式的值为真时，将一直循环。<br>可以用关键字 “break” 用来跳出循环，也可以用关键字 “continue” 用来不执行余下的部分而直接跳到下一个循环。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">num=10</span><br><span class="line">while [ ! &quot;$num&quot; = &quot;0&quot; ]; do</span><br><span class="line">num=`expr &quot;$num&quot; &quot;-&quot; &quot;1&quot;`</span><br><span class="line">echo $num</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="6-for"><a href="#6-for" class="headerlink" title="6. for"></a>6. for</h3><p>for 表达式查看一个字符串列表（字符串用空格分隔），然后将其赋给一个变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for var in ...; do</span><br><span class="line">...</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h2 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h2><p>在向程序传递任何参数之前，程序会扩展通配符和变量。这里所谓扩展的意思程序会把通配符（比如*）替换成合适的文件名，将变量替换成变量值。为了防止程序作这种替换，可以使用引号。<br>假设在当前目录下有一些文件，两个 sh 文件，break.sh select.sh。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# echo *.sh</span><br><span class="line">break.sh select.sh</span><br><span class="line">[root@localhost ~]# echo &quot;*.sh&quot;</span><br><span class="line">*.sh</span><br><span class="line">[root@localhost ~]# echo &apos;*.sh&apos;</span><br><span class="line">*.sh</span><br></pre></td></tr></table></figure>
-<p>这里单引号更严格一些。它可以防止任何变量扩展。双引号可以防止通配符扩展但允许变量扩展。<br>还有一种防止这种扩展的方法，那就是使用转义字符–反斜杠。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="ciriws2kc00598zpvynwozarv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="cirix1aa30058adpvatwyifxl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -677,6 +639,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/06/PHP-json-decode-函数/">PHP json_decode() 函数</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/06/PHP-file-get-contents-函数/">PHP file_get_contents() 函数</a>
           </li>
         
@@ -690,10 +656,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/06/PHP-strpos-函数/">PHP strpos() 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/06/PHP-explode-函数/">PHP explode() 函数</a>
           </li>
         
       </ul>

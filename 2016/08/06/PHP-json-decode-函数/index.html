@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Rsync 同步常用命令 | 运维生存时间</title>
+  <title>PHP json_decode() 函数 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="rsync">
+  <meta name="description" content="php json json_decode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rsync 同步常用命令">
-<meta property="og:url" content="http://ttlop.com/2016/06/30/Rsync-同步常用命令/index.html">
+<meta property="og:title" content="PHP json_decode() 函数">
+<meta property="og:url" content="http://ttlop.com/2016/08/06/PHP-json-decode-函数/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="rsync">
-<meta property="og:updated_time" content="2016-06-30T08:52:09.500Z">
+<meta property="og:description" content="php json json_decode">
+<meta property="og:updated_time" content="2016-08-06T08:25:51.777Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rsync 同步常用命令">
-<meta name="twitter:description" content="rsync">
+<meta name="twitter:title" content="PHP json_decode() 函数">
+<meta name="twitter:description" content="php json json_decode">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Rsync-同步常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-PHP-json-decode-函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/30/Rsync-同步常用命令/" class="article-date">
-  <time datetime="2016-06-30T08:28:21.000Z" itemprop="datePublished">2016-06-30</time>
+    <a href="/2016/08/06/PHP-json-decode-函数/" class="article-date">
+  <time datetime="2016-08-06T08:21:13.000Z" itemprop="datePublished">2016-08-06</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Rsync 同步常用命令
+      PHP json_decode() 函数
     </h1>
   
 
@@ -107,31 +107,16 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="t-选项"><a href="#t-选项" class="headerlink" title="-t 选项"></a>-t 选项</h4><ol>
-<li>使用 -t 选项后，rsync 总会想做一件事，就是将源文件的 “modify time” 同步到目标机器</li>
-<li>带有 -t 选项的 rsync 会变得更聪明些，它会在同步前先对比两边文件的时间戳和大小，如果一致，则认为两边文件一样，对此文件就不采取更新动作</li>
-</ol>
-<h4 id="v-选项"><a href="#v-选项" class="headerlink" title="-v 选项"></a>-v 选项</h4><p>让 rsync 输出更多的信息，越多的 v 可以获得越多的日志信息</p>
-<h4 id="z-选项"><a href="#z-选项" class="headerlink" title="-z 选项"></a>-z 选项</h4><p>使用这个选项，rsync 就会把发向对端的数据先进行压缩再传输</p>
-<h4 id="r-选项"><a href="#r-选项" class="headerlink" title="-r 选项"></a>-r 选项</h4><p>使用这个选项，rsync 会同步文件夹</p>
-<h4 id="p-选项"><a href="#p-选项" class="headerlink" title="-p 选项"></a>-p 选项</h4><p>保持权限的意思。如果不使用此选项，rsync 这样处理权限问题：</p>
-<ol>
-<li>如果目的端没有此文件，那么在同步后将目的端文件权限保持与源端一致</li>
-<li>如果目的端存在此文件，那么只同步文件内容，权限报纸不变</li>
-</ol>
-<h4 id="o-g-选项"><a href="#o-g-选项" class="headerlink" title="-o -g 选项"></a>-o -g 选项</h4><p>这两个选项是一对，用来保持文件的属组和属主</p>
-<h4 id="–progress-选项"><a href="#–progress-选项" class="headerlink" title="–progress 选项"></a>–progress 选项</h4><p>使用这个选项，rsync 会显示出传输进度信息</p>
-<h4 id="–delete、–delete-excluded、–delete-after"><a href="#–delete、–delete-excluded、–delete-after" class="headerlink" title="–delete、–delete-excluded、–delete-after"></a>–delete、–delete-excluded、–delete-after</h4><ol>
-<li>delete 如果源端没有此文件，则删除目的端的此文件，需要搭配 -r 使用</li>
-<li>delete-excluded 指定一些要在目的端删除的文件</li>
-<li>delete-after 默认情况下，rsync 会先清理目的端的文件再开始数据同步，如果使用此选项，则 rsync 会先进行数据同步，都完成后再删除那些需要清理的文件</li>
-</ol>
-<h4 id="–partial-选项"><a href="#–partial-选项" class="headerlink" title="–partial 选项"></a>–partial 选项</h4><p>断点续传，默认情况下，rsync 会删除那些传输中断的文件，然后重新传输，但在一些特别情况下，我们不希望重传而是续传</p>
+        <p>(PHP 5 &gt;= 5.2.0, PECL json &gt;= 1.2.0, PHP 7)</p>
+<p>json_decode — Decodes a JSON string</p>
+<p>json_decode 是 PHP 5.2.0 之后新增的一个 PHP 内置函数，其作用是对 JSON 格式的字符串进行编码</p>
+<h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mixed json_decode ( string $json [, bool $assoc = false [, int $depth = 512 [, int $options = 0 ]]] )</span><br></pre></td></tr></table></figure>
+<p>json_decode 接受一个 JSON 格式的字符串并且把它转换为 PHP 变量 ,当该参数$assoc为 TRUE 时，将返回 array 否则返回 object 。 </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Rsync-同步常用命令/" data-id="cirix1a9t004xadpvgjafju0b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cirix1a9j004kadpvpitggbo7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,19 +125,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/07/01/Linux-是什么/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Linux 是什么
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/06/30/Rsync-安装使用详解/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/06/PHP-file-get-contents-函数/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Rsync 安装使用详解</div>
+      <div class="article-nav-title">PHP file_get_contents() 函数</div>
     </a>
   
 </nav>
