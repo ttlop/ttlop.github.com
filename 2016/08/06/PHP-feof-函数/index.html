@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/08/06/PHP-feof-函数/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="php filesystem feof">
-<meta property="og:updated_time" content="2016-08-06T06:42:02.170Z">
+<meta property="og:updated_time" content="2016-08-06T06:43:58.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP feof() 函数">
 <meta name="twitter:description" content="php filesystem feof">
@@ -109,7 +109,20 @@ var _hmt = _hmt || [];
       
         <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>fe() 函数检测是否已经达到文件末尾(eof)。<br>如果文件指针到了 EOF 或者出错时则返回 TRUE，否则返回一个错误（包括 socket 超时），其它情况则返回 FALSE。</p>
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">feof(file)</span><br></pre></td></tr></table></figure>
-<p>|参数|描述|<br>|file|必须。规定要检查的打开文件。|</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">file</td>
+<td style="text-align:left">必须。规定要检查的打开文件。</td>
+</tr>
+</tbody>
+</table>
 <p>说明：file 参数是一个文件指针。这个指针必须有效，并且必须指向一个由 fopen() 或 fsockopen() 成功打开（但还没有被 fclose()关闭）的文件。</p>
 <h3 id="提示和注释"><a href="#提示和注释" class="headerlink" title="提示和注释"></a>提示和注释</h3><p>提示：feop() 函数对遍历程度未知的数据很有用。</p>
 <p>注意：如果服务器没有关闭由 fsockopen() 所打开的连接，feof() 会一直等待直到超时而返回 TRUE。默认的超时限制是 60 秒，可以使用 stream_set_timeout() 来改变这个值。</p>
@@ -118,7 +131,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-feof-函数/" data-id="ciritbstp0048vjpvp0fx2px8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-feof-函数/" data-id="cirite9nu0048wwpvupe48wzv" class="article-share-link">Share</a>
       
       
     </footer>
