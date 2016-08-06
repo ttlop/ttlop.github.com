@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Zabbix agent 在 Windows 上安装部署 | 运维生存时间</title>
+  <title>PHP trim() 函数 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="zabbix agent windows 安装">
+  <meta name="description" content="php string trim">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zabbix agent 在 Windows 上安装部署">
-<meta property="og:url" content="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/index.html">
+<meta property="og:title" content="PHP trim() 函数">
+<meta property="og:url" content="http://ttlop.com/2016/08/06/PHP-trim-函数/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="zabbix agent windows 安装">
-<meta property="og:updated_time" content="2016-05-11T03:08:43.576Z">
+<meta property="og:description" content="php string trim">
+<meta property="og:updated_time" content="2016-08-06T07:13:48.654Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zabbix agent 在 Windows 上安装部署">
-<meta name="twitter:description" content="zabbix agent windows 安装">
+<meta name="twitter:title" content="PHP trim() 函数">
+<meta name="twitter:description" content="php string trim">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Zabbix-agent-在-Windows-上安装部署" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-PHP-trim-函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" class="article-date">
-  <time datetime="2016-05-11T02:53:32.000Z" itemprop="datePublished">2016-05-11</time>
+    <a href="/2016/08/06/PHP-trim-函数/" class="article-date">
+  <time datetime="2016-08-06T07:09:49.000Z" itemprop="datePublished">2016-08-06</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Zabbix agent 在 Windows 上安装部署
+      PHP trim() 函数
     </h1>
   
 
@@ -107,36 +107,40 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="下载与解压"><a href="#下载与解压" class="headerlink" title="下载与解压"></a>下载与解压</h4><ul>
-<li><p>下载地址：<a href="http://www.zabbix.com/downloads/3.0.0/zabbix_agents_3.0.0.win.zip" target="_blank" rel="external">http://www.zabbix.com/downloads/3.0.0/zabbix_agents_3.0.0.win.zip</a></p>
-</li>
-<li><p>解压后 <strong>conf</strong> 目录存放着 <strong>agent</strong> 配置文件， <strong>bin</strong> 目录存放windows下32和64位安装程序</p>
-</li>
-</ul>
-<h4 id="配置与安装"><a href="#配置与安装" class="headerlink" title="配置与安装"></a>配置与安装</h4><ul>
-<li><p>找到 <strong>conf</strong> 目录下的配置文件 <strong>zabbix_agentd.win.conf</strong>，修改Server、ServerActive、Hostname这三个参数，具体配置参见 <a href="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/">Zabbix Agent Installing And Configuration </a></p>
-</li>
-<li><p>安装 agent</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zabbix_agentd.exe -c zabbix_agentd.win.conf -i <span class="comment">#需要进入程序所在目录，指定配置文件的时候也需要代入配置文件所在完整路径</span></span><br></pre></td></tr></table></figure>
+        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>trim() 函数移除字符串两侧的空白字符或其它预定义字符。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trim(string,charlist)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:left">必须，规定要检查的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">charlist</td>
+<td style="text-align:left">可选，规定从字符串中删除哪些字符。如果被省略，则移除以下字符</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>启动 agent</li>
+<li>“\0” - NULL</li>
+<li>“\t” - 制表符</li>
+<li>“\n” - 换行符</li>
+<li>“\x0B” - 垂直制表符</li>
+<li>“\r” - 回车</li>
+<li>“” - 空格</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zabbix_agentd.exe -c zabbix_agentd.win.conf <span class="_">-s</span> <span class="comment">#同上，可在服务中查看已设置为开机启动</span></span><br></pre></td></tr></table></figure>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><ul>
-<li><p>确认防火墙已开启 zabbix_agent 的通讯端口，默认为 tcp 10050</p>
-</li>
-<li><p>查看 agent 日志文件确认启动正常</p>
-</li>
-<li><p>在 zabbix 服务端使用 zabbix_get 工具进行测试</p>
-</li>
-</ul>
+<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回被修改的字符串<br>PHP版本：4+<br>更新日志：在 PHP 4.1 中，新增了 charlist 参数</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciriugp7k006f3qpv1udqiskr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="ciriugp6b004l3qpvpn6edgtm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -145,19 +149,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix 的 system.cpu.load 与 CPU 使用率
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/07/Zabbix-事件/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/06/PHP-strpos-函数/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Zabbix 事件</div>
+      <div class="article-nav-title">PHP strpos() 函数</div>
     </a>
   
 </nav>
