@@ -82,6 +82,51 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Apache-崩溃解决-修改堆栈大小" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/" class="article-date">
+  <time datetime="2016-04-21T09:16:57.000Z" itemprop="datePublished">2016-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Apache/">Apache</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/21/Apache-崩溃解决-修改堆栈大小/">Apache 崩溃解决 -- 修改堆栈大小</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Windows平台下用正则preg_match_all或preg_match分析比较长的字符串时，导致apache崩溃重启的原因是windows平台下默认分配的线程堆栈空间ThreadStackSize太小导致的。Windows 32默认只有256KB，而在Linux下默认值是8M，这就是为什么同样的程序在linux平台下正常，而在windows平台下不正常的原因。</p>
+<p>那么如何增加Windows平台下ThreadStackSize的大小呢？在apache的配置文件httpd.conf里启用”Include conf/extra/httpd-mpm.conf”，然后在httpd-mpm.conf文件里的mpm_winnt_module配置模块里设置”ThreadStackSIze 8400000”即可（大约8M）。<br>代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mpm_winnt_module&gt;</span><br><span class="line">    ThreadStackSize         8400000</span><br><span class="line">    <span class="comment">#ThreadsPerChild        150</span></span><br><span class="line">    ThreadsPerChild        350</span><br><span class="line">    <span class="comment">#MaxConnectionsPerChild   0</span></span><br><span class="line">    MaxConnectionsPerChild   10000</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是，32位的Apache程序只能最多使用大约2GB内存空间！因此，ThreadStackSize和ThreadsPerChild的值相乘后(8M*350)不应该超过2G，否则无法启动apache，出现的错误日志如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Thu Apr 21 17:13:28.061948 2016] [mpm_winnt:crit] [pid 30660:tid 364] (OS 8)存储空间不足，无法处理此命令。  : AH00355: Child: CreateThread failed. Unable to create all worker threads. Created 212 of the 350 threads requested with the ThreadsPerChild configuration directive.</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="cirity7jm0001zipvo8ps76oz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-默认主题landscape分页异常修复" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/21/默认主题landscape分页异常修复/" class="article-date">
@@ -116,7 +161,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="cirito3ip007ny9pvhha1os6y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="cirity7qr007ozipva3h7tip2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +208,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="cirito3bz000yy9pv3es0z6kj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="cirity7l8000yzipv0py854f3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +253,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="cirito3b7000fy9pvraou5n4t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="cirity7kk000fzipvx2gbmwo7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -253,7 +298,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="cirito3al0006y9pvatxcju82" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="cirity7k40006zipvzhfjvemp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -297,7 +342,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cirito3ar0008y9pv73vwwkhu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="cirity7k90008zipvq165w56j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -344,7 +389,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cirito3bb000jy9pvrqdji0m3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cirity7kn000jzipvbg59rhod" class="article-share-link">Share</a>
       
       
     </footer>
@@ -389,7 +434,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cirito3b9000hy9pvdgmu6ic1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cirity7kl000hzipvwt4qz8o4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -438,7 +483,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cirito3ib0071y9pvc7hfzs9l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cirity7qe0071zipvf6u7pxwy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -487,52 +532,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cirito3bv000vy9pvv114zdxy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Apache-开启Server-status和server-info" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/15/Apache-开启Server-status和server-info/" class="article-date">
-  <time datetime="2016-04-15T07:37:07.000Z" itemprop="datePublished">2016-04-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Apache/">Apache</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/15/Apache-开启Server-status和server-info/">Apache 开启Server-status和server-info</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果靠分析 Apache 的日志或者查看服务器进程来监视 Apache 运行状态的话，比较繁冗。不过在 Apache 1.3.2及以后的版本中就自带了一个查看 Apache 状态的功能模块 server-status，这样查看 apache 的一些相应状态信息会很方便。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/15/Apache-开启Server-status和server-info/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cirito3a70002y9pvtgvpwuyz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cirity7l4000vzipvduq5e50f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -584,6 +584,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/06/PHP-explode-函数/">PHP explode() 函数</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/06/PHP-fgets-函数/">PHP fgets() 函数</a>
           </li>
         
@@ -597,10 +601,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/06/Linux-apache-access-log-Analy-2/">Linux apache access_log Analy 2</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/05/LinuxShell-双引号的妙用/">LinuxShell 双引号的妙用</a>
           </li>
         
       </ul>
