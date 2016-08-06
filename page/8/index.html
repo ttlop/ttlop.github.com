@@ -82,6 +82,77 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-CPU-类型-Key" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/31/Zabbix-CPU-类型-Key/" class="article-date">
+  <time datetime="2016-05-31T07:47:07.000Z" itemprop="datePublished">2016-05-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/31/Zabbix-CPU-类型-Key/">Zabbix CPU 类型 Key</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Zabbix 服务器通过与 zabbix agent 通信来获取客户端的数据，如下是一些 zabbix agent 所支持的 keys 列表。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Key</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">system.cpu.num[<type>]</type></td>
+<td style="text-align:left">处理器个数。<strong>type</strong>-可用值: online(default),max</td>
+</tr>
+<tr>
+<td style="text-align:left">system.cpu.switches</td>
+<td style="text-align:left">上下文交换次数。老命名方式：system[switches]</td>
+</tr>
+<tr>
+<td style="text-align:left">system.cpu.util[<cpu>,<type>,<mode>]</mode></type></cpu></td>
+<td style="text-align:left">利用率百分比。<strong>cpu</strong>-cpu数量(默认是所有CPU) <strong>type</strong>-可用值: idle,nice,user(default),system(windows default),iowait,interrupt,softirq,steal <strong>mode</strong>-可用值:avg1(default),avg5,avg15</td>
+</tr>
+<tr>
+<td style="text-align:left">system.cpu.load[<cpu>,<mode>]</mode></cpu></td>
+<td style="text-align:left">CPU负载。<strong>cpu</strong>-可用值:all(default),percpu(所有在线cpu的负载) <strong>mode</strong>-可用值:avg1,avg5,avg15</td>
+</tr>
+<tr>
+<td style="text-align:left">system.cpu.intr</td>
+<td style="text-align:left">设备中断次数</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cirisdxx00055plpv871cl6lr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Nginx-FastCGI-运行原理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/28/Nginx-FastCGI-运行原理/" class="article-date">
@@ -119,7 +190,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cirikhqg0003y8jpvdn7juj48" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cirisdxw8003yplpv9ovcc6rq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,7 +236,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cirikhqg600468jpvh2s6u6gj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cirisdxwg0046plpvi1q038tt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +283,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="cirikhqfd00358jpvyxqeg31c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="cirisdxvm0035plpv8hw1nnih" class="article-share-link">Share</a>
       
       
     </footer>
@@ -333,7 +404,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="cirikhqh4005q8jpv2n6keke8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="cirisdxxf005uplpve4xwgcwk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -384,7 +455,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="cirikhqgr00568jpvzij4xitl" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="cirisdxx10057plpvdldn73lw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -443,7 +514,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="cirikhqgt00588jpvxbnonsfu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="cirisdxx4005aplpvhqm4hfcz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -496,7 +567,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="cirikhqh0005g8jpvsig227uj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="cirisdxxa005kplpvwuft6lj1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -543,7 +614,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="cirikhqgn004y8jpvvuonqe3f" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="cirisdxwx0050plpv4to94x73" class="article-share-link">Share</a>
       
       
     </footer>
@@ -591,97 +662,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="cirikhqhb005z8jpvpvivhbzm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-命令行快捷键" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/20/Linux-命令行快捷键/" class="article-date">
-  <time datetime="2016-05-20T06:50:04.000Z" itemprop="datePublished">2016-05-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/20/Linux-命令行快捷键/">Linux 命令行快捷键</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">释义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl+b</td>
-<td style="text-align:left">左移一个字符</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+f</td>
-<td style="text-align:left">右移一个字符</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+a</td>
-<td style="text-align:left">移至行首</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+e</td>
-<td style="text-align:left">移至行尾</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+h</td>
-<td style="text-align:left">删除光标左边的字符</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+d</td>
-<td style="text-align:left">删除光标所在字符</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+w</td>
-<td style="text-align:left">删除光标左边的单词</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+u</td>
-<td style="text-align:left">删除光标左边至行首</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+k</td>
-<td style="text-align:left">删除光标至行尾部分</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+r</td>
-<td style="text-align:left">根据字符串搜索历史命令</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/20/Linux-命令行快捷键/" data-id="cirikhqed001z8jpvy0guw5gv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="cirisdxxl0061plpvst4hmwwy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -694,7 +675,7 @@ var _hmt = _hmt || [];
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -733,6 +714,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/06/PHP-fopen-函数/">PHP fopen() 函数</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/06/Linux-apache-access-log-Analy-2/">Linux apache access_log Analy 2</a>
           </li>
         
@@ -746,10 +731,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/05/LinuxAwk-引用外部变量/">LinuxAwk 引用外部变量</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/04/LinuxShell-命令运行符号-区别/">LinuxShell 命令运行符号 &amp; ; &amp;&amp; 区别</a>
           </li>
         
       </ul>
