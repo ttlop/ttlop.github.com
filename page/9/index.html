@@ -82,6 +82,97 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nginx-Location-Configuration" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/01/Nginx-Location-Configuration/" class="article-date">
+  <time datetime="2016-06-01T02:59:50.000Z" itemprop="datePublished">2016-06-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/01/Nginx-Location-Configuration/">Nginx Location Configuration</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>语法规则：location [=|~|~*|^~] /url/ {…}</p>
+</blockquote>
+<ul>
+<li><p>= 表示精确匹配</p>
+</li>
+<li><p>^~ 表示 url 以某个常规字符串开头，理解为匹配 url 路径即可</p>
+</li>
+<li><p>~ 表示区分大小写的正则匹配</p>
+</li>
+<li><p>~* 表示不区分大小写的正则匹配</p>
+</li>
+<li><p>!~和!~* 分别为区分大小写不匹配和不区分大小写的不匹配</p>
+</li>
+<li><p>/ 通用匹配，任何请求都回匹配到</p>
+</li>
+</ul>
+<p>多个 location 配置的情况下匹配顺序为：首先匹配 =，其次匹配 ^~，其次按文件中顺序的正则匹配，最后是交给 / 通用匹配。当有匹配成功的时候，停止匹配，按当前匹配规则处理请求。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">location = / &#123;</span><br><span class="line">   #ruleA</span><br><span class="line">&#125;</span><br><span class="line">location = /login&#123;</span><br><span class="line">   #ruleB</span><br><span class="line">&#125;</span><br><span class="line">location ^~ /static/ &#123;</span><br><span class="line">   #ruleC</span><br><span class="line">&#125;</span><br><span class="line">location ~ \.(gif|jpg|png|js|css)$ &#123;</span><br><span class="line">   #ruleD</span><br><span class="line">&#125;</span><br><span class="line">location ~* \.png$ &#123;</span><br><span class="line">   #ruleE</span><br><span class="line">&#125;</span><br><span class="line">location !~ \.xhtml$ &#123;</span><br><span class="line">   #ruleF</span><br><span class="line">&#125;</span><br><span class="line">location !~* \.xhtml$ &#123;</span><br><span class="line">   #ruleG</span><br><span class="line">&#125;</span><br><span class="line">location / &#123;</span><br><span class="line">   #ruleH</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么产生的效果如下：</p>
+<ol>
+<li><p>访问根目录/，比如 <strong><a href="http://localhost/" target="_blank" rel="external">http://localhost/</a></strong> 将匹配规则 <strong>ruleA</strong></p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/static/a.html" target="_blank" rel="external">http://localhost/static/a.html</a></strong> 将匹配规则 <strong>ruleC</strong></p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/login" target="_blank" rel="external">http://localhost/login</a></strong> 将匹配规则 <strong>ruleB</strong></p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/a.gif" target="_blank" rel="external">http://localhost/a.gif</a></strong>、<strong><a href="http://localhost/b.png" target="_blank" rel="external">http://localhost/b.png</a></strong> 将匹配规则 <strong>ruleD</strong> 和 <strong>ruleE</strong>，但是规则 <strong>ruleD</strong> 优先，<strong>ruleE</strong> 不起作用</p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/static/c.png" target="_blank" rel="external">http://localhost/static/c.png</a></strong> 则优先匹配规则 <strong>ruleC</strong></p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/a.PNG" target="_blank" rel="external">http://localhost/a.PNG</a></strong> 则匹配规则 <strong>ruleE</strong>，不匹配规则 <strong>ruleD</strong>，因为规则 <strong>ruleE</strong> 不区分大小写</p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/a.xhtml" target="_blank" rel="external">http://localhost/a.xhtml</a></strong> 不会匹配规则 <strong>ruleF</strong> 和 <strong>ruleG</strong>，<strong><a href="http://localhost/a.XHTML" target="_blank" rel="external">http://localhost/a.XHTML</a></strong> 不会匹配规则 <strong>ruleG</strong>。规则 <strong>ruleF</strong> 和 <strong>ruleG</strong> 属于排除法，符合匹配规则但是不会匹配。</p>
+</li>
+<li><p>访问 <strong><a href="http://localhost/category/id/1111" target="_blank" rel="external">http://localhost/category/id/1111</a></strong> 则最终匹配到规则 <strong>ruleH</strong>，因为以上规则都不进行匹配</p>
+</li>
+</ol>
+<p>所以在实际使用中，个人觉得至少有三个匹配规则定义，如下：</p>
+<ul>
+<li>直接匹配网站根，通过域名访问网站首页比较频繁，使用这个会加速处理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location = / &#123;</span><br><span class="line">    proxy_pass http://tomcat:8080/index</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理静态文件请求，这是 <strong>nginx</strong> 作为 <strong>http</strong> 服务器的强项</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /static/ &#123;</span><br><span class="line">    root /webroot/static;</span><br><span class="line">&#125;</span><br><span class="line">#or</span><br><span class="line">location ~* \.(gif|jpg|jpeg|png|css|js|ico)$ &#123;</span><br><span class="line">    root /webroot/res/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>转发动态请求到后端应用服务器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    proxy_pass http://tomcat:8080/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="cirn7pw130040k0pv1j2ycxu9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-CPU-类型-Key" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/31/Zabbix-CPU-类型-Key/" class="article-date">
@@ -143,7 +234,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cirn6t3wf005ohepvlci8gq8k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cirn7pw2e005tk0pv0rcspzak" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +281,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cirn6t3v30040hepve464ra2u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cirn7pw11003yk0pv12ot4mhj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -236,7 +327,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cirn6t3vb0048hepvbwsmid83" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cirn7pw150043k0pv8evpwekn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -283,7 +374,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="cirn6t3ub0037hepvh0ku7b2h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="cirn7pw0f0035k0pvlyfxvxjw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -404,7 +495,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="cirn6t3wt006chepvf50u8cfl" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/25/Zabbix-Template-SQL-Server/" data-id="cirn7pw2s006fk0pviewwgpap" class="article-share-link">Share</a>
       
       
     </footer>
@@ -455,7 +546,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="cirn6t3wg005rhepvrezs6ae0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery-of-file-systems/" data-id="cirn7pw2f005vk0pvt7mfbeax" class="article-share-link">Share</a>
       
       
     </footer>
@@ -514,7 +605,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="cirn6t3wh005thepvhxpw3uxq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Discovery/" data-id="cirn7pw2i005yk0pvfzsjha2u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -567,7 +658,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="cirn6t3wn0063hepvybor2irg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/24/Zabbix-Server-Installing-And-Configuration/" data-id="cirn7pw2p0068k0pv34d8gd60" class="article-share-link">Share</a>
       
       
     </footer>
@@ -614,55 +705,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="cirn6t3wc005jhepvkfoyvcjn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Web-Monitoring" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/21/Zabbix-Web-Monitoring/" class="article-date">
-  <time datetime="2016-05-21T05:35:32.000Z" itemprop="datePublished">2016-05-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/21/Zabbix-Web-Monitoring/">Zabbix Web Monitoring</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>With Zabbix you can check several availability aspects of web sites.</p>
-<p>To perform web monitoring Zabbix server must be initially configured with cURL(libcurl) support.</p>
-<p>To activate web monitoring you need to define web scenarios. A web scenario consists of one or several HTTP requests or “steps”. The steps are periodically executed by Zabbix server in a pre-defined order.</p>
-<p>Since Zabbix 2.2 web scenarios are attached to hosts/templates in the same way as items, tirggers, etc. That means that web scenarios can also be created on a template level and then applied to multiple hosts in one move.</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/21/Zabbix-Web-Monitoring/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/21/Zabbix-Web-Monitoring/" data-id="cirn6t3wx006khepvnwihmg10" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/23/YUM-Remove-Repo/" data-id="cirn7pw2b005ok0pvl4gxtk00" class="article-share-link">Share</a>
       
       
     </footer>
@@ -714,6 +757,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/09/PHP-Array-数组/">PHP Array 数组</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/09/PHP-http-build-query-函数/">PHP http_build_query 函数</a>
           </li>
         
@@ -727,10 +774,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/06/PHP-file-get-contents-函数/">PHP file_get_contents() 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/06/PHP-strlen-函数/">PHP strlen() 函数</a>
           </li>
         
       </ul>

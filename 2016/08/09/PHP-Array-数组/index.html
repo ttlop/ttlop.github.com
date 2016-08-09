@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Nginx nginx-status | 运维生存时间</title>
+  <title>PHP Array 数组 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nginx stat stub_status">
+  <meta name="description" content="php 类型 array 数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx nginx-status">
-<meta property="og:url" content="http://ttlop.com/2016/06/01/Nginx-nginx-status/index.html">
+<meta property="og:title" content="PHP Array 数组">
+<meta property="og:url" content="http://ttlop.com/2016/08/09/PHP-Array-数组/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="nginx stat stub_status">
-<meta property="og:updated_time" content="2016-06-02T02:57:51.842Z">
+<meta property="og:description" content="php 类型 array 数组">
+<meta property="og:updated_time" content="2016-08-09T08:36:00.733Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nginx nginx-status">
-<meta name="twitter:description" content="nginx stat stub_status">
+<meta name="twitter:title" content="PHP Array 数组">
+<meta name="twitter:description" content="php 类型 array 数组">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Nginx-nginx-status" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-PHP-Array-数组" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/01/Nginx-nginx-status/" class="article-date">
-  <time datetime="2016-06-01T06:43:29.000Z" itemprop="datePublished">2016-06-01</time>
+    <a href="/2016/08/09/PHP-Array-数组/" class="article-date">
+  <time datetime="2016-08-09T08:29:02.000Z" itemprop="datePublished">2016-08-09</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Nginx nginx-status
+      PHP Array 数组
     </h1>
   
 
@@ -107,31 +107,16 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如何查看 Nginx 状态？</p>
-<a id="more"></a>
-<h3 id="获取-Nginx-状态（HTTP-Stub-Status）"><a href="#获取-Nginx-状态（HTTP-Stub-Status）" class="headerlink" title="获取 Nginx 状态（HTTP Stub Status）"></a>获取 Nginx 状态（HTTP Stub Status）</h3><p>确认有加入状态监控模块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# /usr/local/nginx/sbin/nginx -V</span><br><span class="line">nginx version: nginx/1.8.0</span><br><span class="line">built by gcc 4.4.7 20120313 (Red Hat 4.4.7-11) (GCC) </span><br><span class="line">built with OpenSSL 1.0.1c 10 May 2012</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: --prefix=/usr/local/nginx --with-openssl=/usr/local/hongdian/openssl-1.0.1c --with-http_stub_status_module --with-http_ssl_module</span><br></pre></td></tr></table></figure>
-<h3 id="配置-nginx-conf"><a href="#配置-nginx-conf" class="headerlink" title="配置 nginx.conf"></a>配置 nginx.conf</h3><p>Add the following configuration to you Nginx configuration file</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location ~ /nginx_status &#123;</span><br><span class="line">    stub_status on;  # Turn on nginx stats</span><br><span class="line">    access_log off;  # We do not need logs for stats</span><br><span class="line">    allow 127.0.0.1; # security: Only allow access from ip</span><br><span class="line">    deny all;        # Deny requests from the other of the world</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Nginx-监控项解释"><a href="#Nginx-监控项解释" class="headerlink" title="Nginx 监控项解释"></a>Nginx 监控项解释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# curl http://localhost:61503/nginx_status</span><br><span class="line">Active connections: 1 </span><br><span class="line">server accepts handled requests</span><br><span class="line"> 28 28 25 </span><br><span class="line">Reading: 0 Writing: 1 Waiting: 0</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Active Connections: 当前正处理的活动连结数</p>
-</li>
-<li><p>Server accepts handled requests: Nginx 共处理了多少个连接，成功创建了多少次握手，总共处理了多少个请求</p>
-</li>
-<li><p>Reading: nginx 读取到客户端的 Header 信息数</p>
-</li>
-<li><p>Writing: Nginx 返回给客户端的 Header 信息数</p>
-</li>
-<li><p>Waiting: 开启 keep-alive 的情况下，这个值等于 <strong>active - (reading + writing)</strong>，意思是 Nginx 已经处理完成，正在等待下一次请求指令的的驻留连接数</p>
-</li>
-</ul>
-<p>在访问效率很高，请求很快被处理完毕的情况下，Waiting 数比较多是正常的，如果 reading + writing 数较多，则说明并发访问量很大，正在处理过程中。可能是因为后端的动态应用程序处理慢（如php，jsp），拖了后腿。而一般来说，动态程序之所以慢就就两方面的原因：一是一位数据库，另外一个原因很可能就是IO慢（目前的机器CPU或内存不够的情况很少。而设备的主要瓶颈在硬盘IO上），或者客户端网络慢。</p>
+        <p><strong>PHP</strong> 中的数组实际上是一个有序映射。映射是一种把 <em>values</em> 关联到 <em>keys</em> 的类型。此类型在很多方面做了优化，因此可以可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性。由于数组元素的值也可以是另一个数组，树形结构和多维数组也是允许的。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="定义数组-array"><a href="#定义数组-array" class="headerlink" title="定义数组 array()"></a>定义数组 array()</h4><p>可以用 array() 语言结构来新建一个数组，它接受任意数量用逗号分隔的 <em>键(key) =&gt; 值(value)</em> 对。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array( key =&gt; value</span><br><span class="line">    , ...</span><br><span class="line">)</span><br><span class="line">//键(key) 可以是一个整数或字符串</span><br><span class="line">//值(value) 可以是任意类型的值</span><br></pre></td></tr></table></figure>
+<p>最后一个数组单元之后的逗号可以省略。通常用于单行数组定义中，例如常用 <em>array(1,2)</em> 而不是 <em>array(1,2,)</em>。对多行数组定义通常保留最后一个逗号，这样要添加一个新单元时更方便。</p>
+<p>自 5.4 起可以使用短数组定义语法，用 [] 替代 array()。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cirn7pw180045k0pvhl4s6gqq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cirn7pw1a0048k0pv9ce3vw1b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,19 +125,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/06/02/Zabbix-Monitor-Nginx/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Zabbix Monitor Nginx
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/06/01/Nginx-Location-Configuration/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/09/PHP-http-build-query-函数/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Nginx Location Configuration</div>
+      <div class="article-nav-title">PHP http_build_query 函数</div>
     </a>
   
 </nav>
