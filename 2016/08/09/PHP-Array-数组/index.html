@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/08/09/PHP-Array-数组/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="php 类型 array 数组">
-<meta property="og:updated_time" content="2016-08-09T08:46:14.181Z">
+<meta property="og:updated_time" content="2016-08-09T09:17:37.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP Array 数组">
 <meta name="twitter:description" content="php 类型 array 数组">
@@ -70,9 +70,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -124,11 +124,21 @@ var _hmt = _hmt || [];
 <p>如果在数组定义中多个单元使用同一键名，则只使用最后一个，之前的都被覆盖了。</p>
 <p>PHP 数组可以同时含有整型和字符串类型的键名，因为 PHP 实际上并不区分索引数组和关联数组。如果对给出的值没有指定键名，则取当前最大的整数索引值，而新的键名将该值加一。如果指定的键名已经有了值，则该值会被覆盖。</p>
 <h4 id="用方括号语法访问数组单元"><a href="#用方括号语法访问数组单元" class="headerlink" title="用方括号语法访问数组单元"></a>用方括号语法访问数组单元</h4><p>数组单元可以通过 <em>array[key]</em> 语法来访问。</p>
+<p>注意：方括号和花括号可以互换使用来访问数组单元（例如 $array[42]和$array{42}在上例中效果相同）。</p>
+<p>自 PHP 5.4 起可以用数组间接引用函数或方法调用的结果。之前只能通过一个临时变量。</p>
+<p>自 PHP 5.5 其可以用数组间接引用一个数组原型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">function getArray() &#123;</span><br><span class="line">    return array(1, 2, 3);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// on PHP 5.4</span><br><span class="line">$secondElement = getArray()[1];</span><br><span class="line"></span><br><span class="line">// previously</span><br><span class="line">$tmp = getArray();</span><br><span class="line">$secondElement = $tmp[1];</span><br><span class="line"></span><br><span class="line">// or</span><br><span class="line">list(, $secondElement) = getArray();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="用方括号的语法新建-修改"><a href="#用方括号的语法新建-修改" class="headerlink" title="用方括号的语法新建/修改"></a>用方括号的语法新建/修改</h4><p>可以通过明示地设定其中的值来修改一个已有数组。这是通过方括号内给定键名来给数组赋值实现的。也可以省略监控，在这种情况下给变量名加上一对空的方括号。</p>
+<p>通过调用 unset() 函数可以删除键值对或者数组。</p>
+<p>注意：如果给出方括号但没有指定键名，则取当前最大整数索引，新的键名将是该值加上1（但是最小为0）。如果当前还没有整数索引，则键名为0。这里所使用的最大整数键名不一定当前就在数组中，它只要在上次数组重新生成索引后曾经存在过就行了。</p>
+<p>应该始终在用字符串表示的数组索引上加上，但是用不着给键名为常量或变量的加上引号，否则会使 PHP 不能解析它们。</p>
+<h4 id="转换为数组"><a href="#转换为数组" class="headerlink" title="转换为数组"></a>转换为数组</h4><p>对于任意 integer，float，string，boolean，resource 类型，如果将一个值转换为数组，将得到一个仅有一个元素的数组，其下标为 0，该元素即为此变量的值。换句话说，(array)$scalarValue 与 array($scalarValue) 完全一样。</p>
+<p>如果一个 object 类型转换为 array，则结果为一个数组，其单元该对象的属性，键名将为成员变量名，不过有几点例外：整数属性不可访问；私有变量前加上类名做前缀；保护变量前会加上一个 ‘*’ 做前缀。这些前缀的前后都各有一个 NULL 字符。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cirn831f3004aa8pvobj8e3nk" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cirn97fuz004adapvudcsqr5n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -139,7 +149,7 @@ var _hmt = _hmt || [];
   
   
     <a href="/2016/08/09/PHP-http-build-query-函数/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">PHP http_build_query 函数</div>
     </a>
   
@@ -154,7 +164,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -179,7 +189,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -216,7 +226,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
