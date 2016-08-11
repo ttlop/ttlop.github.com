@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>LinuxShell for使用换行符作为分隔符 | 运维生存时间</title>
+  <title>PHP 循环读取文件每行记录处理 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="shell 分隔符 换行符">
+  <meta name="description" content="php fopen fgets feof">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LinuxShell for使用换行符作为分隔符">
-<meta property="og:url" content="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/index.html">
+<meta property="og:title" content="PHP 循环读取文件每行记录处理">
+<meta property="og:url" content="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="shell 分隔符 换行符">
-<meta property="og:updated_time" content="2016-08-05T07:27:50.884Z">
+<meta property="og:description" content="php fopen fgets feof">
+<meta property="og:updated_time" content="2016-08-11T02:59:00.479Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LinuxShell for使用换行符作为分隔符">
-<meta name="twitter:description" content="shell 分隔符 换行符">
+<meta name="twitter:title" content="PHP 循环读取文件每行记录处理">
+<meta name="twitter:description" content="php fopen fgets feof">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-LinuxShell-for使用换行符作为分隔符" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-PHP-循环读取文件每行记录处理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/05/LinuxShell-for使用换行符作为分隔符/" class="article-date">
-  <time datetime="2016-08-05T07:17:55.000Z" itemprop="datePublished">2016-08-05</time>
+    <a href="/2016/08/11/PHP-循环读取文件每行记录处理/" class="article-date">
+  <time datetime="2016-08-11T02:44:03.000Z" itemprop="datePublished">2016-08-11</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      LinuxShell for使用换行符作为分隔符
+      PHP 循环读取文件每行记录处理
     </h1>
   
 
@@ -107,16 +107,20 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用 <strong>shell</strong> 编写脚本的过程中，无可避免有时候我们需要使用 <strong>for</strong> 循环来遍历一个函数返回的结果。有时候返回的结果是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 11 111</span><br><span class="line">2 22 222</span><br><span class="line">3 33 333</span><br></pre></td></tr></table></figure>
-<p>这时候如果我们需要按行来输出，使用 <strong>while read line</strong> 是一个不错的选择，那么使用 <strong>for</strong> 循环可以吗，答案是肯定的，但是需要修改分隔符 <strong>IFS</strong>，下面我们使用例子来说明。</p>
-<h3 id="实例一：修改分隔符为换行符"><a href="#实例一：修改分隔符为换行符" class="headerlink" title="实例一：修改分隔符为换行符"></a>实例一：修改分隔符为换行符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat test1.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">OLDIFS=$IFS</span><br><span class="line">IFS=&quot;\n&quot;</span><br><span class="line">for line in `cat test.txt`</span><br><span class="line">do</span><br><span class="line">	echo &quot;$line&quot;</span><br><span class="line">done</span><br><span class="line">IFS=&quot;$OLDIFS&quot;</span><br><span class="line">[root@localhost ~]# ./test1.sh </span><br><span class="line">1 11 111</span><br><span class="line">2 22 222</span><br><span class="line">3 33 333</span><br></pre></td></tr></table></figure>
-<h3 id="实例二：不修改分隔符"><a href="#实例二：不修改分隔符" class="headerlink" title="实例二：不修改分隔符"></a>实例二：不修改分隔符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat test2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">for line in `cat test.txt`</span><br><span class="line">do</span><br><span class="line">	echo &quot;$line&quot;</span><br><span class="line">done</span><br><span class="line">[root@localhost ~]# ./test2.sh </span><br><span class="line">1</span><br><span class="line">11</span><br><span class="line">111</span><br><span class="line">2</span><br><span class="line">22</span><br><span class="line">222</span><br><span class="line">3</span><br><span class="line">33</span><br><span class="line">333</span><br></pre></td></tr></table></figure>
+        <p>日常工作中，经常有这样的任务，需要自动读取文件中的信息并处理，此处涉及到这几个函数：</p>
+<ul>
+<li>file_exists：判断文件是否存在</li>
+<li>fopen：打开文件，返回文件指针</li>
+<li>feof：检测是否已经达到文件末尾eof，如是返回TRUE</li>
+<li>fgets：从文件指针中读取一行</li>
+<li>explode：把字符串打散为数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $fp = fopen($file, &quot;r&quot;);</span><br><span class="line">                while(!feof($fp))&#123;</span><br><span class="line">                        $line = fgets($fp);</span><br><span class="line">                        $UserInfo = explode(&quot; &quot;, $line);</span><br><span class="line">                        echo &quot;用户名：$UserInfo[0] &quot;;</span><br><span class="line">                        echo &quot;密码：$UserInfo[1]&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="cirpqk7d1002rg7pvcb832xnt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cirpqk7et004wg7pvqsm6mifp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,19 +129,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/08/05/LinuxShell-双引号的妙用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          LinuxShell 双引号的妙用
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/05/LinuxAwk-引用外部变量/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/09/PHP-Array-数组/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">LinuxAwk 引用外部变量</div>
+      <div class="article-nav-title">PHP Array 数组</div>
     </a>
   
 </nav>

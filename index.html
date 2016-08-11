@@ -82,6 +82,55 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP-循环读取文件每行记录处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/11/PHP-循环读取文件每行记录处理/" class="article-date">
+  <time datetime="2016-08-11T02:44:03.000Z" itemprop="datePublished">2016-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>日常工作中，经常有这样的任务，需要自动读取文件中的信息并处理，此处涉及到这几个函数：</p>
+<ul>
+<li>file_exists：判断文件是否存在</li>
+<li>fopen：打开文件，返回文件指针</li>
+<li>feof：检测是否已经达到文件末尾eof，如是返回TRUE</li>
+<li>fgets：从文件指针中读取一行</li>
+<li>explode：把字符串打散为数组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $fp = fopen($file, &quot;r&quot;);</span><br><span class="line">                while(!feof($fp))&#123;</span><br><span class="line">                        $line = fgets($fp);</span><br><span class="line">                        $UserInfo = explode(&quot; &quot;, $line);</span><br><span class="line">                        echo &quot;用户名：$UserInfo[0] &quot;;</span><br><span class="line">                        echo &quot;密码：$UserInfo[1]&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cirpqk7et004wg7pvqsm6mifp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PHP-Array-数组" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/09/PHP-Array-数组/" class="article-date">
@@ -117,7 +166,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cirn97fuz004adapvudcsqr5n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cirpqk7ec004ag7pv638u2jdf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,7 +210,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="cirn97fv9004mdapvvc00qeau" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="cirpqk7ej004lg7pv50co6qp7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +255,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="cirn97fpw0001dapv0uxa9fq1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="cirpqk79e0002g7pv67vzsan2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +300,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cirn97fvb004pdapvjfjc1z5d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cirpqk7eo004pg7pva8vytrrg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +343,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="cirn97fv5004idapv1l23rp7v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="cirpqk7eh004ig7pvcyfsynac" class="article-share-link">Share</a>
       
       
     </footer>
@@ -351,7 +400,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="cirn97fvc004qdapvqnvdldow" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="cirpqk7ep004qg7pv9h5t93yo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +469,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="cirn97fvf004udapv47dow3zj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="cirpqk7es004ug7pv5tzznv72" class="article-share-link">Share</a>
       
       
     </footer>
@@ -485,7 +534,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="cirn97fve004tdapvql2dk72l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="cirpqk7er004tg7pvr63zr0ra" class="article-share-link">Share</a>
       
       
     </footer>
@@ -555,71 +604,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="cirn97fv1004ddapvtdktxyhp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-fgets-函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/06/PHP-fgets-函数/" class="article-date">
-  <time datetime="2016-08-06T06:46:00.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/PHP-fgets-函数/">PHP fgets() 函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>fgets() 函数从文件指针中读取一行。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fgets(file,length)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">file</td>
-<td style="text-align:left">必须，规定要读取的文件</td>
-</tr>
-<tr>
-<td style="text-align:left">length</td>
-<td style="text-align:left">可选，规定要读取的字节数，默认是 1024 字节</td>
-</tr>
-</tbody>
-</table>
-<p>说明：从 file 指向的文件中读取一行并返回长度最多为 length -1 字节的字符串，碰到换行符（包括在返回值中）、EOF、或者已经读取了 length-1 字节后停止（要看先碰到哪一种情况）。如果没有指定 lenght，默认为 1K，或者说 1024 字节。若失败，则返回 FALSE。</p>
-<h3 id="提示和注释"><a href="#提示和注释" class="headerlink" title="提示和注释"></a>提示和注释</h3><p>注释：length 参数从 PHP 4.2.0 起成为可选项，如果忽略，则行的长度被假定为 1024 字节。从 PHP 4.3 开始，忽略掉 length 将继续从流中读取数据直到行结束。如果文件中的大多数行都大于 8 KB，则在脚本中指定最大行的长度在利用资源上更为有效。</p>
-<p>注释：从 PHP 4.3 开始本函数可以安全用于二进制文件。早期的版本则不行。</p>
-<p>注释：如果碰到 PHP 在读取文件时不能识别 Macintosh 文件的行结束符，可以激活 auto_detect_line_endings 运行时配置选项。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-fgets-函数/" data-id="cirn97fv4004hdapvvcvy7u4u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="cirpqk7ed004dg7pvgtknt523" class="article-share-link">Share</a>
       
       
     </footer>
@@ -671,6 +656,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/09/PHP-Array-数组/">PHP Array 数组</a>
           </li>
         
@@ -684,10 +673,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/06/PHP-json-decode-函数/">PHP json_decode() 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/06/PHP-file-get-contents-函数/">PHP file_get_contents() 函数</a>
           </li>
         
       </ul>
