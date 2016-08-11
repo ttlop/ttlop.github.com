@@ -15,17 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Catégorie: Zabbix | 运维生存时间</title>
+  <title>PHP 的 feof() 方法需要注意的地方 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/Zabbix/page/3/index.html">
+  <meta name="description" content="php feof">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 的 feof() 方法需要注意的地方">
+<meta property="og:url" content="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="php feof">
+<meta property="og:updated_time" content="2016-08-11T08:21:24.692Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="PHP 的 feof() 方法需要注意的地方">
+<meta name="twitter:description" content="php feof">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -80,196 +81,62 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/06/Zabbix-单位符号-Unit-symbols/" class="archive-article-date">
-  <time datetime="2016-05-06T07:42:36.000Z" itemprop="datePublished">May 6</time>
+        <section id="main"><article id="post-PHP-的-feof-方法需要注意的地方" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" class="article-date">
+  <time datetime="2016-08-11T07:36:38.000Z" itemprop="datePublished">2016-08-11</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/06/Zabbix-单位符号-Unit-symbols/">Zabbix 单位符号 Unit symbols</a>
+    <h1 class="article-title" itemprop="name">
+      PHP 的 feof() 方法需要注意的地方
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/06/Zabbix-Triggers-触发器/" class="archive-article-date">
-  <time datetime="2016-05-06T03:40:00.000Z" itemprop="datePublished">May 6</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/06/Zabbix-Triggers-触发器/">Zabbix Triggers 触发器</a>
-    </h1>
-  
+        <p>写过这样的一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>其中当读文件到结尾的时候，结果总会比期望的多出来一个元素：bool(false)。</p>
+<p>按说，如果读取到文件最后一行，<strong>feof</strong> 函数会返回 <strong>TRUE</strong>，然后 <strong>while</strong> 循环就退出了，为什么不是呢？</p>
+<p>先看例子，我们在代码中添加一个判断：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        if(feof($file_handle))&#123;</span><br><span class="line">                                break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>这是因为 <strong>feof</strong> 函数在处理纯文本文件的时候处理到最后一行后，<strong>feof($file_handle)</strong> 将不会返回 <strong>True</strong>，此时循环继续，使用 <strong>fgets</strong> 继续读取文件，由于 <strong>fgets</strong> 获取不到数据，返回 <strong>false</strong>，所以我们使用 <strong>var_dump</strong> 可以看到打印了一个布尔类型的值，解决办法是使用 <strong>fgets</strong> 后再次使用 <strong>feof</strong> 判断文件是否结束，此时可以正确判定文件是否已到末尾。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/06/Zabbix-Value-mapping-值映射/" class="archive-article-date">
-  <time datetime="2016-05-06T02:39:27.000Z" itemprop="datePublished">May 6</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/06/Zabbix-Value-mapping-值映射/">Zabbix Value mapping 值映射</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/06/Zabbix-Simple-check-简单检测/" class="archive-article-date">
-  <time datetime="2016-05-06T01:59:06.000Z" itemprop="datePublished">May 6</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cirq22vot004wympvt0j3fiqo" class="article-share-link">Partager</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/06/Zabbix-Simple-check-简单检测/">Zabbix Simple check 简单检测</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" class="archive-article-date">
-  <time datetime="2016-05-05T08:48:52.000Z" itemprop="datePublished">May 5</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/">Zabbix 自定义用户 key 与参数 UserParameter</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/11/PHP-循环读取文件每行记录处理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">PHP 循环读取文件每行记录处理</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/05/Zabbix-External-check-外部命令检测/" class="archive-article-date">
-  <time datetime="2016-05-05T07:35:28.000Z" itemprop="datePublished">May 5</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/05/Zabbix-External-check-外部命令检测/">Zabbix External check 外部命令检测</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/05/Zabbix-item-key-详解/" class="archive-article-date">
-  <time datetime="2016-05-05T06:18:50.000Z" itemprop="datePublished">May 5</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/05/Zabbix-item-key-详解/">Zabbix item key 详解</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" class="archive-article-date">
-  <time datetime="2016-05-05T01:59:46.000Z" itemprop="datePublished">May 5</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/">Zabbix 在系统已有的Templates中增加Graphs</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" class="archive-article-date">
-  <time datetime="2016-05-04T03:08:51.000Z" itemprop="datePublished">May 4</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/04/Zabbix-Agent-Installing-And-Configuration/">Zabbix Agent Installing And Configuration</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/categories/Zabbix/page/2/">&laquo; Prev</a><a class="page-number" href="/categories/Zabbix/">1</a><a class="page-number" href="/categories/Zabbix/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
 
 </section>
         

@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,53 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-PHP-的-feof-方法需要注意的地方" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" class="article-date">
+  <time datetime="2016-08-11T07:36:38.000Z" itemprop="datePublished">2016-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写过这样的一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>其中当读文件到结尾的时候，结果总会比期望的多出来一个元素：bool(false)。</p>
+<p>按说，如果读取到文件最后一行，<strong>feof</strong> 函数会返回 <strong>TRUE</strong>，然后 <strong>while</strong> 循环就退出了，为什么不是呢？</p>
+<p>先看例子，我们在代码中添加一个判断：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        if(feof($file_handle))&#123;</span><br><span class="line">                                break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>这是因为 <strong>feof</strong> 函数在处理纯文本文件的时候处理到最后一行后，<strong>feof($file_handle)</strong> 将不会返回 <strong>True</strong>，此时循环继续，使用 <strong>fgets</strong> 继续读取文件，由于 <strong>fgets</strong> 获取不到数据，返回 <strong>false</strong>，所以我们使用 <strong>var_dump</strong> 可以看到打印了一个布尔类型的值，解决办法是使用 <strong>fgets</strong> 后再次使用 <strong>feof</strong> 判断文件是否结束，此时可以正确判定文件是否已到末尾。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cirq22vot004wympvt0j3fiqo" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-PHP-循环读取文件每行记录处理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -115,13 +162,14 @@ var _hmt = _hmt || [];
 <li>feof：检测是否已经达到文件末尾eof，如是返回TRUE</li>
 <li>fgets：从文件指针中读取一行</li>
 <li>explode：把字符串打散为数组</li>
+<li>fclose：关闭文件，释放文件指针</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $fp = fopen($file, &quot;r&quot;);</span><br><span class="line">                while(!feof($fp))&#123;</span><br><span class="line">                        $line = fgets($fp);</span><br><span class="line">                        $UserInfo = explode(&quot; &quot;, $line);</span><br><span class="line">                        echo &quot;用户名：$UserInfo[0] &quot;;</span><br><span class="line">                        echo &quot;密码：$UserInfo[1]&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        $UserInfo = explode(&quot; &quot;, $line);</span><br><span class="line">                        echo &quot;用户名：$UserInfo[0] &quot;;</span><br><span class="line">                        echo &quot;密码：$UserInfo[1]&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cirpqk7et004wg7pvqsm6mifp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cirq22vos004uympvu8km5oyt" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -166,7 +214,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cirpqk7ec004ag7pv638u2jdf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cirq22voc004aympvap2h2p2u" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -210,7 +258,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="cirpqk7ej004lg7pv50co6qp7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="cirq22vom004mympvvt01d7q0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -255,7 +303,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="cirpqk79e0002g7pv67vzsan2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="cirq22vj40001ympvlw2ckx8o" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -300,7 +348,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cirpqk7eo004pg7pva8vytrrg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cirq22voo004pympv2jgidni3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -343,7 +391,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="cirpqk7eh004ig7pvcyfsynac" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="cirq22voi004iympvv352h847" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -400,7 +448,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="cirpqk7ep004qg7pv9h5t93yo" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="cirq22vop004qympvr254ben5" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -469,7 +517,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="cirpqk7es004ug7pv5tzznv72" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="cirq22vou004yympvi9ct5kho" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -534,77 +582,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="cirpqk7er004tg7pvr63zr0ra" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-explode-函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/06/PHP-explode-函数/" class="article-date">
-  <time datetime="2016-08-06T06:53:50.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/PHP-explode-函数/">PHP explode() 函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>explode() 函数把字符串打散为数组。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explode(separator,string,limit)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">separator</td>
-<td style="text-align:left">必须，规定在哪里分隔字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">string</td>
-<td style="text-align:left">必须，要分隔的字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">limit</td>
-<td style="text-align:left">可选，规定要返回的数组元素的个数</td>
-</tr>
-</tbody>
-</table>
-<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串的数组<br>PHP版本：4+<br>更新日志：PHP 4.0.1 中，新增 limit 参数，PHP 5.1.0 中新增对负数 limit 的支持。<br>limit 可能的值：</p>
-<ul>
-<li>大于0 - 返回包含最多 limit 个元素的数组</li>
-<li>小于0 - 返回包含除了最后的 -limit 个元素以外的所有元素的数组</li>
-<li>0 - 返回包含了一个元素的数组</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="cirpqk7ed004dg7pvgtknt523" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="cirq22vor004tympvcnbbgb6g" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -626,7 +604,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -651,9 +629,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
+          </li>
         
           <li>
             <a href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
@@ -671,10 +653,6 @@ var _hmt = _hmt || [];
             <a href="/2016/08/09/Apache-ab-命令原理/">Apache ab 命令原理</a>
           </li>
         
-          <li>
-            <a href="/2016/08/06/PHP-json-decode-函数/">PHP json_decode() 函数</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -688,7 +666,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
