@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/08/06/PHP-json-decode-函数/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="php json json_decode">
-<meta property="og:updated_time" content="2016-08-06T08:25:51.777Z">
+<meta property="og:updated_time" content="2016-08-12T05:45:28.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP json_decode() 函数">
 <meta name="twitter:description" content="php json json_decode">
@@ -70,9 +70,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -112,11 +112,13 @@ var _hmt = _hmt || [];
 <p>json_decode 是 PHP 5.2.0 之后新增的一个 PHP 内置函数，其作用是对 JSON 格式的字符串进行编码</p>
 <h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mixed json_decode ( string $json [, bool $assoc = false [, int $depth = 512 [, int $options = 0 ]]] )</span><br></pre></td></tr></table></figure>
 <p>json_decode 接受一个 JSON 格式的字符串并且把它转换为 PHP 变量 ,当该参数$assoc为 TRUE 时，将返回 array 否则返回 object 。 </p>
+<p>当遇到 <em>json<strong> 无法解码的字符串时，返回 </strong>NULL*</em>。因此我们可以进行如下的操作判断是否解码成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if($JsonFlowDictionaryResult !== null)&#123;</span><br><span class="line">                echo &quot;返回代码：&quot; . $JsonFlowDictionaryResult[&quot;code&quot;] ;</span><br><span class="line">                echo &quot; 返回原因：&quot; . $JsonFlowDictionaryResult[&quot;action&quot;] . &quot;\n&quot;;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">                echo &quot;json_decode 解析失败.\n&quot;;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cirq22voo004pympv2jgidni3" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cirrby5s7004pdwpvcupf8lxw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,7 +128,7 @@ var _hmt = _hmt || [];
 <nav id="article-nav">
   
     <a href="/2016/08/09/Apache-ab-命令原理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           Apache ab 命令原理
@@ -136,7 +138,7 @@ var _hmt = _hmt || [];
   
   
     <a href="/2016/08/06/PHP-file-get-contents-函数/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">PHP file_get_contents() 函数</div>
     </a>
   
@@ -151,7 +153,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -176,7 +178,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -213,7 +215,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
