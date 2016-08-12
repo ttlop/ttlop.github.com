@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>PHP 类型简介 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="php type var_dump">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 类型简介">
+<meta property="og:url" content="http://ttlop.com/2016/08/12/PHP-类型简介/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="php type var_dump">
+<meta property="og:updated_time" content="2016-08-12T06:01:55.692Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP 类型简介">
+<meta name="twitter:description" content="php type var_dump">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-PHP-类型简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/12/PHP-类型简介/" class="article-date">
+  <time datetime="2016-08-12T05:52:06.000Z" itemprop="datePublished">2016-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP 类型简介
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHP 支持 8 种原始数据类型。</p>
+<h4 id="标量类型"><a href="#标量类型" class="headerlink" title="标量类型"></a>标量类型</h4><ul>
+<li>boolean（布尔型）</li>
+<li>integer（整型）</li>
+<li>float（浮点型，也称作 double）</li>
+<li>string（字符串）</li>
+</ul>
+<h4 id="复合类型"><a href="#复合类型" class="headerlink" title="复合类型"></a>复合类型</h4><ul>
+<li>array（数组）</li>
+<li>object（对象）</li>
+</ul>
+<h4 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h4><ul>
+<li>resource（资源）</li>
+<li>NULL（无类型）</li>
+</ul>
+<hr>
+<p>变量的类型通常不是主动设定的，确切的说是由 <strong>PHP</strong> 根据该变量使用的上下文在运行时决定的。</p>
+<p>如果想查看某个表达式的值和类型，可以使用 <strong>var_dump()</strong> 函数。如果只是想得到一个易读懂的类型的表达式方式用于调试，用 <strong>gettype()</strong> 函数。要查看某个类型不要用 <strong>gettype()</strong>，而用 <strong>is_type</strong> 函数，以下是范例及执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_type.php </span><br><span class="line">&lt;?php</span><br><span class="line">$a_bool = TRUE;</span><br><span class="line">$a_str = &quot;foo&quot;;</span><br><span class="line">$a_str2 = &apos;foo&apos;;</span><br><span class="line">$an_int = 12;</span><br><span class="line"></span><br><span class="line">echo gettype($a_bool) . &quot;\n&quot;;</span><br><span class="line">echo gettype($a_str) . &quot;\n&quot;;</span><br><span class="line"></span><br><span class="line">if(is_int($an_int))&#123;</span><br><span class="line">	$an_int += 4;</span><br><span class="line">	echo $an_int . &quot;\n&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(is_string($a_bool))&#123;</span><br><span class="line">	echo &quot;String: $a_bool \n&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;Not String: $a_bool \n&quot;;</span><br><span class="line">&#125;</span><br><span class="line">[root@mail ~]# php php_type.php </span><br><span class="line">boolean</span><br><span class="line">string</span><br><span class="line">16</span><br><span class="line">Not String: 1</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cirrdnf7h0056i4pv7ghgzh4p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/12/PHP-boolean-布尔类型/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          PHP boolean 布尔类型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PHP 的 feof() 方法需要注意的地方</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/12/PHP-类型简介/">PHP 类型简介</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/09/PHP-Array-数组/">PHP Array 数组</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -82,6 +82,119 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Shell-中中括号的用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/24/Shell-中中括号的用法/" class="article-date">
+  <time datetime="2016-06-24T03:37:10.000Z" itemprop="datePublished">2016-06-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/24/Shell-中中括号的用法/">Shell 中中括号的用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="单中括号"><a href="#单中括号" class="headerlink" title="单中括号"></a>单中括号</h3><ol>
+<li><p>bash 的内部命令，[ 和 test 是等同的。如果我们不用绝对路径指明，通常我们用的都是 bash 自带的命令。if/test 结构中的左中括号都是调用 test 的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。</p>
+</li>
+<li><p>Test 和 [] 中可用的比较运算符只有 == 和 !=，两者都是用于比较字符串的，不可用于整数比较，整数比较只能使用 -eq、-gt这种形式。无论是字符串比较还是整数比较都不支持大于号小于号。如果实在想用，对于字符串比较可以使用转义形式。[] 中的逻辑与和逻辑或使用 -a 和 -o 表示。</p>
+</li>
+</ol>
+<h3 id="双中括号"><a href="#双中括号" class="headerlink" title="双中括号"></a>双中括号</h3><ol>
+<li><p>bash 的关键字，并不是一个命令。[[]]结构比[]更加通用。在[[和]]之间所有的字符都不会发生文件名扩展或者单词分隔，但是会发生参数扩展和命令替换。</p>
+</li>
+<li><p>支持字符串的模式匹配，使用 =~ 操作符甚至支持 shell 的正则表达式。字符串比较时可以把右边作为一个模式，而不仅仅是一个字符串，比如 [[ hello == hell? ]]，结果为真。[[]]中匹配字符串或通配符，不需要引号。</p>
+</li>
+<li><p>使用[[…]]条件判断结构，而不是[…]，能够防止脚本中的许多逻辑错误。比如 &amp;&amp;、||、&lt; 和 &gt; 操作符能够正常存在于 [[]]条件判断结构中。</p>
+</li>
+<li><p>bash 把双括号中的表达式看作一个单独的元素，并返回一个退出状态码。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="cirrdnf7q005hi4pv89gh0qxd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Shell-中花括号的用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/23/Shell-中花括号的用法/" class="article-date">
+  <time datetime="2016-06-23T09:04:52.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/Shell-中花括号的用法/">Shell 中花括号的用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="var"><a href="#var" class="headerlink" title="${var}"></a>${var}</h3><p><strong>当变量名和后面的内容都是变量命名所允许的内容时，这个时候直接使用$var是不行的，得用{}把变量名括起来。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo &quot;Legion$var&quot;</span><br><span class="line">Legionlookback</span><br><span class="line">[root@localhost ~]# echo &quot;$varLegion&quot;</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# echo &quot;$&#123;var&#125;Legion&quot;</span><br><span class="line">lookbackLegion</span><br></pre></td></tr></table></figure>
+<h3 id="var-string"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</h3><p><strong>当变量var值为空时${var:-a}会把a作为值返回，当变量不为空时，${var:-a}会把var的值作为结果返回</strong><br>注意：表达式并会不修改变量var的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# var=lookbak</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">lookbak</span><br></pre></td></tr></table></figure>
+<h3 id="var-string-1"><a href="#var-string-1" class="headerlink" title="${var:+string}"></a>${var:+string}</h3><p><strong>${var:+a}的替换规则跟上面相反，即当变量var的值不为空的时候将值替换成a，当变量var为空时则不替换</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:+a&#125;</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:+a&#125;</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+<h3 id="var-string-2"><a href="#var-string-2" class="headerlink" title="${var:=string}"></a>${var:=string}</h3><p><strong>当变量var的值为空时，${var:=a}会将其赋值为a，且变量var也被赋值是a了，则${var:=a}的值就是变量var的值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=b&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=a&#125;</span><br><span class="line">lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=b&#125;</span><br><span class="line">lookback</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">lookback</span><br></pre></td></tr></table></figure>
+<h3 id="var-string-3"><a href="#var-string-3" class="headerlink" title="${var:?string}"></a>${var:?string}</h3><p><strong>若变量var不为空，则用变量var的值来替换 ${var:?string}；若变量var为空，则把string输出到标准错误中，并从脚本中退出，我们可利用此特性来检查是否设置了变量的值。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat 123.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">var=lookback</span><br><span class="line">echo $&#123;var:?Legion&#125;</span><br><span class="line"></span><br><span class="line">var=&quot;&quot;</span><br><span class="line">echo $&#123;var:?Legion&#125;</span><br><span class="line">echo test</span><br><span class="line">[root@localhost ~]# ./123.sh </span><br><span class="line">lookback</span><br><span class="line">./123.sh: line 7: var: Legion</span><br><span class="line">[root@localhost ~]# echo $?</span><br><span class="line">1</span><br><span class="line">[root@localhost ~]# echo $?</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h3 id="var-pattern-、-var-pattern"><a href="#var-pattern-、-var-pattern" class="headerlink" title="${var%pattern}、${var%%pattern}"></a>${var%pattern}、${var%%pattern}</h3><p><strong>${variable%pattern}，shell在variable中查找，看是否有给定的pattern模式结尾，如果是，就从命令行把variable中的内容去掉右边最短的匹配模式</strong><br><strong>${variable%%pattern}，shell在variable中查找，看是否有给定的pattern模式结尾，如果是，就从命令行把variable中的内容去掉右边最长的匹配模式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookbacklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var%b*&#125;</span><br><span class="line">lookbacklookbacklook</span><br><span class="line">[root@localhost ~]# echo $&#123;var%*b*&#125;</span><br><span class="line">lookbacklookbacklook</span><br><span class="line">[root@localhost ~]# echo $&#123;var%%b*&#125;</span><br><span class="line">look</span><br></pre></td></tr></table></figure>
+<h3 id="var-pattern-、-var-pattern-1"><a href="#var-pattern-、-var-pattern-1" class="headerlink" title="${var#pattern}、${var##pattern}"></a>${var#pattern}、${var##pattern}</h3><p><strong>${variable#pattern}，shell在variable中查找，看是否有给定的pattern模式开始，如果是，就从命令行把variable中的内容去掉左边最短的匹配模式</strong><br><strong>${variable#pattern}，shell在variable中查找，看是否有给定的pattern模式开始，如果是，就从命令行把variable中的内容去掉左边最长的匹配模式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookbacklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var#*b&#125;</span><br><span class="line">acklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var##*b&#125;</span><br><span class="line">ack</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">lookbacklookbacklookback</span><br></pre></td></tr></table></figure>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p><strong>a的位置可以使用变量名或者一个命令，并不一定只能是常量。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">You have new mail in /var/spool/mail/root</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# a=Legion</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-$a&#125;</span><br><span class="line">Legion</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-$(date +%F)&#125;</span><br><span class="line">2016-06-24</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-3-和-1-n"><a href="#1-2-3-和-1-n" class="headerlink" title="{1,2,3}和{1..n}"></a>{1,2,3}和{1..n}</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# ls -al</span><br><span class="line">total 8</span><br><span class="line">drwxrwxrwt.  9 root root 4096 Jun 24 03:58 .</span><br><span class="line">dr-xr-xr-x. 17 root root 4096 Apr  8 11:03 ..</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .font-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .ICE-unix</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-httpd.service-uSB35m</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-mariadb.service-stR07S</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .Test-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .X11-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .XIM-unix</span><br><span class="line">[root@localhost tmp]# touch &#123;a,b,c&#125;_testFile</span><br><span class="line">[root@localhost tmp]# touch &#123;1..3&#125;testFile</span><br><span class="line">[root@localhost tmp]# ls -al</span><br><span class="line">total 8</span><br><span class="line">drwxrwxrwt.  9 root root 4096 Jun 24 11:23 .</span><br><span class="line">dr-xr-xr-x. 17 root root 4096 Apr  8 11:03 ..</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 1testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 2testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 3testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 a_testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 b_testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 c_testFile</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .font-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .ICE-unix</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-httpd.service-uSB35m</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-mariadb.service-stR07S</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .Test-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .X11-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .XIM-unix</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="cirrdnf7t005mi4pvmzxe71by" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux之cut命令的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/23/Linux之cut命令的用法/" class="article-date">
@@ -117,7 +230,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="cirrby5qy0035dwpvpwt28qpf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="cirrdnf600035i4pvfgjuor7r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +275,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="cirrby5ns000qdwpvys7lqb4z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="cirrdnf2v000ni4pvb4jah0r6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +333,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="cirrby5qd002ndwpvu3s4i31f" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="cirrdnf5h002ni4pvzutiyyil" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,7 +381,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="cirrby5o1000vdwpv9frfz0hj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="cirrdnf37000vi4pvn3eukpvn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -316,7 +429,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="cirrby5sr005fdwpvdzi3r93p" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="cirrdnf7v005pi4pvymug2zdc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -404,7 +517,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cirrby5st005hdwpvctfzt6of" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cirrdnf7w005ri4pvbdegofti" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,7 +569,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cirrby5rj003tdwpv01c4irqt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cirrdnf6j003wi4pvqhysrzav" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,116 +615,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cirrby5rk003vdwpvqwmojvfg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Nagios-Installing-Nagios-Core-From-Source" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" class="article-date">
-  <time datetime="2016-06-20T06:10:44.000Z" itemprop="datePublished">2016-06-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/">Nagios - Installing Nagios Core From Source</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><p>For RHEL/CentOS users:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget httpd php gcc glibc glibc-common gd gd-devel make net-snmp</span><br></pre></td></tr></table></figure>
-<h3 id="Download-Nagios-Core-and-Nagios-Plugins-Tarballs"><a href="#Download-Nagios-Core-and-Nagios-Plugins-Tarballs" class="headerlink" title="Download Nagios Core and Nagios Plugins Tarballs"></a>Download Nagios Core and Nagios Plugins Tarballs</h3><p>For all systems, run the following commands in your terminal:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.1.1.tar.gz</span><br><span class="line">wget http://nagios-plugins.org/download/nagios-plugins-2.1.1.tar.gz</span><br></pre></td></tr></table></figure>
-<h3 id="Adding-the-Nagios-User-and-Group"><a href="#Adding-the-Nagios-User-and-Group" class="headerlink" title="Adding the Nagios User and Group"></a>Adding the Nagios User and Group</h3><p>Next add the appropriate user and group for the Nagios process the run:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd nagios</span><br><span class="line">groupadd nagcmd</span><br><span class="line">usermod -a -G nagcmd nagios</span><br></pre></td></tr></table></figure>
-<h3 id="Nagios-Core-Installation"><a href="#Nagios-Core-Installation" class="headerlink" title="Nagios Core Installation"></a>Nagios Core Installation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf nagios-4.1.1.tar.gz</span><br><span class="line">tar zxvf nagios-plugins-2.1.1.tar.gz</span><br></pre></td></tr></table></figure>
-<p><strong>Change to the New Nagios directory and install the packages:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nagios-4.1.1</span><br></pre></td></tr></table></figure>
-<p><strong>For RHEL/CentOS users:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-command-group=nagcmd</span><br></pre></td></tr></table></figure>
-<p><strong>All systems:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">make all</span><br><span class="line">make install</span><br><span class="line">make install-init</span><br><span class="line">make install-config</span><br><span class="line">make install-commandmode</span><br><span class="line">make instlal-webconf</span><br><span class="line"></span><br><span class="line">cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/</span><br><span class="line">chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers</span><br><span class="line"></span><br><span class="line">/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg</span><br><span class="line">/etc/init.d/nagios start</span><br></pre></td></tr></table></figure>
-<p><strong>For RHEL/CentOS users:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/httpd start</span><br></pre></td></tr></table></figure>
-<h3 id="Create-a-Default-User-for-Web-Access"><a href="#Create-a-Default-User-for-Web-Access" class="headerlink" title="Create a Default User for Web Access."></a>Create a Default User for Web Access.</h3><p>Add a default user for Web Interface Access:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin</span><br></pre></td></tr></table></figure>
-<h3 id="Nagios-Plugin-Installation"><a href="#Nagios-Plugin-Installation" class="headerlink" title="Nagios Plugin Installation"></a>Nagios Plugin Installation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp/nagios-plugins-2.1.1</span><br><span class="line">./configure --with-nagios-user=nagios --with-nagios-group=nagios</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<h3 id="Nagios-Service-Setup"><a href="#Nagios-Service-Setup" class="headerlink" title="Nagios Service Setup"></a>Nagios Service Setup</h3><p>The following commands will register the Nagios daemon to be run upon system startup.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add nagios</span><br><span class="line">chkconfig --level 35 nagios on</span><br><span class="line"></span><br><span class="line">chkconfig --add httpd</span><br><span class="line">chkconfig --level 35 httpd on</span><br></pre></td></tr></table></figure>
-<h3 id="Nagios-Web-Interface"><a href="#Nagios-Web-Interface" class="headerlink" title="Nagios Web Interface"></a>Nagios Web Interface</h3><p>After correctly following the procedures you should now be abel to access your Nagios Core installation from a web browser.</p>
-<p>Simply use the following:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://&lt;your.nagios.server.ip&gt;/nagios</span><br></pre></td></tr></table></figure>
-<p>And log in with credentials you chose when adding the nagiosadmin user to the htpasswd.users file.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cirrby5rf003odwpv2a09uopd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-什么是-Web-框架" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/17/什么是-Web-框架/" class="article-date">
-  <time datetime="2016-06-17T01:47:23.000Z" itemprop="datePublished">2016-06-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Web/">Web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/17/什么是-Web-框架/">什么是 Web 框架?</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Web 应用框架，或者简单的说是 “Web 框架”，其实是建立 Web 应用的一种方式。从简单的博客系统到复杂的 AJAX 应用，Web 上每个页面都是通过代码来产生的。很多人热衷于学习 Web 框架技术，但并不理解什么是 Web 框架，或者它们是如何工作的。这里，我们将探讨反复被忽略的 Web 框架基础的话题。阅读完这篇文章，你应该对什么是 Web 框架以及它们为什么会存在有更深的认识。这会让你学习一个新的 Web 框架变的简单的多，还会让你使用不同的框架的时候作出明智的选择。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/17/什么是-Web-框架/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cirrby5u6007ldwpv9pzw2i0k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cirrdnf6h003ti4pvjyvaur1l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -663,6 +667,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/12/PHP-类型简介/">PHP 类型简介</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
           </li>
         
@@ -672,14 +684,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/09/PHP-Array-数组/">PHP Array 数组</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/09/PHP-http-build-query-函数/">PHP http_build_query 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/09/Apache-ab-命令原理/">Apache ab 命令原理</a>
           </li>
         
       </ul>

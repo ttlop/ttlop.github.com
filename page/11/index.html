@@ -82,6 +82,271 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Mysql-权限" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/14/Mysql-权限/" class="article-date">
+  <time datetime="2016-05-14T03:27:51.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/14/Mysql-权限/">Mysql 权限</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>show privileges 显示服务器支持的权限</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">权限级别</th>
+<th style="text-align:left">权限</th>
+<th style="text-align:left">权限说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">alter</td>
+<td style="text-align:left">To alter the table</td>
+</tr>
+<tr>
+<td style="text-align:left">存储过程</td>
+<td style="text-align:left">alter routine</td>
+<td style="text-align:left">To alter or drop stored functions/procedures</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表或索引</td>
+<td style="text-align:left">create</td>
+<td style="text-align:left">To create new databases and tables</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">create routine</td>
+<td style="text-align:left">To use CREATE FUNCTION/PROCEDURE</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">create temporary tables</td>
+<td style="text-align:left">To use CREATE TEMPORARY TABLE</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">create user</td>
+<td style="text-align:left">To create new users</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">create view</td>
+<td style="text-align:left">To create new views</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">delete</td>
+<td style="text-align:left">To delete existing rows</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库或表</td>
+<td style="text-align:left">drop</td>
+<td style="text-align:left">To drop databases, tables, and views</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">event</td>
+<td style="text-align:left">To create, alter, drop and execute events</td>
+</tr>
+<tr>
+<td style="text-align:left">存储过程</td>
+<td style="text-align:left">execute</td>
+<td style="text-align:left">To execute stored routines</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器主机上的文件访问</td>
+<td style="text-align:left">file</td>
+<td style="text-align:left">To read and write files on the server</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表或存储过程</td>
+<td style="text-align:left">grant option</td>
+<td style="text-align:left">To give to other users those privileges you possess</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">index</td>
+<td style="text-align:left">To create or drop indexes</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">insert</td>
+<td style="text-align:left">To insert data into tables</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">lock tables</td>
+<td style="text-align:left">To use LOCK TABLES (together with SELECT privilege)</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">process</td>
+<td style="text-align:left">To view the plain text of currently executing queries</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">proxy</td>
+<td style="text-align:left">To make proxy user possible</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表</td>
+<td style="text-align:left">references</td>
+<td style="text-align:left">To have references on tables</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">reload</td>
+<td style="text-align:left">To reload or refresh tables, logs and privileges，例如flush status</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">replication client</td>
+<td style="text-align:left">To ask where the slave or master servers are</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">replication slave</td>
+<td style="text-align:left">To read binary log events from the master</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">select</td>
+<td style="text-align:left">To retrieve rows from table</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">show database</td>
+<td style="text-align:left">To see all databases with SHOW DATABASES</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">show view</td>
+<td style="text-align:left">To see views with SHOW CREATE VIEW</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">shutdown</td>
+<td style="text-align:left">To shut down the server</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">super</td>
+<td style="text-align:left">To use KILL thread, SET GLOBAL, CHANGE MASTER, etc.</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">trigger</td>
+<td style="text-align:left">To use triggers</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">create tablespace</td>
+<td style="text-align:left">To create/alter/drop tablespaces</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">update</td>
+<td style="text-align:left">To update existing rows</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">usage</td>
+<td style="text-align:left">No privileges - allow connect only</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cirrdnf6b003ki4pvv0gqccfd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Mysql-mysql-user" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/13/Mysql-mysql-user/" class="article-date">
+  <time datetime="2016-05-13T07:01:22.000Z" itemprop="datePublished">2016-05-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/13/Mysql-mysql-user/">Mysql mysql.user</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前言：近几日，在学习使用 <strong>Zabbix 3</strong> 监控其他服务器的 <strong>Mysql</strong> ，学习过程中碰到一个很奇怪的问题，由此学习到下面的知识，还有很有意义的，记录如下。</p>
+<p>问题是这样发现的：</p>
+<ol>
+<li><p>在两台 <strong>Centos 7</strong> 系统中使用 <strong>Yum</strong> 方式分别安装了 <strong>zabbix-server</strong> 和 <strong>zabbix-agent</strong>，并且在装有 <strong>zabbix-agent</strong> 的服务器上使用 <strong>Yum</strong> 安装了 <strong>mariadb-server</strong>。</p>
+</li>
+<li><p>按照网上的一些资料，此处我应该要添加 <strong>.my.cnf</strong> 文件用来指定连接数据库的账号、密码，但是我这个人学习一个新的东西习惯先发现问题再去解决问题，觉得这样才知道每一步配置的具体用意。哎，坑爹的习惯啊。</p>
+</li>
+<li><p>噩梦开始，我在没有配置 <strong>.my.cnf</strong> 文件的前提下，<strong>zabbix-server</strong> 也可以监控到安装有 <strong>zabbix-agent</strong> 的服务器的数据库信息，数据库安装好之后我可是专门使用 <strong>mysaladmin</strong> 命令修改过账号密码的，为毛？</p>
+</li>
+<li><p>折腾了好几天，最后在一位技术圈的伙伴的提醒下，从数据库本身着手，才发现问题的根由。</p>
+</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/13/Mysql-mysql-user/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="cirrdnf6c003mi4pvultpv1rs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Centos-7-关闭-SELinux" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/12/Centos-7-关闭-SELinux/" class="article-date">
@@ -117,7 +382,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="cirrby5nh000ddwpvkjl37p84" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="cirrdnf2l000di4pvjnyz93ju" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +443,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="cirrby5tu0073dwpv86l79j1a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="cirrdnf8x0079i4pvyx6u111t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +508,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="cirrby5tk006ndwpv692x7b1r" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="cirrdnf8q006yi4pvnjhi602i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -467,7 +732,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cirrby5tq006vdwpvby37bk6z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cirrdnf8t0074i4pvymfzp3s0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -558,7 +823,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cirrby5tz007bdwpvleyus85a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cirrdnf90007gi4pvvvx0s4r4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -603,7 +868,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cirrby5tr006ydwpv0h02h8cr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cirrdnf8v0076i4pv6breoxsn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -648,7 +913,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cirrby5tg006idwpvtktq0bkf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cirrdnf8m006ui4pvbatakvc2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -693,97 +958,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cirrby5ti006jdwpvw6c8n81d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Simple-check-简单检测" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-Simple-check-简单检测/" class="article-date">
-  <time datetime="2016-05-06T01:59:06.000Z" itemprop="datePublished">2016-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/06/Zabbix-Simple-check-简单检测/">Zabbix Simple check 简单检测</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Simple check 通常用来检查远程未安装代理或者客户端的服务。使用 simple check，被监控客户端无需安装 zabbix agent，zabbix server 直接使用 simple check 来收集数据，基本上都是用来检测远程服务器某端口是否在监听。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/06/Zabbix-Simple-check-简单检测/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cirrby5ta0066dwpvpjygn918" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-自定义用户-key-与参数-UserParameter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" class="article-date">
-  <time datetime="2016-05-05T08:48:52.000Z" itemprop="datePublished">2016-05-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/">Zabbix 自定义用户 key 与参数 UserParameter</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果我们想被监控端执行一个 zabbix agent 没有预定义的指令，zabbix 的用户自定义参数功能提供了这个方法。我们可以在客户端配置文件 zabbix_agentd.conf 里面配置 UserParameter。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cirrby5ty0078dwpvw9rrpfau" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cirrdnf8o006wi4pvm3rmpfrp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -835,6 +1010,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/12/PHP-类型简介/">PHP 类型简介</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
           </li>
         
@@ -844,14 +1027,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/09/PHP-Array-数组/">PHP Array 数组</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/09/PHP-http-build-query-函数/">PHP http_build_query 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/09/Apache-ab-命令原理/">Apache ab 命令原理</a>
           </li>
         
       </ul>
