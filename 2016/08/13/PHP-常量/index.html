@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Iptables 概念 | 运维生存时间</title>
+  <title>PHP 常量 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iptables详解 基本概念">
+  <meta name="description" content="php const">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Iptables 概念">
-<meta property="og:url" content="http://ttlop.com/2016/04/25/Iptables-概念/index.html">
+<meta property="og:title" content="PHP 常量">
+<meta property="og:url" content="http://ttlop.com/2016/08/13/PHP-常量/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="iptables详解 基本概念">
-<meta property="og:updated_time" content="2016-04-26T03:42:54.484Z">
+<meta property="og:description" content="php const">
+<meta property="og:updated_time" content="2016-08-13T06:22:02.358Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Iptables 概念">
-<meta name="twitter:description" content="iptables详解 基本概念">
+<meta name="twitter:title" content="PHP 常量">
+<meta name="twitter:description" content="php const">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Iptables-概念" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-PHP-常量" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/25/Iptables-概念/" class="article-date">
-  <time datetime="2016-04-25T08:44:42.000Z" itemprop="datePublished">2016-04-25</time>
+    <a href="/2016/08/13/PHP-常量/" class="article-date">
+  <time datetime="2016-08-13T06:01:42.000Z" itemprop="datePublished">2016-08-13</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Iptables 概念
+      PHP 常量
     </h1>
   
 
@@ -107,49 +107,62 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>防火墙工作在主机/网络边缘，对于进出本主机/网络的数据报文，根据事先设定好的检查规则对其进行检查，对行迹可疑的报文一律依照事先定义好的处理机制作出相应处理。</p>
-<p>对linux而言，tcp/ip协议栈是在内核当中，意味着报文的处理是在内核中进行的，也就是说防火墙必须在内核中tcp/ip报文所流经的位置，用规则去检查，才真正工作起来。</p>
-<p>Iptables用来衡量tcp/ip报文的属性：源ip、目标ip、源端口、目标端口。</p>
+        <p>常量是一个简单值的标识符（名字）。如同其名称所暗示的，在脚本执行期间该值不能改变。常量默认大小写敏感。传统上常量表示总是大写的。<br>常量名和其它任何 PHP 标签遵循同样的命名规则。合法的常量名以字母或下划线开始，后面跟着任何字母，数字或下划线。<br>常量的范围是全局的，不用管作用区域就可以在脚本的任何地方访问常量。</p>
 <a id="more"></a>
-<h2 id="Iptables-表"><a href="#Iptables-表" class="headerlink" title="Iptables 表"></a>Iptables 表</h2><ul>
-<li><p>filter: 这是一个默认防火墙表。它包含这些内置的链：INPUT、FORWARD、OUTPUT</p>
-</li>
-<li><p>nat: 这是跟网络地址相关的表。它包含这些内置的链：PREROUTING、OUTPUT、POSTROUTING</p>
-</li>
-<li><p>mangle: 这是跟流量整型相关的表，它包含这些内置链：PREROUTING、OUTPUT、INTPUT、FORWARD、POSTROUTING</p>
-</li>
-<li><p>raw: 这个表的动作是NOTRACK，不追踪匹配的数据，它包含的链有：PREROUTING、OUTPUT</p>
-</li>
-</ul>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
-<li><p>匹配（match）：符合指定的条件，比如指定的IP地址和端口。</p>
-</li>
-<li><p>丢弃（drop）：当一个包到达时，简单的丢弃，不做其它任何处理。</p>
-</li>
-<li><p>接受（accept）：和丢弃相反，接受这个包，让这个包通过。</p>
-</li>
-<li><p>拒绝（reject）：和丢弃相似，但它还会向发送这个包的源主机发送错误消息。这个错误消息可以指定，也可以自动产生。</p>
-</li>
-<li><p>目标（target）：指定的动作，说明如何处理一个包，比如：丢弃，接受，或拒绝。</p>
-</li>
-<li><p>跳转（jump）：和目标类似，不过它指定的不是一个具体的动作，而是另一个链，表示要跳转到那个链上。</p>
-</li>
-<li><p>规则（rule）：一个或多个匹配及其对应的目标。</p>
-</li>
-<li><p>链（chain）：每条链都包含一系列的规则，这些规则被依次应用到每个遍历该链的数据包上。</p>
-</li>
-<li><p>表（table）：每个表包含若干不同的链。</p>
-</li>
-<li><p>策略（police）：我们在这里提到的策略是指对于iptables某条链，当所有规则都不匹配成功时其默认的处理动作。</p>
-</li>
-<li><p>连接跟踪（connection track）：又称为动态过滤，可以根据指定连接的状态进行一些适当的过滤，是一个很强大的功能，但同时也比较消耗内存资源。</p>
-</li>
-</ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>可以用 <strong>define()</strong> 函数来定义常量，在 PHP 5.3.0 以后，可以使用 <strong>const</strong> 关键字在类定义之外定义常量。一个常量一旦被定义，就不能再改变或者取消定义。</p>
+<p>常量只能包含标量数据（boolean,integer,float,string），可以定义 resource 常量，但应尽量避免，因为会造成不可预料的结果。</p>
+<p>可以简单的通过指定其名字来取得常量的值，与变量不同，不应该在常量前面加上 $ 符号。常量和（全局）变量在不同的名字空间，这意味着例如 TRUE 和 $TRUE 是不同的。</p>
+<p>如果使用一个未定义的常量，PHP 假定想要的是该常量本身的名字，如果用字符串调用它一样（CONSTAT 对应 “CONSTAT”）。此时将发出一个 E_NOTICE 级别的错误。</p>
+<p>和使用 define() 来定义常量相反的是，使用 const 关键字定义常量必须处于最顶端的作用区域，因为用此方法是在编译时定义的。这就意味着不能在函数内，循环内以及 if 语句只能用 const 来定义常量。</p>
+<h3 id="魔术常量"><a href="#魔术常量" class="headerlink" title="魔术常量"></a>魔术常量</h3><p>PHP 向它运行的任何脚本提供了大量的预定义常量。不过很多常量都是由不同的扩展库定义的，只有在加载了这些库时才会出现，或者动态加载后，或者在编译时已经包括进去了。</p>
+<p>有八个魔术常量是它们的值随着它们在代码中的位置改变而改变的。例如 <strong>LINE</strong> 的值就依赖于它在脚本中所处的行来决定。这些特殊的常量不区分大小写，如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>LINE</strong></td>
+<td style="text-align:left">文件中当前的行</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>FILE</strong></td>
+<td style="text-align:left">文件的完整路径和文件名。如果用在被包含文件中，则返回被包含的文件名</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>DIR</strong></td>
+<td style="text-align:left">文件所在的目录。如果用在被包含文件中，则返回被包含的文件所在的目录，等价于dirname(<strong>FILE</strong>)。除非是根目录，否则目录名中不包含末尾的斜杠</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>FUNCTION</strong></td>
+<td style="text-align:left">函数名称</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>CLASS</strong></td>
+<td style="text-align:left">类的名称</td>
+</tr>
+<tr>
+<td style="text-align:left">__TRAIT</td>
+<td style="text-align:left">Trait的名字</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>METHOD</strong></td>
+<td style="text-align:left">类的方法名</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>NAMESPACE</strong></td>
+<td style="text-align:left">当前命名空间的名称</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="cirssp0ew001cdbpvafqwdd7v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cirssp0jv0050dbpvvlqlgzd8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,19 +171,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/25/Iptables-匹配/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Iptables 匹配
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/25/Iptables-四个表和五个链之间的关系/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/13/PHP-String-字符串类型/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Iptables 四个表和五个链之间的关系</div>
+      <div class="article-nav-title">PHP String 字符串类型</div>
     </a>
   
 </nav>
