@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/08/13/PHP-流程控制/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="php 流程 控制">
-<meta property="og:updated_time" content="2016-08-13T06:59:50.928Z">
+<meta property="og:updated_time" content="2016-08-13T09:00:34.006Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP 流程控制">
 <meta name="twitter:description" content="php 流程 控制">
@@ -114,12 +114,33 @@ var _hmt = _hmt || [];
 <p>expr 按照布尔求值，如果 expr 的值为　TRUE，PHP 将执行 statement，如果值为 FALSE，将忽略 statement。<br>经常需要按照条件执行不止一条语句，可以将这些语句放入语句组中。</p>
 <p>if 语句可以无限嵌套其它 if 语句。</p>
 <h3 id="else"><a href="#else" class="headerlink" title="else"></a>else</h3><p>经常需要在满足某个条件时执行一条语句，而在不满足该条件时，执行其它语句，这正是 else 的功能。else 延伸了 if 语句，可以在 if 语句中的表达式的值为 FALSE 时执行语句。else 语句仅在 if 以及 elseif 语句中的表达式的值为 FLASE 时执行。</p>
-<h3 id="elseif-else-if"><a href="#elseif-else-if" class="headerlink" title="elseif/else if"></a>elseif/else if</h3><p>和 else 一样，它延伸了 if 语句，可以在原来的 if 表达式值为 FALSE 时执行不同语句，但不同的是，它仅在 elseif 的条件表达式值为 TRUE 时窒息感语句。<br>同一个 if 语句中可以有多个 elseif 语句，其中第一个表达式值为 TRUE 的 elseif 部分将执行。也可以写成 “else if”</p>
+<h3 id="elseif-else-if"><a href="#elseif-else-if" class="headerlink" title="elseif/else if"></a>elseif/else if</h3><p>和 else 一样，它延伸了 if 语句，可以在原来的 if 表达式值为 FALSE 时执行不同语句，但不同的是，它仅在 elseif 的条件表达式值为 TRUE 时执行语句。<br>同一个 if 语句中可以有多个 elseif 语句，其中第一个表达式值为 TRUE 的 elseif 部分将执行。也可以写成 “else if”。</p>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>PHP 中最简单的循环类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while (expr)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure>
+<p>while 语句的含义很简单，它告诉 PHP 只要 while 表达式的值为 TRUE 就重复执行嵌套中的循环语句。表达式的值在每次开始循环时检查，所以即使这个值在循环过程中改变了，语句也不会停止执行，直到本次循环结束。如果 while 表达式的值一开始就是 FALSE，则循环一次也不会执行。</p>
+<h3 id="do-while"><a href="#do-while" class="headerlink" title="do-while"></a>do-while</h3><p>do-while 循环和 while 循环非常相似，区别在于表达式的值是在每次循环结束时检查而不是开始时。和一般 while 循环主要的区别是 do-while 循环语句保证会执行一次。</p>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>for 循环是 PHP 中最复杂的循环结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (expr1; expr2; expr3)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure>
+<p>expr1 在循环开始前无条件执行一次<br>expr2 在每次循环开始前求值，如果值为 TRUE，则继续循环执行嵌套的循环语句，如果值为 FALSE，则终止循环<br>expr3 在每次循环之后被求值</p>
+<p>每个表达式都可以为空或包含逗号分隔的多个表达式。表达式 expr2 中所有用逗号分隔的表达式都会计算，但只取最后一个结果。expr2 为空意味着无限循环。</p>
+<h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><p>foreach 语法结构提供了遍历数组的简单方式。foreach 仅能够应用于数组和对象，如果尝试应用于其它数据类型的变量，或者未初始化的变量将发出错误信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foreach (array_expression as $value)</span><br><span class="line">	statement</span><br><span class="line"></span><br><span class="line">foreach (array_expression as $key =&gt; $value)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure>
+<p>第一种格式遍历给定的 array_expression 数组，每次循环中，当前单元的值被赋给 $value 并且数组内部的指针向前移动一步（因此下次循环中将会得到下一个单元）。<br>第二种格式做同样的事，只除了当前单元的键名也会在每次循环被赋给变量 $key。</p>
+<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p>break 结束当前 for，foreach，while，do-while 或者 switch 结构的执行。<br>break 可以接受一个可选的数字参数来决定跳出几重循环。</p>
+<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>continue 在循环结构中用来跳过每次循环中剩余的代码并在条件求值为真时开始执行下一次循环。<br>continue 接受一个可选的数组参数来决定跳过几重循环到循环结尾，默认值是 1，即跳到当前循环末尾。</p>
+<h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>switch 语句类似于具有同一个表达式的一系列 if 语句。很多场合下需要把同一个变量（或表达式）与很多不同的值比较，并根据它等于哪个值来执行不同的代码。这正是 switch 语句的用途。</p>
+<p>理解 switch 是怎样执行的非常重要。开始时没有代码被执行，仅当一个 case 语句中的值和 switch 表达式的值匹配时 PHP 才开始执行语句，直到 switch 的程序段结束或者遇到第一个 break 语句为止。如果不在 case 的语句段最后写上 break 的话，PHP 将继续执行下一个 case 中的语句段。</p>
+<h3 id="declare"><a href="#declare" class="headerlink" title="declare"></a>declare</h3><p>declare 结构用来设定一段代码的执行指令。declare 的语法和其它流程控制结构类似：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">declare (directive)</span><br><span class="line">	statement</span><br></pre></td></tr></table></figure>
+<p>directive 部分允许设定 declare 代码段的行为。目前只认识两个指令：ticks以及encoding。</p>
+<h4 id="Ticks"><a href="#Ticks" class="headerlink" title="Ticks"></a>Ticks</h4><p>Tick 是一个在 declare 代码段中解释器每执行 N 条可计时的低级语句就会发生的事件。N 的值是在 declare 中的 directive 部分用 ticks = N 来指定的。不是所有语句都可计时，通常条件表达式和参数表达式都不可计时。</p>
+<h4 id="Encoding"><a href="#Encoding" class="headerlink" title="Encoding"></a>Encoding</h4><p>可以用 encoding 指令来对每段脚本指定其编码方式。</p>
+<h3 id="return"><a href="#return" class="headerlink" title="return"></a>return</h3><p>如果在一个函数中调用 return 语句，将立即结束此函数的执行并将它的参数作为函数的值返回。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cirsu1ngl0054frpvc2bgcxwb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cirsycxu80054nfpv040apr2w" class="article-share-link">Share</a>
       
       
     </footer>
