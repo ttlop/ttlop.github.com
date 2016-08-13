@@ -82,6 +82,57 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-理解-inode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/12/理解-inode/" class="article-date">
+  <time datetime="2016-07-12T07:37:59.000Z" itemprop="datePublished">2016-07-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/12/理解-inode/">理解 inode</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-inode-是什么？"><a href="#1-inode-是什么？" class="headerlink" title="1. inode 是什么？"></a>1. inode 是什么？</h3><p>文件存储在硬盘上，硬盘的最小存储单位叫做“扇区”，每个扇区存储 512 字节，相当于（0.5KB），操作系统读取硬盘的时候，不会一个一个扇区的读取，这样效率太低，而是一次性连续读取多个扇区，即一次性读取一个块（block），这种由多个扇区组成的“块”是文件存取的最小单位，“块”的大小，最常见的是 4KB，即连续八个 sector 组成一个 block，文件数据都存储在“块”中，那么很显然，我们还必须找到一个地方存储文件的元信息，比如文件的创建者、文件的创建日期、文件的大小等等。这种存储文件元信息的区域就叫做 inode，中文译名“索引节点”。每个文件都有对应的 inode，里面包含了该文件有关的一些信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 136.4 GB, 136365211648 bytes, 266338304 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes   # 扇区 512</span><br></pre></td></tr></table></figure>
+<p>inode 包含文件的元信息，可以用 stat 命令查看某个文件的 inode 信息，其具体包含以下内容：文件字节数、uid、gid、读写执行权限、时间戳、链接数，总之除了文件名以外的所有文件信息都存在 inode 之中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# stat for.sh </span><br><span class="line">  File: ‘for.sh’</span><br><span class="line">  Size: 52        	Blocks: 8          IO Block: 4096   regular file  # Block 4096</span><br><span class="line">Device: fd01h/64769d	Inode: 201906130   Links: 1</span><br><span class="line">Access: (0744/-rwxr--r--)  Uid: (    0/    root)   Gid: (    0/    root)</span><br><span class="line">Context: unconfined_u:object_r:admin_home_t:s0</span><br><span class="line">Access: 2016-06-22 14:07:37.778177900 +0800</span><br><span class="line">Modify: 2016-06-22 14:07:34.668177900 +0800</span><br><span class="line">Change: 2016-06-22 14:07:34.802177900 +0800</span><br><span class="line"> Birth: -</span><br><span class="line">[root@localhost ~]# ls -al for.sh </span><br><span class="line">-rwxr--r--. 1 root root 52 Jun 22 14:07 for.sh</span><br></pre></td></tr></table></figure>
+<p>inode 会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域：数据区存放数据，inode区存放inode信息。</p>
+<h3 id="2-inode-号码"><a href="#2-inode-号码" class="headerlink" title="2. inode 号码"></a>2. inode 号码</h3><p>每个 inode 都有一个号码，操作系统用个 inode 号码来识别不同的文件，表面上，用户通过文件名打开文件，实际上，系统内部这个过程分成三步：首先，系统找到了这个文件名对应的 inode 号码，其次通过 inode 号码，获取 inode 信息，最后根据 inode 信息，找到文件所在的 block ，读取数据。使用 ls -i 命令，可以查看文件名对应的 inode 号码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -i for.sh </span><br><span class="line">201906130 for.sh</span><br></pre></td></tr></table></figure>
+<h3 id="3-链接"><a href="#3-链接" class="headerlink" title="3. 链接"></a>3. 链接</h3><p>一般情况下，文件名和 inode 号码是一一对应关系，每个 inode 号码对应一个文件名，但是 Unix/Linux 系统允许多个文件名指向同一个 inode 号码。这意味着可以用不同文件名访问同样的内容，对文件内容进行修改会影响到所有文件名；但是删除一个文件名，不影响另一个文件名的访问，这种情况就被称为“硬链接”。<br>ln 命令可以创建硬链接：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln 源文件 目标文件</span><br></pre></td></tr></table></figure>
+<p>创建目录时，默认会生成两个两个目录项：”.”和”..”，前者的 inode 号码就是当前目录的，等同于当前目录的“硬链接”，后者的 inode 号码就是父目录的，等同于父目录的“硬链接”。所以，任何一个目录的“硬链接”总数总是等于2加上它的子目录总数。</p>
+<p>除了硬链接外还有一个软链接，与硬链接最大区别是软链接指向的是文件名而不是inode号码，所以链接数不会发生变化。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/12/理解-inode/" data-id="cirsjt6p50085y1pv7niz6kyx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-服务器与磁盘阵列连接的几种方式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/12/服务器与磁盘阵列连接的几种方式/" class="article-date">
@@ -113,7 +164,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/12/服务器与磁盘阵列连接的几种方式/" data-id="cirrdnf9w0087i4pvfgofo8vi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/12/服务器与磁盘阵列连接的几种方式/" data-id="cirsjt6p10080y1pvy9pni2tw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,7 +209,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/09/LinuxShell-sed编辑器基础/" data-id="cirrdnf5m002ti4pvmu3g07mx" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/09/LinuxShell-sed编辑器基础/" data-id="cirsjt6kz002vy1pvpr2tnk0z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +254,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/08/LinuxShell-创建函数/" data-id="cirrdnf5p002xi4pvji6pyswu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/08/LinuxShell-创建函数/" data-id="cirsjt6l1002xy1pver4l2kjh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -248,7 +299,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/08/Linux-作业控制/" data-id="cirrdnf4r001vi4pv24w8sl39" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/08/Linux-作业控制/" data-id="cirsjt6k6001yy1pv9kkeogs3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,7 +353,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/07/Linux-控制脚本/" data-id="cirrdnf56002bi4pv16oiq31h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/07/Linux-控制脚本/" data-id="cirsjt6ki002by1pvqtj1f6t5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -347,7 +398,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/07/Linux-呈现数据/" data-id="cirrdnf4x0020i4pvls0ka0ns" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/07/Linux-呈现数据/" data-id="cirsjt6k90020y1pvkrdqjrn8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -392,7 +443,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/07/Linux-处理用户输入/" data-id="cirrdnf510025i4pv5hyx67ce" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/07/Linux-处理用户输入/" data-id="cirsjt6kc0025y1pv7gx271yl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -437,7 +488,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/06/Linux-更多结构化命令/" data-id="cirrdnf5c002hi4pviptm4qh3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/06/Linux-更多结构化命令/" data-id="cirsjt6kq002jy1pvsw2kn9lu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -482,52 +533,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/06/Linux-结构化命令/" data-id="cirrdnf5f002li4pv5h8lrlug" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-文件系统" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/05/Linux-文件系统/" class="article-date">
-  <time datetime="2016-07-05T09:05:54.000Z" itemprop="datePublished">2016-07-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/05/Linux-文件系统/">Linux 文件系统</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>文件系统为 Linux 提供了从硬盘存写的 0 和 1 到你在应用中用到的文件和目录之间的桥梁。<br>Linux 支持多种类型的文件系统来管理文件和目录。每种文件系统都在存储设备上实现了虚拟目录，只是特性略不相同。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/05/Linux-文件系统/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/05/Linux-文件系统/" data-id="cirrdnf59002fi4pvu4jibn8c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/06/Linux-结构化命令/" data-id="cirsjt6ks002ly1pvrfz3knsb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -579,6 +585,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/13/PHP-String-字符串类型/">PHP String 字符串类型</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
           </li>
         
@@ -592,10 +602,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/09/PHP-Array-数组/">PHP Array 数组</a>
           </li>
         
       </ul>

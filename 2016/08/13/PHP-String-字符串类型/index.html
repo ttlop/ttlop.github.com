@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 安装 memcache 及 安装 php 扩展 | 运维生存时间</title>
+  <title>PHP String 字符串类型 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="memcached php">
+  <meta name="description" content="php string">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 安装 memcache 及 安装 php 扩展">
-<meta property="og:url" content="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/index.html">
+<meta property="og:title" content="PHP String 字符串类型">
+<meta property="og:url" content="http://ttlop.com/2016/08/13/PHP-String-字符串类型/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="memcached php">
-<meta property="og:updated_time" content="2016-07-29T03:55:18.266Z">
+<meta property="og:description" content="php string">
+<meta property="og:updated_time" content="2016-08-13T02:13:20.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 安装 memcache 及 安装 php 扩展">
-<meta name="twitter:description" content="memcached php">
+<meta name="twitter:title" content="PHP String 字符串类型">
+<meta name="twitter:description" content="php string">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-安装-memcache-及-安装-php-扩展" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-PHP-String-字符串类型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" class="article-date">
-  <time datetime="2016-07-29T03:51:12.000Z" itemprop="datePublished">2016-07-29</time>
+    <a href="/2016/08/13/PHP-String-字符串类型/" class="article-date">
+  <time datetime="2016-08-13T01:56:14.000Z" itemprop="datePublished">2016-08-13</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Centos 7 安装 memcache 及 安装 php 扩展
+      PHP String 字符串类型
     </h1>
   
 
@@ -107,14 +107,74 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="YUM-方式安装"><a href="#YUM-方式安装" class="headerlink" title="YUM 方式安装"></a>YUM 方式安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install memcached</span><br><span class="line">yum install php55w-pecl-memcache</span><br><span class="line">memcached -d -u root -p 11211 # 启动</span><br></pre></td></tr></table></figure>
-<h3 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install libevent-devel </span><br><span class="line">wget http://memcached.org/latest</span><br><span class="line">tar -zxvf memcached-1.x.x.tar.gz</span><br><span class="line">cd memcached-1.x.x</span><br><span class="line">./configure &amp;&amp; make &amp;&amp; make test &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>运行下面的php文件，如果有输出This is a test!，就表示环境搭建成功。开始领略Memcache的魅力把！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt; ?php</span><br><span class="line">$mem = new Memcache;</span><br><span class="line">$mem-&gt;connect(“127.0.0.1″, 11211);</span><br><span class="line">$mem-&gt;set(‘key’, ‘This is a test!’, 0, 60);</span><br><span class="line">$val = $mem-&gt;get(‘key’);</span><br><span class="line">echo $val;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+        <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>一个字符串可以用 4 种方式表达：</p>
+<ul>
+<li>单引号</li>
+<li>双引号</li>
+<li>heredoc 语法结构</li>
+<li>nowdoc 语法结构（PHP 5.3.0起）</li>
+</ul>
+<h4 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h4><p>定义一个字符串的最简单的方法是用单引号把它包围起来（字符’）。<br>要表达一个单引号自身，需要在它的前面加个反斜线（\）来转义。要表达一个反斜线本身，则用两个反斜线（\）。其它任何方式的反斜线都会被当成反斜线本身：也就是说如果想使用其它转义序列例如 \r 或 \n，并不待变任何特殊含义，就单纯是这两个字符本身。</p>
+<h4 id="双引号"><a href="#双引号" class="headerlink" title="双引号"></a>双引号</h4><p>如果字符串是包围在双引号（”）中，PHP 将对一些特殊的字符进行解析：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序列</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">\n</td>
+<td style="text-align:left">换行（ASCII 字符集中的 LF 或 0x0A(10)）</td>
+</tr>
+<tr>
+<td style="text-align:left">\r</td>
+<td style="text-align:left">回车（ASCII 字符集中的 CR 或 0x0D(13)）</td>
+</tr>
+<tr>
+<td style="text-align:left">\t</td>
+<td style="text-align:left">水平制表符（ASCII 字符集中的 HT 或 0x09(9)）</td>
+</tr>
+<tr>
+<td style="text-align:left">\v</td>
+<td style="text-align:left">垂直制表符（ASCII 字符集中的 VT 或 0x0B(11）（PHP 5.2.5起）</td>
+</tr>
+<tr>
+<td style="text-align:left">\e</td>
+<td style="text-align:left">Escape（ASCII 字符集中的 ESC 或（0x1B(27)））（PHP 5.4.0起）</td>
+</tr>
+<tr>
+<td style="text-align:left">\f</td>
+<td style="text-align:left">换页（ASCII 字符集中的 FF 或 0x0C(12)）（PHP 5.2.5起）</td>
+</tr>
+<tr>
+<td style="text-align:left">\</td>
+<td style="text-align:left">反斜线</td>
+</tr>
+<tr>
+<td style="text-align:left">\$</td>
+<td style="text-align:left">美元标记</td>
+</tr>
+<tr>
+<td style="text-align:left">\”</td>
+<td style="text-align:left">双引号</td>
+</tr>
+<tr>
+<td style="text-align:left">[0-7]{1,3}</td>
+<td style="text-align:left">符合该正则表达式序列的是一个以八进制方式来表达的字符</td>
+</tr>
+<tr>
+<td style="text-align:left">x[0-9A-Fa-f]{1,2}</td>
+<td style="text-align:left">符合该正则表达式序列的是一个以十六进制方式来表达的字符</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="cirsjt6i1000fy1pvnfmmj27b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cirsjt6mb004dy1pvak79gj1j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -123,19 +183,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/07/30/Linux-apache-access-log-Analy/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Linux apache access_log Analy
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/12/PHP-boolean-布尔类型/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">使用 Apachetop 实时监测 web 服务器运行状态</div>
+      <div class="article-nav-title">PHP boolean 布尔类型</div>
     </a>
   
 </nav>
