@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>PHP 的 feof() 方法需要注意的地方 | 运维生存时间</title>
+  <title>Bat 的变量与命令 set 的用法 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="php feof">
+  <meta name="description" content="bat set">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP 的 feof() 方法需要注意的地方">
-<meta property="og:url" content="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/index.html">
+<meta property="og:title" content="Bat 的变量与命令 set 的用法">
+<meta property="og:url" content="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="php feof">
-<meta property="og:updated_time" content="2016-08-11T08:21:24.692Z">
+<meta property="og:description" content="bat set">
+<meta property="og:updated_time" content="2016-08-24T05:55:03.484Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP 的 feof() 方法需要注意的地方">
-<meta name="twitter:description" content="php feof">
+<meta name="twitter:title" content="Bat 的变量与命令 set 的用法">
+<meta name="twitter:description" content="bat set">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-PHP-的-feof-方法需要注意的地方" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Bat-的变量与命令-set-的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" class="article-date">
-  <time datetime="2016-08-11T07:36:38.000Z" itemprop="datePublished">2016-08-11</time>
+    <a href="/2016/08/24/Bat-的变量与命令-set-的用法/" class="article-date">
+  <time datetime="2016-08-24T03:44:28.000Z" itemprop="datePublished">2016-08-24</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+    <a class="article-category-link" href="/categories/Bat/">Bat</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      PHP 的 feof() 方法需要注意的地方
+      Bat 的变量与命令 set 的用法
     </h1>
   
 
@@ -107,18 +107,63 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>写过这样的一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>其中当读文件到结尾的时候，结果总会比期望的多出来一个元素：bool(false)。</p>
-<p>按说，如果读取到文件最后一行，<strong>feof</strong> 函数会返回 <strong>TRUE</strong>，然后 <strong>while</strong> 循环就退出了，为什么不是呢？</p>
-<p>先看例子，我们在代码中添加一个判断：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        if(feof($file_handle))&#123;</span><br><span class="line">                                break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>这是因为 <strong>feof</strong> 函数在处理纯文本文件的时候处理到最后一行后，<strong>feof($file_handle)</strong> 将不会返回 <strong>True</strong>，此时循环继续，使用 <strong>fgets</strong> 继续读取文件，由于 <strong>fgets</strong> 获取不到数据，返回 <strong>false</strong>，所以我们使用 <strong>var_dump</strong> 可以看到打印了一个布尔类型的值，解决办法是使用 <strong>fgets</strong> 后再次使用 <strong>feof</strong> 判断文件是否结束，此时可以正确判定文件是否已到末尾。</p>
+        <h3 id="set-功能一览"><a href="#set-功能一览" class="headerlink" title="set 功能一览"></a>set 功能一览</h3><ul>
+<li><p>[设置变量]<br>格式：set 变量名=变量值<br>详细：被设定的变量以 %变量名% 引用</p>
+</li>
+<li><p>[取消变量]<br>格式：set 变量名=<br>详细：取消后的变量名若被引用 %变量名% 将为空</p>
+</li>
+<li><p>[展示变量]<br>格式：set 变量名<br>详细：展示以变量名开头的所有变量及值</p>
+</li>
+<li><p>[列出变量]<br>格式：set</p>
+</li>
+<li><p>[计算器]<br>格式：set /a 表达式<br>示例：set /a 1+2*3 输出 7</p>
+</li>
+<li><p>[设置变量为表达式计算后的值]<br>set /a a=1+2<br>注意区分：set a=1+2</p>
+</li>
+<li><p>[设置变量为用户输入的值]<br>set /P a=</p>
+</li>
+</ul>
+<h3 id="预定义的变量"><a href="#预定义的变量" class="headerlink" title="预定义的变量"></a>预定义的变量</h3><p>下面是一些已经被底层定义好可以直接使用的变量：不会出现在 set 显示的变量列表中。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%CD%</td>
+<td style="text-align:left">当前目录字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">%DATA%</td>
+<td style="text-align:left">用跟 DATE 命令同样的格式表示当前日期</td>
+</tr>
+<tr>
+<td style="text-align:left">%TIME%</td>
+<td style="text-align:left">用跟 TIME 命令同样的格式表示当前时间</td>
+</tr>
+<tr>
+<td style="text-align:left">%RANDOM%</td>
+<td style="text-align:left">表示0到32767之间的任意十进制数字</td>
+</tr>
+<tr>
+<td style="text-align:left">%ERRORLEVEL%</td>
+<td style="text-align:left">表示当前 ERRORLEVEL 数值</td>
+</tr>
+<tr>
+<td style="text-align:left">%PATH%</td>
+<td style="text-align:left">当前的环境变量，以分号隔开的路径列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="扩展变量"><a href="#扩展变量" class="headerlink" title="扩展变量"></a>扩展变量</h3><p>|变量|含义|<br>|%0|脚本的路径名|<br>|%~x0|当前脚本后缀|<br>|%~n0|当前脚本文件名，不包含后缀|<br>|%~nx0|当前脚本文件名，注意跟%0区分|<br>|%~dp0|当前脚本工作目录<br>|%VAR:str1=str2%|会将VAR中的str1替换为str2，如str2为空可以起到删除效果，str1可以加*通配符|<br>|%VAR:~0,-2%|提取VAR变量的所有字符，除了最后两个|<br>|%VAR:~2%|提取VAR变量除前两个外的所有字符|<br>|%VAR:~-2%|提取VAR变量的最后两个字符|<br>|%VAR:~2,5%|提取从第2个字符开始的5个字符|</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cis8d4z25005doupvf0kci3cv" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cis8d4yww000aoupv8kb38bci" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -127,19 +172,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/08/12/PHP-类型简介/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          PHP 类型简介
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/11/PHP-循环读取文件每行记录处理/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/24/Bat-之-for-循环/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">PHP 循环读取文件每行记录处理</div>
+      <div class="article-nav-title">Bat 之 for 循环</div>
     </a>
   
 </nav>
