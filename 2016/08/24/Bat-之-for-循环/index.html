@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Bat 之 for 循环 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="bat for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bat 之 for 循环">
+<meta property="og:url" content="http://ttlop.com/2016/08/24/Bat-之-for-循环/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="bat for">
+<meta property="og:updated_time" content="2016-08-24T02:57:11.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bat 之 for 循环">
+<meta name="twitter:description" content="bat for">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Bat-之-for-循环" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/24/Bat-之-for-循环/" class="article-date">
+  <time datetime="2016-08-24T02:18:37.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Bat/">Bat</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Bat 之 for 循环
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-没有任何参数的-for"><a href="#1-没有任何参数的-for" class="headerlink" title="1. 没有任何参数的 for"></a>1. 没有任何参数的 for</h4><p>格式为：for %%i in (set) do command</p>
+<p>%%i 为变量<br>set 为一个文件或者一组文件，其实就是一个集合。可用通配符，比如 *.log。<br>command 是要执行的命令。</p>
+<p>例子：你想显示当前目录下扩展名为 log 的文件，可以使用 dir *.log，for 也可以实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for %i in (*.log) do echo %i</span><br></pre></td></tr></table></figure>
+<p>for 会先从括号里面执行，因为括号里面是 *.log，所以 for 会得到当前目录下所有扩展名是 mp3 的文件，并把它们作为一个集合，而每个文件名就是一个元素，像这样{1.log,2.log}，然后用 %%i 依次替代每个元素，之后做 do 后面的命令。当前 () 里面不局限于一个文件或者通配符，可以有多个通配符。</p>
+<h4 id="2-含有-L-的-for"><a href="#2-含有-L-的-for" class="headerlink" title="2. 含有 /L 的 for"></a>2. 含有 /L 的 for</h4><p>格式为：for /L %%i in (start, step, end) do command</p>
+<p>这个表示以增量形式从 start 到 end 的一个数字序列，步长是 step，就是每次的增量是 step</p>
+<p>例子：显示 1 到 5 之间的数字，可以如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /L %%i in (1, 1, 5) do echo %%i</span><br></pre></td></tr></table></figure>
+<p>例子：同时打开 3 个记事本程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /L %%1 in (1, 1, 3) do notepad.exe</span><br></pre></td></tr></table></figure>
+<p>如何理解呢？先从括号开始执行，产生集合，然后用 %%i 依次替代集合中的每个元素，之后执行 do 后面的命令，上面的例子可以看出我们不是必须在 do 后面的命令中使用到 %%i 的，但是这不能阻止 %%i 的每次替代。</p>
+<h4 id="3-含有-F-的-for"><a href="#3-含有-F-的-for" class="headerlink" title="3. 含有 /F 的 for"></a>3. 含有 /F 的 for</h4><p>格式：<br>for /F [“options”] %%i in (file) do command<br>for /F [“options”] %%i in (string) do command<br>for /F [“options”] %%i in (command) do command</p>
+<p>最常用的，也是最强的命令，主要用来处理文件和一些命令的输出结果。</p>
+<p>file 代表一个或多个文件<br>string 代表字符串<br>command 代表命令<br>[“options”] 可选</p>
+<p>我们以第一个为例，for 会依次将 file 中的文件打开，并且在进行到下一个文件之前将每个文件读取到内容，按照没一行分成一个一个的元素</p>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for /F  %%i in (a.txt) do echo %%i</span><br><span class="line">for /F &quot;tokens=1,2 delims= &quot; %%i in (a.txt) do echo %%i %%j</span><br><span class="line">for /F &quot;tokens=* delims= &quot; %%i in (a.txt) do echo %%i</span><br><span class="line">for /F &quot;skip=2&quot; %%i in (a.txt) do echo %%i</span><br><span class="line">for /F &quot;eol=2&quot; %%i in (a.txt) do echo %%i</span><br><span class="line"></span><br><span class="line">D:\&gt;type a.txt</span><br><span class="line">第1行第1列 第1行第2列 第1行第3列</span><br><span class="line">第2行第1列 第2行第2列 第2行第3列</span><br><span class="line">第3行第1列 第3行第2列 第3行第3列</span><br></pre></td></tr></table></figure></p>
+<p>delims 用来告诉 for 每一行应该拿什么作为分隔符，默认分隔符是空格和tab键，当通过 delims 将每一行分为更小的元素时由它来控制要取哪一个或哪几个，skip 表示忽略文件的前多少行，而 eol 用来指定当一行以什么符号开始时，就忽略它。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cis8a0xz10008impvu6ssl8is" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">inotify 报错 upper limit on inotify watches reached</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/24/Bat-之-for-循环/">Bat 之 for 循环</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/">inotify 报错 upper limit on inotify watches reached</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/13/PHP-流程控制/">PHP 流程控制</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/13/PHP-常量/">PHP 常量</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/13/PHP-String-字符串类型/">PHP String 字符串类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

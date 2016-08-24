@@ -82,6 +82,230 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/07/Zabbix-事件/" class="article-date">
+  <time datetime="2016-05-07T01:28:02.000Z" itemprop="datePublished">2016-05-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/07/Zabbix-事件/">Zabbix 事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Zabbix-事件通知"><a href="#1-Zabbix-事件通知" class="headerlink" title="1. Zabbix 事件通知"></a>1. Zabbix 事件通知</h3><h4 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h4><p>我们花费大量时间去配置 item、tirgger 都是为了发送报警做准备的，什么是事件通知？简单说就是故障发生了，zabbix 会发邮件或者短信给你，告诉你服务器的一些状况。</p>
+<h4 id="1-2-通知条件"><a href="#1-2-通知条件" class="headerlink" title="1.2 通知条件"></a>1.2 通知条件</h4><p>发送通知，需要有如下步骤：</p>
+<ul>
+<li>定义一个通知介质</li>
+</ul>
+<p>这个介质包含 email、shell 脚本、sms 短信网关等。zabbix 将需要发送的内容传递给这些介质，然后这些介质把需要发送的内容给到对应的终端。</p>
+<ul>
+<li>配置 action</li>
+</ul>
+<p>Action 由 conditions (条件)和 operations (操作)组成。当满足指定的条件，然后执行操作。这就是一个 action。</p>
+<h4 id="1-3-事件通知配置"><a href="#1-3-事件通知配置" class="headerlink" title="1.3 事件通知配置"></a>1.3 事件通知配置</h4><ul>
+<li><p>点击 <strong>Configuration -&gt; Actions</strong></p>
+</li>
+<li><p>点击右上角 <strong>Create action</strong></p>
+</li>
+</ul>
+<p>此处我们选择右上角 <strong>Event source</strong> 为 <strong>Triggers</strong></p>
+<ul>
+<li>配置 Action 标签页</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:left">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Name</td>
+<td style="text-align:left">action 名称</td>
+</tr>
+<tr>
+<td style="text-align:left">Default subject</td>
+<td style="text-align:left">报警通知的主题，一般是邮件主题</td>
+</tr>
+<tr>
+<td style="text-align:left">Default message</td>
+<td style="text-align:left">通知内容，一般就是邮件内容</td>
+</tr>
+<tr>
+<td style="text-align:left">Recovery message</td>
+<td style="text-align:left">勾上它，监控项恢复后也会收到通知</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>配置 Conditions 标签页</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:left">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Type of calculation</td>
+<td style="text-align:left">各条件之间的关系</td>
+</tr>
+<tr>
+<td style="text-align:left">Conditions</td>
+<td style="text-align:left">条件列表</td>
+</tr>
+<tr>
+<td style="text-align:left">New condition</td>
+<td style="text-align:left">此处可以添加更多的条件</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>配置 Operations 标签页</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:left">定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Default operation step duration</td>
+<td style="text-align:left">默认配置，表示这次发送报警后，下一次发送是在多少秒之后</td>
+</tr>
+<tr>
+<td style="text-align:left">Steps</td>
+<td style="text-align:left">发送次数</td>
+</tr>
+<tr>
+<td style="text-align:left">Step duration</td>
+<td style="text-align:left">发送间隔，如果设置为0，使用默认值</td>
+</tr>
+<tr>
+<td style="text-align:left">Operation type</td>
+<td style="text-align:left">发送介质</td>
+</tr>
+<tr>
+<td style="text-align:left">Send to User groups</td>
+<td style="text-align:left">发送到哪个用户组</td>
+</tr>
+<tr>
+<td style="text-align:left">Send to Users</td>
+<td style="text-align:left">发送给哪个用户</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-Zabbix-事件来源"><a href="#2-Zabbix-事件来源" class="headerlink" title="2. Zabbix 事件来源"></a>2. Zabbix 事件来源</h3><h4 id="2-1-概述"><a href="#2-1-概述" class="headerlink" title="2.1 概述"></a>2.1 概述</h4><p>在 trigger 的文章内，我们已经讲到过事件，zabbix 事件我们这里介绍三种，分别为：触发器事件、发现事件、内部事件。</p>
+<h4 id="2-2-Zabbix-内部事件"><a href="#2-2-Zabbix-内部事件" class="headerlink" title="2.2 Zabbix 内部事件"></a>2.2 Zabbix 内部事件</h4><p>内部事件是从 zabbix 2.2 版本开始引入，主要目的是为了可以通知管理员 zabbix 的某些 item 不可用。</p>
+<ul>
+<li><p>监控项 item 状态从 normal 变为 unsupported，或者从 unsupported 变为 normal</p>
+</li>
+<li><p>low-level 发现规则状态从 normal 变为 unsupported，或者从 unsupported 变为 normal</p>
+</li>
+<li><p>触发器状态从 normal 变为 unknown，或者从 unknown 转为 normal</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">正常</td>
+</tr>
+<tr>
+<td style="text-align:left">unsupported</td>
+<td style="text-align:left">不正常</td>
+</tr>
+<tr>
+<td style="text-align:left">unknown</td>
+<td style="text-align:left">未知</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-3-Zabbix-发现事件"><a href="#2-3-Zabbix-发现事件" class="headerlink" title="2.3 Zabbix 发现事件"></a>2.3 Zabbix 发现事件</h4><p>在我们配置玩 zabbix 网络发现规则之后，zabbix 会定期按照这个规则去扫描 IP 段，一旦有发现主机和服务，变生成一个事件。事件如下列表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">事件</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Service Up</td>
+<td style="text-align:left">每当 zabbix 检测到 active service</td>
+</tr>
+<tr>
+<td style="text-align:left">Service Down</td>
+<td style="text-align:left">每当 zabbix 检测不到 service</td>
+</tr>
+<tr>
+<td style="text-align:left">Host Up</td>
+<td style="text-align:left">目标IP，至少有一个 service 是 UP</td>
+</tr>
+<tr>
+<td style="text-align:left">Host Down</td>
+<td style="text-align:left">所有 services 都没有响应</td>
+</tr>
+<tr>
+<td style="text-align:left">Service Discovered</td>
+<td style="text-align:left">service 在维护时间之后恢复或者第一次被发现</td>
+</tr>
+<tr>
+<td style="text-align:left">Service Lost</td>
+<td style="text-align:left">service 在 up 之后丢失了</td>
+</tr>
+<tr>
+<td style="text-align:left">Host Discovered</td>
+<td style="text-align:left">主机在维护时间之后恢复或者第一次被发现</td>
+</tr>
+<tr>
+<td style="text-align:left">Host Lost</td>
+<td style="text-align:left">主机在 up 之后丢失</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-4-Zabbix-触发器事件"><a href="#2-4-Zabbix-触发器事件" class="headerlink" title="2.4 Zabbix 触发器事件"></a>2.4 Zabbix 触发器事件</h4><p>触发器在 zabbix 事件当中是最重要也是最常用的事件（例如定义action等）。每当触发器状态发生变化都会产生一个包含详细状态信息的触发器事件：例如事件什么时候发送的以及当前状态是什么。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cis8a0y5h007fimpv265h2zo5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-触发器表达式详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/06/Zabbix-触发器表达式详解/" class="article-date">
@@ -163,7 +387,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cis12htdp007k4apvoxz8ll5p" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cis8a0y5r007simpvemqbx1vn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +432,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cis12htdj00794apvu44ed6w5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cis8a0y5i007gimpvqxasty7t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -253,7 +477,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cis12htdb006x4apvcz9xzai7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cis8a0y5b0074impvoypwzh9w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +522,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cis12htdc00704apv9bfcdlth" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cis8a0y5c0077impvac9zaf7o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -343,7 +567,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cis12htd2006m4apvcj7d92gr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cis8a0y53006qimpvxmftt9am" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +612,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cis12htdo007h4apv9osq8vx9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cis8a0y5q007rimpvhw6hqqkh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -433,7 +657,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cis12htcx006c4apv2zf3ehoi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cis8a0y4x006gimpvanjas2r8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -480,7 +704,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cis12htdg00754apvvgbdo9dn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cis8a0y5g007cimpvncr4rui6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -525,51 +749,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" data-id="cis12htdk007c4apvhvvhp0jk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Agent-Installing-And-Configuration" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" class="article-date">
-  <time datetime="2016-05-04T03:08:51.000Z" itemprop="datePublished">2016-05-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/04/Zabbix-Agent-Installing-And-Configuration/">Zabbix Agent Installing And Configuration</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Installing-repository-configuration-package"><a href="#Installing-repository-configuration-package" class="headerlink" title="* Installing repository configuration package"></a>* Installing repository configuration package</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Supported <span class="keyword">for</span> version: Centos 7</span><br><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm</span><br><span class="line"></span><br><span class="line">Supported <span class="keyword">for</span> version: Centos 6</span><br><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/6/x86_64/zabbix-release-3.0-1.el6.noarch.rpm</span><br><span class="line"></span><br><span class="line">Supported <span class="keyword">for</span> version: Centos 5</span><br><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/5/x86_64/zabbix-release-3.0-1.el5.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="Installing-Zabbix-agent"><a href="#Installing-Zabbix-agent" class="headerlink" title="* Installing Zabbix agent"></a>* Installing Zabbix agent</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zabbix-agent</span><br></pre></td></tr></table></figure>
-<h4 id="Configuration"><a href="#Configuration" class="headerlink" title="* Configuration"></a>* Configuration</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-A INPUT <span class="_">-s</span> 192.168.1.110/32 -p tcp -mstate --state NEW -m tcp --dport 10050 -j ACCEPT  <span class="comment">#vim /etc/sysconfig/iptables</span></span><br><span class="line">Server=192.168.1.110,127.0.0.1  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br><span class="line">ServerActive=192.168.1.110,127.0.0.1  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br><span class="line">Hostname=[hostname]  <span class="comment">#vim /etc/zabbix/zabbix_agentd.conf</span></span><br></pre></td></tr></table></figure>
-<h4 id="Testing"><a href="#Testing" class="headerlink" title="* Testing"></a>* Testing</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zabbix_get <span class="_">-s</span> 192.168.1.107 -p 10050 -k <span class="string">"system.cpu.load[all,avg1]"</span>  <span class="comment">#Zabbix-server</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/04/Zabbix-Agent-Installing-And-Configuration/" data-id="cis12htcr00624apvvkf3tjc4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/05/Zabbix-在系统已有的Templates中增加Graphs/" data-id="cis8a0y5o007nimpvg8a1iojn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -582,7 +762,7 @@ var _hmt = _hmt || [];
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -593,7 +773,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -621,6 +801,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/24/Bat-之-for-循环/">Bat 之 for 循环</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/">inotify 报错 upper limit on inotify watches reached</a>
           </li>
         
@@ -634,10 +818,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/13/PHP-String-字符串类型/">PHP String 字符串类型</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
           </li>
         
       </ul>
