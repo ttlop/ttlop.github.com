@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo 常用配置 | 运维生存时间</title>
+  <title>Linux 下访问 Windows 共享目录的配置方法 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="hexo 配置">
+  <meta name="description" content="linux windows 共享 samba-client mount">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 常用配置">
-<meta property="og:url" content="http://ttlop.com/2016/04/16/Hexo-常用配置/index.html">
+<meta property="og:title" content="Linux 下访问 Windows 共享目录的配置方法">
+<meta property="og:url" content="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="hexo 配置">
-<meta property="og:updated_time" content="2016-04-16T03:34:06.678Z">
+<meta property="og:description" content="linux windows 共享 samba-client mount">
+<meta property="og:updated_time" content="2016-08-26T03:34:15.360Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo 常用配置">
-<meta name="twitter:description" content="hexo 配置">
+<meta name="twitter:title" content="Linux 下访问 Windows 共享目录的配置方法">
+<meta name="twitter:description" content="linux windows 共享 samba-client mount">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Hexo-常用配置" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Linux-下访问-Windows-共享目录的配置方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/16/Hexo-常用配置/" class="article-date">
-  <time datetime="2016-04-16T03:20:22.000Z" itemprop="datePublished">2016-04-16</time>
+    <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" class="article-date">
+  <time datetime="2016-08-26T03:29:29.000Z" itemprop="datePublished">2016-08-26</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Hexo 常用配置
+      Linux 下访问 Windows 共享目录的配置方法
     </h1>
   
 
@@ -107,20 +107,17 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="自定义页面"><a href="#自定义页面" class="headerlink" title="自定义页面"></a>自定义页面</h3><p>执行 new page 命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page <span class="string">"About"</span></span><br></pre></td></tr></table></figure>
-<p>在hexo\source\下会生成about目录，里面有个index.md，直接编辑就可以了，然后在主题的_config.yml中将其配置显示出来。<br>上述步骤，也可以手工生成，在hexo\source\下首贡新建about和index.md也是完全等价的。</p>
-<h3 id="文章摘要"><a href="#文章摘要" class="headerlink" title="文章摘要"></a>文章摘要</h3><p>在需要显示摘要的地方添加如下代码即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">以上是摘要</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">以下是余下全文</span><br></pre></td></tr></table></figure>
-<p>more以上内容即是文章摘要，在主页显示，more以下内容点击 Read More 链接打开全文才显示。<br>hexo 中所有文件的编码格式均是 UTF-8。</p>
-<h3 id="description"><a href="#description" class="headerlink" title="description"></a>description</h3><p>markdown 文件中也可以添加 description，以覆盖全局配置文件中的 description 内容，请参考下文 _config_yml 的介绍。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: hexo你的博客</span><br><span class="line">date: 2013-11-22 17:11:54</span><br><span class="line">categories: default</span><br><span class="line">tags: [hexo]</span><br><span class="line">description: 你对本页的描述</span><br></pre></td></tr></table></figure>
-<p>hexo 默认会处理全部 markdown 和 html 文件，如果不想让 hexo 处理你的文件，可以在文件头中加入 layout: false。</p>
+        <h3 id="1-Linux-下安装-samba-client-客户端"><a href="#1-Linux-下安装-samba-client-客户端" class="headerlink" title="1. Linux 下安装 samba-client 客户端"></a>1. Linux 下安装 samba-client 客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install samba-client</span><br></pre></td></tr></table></figure>
+<h3 id="2-Linux-下只能装-cifs-utils-软件包"><a href="#2-Linux-下只能装-cifs-utils-软件包" class="headerlink" title="2. Linux 下只能装 cifs-utils 软件包"></a>2. Linux 下只能装 cifs-utils 软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cifs-utils</span><br></pre></td></tr></table></figure>
+<h3 id="3-Linux-下创建挂载点"><a href="#3-Linux-下创建挂载点" class="headerlink" title="3. Linux 下创建挂载点"></a>3. Linux 下创建挂载点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/AutoBackup</span><br></pre></td></tr></table></figure>
+<h3 id="4-挂载-Windows-上的共享目录"><a href="#4-挂载-Windows-上的共享目录" class="headerlink" title="4. 挂载 Windows 上的共享目录"></a>4. 挂载 Windows 上的共享目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t cifs -o username=&quot;administrator&quot;,password=&apos;xxx&apos; //192.168.200.1/D$/AutoBackup /mnt/AutosBackup/</span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果挂载成功，则可以进入 /mnt/Autobackup 下，查看上面的 windows 共享文件。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cisb7fb3s00144npvz1kt7v37" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cisb7fb5a001z4npv543q2byd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,19 +126,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/16/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/15/Apache-开启Server-status和server-info/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/24/Bat-的变量与命令-set-的用法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Apache 开启Server-status和server-info</div>
+      <div class="article-nav-title">Bat 的变量与命令 set 的用法</div>
     </a>
   
 </nav>
