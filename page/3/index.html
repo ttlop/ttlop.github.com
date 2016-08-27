@@ -82,6 +82,141 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP-strpos-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/06/PHP-strpos-函数/" class="article-date">
+  <time datetime="2016-08-06T07:02:46.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/06/PHP-strpos-函数/">PHP strpos() 函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>strpos() 函数查找字符串在另一个字符串中第一次出现的位置，大小写敏感。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strpos(string,find,start)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:left">必须，规定要搜索的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">find</td>
+<td style="text-align:left">必须，规定要查找的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">start</td>
+<td style="text-align:left">可选，规定在何时开始搜索</td>
+</tr>
+</tbody>
+</table>
+<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串在另一个字符串中第一次出现的位置，如果没有找到字符串则返回 FALSE。字符串位置从 0 开始，不是从 1 开始。<br>PHP版本：4+。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="ciscxaanz005ceopvxcn9mo28" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PHP-explode-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/06/PHP-explode-函数/" class="article-date">
+  <time datetime="2016-08-06T06:53:50.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/06/PHP-explode-函数/">PHP explode() 函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>explode() 函数把字符串打散为数组。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explode(separator,string,limit)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">separator</td>
+<td style="text-align:left">必须，规定在哪里分隔字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:left">必须，要分隔的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">limit</td>
+<td style="text-align:left">可选，规定要返回的数组元素的个数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串的数组<br>PHP版本：4+<br>更新日志：PHP 4.0.1 中，新增 limit 参数，PHP 5.1.0 中新增对负数 limit 的支持。<br>limit 可能的值：</p>
+<ul>
+<li>大于0 - 返回包含最多 limit 个元素的数组</li>
+<li>小于0 - 返回包含除了最后的 -limit 个元素以外的所有元素的数组</li>
+<li>0 - 返回包含了一个元素的数组</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="ciscxaann004xeopvwq4k83xf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PHP-fgets-函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/06/PHP-fgets-函数/" class="article-date">
@@ -136,7 +271,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-fgets-函数/" data-id="cisb7fb7k004u4npv21upjgm6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-fgets-函数/" data-id="ciscxaanq0050eopvzqw790l5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,7 +331,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-feof-函数/" data-id="cisb7fb7h004q4npve9im05ip" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-feof-函数/" data-id="ciscxaanl004veopvjys8vyrs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -317,7 +452,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-fopen-函数/" data-id="cisb7fb7m004y4npvbbag1qlq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-fopen-函数/" data-id="ciscxaant0055eopvh5fss9x4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,7 +494,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/Linux-apache-access-log-Analy-2/" data-id="cisb7fb5o002j4npvsge8bfcn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/Linux-apache-access-log-Analy-2/" data-id="ciscxaakw001oeopvuzwzqcot" class="article-share-link">Share</a>
       
       
     </footer>
@@ -405,7 +540,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/" data-id="cisb7fb6b00374npv9a26hj3n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/" data-id="ciscxaamf003ceopvopeidwg8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -450,7 +585,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="cisb7fb62002z4npve1ug8qf4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="ciscxaama0034eopvwo1k5mmb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,7 +630,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="cisb7fb61002x4npvwisb55b8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="ciscxaam50031eopvtjls3pp6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -538,98 +673,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="cisb7fb6d00394npv061sy7aw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-shell-多进程实现（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/04/Linux-shell-多进程实现（一）/" class="article-date">
-  <time datetime="2016-08-04T03:20:53.000Z" itemprop="datePublished">2016-08-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/04/Linux-shell-多进程实现（一）/">Linux shell 多进程实现（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 bash 中，我们可以使用后台任务来实现任务的“多进程化”。在不加控制的模式下，不管有多少任务，全部都后台执行。也就是说，这种情况下，有多少个任务就有多少“进程”在后同时执行。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/04/Linux-shell-多进程实现（一）/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="cisb7fb55001x4npvwahlh0dl" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-预定义变量" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/02/PHP-预定义变量/" class="article-date">
-  <time datetime="2016-08-02T07:45:42.000Z" itemprop="datePublished">2016-08-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/02/PHP-预定义变量/">PHP 预定义变量</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p><strong>$_SERVER[“DOCUMENT_ROOT”]</strong><br>根目录，在 <strong>apache</strong> 的配置文件里面定义：比如 <strong>httpd.conf</strong> 中的 <strong>DocumentRoot “/var/www/html”</strong></p>
-</li>
-<li><p><strong>$_SERVER[‘REMOTE_ADDR’]</strong><br>你的客户端跟你的服务器“握手”时候的 <strong>IP</strong>，如果使用了代理，<strong>REMOTE_ADDR</strong> 将显示代理服务器的IP</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="cisb7fb80005h4npvytx2rq1x" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="ciscxaamg003eeopvd7xb2f65" class="article-share-link">Share</a>
       
       
     </footer>
@@ -653,7 +697,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -681,6 +725,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/">Hyper-V 3中 虚拟机CPU竞争机制</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/">Windows 2012 下通过命令行管理磁盘</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/">Linux 下访问 Windows 共享目录的配置方法</a>
           </li>
         
@@ -690,14 +742,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/24/Bat-之-for-循环/">Bat 之 for 循环</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/">inotify 报错 upper limit on inotify watches reached</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/13/PHP-流程控制/">PHP 流程控制</a>
           </li>
         
       </ul>
