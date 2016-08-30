@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Nagios - 安装好无法启动问题汇总 | 运维生存时间</title>
+  <title>Hyper-V 网络配置 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nagios no running">
+  <meta name="description" content="hyper-v 虚拟交换机 virtual switch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nagios - 安装好无法启动问题汇总">
-<meta property="og:url" content="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/index.html">
+<meta property="og:title" content="Hyper-V 网络配置">
+<meta property="og:url" content="http://ttlop.com/2016/08/30/Hyper-V-网络配置/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="nagios no running">
-<meta property="og:updated_time" content="2016-06-20T08:50:50.494Z">
+<meta property="og:description" content="hyper-v 虚拟交换机 virtual switch">
+<meta property="og:updated_time" content="2016-08-30T02:04:27.192Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nagios - 安装好无法启动问题汇总">
-<meta name="twitter:description" content="nagios no running">
+<meta name="twitter:title" content="Hyper-V 网络配置">
+<meta name="twitter:description" content="hyper-v 虚拟交换机 virtual switch">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Nagios-安装好无法启动问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Hyper-V-网络配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/20/Nagios-安装好无法启动问题汇总/" class="article-date">
-  <time datetime="2016-06-20T08:48:17.000Z" itemprop="datePublished">2016-06-20</time>
+    <a href="/2016/08/30/Hyper-V-网络配置/" class="article-date">
+  <time datetime="2016-08-30T01:50:45.000Z" itemprop="datePublished">2016-08-30</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Nagios - 安装好无法启动问题汇总
+      Hyper-V 网络配置
     </h1>
   
 
@@ -107,17 +107,45 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ol>
-<li>提示 <strong>qh: Failed to init socket ‘/usr/local/nagios/var/rw/nagios.qh’</strong></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1466408082] Nagios 4.1.1 starting... (PID=22890)</span><br><span class="line">[1466408082] Local time is Mon Jun 20 15:34:42 CST 2016</span><br><span class="line">[1466408082] LOG VERSION: 2.0</span><br><span class="line">[1466408082] qh: Failed to init socket &apos;/usr/local/nagios/var/rw/nagios.qh&apos;. bind() failed: No such file or directory</span><br><span class="line">[1466408082] Error: Failed to initialize query handler. Aborting</span><br></pre></td></tr></table></figure>
-<p>如下步骤即可解决：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/nagios/var/rw</span><br><span class="line">chown nagios:nagios /usr/local/nagios/var/rw</span><br></pre></td></tr></table></figure>
+        <h3 id="1-Hyper-V-虚拟交换机类型"><a href="#1-Hyper-V-虚拟交换机类型" class="headerlink" title="1. Hyper-V 虚拟交换机类型"></a>1. Hyper-V 虚拟交换机类型</h3><ul>
+<li>外部虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间、虚拟机与物理机之间、虚拟机和外部网络之间的通信。<br>生产环境不勾选“允许管理操作系统共享此网络适配器”，勾选之后会为主机创建虚拟网卡，会实现物理主机与外部网络的通信，容易将物理主机暴露在外。不勾选“允许管理操作系统共享此网络适配器”，则在创建虚拟交换机后会将相应绑定的网络的 IP 地址等信息清空，该网卡不会被配置任何 IP，只是用来通信。勾选“允许管理操作系统共享此网络适配器”，则在创建虚拟交换机后，会多出一块虚拟网卡，其原网卡的IP地址等信息都会被配置到相应的虚拟网卡上面。<br>除非物理主机只有一块物理网卡，否则不推荐使用。</p>
+<ul>
+<li>内部虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间、虚拟机和物理机之间的通信，不需要物理网卡，因为不提供对外部网络的访问。<br>在单一服务器上，用来构建主机和虚拟机之间的通信，不推荐使用。</p>
+<ul>
+<li>专用虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间的通信，不需要物理网卡。<br>除了在单一服务器上构建实验环境，极少使用。</p>
+<h3 id="2-Hyper-V-主机网络最佳实践配置"><a href="#2-Hyper-V-主机网络最佳实践配置" class="headerlink" title="2. Hyper-V 主机网络最佳实践配置"></a>2. Hyper-V 主机网络最佳实践配置</h3><ul>
+<li>一块网卡用于工作负载，为虚拟机提供对外服务。</li>
+</ul>
+<p>该网卡绑定到外部虚拟交换机，不勾选“允许管理操作系统共享此网络适配器”，也就无法启用“VLAN ID”，其上的虚拟机与主机完全隔离。该虚拟交换机可以支持多个VLAN间的通信。</p>
+<ul>
+<li><p>一块网卡用于管理物理主机，如连接到域等。该网卡不绑定到任何虚拟交换机，只用作管理网络。</p>
+</li>
+<li><p>一块网卡用于在线迁移、群集心跳、群集共享(CSV)等。</p>
+</li>
+</ul>
+<p>由于虚拟机做群集时候的心跳也使用该网卡，所以也需要将该网卡绑定到外部虚拟交换机，单独VLAN，与物理服务器其他网卡隔离</p>
+<p>该VSwitch选中“允许管理操作系统共享此网络适配器”，因为物理机和虚拟机的心跳都需要使用该网卡。不选中的话该网卡会无法配置IP，选中的话会出来一块虚拟网卡，用来配置心跳网络的IP</p>
+<h3 id="3-VLAN配置"><a href="#3-VLAN配置" class="headerlink" title="3. VLAN配置"></a>3. VLAN配置</h3><ul>
+<li>在虚拟交换机上设置VLAN ID，必须启用“允许管理操作系统共享此网络适配器”，不推荐使用。</li>
+</ul>
+<p>优点：不再需要为每个VM单独设置VLAN ID，改变虚拟交换机上的VLAN ID，其所连接的所有VM的VLAN ID都会随之自动改变。</p>
+<p>缺点：需要为每个VLAN创建不同的外部虚拟网络，由于一个外部虚拟网络需要绑定到一块物理网卡，所以当需要的VLAN数量大于物理网卡的数量时，该方法不可行。虚拟机在不同主机之间迁移时，需要保证每个主机上都有相同的外部虚拟网络(多个)。 </p>
+<ul>
+<li>在每个VM上单独设置VLAN ID，物理交换机上启用trunk模式。</li>
+</ul>
+<p>优点：一个物理网卡就可以支持多个VLAN的通信，保证每个主机上都有一个相同的外部虚拟网络即可。</p>
+<p>缺点：会产生网络流量瓶颈，建议使用Teaming</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cisgtz8dq0048zbpv3iu2hyt8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="cisgtz8au001bzbpvg3iuj735" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,19 +154,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/06/21/Nagios-使用问题解决/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Nagios 使用问题解决
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Nagios - Installing Nagios Core From Source</div>
+      <div class="article-nav-title">Hyper-V 3中 虚拟机CPU竞争机制</div>
     </a>
   
 </nav>

@@ -82,6 +82,80 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Hyper-V-网络配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/30/Hyper-V-网络配置/" class="article-date">
+  <time datetime="2016-08-30T01:50:45.000Z" itemprop="datePublished">2016-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/30/Hyper-V-网络配置/">Hyper-V 网络配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Hyper-V-虚拟交换机类型"><a href="#1-Hyper-V-虚拟交换机类型" class="headerlink" title="1. Hyper-V 虚拟交换机类型"></a>1. Hyper-V 虚拟交换机类型</h3><ul>
+<li>外部虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间、虚拟机与物理机之间、虚拟机和外部网络之间的通信。<br>生产环境不勾选“允许管理操作系统共享此网络适配器”，勾选之后会为主机创建虚拟网卡，会实现物理主机与外部网络的通信，容易将物理主机暴露在外。不勾选“允许管理操作系统共享此网络适配器”，则在创建虚拟交换机后会将相应绑定的网络的 IP 地址等信息清空，该网卡不会被配置任何 IP，只是用来通信。勾选“允许管理操作系统共享此网络适配器”，则在创建虚拟交换机后，会多出一块虚拟网卡，其原网卡的IP地址等信息都会被配置到相应的虚拟网卡上面。<br>除非物理主机只有一块物理网卡，否则不推荐使用。</p>
+<ul>
+<li>内部虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间、虚拟机和物理机之间的通信，不需要物理网卡，因为不提供对外部网络的访问。<br>在单一服务器上，用来构建主机和虚拟机之间的通信，不推荐使用。</p>
+<ul>
+<li>专用虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间的通信，不需要物理网卡。<br>除了在单一服务器上构建实验环境，极少使用。</p>
+<h3 id="2-Hyper-V-主机网络最佳实践配置"><a href="#2-Hyper-V-主机网络最佳实践配置" class="headerlink" title="2. Hyper-V 主机网络最佳实践配置"></a>2. Hyper-V 主机网络最佳实践配置</h3><ul>
+<li>一块网卡用于工作负载，为虚拟机提供对外服务。</li>
+</ul>
+<p>该网卡绑定到外部虚拟交换机，不勾选“允许管理操作系统共享此网络适配器”，也就无法启用“VLAN ID”，其上的虚拟机与主机完全隔离。该虚拟交换机可以支持多个VLAN间的通信。</p>
+<ul>
+<li><p>一块网卡用于管理物理主机，如连接到域等。该网卡不绑定到任何虚拟交换机，只用作管理网络。</p>
+</li>
+<li><p>一块网卡用于在线迁移、群集心跳、群集共享(CSV)等。</p>
+</li>
+</ul>
+<p>由于虚拟机做群集时候的心跳也使用该网卡，所以也需要将该网卡绑定到外部虚拟交换机，单独VLAN，与物理服务器其他网卡隔离</p>
+<p>该VSwitch选中“允许管理操作系统共享此网络适配器”，因为物理机和虚拟机的心跳都需要使用该网卡。不选中的话该网卡会无法配置IP，选中的话会出来一块虚拟网卡，用来配置心跳网络的IP</p>
+<h3 id="3-VLAN配置"><a href="#3-VLAN配置" class="headerlink" title="3. VLAN配置"></a>3. VLAN配置</h3><ul>
+<li>在虚拟交换机上设置VLAN ID，必须启用“允许管理操作系统共享此网络适配器”，不推荐使用。</li>
+</ul>
+<p>优点：不再需要为每个VM单独设置VLAN ID，改变虚拟交换机上的VLAN ID，其所连接的所有VM的VLAN ID都会随之自动改变。</p>
+<p>缺点：需要为每个VLAN创建不同的外部虚拟网络，由于一个外部虚拟网络需要绑定到一块物理网卡，所以当需要的VLAN数量大于物理网卡的数量时，该方法不可行。虚拟机在不同主机之间迁移时，需要保证每个主机上都有相同的外部虚拟网络(多个)。 </p>
+<ul>
+<li>在每个VM上单独设置VLAN ID，物理交换机上启用trunk模式。</li>
+</ul>
+<p>优点：一个物理网卡就可以支持多个VLAN的通信，保证每个主机上都有一个相同的外部虚拟网络即可。</p>
+<p>缺点：会产生网络流量瓶颈，建议使用Teaming</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="cisgtz8au001bzbpvg3iuj735" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Hyper-V-3中-虚拟机CPU竞争机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" class="article-date">
@@ -131,7 +205,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="ciscxaajz0013eopvdrn2d99z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="cisgtz8ap0017zbpvsbldoyx3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +261,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="ciscxaaoq006feopvrabm6prp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="cisgtz8fb006lzbpvliheqoqz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -233,7 +307,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="ciscxaald0022eopvkvr8i9w0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cisgtz8by0025zbpvs5qi35me" class="article-share-link">Share</a>
       
       
     </footer>
@@ -326,7 +400,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="ciscxaaiq000aeopv1sr7vyw1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cisgtz89c000azbpvzhdm0dwa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -384,7 +458,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="ciscxaain0008eopvnejuo628" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cisgtz8980008zbpvgt27pp45" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,7 +501,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="ciscxaaq8008beopvwql5lzo9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cisgtz8gq008fzbpv655mnxim" class="article-share-link">Share</a>
       
       
     </footer>
@@ -472,7 +546,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="ciscxaao5005keopvsv27ido9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cisgtz8ep005pzbpvaqu2r7eu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -517,7 +591,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="ciscxaao1005eeopvxsmur2g3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cisgtz8ej005fzbpv7um6pzhg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -631,63 +705,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="ciscxaang004qeopvirfvm5t8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-boolean-布尔类型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/12/PHP-boolean-布尔类型/" class="article-date">
-  <time datetime="2016-08-12T06:02:43.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是一个最简单的类型，可以为 <strong>TRUE</strong> 或 <strong>FALSE</strong>。如果要指定一个布尔值，使用关键字 <strong>TRUE</strong> 或 <strong>FALSE</strong> 即可，不区分大小写。通常运算符所返回的 <strong>boolean</strong> 值结果会被传递给流程控制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// == 是一个操作符，它检测两个变量是否相等，并返回一个布尔值</span><br><span class="line">if($action == &quot;show_version&quot;)&#123;</span><br><span class="line">	echo &quot;The version is 1.23&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以明确使用 <strong>(bool)</strong> 或者 <strong>(boolean)</strong> 来强制转换一个值为 <strong>boolean</strong>。大多数情况下不需要强制转换，因为当运算符，函数或流程控制结果需要一个 <strong>boolean</strong> 参数时，该值会被自动转换。</p>
-<p>当转换为 <strong>boolean</strong> 时，以下值被认为是 <strong>FALSE</strong>：</p>
-<ul>
-<li>布尔值 FALSE 本身</li>
-<li>整型值 0（零）</li>
-<li>浮点型值 0.0（零）</li>
-<li>空字符串以及字符串”0”</li>
-<li>不包括任何元素的数组</li>
-<li>不包括任何成员变量的对象（PHP 4.0适用）</li>
-<li>特殊类型 NULL（包括尚未赋值的变量）</li>
-<li>从空标记生成的 SimpleXML 对象</li>
-</ul>
-<p>所有其它值都被认为是 <strong>TRUE</strong>（包括任何资源）。<br>注：-1 和其它非零值（无论正负）都被认为是 <strong>TRUE</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_boolean.php </span><br><span class="line">&lt;?php</span><br><span class="line">var_dump((bool) &quot;&quot;);</span><br><span class="line">var_dump((bool) 1);</span><br><span class="line">var_dump((bool) -2);</span><br><span class="line">var_dump((bool) &quot;foo&quot;);</span><br><span class="line">var_dump((bool) 2.3e5);</span><br><span class="line">var_dump((bool) array(12));</span><br><span class="line">var_dump((bool) array());</span><br><span class="line">var_dump((bool) &quot;false&quot;);</span><br><span class="line">var_dump((bool) false);</span><br><span class="line">?&gt;</span><br><span class="line">[root@mail ~]# php php_boolean.php </span><br><span class="line">bool(false)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(false)</span><br><span class="line">bool(true)</span><br><span class="line">bool(false)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="ciscxaanj004seopvignbgqbd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cisgtz8e2004szbpvtgfzxlov" class="article-share-link">Share</a>
       
       
     </footer>
@@ -739,6 +757,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/08/30/Hyper-V-网络配置/">Hyper-V 网络配置</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/">Hyper-V 3中 虚拟机CPU竞争机制</a>
           </li>
         
@@ -752,10 +774,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/24/Bat-的变量与命令-set-的用法/">Bat 的变量与命令 set 的用法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/24/Bat-之-for-循环/">Bat 之 for 循环</a>
           </li>
         
       </ul>
