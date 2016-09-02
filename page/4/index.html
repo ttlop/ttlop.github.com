@@ -82,6 +82,51 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-LinuxShell-for使用换行符作为分隔符" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/05/LinuxShell-for使用换行符作为分隔符/" class="article-date">
+  <time datetime="2016-08-05T07:17:55.000Z" itemprop="datePublished">2016-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/05/LinuxShell-for使用换行符作为分隔符/">LinuxShell for使用换行符作为分隔符</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用 <strong>shell</strong> 编写脚本的过程中，无可避免有时候我们需要使用 <strong>for</strong> 循环来遍历一个函数返回的结果。有时候返回的结果是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 11 111</span><br><span class="line">2 22 222</span><br><span class="line">3 33 333</span><br></pre></td></tr></table></figure>
+<p>这时候如果我们需要按行来输出，使用 <strong>while read line</strong> 是一个不错的选择，那么使用 <strong>for</strong> 循环可以吗，答案是肯定的，但是需要修改分隔符 <strong>IFS</strong>，下面我们使用例子来说明。</p>
+<h3 id="实例一：修改分隔符为换行符"><a href="#实例一：修改分隔符为换行符" class="headerlink" title="实例一：修改分隔符为换行符"></a>实例一：修改分隔符为换行符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat test1.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">OLDIFS=$IFS</span><br><span class="line">IFS=&quot;\n&quot;</span><br><span class="line">for line in `cat test.txt`</span><br><span class="line">do</span><br><span class="line">	echo &quot;$line&quot;</span><br><span class="line">done</span><br><span class="line">IFS=&quot;$OLDIFS&quot;</span><br><span class="line">[root@localhost ~]# ./test1.sh </span><br><span class="line">1 11 111</span><br><span class="line">2 22 222</span><br><span class="line">3 33 333</span><br></pre></td></tr></table></figure>
+<h3 id="实例二：不修改分隔符"><a href="#实例二：不修改分隔符" class="headerlink" title="实例二：不修改分隔符"></a>实例二：不修改分隔符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat test2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">for line in `cat test.txt`</span><br><span class="line">do</span><br><span class="line">	echo &quot;$line&quot;</span><br><span class="line">done</span><br><span class="line">[root@localhost ~]# ./test2.sh </span><br><span class="line">1</span><br><span class="line">11</span><br><span class="line">111</span><br><span class="line">2</span><br><span class="line">22</span><br><span class="line">222</span><br><span class="line">3</span><br><span class="line">33</span><br><span class="line">333</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="cisl7yoox0033y9pv876cmkar" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LinuxAwk-引用外部变量" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/05/LinuxAwk-引用外部变量/" class="article-date">
@@ -117,7 +162,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="cisjz6a6k002yckpvyft19rs5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="cisl7yooz0035y9pv6u84p7ht" class="article-share-link">Share</a>
       
       
     </footer>
@@ -160,7 +205,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="cisjz6a6x003dckpvwuco2hzm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="cisl7yop5003fy9pvhzc5w92n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -205,7 +250,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="cisjz6a5t0021ckpvdorf2x7s" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="cisl7yoo00021y9pvozyzah7k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +296,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="cisjz6a8k005sckpvjmwmer70" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="cisl7yor0005sy9pvm96v7m3j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -311,7 +356,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cisjz6a90006fckpvwda3c7w2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cisl7yorg006fy9pv7g8iwtvt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,7 +404,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/Linux-apache-access-log-Analy/" data-id="cisjz6a5j001rckpvgdvxg6nc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/Linux-apache-access-log-Analy/" data-id="cisl7yonp001ry9pvwavz0yjr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -402,7 +447,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="cisjz6a3n000kckpv5y36lov7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="cisl7yolu000my9pv4r4z213k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,7 +492,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="cisjz6aam008kckpv3l43d0jk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="cisl7yotb008my9pv2twxy2hn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,54 +542,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="cisjz6a9g0079ckpvvwzsu0b2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-大量-TIME-WAIT-解决办法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" class="article-date">
-  <time datetime="2016-07-28T06:22:09.000Z" itemprop="datePublished">2016-07-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/28/Linux-大量-TIME-WAIT-解决办法/">Linux 大量 TIME_WAIT 解决办法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>用以下语句看服务器的 TCP 状态：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost httpd]# netstat -ant | awk &apos;/^tcp/ &#123;print $6&#125;&apos; | sort | uniq -c | sort -n</span><br><span class="line">      1 CLOSING</span><br><span class="line">      7 LISTEN</span><br><span class="line">     15 SYN_RECV</span><br><span class="line">     24 FIN_WAIT1</span><br><span class="line">     34 FIN_WAIT2</span><br><span class="line">     68 LAST_ACK</span><br><span class="line">    120 ESTABLISHED</span><br><span class="line">   1115 TIME_WAIT</span><br></pre></td></tr></table></figure>
-<p>通过调整内核参数解决</p>
-<p>vim /etc/sysctl.conf</p>
-<p>编辑文件，加入以下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_syncookies = 1 ; 开启 SYN Cookies，当出现 SYN 等待队列溢出时，启用 cookie 来处理</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1 ; 开启重用，允许将 TIME_WAIT sockets 重新用于新的 TCP 连接</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1 ; 开启 TCP 连接中 TIME_WAIT sockets 的快速回收</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30 ; 修改系统默认的 TIME_OUT 时间</span><br></pre></td></tr></table></figure>
-<p>TIME_WAIT 的默认时间是 2倍的 MLS，即 240 秒，最低为 30 秒，最高为 300 秒。MLS 是 TCP 片在网上的最长存活时间。TIME_WAIT的主要作用是保证关闭的TCP端口不立即被使用。因为当网络存在延迟时，可能当某个端口被关闭后，网络中还有一些重传的TCP片在发向这个端口，如果这个端口立即建立新的TCP连接，则可能会有影响。所以使用2倍的MSL时间来限制这个端口立即被使用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="cisjz6a66002gckpv2fg9koq7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="cisl7yos1007by9pvmnxscf6w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -583,7 +581,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -594,6 +592,10 @@ var _hmt = _hmt || [];
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
+          </li>
         
           <li>
             <a href="/2016/08/30/虚拟化中的-SR-IOV/">虚拟化中的 SR-IOV</a>
@@ -609,10 +611,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/">Windows 2012 下通过命令行管理磁盘</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/">Linux 下访问 Windows 共享目录的配置方法</a>
           </li>
         
       </ul>

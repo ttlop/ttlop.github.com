@@ -82,6 +82,53 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Centos-7-禁用IPv6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/16/Centos-7-禁用IPv6/" class="article-date">
+  <time datetime="2016-04-16T08:30:41.000Z" itemprop="datePublished">2016-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/Centos-7-禁用IPv6/">Centos 7 禁用IPv6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当通过命令得到类似结果时，可以确认你的系统是启用了IPv6的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># ip -6 addr show</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 </span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp9s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qlen 1000</span><br><span class="line">    inet6 fe80::225:90ff:feaf:7e74/64 scope link </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># lsmod | grep ipv6</span></span><br><span class="line">nf_conntrack_ipv6      18738  5 </span><br><span class="line">nf_defrag_ipv6         34651  1 nf_conntrack_ipv6</span><br><span class="line">nf_nat_ipv6            13279  1 ip6table_nat</span><br><span class="line">nf_nat                 21798  4 nf_nat_ipv4,nf_nat_ipv6,ip6table_nat,iptable_nat</span><br><span class="line">nf_conntrack          101024  8 nf_nat,nf_nat_ipv4,nf_nat_ipv6,xt_conntrack,ip6table_nat,iptable_nat,nf_conntrack_ipv4,nf_conntrack_ipv6</span><br></pre></td></tr></table></figure></p>
+<p>如何关闭呢？我们需要进行如下操作：</p>
+<p>编辑文件/etc/sysctl.conf，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.default.disable_ipv6 = 1</span><br><span class="line">net.ipv6.conf.all.disable_ipv6 = 1</span><br></pre></td></tr></table></figure></p>
+<p>如果你想要为特定的网卡禁用IPv6，比如，对于enp0s3，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.enp0s3.disable_ipv6 = 1</span><br></pre></td></tr></table></figure></p>
+<p>使用如下命令生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p>编辑文件/etc/sysconfig/network，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NETWORKING_IPV6=no</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cisl7yoly000qy9pvxwrr6n6h" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Centos-7-更改yum源" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/16/Centos-7-更改yum源/" class="article-date">
@@ -117,7 +164,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cisjz6a3q000nckpv0cl32g48" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="cisl7yolw000ny9pvv4z3ypg8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -166,7 +213,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cisjz6aah008bckpvuoo344ym" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="cisl7yot5008by9pvll37pexj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +262,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cisjz6a4b0012ckpvr7tzl51q" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="cisl7yomn0012y9pvsi850hnq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -260,7 +307,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cisjz6a2x0004ckpv21venr0s" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="cisl7yokx0004y9pvokez5czl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -305,7 +352,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cisjz6a320006ckpvzz8iag1c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="cisl7yol40006y9pv0ysl4nv7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -350,7 +397,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cisjz6a2z0005ckpvxgsd2kph" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-里的-MPM-调优比较/" data-id="cisl7yol00005y9pv1lmpq8nk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -398,7 +445,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cisjz6a79003qckpvd39yc0oe" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Microsoft-SQL-Server-缓存清除与内存释放/" data-id="cisl7yoph003qy9pvt0n72gpk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -437,7 +484,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -448,6 +495,10 @@ var _hmt = _hmt || [];
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
+          </li>
         
           <li>
             <a href="/2016/08/30/虚拟化中的-SR-IOV/">虚拟化中的 SR-IOV</a>
@@ -463,10 +514,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/">Windows 2012 下通过命令行管理磁盘</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/">Linux 下访问 Windows 共享目录的配置方法</a>
           </li>
         
       </ul>
