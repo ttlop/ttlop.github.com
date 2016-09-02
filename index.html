@@ -108,15 +108,19 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="情况一"><a href="#情况一" class="headerlink" title="情况一"></a>情况一</h3><p>本机机器安装的是 <strong>Windows Server 2012 R2 Datacenter</strong> 系统，需要管理的机器安装的是 <strong>Microsoft Hyper-V Server 2012 R2</strong>，在使用服务器管理器添加需要管理的主机后发现提示 <strong>Winrm 协商身份验证错误</strong>，解决方案如下：</p>
-<p>在本机执行如下代码:</p>
+        <h3 id="情况一"><a href="#情况一" class="headerlink" title="情况一"></a>情况一</h3><ul>
+<li>管理机安装系统：<strong>Windows Server 2012 R2 Datacenter</strong> </li>
+<li>被管理机安装系统：<strong>Microsoft Hyper-V Server 2012 R2</strong></li>
+<li>提示错误：<strong>Winrm 协商身份验证错误</strong></li>
+<li>解决办法：<br>在管理机 powershell 模式下执行如下代码:</li>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-item wsman:localhost\client\trustedhosts –value *</span><br></pre></td></tr></table></figure>
-<p>然后我们再回到客户端，右键刷新即可。</p>
+<p>然后我们再回到客户端，右键刷新即可（注意防火墙是否开启）。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="cisl7yorm006ry9pv34jmrz2q" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="cisl82lxe006kzcpv4wbu01l0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +191,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="cisl7yotj0094y9pvzri2x4h8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="cisl82lz60091zcpvmfywhvlp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,7 +265,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="cisl7yomt0017y9pv6saar24t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="cisl82lst0017zcpvwal7wlw3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +324,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="cisl7yomq0016y9pv2o0ovxwa" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="cisl82lsq0016zcpv2jj3etcw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -376,7 +380,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="cisl7yorh006hy9pvyqz7oyy4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="cisl82lxd006hzcpv3ttdddzi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -422,7 +426,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cisl7yoo40024y9pvhbxvbiff" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cisl82lu10024zcpv8m3k5g7c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -515,7 +519,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cisl7yolf000ay9pvjb9vrjnk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cisl82lre000azcpvq9owd965" class="article-share-link">Share</a>
       
       
     </footer>
@@ -573,7 +577,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cisl7yol90008y9pva56vgd0d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cisl82lra0008zcpv6o4pnk9n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -616,7 +620,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cisl7yot7008fy9pvx9w3y1lf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cisl82lyw008fzcpv3zmk13kf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -661,7 +665,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cisl7yoqw005my9pvc8zly580" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cisl82lwu005mzcpvbz8e7vyq" class="article-share-link">Share</a>
       
       
     </footer>
