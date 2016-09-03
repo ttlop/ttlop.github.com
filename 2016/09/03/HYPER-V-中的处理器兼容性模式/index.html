@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>LinuxShell for使用换行符作为分隔符 | 运维生存时间</title>
+  <title>HYPER-V 中的处理器兼容性模式 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="shell 分隔符 换行符">
+  <meta name="description" content="hyper 处理器 兼容性模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LinuxShell for使用换行符作为分隔符">
-<meta property="og:url" content="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/index.html">
+<meta property="og:title" content="HYPER-V 中的处理器兼容性模式">
+<meta property="og:url" content="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="shell 分隔符 换行符">
-<meta property="og:updated_time" content="2016-08-05T07:27:50.884Z">
+<meta property="og:description" content="hyper 处理器 兼容性模式">
+<meta property="og:updated_time" content="2016-09-03T02:19:53.555Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LinuxShell for使用换行符作为分隔符">
-<meta name="twitter:description" content="shell 分隔符 换行符">
+<meta name="twitter:title" content="HYPER-V 中的处理器兼容性模式">
+<meta name="twitter:description" content="hyper 处理器 兼容性模式">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-LinuxShell-for使用换行符作为分隔符" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-HYPER-V-中的处理器兼容性模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/05/LinuxShell-for使用换行符作为分隔符/" class="article-date">
-  <time datetime="2016-08-05T07:17:55.000Z" itemprop="datePublished">2016-08-05</time>
+    <a href="/2016/09/03/HYPER-V-中的处理器兼容性模式/" class="article-date">
+  <time datetime="2016-09-03T01:37:16.000Z" itemprop="datePublished">2016-09-03</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      LinuxShell for使用换行符作为分隔符
+      HYPER-V 中的处理器兼容性模式
     </h1>
   
 
@@ -107,16 +107,49 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用 <strong>shell</strong> 编写脚本的过程中，无可避免有时候我们需要使用 <strong>for</strong> 循环来遍历一个函数返回的结果。有时候返回的结果是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 11 111</span><br><span class="line">2 22 222</span><br><span class="line">3 33 333</span><br></pre></td></tr></table></figure>
-<p>这时候如果我们需要按行来输出，使用 <strong>while read line</strong> 是一个不错的选择，那么使用 <strong>for</strong> 循环可以吗，答案是肯定的，但是需要修改分隔符 <strong>IFS</strong>，下面我们使用例子来说明。</p>
-<h3 id="实例一：修改分隔符为换行符"><a href="#实例一：修改分隔符为换行符" class="headerlink" title="实例一：修改分隔符为换行符"></a>实例一：修改分隔符为换行符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat test1.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">OLDIFS=$IFS</span><br><span class="line">IFS=&quot;\n&quot;</span><br><span class="line">for line in `cat test.txt`</span><br><span class="line">do</span><br><span class="line">	echo &quot;$line&quot;</span><br><span class="line">done</span><br><span class="line">IFS=&quot;$OLDIFS&quot;</span><br><span class="line">[root@localhost ~]# ./test1.sh </span><br><span class="line">1 11 111</span><br><span class="line">2 22 222</span><br><span class="line">3 33 333</span><br></pre></td></tr></table></figure>
-<h3 id="实例二：不修改分隔符"><a href="#实例二：不修改分隔符" class="headerlink" title="实例二：不修改分隔符"></a>实例二：不修改分隔符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat test2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">for line in `cat test.txt`</span><br><span class="line">do</span><br><span class="line">	echo &quot;$line&quot;</span><br><span class="line">done</span><br><span class="line">[root@localhost ~]# ./test2.sh </span><br><span class="line">1</span><br><span class="line">11</span><br><span class="line">111</span><br><span class="line">2</span><br><span class="line">22</span><br><span class="line">222</span><br><span class="line">3</span><br><span class="line">33</span><br><span class="line">333</span><br></pre></td></tr></table></figure>
+        <p>适用对象：Windows Server 2008 R2, Windows Server 2012 R2, Windows Server 2012, Hyper-V Server 2012 R2</p>
+<p>HYPER-V 提供了名为处理器兼容性模式的功能，第一次引入是在 Windows Server 2008 R2 中。 处理器兼容性模式允许您在使用不同的几代的处理器的虚拟化主机之间迁移正在运行的虚拟机。 此功能的工作原理是禁用了大量的现代处理器功能，这可能会影响虚拟机性能。 本文档提供了用于 HyperV 的处理器兼容性模式有关的详细信息。</p>
+<a id="more"></a>
+<h3 id="何时使用处理器兼容性模式"><a href="#何时使用处理器兼容性模式" class="headerlink" title="何时使用处理器兼容性模式"></a>何时使用处理器兼容性模式</h3><p>处理器兼容性模式是适用于任何不涉及重新启动虚拟机的虚拟机移动性方案。 其中包括虚拟机实时迁移，保存和还原和生产检查点。</p>
+<p>在使用不同的 CPU 制造商的处理器的虚拟化主机上不能实时迁移或保存和还原跨虚拟机。 例如，您不能从具有 Intel 处理器的主机移动正在运行的虚拟机或虚拟机到 AMD 处理器的主机。 如果您必须在这种情况下移动虚拟机，必须首先关闭，然后在新的主机上重新启动虚拟机。</p>
+<p>如果你打算在使用不同的几代的处理器的虚拟化主机之间移动虚拟机时避免重新启动它们，则应启用处理器兼容性模式。 例如，您可以启用处理器兼容性模式，以确保你可以在使用不同的处理器功能集的群集节点之间实时迁移虚拟机。 您还可以使用处理器兼容性模式以保存虚拟机并将其还原到具有不同处理器的主机集。</p>
+<h3 id="为什么需要处理器兼容性模式"><a href="#为什么需要处理器兼容性模式" class="headerlink" title="为什么需要处理器兼容性模式"></a>为什么需要处理器兼容性模式</h3><p>指令集体系结构 (ISA) 扩展是由处理器制造商引入的i优化功能。 这些功能通常用于将特定任务使用专门改进性能或安全性的硬件处理。 例如，应对多媒体应用程序制作的处理器功能偏向于提高向量计算的速度。 这些功能是很少的应用程序运行所必须的；它们大部分时候只是提高性能。</p>
+<p>一个处理器的功能集具体取决于其品牌、 型号和年龄而异。 操作系统和应用程序软件通常在首次启动时枚举系统的处理器功能集。 软件不用的处理器功能会在其生存期内发生变化 — 当然，这这种情况在物理计算机上运行时可能永远不会发生，因为处理器功能是静态的。</p>
+<p>虚拟机移动功能允许运行的虚拟机迁移到新的虚拟化主机。 但是如果在虚拟机中的软件已检测到并开始使用一个特定的处理器的功能，并且它被移到新的虚拟化主机缺少这一功能，该软件启动可能会失败。 这可能导致虚拟机崩溃。</p>
+<p>若要避免这些故障，HYPER-V 执行”预航班”检查虚拟机实时迁移时或启动保存/还原操作。 这些检查将可供针对的目标主机可用的功能集的源主机上的虚拟机的处理器功能的集进行比较。 如果这些功能集不匹配，则迁移或还原操作将被取消。</p>
+<h3 id="处理器兼容性模式的工作原理"><a href="#处理器兼容性模式的工作原理" class="headerlink" title="处理器兼容性模式的工作原理"></a>处理器兼容性模式的工作原理</h3><p>处理器兼容性模式下将隐藏较新的处理器指令集，通常为那些在最近 10 年内内引入。 但是，隐藏这些功能意味着来宾操作系统和应用程序软件不能充分利用这些处理器指令集增强功能。</p>
+<h3 id="使用处理器兼容性模式的后果"><a href="#使用处理器兼容性模式的后果" class="headerlink" title="使用处理器兼容性模式的后果"></a>使用处理器兼容性模式的后果</h3><p>很难量化处理器兼容性模式的整体性能效果。 性能损失是主要取决于虚拟机中运行的工作负荷。 某些工作负荷会完全不会受到影响，而其他人将显示明显的差别。将最大影响很大程度依赖于硬件优化 （如加密、 压缩或密集型的浮点计算) 的软件。</p>
+<h3 id="使用处理器兼容性模式"><a href="#使用处理器兼容性模式" class="headerlink" title="使用处理器兼容性模式"></a>使用处理器兼容性模式</h3><p>应该理解何时在 Hyper-v：使用处理器兼容性模式</p>
+<ul>
+<li><p>可以仅使用来自同一制造商的处理器的虚拟化主机之间迁移正在运行的虚拟机。</p>
+</li>
+<li><p>您在启用或禁用处理器兼容性模式之前必须关闭虚拟机。</p>
+</li>
+<li><p>处理器兼容性模式下不需要用于涉及一个停止并重新启动的虚拟机的虚拟机上移。</p>
+</li>
+<li><p>虚拟机重新启动时，任何时候来宾操作系统将枚举在新的主机计算机可用的处理器功能。</p>
+</li>
+</ul>
+<h3 id="启用处理器兼容性模式"><a href="#启用处理器兼容性模式" class="headerlink" title="启用处理器兼容性模式"></a>启用处理器兼容性模式</h3><p>若要启用虚拟机的处理器兼容性模式</p>
+<ol>
+<li><p>单击“开始”，指向“管理工具”，然后单击“Hyper-V 管理器”。</p>
+</li>
+<li><p>选择运行 HYPER-V 和所需的虚拟机的服务器。</p>
+</li>
+<li><p>如果虚拟机正在运行，则必须关闭虚拟机来更改该处理器兼容性模式设置。</p>
+</li>
+<li><p>在操作窗格中，单击设置，然后单击处理器。</p>
+</li>
+<li><p>展开处理器，然后单击兼容性。</p>
+</li>
+<li><p>单击迁移到具有不同处理器的物理计算机，然后单击确定</p>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="cismkajhg0037k1pvq2xuigv5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="cismkajel0016k1pv4qrmun1d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,19 +158,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/08/05/LinuxShell-双引号的妙用/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          LinuxShell 双引号的妙用
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/05/LinuxAwk-引用外部变量/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/09/02/Windows-NIC-组合/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">LinuxAwk 引用外部变量</div>
+      <div class="article-nav-title">Windows NIC 组合</div>
     </a>
   
 </nav>
