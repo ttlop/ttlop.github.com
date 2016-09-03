@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 禁用IPv6 | 运维生存时间</title>
+  <title>Windows NIC 组合 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="禁用IPv6">
+  <meta name="description" content="windows nic 网卡聚合">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 禁用IPv6">
-<meta property="og:url" content="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/index.html">
+<meta property="og:title" content="Windows NIC 组合">
+<meta property="og:url" content="http://ttlop.com/2016/09/02/Windows-NIC-组合/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="禁用IPv6">
-<meta property="og:updated_time" content="2016-04-16T08:47:09.921Z">
+<meta property="og:description" content="windows nic 网卡聚合">
+<meta property="og:updated_time" content="2016-09-02T07:13:58.092Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 禁用IPv6">
-<meta name="twitter:description" content="禁用IPv6">
+<meta name="twitter:title" content="Windows NIC 组合">
+<meta name="twitter:description" content="windows nic 网卡聚合">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-禁用IPv6" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Windows-NIC-组合" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/16/Centos-7-禁用IPv6/" class="article-date">
-  <time datetime="2016-04-16T08:30:41.000Z" itemprop="datePublished">2016-04-16</time>
+    <a href="/2016/09/02/Windows-NIC-组合/" class="article-date">
+  <time datetime="2016-09-02T07:03:00.000Z" itemprop="datePublished">2016-09-02</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+    <a class="article-category-link" href="/categories/Windows/">Windows</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Centos 7 禁用IPv6
+      Windows NIC 组合
     </h1>
   
 
@@ -107,18 +107,41 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>当通过命令得到类似结果时，可以确认你的系统是启用了IPv6的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># ip -6 addr show</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 </span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp9s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qlen 1000</span><br><span class="line">    inet6 fe80::225:90ff:feaf:7e74/64 scope link </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># lsmod | grep ipv6</span></span><br><span class="line">nf_conntrack_ipv6      18738  5 </span><br><span class="line">nf_defrag_ipv6         34651  1 nf_conntrack_ipv6</span><br><span class="line">nf_nat_ipv6            13279  1 ip6table_nat</span><br><span class="line">nf_nat                 21798  4 nf_nat_ipv4,nf_nat_ipv6,ip6table_nat,iptable_nat</span><br><span class="line">nf_conntrack          101024  8 nf_nat,nf_nat_ipv4,nf_nat_ipv6,xt_conntrack,ip6table_nat,iptable_nat,nf_conntrack_ipv4,nf_conntrack_ipv6</span><br></pre></td></tr></table></figure></p>
-<p>如何关闭呢？我们需要进行如下操作：</p>
-<p>编辑文件/etc/sysctl.conf，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.default.disable_ipv6 = 1</span><br><span class="line">net.ipv6.conf.all.disable_ipv6 = 1</span><br></pre></td></tr></table></figure></p>
-<p>如果你想要为特定的网卡禁用IPv6，比如，对于enp0s3，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv6.conf.enp0s3.disable_ipv6 = 1</span><br></pre></td></tr></table></figure></p>
-<p>使用如下命令生效</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
-<p>编辑文件/etc/sysconfig/network，添加下面的行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NETWORKING_IPV6=no</span><br></pre></td></tr></table></figure></p>
+        <p>NIC 组合即 NIC Teaming，也有被称为”网卡绑定”，此技术是 Windows Server 2012/2012 R2 的内置功能，可以为用户提供具有冗余和容错功能的网络适配器，NIC组合允许一次性绑定最多 32 个网卡接口成一个逻辑组，供用户使用。当组中某一个网卡发生故障时，组合中依然存活的网卡还可以正常使用。值得称道的是，NIC 组合技术对网卡厂商没有硬性要求，这是一种通用的技术。并且在特定前提下，NIC 组合还可以实现带宽叠加的效果。 </p>
+<a id="more"></a>
+<p>实现 NIC 组合需要满足以下条件：</p>
+<ul>
+<li>至少一个网卡接口，为了实现冗余特性，至少需要链各个网卡接口。</li>
+<li>组合接口需要处于同一个网络环境中，如果上联交换机采用的是 Access VLAN，则接口需要处于同一个 Access VLAN 中。</li>
+<li>组合网卡接口不可超过 32 个。</li>
+</ul>
+<p>NIC 组合拥有如下成组模式：</p>
+<ul>
+<li>静态成组，这是一个静态配置的解决方案，这种模式通常需要较高级别的交换机支持，如果插入配置错误的交换机，可能会导致成组失败。</li>
+<li>交换机独立，由于交换机不知道网卡接口是某一个 NIC 组合的一部分，因此 NIC 组合中的网卡可以连接到不同的交换机上，同时这种方式也是对交换机依赖最小的模式。</li>
+<li>LACP，链路聚合控制协议（LACP）用来动态的识别计算机和特定交换机之间的关系，一般来说这项技术主要用在交换机和交换机之间，用来带宽叠加，但现在已经可以在 Windows Server 2012/2012 R2 上使用了。</li>
+</ul>
+<p>注：lacp需要接入的是同一个交换机的2个不同端口，不能接入2台不同的交换机。</p>
+<p>NIC 组合拥有如下负载平衡模式：</p>
+<ul>
+<li>地址哈希，该算法会根据数据包的组成部分哈希，然后将其分配给具有该散列值的可用网卡。这就可以保证相同的数据流能够流向相同的网卡。可以用作哈希的组成部分包括源和目的的 MAC 地址、源和目的的 IP 地址，源和目的的 TCP 端口，</li>
+<li>Hyper-V 端口，当虚拟机都具有独立的 MAC 地址时，虚拟机的 MAC 地址可以为流量分配提供依据，因为虚拟机的 MAC 地址是有规律的，交换机可以平衡负载到多条链路上，这个特性和”虚拟机队列”组合使用是非常有用的。值得注意的是， Windows Server 2012/2012 R2 中使用 Hyper-V 的交换机端口作为识别符，而不是用MAC 地址，因为在某些情况下，一台虚拟机可能会使用多个 MAC 地址。</li>
+<li>动态，该选项类似于”自动”，也被称为智能负载均衡或自适应负载均衡。</li>
+</ul>
+<hr>
+<p>成组模式为”交换机独立”、负载平衡模式为”动态”的 NIC 组合，其建立不依赖交换机，任意一台普通交换机均可实现该功能。但这种 NIC 组合只能实现端口冗余和负载均衡，无法实现带宽叠加。</p>
+<p>NIC 组合的不兼容性：</p>
+<p>已知的在 Windows Server 2012 R2 中，NIC 组合与以下三项技术不兼容：</p>
+<ul>
+<li>SR-IOV，单根 I/O 虚拟化技术，由于其是一种硬件级的网络加速技术，因此数据直接传送到网卡，不通过网络堆栈，自然不可能数据重定向到一个虚拟的 NIC 成组上。 </li>
+<li>RDMA，远程直接内存访问技术，该技术多用于 10Gbps 网卡，是一种硬件级的网络加速技术，无法支持的原因同上。</li>
+<li>TCP Chimney，不受支持。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="cislfctu5000qagpvj7qvn0f8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="cislfctzo006kagpvz09aofuc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -127,19 +150,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/04/19/Centos-7-使用iptables服务/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Centos 7 使用iptables服务
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/16/Centos-7-更改yum源/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Centos 7 更改yum源</div>
+      <div class="article-nav-title">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</div>
     </a>
   
 </nav>
