@@ -82,6 +82,60 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Centos-7-更改-hostname" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/07/Centos-7-更改-hostname/" class="article-date">
+  <time datetime="2016-09-07T06:13:22.000Z" itemprop="datePublished">2016-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Centos-7-永久修改"><a href="#Centos-7-永久修改" class="headerlink" title="Centos 7 永久修改"></a>Centos 7 永久修改</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
+<p><strong>临时修改</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname newhostname</span><br></pre></td></tr></table></figure>
+<p>修改 hostname 后，/etc/hosts 文件并不会自动更新，所以每次在修改主机名后一定要手动更新 /etc/hosts，之后再重启 Centos 7，否则系统再启动时会很慢。</p>
+<h3 id="手动更新-etc-hosts"><a href="#手动更新-etc-hosts" class="headerlink" title="手动更新 /etc/hosts"></a>手动更新 /etc/hosts</h3><p>第一部分：网络 IP 地址<br>第二部分：主机名.域名<br>第三部分：主机名（主机名别名），其实就是主机名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.16.115	mail	mail.ttlop.cn</span><br></pre></td></tr></table></figure>
+<hr>
+<p>在 CentOS 7 中，有三种定义的主机名：</p>
+<ul>
+<li>静态的（static）</li>
+<li>瞬态的（transient）</li>
+<li>灵活的（pretty）</li>
+</ul>
+<p>“静态”主机名也称为内核主机名，是系统在启动时从 /etc/hostname 自动初始化的主机名。“瞬态”主机名是在系统运行时临时分配的主机名，例如，通过 DHCP 或 mDNS 服务器分配。静态主机名和瞬态主机名都遵从作为互联网域名同样的字符限制规则。而另一方面，“灵活”主机名则允许使用自由形式（包括特殊/空白字符）的主机名，以展示给终端用户（如 Dan’s Computer）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="cissjcn65000n4bpvjbj53ryk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-HYPER-V-中的处理器兼容性模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/09/03/HYPER-V-中的处理器兼容性模式/" class="article-date">
@@ -118,7 +172,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="cismkajel0016k1pv4qrmun1d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="cissjcn6t00104bpvdmdl2zxh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +217,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="cismkajkt006ok1pvtzsxerxw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="cissjcnd2006j4bpv7pkmm77n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -211,7 +265,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="cismkajku006qk1pvfe5qdhfb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="cissjcnd8006q4bpvafr1bk5m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,7 +336,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="cismkajn60098k1pv1xzckger" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="cissjcnfl00944bpvx14ygb8y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -356,7 +410,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="cismkajeu001ak1pvdr5kgw6y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="cissjcn7r001g4bpvjbzrltp1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -415,7 +469,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="cismkajeo0017k1pvgd81bbfr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="cissjcn7g001b4bpv635uzdp4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,7 +525,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="cismkajkq006lk1pv4cfe8o0j" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="cissjcnda006t4bpvsionfibm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -517,7 +571,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cismkajg90026k1pvzag9mhhu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cissjcn94002f4bpv0vf31qe2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -610,65 +664,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cismkajcp0008k1pvafmbkiph" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bat-之-for-循环" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/24/Bat-之-for-循环/" class="article-date">
-  <time datetime="2016-08-24T02:18:37.000Z" itemprop="datePublished">2016-08-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Bat/">Bat</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/24/Bat-之-for-循环/">Bat 之 for 循环</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-没有任何参数的-for"><a href="#1-没有任何参数的-for" class="headerlink" title="1. 没有任何参数的 for"></a>1. 没有任何参数的 for</h4><p>格式为：for %%i in (set) do command</p>
-<p>%%i 为变量<br>set 为一个文件或者一组文件，其实就是一个集合。可用通配符，比如 *.log。<br>command 是要执行的命令。</p>
-<p>例子：你想显示当前目录下扩展名为 log 的文件，可以使用 dir *.log，for 也可以实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for %i in (*.log) do echo %i</span><br></pre></td></tr></table></figure>
-<p>for 会先从括号里面执行，因为括号里面是 *.log，所以 for 会得到当前目录下所有扩展名是 mp3 的文件，并把它们作为一个集合，而每个文件名就是一个元素，像这样{1.log,2.log}，然后用 %%i 依次替代每个元素，之后做 do 后面的命令。当前 () 里面不局限于一个文件或者通配符，可以有多个通配符。</p>
-<h4 id="2-含有-L-的-for"><a href="#2-含有-L-的-for" class="headerlink" title="2. 含有 /L 的 for"></a>2. 含有 /L 的 for</h4><p>格式为：for /L %%i in (start, step, end) do command</p>
-<p>这个表示以增量形式从 start 到 end 的一个数字序列，步长是 step，就是每次的增量是 step</p>
-<p>例子：显示 1 到 5 之间的数字，可以如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /L %%i in (1, 1, 5) do echo %%i</span><br></pre></td></tr></table></figure>
-<p>例子：同时打开 3 个记事本程序：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /L %%1 in (1, 1, 3) do notepad.exe</span><br></pre></td></tr></table></figure>
-<p>如何理解呢？先从括号开始执行，产生集合，然后用 %%i 依次替代集合中的每个元素，之后执行 do 后面的命令，上面的例子可以看出我们不是必须在 do 后面的命令中使用到 %%i 的，但是这不能阻止 %%i 的每次替代。</p>
-<h4 id="3-含有-F-的-for"><a href="#3-含有-F-的-for" class="headerlink" title="3. 含有 /F 的 for"></a>3. 含有 /F 的 for</h4><p>格式：<br>for /F [“options”] %%i in (file) do command<br>for /F [“options”] %%i in (string) do command<br>for /F [“options”] %%i in (command) do command</p>
-<p>最常用的，也是最强的命令，主要用来处理文件和一些命令的输出结果。</p>
-<p>file 代表一个或多个文件<br>string 代表字符串<br>command 代表命令<br>[“options”] 可选</p>
-<p>我们以第一个为例，for 会依次将 file 中的文件打开，并且在进行到下一个文件之前将每个文件读取到内容，按照没一行分成一个一个的元素</p>
-<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for /F  %%i in (a.txt) do echo %%i</span><br><span class="line">for /F &quot;tokens=1,2 delims= &quot; %%i in (a.txt) do echo %%i %%j</span><br><span class="line">for /F &quot;tokens=* delims= &quot; %%i in (a.txt) do echo %%i</span><br><span class="line">for /F &quot;skip=2&quot; %%i in (a.txt) do echo %%i</span><br><span class="line">for /F &quot;eol=2&quot; %%i in (a.txt) do echo %%i</span><br><span class="line"></span><br><span class="line">D:\&gt;type a.txt</span><br><span class="line">第1行第1列 第1行第2列 第1行第3列</span><br><span class="line">第2行第1列 第2行第2列 第2行第3列</span><br><span class="line">第3行第1列 第3行第2列 第3行第3列</span><br></pre></td></tr></table></figure></p>
-<p>delims 用来告诉 for 每一行应该拿什么作为分隔符，默认分隔符是空格和tab键，当通过 delims 将每一行分为更小的元素时由它来控制要取哪一个或哪几个，skip 表示忽略文件的前多少行，而 eol 用来指定当一行以什么符号开始时，就忽略它。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cismkajcu000ak1pvcjhh5f2h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cissjcn5h000a4bpv90ug3l0g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -681,7 +677,7 @@ var _hmt = _hmt || [];
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -720,6 +716,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/03/HYPER-V-中的处理器兼容性模式/">HYPER-V 中的处理器兼容性模式</a>
           </li>
         
@@ -733,10 +733,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/08/30/虚拟化中的-SR-IOV/">虚拟化中的 SR-IOV</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/30/Hyper-V-网络配置/">Hyper-V 网络配置</a>
           </li>
         
       </ul>
