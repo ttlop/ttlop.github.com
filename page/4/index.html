@@ -82,6 +82,66 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP-feof-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/06/PHP-feof-函数/" class="article-date">
+  <time datetime="2016-08-06T06:35:48.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/06/PHP-feof-函数/">PHP feof() 函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>fe() 函数检测是否已经达到文件末尾(eof)。<br>如果文件指针到了 EOF 或者出错时则返回 TRUE，否则返回一个错误（包括 socket 超时），其它情况则返回 FALSE。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">feof(file)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">file</td>
+<td style="text-align:left">必须。规定要检查的打开文件。</td>
+</tr>
+</tbody>
+</table>
+<p>说明：file 参数是一个文件指针。这个指针必须有效，并且必须指向一个由 fopen() 或 fsockopen() 成功打开（但还没有被 fclose()关闭）的文件。</p>
+<h3 id="提示和注释"><a href="#提示和注释" class="headerlink" title="提示和注释"></a>提示和注释</h3><p>提示：feop() 函数对遍历程度未知的数据很有用。</p>
+<p>注意：如果服务器没有关闭由 fsockopen() 所打开的连接，feof() 会一直等待直到超时而返回 TRUE。默认的超时限制是 60 秒，可以使用 stream_set_timeout() 来改变这个值。</p>
+<p>注意：如果传递的文件指针无效可能会陷入无线循环中，因为 EOF 不会返回 TRUE。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/06/PHP-feof-函数/" data-id="cistrrau9005588pv98d81r3f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PHP-fopen-函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/06/PHP-fopen-函数/" class="article-date">
@@ -193,7 +253,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-fopen-函数/" data-id="cissjcnc0005b4bpva3drix4y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-fopen-函数/" data-id="cistrrauj005c88pvn6suxl20" class="article-share-link">Share</a>
       
       
     </footer>
@@ -235,7 +295,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/Linux-apache-access-log-Analy-2/" data-id="cissjcn8i001v4bpvlflbestq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/Linux-apache-access-log-Analy-2/" data-id="cistrraqi001x88pvdi5xjsqx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -281,7 +341,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/" data-id="cissjcna6003g4bpve5pvdzij" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/" data-id="cistrrass003j88pv0u2vl326" class="article-share-link">Share</a>
       
       
     </footer>
@@ -326,7 +386,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="cissjcna2003a4bpvqbh9lth5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="cistrrash003b88pvx568hsc8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -371,7 +431,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="cissjcna000384bpvuuk08eyt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="cistrrasf003988pvfjeool8h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -414,7 +474,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="cissjcnab003k4bpvu9pr5p7i" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="cistrrast003l88pv38wtd0ms" class="article-share-link">Share</a>
       
       
     </footer>
@@ -459,7 +519,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="cissjcn8y00274bpv8vdavz7e" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="cistrraqz002a88pvqjns6qa9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -505,7 +565,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="cissjcncp00614bpvc6yzsfva" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="cistrrav1005w88pvfgjuu0lz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -565,55 +625,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cissjcnd4006l4bpviw63jtqm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-apache-access-log-Analy" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/30/Linux-apache-access-log-Analy/" class="article-date">
-  <time datetime="2016-07-30T07:54:28.000Z" itemprop="datePublished">2016-07-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/30/Linux-apache-access-log-Analy/">Linux apache access_log Analy</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此脚本利用 apache 的 server-status 页面值判断服务器并发情况，利用 apache 访问日志分析来源 IP，并进行处理</p>
-<p>存在问题：</p>
-<ul>
-<li>server-status 页面在连续访问一段时间之后 ReqPerSec 的值会出现不准确的情况，相较于 apachetop -T 1 -d 1 的结果</li>
-<li>大量用户通过同一个公网ip来访问站点时容易出现误封的情况</li>
-<li>没有自动解封的功能</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># author: 411383444@qq.com</span><br><span class="line">#####</span><br><span class="line"># 并发连接达到阀值，进行日志分析</span><br><span class="line"># 统计日志中每个ip访问次数</span><br><span class="line"># ip访问占比超过阀值进行记录并进行后续处理</span><br><span class="line"># 将ip添加到防火墙并记录</span><br><span class="line">#####</span><br><span class="line"></span><br><span class="line">#需要分析的站点URL</span><br><span class="line">CheckUrl=http://127.0.0.1/server-status?auto</span><br><span class="line">#需要分析的访问日志</span><br><span class="line">LogPath=/var/log/httpd/access_log</span><br><span class="line">#分析多长时间以内的日志</span><br><span class="line">AnalyTime=5</span><br><span class="line">#分析每秒请求数</span><br><span class="line">AnalyValue=ReqPerSec</span><br><span class="line">#取排名前10的ip列表</span><br><span class="line">AnalyCount=10</span><br><span class="line">#IP白名单</span><br><span class="line">WhiteIp=/root/white_ip.txt</span><br><span class="line">#符合过滤要求的IP列表</span><br><span class="line">BlockIp=/root/block_ip.txt</span><br><span class="line">#添加进防火墙的记录</span><br><span class="line">DenyLog=/root/denylog.txt</span><br><span class="line">#每秒总共访问阀值</span><br><span class="line">ThresholdAll=1000</span><br><span class="line">#每秒每IP访问阀值</span><br><span class="line">ThresholdSingleIp=15</span><br><span class="line"></span><br><span class="line"># 获取当前访问计数（整数）- 函数需要代入当前计数的是哪个值</span><br><span class="line"># Usage: ReqPerSec_Count ReqPerSec</span><br><span class="line">function ReqPerSec_Count()&#123;</span><br><span class="line">	ReqPerSec=`wget --quiet -O - $CheckUrl | head -n 9 | grep &quot;$AnalyValue&quot; | tr -d &quot; &quot; | awk -F &quot;:&quot; &apos;&#123;print $2&#125;&apos; | awk -F &quot;.&quot; &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">	echo $ReqPerSec</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#计算并发（平均值） - 函数需要带入当前计算是哪个值多少秒内的平均值</span><br><span class="line"># Usage: ReqPerSec_Avg 3 ReqPerSec</span><br><span class="line">function ReqPerSec_Avg()&#123;</span><br><span class="line">	for (( n = 0; n &lt; $AnalyTime; n++ ))</span><br><span class="line">	do</span><br><span class="line">		ReqPerSec=$[$ReqPerSec+`ReqPerSec_Count $AnalyValue`]</span><br><span class="line">		sleep 1</span><br><span class="line">	done</span><br><span class="line">	ReqPerSecAvg=`expr $ReqPerSec / $AnalyTime`</span><br><span class="line">	echo $ReqPerSecAvg</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 访问超限IP处理</span><br><span class="line">function DenyIP()&#123;</span><br><span class="line">	if [[ `grep -q $1 $WhiteIp` -eq 0 ]]; then</span><br><span class="line">		echo &quot;$1 ( white_ip )&quot; &gt;&gt; $BlockIp</span><br><span class="line">	else</span><br><span class="line">		echo &quot;$1&quot; &gt;&gt; $BlockIp</span><br><span class="line">		iptables -nL | grep -q $1 || (iptables -I INPUT -s $1 -p tcp --dport 80 -j DROP &amp; echo &quot;$block_ip `date +%Y-%m-%H:%M:%S`&quot; &gt;&gt; ./denylog.txt)</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 统计 IP 访问次数列表 - 函数需要代入</span><br><span class="line">function Access_Count()&#123;</span><br><span class="line">	ReqPerSecAvg=`ReqPerSec_Avg`</span><br><span class="line">	</span><br><span class="line">	iplist=`tail -n $ReqPerSecAvg $LogPath | awk -F &quot; &quot; &apos;&#123;print $1&#125;&apos; | sort | uniq -c | sort -rn | head -n $AnalyCount | awk -F &quot; &quot; &apos;&#123;if($1&gt;=$ThresholdSingleIp) print $2&#125;&apos;`</span><br><span class="line"></span><br><span class="line">	for block_ip in $iplist</span><br><span class="line">	do</span><br><span class="line">		DenyIP $block_ip</span><br><span class="line">		sleep 1</span><br><span class="line">	done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 程序入口</span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">	# 判断实时访问数是否超过阀值</span><br><span class="line">	if [[ `ReqPerSec_Count` -ge $ThresholdAll ]]; then</span><br><span class="line">		echo &quot;需要处理...!&quot;</span><br><span class="line">		Access_Count</span><br><span class="line">	else</span><br><span class="line">		echo &quot;不需要处理...!&quot;</span><br><span class="line">		sleep 10</span><br><span class="line">	fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/Linux-apache-access-log-Analy/" data-id="cissjcn8s00224bpv3y2fhg2n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cistrravt006m88pv0t8ws97y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -665,6 +677,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
           </li>
         
@@ -678,10 +694,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/30/虚拟化中的-SR-IOV/">虚拟化中的 SR-IOV</a>
           </li>
         
       </ul>

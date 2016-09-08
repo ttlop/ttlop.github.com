@@ -82,6 +82,99 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Bat-的变量与命令-set-的用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/24/Bat-的变量与命令-set-的用法/" class="article-date">
+  <time datetime="2016-08-24T03:44:28.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Bat/">Bat</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/24/Bat-的变量与命令-set-的用法/">Bat 的变量与命令 set 的用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="set-功能一览"><a href="#set-功能一览" class="headerlink" title="set 功能一览"></a>set 功能一览</h3><ul>
+<li><p>[设置变量]<br>格式：set 变量名=变量值<br>详细：被设定的变量以 %变量名% 引用</p>
+</li>
+<li><p>[取消变量]<br>格式：set 变量名=<br>详细：取消后的变量名若被引用 %变量名% 将为空</p>
+</li>
+<li><p>[展示变量]<br>格式：set 变量名<br>详细：展示以变量名开头的所有变量及值</p>
+</li>
+<li><p>[列出变量]<br>格式：set</p>
+</li>
+<li><p>[计算器]<br>格式：set /a 表达式<br>示例：set /a 1+2*3 输出 7</p>
+</li>
+<li><p>[设置变量为表达式计算后的值]<br>set /a a=1+2<br>注意区分：set a=1+2</p>
+</li>
+<li><p>[设置变量为用户输入的值]<br>set /P a=</p>
+</li>
+</ul>
+<h3 id="预定义的变量"><a href="#预定义的变量" class="headerlink" title="预定义的变量"></a>预定义的变量</h3><p>下面是一些已经被底层定义好可以直接使用的变量：不会出现在 set 显示的变量列表中。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%CD%</td>
+<td style="text-align:left">当前目录字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">%DATA%</td>
+<td style="text-align:left">用跟 DATE 命令同样的格式表示当前日期</td>
+</tr>
+<tr>
+<td style="text-align:left">%TIME%</td>
+<td style="text-align:left">用跟 TIME 命令同样的格式表示当前时间</td>
+</tr>
+<tr>
+<td style="text-align:left">%RANDOM%</td>
+<td style="text-align:left">表示0到32767之间的任意十进制数字</td>
+</tr>
+<tr>
+<td style="text-align:left">%ERRORLEVEL%</td>
+<td style="text-align:left">表示当前 ERRORLEVEL 数值</td>
+</tr>
+<tr>
+<td style="text-align:left">%PATH%</td>
+<td style="text-align:left">当前的环境变量，以分号隔开的路径列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="扩展变量"><a href="#扩展变量" class="headerlink" title="扩展变量"></a>扩展变量</h3><p>@ 与 $i 相关的变量（bat参数或者for循环的%i）<br>@ 与 %VAR% 相关的变量</p>
+<p>|变量|含义|<br>|%0|脚本的路径名|<br>|%~x0|当前脚本后缀|<br>|%~n0|当前脚本文件名，不包含后缀|<br>|%~nx0|当前脚本文件名，注意跟%0区分|<br>|%~dp0|当前脚本工作目录<br>|%VAR:str1=str2%|会将VAR中的str1替换为str2，如str2为空可以起到删除效果，str1可以加*通配符|<br>|%VAR:~0,-2%|提取VAR变量的所有字符，除了最后两个|<br>|%VAR:~2%|提取VAR变量除前两个外的所有字符|<br>|%VAR:~-2%|提取VAR变量的最后两个字符|<br>|%VAR:~2,5%|提取从第2个字符开始的5个字符|</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cistrramy000a88pvmvjqae28" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Bat-之-for-循环" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/24/Bat-之-for-循环/" class="article-date">
@@ -130,7 +223,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cissjcn5e00084bpvezt3mu6a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cistrramu000888pvgh0s0c1x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +266,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cissjcnf7008l4bpv6ok0r2kr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cistrray5008o88pvej9rsxqj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +311,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cissjcncd005o4bpvsrdpirip" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cistrraux005s88pvchk8a5zb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -263,7 +356,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cissjcncb005m4bpv4fwjc3wy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cistrrauu005o88pvjhnrimpq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -377,7 +470,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cissjcnbn004w4bpvvxxss010" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cistrrau4004x88pvcngja4o5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -433,7 +526,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cissjcnbq004y4bpve4prcse0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cistrrau6005088pvc4l2qi6y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -492,7 +585,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cissjcnci005u4bpvrh1tt899" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cistrrav4005y88pv6t64p035" class="article-share-link">Share</a>
       
       
     </footer>
@@ -539,7 +632,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cissjcncg005s4bpvts6ubk8v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cistrrauz005u88pv21iklukg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -589,52 +682,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cissjcnce005q4bpvqaczp2p3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-Array-数组" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/09/PHP-Array-数组/" class="article-date">
-  <time datetime="2016-08-09T08:29:02.000Z" itemprop="datePublished">2016-08-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/09/PHP-Array-数组/">PHP Array 数组</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>PHP</strong> 中的数组实际上是一个有序映射。映射是一种把 <em>values</em> 关联到 <em>keys</em> 的类型。此类型在很多方面做了优化，因此可以可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性。由于数组元素的值也可以是另一个数组，所以树形结构和多维数组也是允许的。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/09/PHP-Array-数组/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cissjcnbl004t4bpvaeifdnxk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cistrrauw005q88pvke9daqja" class="article-share-link">Share</a>
       
       
     </footer>
@@ -686,6 +734,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
           </li>
         
@@ -699,10 +751,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/30/虚拟化中的-SR-IOV/">虚拟化中的 SR-IOV</a>
           </li>
         
       </ul>

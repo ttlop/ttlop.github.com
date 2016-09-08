@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Centos 7 安装 postfix | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="postfix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos 7 安装 postfix">
+<meta property="og:url" content="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="postfix">
+<meta property="og:updated_time" content="2016-09-08T07:36:30.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos 7 安装 postfix">
+<meta name="twitter:description" content="postfix">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Centos-7-安装-postfix" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/08/Centos-7-安装-postfix/" class="article-date">
+  <time datetime="2016-09-08T03:11:41.000Z" itemprop="datePublished">2016-09-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Centos 7 安装 postfix
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装没什么好说的，无非是卸载 sendmail，安装 postfix 即可。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li>/etc/postfix/main.cf 配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/postfix/main.cf | grep -v ^# | grep -v ^$</span><br><span class="line">queue_directory = /var/spool/postfix</span><br><span class="line">command_directory = /usr/sbin</span><br><span class="line">daemon_directory = /usr/libexec/postfix</span><br><span class="line">data_directory = /var/lib/postfix</span><br><span class="line">mail_owner = postfix</span><br><span class="line">myhostname = mail.ttlop.cn</span><br><span class="line">mydomain = ttlop.cn</span><br><span class="line">myorigin = $mydomain</span><br><span class="line">inet_interfaces = $myhostname</span><br><span class="line">inet_protocols = all</span><br><span class="line">mydestination = $myhostname, $mydomain, localhost.$mydomain, localhost</span><br><span class="line">unknown_local_recipient_reject_code = 550</span><br><span class="line">mynetworks = 192.168.16.0/24, 127.0.0.0/8, 192.168.200.91/32</span><br><span class="line">alias_maps = hash:/etc/aliases</span><br><span class="line">alias_database = hash:/etc/aliases</span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">debug_peer_level = 2</span><br><span class="line">debugger_command =</span><br><span class="line">	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin</span><br><span class="line">	 ddd $daemon_directory/$process_name $process_id &amp; sleep 5</span><br><span class="line">sendmail_path = /usr/sbin/sendmail.postfix</span><br><span class="line">newaliases_path = /usr/bin/newaliases.postfix</span><br><span class="line">mailq_path = /usr/bin/mailq.postfix</span><br><span class="line">setgid_group = postdrop</span><br><span class="line">html_directory = no</span><br><span class="line">manpage_directory = /usr/share/man</span><br><span class="line">sample_directory = /usr/share/doc/postfix-2.10.1/samples</span><br><span class="line">readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES</span><br></pre></td></tr></table></figure>
+<ol>
+<li>/etc/hostname 配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/hostname </span><br><span class="line">mail.ttlop.cn</span><br></pre></td></tr></table></figure>
+<ol>
+<li>/etc/hosts 配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.16.115	mail.ttlop.cn	mail</span><br></pre></td></tr></table></figure>
+<ol>
+<li>/etc/resolv.conf 配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/resolv.conf </span><br><span class="line"># Generated by NetworkManager</span><br><span class="line">search ttlop.cn</span><br><span class="line">nameserver 222.246.129.80</span><br></pre></td></tr></table></figure>
+<ol>
+<li>域名解析配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# nslookup</span><br><span class="line">&gt; set q=mx</span><br><span class="line">&gt; ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">ttlop.cn	mail exchanger = 1 mail.ttlop.cn.</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br><span class="line">&gt; set q=a</span><br><span class="line">&gt; mail.ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">Name:	mail.ttlop.cn</span><br><span class="line">Address: 222.240.236.201</span><br><span class="line">&gt; set q=txt</span><br><span class="line">&gt; ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">ttlop.cn	text = &quot;v=spf1 ipv4:58.20.58.192/27 ipv4:58.20.58.224/27 ipv4:222.240.240.240/28 ipv4:222.240.236.192/28 ~all&quot;</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br></pre></td></tr></table></figure>
+<ol>
+<li>防火墙配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-service=smtp --permanent</span><br><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
+<p>至此配置完成。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ol>
+<li><p>测试内外网 smtp 端口是否开放</p>
+</li>
+<li><p>测试邮件是否可以发出：echo “Mail Content” | mail -s “Mail Subject” 18675850419@wo.cn，建议先从 wo 邮箱往这边发送测试邮件</p>
+</li>
+<li><p>查看 /var/log/maillog、postqueue -p 等信息确认发送是否正常</p>
+</li>
+<li><p>测试邮件是否可以收到，如果当前操作均在 root 下进行，可以直接在 wo 邮箱中发送邮件到 root@ttlop.cn，通过在服务器命令行输入 mail 来确认是否可以收到邮件</p>
+</li>
+</ol>
+<hr>
+<p>至此测试完成，实际环境中发现发送到 qq 邮箱的邮件均被拒绝，建议多用几个邮箱帐号来测试，有时环境搭建正常，但依然会出现邮件发不出去的情况。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="cistrranh000k88pvszmhs28a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/07/Centos-7-更改-hostname/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Centos 7 更改 hostname</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/03/HYPER-V-中的处理器兼容性模式/">HYPER-V 中的处理器兼容性模式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/02/Windows-NIC-组合/">Windows NIC 组合</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
