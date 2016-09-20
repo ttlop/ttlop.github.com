@@ -82,6 +82,103 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux-大量-TIME-WAIT-解决办法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" class="article-date">
+  <time datetime="2016-07-28T06:22:09.000Z" itemprop="datePublished">2016-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/28/Linux-大量-TIME-WAIT-解决办法/">Linux 大量 TIME_WAIT 解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用以下语句看服务器的 TCP 状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost httpd]# netstat -ant | awk &apos;/^tcp/ &#123;print $6&#125;&apos; | sort | uniq -c | sort -n</span><br><span class="line">      1 CLOSING</span><br><span class="line">      7 LISTEN</span><br><span class="line">     15 SYN_RECV</span><br><span class="line">     24 FIN_WAIT1</span><br><span class="line">     34 FIN_WAIT2</span><br><span class="line">     68 LAST_ACK</span><br><span class="line">    120 ESTABLISHED</span><br><span class="line">   1115 TIME_WAIT</span><br></pre></td></tr></table></figure>
+<p>通过调整内核参数解决</p>
+<p>vim /etc/sysctl.conf</p>
+<p>编辑文件，加入以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_syncookies = 1 ; 开启 SYN Cookies，当出现 SYN 等待队列溢出时，启用 cookie 来处理</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1 ; 开启重用，允许将 TIME_WAIT sockets 重新用于新的 TCP 连接</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1 ; 开启 TCP 连接中 TIME_WAIT sockets 的快速回收</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30 ; 修改系统默认的 TIME_OUT 时间</span><br></pre></td></tr></table></figure>
+<p>TIME_WAIT 的默认时间是 2倍的 MLS，即 240 秒，最低为 30 秒，最高为 300 秒。MLS 是 TCP 片在网上的最长存活时间。TIME_WAIT的主要作用是保证关闭的TCP端口不立即被使用。因为当网络存在延迟时，可能当某个端口被关闭后，网络中还有一些重传的TCP片在发向这个端口，如果这个端口立即建立新的TCP连接，则可能会有影响。所以使用2倍的MSL时间来限制这个端口立即被使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="citb38zd2002qdhpvk4v4dbhf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LinuxShell-sed-进阶" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/22/LinuxShell-sed-进阶/" class="article-date">
+  <time datetime="2016-07-22T01:31:57.000Z" itemprop="datePublished">2016-07-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/22/LinuxShell-sed-进阶/">LinuxShell sed 进阶</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用 sed 编辑器的基本命令时，有一个局限，即 sed 编辑器命令只对单行数据执行操作。在 sed 编辑器读取数据流时，它会基于换行符的位置将数据分成行。sed 编辑器一次一行地处理数据行–在一个文本行上运行定义好的脚本命令，然后移到下一行重复这个过程。如果需要在跨多行的数据上执行特定的操作，sed 编辑器包含的 3 个可用来处理多行文本的特殊命令。</p>
+<ul>
+<li>N：将数据流中的下一行加进来创建一个多行组来处理</li>
+<li>D：删除多行组中的一行</li>
+<li>P：打印多行组中的一行</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/22/LinuxShell-sed-进阶/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="citb38zdm003hdhpvhsm0b129" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux-SMB-配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/20/Linux-SMB-配置/" class="article-date">
@@ -117,7 +214,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="citau5yg6001uzhpvi1hcl0j6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="citb38zcf001xdhpvcq1mc2jz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +259,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="citau5yfk001hzhpv8ir7fjxt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="citb38zbz001jdhpvpsdcc4ho" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +304,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/19/Linux-inode-block-与硬盘容量关系/" data-id="citau5yge0024zhpvrfsp8v0a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/19/Linux-inode-block-与硬盘容量关系/" data-id="citb38zcl0027dhpvm6s7lybb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -252,7 +349,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="citau5yi3003szhpvvh7d5ka3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="citb38ze0003udhpvksrbr1f6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +396,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="citau5ygh0027zhpvfba9khin" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="citb38zcn0029dhpvetmfsm61" class="article-share-link">Share</a>
       
       
     </footer>
@@ -345,7 +442,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Hexo-博客添加图片、音乐、视频/" data-id="citau5yf10017zhpv18z1mxzs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/15/Hexo-博客添加图片、音乐、视频/" data-id="citb38zbj0019dhpvfu4hfkzt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -390,7 +487,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/14/Centos-7-连接-SAS-磁盘阵列-DS3512/" data-id="citau5yen000yzhpvy3spddqm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/14/Centos-7-连接-SAS-磁盘阵列-DS3512/" data-id="citb38zb5000zdhpvyjqiy30c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -435,107 +532,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/14/lspci-命令详解/" data-id="citau5ymr0090zhpvcazm1pog" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-fdisk-结果介绍" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/13/Linux-fdisk-结果介绍/" class="article-date">
-  <time datetime="2016-07-13T01:57:58.000Z" itemprop="datePublished">2016-07-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/13/Linux-fdisk-结果介绍/">Linux fdisk 结果介绍</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>电脑硬盘在逻辑上被划分为磁道、柱面以及扇区。</p>
-<ul>
-<li>硬盘由很多盘片(platter)组成，每个盘片的每个面都有一个可读写磁头，如果有 N 个盘片，就有 2N 个面，对应 2N 个磁头（heads），从 0、1、2 开始编号（有些硬盘第一个或最后一个盘片只有一个磁头）；</li>
-<li>每个盘片被划分成若干个同心圆磁道（逻辑上的，不可见），每个盘片的划分规则通常是一样的。这样每个盘片的半径均为固定值 R 的同心圆在逻辑上形成了一个以电机主轴为轴的柱面（cylinders）,从外至里编号为 0、1、2。</li>
-<li>每个盘片上的每个磁道又被划分为几十个扇区（sector），通常的容量是 512 byte，并按照一定规则拜年话为 1、2、3。形成 cylinders <em> heads </em> sector 个扇区。这三个参数即是硬盘的物理参数。</li>
-</ul>
-<p>我们进行硬盘分区时，最小单位是柱面，分隔完之后进行格式化必须考虑 block 的大小，它是磁盘记录的最小单位，是由数个扇区组成，所以大小通常为 n*512Bytes，例如 4K。</p>
-<p>所以我们可以明确的是，block 是文件系统的抽象，不是磁盘本身的属性。扇区大小则是磁盘的物理属性，它是磁盘设备寻址的最小单元。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 120.0 GB, 120034123776 bytes         #磁盘的名称、大小</span><br><span class="line">255 heads, 63 sectors/track, 14593 cylinders        #磁头、扇区、柱面数量</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes    #每个柱面的大小</span><br><span class="line"></span><br><span class="line">### 注：</span><br><span class="line">柱面大小 = 扇区大小 * 每一个磁道扇区数量 * 盘面数量 = 512 bytes * 63 * 255 = 8225280 bytes</span><br><span class="line">硬盘大小 = 柱面大小 * 柱面数量 = 8225280 bytes * 14593</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sda1   *           1          13      104391   83  Linux</span><br><span class="line">/dev/sda2              14        4092    32764567+  82  Linux swap / Solaris</span><br><span class="line">/dev/sda3            4093       14593    84349282+  83  Linux</span><br><span class="line"></span><br><span class="line">### 注：由于硬盘分区最小单位是柱面，所以有如下结论</span><br><span class="line">/dev/sda1 大小 = 柱面数量 * 柱面大小 = 13 * 8225280 bytes   与下面使用 df 命令查看的结果相近</span><br><span class="line">/dev/sda3 大小 = 柱面数量 * 柱面大小 = 10501 * 8225280 bytes </span><br><span class="line"></span><br><span class="line">Disk /dev/sdb: 1000.2 GB, 1000204886016 bytes</span><br><span class="line">255 heads, 63 sectors/track, 121601 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1   *           1       63741   511999551   83  Linux</span><br><span class="line">/dev/sdb2           63742      121601   464760450   83  Linux</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# df -h</span><br><span class="line">文件系统              容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda3              78G   23G   52G  31% /</span><br><span class="line">/dev/sdb2             430G  636M  407G   1% /data</span><br><span class="line">/dev/sdb1             473G  218M  449G   1% /log</span><br><span class="line">/dev/sda1              99M   19M   76M  20% /boot</span><br><span class="line">tmpfs                 7.9G     0  7.9G   0% /dev/shm</span><br><span class="line">[root@localhost ~]# df -l</span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda3             81705912  23914364  53574084  31% /</span><br><span class="line">/dev/sdb2            450205576    650432 426317124   1% /data</span><br><span class="line">/dev/sdb1            495962916    222980 470139960   1% /log</span><br><span class="line">/dev/sda1               101086     18585     77282  20% /boot</span><br><span class="line">tmpfs                  8196780         0   8196780   0% /dev/shm</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# df -i</span><br><span class="line">文件系统               Inode (I)已用 (I)可用 (I)已用% 挂载点</span><br><span class="line">/dev/sda3            21102592   79233 21023359    1% /</span><br><span class="line">/dev/sdb2            116195328     758 116194570    1% /data</span><br><span class="line">/dev/sdb1            128024576      14 128024562    1% /log</span><br><span class="line">/dev/sda1              26104      41   26063    1% /boot</span><br><span class="line">tmpfs                2049195       1 2049194    1% /dev/shm</span><br><span class="line"></span><br><span class="line">### 注：由于每一个 block 都需要一个 inode，所有有一下结论</span><br><span class="line">/dev/sda1 inode 数量 = 硬盘大小 / block 大小 = 13 * 8225280 bytes / 4096 bytes   与 df -i 结果相近</span><br><span class="line">/dev/sda3 inode 数量 = 硬盘大小 / block 大小 = 10501 * 8225280 bytes / 4096 bytes</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/13/Linux-fdisk-结果介绍/" data-id="citau5ygd0022zhpvla6fckv7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-理解-inode" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/12/理解-inode/" class="article-date">
-  <time datetime="2016-07-12T07:37:59.000Z" itemprop="datePublished">2016-07-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/12/理解-inode/">理解 inode</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-inode-是什么？"><a href="#1-inode-是什么？" class="headerlink" title="1. inode 是什么？"></a>1. inode 是什么？</h3><p>文件存储在硬盘上，硬盘的最小存储单位叫做“扇区”，每个扇区存储 512 字节，相当于（0.5KB），操作系统读取硬盘的时候，不会一个一个扇区的读取，这样效率太低，而是一次性连续读取多个扇区，即一次性读取一个块（block），这种由多个扇区组成的“块”是文件存取的最小单位，“块”的大小，最常见的是 4KB，即连续八个 sector 组成一个 block，文件数据都存储在“块”中，那么很显然，我们还必须找到一个地方存储文件的元信息，比如文件的创建者、文件的创建日期、文件的大小等等。这种存储文件元信息的区域就叫做 inode，中文译名“索引节点”。每个文件都有对应的 inode，里面包含了该文件有关的一些信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 136.4 GB, 136365211648 bytes, 266338304 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes   # 扇区 512</span><br></pre></td></tr></table></figure>
-<p>inode 包含文件的元信息，可以用 stat 命令查看某个文件的 inode 信息，其具体包含以下内容：文件字节数、uid、gid、读写执行权限、时间戳、链接数，总之除了文件名以外的所有文件信息都存在 inode 之中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# stat for.sh </span><br><span class="line">  File: ‘for.sh’</span><br><span class="line">  Size: 52        	Blocks: 8          IO Block: 4096   regular file  # Block 4096</span><br><span class="line">Device: fd01h/64769d	Inode: 201906130   Links: 1</span><br><span class="line">Access: (0744/-rwxr--r--)  Uid: (    0/    root)   Gid: (    0/    root)</span><br><span class="line">Context: unconfined_u:object_r:admin_home_t:s0</span><br><span class="line">Access: 2016-06-22 14:07:37.778177900 +0800</span><br><span class="line">Modify: 2016-06-22 14:07:34.668177900 +0800</span><br><span class="line">Change: 2016-06-22 14:07:34.802177900 +0800</span><br><span class="line"> Birth: -</span><br><span class="line">[root@localhost ~]# ls -al for.sh </span><br><span class="line">-rwxr--r--. 1 root root 52 Jun 22 14:07 for.sh</span><br></pre></td></tr></table></figure>
-<p>inode 会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域：数据区存放数据，inode区存放inode信息。</p>
-<h3 id="2-inode-号码"><a href="#2-inode-号码" class="headerlink" title="2. inode 号码"></a>2. inode 号码</h3><p>每个 inode 都有一个号码，操作系统用个 inode 号码来识别不同的文件，表面上，用户通过文件名打开文件，实际上，系统内部这个过程分成三步：首先，系统找到了这个文件名对应的 inode 号码，其次通过 inode 号码，获取 inode 信息，最后根据 inode 信息，找到文件所在的 block ，读取数据。使用 ls -i 命令，可以查看文件名对应的 inode 号码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -i for.sh </span><br><span class="line">201906130 for.sh</span><br></pre></td></tr></table></figure>
-<h3 id="3-链接"><a href="#3-链接" class="headerlink" title="3. 链接"></a>3. 链接</h3><p>一般情况下，文件名和 inode 号码是一一对应关系，每个 inode 号码对应一个文件名，但是 Unix/Linux 系统允许多个文件名指向同一个 inode 号码。这意味着可以用不同文件名访问同样的内容，对文件内容进行修改会影响到所有文件名；但是删除一个文件名，不影响另一个文件名的访问，这种情况就被称为“硬链接”。<br>ln 命令可以创建硬链接：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln 源文件 目标文件</span><br></pre></td></tr></table></figure>
-<p>创建目录时，默认会生成两个两个目录项：”.”和”..”，前者的 inode 号码就是当前目录的，等同于当前目录的“硬链接”，后者的 inode 号码就是父目录的，等同于父目录的“硬链接”。所以，任何一个目录的“硬链接”总数总是等于2加上它的子目录总数。</p>
-<p>除了硬链接外还有一个软链接，与硬链接最大区别是软链接指向的是文件名而不是inode号码，所以链接数不会发生变化。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/12/理解-inode/" data-id="citau5yn7009nzhpvhl7mcril" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/14/lspci-命令详解/" data-id="citb38zhm0091dhpvp5s66zih" class="article-share-link">Share</a>
       
       
     </footer>
@@ -587,6 +584,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/">华为交换机对通过 SNMP 访问交换机的用户的 ACL 控制配置</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/">ACL match-order 中的 config 和 auto 的应用区别</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/20/Authentication-password-与-scheme-区别/">Authentication password 与 scheme 区别</a>
           </li>
         
@@ -596,14 +601,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
           </li>
         
       </ul>
