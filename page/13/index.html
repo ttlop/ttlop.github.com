@@ -82,6 +82,377 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Mysql-权限" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/14/Mysql-权限/" class="article-date">
+  <time datetime="2016-05-14T03:27:51.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/14/Mysql-权限/">Mysql 权限</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>show privileges 显示服务器支持的权限</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">权限级别</th>
+<th style="text-align:left">权限</th>
+<th style="text-align:left">权限说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">alter</td>
+<td style="text-align:left">To alter the table</td>
+</tr>
+<tr>
+<td style="text-align:left">存储过程</td>
+<td style="text-align:left">alter routine</td>
+<td style="text-align:left">To alter or drop stored functions/procedures</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表或索引</td>
+<td style="text-align:left">create</td>
+<td style="text-align:left">To create new databases and tables</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">create routine</td>
+<td style="text-align:left">To use CREATE FUNCTION/PROCEDURE</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">create temporary tables</td>
+<td style="text-align:left">To use CREATE TEMPORARY TABLE</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">create user</td>
+<td style="text-align:left">To create new users</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">create view</td>
+<td style="text-align:left">To create new views</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">delete</td>
+<td style="text-align:left">To delete existing rows</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库或表</td>
+<td style="text-align:left">drop</td>
+<td style="text-align:left">To drop databases, tables, and views</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">event</td>
+<td style="text-align:left">To create, alter, drop and execute events</td>
+</tr>
+<tr>
+<td style="text-align:left">存储过程</td>
+<td style="text-align:left">execute</td>
+<td style="text-align:left">To execute stored routines</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器主机上的文件访问</td>
+<td style="text-align:left">file</td>
+<td style="text-align:left">To read and write files on the server</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表或存储过程</td>
+<td style="text-align:left">grant option</td>
+<td style="text-align:left">To give to other users those privileges you possess</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">index</td>
+<td style="text-align:left">To create or drop indexes</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">insert</td>
+<td style="text-align:left">To insert data into tables</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">lock tables</td>
+<td style="text-align:left">To use LOCK TABLES (together with SELECT privilege)</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">process</td>
+<td style="text-align:left">To view the plain text of currently executing queries</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">proxy</td>
+<td style="text-align:left">To make proxy user possible</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表</td>
+<td style="text-align:left">references</td>
+<td style="text-align:left">To have references on tables</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">reload</td>
+<td style="text-align:left">To reload or refresh tables, logs and privileges，例如flush status</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">replication client</td>
+<td style="text-align:left">To ask where the slave or master servers are</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">replication slave</td>
+<td style="text-align:left">To read binary log events from the master</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">select</td>
+<td style="text-align:left">To retrieve rows from table</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">show database</td>
+<td style="text-align:left">To see all databases with SHOW DATABASES</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">show view</td>
+<td style="text-align:left">To see views with SHOW CREATE VIEW</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">shutdown</td>
+<td style="text-align:left">To shut down the server</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">super</td>
+<td style="text-align:left">To use KILL thread, SET GLOBAL, CHANGE MASTER, etc.</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">trigger</td>
+<td style="text-align:left">To use triggers</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">create tablespace</td>
+<td style="text-align:left">To create/alter/drop tablespaces</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">update</td>
+<td style="text-align:left">To update existing rows</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">usage</td>
+<td style="text-align:left">No privileges - allow connect only</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="citau1e1p004ax8pv9obozhqv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Mysql-mysql-user" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/13/Mysql-mysql-user/" class="article-date">
+  <time datetime="2016-05-13T07:01:22.000Z" itemprop="datePublished">2016-05-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/13/Mysql-mysql-user/">Mysql mysql.user</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前言：近几日，在学习使用 <strong>Zabbix 3</strong> 监控其他服务器的 <strong>Mysql</strong> ，学习过程中碰到一个很奇怪的问题，由此学习到下面的知识，还有很有意义的，记录如下。</p>
+<p>问题是这样发现的：</p>
+<ol>
+<li><p>在两台 <strong>Centos 7</strong> 系统中使用 <strong>Yum</strong> 方式分别安装了 <strong>zabbix-server</strong> 和 <strong>zabbix-agent</strong>，并且在装有 <strong>zabbix-agent</strong> 的服务器上使用 <strong>Yum</strong> 安装了 <strong>mariadb-server</strong>。</p>
+</li>
+<li><p>按照网上的一些资料，此处我应该要添加 <strong>.my.cnf</strong> 文件用来指定连接数据库的账号、密码，但是我这个人学习一个新的东西习惯先发现问题再去解决问题，觉得这样才知道每一步配置的具体用意。哎，坑爹的习惯啊。</p>
+</li>
+<li><p>噩梦开始，我在没有配置 <strong>.my.cnf</strong> 文件的前提下，<strong>zabbix-server</strong> 也可以监控到安装有 <strong>zabbix-agent</strong> 的服务器的数据库信息，数据库安装好之后我可是专门使用 <strong>mysaladmin</strong> 命令修改过账号密码的，为毛？</p>
+</li>
+<li><p>折腾了好几天，最后在一位技术圈的伙伴的提醒下，从数据库本身着手，才发现问题的根由。</p>
+</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/13/Mysql-mysql-user/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="citau1e1n0047x8pvj66sz956" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Centos-7-关闭-SELinux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/12/Centos-7-关闭-SELinux/" class="article-date">
+  <time datetime="2016-05-12T02:23:07.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/12/Centos-7-关闭-SELinux/">Centos 7 关闭 SELinux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="查看-SELinux-状态"><a href="#查看-SELinux-状态" class="headerlink" title="查看 SELinux 状态"></a>查看 SELinux 状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># /usr/sbin/sestatus </span></span><br><span class="line">SELinux status:                 enabled</span><br><span class="line">SELinuxfs mount:                /sys/fs/selinux</span><br><span class="line">SELinux root directory:         /etc/selinux</span><br><span class="line">Loaded policy name:             targeted</span><br><span class="line">Current mode:                   enforcing</span><br><span class="line">Mode from config file:          disabled</span><br><span class="line">Policy MLS status:              enabled</span><br><span class="line">Policy deny_unknown status:     allowed</span><br><span class="line">Max kernel policy version:      28</span><br><span class="line">或者</span><br><span class="line">[root@localhost ~]<span class="comment"># getenforce </span></span><br><span class="line">Permissive</span><br></pre></td></tr></table></figure>
+<h3 id="临时关闭-SELinux"><a href="#临时关闭-SELinux" class="headerlink" title="临时关闭 SELinux"></a>临时关闭 SELinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># setenforce 0</span></span><br></pre></td></tr></table></figure>
+<p>此时再次查看状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># /usr/sbin/sestatus </span></span><br><span class="line">SELinux status:                 enabled</span><br><span class="line">SELinuxfs mount:                /sys/fs/selinux</span><br><span class="line">SELinux root directory:         /etc/selinux</span><br><span class="line">Loaded policy name:             targeted</span><br><span class="line">Current mode:                   permissive</span><br><span class="line">Mode from config file:          disabled</span><br><span class="line">Policy MLS status:              enabled</span><br><span class="line">Policy deny_unknown status:     allowed</span><br><span class="line">Max kernel policy version:      28</span><br></pre></td></tr></table></figure>
+<h3 id="永久关闭-SELinux-需要重启服务器"><a href="#永久关闭-SELinux-需要重启服务器" class="headerlink" title="永久关闭 SELinux (需要重启服务器)"></a>永久关闭 SELinux (需要重启服务器)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config</span><br><span class="line">将</span><br><span class="line">SELINUX=enforcing</span><br><span class="line">修改为</span><br><span class="line">SELINUX=disabled</span><br><span class="line">重启服务器即可</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="citau1dvf000tx8pvspjfkhhn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Zabbix-的-system-cpu-load-与-CPU-使用率" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" class="article-date">
+  <time datetime="2016-05-11T08:46:20.000Z" itemprop="datePublished">2016-05-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/">Zabbix 的 system.cpu.load 与 CPU 使用率</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="CPU-使用率"><a href="#CPU-使用率" class="headerlink" title="CPU 使用率"></a>CPU 使用率</h3><p>CPU 使用率显示的是程序在运行期间实时占用的 CPU 百分比</p>
+<h3 id="CPU-load"><a href="#CPU-load" class="headerlink" title="CPU load"></a>CPU load</h3><p>CPU load 显示的是一段时间内正在使用和等待使用 CPU 的平均任务数，即负载。所以 CPU 使用率高，并不意味着负载就一定大。</p>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><ol>
+<li><p>公司上下班需打卡，每次只能有一个人在打卡且限定 <strong>5</strong> 秒钟，其他人等待，每人限定打一次，若一次不成功，只能重新排队，等待下一轮打卡</p>
+</li>
+<li><p>打卡机就相当于 CPU，而正在或等待打卡的人就相当于任务数</p>
+</li>
+<li><p>在打卡过程中，肯定会有人打完就走掉，有人没有打完而选择重新排队打卡，更会有新增的人在这儿排队，这个人数的变化就相当于任务数的增减</p>
+</li>
+<li><p>为了统计平均负载情况，我们每 <strong>5</strong> 秒统计一次人数，并在第1、5、15分钟的时候对统计情况取平均值，从而形成第1、5、15的平均负载</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li><p>有的人拿起打卡机就打卡，一直到 <strong>5</strong> 秒钟结束，而有的人可能前 <strong>2</strong> 秒没有操作，后 <strong>3</strong> 秒才真正在打卡</p>
+</li>
+<li><p>如果把打卡机比作CPU， 任务看作任务，我们就说前一个人的 CPU 利用率高，后一个人的 CPU 利用率低，但无论 CPU 的利用率高低，跟后面有多少任务在排队没有必然关系</p>
+</li>
+<li><p>除非后一秒打卡的人因为浪费了时间导致打卡不成功需要重新排队打卡，由于排队人数相当于任务数，任务数增加会导致负载变大，此时 CPU 的利用率低才会对负载有影响</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="citau1e7d0096x8pvrm4ri42y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-agent-在-Windows-上安装部署" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" class="article-date">
@@ -137,7 +508,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="cistrrax5007z88pvsp83c0yu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="citau1e5u0081x8pvvl1fhbh7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -361,7 +732,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cistrraxa008388pv63j1b6gg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="citau1e610084x8pvmxa2cke7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -452,7 +823,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cistrraxx008g88pvux6qmo2l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="citau1e6u008ix8pvxrfe22mq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,7 +868,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cistrraxc008488pvxjf8kdeo" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="citau1e630086x8pvz5xw0mm2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -542,7 +913,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="cistrrax0007s88pv26necp2w" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="citau1e670088x8pvuu61q7tu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -587,189 +958,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="cistrrax2007v88pv9z56mbo1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Simple-check-简单检测" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-Simple-check-简单检测/" class="article-date">
-  <time datetime="2016-05-06T01:59:06.000Z" itemprop="datePublished">2016-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/06/Zabbix-Simple-check-简单检测/">Zabbix Simple check 简单检测</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Simple check 通常用来检查远程未安装代理或者客户端的服务。使用 simple check，被监控客户端无需安装 zabbix agent，zabbix server 直接使用 simple check 来收集数据，基本上都是用来检测远程服务器某端口是否在监听。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/06/Zabbix-Simple-check-简单检测/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="cistrrawp007g88pv85ywtq67" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-自定义用户-key-与参数-UserParameter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" class="article-date">
-  <time datetime="2016-05-05T08:48:52.000Z" itemprop="datePublished">2016-05-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/">Zabbix 自定义用户 key 与参数 UserParameter</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果我们想被监控端执行一个 zabbix agent 没有预定义的指令，zabbix 的用户自定义参数功能提供了这个方法。我们可以在客户端配置文件 zabbix_agentd.conf 里面配置 UserParameter。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-自定义用户-key-与参数-UserParameter/" data-id="cistrraxv008e88pv9uvk53dl" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-External-check-外部命令检测" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-External-check-外部命令检测/" class="article-date">
-  <time datetime="2016-05-05T07:35:28.000Z" itemprop="datePublished">2016-05-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/05/Zabbix-External-check-外部命令检测/">Zabbix External check 外部命令检测</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Zabbix server 运行脚本或者二进制文件来执行外部检测，外部检测不需要在被监控段运行任何 agentd。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/05/Zabbix-External-check-外部命令检测/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-External-check-外部命令检测/" data-id="cistrrawa007988pv6ldhgdkf" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-item-key-详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/05/Zabbix-item-key-详解/" class="article-date">
-  <time datetime="2016-05-05T06:18:50.000Z" itemprop="datePublished">2016-05-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/05/Zabbix-item-key-详解/">Zabbix item key 详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>zabbix的items用来从主机获取数据，通常情况下，我们称item为监控项。例如我们服务器需要监控它的CPU负载，那么实现这个方法的东西就叫做item。</p>
-<p>监控项需要获取cpu信息，则需要一个对应的监控key：system.cpu.load。如果是获取网卡流量，那么获取网卡这个监控项需要key：net.if.in或者net.if.out。</p>
-<p>一般情况下key要与参数结合起来使用，例如获取5分钟的负载情况：system.cpu.load[avg5]，avg5是对应的参数。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/05/Zabbix-item-key-详解/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/05/Zabbix-item-key-详解/" data-id="cistrrax7008088pvlwdfv53o" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="citau1e5d007ux8pv706wb2mi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -793,7 +982,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI-Switch/">HUAWEI Switch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -821,23 +1010,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/20/Authentication-password-与-scheme-区别/">Authentication password 与 scheme 区别</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/交换机链路聚合/">交换机链路聚合</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/03/HYPER-V-中的处理器兼容性模式/">HYPER-V 中的处理器兼容性模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/Windows-NIC-组合/">Windows NIC 组合</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
           </li>
         
       </ul>

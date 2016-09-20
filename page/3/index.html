@@ -82,6 +82,218 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP-boolean-布尔类型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/12/PHP-boolean-布尔类型/" class="article-date">
+  <time datetime="2016-08-12T06:02:43.000Z" itemprop="datePublished">2016-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这是一个最简单的类型，可以为 <strong>TRUE</strong> 或 <strong>FALSE</strong>。如果要指定一个布尔值，使用关键字 <strong>TRUE</strong> 或 <strong>FALSE</strong> 即可，不区分大小写。通常运算符所返回的 <strong>boolean</strong> 值结果会被传递给流程控制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// == 是一个操作符，它检测两个变量是否相等，并返回一个布尔值</span><br><span class="line">if($action == &quot;show_version&quot;)&#123;</span><br><span class="line">	echo &quot;The version is 1.23&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以明确使用 <strong>(bool)</strong> 或者 <strong>(boolean)</strong> 来强制转换一个值为 <strong>boolean</strong>。大多数情况下不需要强制转换，因为当运算符，函数或流程控制结果需要一个 <strong>boolean</strong> 参数时，该值会被自动转换。</p>
+<p>当转换为 <strong>boolean</strong> 时，以下值被认为是 <strong>FALSE</strong>：</p>
+<ul>
+<li>布尔值 FALSE 本身</li>
+<li>整型值 0（零）</li>
+<li>浮点型值 0.0（零）</li>
+<li>空字符串以及字符串”0”</li>
+<li>不包括任何元素的数组</li>
+<li>不包括任何成员变量的对象（PHP 4.0适用）</li>
+<li>特殊类型 NULL（包括尚未赋值的变量）</li>
+<li>从空标记生成的 SimpleXML 对象</li>
+</ul>
+<p>所有其它值都被认为是 <strong>TRUE</strong>（包括任何资源）。<br>注：-1 和其它非零值（无论正负）都被认为是 <strong>TRUE</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_boolean.php </span><br><span class="line">&lt;?php</span><br><span class="line">var_dump((bool) &quot;&quot;);</span><br><span class="line">var_dump((bool) 1);</span><br><span class="line">var_dump((bool) -2);</span><br><span class="line">var_dump((bool) &quot;foo&quot;);</span><br><span class="line">var_dump((bool) 2.3e5);</span><br><span class="line">var_dump((bool) array(12));</span><br><span class="line">var_dump((bool) array());</span><br><span class="line">var_dump((bool) &quot;false&quot;);</span><br><span class="line">var_dump((bool) false);</span><br><span class="line">?&gt;</span><br><span class="line">[root@mail ~]# php php_boolean.php </span><br><span class="line">bool(false)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(false)</span><br><span class="line">bool(true)</span><br><span class="line">bool(false)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="citau1e2b004ux8pvjlsf492p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PHP-类型简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/12/PHP-类型简介/" class="article-date">
+  <time datetime="2016-08-12T05:52:06.000Z" itemprop="datePublished">2016-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/12/PHP-类型简介/">PHP 类型简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHP 支持 8 种原始数据类型。</p>
+<h4 id="标量类型"><a href="#标量类型" class="headerlink" title="标量类型"></a>标量类型</h4><ul>
+<li>boolean（布尔型）</li>
+<li>integer（整型）</li>
+<li>float（浮点型，也称作 double）</li>
+<li>string（字符串）</li>
+</ul>
+<h4 id="复合类型"><a href="#复合类型" class="headerlink" title="复合类型"></a>复合类型</h4><ul>
+<li>array（数组）</li>
+<li>object（对象）</li>
+</ul>
+<h4 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h4><ul>
+<li>resource（资源）</li>
+<li>NULL（无类型）</li>
+</ul>
+<hr>
+<p>变量的类型通常不是主动设定的，确切的说是由 <strong>PHP</strong> 根据该变量使用的上下文在运行时决定的。</p>
+<p>如果想查看某个表达式的值和类型，可以使用 <strong>var_dump()</strong> 函数。如果只是想得到一个易读懂的类型的表达式方式用于调试，用 <strong>gettype()</strong> 函数。要查看某个类型不要用 <strong>gettype()</strong>，而用 <strong>is_type</strong> 函数，以下是范例及执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_type.php </span><br><span class="line">&lt;?php</span><br><span class="line">$a_bool = TRUE;</span><br><span class="line">$a_str = &quot;foo&quot;;</span><br><span class="line">$a_str2 = &apos;foo&apos;;</span><br><span class="line">$an_int = 12;</span><br><span class="line"></span><br><span class="line">echo gettype($a_bool) . &quot;\n&quot;;</span><br><span class="line">echo gettype($a_str) . &quot;\n&quot;;</span><br><span class="line"></span><br><span class="line">if(is_int($an_int))&#123;</span><br><span class="line">	$an_int += 4;</span><br><span class="line">	echo $an_int . &quot;\n&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(is_string($a_bool))&#123;</span><br><span class="line">	echo &quot;String: $a_bool \n&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;Not String: $a_bool \n&quot;;</span><br><span class="line">&#125;</span><br><span class="line">[root@mail ~]# php php_type.php </span><br><span class="line">boolean</span><br><span class="line">string</span><br><span class="line">16</span><br><span class="line">Not String: 1</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="citau1e38005rx8pv90ffda0h" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PHP-的-feof-方法需要注意的地方" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" class="article-date">
+  <time datetime="2016-08-11T07:36:38.000Z" itemprop="datePublished">2016-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写过这样的一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>其中当读文件到结尾的时候，结果总会比期望的多出来一个元素：bool(false)。</p>
+<p>按说，如果读取到文件最后一行，<strong>feof</strong> 函数会返回 <strong>TRUE</strong>，然后 <strong>while</strong> 循环就退出了，为什么不是呢？</p>
+<p>先看例子，我们在代码中添加一个判断：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        if(feof($file_handle))&#123;</span><br><span class="line">                                break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>这是因为 <strong>feof</strong> 函数在处理纯文本文件的时候处理到最后一行后，<strong>feof($file_handle)</strong> 将不会返回 <strong>True</strong>，此时循环继续，使用 <strong>fgets</strong> 继续读取文件，由于 <strong>fgets</strong> 获取不到数据，返回 <strong>false</strong>，所以我们使用 <strong>var_dump</strong> 可以看到打印了一个布尔类型的值，解决办法是使用 <strong>fgets</strong> 后再次使用 <strong>feof</strong> 判断文件是否结束，此时可以正确判定文件是否已到末尾。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="citau1e3j0060x8pvusgu0pod" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PHP-循环读取文件每行记录处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/11/PHP-循环读取文件每行记录处理/" class="article-date">
+  <time datetime="2016-08-11T02:44:03.000Z" itemprop="datePublished">2016-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>日常工作中，经常有这样的任务，需要自动读取文件中的信息并处理，此处涉及到这几个函数：</p>
+<ul>
+<li>file_exists：判断文件是否存在</li>
+<li>fopen：打开文件，返回文件指针</li>
+<li>feof：检测是否已经达到文件末尾eof，如是返回TRUE</li>
+<li>fgets：从文件指针中读取一行</li>
+<li>explode：把字符串打散为数组</li>
+<li>fclose：关闭文件，释放文件指针</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        $UserInfo = explode(&quot; &quot;, $line);</span><br><span class="line">                        echo &quot;用户名：$UserInfo[0] &quot;;</span><br><span class="line">                        echo &quot;密码：$UserInfo[1]&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="citau1e32005lx8pvkpczm7xe" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PHP-Array-数组" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/09/PHP-Array-数组/" class="article-date">
@@ -117,7 +329,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cistrrau1004v88pvf3olnfvt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="citau1e2p0059x8pv5o3whvag" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,7 +373,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="cistrraul005f88pvs1vnkt97" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="citau1e2y005jx8pvov2118oa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +418,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="cistrram8000188pvyyibn27e" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="citau1dt20001x8pvmlvxoz30" class="article-share-link">Share</a>
       
       
     </footer>
@@ -253,7 +465,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cistrraun005g88pvt3cckq7b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="citau1e2t005ex8pva573r1dj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -296,7 +508,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="cistrrauf005a88pvwa2yzkv5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="citau1e2l0054x8pvxtoxkdhv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -353,275 +565,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="cistrrauo005i88pvzfw486p3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-trim-函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/06/PHP-trim-函数/" class="article-date">
-  <time datetime="2016-08-06T07:09:49.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/PHP-trim-函数/">PHP trim() 函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>trim() 函数移除字符串两侧的空白字符或其它预定义字符。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trim(string,charlist)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">string</td>
-<td style="text-align:left">必须，规定要检查的字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">charlist</td>
-<td style="text-align:left">可选，规定从字符串中删除哪些字符。如果被省略，则移除以下字符</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>“\0” - NULL</li>
-<li>“\t” - 制表符</li>
-<li>“\n” - 换行符</li>
-<li>“\x0B” - 垂直制表符</li>
-<li>“\r” - 回车</li>
-<li>“” - 空格</li>
-</ul>
-<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回被修改的字符串<br>PHP版本：4+<br>更新日志：在 PHP 4.1 中，新增了 charlist 参数</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="cistrraus005m88pv93h2tueu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-strpos-函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/06/PHP-strpos-函数/" class="article-date">
-  <time datetime="2016-08-06T07:02:46.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/PHP-strpos-函数/">PHP strpos() 函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>strpos() 函数查找字符串在另一个字符串中第一次出现的位置，大小写敏感。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strpos(string,find,start)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">string</td>
-<td style="text-align:left">必须，规定要搜索的字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">find</td>
-<td style="text-align:left">必须，规定要查找的字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">start</td>
-<td style="text-align:left">可选，规定在何时开始搜索</td>
-</tr>
-</tbody>
-</table>
-<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串在另一个字符串中第一次出现的位置，如果没有找到字符串则返回 FALSE。字符串位置从 0 开始，不是从 1 开始。<br>PHP版本：4+。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="cistrrauq005k88pv7um0qe53" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-explode-函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/06/PHP-explode-函数/" class="article-date">
-  <time datetime="2016-08-06T06:53:50.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/PHP-explode-函数/">PHP explode() 函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>explode() 函数把字符串打散为数组。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explode(separator,string,limit)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">separator</td>
-<td style="text-align:left">必须，规定在哪里分隔字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">string</td>
-<td style="text-align:left">必须，要分隔的字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">limit</td>
-<td style="text-align:left">可选，规定要返回的数组元素的个数</td>
-</tr>
-</tbody>
-</table>
-<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串的数组<br>PHP版本：4+<br>更新日志：PHP 4.0.1 中，新增 limit 参数，PHP 5.1.0 中新增对负数 limit 的支持。<br>limit 可能的值：</p>
-<ul>
-<li>大于0 - 返回包含最多 limit 个元素的数组</li>
-<li>小于0 - 返回包含除了最后的 -limit 个元素以外的所有元素的数组</li>
-<li>0 - 返回包含了一个元素的数组</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="cistrrau7005288pvjed1ofay" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-fgets-函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/06/PHP-fgets-函数/" class="article-date">
-  <time datetime="2016-08-06T06:46:00.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/PHP-fgets-函数/">PHP fgets() 函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>fgets() 函数从文件指针中读取一行。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fgets(file,length)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">file</td>
-<td style="text-align:left">必须，规定要读取的文件</td>
-</tr>
-<tr>
-<td style="text-align:left">length</td>
-<td style="text-align:left">可选，规定要读取的字节数，默认是 1024 字节</td>
-</tr>
-</tbody>
-</table>
-<p>说明：从 file 指向的文件中读取一行并返回长度最多为 length -1 字节的字符串，碰到<strong>换行符</strong>（包括在返回值中）、EOF、或者已经读取了 length-1 字节后停止（要看先碰到哪一种情况）。如果没有指定 lenght，默认为 1K，或者说 1024 字节。若失败，则返回 FALSE。</p>
-<h3 id="提示和注释"><a href="#提示和注释" class="headerlink" title="提示和注释"></a>提示和注释</h3><p>注释：length 参数从 PHP 4.2.0 起成为可选项，如果忽略，则行的长度被假定为 1024 字节。从 PHP 4.3 开始，忽略掉 length 将继续从流中读取数据直到行结束。如果文件中的大多数行都大于 8 KB，则在脚本中指定最大行的长度在利用资源上更为有效。</p>
-<p>注释：从 PHP 4.3 开始本函数可以安全用于二进制文件。早期的版本则不行。</p>
-<p>注释：如果碰到 PHP 在读取文件时不能识别 Macintosh 文件的行结束符，可以激活 auto_detect_line_endings 运行时配置选项。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-fgets-函数/" data-id="cistrrauc005788pv124cawhk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="citau1e2u005fx8pvk6fhbe8x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -645,7 +589,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI-Switch/">HUAWEI Switch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -673,23 +617,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/20/Authentication-password-与-scheme-区别/">Authentication password 与 scheme 区别</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/交换机链路聚合/">交换机链路聚合</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/03/HYPER-V-中的处理器兼容性模式/">HYPER-V 中的处理器兼容性模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/Windows-NIC-组合/">Windows NIC 组合</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
           </li>
         
       </ul>

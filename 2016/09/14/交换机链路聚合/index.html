@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>交换机链路聚合 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="链路聚合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="交换机链路聚合">
+<meta property="og:url" content="http://ttlop.com/2016/09/14/交换机链路聚合/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="链路聚合">
+<meta property="og:updated_time" content="2016-09-20T01:38:34.365Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="交换机链路聚合">
+<meta name="twitter:description" content="链路聚合">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-交换机链路聚合" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/14/交换机链路聚合/" class="article-date">
+  <time datetime="2016-09-14T07:14:21.000Z" itemprop="datePublished">2016-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      交换机链路聚合
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>链路聚合是将两个或更多数据信道结合成一个单个的信道，该信道以一个单个的更高带宽的逻辑链路出现。链路聚合一般用来连接一个或多个带宽需求大的设备，例如连接骨干网络的服务器或服务器群。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>链路聚合（Link Aggregation），是指将多个物理端口捆绑在一起，成为一个逻辑端口，以实现出/入流量在各成员端口中的负荷分担，交换机根据用户配置的端口负荷分担策略决定报文从哪一个成员端口发送到对端的交换机。当交换机检测到其中一个成员端口的链路发生故障时，就停止在此端口上发送报文，并根据负荷分担策略在剩下链路中重新计算报文发送的端口，故障端口恢复后再次重新计算报文发送端口。链路聚合在增加链路带宽、实现链路传输弹性和冗余等方面是一项很重要的技术。<br>如果聚合的每个链路都遵循不同的物理路径,则聚合链路也提供冗余和容错。通过聚合调制解调器链路或者数字线路,链路聚合可用于改善对公共网络的访问。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>逻辑链路的带宽增加了大约(n-1)倍，这里，n为聚合的路数。另外，聚合后，可靠性大大提高，因为，n条链路中只要有一条可以正常工作，则这个链路就可以工作。除此之外，链路聚合可以实现负载均衡。因为，通过链路聚合连接在一起的两个（或多个）交换机（或其他网络设备），通过内部控制，也可以合理地将数据分配在被聚合连接的设备上，实现负载分担。</p>
+<p>链路聚合有如下优点：</p>
+<ol>
+<li>增加网络带宽</li>
+</ol>
+<p>链路聚合可以将多个链路捆绑成为一个逻辑链路，捆绑后的链路带宽是每个独立链路的带宽总和。</p>
+<ol>
+<li>提高网络连接的可靠性</li>
+</ol>
+<p>链路聚合中的多个链路互为备份，当有一条链路断开，流量会自动在剩下链路间重新分配。<br>链路聚合的方式主要有以下两种：</p>
+<ul>
+<li>静态Trunk</li>
+</ul>
+<p>静态Trunk将多个物理链路直接加入Trunk组，形成一条逻辑链路。</p>
+<ul>
+<li>动态LACP</li>
+</ul>
+<p>激活某端口的LACP协议后，该端口将通过发送LACPDU向对端通告自己的系统优先级、系统MAC地址、端口优先级和端口号。对端接收到这些信息后，将这些信息与自己的属性比较，选择能够聚合的端口，从而双方可以对端口加入或退出某个动态聚合组达成一致。</p>
+<hr>
+<p>链路聚合往往用在两个重要节点或繁忙节点之间，既能增加互联带宽，又提供了连接的可靠性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="citau1e73008tx8pvggkvuo63" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/20/Authentication-password-与-scheme-区别/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Authentication password 与 scheme 区别
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/14/华为交换机命令释义/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">华为交换机命令释义</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI-Switch/">HUAWEI Switch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/20/Authentication-password-与-scheme-区别/">Authentication password 与 scheme 区别</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/交换机链路聚合/">交换机链路聚合</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

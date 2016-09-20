@@ -82,6 +82,222 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux-文件权限" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/05/Linux-文件权限/" class="article-date">
+  <time datetime="2016-07-05T03:50:51.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/05/Linux-文件权限/">Linux 文件权限</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Linux-的安全性"><a href="#1-Linux-的安全性" class="headerlink" title="1. Linux 的安全性"></a>1. Linux 的安全性</h3><p>Linux 安全系统的核心是用户帐号。每个能进去 Linux 系统的用户都会被分配一个唯一的用户帐号。用户对系统上对象的访问权限取决于他们登入系统时用的帐号。<br>用户权限是通过创建用户时分配的用户ID（UID）来跟踪的。UID是个数值，每个用户都有个唯一的UID，但在登录系统时不使用UID而是登录名。<br>Linux 系统使用特定的文件和工具来跟踪和管理系统上的用户帐号。</p>
+<h4 id="1-1-etc-passwd-文件"><a href="#1-1-etc-passwd-文件" class="headerlink" title="1.1 /etc/passwd 文件"></a>1.1 /etc/passwd 文件</h4><p>Linux 系统使用一个专门的文件来将用户的登录名匹配到对应的UID值。这个文件就是 /etc/passwd 文件。/etc/passwd 文件的字段包含了如下信息：登录用户名、用户密码、UID、GID、备注字段、用户HOME目录位置、用户默认Shell。</p>
+<h4 id="1-2-添加新用户"><a href="#1-2-添加新用户" class="headerlink" title="1.2 添加新用户"></a>1.2 添加新用户</h4><p>添加新用户到 Linux 系统的工具是 useradd。这个命令提供了一次性创建新用户帐户及设置用户 HOME 目录结构的简便方法。useradd 命令使用系统的默认值以及命令行参数来设置用户帐户。可以用 useradd 的命令加 -D 参数来查看你的 linux 系统的系统默认值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@host-001 ~]# /usr/sbin/useradd -D</span><br><span class="line">GROUP=100</span><br><span class="line">HOME=/home</span><br><span class="line">INACTIVE=-1</span><br><span class="line">EXPIRE=</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">SKEL=/etc/skel</span><br><span class="line">CREATE_MAIL_SPOOL=yes</span><br></pre></td></tr></table></figure>
+<p>-D 参数显示了在创建新用户时如果你不在命令行指定的话 useradd 命令将使用的默认值。</p>
+<h4 id="1-3-删除用户"><a href="#1-3-删除用户" class="headerlink" title="1.3 删除用户"></a>1.3 删除用户</h4><p>如果想从系统中删除用户，userdel 可以满足这个需求。默认情况下，userdel 命令会只删除 /etc/passwd 文件中的用户信息，而加上 -r 参数，userdel 会删除用户的 HOME 目录以及 mail 目录。</p>
+<h4 id="1-4-修改用户"><a href="#1-4-修改用户" class="headerlink" title="1.4 修改用户"></a>1.4 修改用户</h4><ul>
+<li>usermod</li>
+</ul>
+<p>usermod 命令是用户帐户修改工具中最为强大的一个，它能用来修改 /etc/passwd 文件中的大部分字段，只需用与想修改的字段对应的命令行参数就可以了。参数大部分跟 useradd 命令的参数一样，比如 -c 用来修改备注字段，-e 用来修改过期日期，-g 用来修改默认的登录组，-l 用来修改用户帐户的登录名，-L 用来锁定帐户，-p 用来修改帐户的密码，-U 用来解除帐户锁定。</p>
+<ul>
+<li>passwd 和 chpasswd</li>
+</ul>
+<p>改变用户密码的一个简便方法就是用 passwd 命令。如果只用 passwd 命令，它会改变你自己的密码。系统上的任何用户都能改变它自己的密码，但只有 root 用户才有权限改变别人的密码。-e 选项能强制用户下次登录时修改密码。<br>如果需要为系统中的大量用户来修改密码，chpasswd 命令能让事情简单许多。chpasswd 命令能从标准输入自动读取登录名和密码对列表，给密码加密，然后为用户帐户设置。</p>
+<ul>
+<li>chsh、chfn 和 chage</li>
+</ul>
+<p>chsh 用来快速修改默认的用户登录 shell，使用时必须用 shell 的全路径名作为参数，不能只用 shell 名。<br>chfn 命令提供了在 /etc/passwd 文件的备注字段中存储信息的标准方法。<br>chage 命令用来帮助管理用户帐户的有效期。chage 命令中好用的功能是设置帐户过期日期。通过它，你就能创建临时用户了。</p>
+<h3 id="2-使用-Linux-组"><a href="#2-使用-Linux-组" class="headerlink" title="2. 使用 Linux 组"></a>2. 使用 Linux 组</h3><p>用户帐户在控制单个用户安全性方面很管用，组权限用户则允许多个用户共享一组公用的权限来访问系统上的对象，比如文件、目录或设备等。<br>每个组都有一个唯一的GID，在系统上这是一个唯一的数值。</p>
+<h4 id="2-1-etc-group-文件"><a href="#2-1-etc-group-文件" class="headerlink" title="2.1 /etc/group 文件"></a>2.1 /etc/group 文件</h4><p>类似用户帐户信息，/etc/group 文件包含系统上用到的每个组的信息。</p>
+<ul>
+<li>创建新组</li>
+</ul>
+<p>groupadd 命令用来在系统上穿件新组。创建新组时，默认没有用户属于该组。可以用 usermod 命令来添加用户到组。</p>
+<ul>
+<li>修改组</li>
+</ul>
+<p>groupmod 命令可以修改已有组的GID或组名，修改组名时，GID和组成员不会变，只有组名会改变。由于所有的安全权限都是基于GID的，可以随意改变组名而不影响文件的安全性。</p>
+<h3 id="3-理解文件权限"><a href="#3-理解文件权限" class="headerlink" title="3. 理解文件权限"></a>3. 理解文件权限</h3><h4 id="3-1-使用文件权限符"><a href="#3-1-使用文件权限符" class="headerlink" title="3.1 使用文件权限符"></a>3.1 使用文件权限符</h4><p>可以用 ls 命令用来查看 Linux 系统上的文件、目录和设备的权限。</p>
+<h4 id="3-2-默认文件权限"><a href="#3-2-默认文件权限" class="headerlink" title="3.2 默认文件权限"></a>3.2 默认文件权限</h4><p>umask 命令用来设置用户创建文件和目录的默认权限。touch 命令用分配给我的用户帐户的默认权限创建了这个文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/05/Linux-文件权限/" data-id="citau1e030033x8pvgvaboz7z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-定位系统环境变量" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/05/Linux-定位系统环境变量/" class="article-date">
+  <time datetime="2016-07-05T01:50:19.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/05/Linux-定位系统环境变量/">Linux 定位系统环境变量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux 系统用环境变量来在程序和脚本中标识它自己。这为你的程序提供了获得信息的一个简便方法。问题是如何设置这些变量。<br>在你登录 Linux 系统启动一个 bash shell 时，默认情况下 bash 在几个文件中查找命令。这些文件称作启动文件。bash 检查的启动文件取决与你启动 bash shell 的方式。启动 bash shell 有3种方式：</p>
+<ul>
+<li>登录时当作默认登录 shell；</li>
+<li>作为非登录 shell 的交互式 shell；</li>
+<li>作为运行脚本的非交互式 shell。</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/05/Linux-定位系统环境变量/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/05/Linux-定位系统环境变量/" data-id="citau1dzk002qx8pv6yxx01id" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-GNU-工具链" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/01/Linux-GNU-工具链/" class="article-date">
+  <time datetime="2016-07-01T05:07:08.000Z" itemprop="datePublished">2016-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/01/Linux-GNU-工具链/">Linux GNU 工具链</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>操作系统除了有内核来控制硬件设备外，还需要工具链来执行一些标准功能，比如控制文件和程序。<br>GNU组织开发了一套完整的Unix工具链，但没有可以运行它们的内核系统。这些工具链是在开源软件的软件开发理念下开发的。<br>开源软件理念允许程序员开发软件并将其免费发布。任何人都可以使用、修改该软件，或将该软件集成进自己的系统，而无需支付任何授权费用。将linux内核系统和GNU工具整合起来，就可以创造一个完整的、功能丰富的免费操作系统。<br>尽管通常我们将linux内核和GNU工具链的结合体称为Linux，但也有一部分linux纯粹主义者将其称为GNU/Linux系统来表彰GNU组织为此所作出的贡献。</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/01/Linux-GNU-工具链/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/01/Linux-GNU-工具链/" data-id="citau1dxk001px8pvbwmb4vm9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-是什么" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/01/Linux-是什么/" class="article-date">
+  <time datetime="2016-07-01T02:44:34.000Z" itemprop="datePublished">2016-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/01/Linux-是什么/">Linux 是什么</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux 可划分以下四部分：</p>
+<ul>
+<li>linux 内核</li>
+<li>GNU 工具组建</li>
+<li>图形化桌面环境</li>
+<li>应用软件</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2016/07/01/Linux-是什么/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/01/Linux-是什么/" data-id="citau1dzo002vx8pv92nfldft" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Rsync-同步常用命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/30/Rsync-同步常用命令/" class="article-date">
@@ -132,7 +348,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Rsync-同步常用命令/" data-id="cistrrava006588pvhle2ulj5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/30/Rsync-同步常用命令/" data-id="citau1e3p0067x8pv0d4yuwiz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +394,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Rsync-安装使用详解/" data-id="cistrravf006788pvmsrffeep" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/30/Rsync-安装使用详解/" data-id="citau1e3l0062x8pvrl8kpi4x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,7 +441,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" data-id="cistrraot001088pvolg2byol" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" data-id="citau1dvn000vx8pvbo3wmvui" class="article-share-link">Share</a>
       
       
     </footer>
@@ -275,7 +491,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="cistrrato004i88pvi2tj4ci0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="citau1e1r004cx8pv6twiutoz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,7 +544,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="cistrrath004888pvprjv9chu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="citau1e1l0045x8pvelwnfthu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -383,210 +599,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="cistrravl006c88pvxmeyb8cb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Shell-中中括号的用法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/24/Shell-中中括号的用法/" class="article-date">
-  <time datetime="2016-06-24T03:37:10.000Z" itemprop="datePublished">2016-06-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/24/Shell-中中括号的用法/">Shell 中中括号的用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="单中括号"><a href="#单中括号" class="headerlink" title="单中括号"></a>单中括号</h3><ol>
-<li><p>bash 的内部命令，[ 和 test 是等同的。如果我们不用绝对路径指明，通常我们用的都是 bash 自带的命令。if/test 结构中的左中括号都是调用 test 的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。</p>
-</li>
-<li><p>Test 和 [] 中可用的比较运算符只有 == 和 !=，两者都是用于比较字符串的，不可用于整数比较，整数比较只能使用 -eq、-gt这种形式。无论是字符串比较还是整数比较都不支持大于号小于号。如果实在想用，对于字符串比较可以使用转义形式。[] 中的逻辑与和逻辑或使用 -a 和 -o 表示。</p>
-</li>
-</ol>
-<h3 id="双中括号"><a href="#双中括号" class="headerlink" title="双中括号"></a>双中括号</h3><ol>
-<li><p>bash 的关键字，并不是一个命令。[[]]结构比[]更加通用。在[[和]]之间所有的字符都不会发生文件名扩展或者单词分隔，但是会发生参数扩展和命令替换。</p>
-</li>
-<li><p>支持字符串的模式匹配，使用 =~ 操作符甚至支持 shell 的正则表达式。字符串比较时可以把右边作为一个模式，而不仅仅是一个字符串，比如 [[ hello == hell? ]]，结果为真。[[]]中匹配字符串或通配符，不需要引号。</p>
-</li>
-<li><p>使用[[…]]条件判断结构，而不是[…]，能够防止脚本中的许多逻辑错误。比如 &amp;&amp;、||、&lt; 和 &gt; 操作符能够正常存在于 [[]]条件判断结构中。</p>
-</li>
-<li><p>bash 把双括号中的表达式看作一个单独的元素，并返回一个退出状态码。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="cistrravi006a88pvom551bd5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Shell-中花括号的用法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/23/Shell-中花括号的用法/" class="article-date">
-  <time datetime="2016-06-23T09:04:52.000Z" itemprop="datePublished">2016-06-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/23/Shell-中花括号的用法/">Shell 中花括号的用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="var"><a href="#var" class="headerlink" title="${var}"></a>${var}</h3><p><strong>当变量名和后面的内容都是变量命名所允许的内容时，这个时候直接使用$var是不行的，得用{}把变量名括起来。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo &quot;Legion$var&quot;</span><br><span class="line">Legionlookback</span><br><span class="line">[root@localhost ~]# echo &quot;$varLegion&quot;</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# echo &quot;$&#123;var&#125;Legion&quot;</span><br><span class="line">lookbackLegion</span><br></pre></td></tr></table></figure>
-<h3 id="var-string"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</h3><p><strong>当变量var值为空时${var:-a}会把a作为值返回，当变量不为空时，${var:-a}会把var的值作为结果返回</strong><br>注意：表达式并会不修改变量var的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# var=lookbak</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">lookbak</span><br></pre></td></tr></table></figure>
-<h3 id="var-string-1"><a href="#var-string-1" class="headerlink" title="${var:+string}"></a>${var:+string}</h3><p><strong>${var:+a}的替换规则跟上面相反，即当变量var的值不为空的时候将值替换成a，当变量var为空时则不替换</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:+a&#125;</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:+a&#125;</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
-<h3 id="var-string-2"><a href="#var-string-2" class="headerlink" title="${var:=string}"></a>${var:=string}</h3><p><strong>当变量var的值为空时，${var:=a}会将其赋值为a，且变量var也被赋值是a了，则${var:=a}的值就是变量var的值</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=b&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=a&#125;</span><br><span class="line">lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=b&#125;</span><br><span class="line">lookback</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">lookback</span><br></pre></td></tr></table></figure>
-<h3 id="var-string-3"><a href="#var-string-3" class="headerlink" title="${var:?string}"></a>${var:?string}</h3><p><strong>若变量var不为空，则用变量var的值来替换 ${var:?string}；若变量var为空，则把string输出到标准错误中，并从脚本中退出，我们可利用此特性来检查是否设置了变量的值。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat 123.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">var=lookback</span><br><span class="line">echo $&#123;var:?Legion&#125;</span><br><span class="line"></span><br><span class="line">var=&quot;&quot;</span><br><span class="line">echo $&#123;var:?Legion&#125;</span><br><span class="line">echo test</span><br><span class="line">[root@localhost ~]# ./123.sh </span><br><span class="line">lookback</span><br><span class="line">./123.sh: line 7: var: Legion</span><br><span class="line">[root@localhost ~]# echo $?</span><br><span class="line">1</span><br><span class="line">[root@localhost ~]# echo $?</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-<h3 id="var-pattern-、-var-pattern"><a href="#var-pattern-、-var-pattern" class="headerlink" title="${var%pattern}、${var%%pattern}"></a>${var%pattern}、${var%%pattern}</h3><p><strong>${variable%pattern}，shell在variable中查找，看是否有给定的pattern模式结尾，如果是，就从命令行把variable中的内容去掉右边最短的匹配模式</strong><br><strong>${variable%%pattern}，shell在variable中查找，看是否有给定的pattern模式结尾，如果是，就从命令行把variable中的内容去掉右边最长的匹配模式</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookbacklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var%b*&#125;</span><br><span class="line">lookbacklookbacklook</span><br><span class="line">[root@localhost ~]# echo $&#123;var%*b*&#125;</span><br><span class="line">lookbacklookbacklook</span><br><span class="line">[root@localhost ~]# echo $&#123;var%%b*&#125;</span><br><span class="line">look</span><br></pre></td></tr></table></figure>
-<h3 id="var-pattern-、-var-pattern-1"><a href="#var-pattern-、-var-pattern-1" class="headerlink" title="${var#pattern}、${var##pattern}"></a>${var#pattern}、${var##pattern}</h3><p><strong>${variable#pattern}，shell在variable中查找，看是否有给定的pattern模式开始，如果是，就从命令行把variable中的内容去掉左边最短的匹配模式</strong><br><strong>${variable#pattern}，shell在variable中查找，看是否有给定的pattern模式开始，如果是，就从命令行把variable中的内容去掉左边最长的匹配模式</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookbacklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var#*b&#125;</span><br><span class="line">acklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var##*b&#125;</span><br><span class="line">ack</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">lookbacklookbacklookback</span><br></pre></td></tr></table></figure>
-<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p><strong>a的位置可以使用变量名或者一个命令，并不一定只能是常量。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">You have new mail in /var/spool/mail/root</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# a=Legion</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-$a&#125;</span><br><span class="line">Legion</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-$(date +%F)&#125;</span><br><span class="line">2016-06-24</span><br></pre></td></tr></table></figure>
-<h3 id="1-2-3-和-1-n"><a href="#1-2-3-和-1-n" class="headerlink" title="{1,2,3}和{1..n}"></a>{1,2,3}和{1..n}</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# ls -al</span><br><span class="line">total 8</span><br><span class="line">drwxrwxrwt.  9 root root 4096 Jun 24 03:58 .</span><br><span class="line">dr-xr-xr-x. 17 root root 4096 Apr  8 11:03 ..</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .font-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .ICE-unix</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-httpd.service-uSB35m</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-mariadb.service-stR07S</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .Test-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .X11-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .XIM-unix</span><br><span class="line">[root@localhost tmp]# touch &#123;a,b,c&#125;_testFile</span><br><span class="line">[root@localhost tmp]# touch &#123;1..3&#125;testFile</span><br><span class="line">[root@localhost tmp]# ls -al</span><br><span class="line">total 8</span><br><span class="line">drwxrwxrwt.  9 root root 4096 Jun 24 11:23 .</span><br><span class="line">dr-xr-xr-x. 17 root root 4096 Apr  8 11:03 ..</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 1testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 2testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 3testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 a_testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 b_testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 c_testFile</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .font-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .ICE-unix</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-httpd.service-uSB35m</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-mariadb.service-stR07S</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .Test-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .X11-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .XIM-unix</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="cistrravn006f88pvx6hdsqwp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux之cut命令的用法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/23/Linux之cut命令的用法/" class="article-date">
-  <time datetime="2016-06-23T08:15:43.000Z" itemprop="datePublished">2016-06-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/23/Linux之cut命令的用法/">Linux之cut命令的用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>cut - 输出文件行的选定部分到标准输出。<br>如果不指定 File 参数，cut 命令将读取标准输入。必须指定 -b、-c 或 -f 标志之一。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/23/Linux之cut命令的用法/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="cistrrasv003n88pv5iz40wo2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Crontab-定时执行任务-命令格式与详细例子" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" class="article-date">
-  <time datetime="2016-06-23T03:33:07.000Z" itemprop="datePublished">2016-06-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/">Crontab 定时执行任务 命令格式与详细例子</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Linux 下面的 crontab 表达式是一个很神奇的表达式，几乎所有有意义的时间都能表示出来。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="cistrraoq000y88pv7u46xyec" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="citau1e3s006ax8pvku1egeaj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -610,7 +623,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI-Switch/">HUAWEI Switch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -638,23 +651,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/20/Authentication-password-与-scheme-区别/">Authentication password 与 scheme 区别</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/交换机链路聚合/">交换机链路聚合</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/03/HYPER-V-中的处理器兼容性模式/">HYPER-V 中的处理器兼容性模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/Windows-NIC-组合/">Windows NIC 组合</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
           </li>
         
       </ul>

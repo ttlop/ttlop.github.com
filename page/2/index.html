@@ -82,6 +82,241 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Hyper-V-网络配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/30/Hyper-V-网络配置/" class="article-date">
+  <time datetime="2016-08-30T01:50:45.000Z" itemprop="datePublished">2016-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/30/Hyper-V-网络配置/">Hyper-V 网络配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Hyper-V-虚拟交换机类型"><a href="#1-Hyper-V-虚拟交换机类型" class="headerlink" title="1. Hyper-V 虚拟交换机类型"></a>1. Hyper-V 虚拟交换机类型</h3><ul>
+<li>外部虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间、虚拟机与物理机之间、虚拟机和外部网络之间的通信。<br>生产环境不勾选“允许管理操作系统共享此网络适配器”，勾选之后会为主机创建虚拟网卡，会实现物理主机与外部网络的通信，容易将物理主机暴露在外。不勾选“允许管理操作系统共享此网络适配器”，则在创建虚拟交换机后会将相应绑定的网络的 IP 地址等信息清空，该网卡不会被配置任何 IP，只是用来通信。勾选“允许管理操作系统共享此网络适配器”，则在创建虚拟交换机后，会多出一块虚拟网卡，其原网卡的IP地址等信息都会被配置到相应的虚拟网卡上面。<br>除非物理主机只有一块物理网卡，否则不推荐使用。</p>
+<ul>
+<li>内部虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间、虚拟机和物理机之间的通信，不需要物理网卡，因为不提供对外部网络的访问。<br>在单一服务器上，用来构建主机和虚拟机之间的通信，不推荐使用。</p>
+<ul>
+<li>专用虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间的通信，不需要物理网卡。<br>除了在单一服务器上构建实验环境，极少使用。</p>
+<h3 id="2-Hyper-V-主机网络最佳实践配置"><a href="#2-Hyper-V-主机网络最佳实践配置" class="headerlink" title="2. Hyper-V 主机网络最佳实践配置"></a>2. Hyper-V 主机网络最佳实践配置</h3><ul>
+<li>一块网卡用于工作负载，为虚拟机提供对外服务。</li>
+</ul>
+<p>该网卡绑定到外部虚拟交换机，不勾选“允许管理操作系统共享此网络适配器”，也就无法启用“VLAN ID”，其上的虚拟机与主机完全隔离。该虚拟交换机可以支持多个VLAN间的通信。</p>
+<ul>
+<li><p>一块网卡用于管理物理主机，如连接到域等。该网卡不绑定到任何虚拟交换机，只用作管理网络。</p>
+</li>
+<li><p>一块网卡用于在线迁移、群集心跳、群集共享(CSV)等。</p>
+</li>
+</ul>
+<p>由于虚拟机做群集时候的心跳也使用该网卡，所以也需要将该网卡绑定到外部虚拟交换机，单独VLAN，与物理服务器其他网卡隔离</p>
+<p>该VSwitch选中“允许管理操作系统共享此网络适配器”，因为物理机和虚拟机的心跳都需要使用该网卡。不选中的话该网卡会无法配置IP，选中的话会出来一块虚拟网卡，用来配置心跳网络的IP</p>
+<h3 id="3-VLAN配置"><a href="#3-VLAN配置" class="headerlink" title="3. VLAN配置"></a>3. VLAN配置</h3><ul>
+<li>在虚拟交换机上设置VLAN ID，必须启用“允许管理操作系统共享此网络适配器”，不推荐使用。</li>
+</ul>
+<p>优点：不再需要为每个VM单独设置VLAN ID，改变虚拟交换机上的VLAN ID，其所连接的所有VM的VLAN ID都会随之自动改变。</p>
+<p>缺点：需要为每个VLAN创建不同的外部虚拟网络，由于一个外部虚拟网络需要绑定到一块物理网卡，所以当需要的VLAN数量大于物理网卡的数量时，该方法不可行。虚拟机在不同主机之间迁移时，需要保证每个主机上都有相同的外部虚拟网络(多个)。 </p>
+<ul>
+<li>在每个VM上单独设置VLAN ID，物理交换机上启用trunk模式。</li>
+</ul>
+<p>优点：一个物理网卡就可以支持多个VLAN的通信，保证每个主机上都有一个相同的外部虚拟网络即可。</p>
+<p>缺点：会产生网络流量瓶颈，建议使用Teaming</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="citau1dww001ex8pvseadydrf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Hyper-V-3中-虚拟机CPU竞争机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" class="article-date">
+  <time datetime="2016-08-27T08:03:34.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/">Hyper-V 3中 虚拟机CPU竞争机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>同一个宿主计算机中的虚拟机，当全部或者部分运行时，将无可非议争夺宿主机CPU资源。<br>如何平衡宿主机的资源利用率，Hyper-V3给出了三种解决方法：</p>
+<ol>
+<li>分配给虚拟机的CPU资源（虚拟机保留百分比）</li>
+<li>虚拟机使用的最高CPU资源（虚拟机限制百分比）</li>
+<li>资源优先级（相对权重）</li>
+</ol>
+<h3 id="第一部分：分配给虚拟机的-CPU-资源"><a href="#第一部分：分配给虚拟机的-CPU-资源" class="headerlink" title="第一部分：分配给虚拟机的 CPU 资源"></a>第一部分：分配给虚拟机的 CPU 资源</h3><p>虚拟机可用的处理器资源（全部资源为100%），管理员可以分配给虚拟机可用CPU资源，也就是说将CPU处理能力的一部分指定给特定的虚拟机（使用百分比表示）。<br>虚拟机属性设置中提供“虚拟机保留”选项，此设置保证指定的百分比将提供给该虚拟机。此设置将影响一次可以运行的虚拟机的数量，如果指定多台虚拟机，虚拟机使用的CPU资源超过100%，则按照虚拟机启动的先后顺序，未超出物理CPU处理能力的虚拟机可以正常启动，超出物理CPU处理能力的虚拟机将不能启动。</p>
+<p><strong>默认设置</strong></p>
+<p>通过虚拟机向导创建虚拟机后，默认情况为虚拟机指派的虚拟处理器计算资源是1个CPU，Hyper-V 3宿主机根据CPU内核的多少决定每个虚拟机可以使用的最大虚拟处理器数量（可以参考Windows 8 Server说明）。默认设置“虚拟机保留（百分比）”为0，不为虚拟机保留资源，处理器数量确认的情况下赋予虚拟机最大限度的计算能力。在实际应用中，多个CPU竞争是最常见的。如果每个CPU都使用最大处理能力，将会导致整体系统性能下降，甚至系统崩溃。因此，限制CPU的计算能力将是一种行之有效的方法。</p>
+<p><strong>CPU使用机制</strong></p>
+<p>虚拟机保留（百分比），在其他参数设置相同的情况下，宿主机强制为虚拟机分配CPU资源。当赋予虚拟机20%的计算资源时，20%的资源被虚拟机独占，其他虚拟机将不能使用已经分配的计算资源。虚拟机运行重要业务时，为了保证虚拟机具有足够的计算资源，虚拟机指派CPU应该为一种简单且行之有效的方法。</p>
+<h3 id="第二部分：限定虚拟机可用的CPU利用率"><a href="#第二部分：限定虚拟机可用的CPU利用率" class="headerlink" title="第二部分：限定虚拟机可用的CPU利用率"></a>第二部分：限定虚拟机可用的CPU利用率</h3><p>创建新虚拟机后，默认为每个虚拟机限制百分比为“100”，即每个虚拟机都可以使用最大的CPU处理能力。</p>
+<p>默认设置有一个致命的缺陷，当多个虚拟机同时运行，虚拟机使用的CPU利用率都达到100%时，系统将停止响应以至于宕机。对应用来说，这是一个致命的缺陷。因此，限制虚拟机的最大处理能力将是一种好方法。</p>
+<p>当宿主机中具备一定数量的虚拟机时，建议通过基准测试计算出每个虚拟机应用占用的最大CPU利用率，然后通过“虚拟机限制”选项为每个虚拟机指派限制值。</p>
+<p>这样即便有多个虚拟机达到应用峰值，也不会影响其他虚拟机处理能力，确保系统平稳运行。</p>
+<h3 id="第三部分：争夺CPU资源优先级"><a href="#第三部分：争夺CPU资源优先级" class="headerlink" title="第三部分：争夺CPU资源优先级"></a>第三部分：争夺CPU资源优先级</h3><p>在同一台宿主计算机中，有多个虚拟机运行并且争用CPU资源时，管理员可以设置虚拟机使用CPU的优先级别。</p>
+<p>虚拟机属性设置中提供“相对权重”选项，此设置虚拟机优先级，优先级别默认设置为100，即每个虚拟机优先级相同，优先级可用区间是1-10000。</p>
+<p>当出现争夺资源的状况时，根据时间片轮转均衡的非配给虚拟机CPU资源。</p>
+<p>启动优先级设置后，优先级高的虚拟机将首先得到CPU资源。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="citau1dwm001cx8pvuchqwpy9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Windows-2012-下通过命令行管理磁盘" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/" class="article-date">
+  <time datetime="2016-08-27T06:21:34.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Windows/">Windows</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/">Windows 2012 下通过命令行管理磁盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Windows 2012 包含一个名为 Diskpart.exe 的命令行实用程序，用来管理服务器的磁盘子系统。要使用此命令，只需要打开命令提示符窗口，并输入 DiskPart.exe 命令即可。Windows 将进入 Diskpart Shell 界面。在这个界面中，可以使用各种命令来管理磁盘子系统。</p>
+<h3 id="命令用法"><a href="#命令用法" class="headerlink" title="命令用法"></a>命令用法</h3><p>Diskpart 命令格式，按照动词-名词的语法。动词告诉 Windows 要执行什么动作，名词告诉 Windows 要执行动作的对象，例如：</p>
+<ol>
+<li><p>List Disk：显示服务器上安装的所有物理硬盘</p>
+</li>
+<li><p>select disk 0：选中硬盘0，0为使用 list disk 命令后列出的磁盘编号</p>
+</li>
+<li><p>list volume：显示选中的硬盘每个 volume 的情况</p>
+</li>
+<li><p>select volume 1：选中指定的 volume</p>
+</li>
+<li><p>format fs=ntfs Label=MyHperDisk：格式化选定的volume</p>
+</li>
+<li><p>Assign Letter=F：分配盘符为 F</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="citau1e42006mx8pvwtysexfg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Linux-下访问-Windows-共享目录的配置方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" class="article-date">
+  <time datetime="2016-08-26T03:29:29.000Z" itemprop="datePublished">2016-08-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/">Linux 下访问 Windows 共享目录的配置方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Linux-下安装-samba-client-客户端"><a href="#1-Linux-下安装-samba-client-客户端" class="headerlink" title="1. Linux 下安装 samba-client 客户端"></a>1. Linux 下安装 samba-client 客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install samba-client</span><br></pre></td></tr></table></figure>
+<h3 id="2-Linux-下只能装-cifs-utils-软件包"><a href="#2-Linux-下只能装-cifs-utils-软件包" class="headerlink" title="2. Linux 下只能装 cifs-utils 软件包"></a>2. Linux 下只能装 cifs-utils 软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cifs-utils</span><br></pre></td></tr></table></figure>
+<h3 id="3-Linux-下创建挂载点"><a href="#3-Linux-下创建挂载点" class="headerlink" title="3. Linux 下创建挂载点"></a>3. Linux 下创建挂载点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/AutoBackup</span><br></pre></td></tr></table></figure>
+<h3 id="4-挂载-Windows-上的共享目录"><a href="#4-挂载-Windows-上的共享目录" class="headerlink" title="4. 挂载 Windows 上的共享目录"></a>4. 挂载 Windows 上的共享目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t cifs -o username=&quot;administrator&quot;,password=&apos;xxx&apos; //192.168.200.1/D$/AutoBackup /mnt/AutosBackup/</span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果挂载成功，则可以进入 /mnt/Autobackup 下，查看上面的 windows 共享文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="citau1dz4002ix8pvp66z1ter" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Bat-的变量与命令-set-的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/24/Bat-的变量与命令-set-的用法/" class="article-date">
@@ -165,7 +400,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cistrramy000a88pvmvjqae28" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="citau1dut000fx8pvo9hv4sg5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -223,7 +458,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cistrramu000888pvgh0s0c1x" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="citau1duq000dx8pv3t8j4qft" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,7 +501,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cistrray5008o88pvej9rsxqj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="citau1e6z008ox8pvzrbuasnt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -311,7 +546,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cistrraux005s88pvchk8a5zb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="citau1e3a005tx8pvbntokinu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -356,7 +591,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cistrrauu005o88pvjhnrimpq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="citau1e36005px8pv4e6kgrbx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -470,219 +705,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cistrrau4004x88pvcngja4o5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-boolean-布尔类型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/12/PHP-boolean-布尔类型/" class="article-date">
-  <time datetime="2016-08-12T06:02:43.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是一个最简单的类型，可以为 <strong>TRUE</strong> 或 <strong>FALSE</strong>。如果要指定一个布尔值，使用关键字 <strong>TRUE</strong> 或 <strong>FALSE</strong> 即可，不区分大小写。通常运算符所返回的 <strong>boolean</strong> 值结果会被传递给流程控制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// == 是一个操作符，它检测两个变量是否相等，并返回一个布尔值</span><br><span class="line">if($action == &quot;show_version&quot;)&#123;</span><br><span class="line">	echo &quot;The version is 1.23&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以明确使用 <strong>(bool)</strong> 或者 <strong>(boolean)</strong> 来强制转换一个值为 <strong>boolean</strong>。大多数情况下不需要强制转换，因为当运算符，函数或流程控制结果需要一个 <strong>boolean</strong> 参数时，该值会被自动转换。</p>
-<p>当转换为 <strong>boolean</strong> 时，以下值被认为是 <strong>FALSE</strong>：</p>
-<ul>
-<li>布尔值 FALSE 本身</li>
-<li>整型值 0（零）</li>
-<li>浮点型值 0.0（零）</li>
-<li>空字符串以及字符串”0”</li>
-<li>不包括任何元素的数组</li>
-<li>不包括任何成员变量的对象（PHP 4.0适用）</li>
-<li>特殊类型 NULL（包括尚未赋值的变量）</li>
-<li>从空标记生成的 SimpleXML 对象</li>
-</ul>
-<p>所有其它值都被认为是 <strong>TRUE</strong>（包括任何资源）。<br>注：-1 和其它非零值（无论正负）都被认为是 <strong>TRUE</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_boolean.php </span><br><span class="line">&lt;?php</span><br><span class="line">var_dump((bool) &quot;&quot;);</span><br><span class="line">var_dump((bool) 1);</span><br><span class="line">var_dump((bool) -2);</span><br><span class="line">var_dump((bool) &quot;foo&quot;);</span><br><span class="line">var_dump((bool) 2.3e5);</span><br><span class="line">var_dump((bool) array(12));</span><br><span class="line">var_dump((bool) array());</span><br><span class="line">var_dump((bool) &quot;false&quot;);</span><br><span class="line">var_dump((bool) false);</span><br><span class="line">?&gt;</span><br><span class="line">[root@mail ~]# php php_boolean.php </span><br><span class="line">bool(false)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(false)</span><br><span class="line">bool(true)</span><br><span class="line">bool(false)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cistrrau6005088pvc4l2qi6y" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-类型简介" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/12/PHP-类型简介/" class="article-date">
-  <time datetime="2016-08-12T05:52:06.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/PHP-类型简介/">PHP 类型简介</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>PHP 支持 8 种原始数据类型。</p>
-<h4 id="标量类型"><a href="#标量类型" class="headerlink" title="标量类型"></a>标量类型</h4><ul>
-<li>boolean（布尔型）</li>
-<li>integer（整型）</li>
-<li>float（浮点型，也称作 double）</li>
-<li>string（字符串）</li>
-</ul>
-<h4 id="复合类型"><a href="#复合类型" class="headerlink" title="复合类型"></a>复合类型</h4><ul>
-<li>array（数组）</li>
-<li>object（对象）</li>
-</ul>
-<h4 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h4><ul>
-<li>resource（资源）</li>
-<li>NULL（无类型）</li>
-</ul>
-<hr>
-<p>变量的类型通常不是主动设定的，确切的说是由 <strong>PHP</strong> 根据该变量使用的上下文在运行时决定的。</p>
-<p>如果想查看某个表达式的值和类型，可以使用 <strong>var_dump()</strong> 函数。如果只是想得到一个易读懂的类型的表达式方式用于调试，用 <strong>gettype()</strong> 函数。要查看某个类型不要用 <strong>gettype()</strong>，而用 <strong>is_type</strong> 函数，以下是范例及执行结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_type.php </span><br><span class="line">&lt;?php</span><br><span class="line">$a_bool = TRUE;</span><br><span class="line">$a_str = &quot;foo&quot;;</span><br><span class="line">$a_str2 = &apos;foo&apos;;</span><br><span class="line">$an_int = 12;</span><br><span class="line"></span><br><span class="line">echo gettype($a_bool) . &quot;\n&quot;;</span><br><span class="line">echo gettype($a_str) . &quot;\n&quot;;</span><br><span class="line"></span><br><span class="line">if(is_int($an_int))&#123;</span><br><span class="line">	$an_int += 4;</span><br><span class="line">	echo $an_int . &quot;\n&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(is_string($a_bool))&#123;</span><br><span class="line">	echo &quot;String: $a_bool \n&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;Not String: $a_bool \n&quot;;</span><br><span class="line">&#125;</span><br><span class="line">[root@mail ~]# php php_type.php </span><br><span class="line">boolean</span><br><span class="line">string</span><br><span class="line">16</span><br><span class="line">Not String: 1</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cistrrav4005y88pv6t64p035" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-的-feof-方法需要注意的地方" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" class="article-date">
-  <time datetime="2016-08-11T07:36:38.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>写过这样的一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>其中当读文件到结尾的时候，结果总会比期望的多出来一个元素：bool(false)。</p>
-<p>按说，如果读取到文件最后一行，<strong>feof</strong> 函数会返回 <strong>TRUE</strong>，然后 <strong>while</strong> 循环就退出了，为什么不是呢？</p>
-<p>先看例子，我们在代码中添加一个判断：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        if(feof($file_handle))&#123;</span><br><span class="line">                                break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>这是因为 <strong>feof</strong> 函数在处理纯文本文件的时候处理到最后一行后，<strong>feof($file_handle)</strong> 将不会返回 <strong>True</strong>，此时循环继续，使用 <strong>fgets</strong> 继续读取文件，由于 <strong>fgets</strong> 获取不到数据，返回 <strong>false</strong>，所以我们使用 <strong>var_dump</strong> 可以看到打印了一个布尔类型的值，解决办法是使用 <strong>fgets</strong> 后再次使用 <strong>feof</strong> 判断文件是否结束，此时可以正确判定文件是否已到末尾。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cistrrauz005u88pv21iklukg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-循环读取文件每行记录处理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/PHP-循环读取文件每行记录处理/" class="article-date">
-  <time datetime="2016-08-11T02:44:03.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>日常工作中，经常有这样的任务，需要自动读取文件中的信息并处理，此处涉及到这几个函数：</p>
-<ul>
-<li>file_exists：判断文件是否存在</li>
-<li>fopen：打开文件，返回文件指针</li>
-<li>feof：检测是否已经达到文件末尾eof，如是返回TRUE</li>
-<li>fgets：从文件指针中读取一行</li>
-<li>explode：把字符串打散为数组</li>
-<li>fclose：关闭文件，释放文件指针</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        $UserInfo = explode(&quot; &quot;, $line);</span><br><span class="line">                        echo &quot;用户名：$UserInfo[0] &quot;;</span><br><span class="line">                        echo &quot;密码：$UserInfo[1]&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cistrrauw005q88pvke9daqja" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="citau1e28004rx8pvelxhu9lu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -706,7 +729,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI-Switch/">HUAWEI Switch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -734,23 +757,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/20/Authentication-password-与-scheme-区别/">Authentication password 与 scheme 区别</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/交换机链路聚合/">交换机链路聚合</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/03/HYPER-V-中的处理器兼容性模式/">HYPER-V 中的处理器兼容性模式</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/Windows-NIC-组合/">Windows NIC 组合</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
           </li>
         
       </ul>
