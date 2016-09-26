@@ -82,6 +82,49 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nagios-check-http-Invalid-option-SSL-is-not-available" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" class="article-date">
+  <time datetime="2016-09-26T06:42:34.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/">Nagios check_http Invalid option - SSL is not available</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="环境检测-openssl"><a href="#环境检测-openssl" class="headerlink" title="环境检测 - openssl"></a>环境检测 - openssl</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost libexec]# yum install openssl openssl-devel</span><br><span class="line">已加载插件：fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.cn99.com</span><br><span class="line"> * extras: mirrors.cn99.com</span><br><span class="line"> * updates: mirrors.163.com</span><br><span class="line">软件包 1:openssl-1.0.1e-51.el7_2.5.x86_64 已安装并且是最新版本</span><br><span class="line">软件包 1:openssl-devel-1.0.1e-51.el7_2.5.x86_64 已安装并且是最新版本</span><br><span class="line">无须任何处理</span><br><span class="line">[root@localhost libexec]# whereis openssl</span><br><span class="line">openssl: /usr/bin/openssl /usr/lib64/openssl /usr/include/openssl /usr/share/man/man1/openssl.1ssl.gz</span><br></pre></td></tr></table></figure>
+<h3 id="编译安装-指定-openssl-路径"><a href="#编译安装-指定-openssl-路径" class="headerlink" title="编译安装 - 指定 openssl 路径"></a>编译安装 - 指定 openssl 路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-nagios-user=nagios --with-nagios-group=nagios --with-openssl=/usr/bin/openssl</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="检测-切换到-usr-local-nagios-libexec-目录"><a href="#检测-切换到-usr-local-nagios-libexec-目录" class="headerlink" title="检测 - 切换到 /usr/local/nagios/libexec/ 目录"></a>检测 - 切换到 /usr/local/nagios/libexec/ 目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./check_http -H api.jpush.cn -u /v3/push -S</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="citjoxytr004dvzpvqwdc541j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" class="article-date">
@@ -115,7 +158,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="citb38zht009fdhpvjxk0ph67" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="citjoxyvw009hvzpveuojblae" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +215,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="citb38z9a0001dhpv3sy0e8dq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="citjoxyq80001vzpv90kiajv1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,7 +271,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="citb38z9y000adhpvmia6n4dw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="citjoxyql0008vzpvbemqlzap" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,7 +333,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="citb38zhn0093dhpvlxel40wl" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="citjoxyvt0097vzpvrcxxmo5a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +431,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="citb38zhs009ddhpvdtc45yj7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="citjoxyvv009evzpvf2ct5unq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -448,7 +491,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="citb38zg2006wdhpvp2jf3crn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="citjoxyuu006yvzpv3q1dszt4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -526,7 +569,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="citb38zas000rdhpv07lnsyh5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="citjoxyr2000nvzpvw6zmu4n4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -580,7 +623,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="citb38zb0000vdhpvqnvzw926" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="citjoxyr5000rvzpvr3e3t2sz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -626,52 +669,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="citb38zbe0017dhpv3ha44p1m" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Windows-NIC-组合" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/02/Windows-NIC-组合/" class="article-date">
-  <time datetime="2016-09-02T07:03:00.000Z" itemprop="datePublished">2016-09-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Windows/">Windows</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/02/Windows-NIC-组合/">Windows NIC 组合</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>NIC 组合即 NIC Teaming，也有被称为”网卡绑定”，此技术是 Windows Server 2012/2012 R2 的内置功能，可以为用户提供具有冗余和容错功能的网络适配器，NIC组合允许一次性绑定最多 32 个网卡接口成一个逻辑组，供用户使用。当组中某一个网卡发生故障时，组合中依然存活的网卡还可以正常使用。值得称道的是，NIC 组合技术对网卡厂商没有硬性要求，这是一种通用的技术。并且在特定前提下，NIC 组合还可以实现带宽叠加的效果。 </p>
-        
-          <p class="article-more-link">
-            <a href="/2016/09/02/Windows-NIC-组合/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="citb38zg50071dhpvdbhjh1au" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="citjoxyrn0019vzpvrlaqlwq6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -723,6 +721,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/">Nagios check_http Invalid option - SSL is not available</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/">华为交换机对通过 SNMP 访问交换机的用户的 ACL 控制配置</a>
           </li>
         
@@ -736,10 +738,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/09/14/交换机链路聚合/">交换机链路聚合</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
           </li>
         
       </ul>

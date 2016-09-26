@@ -15,17 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Category: Zabbix | 运维生存时间</title>
+  <title>Nagios check_http Invalid option - SSL is not available | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="运维 生存时间 ttl op oa">
-<meta property="og:type" content="website">
-<meta property="og:title" content="运维生存时间">
-<meta property="og:url" content="http://ttlop.com/categories/Zabbix/index.html">
+  <meta name="description" content="naigos check_http Invalid option - SSL is not available">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nagios check_http Invalid option - SSL is not available">
+<meta property="og:url" content="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="运维 生存时间 ttl op oa">
+<meta property="og:description" content="naigos check_http Invalid option - SSL is not available">
+<meta property="og:updated_time" content="2016-09-26T06:46:32.241Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="运维生存时间">
-<meta name="twitter:description" content="运维 生存时间 ttl op oa">
+<meta name="twitter:title" content="Nagios check_http Invalid option - SSL is not available">
+<meta name="twitter:description" content="naigos check_http Invalid option - SSL is not available">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -80,215 +81,58 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/07/28/Zabbix-TCP-连接数监控/" class="archive-article-date">
-  <time datetime="2016-07-28T06:56:41.000Z" itemprop="datePublished">Jul 28</time>
+        <section id="main"><article id="post-Nagios-check-http-Invalid-option-SSL-is-not-available" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" class="article-date">
+  <time datetime="2016-09-26T06:42:34.000Z" itemprop="datePublished">2016-09-26</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/28/Zabbix-TCP-连接数监控/">Zabbix TCP 连接数监控</a>
+    <h1 class="article-title" itemprop="name">
+      Nagios check_http Invalid option - SSL is not available
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" class="archive-article-date">
-  <time datetime="2016-06-14T07:34:33.000Z" itemprop="datePublished">Jun 14</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/">Zabbix 配置本地邮件服务器实现邮件报警</a>
-    </h1>
-  
+        <h3 id="环境检测-openssl"><a href="#环境检测-openssl" class="headerlink" title="环境检测 - openssl"></a>环境检测 - openssl</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost libexec]# yum install openssl openssl-devel</span><br><span class="line">已加载插件：fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.cn99.com</span><br><span class="line"> * extras: mirrors.cn99.com</span><br><span class="line"> * updates: mirrors.163.com</span><br><span class="line">软件包 1:openssl-1.0.1e-51.el7_2.5.x86_64 已安装并且是最新版本</span><br><span class="line">软件包 1:openssl-devel-1.0.1e-51.el7_2.5.x86_64 已安装并且是最新版本</span><br><span class="line">无须任何处理</span><br><span class="line">[root@localhost libexec]# whereis openssl</span><br><span class="line">openssl: /usr/bin/openssl /usr/lib64/openssl /usr/include/openssl /usr/share/man/man1/openssl.1ssl.gz</span><br></pre></td></tr></table></figure>
+<h3 id="编译安装-指定-openssl-路径"><a href="#编译安装-指定-openssl-路径" class="headerlink" title="编译安装 - 指定 openssl 路径"></a>编译安装 - 指定 openssl 路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-nagios-user=nagios --with-nagios-group=nagios --with-openssl=/usr/bin/openssl</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="检测-切换到-usr-local-nagios-libexec-目录"><a href="#检测-切换到-usr-local-nagios-libexec-目录" class="headerlink" title="检测 - 切换到 /usr/local/nagios/libexec/ 目录"></a>检测 - 切换到 /usr/local/nagios/libexec/ 目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./check_http -H api.jpush.cn -u /v3/push -S</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/07/Zabbix-监控-windows-进程/" class="archive-article-date">
-  <time datetime="2016-06-07T05:31:49.000Z" itemprop="datePublished">Jun 7</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/06/Zabbix-windows-性能计数器使用/" class="archive-article-date">
-  <time datetime="2016-06-06T03:09:27.000Z" itemprop="datePublished">Jun 6</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="citjoxytr004dvzpvqwdc541j" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/Zabbix-windows-性能计数器使用/">Zabbix windows 性能计数器使用</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/03/Zabbix-Monitor-Redis/" class="archive-article-date">
-  <time datetime="2016-06-03T05:18:23.000Z" itemprop="datePublished">Jun 3</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/03/Zabbix-Monitor-Redis/">Zabbix Monitor Redis</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">华为交换机对通过 SNMP 访问交换机的用户的 ACL 控制配置</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/06/02/Zabbix-Monitor-Nginx/" class="archive-article-date">
-  <time datetime="2016-06-02T02:58:06.000Z" itemprop="datePublished">Jun 2</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/02/Zabbix-Monitor-Nginx/">Zabbix Monitor Nginx</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/31/Zabbix-CPU-类型-Key/" class="archive-article-date">
-  <time datetime="2016-05-31T07:47:07.000Z" itemprop="datePublished">May 31</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/31/Zabbix-CPU-类型-Key/">Zabbix CPU 类型 Key</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/25/Zabbix-Template-SQL-Server/" class="archive-article-date">
-  <time datetime="2016-05-25T02:56:00.000Z" itemprop="datePublished">May 25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/25/Zabbix-Template-SQL-Server/">Zabbix Template SQL Server</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/24/Zabbix-Discovery-of-file-systems/" class="archive-article-date">
-  <time datetime="2016-05-24T08:13:42.000Z" itemprop="datePublished">May 24</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/24/Zabbix-Discovery-of-file-systems/">Zabbix Discovery of file systems</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/05/24/Zabbix-Discovery/" class="archive-article-date">
-  <time datetime="2016-05-24T03:38:52.000Z" itemprop="datePublished">May 24</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/24/Zabbix-Discovery/">Zabbix Discovery</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/categories/Zabbix/page/2/">2</a><a class="page-number" href="/categories/Zabbix/page/3/">3</a><a class="extend next" rel="next" href="/categories/Zabbix/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         
