@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/10/09/数据库镜像-基本概念/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="数据库镜像">
-<meta property="og:updated_time" content="2016-10-09T02:25:11.197Z">
+<meta property="og:updated_time" content="2016-10-09T03:06:53.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库镜像-基本概念">
 <meta name="twitter:description" content="数据库镜像">
@@ -107,7 +107,12 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>数据库镜像会为目标数据库创建一个副本数据库。这两个数据库分别运行在不同的 SQLServer 实例上，作为“伙伴”建立一个会话（session）。通过这个会话，两个数据库互相进行通信和协作，扮演互补的角色“主体角色”和“镜像角色”，以实现“镜像效果”。</p>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>数据库镜像功能首次出现在 SQL Server 2005 R1 中。它设计的目的是视图为 SQL Server 提供一个具有实时性数据同步的灾难恢复技术，即能提供数据冗余备份，切换起来也比较方便。相比较故障转移群集，数据库镜像同样也能够为客户端应用提供统一的连接方式，但同时它又具备故障转移群集所没有的抵御数据损失的能力。相对日志传送，它进行灾难切换要块很多，又基本对客户端应用透明，这些有点都使得数据库镜像成为了一项兼备可用性和灾难恢复功能的技术。现在，数据库镜像技术在企业环境中，使用的越来越多了。</p>
+<p>优点是系统能够自动发现主服务器故障，并且自动切换至镜像服务器。缺点是配置复杂，镜像数据库中的数据不可见（通过 SQL Server Management Studio 中只能看到镜像数据库处于镜像状态，无法进行任何数据库操作，最简单的查询也不行）。</p>
+<p>相对于日志传送，数据库镜像显然更高一级。在最简单的形式下，它其实与日志传送的工作原理相似，但是生产服务器发送事物到镜像服务器的频率要高得多，这意味着更新数据也要快很多。</p>
+<p>对于数据库镜像来说，故障转移功能也是需要手动完成，但是你可以添加第三个 SQL Server，称为 witness。witness 可以作为一个普通的 SQL Server，但是一直留意着其它两个镜像服务器，当主镜像发生故障，witness 可以让第二个镜像接管操作，类似一种自动的故障转移。</p>
+<p>在故障转移时，任何进行中的客户端事物都将重新启动，而由于在这一过程中任然存在着延迟，镜像服务器也不能保证百分百不丢失数据。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>数据库镜像会为目标数据库创建一个副本数据库。这两个数据库分别运行在不同的 SQLServer 实例上，作为“伙伴”建立一个会话（session）。通过这个会话，两个数据库互相进行通信和协作，扮演互补的角色“主体角色”和“镜像角色”，以实现“镜像效果”。</p>
 <p>在任何给定的时间，都是一个伙伴扮演主体角色，而另一个伙伴扮演镜像角色。扮演主体角色的数据库就是主体数据库（principaldatabase），另一个扮演镜像角色的数据库则是镜像数据库（mirrordatabase）。每个主体数据库只能有一个镜像数据库。镜像数据库作为主体数据库的一个副本，在主体数据库发生故障、不可访问时，能迅速恢复数据库访问，提供了灾难恢复的功能。</p>
 <p>只有使用<strong>完整恢复模式</strong>的数据库才能使用数据库镜像功能。主体数据库可以像一个普通数据库一样，执行数据库查询、修改、数据库管理等操作。</p>
 <p>只有很少的操作（比如还原数据库备份）由于数据库镜像的限制而不被允许执行，而镜像数据库是一个一直处于“恢复”状态的数据库，因此是不能直接被访问的。这点和日志传送不一样。但是，你可以为镜像数据库创建一个快照，这样就可以间接地访问镜像数据库里的数据了。那些用作报表查询的应用可以通过镜像服务器的快照来获取数据，这能减轻主体服务器的工作负载。</p>
@@ -117,7 +122,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciu20c3y2009biipv9vzvq64k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciu21toqq009no7pvdynausm2" class="article-share-link">Share</a>
       
       
     </footer>
