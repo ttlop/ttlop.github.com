@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据库镜像-基本概念 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数据库镜像">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库镜像-基本概念">
+<meta property="og:url" content="http://ttlop.com/2016/10/09/数据库镜像-基本概念/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="数据库镜像">
+<meta property="og:updated_time" content="2016-10-09T02:25:11.197Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库镜像-基本概念">
+<meta name="twitter:description" content="数据库镜像">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库镜像-基本概念" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/09/数据库镜像-基本概念/" class="article-date">
+  <time datetime="2016-10-09T02:11:57.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据库镜像-基本概念
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数据库镜像会为目标数据库创建一个副本数据库。这两个数据库分别运行在不同的 SQLServer 实例上，作为“伙伴”建立一个会话（session）。通过这个会话，两个数据库互相进行通信和协作，扮演互补的角色“主体角色”和“镜像角色”，以实现“镜像效果”。</p>
+<p>在任何给定的时间，都是一个伙伴扮演主体角色，而另一个伙伴扮演镜像角色。扮演主体角色的数据库就是主体数据库（principaldatabase），另一个扮演镜像角色的数据库则是镜像数据库（mirrordatabase）。每个主体数据库只能有一个镜像数据库。镜像数据库作为主体数据库的一个副本，在主体数据库发生故障、不可访问时，能迅速恢复数据库访问，提供了灾难恢复的功能。</p>
+<p>只有使用<strong>完整恢复模式</strong>的数据库才能使用数据库镜像功能。主体数据库可以像一个普通数据库一样，执行数据库查询、修改、数据库管理等操作。</p>
+<p>只有很少的操作（比如还原数据库备份）由于数据库镜像的限制而不被允许执行，而镜像数据库是一个一直处于“恢复”状态的数据库，因此是不能直接被访问的。这点和日志传送不一样。但是，你可以为镜像数据库创建一个快照，这样就可以间接地访问镜像数据库里的数据了。那些用作报表查询的应用可以通过镜像服务器的快照来获取数据，这能减轻主体服务器的工作负载。</p>
+<p>需要特别的指出，只有用户数据库才能配置数据库镜像，所有的系统数据库都不能被镜像，对于系统数据库还是通过备份的方式来保障安全。</p>
+<p>运行主体数据库的 SQL Server 实例被称为主体服务器（principalserver），而运行镜像数据库的 SQL Server 被称为镜像服务器（mirrorserver）。主体服务器和镜像服务器必须是两个不同的 SQL Server 实例。这两个实例上可以配置多个数据库镜像的会话。这两个实例可以运行在同一台计算机上，但是一般不建议这么做。因为这种配置下，一旦服务器的磁盘发生物理损坏，那么主体数据库和镜像数据库就都无法使用了，灾难恢复就无从谈起了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciu20c3y2009biipv9vzvq64k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/28/Centos-下转发-DNS-服务器的架设/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Centos 下转发 DNS 服务器的架设</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/09/数据库镜像-基本概念/">数据库镜像-基本概念</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/28/Centos-下转发-DNS-服务器的架设/">Centos 下转发 DNS 服务器的架设</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/">Nagios check_http Invalid option - SSL is not available</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/">华为交换机对通过 SNMP 访问交换机的用户的 ACL 控制配置</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/">ACL match-order 中的 config 和 auto 的应用区别</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
