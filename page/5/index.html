@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,265 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-PHP-strpos-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/06/PHP-strpos-函数/" class="article-date">
+  <time datetime="2016-08-06T07:02:46.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/06/PHP-strpos-函数/">PHP strpos() 函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>strpos() 函数查找字符串在另一个字符串中第一次出现的位置，大小写敏感。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strpos(string,find,start)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:left">必须，规定要搜索的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">find</td>
+<td style="text-align:left">必须，规定要查找的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">start</td>
+<td style="text-align:left">可选，规定在何时开始搜索</td>
+</tr>
+</tbody>
+</table>
+<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串在另一个字符串中第一次出现的位置，如果没有找到字符串则返回 FALSE。字符串位置从 0 开始，不是从 1 开始。<br>PHP版本：4+。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="ciu59y1cz005ue9pv812ph34j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PHP-explode-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/06/PHP-explode-函数/" class="article-date">
+  <time datetime="2016-08-06T06:53:50.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/06/PHP-explode-函数/">PHP explode() 函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>explode() 函数把字符串打散为数组。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explode(separator,string,limit)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">separator</td>
+<td style="text-align:left">必须，规定在哪里分隔字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:left">必须，要分隔的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">limit</td>
+<td style="text-align:left">可选，规定要返回的数组元素的个数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串的数组<br>PHP版本：4+<br>更新日志：PHP 4.0.1 中，新增 limit 参数，PHP 5.1.0 中新增对负数 limit 的支持。<br>limit 可能的值：</p>
+<ul>
+<li>大于0 - 返回包含最多 limit 个元素的数组</li>
+<li>小于0 - 返回包含除了最后的 -limit 个元素以外的所有元素的数组</li>
+<li>0 - 返回包含了一个元素的数组</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="ciu59y1cr005ge9pvus62r700" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PHP-fgets-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/06/PHP-fgets-函数/" class="article-date">
+  <time datetime="2016-08-06T06:46:00.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/06/PHP-fgets-函数/">PHP fgets() 函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>fgets() 函数从文件指针中读取一行。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fgets(file,length)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">file</td>
+<td style="text-align:left">必须，规定要读取的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">length</td>
+<td style="text-align:left">可选，规定要读取的字节数，默认是 1024 字节</td>
+</tr>
+</tbody>
+</table>
+<p>说明：从 file 指向的文件中读取一行并返回长度最多为 length -1 字节的字符串，碰到<strong>换行符</strong>（包括在返回值中）、EOF、或者已经读取了 length-1 字节后停止（要看先碰到哪一种情况）。如果没有指定 lenght，默认为 1K，或者说 1024 字节。若失败，则返回 FALSE。</p>
+<h3 id="提示和注释"><a href="#提示和注释" class="headerlink" title="提示和注释"></a>提示和注释</h3><p>注释：length 参数从 PHP 4.2.0 起成为可选项，如果忽略，则行的长度被假定为 1024 字节。从 PHP 4.3 开始，忽略掉 length 将继续从流中读取数据直到行结束。如果文件中的大多数行都大于 8 KB，则在脚本中指定最大行的长度在利用资源上更为有效。</p>
+<p>注释：从 PHP 4.3 开始本函数可以安全用于二进制文件。早期的版本则不行。</p>
+<p>注释：如果碰到 PHP 在读取文件时不能识别 Macintosh 文件的行结束符，可以激活 auto_detect_line_endings 运行时配置选项。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/06/PHP-fgets-函数/" data-id="ciu59y1ct005je9pv2uzis63y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-PHP-feof-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/06/PHP-feof-函数/" class="article-date">
+  <time datetime="2016-08-06T06:35:48.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/06/PHP-feof-函数/">PHP feof() 函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>fe() 函数检测是否已经达到文件末尾(eof)。<br>如果文件指针到了 EOF 或者出错时则返回 TRUE，否则返回一个错误（包括 socket 超时），其它情况则返回 FALSE。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">feof(file)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">file</td>
+<td style="text-align:left">必须。规定要检查的打开文件。</td>
+</tr>
+</tbody>
+</table>
+<p>说明：file 参数是一个文件指针。这个指针必须有效，并且必须指向一个由 fopen() 或 fsockopen() 成功打开（但还没有被 fclose()关闭）的文件。</p>
+<h3 id="提示和注释"><a href="#提示和注释" class="headerlink" title="提示和注释"></a>提示和注释</h3><p>提示：feop() 函数对遍历程度未知的数据很有用。</p>
+<p>注意：如果服务器没有关闭由 fsockopen() 所打开的连接，feof() 会一直等待直到超时而返回 TRUE。默认的超时限制是 60 秒，可以使用 stream_set_timeout() 来改变这个值。</p>
+<p>注意：如果传递的文件指针无效可能会陷入无线循环中，因为 EOF 不会返回 TRUE。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/06/PHP-feof-函数/" data-id="ciu59y1cq005ee9pvsmiihu5u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-PHP-fopen-函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -193,7 +452,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-fopen-函数/" data-id="ciu223w7p005fpepv9ot8pkal" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-fopen-函数/" data-id="ciu59y1cu005le9pvn3q02vfc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -235,7 +494,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/Linux-apache-access-log-Analy-2/" data-id="ciu223w660026pepvbcv81vjv" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/Linux-apache-access-log-Analy-2/" data-id="ciu59y1a80021e9pvcgv5qxwn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -281,7 +540,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/" data-id="ciu223w6z003upepvg29tz9ak" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/" data-id="ciu59y1bp003qe9pvhm3tmy8y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -326,7 +585,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="ciu223w6v003kpepvy85ot8mz" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-for使用换行符作为分隔符/" data-id="ciu59y1bd003ge9pvzxag3y12" class="article-share-link">Share</a>
       
       
     </footer>
@@ -371,7 +630,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="ciu223w6r003epepv9jdsawsm" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="ciu59y1bb003ee9pv2m0xwhor" class="article-share-link">Share</a>
       
       
     </footer>
@@ -414,206 +673,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="ciu223w6y003qpepvyr3vbnhn" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-shell-多进程实现（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/04/Linux-shell-多进程实现（一）/" class="article-date">
-  <time datetime="2016-08-04T03:20:53.000Z" itemprop="datePublished">2016-08-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/04/Linux-shell-多进程实现（一）/">Linux shell 多进程实现（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 bash 中，我们可以使用后台任务来实现任务的“多进程化”。在不加控制的模式下，不管有多少任务，全部都后台执行。也就是说，这种情况下，有多少个任务就有多少“进程”在后同时执行。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/04/Linux-shell-多进程实现（一）/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="ciu223w6e002npepvpla9ztln" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-预定义变量" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/02/PHP-预定义变量/" class="article-date">
-  <time datetime="2016-08-02T07:45:42.000Z" itemprop="datePublished">2016-08-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/02/PHP-预定义变量/">PHP 预定义变量</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p><strong>$_SERVER[“DOCUMENT_ROOT”]</strong><br>根目录，在 <strong>apache</strong> 的配置文件里面定义：比如 <strong>httpd.conf</strong> 中的 <strong>DocumentRoot “/var/www/html”</strong></p>
-</li>
-<li><p><strong>$_SERVER[‘REMOTE_ADDR’]</strong><br>你的客户端跟你的服务器“握手”时候的 <strong>IP</strong>，如果使用了代理，<strong>REMOTE_ADDR</strong> 将显示代理服务器的IP</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="ciu223w810065pepveqeuz8bi" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-TCP-连接的状态" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/30/TCP-连接的状态/" class="article-date">
-  <time datetime="2016-07-30T08:52:54.000Z" itemprop="datePublished">2016-07-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/30/TCP-连接的状态/">TCP 连接的状态</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我们通过了解各个 <strong>TCP</strong> 状态，可以排除和定位网络或系统故障。</p>
-<h3 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h3><p><strong>TCP/IP</strong> 协议中，<strong>TCP</strong> 协议提供可靠的连接服务，采用三次握手建立一个连接</p>
-<ol>
-<li>第一次握手：建立连接时，客户端发送 <strong>SYN</strong> 包到服务器，并进入 <strong>SYN_SENT</strong> 状态，等待服务器确认</li>
-<li>第二次握手：服务器收到 <strong>SYN</strong> 包，必须确认客户端的 <strong>SYN</strong>，同时自己也发送一个 <strong>SYN</strong> 包，即 <strong>SYN + ACK</strong>，此时服务器进入 <strong>SYN_RECV</strong> 状态</li>
-<li>第三次握手：客户端收到服务器发送的 <strong>SYN+ACK</strong> 包，向服务器发送确认 <strong>ACK</strong>，此包发送完毕，客户端和服务器进入 <strong>ESTABLISHED</strong> 状态，完成三次握手</li>
-</ol>
-<h3 id="关闭连接"><a href="#关闭连接" class="headerlink" title="关闭连接"></a>关闭连接</h3><p>由于 <strong>TCP</strong> 连接是全双工的，因此每个方向都必须单独进行关闭。这个原则是当一方完成它的数据发送任务后就能发送一个 <strong>FIN</strong> 来终止这个方向的连接。收到一个 FIN 只意味着这一方向没有数据流动，一个 <strong>TCP</strong> 连接在收到一个 <strong>FIN</strong> 后仍能发送数据。首先进行关闭的一房将执行主动关闭，而另一方执行被动关闭。</p>
-<p><strong>TCP</strong> 的连接断开需要发送四个包，因此称为四次握手。客户端或服务器均可主动发起，在 <strong>socket</strong> 编程中，任何一方执行 <strong>close()</strong> 操作即可产生。</p>
-<ol>
-<li>客户端发送一个 <strong>FIN</strong>，用来关闭客户端到服务端的数据传送，此时进入 <strong>FIN_WAIT1</strong> 状态</li>
-<li>服务器收到这个 <strong>FIN</strong>，它发送一个 <strong>ACK</strong>，确认号为收到的序号加 1， 和 <strong>SYN</strong> 一样，一个 <strong>FIN</strong> 将占用一个序号，此时服务端进入 <strong>CLOSE_WAIT</strong> 状态，客户端接收到 <strong>ACK</strong> 后进入 <strong>FIN_WAIT2</strong> 状态（即半连接状态）</li>
-<li>服务器关闭与客户端的连接，发送一个 <strong>FIN</strong> 给客户端，此时服务端进入 <strong>LAST_ACK</strong> 状态</li>
-<li>客户端发回 <strong>ACK</strong> 报文确认，并将确认序号设置为收到序号加 1，此时客户端进入 <strong>TIME_WAIT</strong> 状态，服务端进入 <strong>CLOSED</strong> 状态</li>
-</ol>
-<p><img src="http://images.cnitblog.com/blog/88420/201402/181351206012825.png" alt="TCP状态"></p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/30/TCP-连接的状态/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="ciu223w8c006ypepvpzaqxynn" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-apache-access-log-Analy" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/30/Linux-apache-access-log-Analy/" class="article-date">
-  <time datetime="2016-07-30T07:54:28.000Z" itemprop="datePublished">2016-07-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/30/Linux-apache-access-log-Analy/">Linux apache access_log Analy</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此脚本利用 apache 的 server-status 页面值判断服务器并发情况，利用 apache 访问日志分析来源 IP，并进行处理</p>
-<p>存在问题：</p>
-<ul>
-<li>server-status 页面在连续访问一段时间之后 ReqPerSec 的值会出现不准确的情况，相较于 apachetop -T 1 -d 1 的结果</li>
-<li>大量用户通过同一个公网ip来访问站点时容易出现误封的情况</li>
-<li>没有自动解封的功能</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># author: 411383444@qq.com</span><br><span class="line">#####</span><br><span class="line"># 并发连接达到阀值，进行日志分析</span><br><span class="line"># 统计日志中每个ip访问次数</span><br><span class="line"># ip访问占比超过阀值进行记录并进行后续处理</span><br><span class="line"># 将ip添加到防火墙并记录</span><br><span class="line">#####</span><br><span class="line"></span><br><span class="line">#需要分析的站点URL</span><br><span class="line">CheckUrl=http://127.0.0.1/server-status?auto</span><br><span class="line">#需要分析的访问日志</span><br><span class="line">LogPath=/var/log/httpd/access_log</span><br><span class="line">#分析多长时间以内的日志</span><br><span class="line">AnalyTime=5</span><br><span class="line">#分析每秒请求数</span><br><span class="line">AnalyValue=ReqPerSec</span><br><span class="line">#取排名前10的ip列表</span><br><span class="line">AnalyCount=10</span><br><span class="line">#IP白名单</span><br><span class="line">WhiteIp=/root/white_ip.txt</span><br><span class="line">#符合过滤要求的IP列表</span><br><span class="line">BlockIp=/root/block_ip.txt</span><br><span class="line">#添加进防火墙的记录</span><br><span class="line">DenyLog=/root/denylog.txt</span><br><span class="line">#每秒总共访问阀值</span><br><span class="line">ThresholdAll=1000</span><br><span class="line">#每秒每IP访问阀值</span><br><span class="line">ThresholdSingleIp=15</span><br><span class="line"></span><br><span class="line"># 获取当前访问计数（整数）- 函数需要代入当前计数的是哪个值</span><br><span class="line"># Usage: ReqPerSec_Count ReqPerSec</span><br><span class="line">function ReqPerSec_Count()&#123;</span><br><span class="line">	ReqPerSec=`wget --quiet -O - $CheckUrl | head -n 9 | grep &quot;$AnalyValue&quot; | tr -d &quot; &quot; | awk -F &quot;:&quot; &apos;&#123;print $2&#125;&apos; | awk -F &quot;.&quot; &apos;&#123;print $1&#125;&apos;`</span><br><span class="line">	echo $ReqPerSec</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#计算并发（平均值） - 函数需要带入当前计算是哪个值多少秒内的平均值</span><br><span class="line"># Usage: ReqPerSec_Avg 3 ReqPerSec</span><br><span class="line">function ReqPerSec_Avg()&#123;</span><br><span class="line">	for (( n = 0; n &lt; $AnalyTime; n++ ))</span><br><span class="line">	do</span><br><span class="line">		ReqPerSec=$[$ReqPerSec+`ReqPerSec_Count $AnalyValue`]</span><br><span class="line">		sleep 1</span><br><span class="line">	done</span><br><span class="line">	ReqPerSecAvg=`expr $ReqPerSec / $AnalyTime`</span><br><span class="line">	echo $ReqPerSecAvg</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 访问超限IP处理</span><br><span class="line">function DenyIP()&#123;</span><br><span class="line">	if [[ `grep -q $1 $WhiteIp` -eq 0 ]]; then</span><br><span class="line">		echo &quot;$1 ( white_ip )&quot; &gt;&gt; $BlockIp</span><br><span class="line">	else</span><br><span class="line">		echo &quot;$1&quot; &gt;&gt; $BlockIp</span><br><span class="line">		iptables -nL | grep -q $1 || (iptables -I INPUT -s $1 -p tcp --dport 80 -j DROP &amp; echo &quot;$block_ip `date +%Y-%m-%H:%M:%S`&quot; &gt;&gt; ./denylog.txt)</span><br><span class="line">	fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 统计 IP 访问次数列表 - 函数需要代入</span><br><span class="line">function Access_Count()&#123;</span><br><span class="line">	ReqPerSecAvg=`ReqPerSec_Avg`</span><br><span class="line">	</span><br><span class="line">	iplist=`tail -n $ReqPerSecAvg $LogPath | awk -F &quot; &quot; &apos;&#123;print $1&#125;&apos; | sort | uniq -c | sort -rn | head -n $AnalyCount | awk -F &quot; &quot; &apos;&#123;if($1&gt;=$ThresholdSingleIp) print $2&#125;&apos;`</span><br><span class="line"></span><br><span class="line">	for block_ip in $iplist</span><br><span class="line">	do</span><br><span class="line">		DenyIP $block_ip</span><br><span class="line">		sleep 1</span><br><span class="line">	done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 程序入口</span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">	# 判断实时访问数是否超过阀值</span><br><span class="line">	if [[ `ReqPerSec_Count` -ge $ThresholdAll ]]; then</span><br><span class="line">		echo &quot;需要处理...!&quot;</span><br><span class="line">		Access_Count</span><br><span class="line">	else</span><br><span class="line">		echo &quot;不需要处理...!&quot;</span><br><span class="line">		sleep 10</span><br><span class="line">	fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/Linux-apache-access-log-Analy/" data-id="ciu223w670028pepv62n7yasq" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="ciu59y1bq003te9pvxqktalae" class="article-share-link">Share</a>
       
       
     </footer>
@@ -635,7 +695,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -660,28 +720,28 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
           <li>
+            <a href="/2016/10/11/恢复路径/">恢复路径</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/">RESTORE HEADERONLY (Transact-SQL)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/11/电池串联和并联区别/">电池串联和并联区别</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/09/数据库镜像-基本概念/">数据库镜像-基本概念</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/28/Centos-下转发-DNS-服务器的架设/">Centos 下转发 DNS 服务器的架设</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/">Nagios check_http Invalid option - SSL is not available</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/">华为交换机对通过 SNMP 访问交换机的用户的 ACL 控制配置</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/">ACL match-order 中的 config 和 auto 的应用区别</a>
           </li>
         
       </ul>
@@ -697,7 +757,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

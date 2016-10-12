@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,209 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-恢复路径" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/11/恢复路径/" class="article-date">
+  <time datetime="2016-10-11T09:11:58.000Z" itemprop="datePublished">2016-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/11/恢复路径/">恢复路径</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果您使用差异或日志备份并且通过下列方式之一将数据库恢复到以前的时间点，则很有必要理解恢复路径：</p>
+<ul>
+<li>执行时点还原</li>
+<li>执行恢复而不先还原所有日志备份或最新的差异备份。 </li>
+</ul>
+<p>如果将数据库恢复到更早的恢复点并从该点开始使用数据库，会生成一个新的恢复路径。“恢复路径”是指通过正常的数据库使用或特定的数据和日志还原将数据库恢复到特定时间点的数据和日志备份的序列。</p>
+<p>通常，由于必须回滚事务并且数据库现在处于唯一的状态，恢复点将开始一个新的恢复路径。预先存在的备份现在可能具有比此恢复点的日志序列号 (LSN) 更大的 LSN。这些备份中的 LSN 存在于由当前恢复操作创建的新分支以外的恢复分支中。</p>
+<p>最佳方法：若要避免创建具有多个恢复分叉的恢复路径，请在恢复数据库之后尽快执行一组完整的数据备份。此方法可保证对单个恢复分支执行所有备份。</p>
+<p>下列情况会创建新的恢复路径，因为数据库未还原到“结束时间”。此后，会出现使数据库进入两个或两个以上恢复路径的备份，它们都使用同一组 LSN。</p>
+<ul>
+<li>不应用现有的事务日志备份还原完整数据库备份和差异数据库备份并恢复数据库。</li>
+<li>将数据库恢复到非最新的差异备份的结尾处。</li>
+<li>将数据库恢复到非最新的事务日志备份的结尾处。</li>
+<li>将数据库恢复到特定时间或事务日志备份中的某个标记事务处。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="ciu59y1fq009qe9pvkwerk0h0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-日志序列号和还原计划" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/11/日志序列号和还原计划/" class="article-date">
+  <time datetime="2016-10-11T08:21:22.000Z" itemprop="datePublished">2016-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Microsoft SQL Server 事物日志中每个记录都由一个唯一的日志序列号（LSN）标识，如果 LSN2 大于 LSN1，则 LSN2 所标识的日志记录描述的更改发生在日志记录 LSN1 描述的更改之后。</p>
+<p>顺序还原期间，还原完整备份后，数据被还原到进行备份的时间点相对应的 LSN，利用差异和日志备份可以将还原的数据库推到稍后的时间，该时间与一个更高的 LSN 相对应。</p>
+<p>还原计划中，最重要的日志序列号（LSN）是第一个和最后一个 LSN。</p>
+<ol>
+<li>first_lsn或FirstLSN：备份集中第一个或最早日志记录的日志序列号。对于数据备份和差异备份，第一个 LSN 标识的是需要此备份执行恢复的最早日志记录，对于日志备份，第一个 LSN 标识的是备份中包含的第一个日志记录。</li>
+<li>last_lsn或LastLSN：备份集之后的下一条日志记录的序列号。最后一个 LSN 标识的是备份结束后的下一个日志记录。对于数据备份和差异备份（以及包含大容量日志操作的日志备份）。必须至少前滚到此 LSN，否则，还原期间复制的数据会出现不一致。对于日志备份，它包含的日志记录最多到（但不包含）此LSN。</li>
+</ol>
+<h3 id="日志序列号和数据备份或差异备份"><a href="#日志序列号和数据备份或差异备份" class="headerlink" title="日志序列号和数据备份或差异备份"></a>日志序列号和数据备份或差异备份</h3><p>对于数据备份或差异备份，first_lsn 和 last_lsn 之间的日志数据包含在备份中，这使得使用该备份（而无需日志备份）就可以恢复到 last_lsn。</p>
+<p>对于数据备份或差异备份，如果按还原顺序使用备份，则 last_lsn 可能是最早的恢复点，如果需要更早的恢复点，则必须使用更早的备份。</p>
+<p>当计划在还原数据备份或差异备份后使用哪个日志备份前滚时，通常将从该数据备份或差异备份之后的第一个日志备份开始，检查备份的属性时，你就会发现这样一个日志备份，其 first_lsn 小于或等于数据备份或差异备份中的 last_lsn，并且 last_lsn 大于数据备份或者差异备份中的 last_lsn。</p>
+<h3 id="日志序列号和日志链中的日志备份"><a href="#日志序列号和日志链中的日志备份" class="headerlink" title="日志序列号和日志链中的日志备份"></a>日志序列号和日志链中的日志备份</h3><p>新的日志链将随顺序局创建后的第一个完整数据库备份而启动，或在从简单恢复模式切换到完整或大容量日志恢复模式后启动。</p>
+<p>first_lsn 和 last_lsn 用于将日志备份连成一个连续的序列（即日志链）。可以使用连续的日志备份序列前滚数据库（可以从最近的数据库备份或者差异备份前滚，也可以从丢失或损坏的数据库备份和差异备份的早期备份前滚）。</p>
+<p>在日志备份中，first_lsn 是备份中第一个日志记录的 LSN，从此日志记录开始，日志备份最多包含到 LSN 为 last_lsn 的日志记录（但不包含该日志记录）。而且仅当早期备份（Backup_A）中的最后一个日志记录的 LSN 大于或等于后期备份（Backup_B）的第一个日志记录的 LSN 时，这两个日志备份才是连续的；也就是 Backup_A.last_lsn &gt;= Backup_B.first_lsn。如果不是这样，这两个备份之间将存在空白。</p>
+<p>这些 LSN 之间关系的意义如下：</p>
+<ul>
+<li>A.last_lsn = B.last_lsn：则 B 通常是紧跟着 A 后进行的日志备份</li>
+<li>A.last_lsn &gt; B.last_lsn：存在重叠。重叠通常是由于创建仅复制日志备份或在时点还原后备份第一个日志引起的。重叠可能会涉及不同的恢复分叉。</li>
+</ul>
+<h3 id="日志链断开的原因"><a href="#日志链断开的原因" class="headerlink" title="日志链断开的原因"></a>日志链断开的原因</h3><p>通常，SQL Server 数据库引擎会防止日志备份序列中出现空白，从而使日志链保持完整。但是，如果数据库管理员先将恢复模式更改为简单恢复模式，然后再将其改回完整或者大容量日志恢复模式，会使日志链断开。</p>
+<p>由于日志链已断开，因此无法在涉及简单恢复模式的恢复模式中前滚。更改到完整或大容量日志恢复模式后，应使用新的差异基准或差异基准集。此外，也可以使用差异备份填补空白。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="ciu59y1ft009ve9pvnff3fk7w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RESTORE-HEADERONLY-Transact-SQL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" class="article-date">
+  <time datetime="2016-10-11T07:34:12.000Z" itemprop="datePublished">2016-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/">RESTORE HEADERONLY (Transact-SQL)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们一般使用 RESTORE HEADERONLY 来查看备份文件上包含的一些其它信息，这里我们说明结果集中的 LSN 信息。</p>
+<p>关于 LSN 相关的结果集包含有 FirstLSN、LastLSN、CheckpointLSN、DatabaseBackupLSN。</p>
+<p>FirstLSN：备份集中第一个日志记录的日志序列号<br>LastLSN：备份集之后的下一条日志记录的序列号<br>CheckpointLSN：创建备份时最后一个检查点的日志序列号<br>DatabaseBackupLSN：最近的数据库完整备份的日志序列号</p>
+<p>以下示例用来返回备份文件标头中的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RESTORE HEADERONLY </span><br><span class="line">FROM DISK = N&apos;C:\AdventureWorks-FullBackup.bak&apos; </span><br><span class="line">WITH NOUNLOAD;</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+<p>通过对完整备份、差异备份、事物日志备份使用上述命令，我们可以得到如下结论：</p>
+<ol>
+<li>当我们对一个完整备份的文件使用上述命令时，返回的结果中 FirstLSN 即为当前完整备份文件的标识，DatabaseBackupLSN 为上一个完整备份的标识。</li>
+<li>当我们对差异备份、事物日志备份使用上述命令时，返回的结果集中 DatabaseBackupLSN 即为与当前备份相关联的完整备份文件的标识，据此我们可以将差异备份、事物日志备份与完整备份文件关联起来进行数据库恢复。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="ciu59y1dc006ee9pvjvo17zxu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-电池串联和并联区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/11/电池串联和并联区别/" class="article-date">
+  <time datetime="2016-10-11T01:12:38.000Z" itemprop="datePublished">2016-10-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/11/电池串联和并联区别/">电池串联和并联区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>并联：电池之间正和正、负和负并排连接在一起。并联电池的电压是每个子电池电压的最大值，输出的电量是电池组最弱子电池的N倍（N为子电池的数量）。<br>串联：电池之间正和负串在一起连接。串联电池的电压是每个子电池电压的总和，输出功率（即串联后的电量）与单个电磁电池的容量相关。</p>
+<p>因为无论串联，还是并联电池组的输出电量都与电池组中的最弱电池有关，所以要求电池组中要选用新旧程度和性能尽可能接近的子电池，不然电池组中的性能好（或新的）子电池就要对弱的子电池做功，从而减少整个电池组的效能，也不利于最好子电池的寿命。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="ciu59y1fy00a2e9pv4ear7mh3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-数据库镜像-基本概念" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -123,7 +326,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciu223w9i009kpepvm2ckwmpp" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciu59y1fr009se9pvv0kst948" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +372,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciu223w560015pepvxq9gtwom" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciu59y18u000ze9pvk6qnfwv5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +415,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciu223w7b004hpepv1jeu3mlb" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciu59y1cb004ke9pvcxluh94p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -255,7 +458,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciu223w9g009cpepvtz7z2lwq" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciu59y1fo009le9pvdr4t66j9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -312,7 +515,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciu223w3w0001pepvsl52iz5m" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciu59y16s0001e9pv3zgapfbe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -368,305 +571,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciu223w4b000apepvgsjpgmee" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-交换机链路聚合" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/14/交换机链路聚合/" class="article-date">
-  <time datetime="2016-09-14T07:14:21.000Z" itemprop="datePublished">2016-09-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/14/交换机链路聚合/">交换机链路聚合</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>链路聚合是将两个或更多数据信道结合成一个单个的信道，该信道以一个单个的更高带宽的逻辑链路出现。链路聚合一般用来连接一个或多个带宽需求大的设备，例如连接骨干网络的服务器或服务器群。</p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>链路聚合（Link Aggregation），是指将多个物理端口捆绑在一起，成为一个逻辑端口，以实现出/入流量在各成员端口中的负荷分担，交换机根据用户配置的端口负荷分担策略决定报文从哪一个成员端口发送到对端的交换机。当交换机检测到其中一个成员端口的链路发生故障时，就停止在此端口上发送报文，并根据负荷分担策略在剩下链路中重新计算报文发送的端口，故障端口恢复后再次重新计算报文发送端口。链路聚合在增加链路带宽、实现链路传输弹性和冗余等方面是一项很重要的技术。<br>如果聚合的每个链路都遵循不同的物理路径,则聚合链路也提供冗余和容错。通过聚合调制解调器链路或者数字线路,链路聚合可用于改善对公共网络的访问。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>逻辑链路的带宽增加了大约(n-1)倍，这里，n为聚合的路数。另外，聚合后，可靠性大大提高，因为，n条链路中只要有一条可以正常工作，则这个链路就可以工作。除此之外，链路聚合可以实现负载均衡。因为，通过链路聚合连接在一起的两个（或多个）交换机（或其他网络设备），通过内部控制，也可以合理地将数据分配在被聚合连接的设备上，实现负载分担。</p>
-<p>链路聚合有如下优点：</p>
-<ol>
-<li>增加网络带宽</li>
-</ol>
-<p>链路聚合可以将多个链路捆绑成为一个逻辑链路，捆绑后的链路带宽是每个独立链路的带宽总和。</p>
-<ol>
-<li>提高网络连接的可靠性</li>
-</ol>
-<p>链路聚合中的多个链路互为备份，当有一条链路断开，流量会自动在剩下链路间重新分配。<br>链路聚合的方式主要有以下两种：</p>
-<ul>
-<li>静态Trunk</li>
-</ul>
-<p>静态Trunk将多个物理链路直接加入Trunk组，形成一条逻辑链路。</p>
-<ul>
-<li>动态LACP</li>
-</ul>
-<p>激活某端口的LACP协议后，该端口将通过发送LACPDU向对端通告自己的系统优先级、系统MAC地址、端口优先级和端口号。对端接收到这些信息后，将这些信息与自己的属性比较，选择能够聚合的端口，从而双方可以对端口加入或退出某个动态聚合组达成一致。</p>
-<hr>
-<p>链路聚合往往用在两个重要节点或繁忙节点之间，既能增加互联带宽，又提供了连接的可靠性。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciu223w9d0092pepv1ow05sc5" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-华为交换机命令释义" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/14/华为交换机命令释义/" class="article-date">
-  <time datetime="2016-09-14T06:35:20.000Z" itemprop="datePublished">2016-09-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>批量创建 vlan</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vlan batch 1 t0 100 105 to 108 1023</span><br><span class="line">一次性创建 vlan 1 - vlan2 ，vlan 105 - vlan 108 ，以及 vlan 1023</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">命令</th>
-<th style="text-align:left">释义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">sysname</td>
-<td style="text-align:left">改设备名</td>
-</tr>
-<tr>
-<td style="text-align:left">save</td>
-<td style="text-align:left">保存配置</td>
-</tr>
-<tr>
-<td style="text-align:left">system-view</td>
-<td style="text-align:left">进入系统试图</td>
-</tr>
-<tr>
-<td style="text-align:left">display current-configuration</td>
-<td style="text-align:left">查看当前配置</td>
-</tr>
-<tr>
-<td style="text-align:left">stp mode stp</td>
-<td style="text-align:left">设置 STP 模式为 STP</td>
-</tr>
-<tr>
-<td style="text-align:left">stp instance 0 root primary</td>
-<td style="text-align:left">指定该交换机为根桥</td>
-</tr>
-<tr>
-<td style="text-align:left">stp enable</td>
-<td style="text-align:left">开启 STP</td>
-</tr>
-<tr>
-<td style="text-align:left">http server enable</td>
-<td style="text-align:left">使能 HTTP 服务功能，可用 undo http server enable 去使能状态</td>
-</tr>
-<tr>
-<td style="text-align:left">interface Eth-Trunk1</td>
-<td style="text-align:left">建立链路聚合 1</td>
-</tr>
-<tr>
-<td style="text-align:left">prot link-type trunk</td>
-<td style="text-align:left">链路聚合后的模式</td>
-</tr>
-<tr>
-<td style="text-align:left">port trunk allow-pass vlan 2 to 200</td>
-<td style="text-align:left">允许通过 vlan 标签</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciu223w9h009fpepvv5u4sqrg" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-VRRP-协议" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/14/VRRP-协议/" class="article-date">
-  <time datetime="2016-09-14T06:01:31.000Z" itemprop="datePublished">2016-09-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h3><ol>
-<li><p>路由器开启 VRRP 功能后，会根据优先级确定自己在备份组中的角色。优先级高的路由器称为主用路由器，优先级低的成为备用路由器。主用路由器定期发送 VRRP 通告报文，通知备份组内的其它路由器自己工作正常；备用路由器则启动定时器等待通告报文的到来。</p>
-</li>
-<li><p>VRRP 在不同的主用抢占方式下，主用角色的替换方式不同：</p>
-</li>
-</ol>
-<ul>
-<li>抢占方式下，当备用路由器收到 VRRP 通告报文后，会将自己的优先级与通告报文中的优先级进行比较。如果大于通告报文中的优先级，则称为主用路由器，否则将保持备用状态。</li>
-<li>非抢占方式下，只要主用路由器没有出现故障，备份组中的路由器始终保持主用或者备用状态，备份组中的路由器即使随后被配置了更高的优先级也不会成为主用路由器</li>
-</ul>
-<ol>
-<li>如果备用路由器的定时器超时后仍未收到主用路由器发送来的 VRRP 通告报文，则认为主用路由器已经无法正常工作，此时备用路由器会认为自己是主用路由器，并对外发送 VRRP 通告报文。备份组内的路由器根据优先级选举出主用路由器，承担报文的转发功能。</li>
-</ol>
-<h3 id="VRRP-负载分担"><a href="#VRRP-负载分担" class="headerlink" title="VRRP 负载分担"></a>VRRP 负载分担</h3><p>在实际组网中一般会进行 VRRP 负载分担方式的设置。负载分担方式是指多台路由器同时承担业务，避免设备闲置，因此需要建立两个或更多的备份组实现负载分担。VRRP 负载分担方式具有以下特点：</p>
-<ul>
-<li>每个备份组都包括一个主用路由器或若干个备用路由器</li>
-<li>各备份组的主用路由器可以不相同</li>
-<li>同一台路由器可以加入多个备份组，在不同备份组中具有不同的优先级，使得该路由器可以在一个备份组中作为主用路由器，在其它备份组中作为备用路由器</li>
-</ul>
-<p>VRRP 在提高可靠性的同时，简化了主机的配置。在具有多播或者广播能力的局域网中，借助于 VRRP 能在某台路由器出现故障时仍然提供可靠的缺省链路，有效避免单一链路故障发生后网络中断的问题，而无需修改动态路由协议、路由发现协议等配置信息。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciu223w89006tpepvbocj0agv" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Centos-7-安装-postfix" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/08/Centos-7-安装-postfix/" class="article-date">
-  <time datetime="2016-09-08T03:11:41.000Z" itemprop="datePublished">2016-09-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装没什么好说的，无非是卸载 sendmail，安装 postfix 即可。</p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
-<li>/etc/postfix/main.cf 配置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/postfix/main.cf | grep -v ^# | grep -v ^$</span><br><span class="line">queue_directory = /var/spool/postfix</span><br><span class="line">command_directory = /usr/sbin</span><br><span class="line">daemon_directory = /usr/libexec/postfix</span><br><span class="line">data_directory = /var/lib/postfix</span><br><span class="line">mail_owner = postfix</span><br><span class="line">myhostname = mail.ttlop.cn</span><br><span class="line">mydomain = ttlop.cn</span><br><span class="line">myorigin = $mydomain</span><br><span class="line">inet_interfaces = $myhostname</span><br><span class="line">inet_protocols = all</span><br><span class="line">mydestination = $myhostname, $mydomain, localhost.$mydomain, localhost</span><br><span class="line">unknown_local_recipient_reject_code = 550</span><br><span class="line">mynetworks = 192.168.16.0/24, 127.0.0.0/8, 192.168.200.91/32</span><br><span class="line">alias_maps = hash:/etc/aliases</span><br><span class="line">alias_database = hash:/etc/aliases</span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">debug_peer_level = 2</span><br><span class="line">debugger_command =</span><br><span class="line">	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin</span><br><span class="line">	 ddd $daemon_directory/$process_name $process_id &amp; sleep 5</span><br><span class="line">sendmail_path = /usr/sbin/sendmail.postfix</span><br><span class="line">newaliases_path = /usr/bin/newaliases.postfix</span><br><span class="line">mailq_path = /usr/bin/mailq.postfix</span><br><span class="line">setgid_group = postdrop</span><br><span class="line">html_directory = no</span><br><span class="line">manpage_directory = /usr/share/man</span><br><span class="line">sample_directory = /usr/share/doc/postfix-2.10.1/samples</span><br><span class="line">readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES</span><br></pre></td></tr></table></figure>
-<ol>
-<li>/etc/hostname 配置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/hostname </span><br><span class="line">mail.ttlop.cn</span><br></pre></td></tr></table></figure>
-<ol>
-<li>/etc/hosts 配置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.16.115	mail.ttlop.cn	mail</span><br></pre></td></tr></table></figure>
-<ol>
-<li>/etc/resolv.conf 配置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/resolv.conf </span><br><span class="line"># Generated by NetworkManager</span><br><span class="line">search ttlop.cn</span><br><span class="line">nameserver 222.246.129.80</span><br></pre></td></tr></table></figure>
-<ol>
-<li>域名解析配置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# nslookup</span><br><span class="line">&gt; set q=mx</span><br><span class="line">&gt; ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">ttlop.cn	mail exchanger = 1 mail.ttlop.cn.</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br><span class="line">&gt; set q=a</span><br><span class="line">&gt; mail.ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">Name:	mail.ttlop.cn</span><br><span class="line">Address: 222.240.236.201</span><br><span class="line">&gt; set q=txt</span><br><span class="line">&gt; ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">ttlop.cn	text = &quot;v=spf1 ipv4:58.20.58.192/27 ipv4:58.20.58.224/27 ipv4:222.240.240.240/28 ipv4:222.240.236.192/28 ~all&quot;</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br></pre></td></tr></table></figure>
-<ol>
-<li>防火墙配置</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-service=smtp --permanent</span><br><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
-<p>至此配置完成。</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ol>
-<li><p>测试内外网 smtp 端口是否开放</p>
-</li>
-<li><p>测试邮件是否可以发出：echo “Mail Content” | mail -s “Mail Subject” 18675850419@wo.cn，建议先从 wo 邮箱往这边发送测试邮件</p>
-</li>
-<li><p>查看 /var/log/maillog、postqueue -p 等信息确认发送是否正常</p>
-</li>
-<li><p>测试邮件是否可以收到，如果当前操作均在 root 下进行，可以直接在 wo 邮箱中发送邮件到 root@ttlop.cn，通过在服务器命令行输入 mail 来确认是否可以收到邮件</p>
-</li>
-</ol>
-<hr>
-<p>至此测试完成，实际环境中发现发送到 qq 邮箱的邮件均被拒绝，建议多用几个邮箱帐号来测试，有时环境搭建正常，但依然会出现邮件发不出去的情况。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciu223w4t000npepvmkk4flz6" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciu59y17t000ce9pvx8kxtk8n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -688,7 +593,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -713,28 +618,28 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
           <li>
+            <a href="/2016/10/11/恢复路径/">恢复路径</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/">RESTORE HEADERONLY (Transact-SQL)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/11/电池串联和并联区别/">电池串联和并联区别</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/09/数据库镜像-基本概念/">数据库镜像-基本概念</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/28/Centos-下转发-DNS-服务器的架设/">Centos 下转发 DNS 服务器的架设</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/">Nagios check_http Invalid option - SSL is not available</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/">华为交换机对通过 SNMP 访问交换机的用户的 ACL 控制配置</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/">ACL match-order 中的 config 和 auto 的应用区别</a>
           </li>
         
       </ul>
@@ -750,7 +655,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
