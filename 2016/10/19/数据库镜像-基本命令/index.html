@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Linux SMB 配置 | 运维生存时间</title>
+  <title>数据库镜像-基本命令 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="smb samba">
+  <meta name="description" content="数据库镜像命令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux SMB 配置">
-<meta property="og:url" content="http://ttlop.com/2016/07/20/Linux-SMB-配置/index.html">
+<meta property="og:title" content="数据库镜像-基本命令">
+<meta property="og:url" content="http://ttlop.com/2016/10/19/数据库镜像-基本命令/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="smb samba">
-<meta property="og:updated_time" content="2016-07-20T04:53:41.393Z">
+<meta property="og:description" content="数据库镜像命令">
+<meta property="og:updated_time" content="2016-10-19T02:33:21.295Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux SMB 配置">
-<meta name="twitter:description" content="smb samba">
+<meta name="twitter:title" content="数据库镜像-基本命令">
+<meta name="twitter:description" content="数据库镜像命令">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Linux-SMB-配置" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-数据库镜像-基本命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/20/Linux-SMB-配置/" class="article-date">
-  <time datetime="2016-07-20T04:47:28.000Z" itemprop="datePublished">2016-07-20</time>
+    <a href="/2016/10/19/数据库镜像-基本命令/" class="article-date">
+  <time datetime="2016-10-19T02:05:25.000Z" itemprop="datePublished">2016-10-19</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Linux SMB 配置
+      数据库镜像-基本命令
     </h1>
   
 
@@ -107,25 +107,31 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如果要在 Linux 以及 Windows 之间互相传文件，使用 SMB 共享的方式是一个比较不错的方法，下面记录一下了下步骤。</p>
-<a id="more"></a>
-<ul>
-<li>安装：yum install samba</li>
-<li><p>配置：vim /etc/samba/smb.conf，最后面添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[ziplog]						; 共享名称</span><br><span class="line">        path = /hdlog/tanfei/home/data/unzip/jsonFile   ; 需要共享的文件夹路径</span><br><span class="line">        writeable = yes					; 是否可写</span><br><span class="line">        guest ok = no					; 是否允许 GUEST 访问</span><br></pre></td></tr></table></figure>
+        <ul>
+<li><p>查询数据库证书 select * from sys.certificates;</p>
 </li>
-<li><p>设置 SMB 用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd tanfei -s /sbin/nologin -d /dev/null    ; 先增加smb用户对应的系统用户</span><br><span class="line">smbpasswd -a tanfei				; 增加 smb 用户</span><br></pre></td></tr></table></figure>
+<li><p>删除数据库证书 drop certificate xxx_cert;</p>
 </li>
-<li><p>配置防火墙：开启 139 和 445 端口</p>
+<li><p>查询数据库主密钥 select * from sys.symmetric_keys;</p>
 </li>
-<li>至此安装配置完成，可以尝试在 windows 下访问测试了</li>
+<li><p>删除已有的密钥 drop master key;</p>
+</li>
+<li><p>查看终端点 select <em> from sys.database_mirroring_endpoints、select </em> from sys.endpoints;</p>
+</li>
+<li><p>删除终端点 drop endpoint xxx;</p>
+</li>
+<li><p>删除数据库镜像的正在还原模式</p>
+</li>
 </ul>
+<ol>
+<li>alter database xxx set partner off;</li>
+<li>restore database xxx with recovery;</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="ciugb10f10022hcpvinlldq0p" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本命令/" data-id="ciugb10kz009mhcpv4kxsl2em" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,19 +140,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/07/22/LinuxShell-sed-进阶/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          LinuxShell sed 进阶
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/10/19/数据库镜像-基本配置/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Intofiy+Rsync 实现 Linux 文件实时同步</div>
+      <div class="article-nav-title">数据库镜像-基本配置</div>
     </a>
   
 </nav>

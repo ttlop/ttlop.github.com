@@ -82,6 +82,63 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-ACL-match-order-中的-config-和-auto-的应用区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" class="article-date">
+  <time datetime="2016-09-20T05:53:11.000Z" itemprop="datePublished">2016-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/">ACL match-order 中的 config 和 auto 的应用区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一个 ACL 由一条或多条描述报文匹配选项的判断语句组成，这样的判断语句就称为“规则”。由于每条规则中的报文匹配选项不同，从而使这些规则之间可能存在重复甚至矛盾的地方，因此在将一个报文与ACL 的各条规则进行匹配时，就需要有明确的匹配顺序来确定规则执行的优先级。</p>
+<p>ACL 的规则匹配顺序有以下两种：</p>
+<ul>
+<li><p>配置顺序：按照用户配置规则的先后顺序进行匹配，但由于本质上系统是按照规则编号由小到大进行匹配，因此后插入的规则如果编号较小也有可能先被匹配。</p>
+</li>
+<li><p>自动排序：按照“深度优先”原则由深到浅进行匹配，</p>
+</li>
+</ul>
+<p>不同类型ACL的“深度优先”排序法则如下所示:</p>
+<ul>
+<li>IPv4基本ACL</li>
+</ul>
+<p>先比较源IPv4 地址范围，范围较小者优先<br>如果源IP 地址范围相同，再比较配置顺序，配置在前者优先</p>
+<ul>
+<li>IPv4高级ACL</li>
+</ul>
+<p>先比较协议范围，指定有IPv4 承载的协议类型者优先<br>如果协议范围相同，再比较源IPv4 地址范围，较小者优先<br>如果源IPv4 地址范围也相同，再比较目的IPv4 地址范围，较小者优先<br>如果目的IPv4 地址范围也相同，再比较四层端口（即TCP/UDP 端口）号范围，较小者优先<br>如果四层端口号范围也相同，再比较配置顺序，配置在前者优先</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciugb10c10002hcpv24afarwv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Authentication-password-与-scheme-区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/09/20/Authentication-password-与-scheme-区别/" class="article-date">
@@ -128,7 +185,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciug9tgph000advpvo4aoj65e" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciugb10ck000ahcpveeojy9yj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +247,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciug9tgyd009advpvled2c0sw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciugb10kn0092hcpvfkwufa3u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +345,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciug9tgyi009jdvpv09oyxnzx" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciugb10kt009chcpvxjgp77q0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -348,7 +405,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciug9tgwq0072dvpv4myzzxgs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciugb10j4006uhcpv3izgr1cm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -426,7 +483,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciug9tgqb000qdvpvvohmhp2j" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciugb10d9000rhcpvs2cev5r9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -480,7 +537,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="ciug9tgqj000udvpvey1cbsjr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="ciugb10dd000vhcpvkfujbd3j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -526,7 +583,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="ciug9tgr70019dvpvyuf2ksw1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="ciugb10e5001dhcpvjeu22rh6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -571,7 +628,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="ciug9tgwt0077dvpveztkzxcd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="ciugb10j7006zhcpvo0jfdpcg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -619,78 +676,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="ciug9tgwu0079dvpvl6be74tx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-虚拟化中的-SR-IOV" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/30/虚拟化中的-SR-IOV/" class="article-date">
-  <time datetime="2016-08-30T02:10:15.000Z" itemprop="datePublished">2016-08-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/30/虚拟化中的-SR-IOV/">虚拟化中的 SR-IOV</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>虚拟化环境中有很多的硬件加速技术，这些技术标准来源于行业内的领导者或各种组织机构，但是在实际项目落地时又有哪些会被启用呢？无论想启用哪些加速功能，势必需要硬件的支持，这就导致在一些项目前期的调研或者 POC 环境里不太容易实现，毕竟有些要求是十分昂贵和苛刻的，比如 RDMA。相对于一些需要资金投入的技术来说，SRIOV 无疑是比较亲民易于实现的，今天我们采用 Hyper-V 环境来进行说明。</p>
-<p>SRIOV，即单根虚拟化，Inter 在早期为了支持虚拟化环境，在 CPU 和 PCI 总线上提供了三层虚拟化技术，它们分别是：</p>
-<ol>
-<li><p>基于处理器的虚拟化技术 VT-x</p>
-</li>
-<li><p>基于 PCI 总线实现的 IO 虚拟化技术 VT-d</p>
-</li>
-<li><p>基于网络的虚拟化技术 VT-c</p>
-</li>
-</ol>
-<p>从 SRIOV 的中文字面不难理解，它属于 VT-d 技术的一个分支，要实现 SRIOV 功能，前提条件就是你的网卡首先要支持 SRIOV，你的主板支持 VT-d 技术（支持 VT-d 自然也就支持 SRIOV）</p>
-<p>那么 SRIOV 究竟是干嘛用的，上一张架构图来看看吧：</p>
-<p><img src="/myimages/43637752_1.jpg" alt="图片描述"></p>
-<p>以上图为例逐个解释关键词：</p>
-<ol>
-<li><p>PF 就是物理网卡所支持的一项 PCI 功能，PF 可以扩展出若干个 VF</p>
-</li>
-<li><p>VF 是支持 SRIOV 的物理网卡所虚拟出的一个“网卡”或者说虚拟出的一个实例，它会以一个独立网卡的形式呈现出来，每一个 VF 有他自己独享的 PCI 配置区域，并且可能与其它 VF 共享着同一个物理资源</p>
-</li>
-<li><p>PF miniport driver 即 PF 驱动是工作于 Hyper-V 虚拟化平台父区域的，并在 VF 之前最先加载</p>
-</li>
-<li><p>VF miniport driver 即 VF 驱动是工作与 Hyper-V 虚拟化平台子区域的，需要注意的是 VF 与 PF 之间是隔离的，任何经由VF 驱动或所执行的结果都不会影响其它 VF 或 PF</p>
-</li>
-<li><p>Network Interface Card 即物理网卡，在启用 SRIOV 之后会产生若干 vport，物理 NIC 所要做的就是转发 physical port 与 vport 之间的流量。</p>
-</li>
-<li><p>physical port 顾名思义就是物理网口，在 SRIOV 场景中 physical port 充当一个面向对外的网络媒介</p>
-</li>
-<li><p>VPort 是个抽象出来的接口，类似于物理网口，它被映射给每个 VF 或者 PF。</p>
-</li>
-</ol>
-<p>通过以上架构的描述可以看出，启用 SRIOV 之后，物理 NIC 将通过 VF 与虚拟机（VF driver）进行数据交互，这样一来可以跳过中间的虚拟化堆栈（即 VMM）层，以达到近乎于物理环境的性能，这一点也是 SRIOV 最大的价值所在，它有别于以往虚拟机通过仿真设备和虚拟化层进行流量传递的情况。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="ciug9tgyz00abdvpvevh9s6km" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="ciugb10ja0074hcpv1qrqbhma" class="article-share-link">Share</a>
       
       
     </footer>
@@ -742,6 +728,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/10/19/数据库镜像-基本命令/">数据库镜像-基本命令</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/19/数据库镜像-基本配置/">数据库镜像-基本配置</a>
           </li>
         
@@ -755,10 +745,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/">RESTORE HEADERONLY (Transact-SQL)</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/11/电池串联和并联区别/">电池串联和并联区别</a>
           </li>
         
       </ul>
