@@ -82,6 +82,54 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" class="article-date">
+  <time datetime="2016-09-02T03:40:20.000Z" itemprop="datePublished">2016-09-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Windows/">Windows</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="情况一"><a href="#情况一" class="headerlink" title="情况一"></a>情况一</h3><ul>
+<li>管理机安装系统：<strong>Windows Server 2012 R2 Datacenter</strong> </li>
+<li>被管理机安装系统：<strong>Microsoft Hyper-V Server 2012 R2</strong></li>
+<li>提示错误：<strong>Winrm 协商身份验证错误</strong></li>
+<li>解决办法：<br>在管理机 powershell 模式下执行如下代码:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-item wsman:localhost\client\trustedhosts –value *</span><br></pre></td></tr></table></figure>
+<p>然后我们再回到客户端，右键刷新即可（注意防火墙是否开启）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="ciukzu9gr007cl2pvi56k9939" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-虚拟化中的-SR-IOV" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/30/虚拟化中的-SR-IOV/" class="article-date">
@@ -143,7 +191,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="ciugb10la00a6hcpvzrflqna8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="ciukzu9iw00afl2pvdb5pb5o1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -217,7 +265,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="ciugb10el001phcpvflxjgvqt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="ciukzu9bp001jl2pv23lrstx4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -276,7 +324,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="ciugb10ei001mhcpvpyvkxdlf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="ciukzu9bn001hl2pvxzsus6xp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -332,7 +380,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="ciugb10j6006xhcpv1wwsod18" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="ciukzu9gp0077l2pvjn8g6awo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -378,7 +426,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="ciugb10fk002ohcpvsj9q8get" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="ciukzu9cq002fl2pvsmq8elqd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,7 +519,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="ciugb10d0000fhcpvihvflvuz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="ciukzu99t000el2pvxj3r8l1q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -529,7 +577,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="ciugb10cy000dhcpvjx7ks5r7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="ciukzu99r000cl2pv5dcevudc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -572,7 +620,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="ciugb10kl008xhcpvmwje6igr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="ciukzu9i70096l2pv198ygrc8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -617,52 +665,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="ciugb10ib005zhcpvbd9fqnxk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-常量" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/13/PHP-常量/" class="article-date">
-  <time datetime="2016-08-13T06:01:42.000Z" itemprop="datePublished">2016-08-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/13/PHP-常量/">PHP 常量</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>常量是一个简单值的标识符（名字）。如同其名称所暗示的，在脚本执行期间该值不能改变。常量默认大小写敏感。传统上常量表示总是大写的。<br>常量名和其它任何 PHP 标签遵循同样的命名规则。合法的常量名以字母或下划线开始，后面跟着任何字母，数字或下划线。<br>常量的范围是全局的，不用管作用区域就可以在脚本的任何地方访问常量。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/13/PHP-常量/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="ciugb10i4005thcpvz9440x7w" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="ciukzu9fp0066l2pvamodsx2y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -714,6 +717,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/10/22/Nagios-服务组定义/">Nagios 服务组定义</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/19/数据库镜像-基本命令/">数据库镜像-基本命令</a>
           </li>
         
@@ -727,10 +734,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/">RESTORE HEADERONLY (Transact-SQL)</a>
           </li>
         
       </ul>

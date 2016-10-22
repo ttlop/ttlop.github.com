@@ -82,6 +82,138 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-Template-Windows-2008-R2-IIS-Servers" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" class="article-date">
+  <time datetime="2016-05-19T01:29:00.000Z" itemprop="datePublished">2016-05-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/">Zabbix Template Windows 2008 R2 IIS Servers</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="DownUrl"><a href="#DownUrl" class="headerlink" title="DownUrl"></a>DownUrl</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://zabbix.org/mw/images/d/d4/Template_Windows_2008_R2_IIS_Servers.xml</span><br></pre></td></tr></table></figure>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h3><h4 id="1-Import"><a href="#1-Import" class="headerlink" title="1. Import"></a>1. Import</h4><p>Configuration -&gt; Templates — Import</p>
+<h4 id="2-Template-Name"><a href="#2-Template-Name" class="headerlink" title="2. Template Name"></a>2. Template Name</h4><p>Template Windows 2008 R2 IIS Servers</p>
+<h4 id="3-Items"><a href="#3-Items" class="headerlink" title="3. Items"></a>3. Items</h4><blockquote>
+<p>参考：<a href="http://doc.51windows.net/iismmc/?url=/iismmc/htm/ref_we_counters.htm" target="_blank" rel="external">http://doc.51windows.net/iismmc/?url=/iismmc/htm/ref_we_counters.htm</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">KEY</th>
+<th style="text-align:left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service Cache Current Metadata Cached</td>
+<td style="text-align:left">perf_counter[“\Web Service Cache\Current Metadata Cached”,300]</td>
+<td style="text-align:left">用户模式缓存中的元数据信息块的当前数量</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service Cache Current Files Cached</td>
+<td style="text-align:left">perf_counter[“\Web Service Cache\Current Files Cached”,300]</td>
+<td style="text-align:left">自 WWW 服务启动后，在用户模式文件缓存中查找成功的总数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service Cache Current URIs Cached</td>
+<td style="text-align:left">perf_counter[“\Web Service Cache\Current URIs Cached”,300]</td>
+<td style="text-align:left">自 WWW 服务启动后，在用户模式 URI 缓存中成功查找的总数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service Cache File Cache Hits %</td>
+<td style="text-align:left">perf_counter[“\Web Service Cache\File Cache Hits %”,300]</td>
+<td style="text-align:left">自 WWW 服务启动后，用户模式文件缓存命中与缓存请求总数的比</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service Cache URI Cache Hits %</td>
+<td style="text-align:left">perf_counter[“\Web Service Cache\URI Cache Hits %”,300]</td>
+<td style="text-align:left">自 WWW 服务启动后，URI 缓存命中与缓存总请求数的比</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service Cache Metadata Cache Hits</td>
+<td style="text-align:left">perf_counter[“\Web Service Cache\Metadata Cache Hits”,300]</td>
+<td style="text-align:left">自 WWW 服务启动后，在用户模式元数据缓存中成功查找的总数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Post Requests/sec</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Post Requests/sec”,300]</td>
+<td style="text-align:left">每秒使用 POST 方法对 WWW 服务进行的 HTTP 请求数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Get Requests/sec</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Get Requests/sec”,300]</td>
+<td style="text-align:left">每秒使用 GET 方法对 WWW 服务进行的HTTP 请求数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Service IIS World Side Web Publishing</td>
+<td style="text-align:left">service_state[W3SVC]</td>
+<td style="text-align:left">当前是否有开启W3SVC服务</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Service IIS Admin</td>
+<td style="text-align:left">service_state[IISAdmin]</td>
+<td style="text-align:left">当前是否有开启IISAdmin服务</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Bytes Received/sec</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Bytes Received/sec”,300]</td>
+<td style="text-align:left">WWW 服务每秒接收的数据字节数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Bytes Sent/sec</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Bytes Sent/sec”,300]</td>
+<td style="text-align:left">WWW 服务每秒发送的数据字节数</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Current Connections</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Current Connections”,300]</td>
+<td style="text-align:left">当前与 WWW 服务建立连接的数量</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Web Service(_Total) Bytes Total/sec</td>
+<td style="text-align:left">perf_counter[“\Web Service(_Total)\Bytes Total/sec”,300]</td>
+<td style="text-align:left">bytes sent/sec 和 bytes received/sec 的总和</td>
+</tr>
+<tr>
+<td style="text-align:left">Windows 2008 R2 IIS Port 80HTTP</td>
+<td style="text-align:left">net.tcp.listen[80]</td>
+<td style="text-align:left">当前是否有侦听TCP80端口</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="ciukzu9hc0089l2pv61kiw0a6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-监控-Centos-7-系统下的-Mysql" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" class="article-date">
@@ -126,7 +258,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="ciugb10kc008khcpvtsyj2ngz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="ciukzu9hy008tl2pvznfq74lg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +467,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="ciugb10gz004bhcpvklpvuc9t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="ciukzu9eg004fl2pvhy9h1tb1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,7 +523,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="ciugb10gy0049hcpvv9duiby8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="ciukzu9ef004dl2pvwf9x383q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -436,7 +568,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciugb10d5000mhcpvzx7ye0zm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciukzu9a5000jl2pvbqdxgvhc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,7 +629,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciugb10ka008ghcpviqd0sm6s" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciukzu9hv008ql2pvibugyrtz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -562,7 +694,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciugb10k40088hcpv453b9ig2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciukzu9hp008hl2pv5wfwf4en" class="article-share-link">Share</a>
       
       
     </footer>
@@ -786,7 +918,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="ciugb10k7008chcpvap89cgc4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="ciukzu9hr008ll2pvxkzopj00" class="article-share-link">Share</a>
       
       
     </footer>
@@ -877,7 +1009,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="ciugb10kh008shcpv8xhmod7v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="ciukzu9i2008yl2pvzw3eopj4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -922,52 +1054,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="ciugb10k9008dhcpv8ho8k98b" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Triggers-触发器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-Triggers-触发器/" class="article-date">
-  <time datetime="2016-05-06T03:40:00.000Z" itemprop="datePublished">2016-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/06/Zabbix-Triggers-触发器/">Zabbix Triggers 触发器</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>触发器使用逻辑表达式来评估通过 item 获取得到数据是处于哪种状态。Item 每次获取到一个新值都会使用触发器表达式去计算它的状态，在触发器表达式中我们可以定义哪些值是合理的，哪些是不合理的，如果出现不合理的值，触发器会把状态改为 PROBLEM。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/06/Zabbix-Triggers-触发器/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="ciugb10js0081hcpvdj61qdor" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="ciukzu9ht008ml2pv659ugu2k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1019,6 +1106,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/10/22/Nagios-服务组定义/">Nagios 服务组定义</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/19/数据库镜像-基本命令/">数据库镜像-基本命令</a>
           </li>
         
@@ -1032,10 +1123,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/">RESTORE HEADERONLY (Transact-SQL)</a>
           </li>
         
       </ul>

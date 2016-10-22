@@ -82,6 +82,58 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nagios-使用问题解决" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/21/Nagios-使用问题解决/" class="article-date">
+  <time datetime="2016-06-21T06:54:45.000Z" itemprop="datePublished">2016-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/21/Nagios-使用问题解决/">Nagios 使用问题解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="通过-Web-界面修改某个服务时报错"><a href="#通过-Web-界面修改某个服务时报错" class="headerlink" title="通过 Web 界面修改某个服务时报错"></a>通过 Web 界面修改某个服务时报错</h3><p>例如对某个服务进行临时修改，或者不让它发出警告，Web 页面上都有这样的设置，但是常常会有错误信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Could not open command file &apos;/usr/local/nagios/var/rw/nagios.cmd&apos; for update!</span><br><span class="line">The permissions on the external command file and/or directory may be incorrect. </span><br><span class="line">Read the FAQs on how to setup proper permissions.</span><br><span class="line">An error occurred while attempting to commit your command for processing.</span><br></pre></td></tr></table></figure>
+<p>关于这部分在 <strong>nagios.cfg</strong> 中有下面的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># EXTERNAL COMMAND FILE</span><br><span class="line"># This is the file that Nagios checks for external command requests.</span><br><span class="line"># It is also where the command CGI will write commands that are submitted</span><br><span class="line"># by users, so it must be writeable by the user that the web server</span><br><span class="line"># is running as (usually &apos;nobody&apos;).  Permissions should be set at the </span><br><span class="line"># directory level instead of on the file, as the file is deleted every</span><br><span class="line"># time its contents are processed.</span><br><span class="line">这段话的核心意思是 apache 的运行用户要有对文件的写的权限，权限应该设置在目录上，因为每次文件的内容被处理后文件就会删除</span><br><span class="line"></span><br><span class="line">command_file=/usr/local/nagios/var/rw/nagios.cmd</span><br></pre></td></tr></table></figure>
+<p>本来应该是将 <strong>httpd</strong> 的运行用户 <strong>apache</strong> 添加到 <strong>nagcmd</strong> 组就可以了的，但是这个却不行，因为 <strong>rw</strong> 这个目录下的 <strong>nagios.cmd</strong> 文件在每次 <strong>nagios</strong> 服务重启的时候会重新生成，并且权限会自动变成：prw-rw—-</p>
+<p>我们可以用这种方法来解决：</p>
+<ol>
+<li>usermod -a -G nagcmd apache  ##将 httpd 的运行用户 apche 添加到组 nagcmd 中</li>
+<li>chown -R nagios.nagcmd /usr/local/nagios/var/rw  ##修改 rw 的所属用户和所属组</li>
+<li>chmod g+s /use/local/nagios/var/rw  ##设置 rw 目录下的文件都具有和该目录所属的组相同的组</li>
+</ol>
+<p>此后重启 nagios 服务，依然可以通过 Web 界面修改服务属性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="ciukzu9en004pl2pva2wwnzuv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Nagios-安装好无法启动问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/20/Nagios-安装好无法启动问题汇总/" class="article-date">
@@ -118,7 +170,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciugb10h9004ohcpvrxa7phtw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciukzu9es004ul2pvf03x3olb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +234,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciugb10h1004ehcpv2c967364" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciukzu9ej004il2pvhczfty2w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -227,7 +279,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciugb10kp0094hcpvbgb8xk3e" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciukzu9ib009el2pvmnywqht6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -272,7 +324,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciugb10gw0046hcpv21umdn6o" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciukzu9ee004al2pvfa914fxh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -369,7 +421,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciugb10gt0042hcpvjepnez9z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciukzu9e60043l2pv428njzoj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -414,7 +466,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciugb10gv0044hcpvs5huppmc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciukzu9ed0048l2pvhlildonz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +518,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciugb10kw009hhcpvpmu4cwj4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciukzu9ii009ql2pvrmqy1ywx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -511,7 +563,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciugb10kf008phcpvl6dl27bc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciukzu9i30091l2pvzn9xxx58" class="article-share-link">Share</a>
       
       
     </footer>
@@ -556,60 +608,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciugb10ih0065hcpvtfny9meb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-监控-windows-进程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/07/Zabbix-监控-windows-进程/" class="article-date">
-  <time datetime="2016-06-07T05:31:49.000Z" itemprop="datePublished">2016-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 监控进程的数量</span><br><span class="line">proc.num[&lt;name&gt;,&lt;user&gt;,&lt;state&gt;,&lt;cmdline&gt;]</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>name 进程名字</p>
-</li>
-<li><p>user 运行进程的用户名</p>
-</li>
-<li><p>state 进程的状态 all(default)、run、sleep、zomb</p>
-</li>
-<li><p>cmdline 进程名中包含的字符</p>
-</li>
-</ul>
-<p><strong>On Windows, only name and user are supported.</strong></p>
-<h3 id="Item-Keys"><a href="#Item-Keys" class="headerlink" title="Item Keys"></a>Item Keys</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proc.num[ChuanAPI.Winfrm.exe]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="ciugb10kd008lhcpv7ngw3zb8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciukzu9fv006el2pvqow04lkw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -661,6 +660,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/10/22/Nagios-服务组定义/">Nagios 服务组定义</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/19/数据库镜像-基本命令/">数据库镜像-基本命令</a>
           </li>
         
@@ -674,10 +677,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/">RESTORE HEADERONLY (Transact-SQL)</a>
           </li>
         
       </ul>
