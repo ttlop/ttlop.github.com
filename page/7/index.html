@@ -82,6 +82,56 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-TCP-连接数监控" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/28/Zabbix-TCP-连接数监控/" class="article-date">
+  <time datetime="2016-07-28T06:56:41.000Z" itemprop="datePublished">2016-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/28/Zabbix-TCP-连接数监控/">Zabbix TCP 连接数监控</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="被控端设置"><a href="#被控端设置" class="headerlink" title="被控端设置"></a>被控端设置</h3><p>主要命令及输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix]# netstat -an | awk &apos;/^tcp/ &#123;++S[$NF]&#125; END &#123;for(a in S) print a, S[a]&#125;&apos;</span><br><span class="line">LAST_ACK 27</span><br><span class="line">LISTEN 7</span><br><span class="line">SYN_RECV 10</span><br><span class="line">ESTABLISHED 121</span><br><span class="line">FIN_WAIT1 22</span><br><span class="line">FIN_WAIT2 46</span><br><span class="line">TIME_WAIT 1077</span><br></pre></td></tr></table></figure>
+<p>下面以监控 TIME_WAIT 的数量为例，准备脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkdir -pv /usr/local/shell/zabbix</span><br><span class="line">cd /usr/local/shell/zabbix</span><br><span class="line">vim tcp_connections.sh</span><br><span class="line">---以下为脚本内容</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">netstat -an | awk &apos;/^tcp/ &#123;++S[$NF]&#125; END &#123;for(a in S) print a, S[a]&#125;&apos; | grep $1 | cut -d&apos; &apos; -f2</span><br><span class="line">---以上为脚本内容</span><br><span class="line">chmod u+x tcp_connections.sh</span><br></pre></td></tr></table></figure>
+<p>编辑 zabbix_agentd.conf 配置文件，添加以下行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserParameter=TIME_WAIT,/bin/bash /usr/local/shell/zabbix/tcp_connections.sh TIME_WAIT</span><br></pre></td></tr></table></figure>
+<p>重启客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart zabbix-agent</span><br></pre></td></tr></table></figure>
+<h3 id="zabbix-server-端设置"><a href="#zabbix-server-端设置" class="headerlink" title="zabbix_server 端设置"></a>zabbix_server 端设置</h3><p>测试是否能取到值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@host-001 ezagooDomainResolv]# zabbix_get -s 192.168.16.88 -p 10050 -k TIME_WAIT</span><br><span class="line">1173</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="ciungb44h0093azpvr0bnyzvq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux-大量-TIME-WAIT-解决办法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" class="article-date">
@@ -119,7 +169,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="ciukzu9cz002pl2pv6xfm5poh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="ciungb3z9002razpvk2yx01lw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +219,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="ciukzu9do003jl2pv5ophqrfy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="ciungb3zx003jazpvjmjpi35l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +264,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="ciukzu9c9001wl2pvs7nuvn7t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="ciungb3yk001yazpve0sajq6l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +309,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="ciukzu9bs001ll2pv3eazgm49" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="ciungb3xu001lazpvz2pkugki" class="article-share-link">Share</a>
       
       
     </footer>
@@ -304,7 +354,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/19/Linux-inode-block-与硬盘容量关系/" data-id="ciukzu9ci0028l2pvjja262d0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/19/Linux-inode-block-与硬盘容量关系/" data-id="ciungb3ys0028azpvumk1quxb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -349,7 +399,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="ciukzu9e1003vl2pvawsim81l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="ciungb40c003vazpvgi5k3g9h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -396,7 +446,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="ciukzu9ck002bl2pvppyaua9g" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="ciungb3yu002bazpvb90khd1e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -442,7 +492,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Hexo-博客添加图片、音乐、视频/" data-id="ciukzu9b60019l2pveulqaqay" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/15/Hexo-博客添加图片、音乐、视频/" data-id="ciungb3xg001dazpv1gvlfl61" class="article-share-link">Share</a>
       
       
     </footer>
@@ -487,52 +537,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/14/Centos-7-连接-SAS-磁盘阵列-DS3512/" data-id="ciukzu9at000zl2pvkugri2bb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-lspci-命令详解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/14/lspci-命令详解/" class="article-date">
-  <time datetime="2016-07-14T02:00:25.000Z" itemprop="datePublished">2016-07-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/14/lspci-命令详解/">lspci 命令详解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>lspci 是一个用来显示系统中所有 PCI 总线设备或连接到该总线上所有设备的工具。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/14/lspci-命令详解/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/14/lspci-命令详解/" data-id="ciukzu9i80099l2pvpfb50dv8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/14/Centos-7-连接-SAS-磁盘阵列-DS3512/" data-id="ciungb3x1000zazpvhea2tg6n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -584,6 +589,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/10/24/索引的填充因子/">索引的填充因子</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/22/Nagios-服务组定义/">Nagios 服务组定义</a>
           </li>
         
@@ -597,10 +606,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/10/11/恢复路径/">恢复路径</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
           </li>
         
       </ul>
