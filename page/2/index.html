@@ -82,6 +82,57 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库镜像-基本概念" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/09/数据库镜像-基本概念/" class="article-date">
+  <time datetime="2016-10-09T02:11:57.000Z" itemprop="datePublished">2016-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/09/数据库镜像-基本概念/">数据库镜像-基本概念</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>数据库镜像功能首次出现在 SQL Server 2005 R1 中。它设计的目的是试图为 SQL Server 提供一个具有实时性数据同步的灾难恢复技术，即能提供数据冗余备份，切换起来也比较方便。相比较故障转移群集，数据库镜像同样也能够为客户端应用提供统一的连接方式，但同时它又具备故障转移群集所没有的抵御数据损失的能力。相对日志传送，它进行灾难切换要快很多，又基本对客户端应用透明，这些优点使得数据库镜像成为了一项兼备可用性和灾难恢复功能的技术。现在，数据库镜像技术在企业环境中，使用的越来越多了。</p>
+<p>优点是系统能够自动发现主服务器故障，并且自动切换至镜像服务器。缺点是配置复杂，镜像数据库中的数据不可见（通过 SQL Server Management Studio 中只能看到镜像数据库处于镜像状态，无法进行任何数据库操作，最简单的查询也不行）。</p>
+<p>相对于日志传送，数据库镜像显然更高一级。在最简单的形式下，它其实与日志传送的工作原理相似，但是生产服务器发送事物到镜像服务器的频率要高得多，这意味着更新数据也要快很多。</p>
+<p>对于数据库镜像来说，故障转移功能也是需要手动完成，但是你可以添加第三个 SQL Server，称为 witness。witness 可以作为一个普通的 SQL Server，但是一直留意着其它两个镜像服务器，当主镜像发生故障，witness 可以让第二个镜像接管操作，类似一种自动的故障转移。</p>
+<p>在故障转移时，任何进行中的客户端事物都将重新启动，而由于在这一过程中仍然存在着延迟，镜像服务器也不能保证百分百不丢失数据。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>数据库镜像会为目标数据库创建一个副本数据库。这两个数据库分别运行在不同的 SQLServer 实例上，作为“伙伴”建立一个会话（session）。通过这个会话，两个数据库互相进行通信和协作，扮演互补的角色“主体角色”和“镜像角色”，以实现“镜像效果”。</p>
+<p>在任何给定的时间，都是一个伙伴扮演主体角色，而另一个伙伴扮演镜像角色。扮演主体角色的数据库就是主体数据库（principaldatabase），另一个扮演镜像角色的数据库则是镜像数据库（mirrordatabase）。每个主体数据库只能有一个镜像数据库。镜像数据库作为主体数据库的一个副本，在主体数据库发生故障、不可访问时，能迅速恢复数据库访问，提供了灾难恢复的功能。</p>
+<p>只有使用<strong>完整恢复模式</strong>的数据库才能使用数据库镜像功能。主体数据库可以像一个普通数据库一样，执行数据库查询、修改、数据库管理等操作。</p>
+<p>只有很少的操作（比如还原数据库备份）由于数据库镜像的限制而不被允许执行，而镜像数据库是一个一直处于“恢复”状态的数据库，因此是不能直接被访问的。这点和日志传送不一样。但是，你可以为镜像数据库创建一个快照，这样就可以间接地访问镜像数据库里的数据了。那些用作报表查询的应用可以通过镜像服务器的快照来获取数据，这能减轻主体服务器的工作负载。</p>
+<p>需要特别的指出，只有用户数据库才能配置数据库镜像，所有的系统数据库都不能被镜像，对于系统数据库还是通过备份的方式来保障安全。</p>
+<p>运行主体数据库的 SQL Server 实例被称为主体服务器（principalserver），而运行镜像数据库的 SQL Server 被称为镜像服务器（mirrorserver）。主体服务器和镜像服务器必须是两个不同的 SQL Server 实例。这两个实例上可以配置多个数据库镜像的会话。这两个实例可以运行在同一台计算机上，但是一般不建议这么做。因为这种配置下，一旦服务器的磁盘发生物理损坏，那么主体数据库和镜像数据库就都无法使用了，灾难恢复就无从谈起了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciurqgp2t009u9epvptnxqb0f" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Centos-下转发-DNS-服务器的架设" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/09/28/Centos-下转发-DNS-服务器的架设/" class="article-date">
@@ -118,7 +169,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciurp4ykd0012mapvskvbklw1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciurqgop700139epvwc9abovt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,7 +212,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciurp4yom004kmapvb2p1o9jt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciurqgouw004b9epvdq38t20h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -204,7 +255,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciurp4ytc009nmapveety6e58" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciurqgp24009i9epvx5rpvnan" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,7 +312,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciurp4yhs0001mapvq8ifz22u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciurqgokt00029epv14nkg9ej" class="article-share-link">Share</a>
       
       
     </footer>
@@ -317,7 +368,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciurp4yj6000cmapv3pjart70" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciurqgom7000a9epvgv6w68b4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -379,7 +430,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciurp4yt4009bmapvwuhakjvq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciurqgp1m00959epviiigrazb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -477,7 +528,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciurp4ytb009lmapvfr4ow3zh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciurqgp20009f9epv7oktj23i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -537,7 +588,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciurp4yr20074mapvkkqzddxm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciurqgoym006u9epvfkb9xc1x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -615,61 +666,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciurp4yjp000qmapvoqpvjy7o" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Centos-7-更改-hostname" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/07/Centos-7-更改-hostname/" class="article-date">
-  <time datetime="2016-09-07T06:13:22.000Z" itemprop="datePublished">2016-09-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/07/Centos-7-更改-hostname/">Centos 7 更改 hostname</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Centos-7-永久修改"><a href="#Centos-7-永久修改" class="headerlink" title="Centos 7 永久修改"></a>Centos 7 永久修改</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
-<p><strong>临时修改</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname newhostname</span><br></pre></td></tr></table></figure>
-<p>修改 hostname 后，/etc/hosts 文件并不会自动更新，所以每次在修改主机名后一定要手动更新 /etc/hosts，之后再重启 Centos 7，否则系统再启动时会很慢。</p>
-<h3 id="手动更新-etc-hosts"><a href="#手动更新-etc-hosts" class="headerlink" title="手动更新 /etc/hosts"></a>手动更新 /etc/hosts</h3><p>第一部分：网络 IP 地址<br>第二部分：主机名.域名<br>第三部分：主机名（主机名别名），其实就是主机名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.16.115	mail	mail.ttlop.cn</span><br></pre></td></tr></table></figure>
-<hr>
-<p>在 CentOS 7 中，有三种定义的主机名：</p>
-<ul>
-<li>静态的（static）</li>
-<li>瞬态的（transient）</li>
-<li>灵活的（pretty）</li>
-</ul>
-<p>“静态”主机名也称为内核主机名，是系统在启动时从 /etc/hostname 自动初始化的主机名。“瞬态”主机名是在系统运行时临时分配的主机名，例如，通过 DHCP 或 mDNS 服务器分配。静态主机名和瞬态主机名都遵从作为互联网域名同样的字符限制规则。而另一方面，“灵活”主机名则允许使用自由形式（包括特殊/空白字符）的主机名，以展示给终端用户（如 Dan’s Computer）。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="ciurp4yk3000vmapvqfev11fj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciurqgont000r9epvq1ngtqr2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -682,7 +679,7 @@ var _hmt = _hmt || [];
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -721,6 +718,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/10/27/数据库中聚簇索引和非聚簇索引的区别/">数据库中聚簇索引和非聚簇索引的区别</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/27/用-SQL-建立索引的方法/">用 SQL 建立索引的方法</a>
           </li>
         
@@ -734,10 +735,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/10/19/数据库镜像-基本命令/">数据库镜像-基本命令</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/19/数据库镜像-基本配置/">数据库镜像-基本配置</a>
           </li>
         
       </ul>
