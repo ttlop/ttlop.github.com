@@ -82,6 +82,48 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-查看linux系统版本命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/26/查看linux系统版本命令/" class="article-date">
+  <time datetime="2016-04-26T06:23:25.000Z" itemprop="datePublished">2016-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/26/查看linux系统版本命令/">查看linux系统版本命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="查看内核版本命令"><a href="#查看内核版本命令" class="headerlink" title="* 查看内核版本命令"></a>* 查看内核版本命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]<span class="comment"># cat /proc/version</span></span><br><span class="line">Linux version 3.10.0-229.14.1.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.3 20140911 (Red Hat 4.8.3-9) (GCC) ) <span class="comment">#1 SMP Tue Sep 15 15:05:51 UTC 2015</span></span><br><span class="line">[root@mail ~]<span class="comment"># uname -r</span></span><br><span class="line">3.10.0-229.14.1.el7.x86_64</span><br><span class="line">[root@mail ~]<span class="comment"># uname -a</span></span><br><span class="line">Linux mail.xxxx.cn 3.10.0-229.14.1.el7.x86_64 <span class="comment">#1 SMP Tue Sep 15 15:05:51 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># cat /proc/version </span></span><br><span class="line">Linux version 2.6.18-308.el5 (mockbuild@builder10.centos.org) (gcc version 4.1.2 20080704 (Red Hat 4.1.2-52)) <span class="comment">#1 SMP Tue Feb 21 20:06:06 EST 2012</span></span><br><span class="line">[root@localhost ~]<span class="comment"># uname -r</span></span><br><span class="line">2.6.18-308.el5</span><br><span class="line">[root@localhost ~]<span class="comment"># uname -a</span></span><br><span class="line">Linux localhost.localdomain 2.6.18-308.el5 <span class="comment">#1 SMP Tue Feb 21 20:06:06 EST 2012 x86_64 x86_64 x86_64 GNU/Linux</span></span><br><span class="line"></span><br><span class="line">controller-xxxx:~ <span class="comment"># cat /proc/version </span></span><br><span class="line">Linux version 3.0.101-0.40-default (geeko@buildhost) (gcc version 4.3.4 [gcc-4_3-branch revision 152973] (SUSE Linux) ) <span class="comment">#1 SMP Thu Sep 18 13:09:38 UTC 2014 (44b8c95)</span></span><br><span class="line">controller-xxxx:~ <span class="comment"># uname -r</span></span><br><span class="line">3.0.101-0.40-default</span><br><span class="line">controller-xxxx:~ <span class="comment"># uname -a</span></span><br><span class="line">Linux controller-xxxx 3.0.101-0.40-default <span class="comment">#1 SMP Thu Sep 18 13:09:38 UTC 2014 (44b8c95) x86_64 x86_64 x86_64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
+<h2 id="查看linux版本"><a href="#查看linux版本" class="headerlink" title="* 查看linux版本"></a>* 查看linux版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># lsb_release -a</span></span><br><span class="line">LSB Version:	:core-4.0-amd64:core-4.0-ia32:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-ia32:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-ia32:printing-4.0-noarch</span><br><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS release 5.11 (Final)</span><br><span class="line">Release:	5.11</span><br><span class="line">Codename:	Final</span><br><span class="line">---</span><br><span class="line">[root@localhost ~]<span class="comment"># cat /etc/issue</span></span><br><span class="line">CentOS release 5.11 (Final)</span><br><span class="line">Kernel \r on an \m</span><br><span class="line"></span><br><span class="line">controller-xxxx:~ <span class="comment"># lsb_release -a</span></span><br><span class="line">LSB Version:	core-2.0-noarch:core-3.2-noarch:core-4.0-noarch:core-2.0-x86_64:core-3.2-x86_64:core-4.0-x86_64:desktop-4.0-amd64:desktop-4.0-noarch:graphics-2.0-amd64:graphics-2.0-noarch:graphics-3.2-amd64:graphics-3.2-noarch:graphics-4.0-amd64:graphics-4.0-noarch</span><br><span class="line">Distributor ID:	SUSE LINUX</span><br><span class="line">Description:	SUSE Linux Enterprise Server 11 (x86_64)</span><br><span class="line">Release:	11</span><br><span class="line">Codename:	n/a</span><br><span class="line">---</span><br><span class="line">controller-192-168-1-100:~ <span class="comment"># cat /etc/issue</span></span><br><span class="line"></span><br><span class="line">Welcome to SUSE Linux Enterprise Server 11 SP3  (x86_64) - Kernel \r (\l).</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/26/查看linux系统版本命令/" data-id="ciuroz12a00a6kbpvfpe6ln3w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Iptables-数据包的流程（图）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/26/Iptables-数据包的流程（图）/" class="article-date">
@@ -117,7 +159,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/26/Iptables-数据包的流程（图）/" data-id="ciungb3y7001razpvnrnqtssz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/26/Iptables-数据包的流程（图）/" data-id="ciuroz0vf001skbpvzyps5ozh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +204,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-匹配/" data-id="ciungb3xy001nazpvbmqum7bk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-匹配/" data-id="ciuroz0z4005xkbpvoh6gzk39" class="article-share-link">Share</a>
       
       
     </footer>
@@ -209,7 +251,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="ciungb3yd001tazpvw2smiav8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-概念/" data-id="ciuroz0v3001jkbpv5qe04yxu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -254,7 +296,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="ciungb3y5001pazpv0sz031mo" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/25/Iptables-四个表和五个链之间的关系/" data-id="ciuroz0v8001nkbpvn3318px6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +341,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/22/使用Nagios监控网站登录是否成功/" data-id="ciungb45s00akazpvzlogk2h3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/22/使用Nagios监控网站登录是否成功/" data-id="ciuroz11w009ikbpvgzbetxu3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -344,7 +386,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="ciungb3vl0006azpv2ly4tbsf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Apache-崩溃解决-修改堆栈大小/" data-id="ciuroz0sq0004kbpv76si8qjr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +430,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="ciungb46900bcazpv0yi9yimy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="ciuroz12k00alkbpv704aldam" class="article-share-link">Share</a>
       
       
     </footer>
@@ -435,7 +477,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="ciungb3xj001fazpv464kjqgt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="ciuroz0ux001fkbpvd1ln524u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -480,52 +522,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="ciungb3wf000razpvcecjeb7f" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Centos-7-iptables默认规则" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/19/Centos-7-iptables默认规则/" class="article-date">
-  <time datetime="2016-04-19T03:15:03.000Z" itemprop="datePublished">2016-04-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Iptables/">Iptables</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/19/Centos-7-iptables默认规则/">Centos 7 iptables默认策略</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如下为Centos 7系统下iptables的默认策略及解释：<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/19/Centos-7-iptables默认规则/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="ciungb3w1000eazpvg43bfni2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="ciuroz0u4000vkbpv2r11lmxa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -577,6 +574,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/10/27/用-SQL-建立索引的步骤/">用 SQL 建立索引的步骤</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/24/索引的填充因子/">索引的填充因子</a>
           </li>
         
@@ -590,10 +591,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/10/19/数据库镜像-基本配置/">数据库镜像-基本配置</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/11/恢复路径/">恢复路径</a>
           </li>
         
       </ul>

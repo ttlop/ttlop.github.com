@@ -15,26 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>About | 运维生存时间</title>
+  <title>用 SQL 建立索引的步骤 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="联系我
-QQ：411383444EMail：huxiaoyong2009@hotmail.com
-赞助">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="http://ttlop.com/About/index.html">
+  <meta name="description" content="SQL建立索引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 SQL 建立索引的步骤">
+<meta property="og:url" content="http://ttlop.com/2016/10/27/用-SQL-建立索引的步骤/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="联系我
-QQ：411383444EMail：huxiaoyong2009@hotmail.com
-赞助">
-<meta property="og:image" content="http://ttlop.com/myimages/1468544701121.jpg">
-<meta property="og:updated_time" content="2016-07-15T01:52:50.227Z">
+<meta property="og:description" content="SQL建立索引">
+<meta property="og:updated_time" content="2016-10-27T01:49:12.036Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
-<meta name="twitter:description" content="联系我
-QQ：411383444EMail：huxiaoyong2009@hotmail.com
-赞助">
-<meta name="twitter:image" content="http://ttlop.com/myimages/1468544701121.jpg">
+<meta name="twitter:title" content="用 SQL 建立索引的步骤">
+<meta name="twitter:description" content="SQL建立索引">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -89,12 +81,16 @@ QQ：411383444EMail：huxiaoyong2009@hotmail.com
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-用-SQL-建立索引的步骤" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/About/index.html" class="article-date">
-  <time datetime="2016-04-16T03:18:41.000Z" itemprop="datePublished">2016-04-16</time>
+    <a href="/2016/10/27/用-SQL-建立索引的步骤/" class="article-date">
+  <time datetime="2016-10-27T01:30:49.000Z" itemprop="datePublished">2016-10-27</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -103,7 +99,7 @@ QQ：411383444EMail：huxiaoyong2009@hotmail.com
         
   
     <h1 class="article-title" itemprop="name">
-      About
+      用 SQL 建立索引的步骤
     </h1>
   
 
@@ -111,21 +107,45 @@ QQ：411383444EMail：huxiaoyong2009@hotmail.com
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>联系我</strong></p>
-<p>QQ：411383444<br>EMail：huxiaoyong2009@hotmail.com</p>
-<p><strong>赞助</strong></p>
-<p><img src="/myimages/1468544701121.jpg" alt="支付宝打赏"></p>
+        <h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><p>进入查询窗口后，输入下面的语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX mycolumn_index ON mytable(mycolumn)</span><br></pre></td></tr></table></figure>
+<p>这个语句建立了一个名为 mycolumn_index 的索引。索引对表 mytable 的 mycolumn 字段进行，这是一个非聚簇索引，也是一个非唯一索引。（这是一个索引的缺省属性）</p>
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><p>如果需要改变一个索引的类型，必须删除原来的索引并重新创建一个。可以用下面的 SQL 语句删除它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX mytable.mycolumn_index</span><br></pre></td></tr></table></figure>
+<p>注意在 DROP INDEX 语句中你要包含表的名字。</p>
+<h3 id="创建聚簇索引"><a href="#创建聚簇索引" class="headerlink" title="创建聚簇索引"></a>创建聚簇索引</h3><p>要建立一个聚簇索引，可以使用关键字 CLUSTERED。一个表只能有一个聚簇索引。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE CLUSTERED INDEX mycolumn_clust_index ON mytable(mycolumn)</span><br></pre></td></tr></table></figure>
+<h3 id="创建聚簇索引-允许值重复"><a href="#创建聚簇索引-允许值重复" class="headerlink" title="创建聚簇索引-允许值重复"></a>创建聚簇索引-允许值重复</h3><p>如果表中有重复的记录，当你视图用这个语句建立索引时，会出现错误。但是有重复记录的表也可以建立聚簇索引，需要使用关键字 ALLOW_DUP_ROW。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE CLUSTERED INDEX mycolumn_clust_index ON mytable(mycolumn) WITH ALLOW_DUP_ROW</span><br></pre></td></tr></table></figure>
+<p>这个语句建立了一个允许重复记录的聚簇索引。你应该尽量避免在一个表中出现重复记录，但是，如果已经出现了，可以使用这种方法。</p>
+<h3 id="创建唯一索引"><a href="#创建唯一索引" class="headerlink" title="创建唯一索引"></a>创建唯一索引</h3><p>要对一个表建立唯一索引，可以使用关键字 UNIQUE。对聚簇索引和非聚簇索引都可以使用这个关键字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE UNIQUE CLUSTERED INDEX mycolumn_clust_index ON mytable(mycolumn)</span><br></pre></td></tr></table></figure>
+<p>这是经常使用的索引建立语句。无论何时，只要可以，应该尽量对一个表建立唯一聚簇索引来增强查询操作。</p>
+<p>注：唯一索引是指该字段不能有重复的值，而不是只能建立这一个索引。</p>
+<h3 id="创建复合索引"><a href="#创建复合索引" class="headerlink" title="创建复合索引"></a>创建复合索引</h3><p>最后，要建立一个对多个字段的索引（复合索引）-在索引建立语句中同时包含多个字段名。下面的例子对 firstname 和 lastname 两个字段建立索引：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX name_index ON username(firstname,lastname)</span><br></pre></td></tr></table></figure>
+<p>这个例子对两个字段建立了单个索引。在一个复合索引中，最多可以对 16 个字段进行索引。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/About/index.html" data-id="ciuroz0s80000kbpve00m47ky" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/27/用-SQL-建立索引的步骤/" data-id="ciuroz12d00abkbpvluvw7cte" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2016/10/24/索引的填充因子/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">索引的填充因子</div>
+    </a>
+  
+</nav>
+
   
 </article>
 
