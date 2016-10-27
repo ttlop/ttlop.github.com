@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>PHP explode() 函数 | 运维生存时间</title>
+  <title>CREATE INDEX | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="php string explode">
+  <meta name="description" content="create index">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP explode() 函数">
-<meta property="og:url" content="http://ttlop.com/2016/08/06/PHP-explode-函数/index.html">
+<meta property="og:title" content="CREATE INDEX">
+<meta property="og:url" content="http://ttlop.com/2016/10/27/CREATE-INDEX/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="php string explode">
-<meta property="og:updated_time" content="2016-08-06T06:59:29.723Z">
+<meta property="og:description" content="create index">
+<meta property="og:updated_time" content="2016-10-27T06:28:54.422Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP explode() 函数">
-<meta name="twitter:description" content="php string explode">
+<meta name="twitter:title" content="CREATE INDEX">
+<meta name="twitter:description" content="create index">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-PHP-explode-函数" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-CREATE-INDEX" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/06/PHP-explode-函数/" class="article-date">
-  <time datetime="2016-08-06T06:53:50.000Z" itemprop="datePublished">2016-08-06</time>
+    <a href="/2016/10/27/CREATE-INDEX/" class="article-date">
+  <time datetime="2016-10-27T03:50:13.000Z" itemprop="datePublished">2016-10-27</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      PHP explode() 函数
+      CREATE INDEX
     </h1>
   
 
@@ -107,41 +107,17 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>explode() 函数把字符串打散为数组。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explode(separator,string,limit)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">separator</td>
-<td style="text-align:left">必须，规定在哪里分隔字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">string</td>
-<td style="text-align:left">必须，要分隔的字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">limit</td>
-<td style="text-align:left">可选，规定要返回的数组元素的个数</td>
-</tr>
-</tbody>
-</table>
-<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串的数组<br>PHP版本：4+<br>更新日志：PHP 4.0.1 中，新增 limit 参数，PHP 5.1.0 中新增对负数 limit 的支持。<br>limit 可能的值：</p>
-<ul>
-<li>大于0 - 返回包含最多 limit 个元素的数组</li>
-<li>小于0 - 返回包含除了最后的 -limit 个元素以外的所有元素的数组</li>
-<li>0 - 返回包含了一个元素的数组</li>
-</ul>
+        <h2 id="CREATE-INDEX"><a href="#CREATE-INDEX" class="headerlink" title="CREATE INDEX"></a>CREATE INDEX</h2><p>为给定表或视图创建索引。<br>只有表或视图的所有者才能为表创建索引。表或视图的所有者可以随时创建索引，无论表中是否有数据。可以通过指定限定的数据库名称，为另一个数据库中的表或视图视窗索引。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE [ UNIQUE ] [ CLUSTERED | NONCLUSTERED ] INDEX index_name</span><br><span class="line">    ON &#123; table | view &#125; ( column [ ASC | DESC ] [ ,...n ] )</span><br><span class="line">[ WITH &lt; index_option &gt; [ ,...n] ]</span><br><span class="line">[ ON filegroup ]</span><br><span class="line"></span><br><span class="line">&lt; index_option &gt; ::=</span><br><span class="line">    &#123; PAD_INDEX |</span><br><span class="line">        FILLFACTOR = fillfactor |</span><br><span class="line">        IGNORE_DUP_KEY |</span><br><span class="line">        DROP_EXISTING |</span><br><span class="line">    STATISTICS_NORECOMPUTE |</span><br><span class="line">    SORT_IN_TEMPDB </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h4 id="UNIQUE"><a href="#UNIQUE" class="headerlink" title="UNIQUE"></a>UNIQUE</h4><p>为表或视图创建唯一索引（不允许存在索引值相同的两行）。视图上的聚簇索引必须是 UNIQUE 索引。<br>在创建索引时，如果数据已存在，SQL Server 会检查是否有重复值，并在每次使用 INSERT 或 UPDATE 语句添加数据时进行这种检查。<br>如果存在重复的键值，将取消 CREATE INDEX 语句，并返回错误信息，给出第一个重复值。<br>如果存在唯一索引，那么会产生重复键值的 UPDATE 或 INSERT 语句将回滚，SQL Server 将显示错误信息。即使 UPDATE 或 INSERT 语句更改了很多行但只产生一个重复值，也会出现这种情况。<br>如果在有唯一索引并指定了 IGNORE_DUP_KEY 子句情况下输入数据，则只有违反 UNIQUE 索引才会失败。在处理 UPDATE 语句时，IGNORE_DUP_KEY 不起作用。<br>SQL Server 不允许为已经包含重复值的列创建唯一索引，无论是否设置了 IGNORE_DUP_KEY。如果尝试这样做，SQL Server 会显示错误信息；重复值必须先删除，才能为这些列创建唯一索引。</p>
+<h4 id="CLUSTERED"><a href="#CLUSTERED" class="headerlink" title="CLUSTERED"></a>CLUSTERED</h4><p>创建一个对象，其中行的物理排序与索引排序相同，并且聚簇索引的最低一级（页级）包含实际的数据行。一个表或视图只允许同时有一个聚簇索引。具有聚簇索引的视图称为索引视图。必须先为视图创建唯一聚簇索引，然后才能为该视图定义其它索引。</p>
+<p>因为按照定义，聚簇索引的页级与其数据页相同，所以创建聚簇索引时使用 ON filegroup 子句实际上会将表从创建该表所用的文件移到新的文件组中。在特定的文件组上创建表或索引之前，应确认哪些文件组可用并且有足够的空间供索引使用。文件组的大小必须至少是整个表所需空间的 1.2 倍，这一点很重要。</p>
+<h4 id="NONCLUSTERED"><a href="#NONCLUSTERED" class="headerlink" title="NONCLUSTERED"></a>NONCLUSTERED</h4><p>创建一个指定表的逻辑排序的对象。对于非聚簇索引，行的物理排序独立于索引排序。非聚簇所应的页级包含索引行。每个索引行均包含非聚簇键值和一个或多个行定位器（指向包含该值的行）。如果表没有聚簇索引行，行定位器就是行的磁盘地址。如果表有聚簇索引，行定位器就是该行的聚簇索引键。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="ciurtettk005iezpv9zq2j1yw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/27/CREATE-INDEX/" data-id="ciurtetog000hezpvy292fgre" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,19 +126,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/08/06/PHP-strpos-函数/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          PHP strpos() 函数
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/06/PHP-fgets-函数/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/10/27/数据库中聚簇索引和非聚簇索引的区别/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">PHP fgets() 函数</div>
+      <div class="article-nav-title">数据库中聚簇索引和非聚簇索引的区别</div>
     </a>
   
 </nav>
