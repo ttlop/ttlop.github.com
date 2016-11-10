@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,56 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-RESTORE-HEADERONLY-Transact-SQL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" class="article-date">
+  <time datetime="2016-10-11T07:34:12.000Z" itemprop="datePublished">2016-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/">RESTORE HEADERONLY (Transact-SQL)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们一般使用 RESTORE HEADERONLY 来查看备份文件上包含的一些其它信息，这里我们说明结果集中的 LSN 信息。</p>
+<p>关于 LSN 相关的结果集包含有 FirstLSN、LastLSN、CheckpointLSN、DatabaseBackupLSN。</p>
+<p>FirstLSN：备份集中第一个日志记录的日志序列号<br>LastLSN：备份集之后的下一条日志记录的序列号<br>CheckpointLSN：创建备份时最后一个检查点的日志序列号<br>DatabaseBackupLSN：最近的数据库完整备份的日志序列号</p>
+<p>以下示例用来返回备份文件标头中的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">RESTORE HEADERONLY </span><br><span class="line">FROM DISK = N&apos;C:\AdventureWorks-FullBackup.bak&apos; </span><br><span class="line">WITH NOUNLOAD;</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+<p>通过对完整备份、差异备份、事物日志备份使用上述命令，我们可以得到如下结论：</p>
+<ol>
+<li>当我们对一个完整备份的文件使用上述命令时，返回的结果中 FirstLSN 即为当前完整备份文件的标识，DatabaseBackupLSN 为上一个完整备份的标识。</li>
+<li>当我们对差异备份、事物日志备份使用上述命令时，返回的结果集中 DatabaseBackupLSN 即为与当前备份相关联的完整备份文件的标识，据此我们可以将差异备份、事物日志备份与完整备份文件关联起来进行数据库恢复。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="civbolti0006l5opvwj6witrs" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-电池串联和并联区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -110,7 +160,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="ciurtetxa00amezpvca6orc5l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="civboltkv00an5opv14e1yp0e" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -161,7 +211,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciurtetx000a7ezpv3is5wx1i" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="civboltkk00a65opvr3p6401s" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -207,7 +257,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciurtetpd0013ezpv1hh94c9v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="civboltcp00155opvfqqhhdp3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -250,7 +300,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciurtett2004lezpvf948bbbu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="civboltgk004p5opv8hjjpwe0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -293,7 +343,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciurtetwr009sezpvjaa70mwe" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="civboltkb009t5opvrlbxasbl" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -350,7 +400,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciurtetn60001ezpvn1sobzzh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="civboltad00015opvd16id4rb" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -406,7 +456,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciurteto00008ezpvftk3ruw0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="civboltbd000a5opvxi98hbl3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -468,7 +518,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciurtetwk009fezpvekbtmcnr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="civboltk3009f5opvnn5f1bi3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -566,67 +616,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciurtetwo009nezpv8trbmfj6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-VRRP-协议" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/14/VRRP-协议/" class="article-date">
-  <time datetime="2016-09-14T06:01:31.000Z" itemprop="datePublished">2016-09-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h3><ol>
-<li><p>路由器开启 VRRP 功能后，会根据优先级确定自己在备份组中的角色。优先级高的路由器称为主用路由器，优先级低的成为备用路由器。主用路由器定期发送 VRRP 通告报文，通知备份组内的其它路由器自己工作正常；备用路由器则启动定时器等待通告报文的到来。</p>
-</li>
-<li><p>VRRP 在不同的主用抢占方式下，主用角色的替换方式不同：</p>
-</li>
-</ol>
-<ul>
-<li>抢占方式下，当备用路由器收到 VRRP 通告报文后，会将自己的优先级与通告报文中的优先级进行比较。如果大于通告报文中的优先级，则称为主用路由器，否则将保持备用状态。</li>
-<li>非抢占方式下，只要主用路由器没有出现故障，备份组中的路由器始终保持主用或者备用状态，备份组中的路由器即使随后被配置了更高的优先级也不会成为主用路由器</li>
-</ul>
-<ol>
-<li>如果备用路由器的定时器超时后仍未收到主用路由器发送来的 VRRP 通告报文，则认为主用路由器已经无法正常工作，此时备用路由器会认为自己是主用路由器，并对外发送 VRRP 通告报文。备份组内的路由器根据优先级选举出主用路由器，承担报文的转发功能。</li>
-</ol>
-<h3 id="VRRP-负载分担"><a href="#VRRP-负载分担" class="headerlink" title="VRRP 负载分担"></a>VRRP 负载分担</h3><p>在实际组网中一般会进行 VRRP 负载分担方式的设置。负载分担方式是指多台路由器同时承担业务，避免设备闲置，因此需要建立两个或更多的备份组实现负载分担。VRRP 负载分担方式具有以下特点：</p>
-<ul>
-<li>每个备份组都包括一个主用路由器或若干个备用路由器</li>
-<li>各备份组的主用路由器可以不相同</li>
-<li>同一台路由器可以加入多个备份组，在不同备份组中具有不同的优先级，使得该路由器可以在一个备份组中作为主用路由器，在其它备份组中作为备用路由器</li>
-</ul>
-<p>VRRP 在提高可靠性的同时，简化了主机的配置。在具有多播或者广播能力的局域网中，借助于 VRRP 能在某台路由器出现故障时仍然提供可靠的缺省链路，有效避免单一链路故障发生后网络中断的问题，而无需修改动态路由协议、路由发现协议等配置信息。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciurtetux0079ezpv2jzvwuau" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="civboltka009r5opv5w2pcsl4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -648,9 +638,9 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CentOS-7/">CentOS 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -665,7 +655,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -673,9 +663,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/">CentOS 系统时间与现在时间相差8小时解决方法</a>
+          </li>
         
           <li>
             <a href="/2016/10/27/CREATE-INDEX/">CREATE INDEX</a>
@@ -693,10 +687,6 @@ var _hmt = _hmt || [];
             <a href="/2016/10/24/索引的填充因子/">索引的填充因子</a>
           </li>
         
-          <li>
-            <a href="/2016/10/22/Nagios-服务组定义/">Nagios 服务组定义</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -710,7 +700,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

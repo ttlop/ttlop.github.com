@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,52 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Linux-下访问-Windows-共享目录的配置方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" class="article-date">
+  <time datetime="2016-08-26T03:29:29.000Z" itemprop="datePublished">2016-08-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/">Linux 下访问 Windows 共享目录的配置方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Linux-下安装-samba-client-客户端"><a href="#1-Linux-下安装-samba-client-客户端" class="headerlink" title="1. Linux 下安装 samba-client 客户端"></a>1. Linux 下安装 samba-client 客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install samba-client</span><br></pre></td></tr></table></figure>
+<h3 id="2-Linux-下只能装-cifs-utils-软件包"><a href="#2-Linux-下只能装-cifs-utils-软件包" class="headerlink" title="2. Linux 下只能装 cifs-utils 软件包"></a>2. Linux 下只能装 cifs-utils 软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cifs-utils</span><br></pre></td></tr></table></figure>
+<h3 id="3-Linux-下创建挂载点"><a href="#3-Linux-下创建挂载点" class="headerlink" title="3. Linux 下创建挂载点"></a>3. Linux 下创建挂载点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/AutoBackup</span><br></pre></td></tr></table></figure>
+<h3 id="4-挂载-Windows-上的共享目录"><a href="#4-挂载-Windows-上的共享目录" class="headerlink" title="4. 挂载 Windows 上的共享目录"></a>4. 挂载 Windows 上的共享目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t cifs -o username=&quot;administrator&quot;,password=&apos;xxx&apos; //192.168.200.1/D$/AutoBackup /mnt/AutosBackup/</span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果挂载成功，则可以进入 /mnt/Autobackup 下，查看上面的 windows 共享文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="civboltek002j5opvu2xjsuio" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Bat-的变量与命令-set-的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -165,7 +211,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="ciurtetod000eezpvntzpb4zm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="civboltbn000e5opvi2lzivje" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -223,7 +269,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="ciurtetob000cezpv2mw46hvs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="civboltbl000c5opv2zaiqpr4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -266,7 +312,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="ciurtetwh009cezpvoox4o3xm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="civboltk0009b5opvohf9c8iw" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -311,7 +357,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="ciurtetu10069ezpv0oapwt72" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="civbolthl006c5opv999fit5c" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -356,7 +402,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="ciurtetu00067ezpv6qosgbrg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="civbolthj00685opv2lujhrpr" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -470,7 +516,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="ciurtettj005fezpv5o7s102x" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="civboltgz005e5opvilan92oc" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -526,7 +572,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="ciurtetti005dezpvfpivk5an" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="civbolth1005h5opv7ini9x5r" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -585,7 +631,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="ciurtetu5006fezpvovv9f3qv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="civboltho006g5opvlobot1u7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -632,57 +678,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="ciurtetu4006dezpvhtcqctbb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-循环读取文件每行记录处理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/PHP-循环读取文件每行记录处理/" class="article-date">
-  <time datetime="2016-08-11T02:44:03.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>日常工作中，经常有这样的任务，需要自动读取文件中的信息并处理，此处涉及到这几个函数：</p>
-<ul>
-<li>file_exists：判断文件是否存在</li>
-<li>fopen：打开文件，返回文件指针</li>
-<li>feof：检测是否已经达到文件末尾eof，如是返回TRUE</li>
-<li>fgets：从文件指针中读取一行</li>
-<li>explode：把字符串打散为数组</li>
-<li>fclose：关闭文件，释放文件指针</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        $UserInfo = explode(&quot; &quot;, $line);</span><br><span class="line">                        echo &quot;用户名：$UserInfo[0] &quot;;</span><br><span class="line">                        echo &quot;密码：$UserInfo[1]&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="ciurtetu2006bezpv6cb2fp4x" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="civbolthn006e5opvlqpc09h4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -704,9 +700,9 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CentOS-7/">CentOS 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -721,7 +717,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -729,9 +725,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/">CentOS 系统时间与现在时间相差8小时解决方法</a>
+          </li>
         
           <li>
             <a href="/2016/10/27/CREATE-INDEX/">CREATE INDEX</a>
@@ -749,10 +749,6 @@ var _hmt = _hmt || [];
             <a href="/2016/10/24/索引的填充因子/">索引的填充因子</a>
           </li>
         
-          <li>
-            <a href="/2016/10/22/Nagios-服务组定义/">Nagios 服务组定义</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -766,7 +762,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

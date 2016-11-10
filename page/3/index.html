@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,66 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-VRRP-协议" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/14/VRRP-协议/" class="article-date">
+  <time datetime="2016-09-14T06:01:31.000Z" itemprop="datePublished">2016-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/14/VRRP-协议/">VRRP 协议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h3><ol>
+<li><p>路由器开启 VRRP 功能后，会根据优先级确定自己在备份组中的角色。优先级高的路由器称为主用路由器，优先级低的成为备用路由器。主用路由器定期发送 VRRP 通告报文，通知备份组内的其它路由器自己工作正常；备用路由器则启动定时器等待通告报文的到来。</p>
+</li>
+<li><p>VRRP 在不同的主用抢占方式下，主用角色的替换方式不同：</p>
+</li>
+</ol>
+<ul>
+<li>抢占方式下，当备用路由器收到 VRRP 通告报文后，会将自己的优先级与通告报文中的优先级进行比较。如果大于通告报文中的优先级，则称为主用路由器，否则将保持备用状态。</li>
+<li>非抢占方式下，只要主用路由器没有出现故障，备份组中的路由器始终保持主用或者备用状态，备份组中的路由器即使随后被配置了更高的优先级也不会成为主用路由器</li>
+</ul>
+<ol>
+<li>如果备用路由器的定时器超时后仍未收到主用路由器发送来的 VRRP 通告报文，则认为主用路由器已经无法正常工作，此时备用路由器会认为自己是主用路由器，并对外发送 VRRP 通告报文。备份组内的路由器根据优先级选举出主用路由器，承担报文的转发功能。</li>
+</ol>
+<h3 id="VRRP-负载分担"><a href="#VRRP-负载分担" class="headerlink" title="VRRP 负载分担"></a>VRRP 负载分担</h3><p>在实际组网中一般会进行 VRRP 负载分担方式的设置。负载分担方式是指多台路由器同时承担业务，避免设备闲置，因此需要建立两个或更多的备份组实现负载分担。VRRP 负载分担方式具有以下特点：</p>
+<ul>
+<li>每个备份组都包括一个主用路由器或若干个备用路由器</li>
+<li>各备份组的主用路由器可以不相同</li>
+<li>同一台路由器可以加入多个备份组，在不同备份组中具有不同的优先级，使得该路由器可以在一个备份组中作为主用路由器，在其它备份组中作为备用路由器</li>
+</ul>
+<p>VRRP 在提高可靠性的同时，简化了主机的配置。在具有多播或者广播能力的局域网中，借助于 VRRP 能在某台路由器出现故障时仍然提供可靠的缺省链路，有效避免单一链路故障发生后网络中断的问题，而无需修改动态路由协议、路由发现协议等配置信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="civboltig00795opvcl8350ja" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Centos-7-安装-postfix" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -150,7 +210,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciurtetop000qezpvfjq40wzv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="civboltc8000u5opvzz5dwl5v" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -204,7 +264,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="ciurtetp3000vezpvuna7s1dy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="civboltcf000y5opvjmgla4i7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -250,7 +310,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="ciurtetpn001bezpv6xama81k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="civboltd3001c5opv3vidoeg8" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -295,7 +355,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="ciurtetv0007eezpvft7v5ygz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="civboltih007c5opvuet71fx0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -343,7 +403,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="ciurtetv1007gezpvxuax7wyi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="civboltik007h5opvmanrioon" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -414,7 +474,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="ciurtetxe00arezpvkxk5fau3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="civboltky00as5opvc6cl8ut6" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -488,7 +548,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="ciurtetq8001nezpvsw7zdod0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="civboltdh001n5opvz7izuf6u" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -547,7 +607,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="ciurtetq3001jezpvj1p4eg0m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="civboltdf001k5opv9nj4tlte" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -603,53 +663,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="ciurtetuz007bezpvlw0pu48i" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-下访问-Windows-共享目录的配置方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" class="article-date">
-  <time datetime="2016-08-26T03:29:29.000Z" itemprop="datePublished">2016-08-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/">Linux 下访问 Windows 共享目录的配置方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-Linux-下安装-samba-client-客户端"><a href="#1-Linux-下安装-samba-client-客户端" class="headerlink" title="1. Linux 下安装 samba-client 客户端"></a>1. Linux 下安装 samba-client 客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install samba-client</span><br></pre></td></tr></table></figure>
-<h3 id="2-Linux-下只能装-cifs-utils-软件包"><a href="#2-Linux-下只能装-cifs-utils-软件包" class="headerlink" title="2. Linux 下只能装 cifs-utils 软件包"></a>2. Linux 下只能装 cifs-utils 软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cifs-utils</span><br></pre></td></tr></table></figure>
-<h3 id="3-Linux-下创建挂载点"><a href="#3-Linux-下创建挂载点" class="headerlink" title="3. Linux 下创建挂载点"></a>3. Linux 下创建挂载点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/AutoBackup</span><br></pre></td></tr></table></figure>
-<h3 id="4-挂载-Windows-上的共享目录"><a href="#4-挂载-Windows-上的共享目录" class="headerlink" title="4. 挂载 Windows 上的共享目录"></a>4. 挂载 Windows 上的共享目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t cifs -o username=&quot;administrator&quot;,password=&apos;xxx&apos; //192.168.200.1/D$/AutoBackup /mnt/AutosBackup/</span><br></pre></td></tr></table></figure>
-<hr>
-<p>如果挂载成功，则可以进入 /mnt/Autobackup 下，查看上面的 windows 共享文件。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="ciurtetr8002gezpv3htdk8ai" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="civboltij007e5opvsknzqlvs" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -671,9 +685,9 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CentOS-7/">CentOS 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -688,7 +702,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -696,9 +710,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/">CentOS 系统时间与现在时间相差8小时解决方法</a>
+          </li>
         
           <li>
             <a href="/2016/10/27/CREATE-INDEX/">CREATE INDEX</a>
@@ -716,10 +734,6 @@ var _hmt = _hmt || [];
             <a href="/2016/10/24/索引的填充因子/">索引的填充因子</a>
           </li>
         
-          <li>
-            <a href="/2016/10/22/Nagios-服务组定义/">Nagios 服务组定义</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -733,7 +747,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
