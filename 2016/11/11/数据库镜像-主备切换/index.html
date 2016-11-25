@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?639ab28f32e0029ed25324113f0ff34a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据库镜像-主备切换 | 运维生存时间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数据库镜像主备切换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库镜像-主备切换">
+<meta property="og:url" content="http://ttlop.com/2016/11/11/数据库镜像-主备切换/index.html">
+<meta property="og:site_name" content="运维生存时间">
+<meta property="og:description" content="数据库镜像主备切换">
+<meta property="og:updated_time" content="2016-11-11T09:30:29.840Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库镜像-主备切换">
+<meta name="twitter:description" content="数据库镜像主备切换">
+  
+    <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">运维生存时间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">业精于勤而荒于嬉，行成于思而毁于随</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/About">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库镜像-主备切换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/11/数据库镜像-主备切换/" class="article-date">
+  <time datetime="2016-11-11T06:04:59.000Z" itemprop="datePublished">2016-11-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据库镜像-主备切换
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>高性能状态-主备切换（主机服务停止）</li>
+</ol>
+<p>主机服务停止，镜像（备机）上执行下列命令后备机状态会变为：<strong>主机 挂起/正在还原…</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER FORCE_SERVICE_ALLOW_DATA_LOSS;</span><br></pre></td></tr></table></figure></p>
+<p>此时如原主机再启动服务，会显示挂起状态。执行下列命令后状态会变为：<strong>镜像 已同步/正在还原…</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER RESUME;</span><br></pre></td></tr></table></figure></p>
+<p>如果要从原镜像机（即现在的主机）手动切换回镜像状态，需执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER SAFETY FULL;</span><br></pre></td></tr></table></figure></p>
+<p>即将运行模式改为高安全，这时状态就会变回最初的状态（即原始的主机和备机）</p>
+<ol>
+<li>高性能状态下-主备切换（主机网络断开）<br>在原始的主机、备机状态下，将主机网络断开，在备机（镜像）上执行下列命令同样可以实现主备切换：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER FORCE_SERVICE_ALLOW_DATA_LOSS;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>但是此时的备机（镜像）虽然成为了主机，其运行模式为高安全模式，需要手动切换到高性能模式下。然后将主机联网后，在主机上执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER RESUME;</span><br></pre></td></tr></table></figure></p>
+<p>此时主机变为镜像机（镜像，已同步/正在还原…）</p>
+<p>高安全模式下，将原主机服务停止，镜像机自动转为主机，但运行模式为高安全模式，此时镜像（相对于现在为主机）是不能调整运行模式的。即不能从高安全调整为高性能模式。只有当原主机网络连通或服务开始运行后在镜像（相对于现在为主机）才可以调整运行模式，同时这时也不允许强制执行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/11/11/数据库镜像-主备切换/" data-id="civx98wcv009zn1pvw3sc7l9x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/11/25/查找通过Yum安装的Java的安装路径/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          查找通过Yum安装的Java的安装路径
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CentOS 系统时间与现在时间相差8小时解决方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/25/查找通过Yum安装的Java的安装路径/">查找通过Yum安装的Java的安装路径</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/11/数据库镜像-主备切换/">数据库镜像-主备切换</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/">CentOS 系统时间与现在时间相差8小时解决方法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/27/CREATE-INDEX/">CREATE INDEX</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/27/数据库中聚簇索引和非聚簇索引的区别/">数据库中聚簇索引和非聚簇索引的区别</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 XiaoYong Hu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/About" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

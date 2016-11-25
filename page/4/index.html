@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,121 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Hyper-V-3中-虚拟机CPU竞争机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" class="article-date">
+  <time datetime="2016-08-27T08:03:34.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/">Hyper-V 3中 虚拟机CPU竞争机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>同一个宿主计算机中的虚拟机，当全部或者部分运行时，将无可非议争夺宿主机CPU资源。<br>如何平衡宿主机的资源利用率，Hyper-V3给出了三种解决方法：</p>
+<ol>
+<li>分配给虚拟机的CPU资源（虚拟机保留百分比）</li>
+<li>虚拟机使用的最高CPU资源（虚拟机限制百分比）</li>
+<li>资源优先级（相对权重）</li>
+</ol>
+<h3 id="第一部分：分配给虚拟机的-CPU-资源"><a href="#第一部分：分配给虚拟机的-CPU-资源" class="headerlink" title="第一部分：分配给虚拟机的 CPU 资源"></a>第一部分：分配给虚拟机的 CPU 资源</h3><p>虚拟机可用的处理器资源（全部资源为100%），管理员可以分配给虚拟机可用CPU资源，也就是说将CPU处理能力的一部分指定给特定的虚拟机（使用百分比表示）。<br>虚拟机属性设置中提供“虚拟机保留”选项，此设置保证指定的百分比将提供给该虚拟机。此设置将影响一次可以运行的虚拟机的数量，如果指定多台虚拟机，虚拟机使用的CPU资源超过100%，则按照虚拟机启动的先后顺序，未超出物理CPU处理能力的虚拟机可以正常启动，超出物理CPU处理能力的虚拟机将不能启动。</p>
+<p><strong>默认设置</strong></p>
+<p>通过虚拟机向导创建虚拟机后，默认情况为虚拟机指派的虚拟处理器计算资源是1个CPU，Hyper-V 3宿主机根据CPU内核的多少决定每个虚拟机可以使用的最大虚拟处理器数量（可以参考Windows 8 Server说明）。默认设置“虚拟机保留（百分比）”为0，不为虚拟机保留资源，处理器数量确认的情况下赋予虚拟机最大限度的计算能力。在实际应用中，多个CPU竞争是最常见的。如果每个CPU都使用最大处理能力，将会导致整体系统性能下降，甚至系统崩溃。因此，限制CPU的计算能力将是一种行之有效的方法。</p>
+<p><strong>CPU使用机制</strong></p>
+<p>虚拟机保留（百分比），在其他参数设置相同的情况下，宿主机强制为虚拟机分配CPU资源。当赋予虚拟机20%的计算资源时，20%的资源被虚拟机独占，其他虚拟机将不能使用已经分配的计算资源。虚拟机运行重要业务时，为了保证虚拟机具有足够的计算资源，虚拟机指派CPU应该为一种简单且行之有效的方法。</p>
+<h3 id="第二部分：限定虚拟机可用的CPU利用率"><a href="#第二部分：限定虚拟机可用的CPU利用率" class="headerlink" title="第二部分：限定虚拟机可用的CPU利用率"></a>第二部分：限定虚拟机可用的CPU利用率</h3><p>创建新虚拟机后，默认为每个虚拟机限制百分比为“100”，即每个虚拟机都可以使用最大的CPU处理能力。</p>
+<p>默认设置有一个致命的缺陷，当多个虚拟机同时运行，虚拟机使用的CPU利用率都达到100%时，系统将停止响应以至于宕机。对应用来说，这是一个致命的缺陷。因此，限制虚拟机的最大处理能力将是一种好方法。</p>
+<p>当宿主机中具备一定数量的虚拟机时，建议通过基准测试计算出每个虚拟机应用占用的最大CPU利用率，然后通过“虚拟机限制”选项为每个虚拟机指派限制值。</p>
+<p>这样即便有多个虚拟机达到应用峰值，也不会影响其他虚拟机处理能力，确保系统平稳运行。</p>
+<h3 id="第三部分：争夺CPU资源优先级"><a href="#第三部分：争夺CPU资源优先级" class="headerlink" title="第三部分：争夺CPU资源优先级"></a>第三部分：争夺CPU资源优先级</h3><p>在同一台宿主计算机中，有多个虚拟机运行并且争用CPU资源时，管理员可以设置虚拟机使用CPU的优先级别。</p>
+<p>虚拟机属性设置中提供“相对权重”选项，此设置虚拟机优先级，优先级别默认设置为100，即每个虚拟机优先级相同，优先级可用区间是1-10000。</p>
+<p>当出现争夺资源的状况时，根据时间片轮转均衡的非配给虚拟机CPU资源。</p>
+<p>启动优先级设置后，优先级高的虚拟机将首先得到CPU资源。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="civx98w5s001ln1pvw4iner4u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Windows-2012-下通过命令行管理磁盘" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/" class="article-date">
+  <time datetime="2016-08-27T06:21:34.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Windows/">Windows</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/">Windows 2012 下通过命令行管理磁盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Windows 2012 包含一个名为 Diskpart.exe 的命令行实用程序，用来管理服务器的磁盘子系统。要使用此命令，只需要打开命令提示符窗口，并输入 DiskPart.exe 命令即可。Windows 将进入 Diskpart Shell 界面。在这个界面中，可以使用各种命令来管理磁盘子系统。</p>
+<h3 id="命令用法"><a href="#命令用法" class="headerlink" title="命令用法"></a>命令用法</h3><p>Diskpart 命令格式，按照动词-名词的语法。动词告诉 Windows 要执行什么动作，名词告诉 Windows 要执行动作的对象，例如：</p>
+<ol>
+<li><p>List Disk：显示服务器上安装的所有物理硬盘</p>
+</li>
+<li><p>select disk 0：选中硬盘0，0为使用 list disk 命令后列出的磁盘编号</p>
+</li>
+<li><p>list volume：显示选中的硬盘每个 volume 的情况</p>
+</li>
+<li><p>select volume 1：选中指定的 volume</p>
+</li>
+<li><p>format fs=ntfs Label=MyHperDisk：格式化选定的volume</p>
+</li>
+<li><p>Assign Letter=F：分配盘符为 F</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="civx98wax007bn1pvdqmkaa3c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Linux-下访问-Windows-共享目录的配置方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -118,7 +233,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="civboltek002j5opvu2xjsuio" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="civx98w6q002in1pv5ii4jzt2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -211,7 +326,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="civboltbn000e5opvi2lzivje" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="civx98w47000en1pvnsbqbbpt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -269,7 +384,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="civboltbl000c5opv2zaiqpr4" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="civx98w45000cn1pv7nbudm5w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -312,7 +427,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="civboltk0009b5opvohf9c8iw" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="civx98wch009cn1pv99cfcxtu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -357,7 +472,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="civbolthl006c5opv999fit5c" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="civx98wa0006dn1pviiibcbqh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -402,7 +517,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="civbolthj00685opv2lujhrpr" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="civx98w9z006bn1pvrtxstye1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -516,7 +631,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="civboltgz005e5opvilan92oc" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="civx98w9f005jn1pvvzcqp6es" class="article-share-link">Share</a>
       
       
     </footer>
@@ -572,113 +687,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="civbolth1005h5opv7ini9x5r" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-类型简介" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/12/PHP-类型简介/" class="article-date">
-  <time datetime="2016-08-12T05:52:06.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/PHP-类型简介/">PHP 类型简介</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>PHP 支持 8 种原始数据类型。</p>
-<h4 id="标量类型"><a href="#标量类型" class="headerlink" title="标量类型"></a>标量类型</h4><ul>
-<li>boolean（布尔型）</li>
-<li>integer（整型）</li>
-<li>float（浮点型，也称作 double）</li>
-<li>string（字符串）</li>
-</ul>
-<h4 id="复合类型"><a href="#复合类型" class="headerlink" title="复合类型"></a>复合类型</h4><ul>
-<li>array（数组）</li>
-<li>object（对象）</li>
-</ul>
-<h4 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h4><ul>
-<li>resource（资源）</li>
-<li>NULL（无类型）</li>
-</ul>
-<hr>
-<p>变量的类型通常不是主动设定的，确切的说是由 <strong>PHP</strong> 根据该变量使用的上下文在运行时决定的。</p>
-<p>如果想查看某个表达式的值和类型，可以使用 <strong>var_dump()</strong> 函数。如果只是想得到一个易读懂的类型的表达式方式用于调试，用 <strong>gettype()</strong> 函数。要查看某个类型不要用 <strong>gettype()</strong>，而用 <strong>is_type</strong> 函数，以下是范例及执行结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_type.php </span><br><span class="line">&lt;?php</span><br><span class="line">$a_bool = TRUE;</span><br><span class="line">$a_str = &quot;foo&quot;;</span><br><span class="line">$a_str2 = &apos;foo&apos;;</span><br><span class="line">$an_int = 12;</span><br><span class="line"></span><br><span class="line">echo gettype($a_bool) . &quot;\n&quot;;</span><br><span class="line">echo gettype($a_str) . &quot;\n&quot;;</span><br><span class="line"></span><br><span class="line">if(is_int($an_int))&#123;</span><br><span class="line">	$an_int += 4;</span><br><span class="line">	echo $an_int . &quot;\n&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(is_string($a_bool))&#123;</span><br><span class="line">	echo &quot;String: $a_bool \n&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;Not String: $a_bool \n&quot;;</span><br><span class="line">&#125;</span><br><span class="line">[root@mail ~]# php php_type.php </span><br><span class="line">boolean</span><br><span class="line">string</span><br><span class="line">16</span><br><span class="line">Not String: 1</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="civboltho006g5opvlobot1u7" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-的-feof-方法需要注意的地方" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" class="article-date">
-  <time datetime="2016-08-11T07:36:38.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>写过这样的一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>其中当读文件到结尾的时候，结果总会比期望的多出来一个元素：bool(false)。</p>
-<p>按说，如果读取到文件最后一行，<strong>feof</strong> 函数会返回 <strong>TRUE</strong>，然后 <strong>while</strong> 循环就退出了，为什么不是呢？</p>
-<p>先看例子，我们在代码中添加一个判断：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        if(feof($file_handle))&#123;</span><br><span class="line">                                break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>这是因为 <strong>feof</strong> 函数在处理纯文本文件的时候处理到最后一行后，<strong>feof($file_handle)</strong> 将不会返回 <strong>True</strong>，此时循环继续，使用 <strong>fgets</strong> 继续读取文件，由于 <strong>fgets</strong> 获取不到数据，返回 <strong>false</strong>，所以我们使用 <strong>var_dump</strong> 可以看到打印了一个布尔类型的值，解决办法是使用 <strong>fgets</strong> 后再次使用 <strong>feof</strong> 判断文件是否结束，此时可以正确判定文件是否已到末尾。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="civbolthn006e5opvlqpc09h4" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="civx98w9e005hn1pve9nvz6al" class="article-share-link">Share</a>
       
       
     </footer>
@@ -700,9 +709,9 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CentOS-7/">CentOS 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -725,9 +734,17 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/25/查找通过Yum安装的Java的安装路径/">查找通过Yum安装的Java的安装路径</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/11/数据库镜像-主备切换/">数据库镜像-主备切换</a>
+          </li>
         
           <li>
             <a href="/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/">CentOS 系统时间与现在时间相差8小时解决方法</a>
@@ -739,14 +756,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/10/27/数据库中聚簇索引和非聚簇索引的区别/">数据库中聚簇索引和非聚簇索引的区别</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/27/用-SQL-建立索引的方法/">用 SQL 建立索引的方法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/24/索引的填充因子/">索引的填充因子</a>
           </li>
         
       </ul>
@@ -762,7 +771,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
