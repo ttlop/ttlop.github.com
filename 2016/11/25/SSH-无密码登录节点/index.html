@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>Centos 7 安装 memcache 及 安装 php 扩展 | 运维生存时间</title>
+  <title>SSH 无密码登录节点 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="memcached php">
+  <meta name="description" content="hadoop ssh 无密码登录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos 7 安装 memcache 及 安装 php 扩展">
-<meta property="og:url" content="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/index.html">
+<meta property="og:title" content="SSH 无密码登录节点">
+<meta property="og:url" content="http://ttlop.com/2016/11/25/SSH-无密码登录节点/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="memcached php">
-<meta property="og:updated_time" content="2016-07-29T03:55:18.266Z">
+<meta property="og:description" content="hadoop ssh 无密码登录">
+<meta property="og:updated_time" content="2016-11-25T07:45:09.440Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos 7 安装 memcache 及 安装 php 扩展">
-<meta name="twitter:description" content="memcached php">
+<meta name="twitter:title" content="SSH 无密码登录节点">
+<meta name="twitter:description" content="hadoop ssh 无密码登录">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Centos-7-安装-memcache-及-安装-php-扩展" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-SSH-无密码登录节点" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" class="article-date">
-  <time datetime="2016-07-29T03:51:12.000Z" itemprop="datePublished">2016-07-29</time>
+    <a href="/2016/11/25/SSH-无密码登录节点/" class="article-date">
+  <time datetime="2016-11-25T07:29:47.000Z" itemprop="datePublished">2016-11-25</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
   </div>
 
   </div>
@@ -99,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      Centos 7 安装 memcache 及 安装 php 扩展
+      SSH 无密码登录节点
     </h1>
   
 
@@ -107,14 +107,34 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="YUM-方式安装"><a href="#YUM-方式安装" class="headerlink" title="YUM 方式安装"></a>YUM 方式安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install memcached</span><br><span class="line">yum install php55w-pecl-memcache</span><br><span class="line">memcached -d -u root -p 11211 # 启动</span><br></pre></td></tr></table></figure>
-<h3 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install libevent-devel </span><br><span class="line">wget http://memcached.org/latest</span><br><span class="line">tar -zxvf memcached-1.x.x.tar.gz</span><br><span class="line">cd memcached-1.x.x</span><br><span class="line">./configure &amp;&amp; make &amp;&amp; make test &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>运行下面的php文件，如果有输出This is a test!，就表示环境搭建成功。开始领略Memcache的魅力把！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt; ?php</span><br><span class="line">$mem = new Memcache;</span><br><span class="line">$mem-&gt;connect(“127.0.0.1″, 11211);</span><br><span class="line">$mem-&gt;set(‘key’, ‘This is a test!’, 0, 60);</span><br><span class="line">$val = $mem-&gt;get(‘key’);</span><br><span class="line">echo $val;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+        <p>在配置 Hadoop 的过程中一个必要的步骤是配置 Mster 节点可以无密码 SSH 登录到各个 Slave 节点上。</p>
+<p>如下说明配置步骤：</p>
+<ol>
+<li>生成 Master 节点的公匙（在 Master 节点的终端中执行）</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh		#如果没有该目录，先执行一次 ssh localhost</span><br><span class="line">rm -rf ./id_rsa*	#删除之前生成的公钥（如果有）</span><br><span class="line">ssh-keygen -t rsa	#一直按回车就可以</span><br></pre></td></tr></table></figure>
+<ol>
+<li>配置 Master 节点可以无密码 SSH 本机（在 Master 节点的终端中执行）</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ./id_rsa.pub &gt;&gt;./authorized_keys</span><br></pre></td></tr></table></figure>
+<p>完成后可执行 ssh Master 验证一下（可能需要输入 yes，成功后执行 exit 返回原来的终端）。</p>
+<ol>
+<li>在 Master 节点将公钥传送到各个 Slave 节点</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/id_rsa.pub root@slave1:/root/</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在 Slave 节点上，将 Master SSH 公匙加入授权</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.ssh		#如果不存在该文件夹需要先创建，若存在则忽略</span><br><span class="line">cat ~/id_rsa.pub &gt;&gt;~/.ssh/authorized_keys	</span><br><span class="line">rm ~/id_rsa.pub		#用完就可以删除了</span><br></pre></td></tr></table></figure>
+<p>如果有其它 slave 节点，也要执行将 Master 公匙传送到其它 Slave 节点并授权的步骤。</p>
+<hr>
+<p>至此，在 Master 节点上就可以无密码 SSH 到各个 Slave 节点了。可以在 Master 节点上执行如下命令进行检验：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh slave1</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="civxhglcp000ry6pv4ilm8knh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="civxhglhn006zy6pvbty4w5ur" class="article-share-link">Share</a>
       
       
     </footer>
@@ -123,19 +143,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/07/30/Linux-apache-access-log-Analy/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Linux apache access_log Analy
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/11/25/查找通过Yum安装的Java的安装路径/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">使用 Apachetop 实时监测 web 服务器运行状态</div>
+      <div class="article-nav-title">查找通过Yum安装的Java的安装路径</div>
     </a>
   
 </nav>
