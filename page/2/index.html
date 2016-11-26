@@ -82,6 +82,64 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-用-SQL-建立索引的方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/27/用-SQL-建立索引的方法/" class="article-date">
+  <time datetime="2016-10-27T01:30:49.000Z" itemprop="datePublished">2016-10-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/27/用-SQL-建立索引的方法/">用 SQL 建立索引的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><p>进入查询窗口后，输入下面的语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX mycolumn_index ON mytable(mycolumn)</span><br></pre></td></tr></table></figure>
+<p>这个语句建立了一个名为 mycolumn_index 的索引。索引对表 mytable 的 mycolumn 字段进行，这是一个非聚簇索引，也是一个非唯一索引。（这是一个索引的缺省属性）</p>
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><p>如果需要改变一个索引的类型，必须删除原来的索引并重新创建一个。可以用下面的 SQL 语句删除它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP INDEX mytable.mycolumn_index</span><br></pre></td></tr></table></figure>
+<p>注意在 DROP INDEX 语句中你要包含表的名字。</p>
+<h3 id="创建聚簇索引"><a href="#创建聚簇索引" class="headerlink" title="创建聚簇索引"></a>创建聚簇索引</h3><p>要建立一个聚簇索引，可以使用关键字 CLUSTERED。一个表只能有一个聚簇索引。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE CLUSTERED INDEX mycolumn_clust_index ON mytable(mycolumn)</span><br></pre></td></tr></table></figure>
+<h3 id="创建聚簇索引-允许值重复"><a href="#创建聚簇索引-允许值重复" class="headerlink" title="创建聚簇索引-允许值重复"></a>创建聚簇索引-允许值重复</h3><p>如果表中有重复的记录，当你视图用这个语句建立索引时，会出现错误。但是有重复记录的表也可以建立聚簇索引，需要使用关键字 ALLOW_DUP_ROW。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE CLUSTERED INDEX mycolumn_clust_index ON mytable(mycolumn) WITH ALLOW_DUP_ROW</span><br></pre></td></tr></table></figure>
+<p>这个语句建立了一个允许重复记录的聚簇索引。你应该尽量避免在一个表中出现重复记录，但是，如果已经出现了，可以使用这种方法。</p>
+<h3 id="创建唯一索引"><a href="#创建唯一索引" class="headerlink" title="创建唯一索引"></a>创建唯一索引</h3><p>要对一个表建立唯一索引，可以使用关键字 UNIQUE。对聚簇索引和非聚簇索引都可以使用这个关键字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE UNIQUE CLUSTERED INDEX mycolumn_clust_index ON mytable(mycolumn)</span><br></pre></td></tr></table></figure>
+<p>这是经常使用的索引建立语句。无论何时，只要可以，应该尽量对一个表建立唯一聚簇索引来增强查询操作。</p>
+<p>注：唯一索引是指该字段不能有重复的值，而不是只能建立这一个索引。</p>
+<h3 id="创建复合索引"><a href="#创建复合索引" class="headerlink" title="创建复合索引"></a>创建复合索引</h3><p>最后，要建立一个对多个字段的索引（复合索引）-在索引建立语句中同时包含多个字段名。下面的例子对 firstname 和 lastname 两个字段建立索引：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX name_index ON username(firstname,lastname)</span><br></pre></td></tr></table></figure>
+<p>这个例子对两个字段建立了单个索引。在一个复合索引中，最多可以对 16 个字段进行索引。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/27/用-SQL-建立索引的方法/" data-id="civythcmz00b8jjpvvzgw8c1v" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-索引的填充因子" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/24/索引的填充因子/" class="article-date">
@@ -116,7 +174,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/24/索引的填充因子/" data-id="civyopbms00bbbkpvtgmbc3yr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/24/索引的填充因子/" data-id="civythcn300bdjjpvozpxve1u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,7 +216,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/22/Nagios-服务组定义/" data-id="civyopbid0054bkpvekuiqnyb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/22/Nagios-服务组定义/" data-id="civythcgt0056jjpvpetfxhkt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +276,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本命令/" data-id="civyopbmb00akbkpvo7fnf0x3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本命令/" data-id="civythcme00ajjjpv8ii4a9h9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -274,7 +332,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本配置/" data-id="civyopbme00apbkpv83iupfop" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本配置/" data-id="civythcmi00aojjpvk9t7baeo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +387,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="civyopbm600acbkpvtj36xx6k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="civythcma00aejjpvd51ju9ac" class="article-share-link">Share</a>
       
       
     </footer>
@@ -389,7 +447,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="civyopbmf00arbkpvocft4mjx" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="civythcmp00awjjpvztqpzymy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -439,7 +497,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="civyopbjq006tbkpv5syiyp4m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="civythcir006vjjpv11kem22s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -477,7 +535,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="civyopbmq00b9bkpvf5v16m2v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="civythcn200bbjjpvmgxk09bi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -528,53 +586,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="civyopbmc00ambkpvqn6f2vkj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Centos-下转发-DNS-服务器的架设" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/28/Centos-下转发-DNS-服务器的架设/" class="article-date">
-  <time datetime="2016-09-28T08:41:31.000Z" itemprop="datePublished">2016-09-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/28/Centos-下转发-DNS-服务器的架设/">Centos 下转发 DNS 服务器的架设</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>要架设DNS服务器，则必须安装可以提供DNS服务的软件程序，即bind软件，使用下面的命令即可安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install bind bind-utils</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2016/09/28/Centos-下转发-DNS-服务器的架设/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="civyopbeh0015bkpv0nss5qy0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="civythcmg00amjjpvasom5rt0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -626,6 +638,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/26/JobTracker-和-TaskTracker-概述/">JobTracker 和 TaskTracker 概述</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/26/浅谈-JobTracker-和-TaskTracker/">浅谈 JobTracker 和 TaskTracker</a>
           </li>
         
@@ -639,10 +655,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/25/SSH-无密码登录节点/">SSH 无密码登录节点</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/25/查找通过Yum安装的Java的安装路径/">查找通过Yum安装的Java的安装路径</a>
           </li>
         
       </ul>

@@ -82,6 +82,49 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-inotify-报错-upper-limit-on-inotify-watches-reached" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" class="article-date">
+  <time datetime="2016-08-19T01:16:46.000Z" itemprop="datePublished">2016-08-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/">inotify 报错 upper limit on inotify watches reached</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在对一个大磁盘进行 inotify 监听时，爆出如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Failed to watch /mnt/;</span><br><span class="line">upper limit on inotify watches reached!</span><br><span class="line">Please increase the amount of inotify watches allowed per user via `/proc/sys/fs/inotify/max_user_watches’.</span><br></pre></td></tr></table></figure>
+<p>cat一下这个文件，默认值是8192，<strong>echo 8192000 &gt; /proc/sys/fs/inotify/max_user_watches</strong> 即可~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="civythclr009ujjpvlzlsvwkw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PHP-流程控制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/13/PHP-流程控制/" class="article-date">
@@ -117,7 +160,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="civyopbja006ibkpvuxjhr1ge" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="civythci3006hjjpvdbvy2chq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +205,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="civyopbj7006dbkpv2bdes01y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="civythci0006fjjpvzqk3nu0z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -276,7 +319,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="civyopbin005jbkpvil45nm0c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="civythch8005ljjpvfo2j7zbf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -332,7 +375,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="civyopbio005lbkpvrylhp0uy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="civythcha005njjpvd6iwk8bv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,7 +434,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="civyopbje006mbkpvi2c5qdd3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="civythcik006ojjpvyy1ya7or" class="article-share-link">Share</a>
       
       
     </footer>
@@ -438,7 +481,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="civyopbjd006kbkpv25md2x8k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="civythcij006mjjpvd6hd0f78" class="article-share-link">Share</a>
       
       
     </footer>
@@ -488,7 +531,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="civyopbj8006fbkpvnyl4f5jh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="civythcih006kjjpvevm4ejpw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -533,7 +576,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="civyopbil005gbkpvm0ovumdi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="civythch5005ijjpvo1j6jmfi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -577,52 +620,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="civyopbiy0060bkpvt6khkrkv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Apache-ab-命令原理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/09/Apache-ab-命令原理/" class="article-date">
-  <time datetime="2016-08-09T03:03:43.000Z" itemprop="datePublished">2016-08-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Apache/">Apache</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/09/Apache-ab-命令原理/">Apache ab 命令原理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>ab</strong> 命令会创建很多的并发访问线程，模拟多个访问者同时对某一 <strong>URL</strong> 地址进行访问。它的测试目标是基于 <strong>URL</strong> 的，因此，可以用来测试 <strong>Apache</strong> 的负载压力，也可以测试 <strong>Nginx、Lighthttp、tomcat、IIS</strong> 等其它 <strong>Web</strong> 服务器的压力。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/09/Apache-ab-命令原理/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="civyopbcb0002bkpvtbrbmgge" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="civythchp0062jjpvjfv9fqy9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -674,6 +672,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/26/JobTracker-和-TaskTracker-概述/">JobTracker 和 TaskTracker 概述</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/26/浅谈-JobTracker-和-TaskTracker/">浅谈 JobTracker 和 TaskTracker</a>
           </li>
         
@@ -687,10 +689,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/25/SSH-无密码登录节点/">SSH 无密码登录节点</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/25/查找通过Yum安装的Java的安装路径/">查找通过Yum安装的Java的安装路径</a>
           </li>
         
       </ul>
