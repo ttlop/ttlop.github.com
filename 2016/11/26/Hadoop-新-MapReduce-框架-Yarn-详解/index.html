@@ -25,7 +25,7 @@ var _hmt = _hmt || [];
 <meta property="og:description" content="hadoop mapreduce yarm">
 <meta property="og:image" content="http://ttlop.com/myimages/image001.jpg">
 <meta property="og:image" content="http://ttlop.com/myimages/image002.jpg">
-<meta property="og:updated_time" content="2016-11-26T07:31:31.309Z">
+<meta property="og:updated_time" content="2016-11-26T07:40:07.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop 新 MapReduce 框架 Yarn 详解">
 <meta name="twitter:description" content="hadoop mapreduce yarm">
@@ -240,18 +240,21 @@ var _hmt = _hmt || [];
 <td style="text-align:left">yarm-site.xml</td>
 <td style="text-align:left">The address of the scheduler interface</td>
 <td style="text-align:left">无</td>
+<td style="text-align:left">Yarn.resourcemanager.scheduler.address</td>
 <td style="text-align:left">同上，NodeManger 需要知道 RM 主机的 scheduler 调度服务接口地址</td>
 </tr>
 <tr>
 <td style="text-align:left">yarm-site.xml</td>
 <td style="text-align:left">The address of the RM web application</td>
 <td style="text-align:left">无</td>
+<td style="text-align:left">Yarn.resourcemanager.webapp.address</td>
 <td style="text-align:left">新框架中各个 task 的资源调度及运行状况通过通过该 web 界面访问</td>
 </tr>
 <tr>
 <td style="text-align:left">yarm-site.xml</td>
 <td style="text-align:left">The address of the resource tracker interface</td>
 <td style="text-align:left">无</td>
+<td style="text-align:left">Yarn.resourcemanager.resource-tracker.address</td>
 <td style="text-align:left">新框架中 NodeManager 需要向 RM 报告任务运行状态供 Resouce 跟踪，因此 NodeManager 节点主机需要知道 RM 主机的 tracker 接口地址</td>
 </tr>
 </tbody>
@@ -260,7 +263,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="civywet33001lbjpvavnspive" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="civywpvq7001lcopvk8v83anv" class="article-share-link">Share</a>
       
       
     </footer>
