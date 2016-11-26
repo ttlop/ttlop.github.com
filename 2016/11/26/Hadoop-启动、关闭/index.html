@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="hadoop 启动 停止">
-<meta property="og:updated_time" content="2016-11-26T01:48:06.395Z">
+<meta property="og:updated_time" content="2016-11-26T02:22:27.568Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop 启动、关闭">
 <meta name="twitter:description" content="hadoop 启动 停止">
@@ -107,8 +107,9 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>适用版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop]# hadoop version</span><br><span class="line">Hadoop 3.0.0-alpha1</span><br><span class="line">Source code repository https://git-wip-us.apache.org/repos/asf/hadoop.git -r a990d2ebcd6de5d7dc2d3684930759b0f0ea4dc3</span><br><span class="line">Compiled by andrew on 2016-08-30T07:02Z</span><br><span class="line">Compiled with protoc 2.5.0</span><br><span class="line">From source with checksum f3a9644139eac17acbb91bfce7f68e2</span><br><span class="line">This command was run using /usr/local/hadoop/share/hadoop/common/hadoop-common-3.0.0-alpha1.jar</span><br></pre></td></tr></table></figure></p>
-<h2 id="参考地址："><a href="#参考地址：" class="headerlink" title="参考地址："></a>参考地址：</h2><h2 id="http-hadoop-apache-org-docs-r3-0-0-alpha1-hadoop-project-dist-hadoop-common-ClusterSetup-html-Slaves-File"><a href="#http-hadoop-apache-org-docs-r3-0-0-alpha1-hadoop-project-dist-hadoop-common-ClusterSetup-html-Slaves-File" class="headerlink" title="http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File"></a><a href="http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File" target="_blank" rel="external">http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File</a></h2><h2 id="Hadoop-Startup"><a href="#Hadoop-Startup" class="headerlink" title="Hadoop Startup"></a>Hadoop Startup</h2><ol>
+        <h2 id="适用版本"><a href="#适用版本" class="headerlink" title="适用版本"></a>适用版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop]# hadoop version</span><br><span class="line">Hadoop 3.0.0-alpha1</span><br><span class="line">Source code repository https://git-wip-us.apache.org/repos/asf/hadoop.git -r a990d2ebcd6de5d7dc2d3684930759b0f0ea4dc3</span><br><span class="line">Compiled by andrew on 2016-08-30T07:02Z</span><br><span class="line">Compiled with protoc 2.5.0</span><br><span class="line">From source with checksum f3a9644139eac17acbb91bfce7f68e2</span><br><span class="line">This command was run using /usr/local/hadoop/share/hadoop/common/hadoop-common-3.0.0-alpha1.jar</span><br></pre></td></tr></table></figure>
+<h2 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h2><p><a href="http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File" target="_blank" rel="external">http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File</a></p>
+<h2 id="Hadoop-Startup"><a href="#Hadoop-Startup" class="headerlink" title="Hadoop Startup"></a>Hadoop Startup</h2><ol>
 <li>要启动 Hadooop cluster，需要同时启动 HDFS 和 YARN cluster.<br>第一次打开 HDFS，它必须先格式化它。</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs namenode -format</span><br></pre></td></tr></table></figure>
@@ -148,7 +149,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="civyk57xt001h1zpv7mwdehc7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="civyldd15001g5apvg9hi45id" class="article-share-link">Share</a>
       
       
     </footer>
