@@ -82,6 +82,64 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux-获取当前正在执行脚本的绝对路径" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" class="article-date">
+  <time datetime="2016-06-23T03:15:14.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/">Linux 获取当前正在执行脚本的绝对路径</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>常见的误区是使用 <strong>pwd</strong> 命令，该命令的作用是 <strong>pwd - print name of current/working directory</strong>，这才是此命令的含义，当前的工作目录。这里没有任何意思说明，这个目录就是脚本存放的目录，我们可以如下测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# pwd</span><br><span class="line">/root</span><br><span class="line">[root@mail ~]# cat /tmp/a.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line">pwd</span><br><span class="line">[root@mail ~]# /tmp/a.sh </span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
+<p>你会发现，显示的是执行命令的路径 <strong>/root</strong>，而不是脚本所在的路径 <strong>/tmp</strong>。</p>
+<p>另一个错误的答案是 $0，这个也是不对的，这个 $0 是 <strong>Bash</strong> 环境下的特殊变量，真实含义如下：</p>
+<ol>
+<li>使用一个文件调用 bash，那么 $0 的值是那个文件的名字，不是绝对路径咯</li>
+<li>使用 -c 选项启动 bash 的话，真正执行的命令会从一个字符串中读取，字符串后面还有别的参数的话，使用从 $0 开始的特殊变量引用</li>
+<li>除此之外，$0 会被设置成调用 bash 的那个文件的名字，没说是绝对路径咯</li>
+</ol>
+<p>下面是正确答案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">basepath=$(cd `dirname $0`; pwd)</span><br></pre></td></tr></table></figure>
+<p>在此进行解释如下：</p>
+<ol>
+<li>dirname $0，取得当前执行的脚本文件的父目录</li>
+<li>cd <code>dirname $0</code>，进入这个目录（切换到当前工作目录）</li>
+<li>pwd，显示当前工作目录（cd执行后的结果）</li>
+</ol>
+<p>由此，我们获得了当前正在执行的脚本的存放路径。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="civyyk4uz003shkpvnlqvmzi4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Find-查找最近修改的文件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/23/Find-查找最近修改的文件/" class="article-date">
@@ -120,7 +178,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="civyx265e001cdppvz6gctfgn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="civyyk4s0001chkpvp31schz3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,7 +226,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="civyx26ao007idppvz8zcyw9m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="civyyk4xy007khkpvg4kwxqq1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -256,7 +314,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="civyx26aq007kdppvjzw98s2s" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="civyyk4xz007mhkpvhcgqcub2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -308,7 +366,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="civyx26910059dppv32pgc50z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="civyyk4w40050hkpvjunh7epc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -354,7 +412,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="civyx268x0051dppvrl54m94t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="civyyk4w50052hkpvz9nxngf2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -418,7 +476,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="civyx268u004wdppvar40lk6b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="civyyk4w0004vhkpv26e2p1cd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -463,7 +521,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="civyx26ci00a5dppv5jqoq9st" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="civyyk4zu00a4hkpvbbp4ux99" class="article-share-link">Share</a>
       
       
     </footer>
@@ -508,7 +566,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="civyx268p004ndppv5stfyv1d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="civyyk4vv004ohkpv408zuhrf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -605,52 +663,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="civyx268l004hdppvnjj7qyir" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Microsoft-SQL-Server-进程的阻塞与死锁检查" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" class="article-date">
-  <time datetime="2016-06-15T07:09:56.000Z" itemprop="datePublished">2016-06-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/">Microsoft SQL Server 进程的阻塞与死锁检查</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[master].[sys].[sysprocesses] 系统表是一个很重要的系统视图，主要用来定位与解决 sql server 的阻塞与死锁。这个表查询出的内容包含正在 sql server 实例上运行的进程的相关信息。这些进程可以是客户端进程或系统进程。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="civyx268o004ldppv8nrmcmh3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="civyyk4vp004ihkpv8y3y3ksf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -702,6 +715,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
           </li>
         
@@ -715,10 +732,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/26/Hadoop-MapReduce/">Hadoop MapReduce</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-启动、关闭/">Hadoop 启动、关闭</a>
           </li>
         
       </ul>

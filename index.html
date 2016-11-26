@@ -82,6 +82,60 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Hadoop-Yarn" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/26/Hadoop-Yarn/" class="article-date">
+  <time datetime="2016-11-26T08:14:13.000Z" itemprop="datePublished">2016-11-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Yarn-简介"><a href="#Yarn-简介" class="headerlink" title="Yarn 简介"></a>Yarn 简介</h1><p>YARN的基本思想是将 JobTracker 的两个主要功能（资源管理和作业调度/监控）分离，主要方法是创建一个全局的ResourceManager（RM）和若干个针对应用程序的ApplicationMaster（AM）。这里的应用程序是指传统的MapReduce作业或作业的DAG（有向无环图）。</p>
+<p>YARN 分层结构的本质是 ResourceManager。这个实体控制整个集群并管理应用程序向基础计算资源的分配。ResourceManager 将各个资源部分（计算、内存、带宽等）精心安排给基础 NodeManager（YARN 的每节点代理）。ResourceManager 还与 ApplicationMaster 一起分配资源，与 NodeManager 一起启动和监视它们的基础应用程序。在此上下文中，ApplicationMaster 承担了以前的 TaskTracker 的一些角色，ResourceManager 承担了 JobTracker 的角色。<br>ApplicationMaster 管理一个在 YARN 内运行的应用程序的每个实例。ApplicationMaster 负责协调来自 ResourceManager 的资源，并通过 NodeManager 监视容器的执行和资源使用（CPU、内存等的资源分配）。请注意，尽管目前的资源更加传统（CPU 核心、内存），但未来会带来基于手头任务的新资源类型（比如图形处理单元或专用处理设备）。从 YARN 角度讲，ApplicationMaster 是用户代码，因此存在潜在的安全问题。YARN 假设 ApplicationMaster 存在错误或者甚至是恶意的，因此将它们当作无特权的代码对待。<br>NodeManager 管理一个 YARN 集群中的每个节点。NodeManager 提供针对集群中每个节点的服务，从监督对一个容器的终生管理到监视资源和跟踪节点健康。MRv1 通过插槽管理 Map 和 Reduce 任务的执行，而 NodeManager 管理抽象容器，这些容器代表着可供一个特定应用程序使用的针对每个节点的资源。YARN 继续使用 HDFS 层。它的主要 NameNode 用于元数据服务，而 DataNode 用于分散在一个集群中的复制存储服务。<br>要使用一个 YARN 集群，首先需要来自包含一个应用程序的客户的请求。ResourceManager 协商一个容器的必要资源，启动一个 ApplicationMaster 来表示已提交的应用程序。通过使用一个资源请求协议，ApplicationMaster 协商每个节点上供应用程序使用的资源容器。执行应用程序时，ApplicationMaster 监视容器直到完成。当应用程序完成时，ApplicationMaster 从 ResourceManager 注销其容器，执行周期就完成了。</p>
+<h2 id="MRv1-的缺陷"><a href="#MRv1-的缺陷" class="headerlink" title="MRv1 的缺陷"></a>MRv1 的缺陷</h2><p>MapReduce 的第一个版本既有优点也有缺点。MRv1 是目前使用的标准的大数据处理系统。但是，这种架构存在不足，主要表现在大型集群上。当集群包含的节点超过 4,000 个时（其中每个节点可能是多核的），就会表现出一定的不可预测性。其中一个最大的问题是级联故障，由于要尝试复制数据和重载活动的节点，所以一个故障会通过网络泛洪形式导致整个集群严重恶化。<br>但 MRv1 的最大问题是多租户。随着集群规模的增加，一种可取的方式是为这些集群采用各种不同的模型。MRv1 的节点专用于 Hadoop，所以可以改变它们的用途以用于其他应用程序和工作负载。当大数据和 Hadoop 成为云部署中一个更重要的使用模型时，这种能力也会增强，因为它允许在服务器上对 Hadoop 进行物理化，而无需虚拟化且不会增加管理、计算和输入/输出开销。</p>
+<h2 id="Yarn的优点"><a href="#Yarn的优点" class="headerlink" title="Yarn的优点"></a>Yarn的优点</h2><p>大大减小了 JobTracker（也就是现在的 ResourceManager）的资源消耗，并且让监测每一个 Job 子任务 (tasks) 状态的程序分布式化了，更安全、更优美。<br>在新的 Yarn 中，ApplicationMaster 是一个可变更的部分，用户可以对不同的编程模型写自己的 AppMst，让更多类型的编程模型能够跑在 Hadoop 集群中，可以参考 hadoop Yarn 官方配置模板中的 mapred-site.xml 配置。<br>对于资源的表示以内存为单位 ( 在目前版本的 Yarn 中，没有考虑 cpu 的占用 )，比之前以剩余 slot 数目更合理。<br>老的框架中，JobTracker 一个很大的负担就是监控 job 下的 tasks 的运行状况，现在，这个部分就扔给 ApplicationMaster 做了，而 ResourceManager 中有一个模块叫做 ApplicationsMasters( 注意不是 ApplicationMaster)，它是监测 ApplicationMaster 的运行状况，如果出问题，会将其在其他机器上重启。<br>Container 是 Yarn 为了将来作资源隔离而提出的一个框架。这一点应该借鉴了 Mesos 的工作，目前是一个框架，仅仅提供 java 虚拟机内存的隔离,hadoop 团队的设计思路应该后续能支持更多的资源调度和控制 , 既然资源表示成内存量，那就没有了之前的 map slot/reduce slot 分开造成集群资源闲置的尴尬情况。</p>
+<h2 id="YARN的核心思想"><a href="#YARN的核心思想" class="headerlink" title="YARN的核心思想"></a>YARN的核心思想</h2><p>将JobTracker和TaskTacker进行分离，它由下面几大构成组件：<br>a. 一个全局的资源管理器 ResourceManager<br>b. ResourceManager的每个节点代理 NodeManager<br>c. 表示每个应用的 ApplicationMaster<br>d. 每一个ApplicationMaster拥有多个Container在NodeManager上运行[2]  </p>
+<h1 id="YARN的主要架构"><a href="#YARN的主要架构" class="headerlink" title="YARN的主要架构"></a>YARN的主要架构</h1><h2 id="ResourceManager（RM）"><a href="#ResourceManager（RM）" class="headerlink" title="ResourceManager（RM）"></a>ResourceManager（RM）</h2><p>RM是一个全局的资源管理器，负责整个系统的资源管理和分配。它主要由两个组件构成：调度器（Scheduler）和应用程序管理器（Applications Manager，ASM）。<br>调度器根据容量、队列等限制条件（如每个队列分配一定的资源，最多执行一定数量的作业等），将系统中的资源分配给各个正在运行的应用程序。需要注意的是，该调度器是一个“纯调度器”，它不再从事任何与具体应用程序相关的工作，比如不负责监控或者跟踪应用的执行状态等，也不负责重新启动因应用执行失败或者硬件故障而产生的失败任务，这些均交由应用程序相关的ApplicationMaster完成。调度器仅根据各个应用程序的资源需求进行资源分配，而资源分配单位用一个抽象概念“资源容器”（Resource Container，简称Container）表示，Container是一个动态资源分配单位，它将内存、CPU、磁盘、网络等资源封装在一起，从而限定每个任务使用的资源量。此外，该调度器是一个可插拔的组件，用户可根据自己的需要设计新的调度器，YARN提供了多种直接可用的调度器，比如Fair Scheduler和Capacity Scheduler等。<br>应用程序管理器负责管理整个系统中所有应用程序，包括应用程序提交、与调度器协商资源以启动ApplicationMaster、监控ApplicationMaster运行状态并在失败时重新启动它等。</p>
+<h2 id="ApplicationMaster（AM）"><a href="#ApplicationMaster（AM）" class="headerlink" title="ApplicationMaster（AM）"></a>ApplicationMaster（AM）</h2><p>用户提交的每个应用程序均包含一个AM，主要功能包括：<br>与RM调度器协商以获取资源（用Container表示）；<br>将得到的任务进一步分配给内部的任务(资源的二次分配)；<br>与NM通信以启动/停止任务；<br>监控所有任务运行状态，并在任务运行失败时重新为任务申请资源以重启任务。<br>当前YARN自带了两个AM实现，一个是用于演示AM编写方法的实例程序distributedshell，它可以申请一定数目的Container以并行运行一个Shell命令或者Shell脚本；另一个是运行MapReduce应用程序的AM—MRAppMaster。<br>注：RM只负责监控AM，在AM运行失败时候启动它，RM并不负责AM内部任务的容错，这由AM来完成。</p>
+<h2 id="NodeManager（NM）"><a href="#NodeManager（NM）" class="headerlink" title="NodeManager（NM）"></a>NodeManager（NM）</h2><p>NM是每个节点上的资源和任务管理器，一方面，它会定时地向RM汇报本节点上的资源使用情况和各个Container的运行状态；另一方面，它接收并处理来自AM的Container启动/停止等各种请求</p>
+<h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><p>Container是YARN中的资源抽象，它封装了某个节点上的多维度资源，如内存、CPU、磁盘、网络等，当AM向RM申请资源时，RM为AM返回的资源便是用Container表示。YARN会为每个任务分配一个Container，且该任务只能使用该Container中描述的资源。<br>注：1. Container不同于MRv1中的slot，它是一个动态资源划分单位，是根据应用程序的需求动态生成的。</p>
+<ol>
+<li>现在YARN仅支持CPU和内存两种资源，且使用了轻量级资源隔离机制Cgroups进行资源隔离。<br>YARN的资源管理和执行框架都是按主/从范例实现的——Slave —节点管理器（NM）运行、监控每个节点，并向集群的Master—资源管理器(RM)报告资源的可用性状态，资源管理器最终为系统里所有应用分配资源。<br>特定应用的执行由ApplicationMaster控制，ApplicationMaster负责将一个应用分割成多个任务，并和资源管理器协调执行所需的资源，资源一旦分配好，ApplicationMaster就和节点管理器一起安排、执行、监控独立的应用任务。<br>需要说明的是， YARN不同服务组件的通信方式采用了事件驱动的异步并发机制，这样可以简化系统的设计。</li>
+</ol>
+<h1 id="YARN架构简析"><a href="#YARN架构简析" class="headerlink" title="YARN架构简析"></a>YARN架构简析</h1><h2 id="集中式架构"><a href="#集中式架构" class="headerlink" title="集中式架构"></a>集中式架构</h2><p>集中式调度器(Monolithic Scheduler)的特点是，资源的调度和应用程序的管理功能全部放到一个进程中完成，开源界典型的代表是MRv1 JobTracker的实现。这样设计的缺点很明显，扩展性差：首先，集群规模受限；其次，新的调度策略难以融入到现有代码中，比如之前仅支持MapReduce作业，现在要支持流式作业，而将流式作业的调度策略嵌入到中央调度其中是一项很难的工作。</p>
+<h2 id="双层调度架构"><a href="#双层调度架构" class="headerlink" title="双层调度架构"></a>双层调度架构</h2><p>为了克服集中式调度器的不足，双层调度器是一种很容易被想到的解决之道，它可看作是一种分而治之的机制或者是策略下放机制：双层调度器仍保留一个经简化的集中式资源调度器，但具体任务相关的调度策略则下放到各个应用程序调度器完成。这种调度器的典型代表是Mesos。Mesos调度器由两部分组成，分别是资源调度器和框架(应用程序)调度器,其中，资源调度器负责将集群中的资源分配给各个框架(应用程序),而框架(应用程序)调度器负责将资源进一步分配给内部的各个任务，用户很容易将一种框架或者系统接入Mesos.<br>双层调度器的特点是：各个框架调度器并不知道整个集群资源使用情况，只是被动地接受资源；资源调度器仅将可用的资源推送给各个框架，而由框架自己选择是使用还是拒绝这些资源；一旦框架接受到新资源，再进一步将资源分配给其内部的任务，进而实现双层调度。然而这种调度器也是有缺点，主要表现在以下两个方面:1.各个框架无法知道整个集群的实时资源使用情况；采用悲观锁，并发粒度小。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="civyyk4s8001hhkpvmhjvjsxk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Hadoop-新-MapReduce-框架-Yarn-详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" class="article-date">
@@ -261,7 +315,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="civyx265v001ldppvadnqkytc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="civyyk4sh001mhkpvkfnsk0lc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +376,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="civyx266q002bdppvqs1t1niw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="civyyk4ta002ahkpv16wv0w3d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -369,7 +423,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="civyx26d500b6dppvj2ayn8dq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="civyyk50k00b8hkpv6nfxb4iu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -438,7 +492,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="civyx265n001hdppv3zwq42iq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="civyyk4sd001ihkpvdlc3mclg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -516,7 +570,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="civyx265q001idppvd4pteiiw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="civyyk4sg001lhkpvr018vo7i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -579,7 +633,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="civyx26aj0078dppvghyrc6qb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="civyyk4xs007ahkpvjevbo9bm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -629,7 +683,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/查找通过Yum安装的Java的安装路径/" data-id="civyx26d100azdppvaygorhy6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/25/查找通过Yum安装的Java的安装路径/" data-id="civyyk50h00b3hkpvw7b9iu4g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -683,7 +737,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/11/数据库镜像-主备切换/" data-id="civyx26ct00amdppvmxtj20zr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/11/数据库镜像-主备切换/" data-id="civyyk50800aohkpvhqzrluki" class="article-share-link">Share</a>
       
       
     </footer>
@@ -730,53 +784,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/" data-id="civyx2649000jdppvpegkyhuo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CREATE-INDEX" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/27/CREATE-INDEX/" class="article-date">
-  <time datetime="2016-10-27T03:50:13.000Z" itemprop="datePublished">2016-10-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/27/CREATE-INDEX/">CREATE INDEX</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="CREATE-INDEX"><a href="#CREATE-INDEX" class="headerlink" title="CREATE INDEX"></a>CREATE INDEX</h2><p>为给定表或视图创建索引。<br>只有表或视图的所有者才能为表创建索引。表或视图的所有者可以随时创建索引，无论表中是否有数据。可以通过指定限定的数据库名称，为另一个数据库中的表或视图视窗索引。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE [ UNIQUE ] [ CLUSTERED | NONCLUSTERED ] INDEX index_name</span><br><span class="line">    ON &#123; table | view &#125; ( column [ ASC | DESC ] [ ,...n ] )</span><br><span class="line">[ WITH &lt; index_option &gt; [ ,...n] ]</span><br><span class="line">[ ON filegroup ]</span><br><span class="line"></span><br><span class="line">&lt; index_option &gt; ::=</span><br><span class="line">    &#123; PAD_INDEX |</span><br><span class="line">        FILLFACTOR = fillfactor |</span><br><span class="line">        IGNORE_DUP_KEY |</span><br><span class="line">        DROP_EXISTING |</span><br><span class="line">    STATISTICS_NORECOMPUTE |</span><br><span class="line">    SORT_IN_TEMPDB </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><h4 id="UNIQUE"><a href="#UNIQUE" class="headerlink" title="UNIQUE"></a>UNIQUE</h4><p>为表或视图创建唯一索引（不允许存在索引值相同的两行）。视图上的聚簇索引必须是 UNIQUE 索引。<br>在创建索引时，如果数据已存在，SQL Server 会检查是否有重复值，并在每次使用 INSERT 或 UPDATE 语句添加数据时进行这种检查。<br>如果存在重复的键值，将取消 CREATE INDEX 语句，并返回错误信息，给出第一个重复值。<br>如果存在唯一索引，那么会产生重复键值的 UPDATE 或 INSERT 语句将回滚，SQL Server 将显示错误信息。即使 UPDATE 或 INSERT 语句更改了很多行但只产生一个重复值，也会出现这种情况。<br>如果在有唯一索引并指定了 IGNORE_DUP_KEY 子句情况下输入数据，则只有违反 UNIQUE 索引才会失败。在处理 UPDATE 语句时，IGNORE_DUP_KEY 不起作用。<br>SQL Server 不允许为已经包含重复值的列创建唯一索引，无论是否设置了 IGNORE_DUP_KEY。如果尝试这样做，SQL Server 会显示错误信息；重复值必须先删除，才能为这些列创建唯一索引。</p>
-<h4 id="CLUSTERED"><a href="#CLUSTERED" class="headerlink" title="CLUSTERED"></a>CLUSTERED</h4><p>创建一个对象，其中行的物理排序与索引排序相同，并且聚簇索引的最低一级（页级）包含实际的数据行。一个表或视图只允许同时有一个聚簇索引。具有聚簇索引的视图称为索引视图。必须先为视图创建唯一聚簇索引，然后才能为该视图定义其它索引。</p>
-<p>因为按照定义，聚簇索引的页级与其数据页相同，所以创建聚簇索引时使用 ON filegroup 子句实际上会将表从创建该表所用的文件移到新的文件组中。在特定的文件组上创建表或索引之前，应确认哪些文件组可用并且有足够的空间供索引使用。文件组的大小必须至少是整个表所需空间的 1.2 倍，这一点很重要。</p>
-<h4 id="NONCLUSTERED"><a href="#NONCLUSTERED" class="headerlink" title="NONCLUSTERED"></a>NONCLUSTERED</h4><p>创建一个指定表的逻辑排序的对象。对于非聚簇索引，行的物理排序独立于索引排序。非聚簇所应的页级包含索引行。每个索引行均包含非聚簇键值和一个或多个行定位器（指向包含该值的行）。如果表没有聚簇索引行，行定位器就是行的磁盘地址。如果表有聚簇索引，行定位器就是该行的聚簇索引键。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/27/CREATE-INDEX/" data-id="civyx2645000hdppvobcetz1e" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/" data-id="civyyk4r3000jhkpvgxr3otvy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -828,6 +836,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
           </li>
         
@@ -841,10 +853,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/26/Hadoop-MapReduce/">Hadoop MapReduce</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-启动、关闭/">Hadoop 启动、关闭</a>
           </li>
         
       </ul>
