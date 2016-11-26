@@ -173,11 +173,92 @@ var _hmt = _hmt || [];
 </tbody>
 </table>
 <p>由于新的 Yarn 框架与原 Hadoop MapReduce 框架相比变化较大，核心的配置文件中很多项在新框架中已经废弃，而新框架中新增了很多其他配置项，看下表所示会更加清晰：</p>
+<p><strong>表2:新旧 Hadoop 框架配置项变化表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">配置文件</th>
+<th style="text-align:left">配置项</th>
+<th style="text-align:left">Hadoop 0.20.X配置</th>
+<th style="text-align:left">Hadoop 0.23.X配置</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">core-site.xml</td>
+<td style="text-align:left">系统默认分布式文件URL</td>
+<td style="text-align:left">fs.default.name</td>
+<td style="text-align:left">fs.defaultFS</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">hdfs-site.xml</td>
+<td style="text-align:left">DFS name node 存放 name table 的目录</td>
+<td style="text-align:left">dfs.name.dir</td>
+<td style="text-align:left">dfs.namenode.name.dir</td>
+<td style="text-align:left">新框架中 name node 分成 dfs.namenode.name.dir( 存放 naname table 和 dfs.namenode.edits.dir（存放 edit 文件），默认是同一个目录</td>
+</tr>
+<tr>
+<td style="text-align:left">hdfs-site.xml</td>
+<td style="text-align:left">DFS data node 存放数据block的目录</td>
+<td style="text-align:left">dfs.data.dir</td>
+<td style="text-align:left">dfs.datanode.data.dir</td>
+<td style="text-align:left">新框架中 DataNode 增加更多细节配置，位于 dfs.datanode. 配置项下，如 dfs.datanode.data.dir.perm（datanode local 目录默认权限）；dfs.datanode.address（datanode 节点监听端口）；等</td>
+</tr>
+<tr>
+<td style="text-align:left">hdfs-site.xml</td>
+<td style="text-align:left">分布式文件系统数据复制块</td>
+<td style="text-align:left">dfs.replication</td>
+<td style="text-align:left">dfs.replication</td>
+<td style="text-align:left">新框架与老框架一致，值建议配置为与分布式 cluster 中实际的 DataNode 主机数一致</td>
+</tr>
+<tr>
+<td style="text-align:left">mapred-site.xml</td>
+<td style="text-align:left">Job监控地址及端口</td>
+<td style="text-align:left">mapred.job.tracker</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">新框架中已改为 Yarn-site.xml 中的 resouceManager 及 nodeManager 具体配置项，新框架中历史 job 的查询已从 Job tracker 剥离，归入单独的 mapreduce.jobtracker.jobhistory 相关配置，</td>
+</tr>
+<tr>
+<td style="text-align:left">mapred-site.xml</td>
+<td style="text-align:left">第三方MapReduce框架</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">mapreduce.framework.name</td>
+<td style="text-align:left">新框架支持第三方 MapReduce 开发框架以支持如 SmartTalk/DGSG 等非 Yarn 架构，注意通常情况下这个配置的值都设置为 Yarn，如果没有配置这项，那么提交的 Yarn job 只会运行在 locale 模式，而不是分布式模式。</td>
+</tr>
+<tr>
+<td style="text-align:left">yarm-site.xml</td>
+<td style="text-align:left">The address of the applications manager interface in the RM</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">Yarn.resourcemanager.address</td>
+<td style="text-align:left">新框架中 NodeManager 与 RM 通信的接口地址</td>
+</tr>
+<tr>
+<td style="text-align:left">yarm-site.xml</td>
+<td style="text-align:left">The address of the scheduler interface</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">同上，NodeManger 需要知道 RM 主机的 scheduler 调度服务接口地址</td>
+</tr>
+<tr>
+<td style="text-align:left">yarm-site.xml</td>
+<td style="text-align:left">The address of the RM web application</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">新框架中各个 task 的资源调度及运行状况通过通过该 web 界面访问</td>
+</tr>
+<tr>
+<td style="text-align:left">yarm-site.xml</td>
+<td style="text-align:left">The address of the resource tracker interface</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">新框架中 NodeManager 需要向 RM 报告任务运行状态供 Resouce 跟踪，因此 NodeManager 节点主机需要知道 RM 主机的 tracker 接口地址</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="civyvt9em001g4lpvkfc554v4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="civywet33001lbjpvavnspive" class="article-share-link">Share</a>
       
       
     </footer>
@@ -238,7 +319,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="civyvt9fb00254lpvi82zfjdw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="civywet3x002abjpvfc2b9kfr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -285,7 +366,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="civyvt9l000b24lpvemox69ff" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="civywetal00b6bjpv1uolsuh3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -354,7 +435,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="civyvt9ep001j4lpvjxjocxqd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="civywet2u001hbjpvcmerv167" class="article-share-link">Share</a>
       
       
     </footer>
@@ -432,7 +513,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="civyvt9ek001f4lpv34bzu607" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="civywet2y001ibjpv80panl2t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,7 +576,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="civyvt9io00764lpvlbglpb00" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="civywet7z0078bjpvs578po3s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -545,7 +626,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/查找通过Yum安装的Java的安装路径/" data-id="civyvt9kx00ax4lpv3rtd830y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/25/查找通过Yum安装的Java的安装路径/" data-id="civywetai00b1bjpv8y80vr3j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -599,7 +680,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/11/数据库镜像-主备切换/" data-id="civyvt9kq00ak4lpv7n8tbw59" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/11/数据库镜像-主备切换/" data-id="civyweta900ambjpv805ajwbg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -646,7 +727,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/" data-id="civyvt9dq000n4lpvid46mq8o" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/" data-id="civywet1k000jbjpvq40gjs71" class="article-share-link">Share</a>
       
       
     </footer>
@@ -692,7 +773,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/27/CREATE-INDEX/" data-id="civyvt9dj000h4lpvt796yhiw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/27/CREATE-INDEX/" data-id="civywet1h000hbjpvxd54j9g6" class="article-share-link">Share</a>
       
       
     </footer>
