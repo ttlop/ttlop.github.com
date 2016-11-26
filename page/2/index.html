@@ -82,6 +82,66 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库镜像-基本命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/19/数据库镜像-基本命令/" class="article-date">
+  <time datetime="2016-10-19T02:05:25.000Z" itemprop="datePublished">2016-10-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/19/数据库镜像-基本命令/">数据库镜像-基本命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>查询数据库证书 select * from sys.certificates;</p>
+</li>
+<li><p>删除数据库证书 drop certificate xxx_cert;</p>
+</li>
+<li><p>查询数据库主密钥 select * from sys.symmetric_keys;</p>
+</li>
+<li><p>删除已有的密钥 drop master key;</p>
+</li>
+<li><p>查看终端点 select <em> from sys.database_mirroring_endpoints、select </em> from sys.endpoints;</p>
+</li>
+<li><p>删除终端点 drop endpoint xxx;</p>
+</li>
+<li><p>删除数据库镜像的正在还原模式</p>
+</li>
+</ul>
+<ol>
+<li>alter database xxx set partner off;</li>
+<li>restore database xxx with recovery;</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本命令/" data-id="civyjrio000aizypv08329rw6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据库镜像-基本配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/19/数据库镜像-基本配置/" class="article-date">
@@ -128,7 +188,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本配置/" data-id="civxhglk100aly6pvod2bpjc7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本配置/" data-id="civyjrio400anzypvutr4sh3w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -183,7 +243,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="civxhglju00a8y6pvcdlrgi2s" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="civyjrint00aazypvhiagiapy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +303,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="civxhglk200any6pvb7r2ssvf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="civyjrio600apzypvlgatawuj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -293,7 +353,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="civxhglhi006py6pv6jpma4vf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="civyjrikb006rzypvlcgbr551" class="article-share-link">Share</a>
       
       
     </footer>
@@ -331,7 +391,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="civxhglk900b2y6pvoapmypbt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="civyjrioj00b4zypvgy5xk1q5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -382,7 +442,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="civxhglk000aiy6pvukl0j99t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="civyjrio200akzypvvboccx05" class="article-share-link">Share</a>
       
       
     </footer>
@@ -428,7 +488,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="civxhgld40015y6pvaodgc322" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="civyjric60015zypveva70jcq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,7 +531,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="civxhglg2004oy6pvns58ob7s" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="civyjrihz004pzypvbvfim6ow" class="article-share-link">Share</a>
       
       
     </footer>
@@ -514,64 +574,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="civxhgljr00a3y6pv2061185h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ACL-match-order-中的-config-和-auto-的应用区别" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" class="article-date">
-  <time datetime="2016-09-20T05:53:11.000Z" itemprop="datePublished">2016-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/">ACL match-order 中的 config 和 auto 的应用区别</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一个 ACL 由一条或多条描述报文匹配选项的判断语句组成，这样的判断语句就称为“规则”。由于每条规则中的报文匹配选项不同，从而使这些规则之间可能存在重复甚至矛盾的地方，因此在将一个报文与ACL 的各条规则进行匹配时，就需要有明确的匹配顺序来确定规则执行的优先级。</p>
-<p>ACL 的规则匹配顺序有以下两种：</p>
-<ul>
-<li><p>配置顺序：按照用户配置规则的先后顺序进行匹配，但由于本质上系统是按照规则编号由小到大进行匹配，因此后插入的规则如果编号较小也有可能先被匹配。</p>
-</li>
-<li><p>自动排序：按照“深度优先”原则由深到浅进行匹配，</p>
-</li>
-</ul>
-<p>不同类型ACL的“深度优先”排序法则如下所示:</p>
-<ul>
-<li>IPv4基本ACL</li>
-</ul>
-<p>先比较源IPv4 地址范围，范围较小者优先<br>如果源IP 地址范围相同，再比较配置顺序，配置在前者优先</p>
-<ul>
-<li>IPv4高级ACL</li>
-</ul>
-<p>先比较协议范围，指定有IPv4 承载的协议类型者优先<br>如果协议范围相同，再比较源IPv4 地址范围，较小者优先<br>如果源IPv4 地址范围也相同，再比较目的IPv4 地址范围，较小者优先<br>如果目的IPv4 地址范围也相同，再比较四层端口（即TCP/UDP 端口）号范围，较小者优先<br>如果四层端口号范围也相同，再比较配置顺序，配置在前者优先</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="civxhgkjn0001y6pvojgcllbf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="civyjrino00a5zypvmt77oo9m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -595,7 +598,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -623,6 +626,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/26/Hadoop-启动、关闭/">Hadoop 启动、关闭</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/25/SSH-无密码登录节点/">SSH 无密码登录节点</a>
           </li>
         
@@ -636,10 +643,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/">CentOS 系统时间与现在时间相差8小时解决方法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/27/CREATE-INDEX/">CREATE INDEX</a>
           </li>
         
       </ul>
