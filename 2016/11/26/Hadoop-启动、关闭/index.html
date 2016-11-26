@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="hadoop 启动 停止">
-<meta property="og:updated_time" content="2016-11-26T01:42:02.259Z">
+<meta property="og:updated_time" content="2016-11-26T01:48:06.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop 启动、关闭">
 <meta name="twitter:description" content="hadoop 启动 停止">
@@ -109,20 +109,20 @@ var _hmt = _hmt || [];
       
         <p>适用版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop]# hadoop version</span><br><span class="line">Hadoop 3.0.0-alpha1</span><br><span class="line">Source code repository https://git-wip-us.apache.org/repos/asf/hadoop.git -r a990d2ebcd6de5d7dc2d3684930759b0f0ea4dc3</span><br><span class="line">Compiled by andrew on 2016-08-30T07:02Z</span><br><span class="line">Compiled with protoc 2.5.0</span><br><span class="line">From source with checksum f3a9644139eac17acbb91bfce7f68e2</span><br><span class="line">This command was run using /usr/local/hadoop/share/hadoop/common/hadoop-common-3.0.0-alpha1.jar</span><br></pre></td></tr></table></figure></p>
 <h2 id="参考地址："><a href="#参考地址：" class="headerlink" title="参考地址："></a>参考地址：</h2><h2 id="http-hadoop-apache-org-docs-r3-0-0-alpha1-hadoop-project-dist-hadoop-common-ClusterSetup-html-Slaves-File"><a href="#http-hadoop-apache-org-docs-r3-0-0-alpha1-hadoop-project-dist-hadoop-common-ClusterSetup-html-Slaves-File" class="headerlink" title="http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File"></a><a href="http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File" target="_blank" rel="external">http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File</a></h2><h2 id="Hadoop-Startup"><a href="#Hadoop-Startup" class="headerlink" title="Hadoop Startup"></a>Hadoop Startup</h2><ol>
-<li>要启动 Hadooop cluster，需要同时启动 HDFS 和 YARN cluster.<br>第一次打开 HDFS，它必须先辈格式化。</li>
+<li>要启动 Hadooop cluster，需要同时启动 HDFS 和 YARN cluster.<br>第一次打开 HDFS，它必须先格式化它。</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs namenode -format</span><br></pre></td></tr></table></figure>
 <ol>
-<li>如果 etc/hadoop/workers 与 ssh 信任已经配置好了，所有的 HDFS processes 可以使用一个单一的脚本来启动：</li>
+<li>如果 etc/hadoop/workers 与 ssh 信任已经配置好了，所有的 HDFS processes 可以使用单一的脚本来启动</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
-<p>当然也可以每个节点单个的来启动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/start-dfs.sh   #在NameNode 节点运行</span><br></pre></td></tr></table></figure>
+<p>也可以逐个节点来启动：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs --daemon start namenode   #Start HDFS NameNode</span><br><span class="line">$HADOOP_HOME/bin/hdfs --daemon start datanode   #Start HDFS DataNode</span><br></pre></td></tr></table></figure>
 <ol>
-<li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，所有的 YARN processes 亦可以使用单一的脚本来启动</li>
+<li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，所有的 YARN processes 可以使用单一的脚本来启动</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-<p>当然也可以每个节点单个的来启动：</p>
+<p>也可以逐个节点来启动：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/yarn --daemon start resourcemanager    #使用如下命令运行指定的资源管理程序</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon start nodemanager   #在每个yarn节点启动NodeManager</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon start proxyserver</span><br></pre></td></tr></table></figure>
 <ol>
 <li>在指定的服务器运行如下命令启动 MapReduce JobHistory Server</li>
@@ -131,9 +131,9 @@ var _hmt = _hmt || [];
 <h2 id="Hadoop-ShutDown"><a href="#Hadoop-ShutDown" class="headerlink" title="Hadoop ShutDown"></a>Hadoop ShutDown</h2><ol>
 <li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，使用如下命令停止所有的 HDFS processes</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/stop-dfs.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/stop-dfs.sh    #在 NameNode 节点运行</span><br></pre></td></tr></table></figure>
 <p>同启动的时候一样，也可以逐个节点停止：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs --daemon stop namenode</span><br><span class="line">$HADOOP_HOME/bin/hdfs --daemon stop datanode</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs --daemon stop namenode    # 在 NameNode 节点运行</span><br><span class="line">$HADOOP_HOME/bin/hdfs --daemon stop datanode    # 在 DataNode 节点运行</span><br></pre></td></tr></table></figure>
 <ol>
 <li>如果 etc/hadoop/workers 与 SSH 信任已经配置好可，使用如下命令停止所有 YARN processes</li>
 </ol>
@@ -148,7 +148,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="civyjxegy001h10pvpd1j9vqn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="civyk57xt001h1zpv7mwdehc7" class="article-share-link">Share</a>
       
       
     </footer>
