@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,49 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Centos-7-安装-memcache-及-安装-php-扩展" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" class="article-date">
+  <time datetime="2016-07-29T03:51:12.000Z" itemprop="datePublished">2016-07-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/">Centos 7 安装 memcache 及 安装 php 扩展</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="YUM-方式安装"><a href="#YUM-方式安装" class="headerlink" title="YUM 方式安装"></a>YUM 方式安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install memcached</span><br><span class="line">yum install php55w-pecl-memcache</span><br><span class="line">memcached -d -u root -p 11211 # 启动</span><br></pre></td></tr></table></figure>
+<h3 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install libevent-devel </span><br><span class="line">wget http://memcached.org/latest</span><br><span class="line">tar -zxvf memcached-1.x.x.tar.gz</span><br><span class="line">cd memcached-1.x.x</span><br><span class="line">./configure &amp;&amp; make &amp;&amp; make test &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>运行下面的php文件，如果有输出This is a test!，就表示环境搭建成功。开始领略Memcache的魅力把！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt; ?php</span><br><span class="line">$mem = new Memcache;</span><br><span class="line">$mem-&gt;connect(“127.0.0.1″, 11211);</span><br><span class="line">$mem-&gt;set(‘key’, ‘This is a test!’, 0, 60);</span><br><span class="line">$val = $mem-&gt;get(‘key’);</span><br><span class="line">echo $val;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="civyufgla000r1upvcu9x819h" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-使用-Apachetop-实时监测-web-服务器运行状态" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -117,7 +160,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="civyto2np00aakopvtzvwilaq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="civyufgtk00a41upvamrjzg8v" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -167,7 +210,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="civyto2m0008nkopvoa4qpdqz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="civyufgsl008n1upv54tk8vx9" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -214,7 +257,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="civyto2h80034kopvca8ie8bv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="civyufgo800331upva5bwo0ja" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -264,7 +307,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="civyto2i3003wkopv4xrv1aj1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="civyufgow003x1upvrjuqg334" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -309,7 +352,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="civyto2gc002bkopv38yq5bep" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="civyufgni002c1upvesjtmkpd" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -354,7 +397,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="civyto2fx001ukopv180f9e7t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="civyufgn4001x1upviyrghc57" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -399,7 +442,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/19/Linux-inode-block-与硬盘容量关系/" data-id="civyto2go002lkopvj4f5drsu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/19/Linux-inode-block-与硬盘容量关系/" data-id="civyufgnv002p1upvadv1bhra" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -444,7 +487,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="civyto2ij0048kopvb4gj607g" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="civyufgpa00491upvrpprc25j" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -491,53 +534,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="civyto2gq002nkopv5ersnh67" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Hexo-博客添加图片、音乐、视频" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/15/Hexo-博客添加图片、音乐、视频/" class="article-date">
-  <time datetime="2016-07-15T02:08:42.000Z" itemprop="datePublished">2016-07-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/15/Hexo-博客添加图片、音乐、视频/">Hexo 博客添加图片、音乐、视频</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-插入外部图片"><a href="#1-插入外部图片" class="headerlink" title="1. 插入外部图片"></a>1. 插入外部图片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片描述](图片地址)</span><br></pre></td></tr></table></figure>
-<h3 id="2-添加本地图片"><a href="#2-添加本地图片" class="headerlink" title="2. 添加本地图片"></a>2. 添加本地图片</h3><p>在 \hexo\source 目录下新建文件夹，例如命名为 myimages 或者你喜欢的名字，然后编辑你的 md 博文，插入下面的代码样式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片描述](/myimages/你的图片文件名)</span><br></pre></td></tr></table></figure>
-<h3 id="3-插入音乐"><a href="#3-插入音乐" class="headerlink" title="3. 插入音乐"></a>3. 插入音乐</h3><p>比如网易云音乐，找到喜欢的歌曲，点击分享按钮，把里面的代码复制下来，直接粘贴到博文即可</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86   </span><br><span class="line">    src=&quot;http://music.163.com/outchain/player?type=2&amp;id=25706282&amp;auto=0&amp;height=66&quot;&gt;  </span><br><span class="line">&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="4-插入视频"><a href="#4-插入视频" class="headerlink" title="4. 插入视频"></a>4. 插入视频</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Idina Menze和Caleb Hyles激情对唱Let It Go：  </span><br><span class="line">&lt;iframe   </span><br><span class="line">    height=498 width=510   </span><br><span class="line">    src=&quot;http://player.youku.com/embed/XNjcyMDU4Njg0&quot;   </span><br><span class="line">    frameborder=0 allowfullscreen&gt;  </span><br><span class="line">&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Hexo-博客添加图片、音乐、视频/" data-id="civyto2fh001lkopvjpcsmq84" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="civyufgnt002m1upv921w349w" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -550,7 +547,7 @@ var _hmt = _hmt || [];
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -559,7 +556,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -584,9 +581,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
+          </li>
         
           <li>
             <a href="/2016/11/26/JobTracker-和-TaskTracker-概述/">JobTracker 和 TaskTracker 概述</a>
@@ -604,10 +605,6 @@ var _hmt = _hmt || [];
             <a href="/2016/11/26/Hadoop-启动、关闭/">Hadoop 启动、关闭</a>
           </li>
         
-          <li>
-            <a href="/2016/11/25/SSH-无密码登录节点/">SSH 无密码登录节点</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -621,7 +618,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
