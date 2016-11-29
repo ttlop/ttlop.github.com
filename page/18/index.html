@@ -82,6 +82,50 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-默认主题landscape分页异常修复" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/21/默认主题landscape分页异常修复/" class="article-date">
+  <time datetime="2016-04-21T02:24:45.000Z" itemprop="datePublished">2016-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/21/默认主题landscape分页异常修复/">默认主题landscape分页异常修复</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>hexo默认安装的主题是landscape，当文章过多页面自动分页时会出现页面下部分页条显示异常</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__(<span class="string">'next'</span>) »</span><br></pre></td></tr></table></figure>
+<p>通过修改代码themes/landscape/layout/_partial/archive.ejs可以修复此问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- paginator(&#123;</span><br><span class="line">      prev_text: <span class="string">"&amp;laquo; __('prev')"</span>,</span><br><span class="line">      next_text: <span class="string">"__('next') &amp;raquo;"</span></span><br><span class="line">    &#125;) %&gt;</span><br><span class="line">替换为</span><br><span class="line">&lt;%- paginator(&#123;</span><br><span class="line">      prev_text: <span class="string">"&amp;laquo; Prev"</span>,</span><br><span class="line">      next_text: <span class="string">"Next &amp;raquo;"</span></span><br><span class="line">    &#125;) %&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/04/21/默认主题landscape分页异常修复/" data-id="ciw34b4td00bk1npvdzi7srhq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Hexo-添加百度统计代码" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/21/Hexo-添加百度统计代码/" class="article-date">
@@ -119,7 +163,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="civyyk4sv001uhkpvnxllm9n5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/21/Hexo-添加百度统计代码/" data-id="ciw34b4n400201npvmcxa6gw5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,7 +208,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="civyyk4ri000vhkpvhqwlh1p9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/20/Centos-7-安装php5-5/" data-id="ciw34b4m0000y1npv1bym7mhd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -209,7 +253,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="civyyk4r5000mhkpv6rz7aod2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-iptables默认规则/" data-id="ciw34b4lm000n1npvz68eruq9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -253,7 +297,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="civyyk4r7000nhkpv7emb70sn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/19/Centos-7-使用iptables服务/" data-id="ciw34b4lo000q1npvtcio9yh2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -300,7 +344,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="civyyk4rp0012hkpvh27c1f5l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-禁用IPv6/" data-id="ciw34b4m800151npvz8kbcsgc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -345,7 +389,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="civyyk4rm000zhkpvyhjyhs0e" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Centos-7-更改yum源/" data-id="ciw34b4m600131npvd2dksonp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -394,7 +438,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="civyyk4zn009uhkpvo1rntflz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/hello-world/" data-id="ciw34b4sh009w1npvy0us5nbm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -443,7 +487,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="civyyk4so001qhkpvn42aia5v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/16/Hexo-常用配置/" data-id="ciw34b4n1001z1npvnmvzhllk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -488,52 +532,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="civyyk4qc0005hkpvuzrcdf63" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Apache-静态编译和动态编译" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/15/Apache-静态编译和动态编译/" class="article-date">
-  <time datetime="2016-04-15T07:07:15.000Z" itemprop="datePublished">2016-04-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Apache/">Apache</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/15/Apache-静态编译和动态编译/">Apache 静态编译和动态编译</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>动态编译就是可执行文件需要附带一个动态链接库，在执行时，需要调用对应动态链接库中的命令。所以其优点一方面是缩小了可执行文件本身的体积，另一方面是加快了编译速度，节省了系统资源。缺点一是哪怕很简单的程序，只用到了链接库中的一两条命令，也需要附带一个相对庞大的链接库；二是如果其它计算机上没有安装对应的运行库，则用动态编译的可执行文件就不能运行。<br>静态编译就是编译器在编译可执行文件的时候，将可执行文件需要调用的对应动态链接库(.so)中的部分提取出来，链接到可执行文件中，使可执行文件在运行的时候不依赖于动态链。所以其有缺点与动态编译的可执行文件正好互补。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/04/15/Apache-静态编译和动态编译/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/04/15/Apache-静态编译和动态编译/" data-id="civyyk4qi0008hkpvg4wsnvmi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/04/15/Apache-开启Server-status和server-info/" data-id="ciw34b4kz00051npvrakbfohk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -585,6 +584,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
           </li>
         
@@ -598,10 +601,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/26/浅谈-JobTracker-和-TaskTracker/">浅谈 JobTracker 和 TaskTracker</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-MapReduce/">Hadoop MapReduce</a>
           </li>
         
       </ul>
