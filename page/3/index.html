@@ -82,6 +82,66 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-日志序列号和还原计划" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/11/日志序列号和还原计划/" class="article-date">
+  <time datetime="2016-10-11T08:21:22.000Z" itemprop="datePublished">2016-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Microsoft SQL Server 事物日志中每个记录都由一个唯一的日志序列号（LSN）标识，如果 LSN2 大于 LSN1，则 LSN2 所标识的日志记录描述的更改发生在日志记录 LSN1 描述的更改之后。</p>
+<p>顺序还原期间，还原完整备份后，数据被还原到进行备份的时间点相对应的 LSN，利用差异和日志备份可以将还原的数据库推到稍后的时间，该时间与一个更高的 LSN 相对应。</p>
+<p>还原计划中，最重要的日志序列号（LSN）是第一个和最后一个 LSN。</p>
+<ol>
+<li>first_lsn或FirstLSN：备份集中第一个或最早日志记录的日志序列号。对于数据备份和差异备份，第一个 LSN 标识的是需要此备份执行恢复的最早日志记录，对于日志备份，第一个 LSN 标识的是备份中包含的第一个日志记录。</li>
+<li>last_lsn或LastLSN：备份集之后的下一条日志记录的序列号。最后一个 LSN 标识的是备份结束后的下一个日志记录。对于数据备份和差异备份（以及包含大容量日志操作的日志备份）。必须至少前滚到此 LSN，否则，还原期间复制的数据会出现不一致。对于日志备份，它包含的日志记录最多到（但不包含）此LSN。</li>
+</ol>
+<h3 id="日志序列号和数据备份或差异备份"><a href="#日志序列号和数据备份或差异备份" class="headerlink" title="日志序列号和数据备份或差异备份"></a>日志序列号和数据备份或差异备份</h3><p>对于数据备份或差异备份，first_lsn 和 last_lsn 之间的日志数据包含在备份中，这使得使用该备份（而无需日志备份）就可以恢复到 last_lsn。</p>
+<p>对于数据备份或差异备份，如果按还原顺序使用备份，则 last_lsn 可能是最早的恢复点，如果需要更早的恢复点，则必须使用更早的备份。</p>
+<p>当计划在还原数据备份或差异备份后使用哪个日志备份前滚时，通常将从该数据备份或差异备份之后的第一个日志备份开始，检查备份的属性时，你就会发现这样一个日志备份，其 first_lsn 小于或等于数据备份或差异备份中的 last_lsn，并且 last_lsn 大于数据备份或者差异备份中的 last_lsn。</p>
+<h3 id="日志序列号和日志链中的日志备份"><a href="#日志序列号和日志链中的日志备份" class="headerlink" title="日志序列号和日志链中的日志备份"></a>日志序列号和日志链中的日志备份</h3><p>新的日志链将随顺序局创建后的第一个完整数据库备份而启动，或在从简单恢复模式切换到完整或大容量日志恢复模式后启动。</p>
+<p>first_lsn 和 last_lsn 用于将日志备份连成一个连续的序列（即日志链）。可以使用连续的日志备份序列前滚数据库（可以从最近的数据库备份或者差异备份前滚，也可以从丢失或损坏的数据库备份和差异备份的早期备份前滚）。</p>
+<p>在日志备份中，first_lsn 是备份中第一个日志记录的 LSN，从此日志记录开始，日志备份最多包含到 LSN 为 last_lsn 的日志记录（但不包含该日志记录）。而且仅当早期备份（Backup_A）中的最后一个日志记录的 LSN 大于或等于后期备份（Backup_B）的第一个日志记录的 LSN 时，这两个日志备份才是连续的；也就是 Backup_A.last_lsn &gt;= Backup_B.first_lsn。如果不是这样，这两个备份之间将存在空白。</p>
+<p>这些 LSN 之间关系的意义如下：</p>
+<ul>
+<li>A.last_lsn = B.last_lsn：则 B 通常是紧跟着 A 后进行的日志备份</li>
+<li>A.last_lsn &gt; B.last_lsn：存在重叠。重叠通常是由于创建仅复制日志备份或在时点还原后备份第一个日志引起的。重叠可能会涉及不同的恢复分叉。</li>
+</ul>
+<h3 id="日志链断开的原因"><a href="#日志链断开的原因" class="headerlink" title="日志链断开的原因"></a>日志链断开的原因</h3><p>通常，SQL Server 数据库引擎会防止日志备份序列中出现空白，从而使日志链保持完整。但是，如果数据库管理员先将恢复模式更改为简单恢复模式，然后再将其改回完整或者大容量日志恢复模式，会使日志链断开。</p>
+<p>由于日志链已断开，因此无法在涉及简单恢复模式的恢复模式中前滚。更改到完整或大容量日志恢复模式后，应使用新的差异基准或差异基准集。此外，也可以使用差异备份填补空白。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="ciw37tmc600asaopvb0sc4oa7" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-RESTORE-HEADERONLY-Transact-SQL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" class="article-date">
@@ -122,7 +182,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="ciw35au1p006z54pvvi2xfy0h" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="ciw37tma70075aopvmle0z0m1" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -160,7 +220,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="ciw35au4i00bf54pvqcb2tqkq" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="ciw37tmcd00b6aopv23wc5ms1" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -211,7 +271,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciw35au4600as54pvogtt1fjp" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciw37tmc300amaopvcp67bov6" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -257,7 +317,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciw35atwf001554pv6c6qdmtd" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciw37tm5v0019aopvtmzc3bwm" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -300,7 +360,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciw35au08004z54pvkt6ckeda" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciw37tm8v0052aopvz43i3wc4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -343,7 +403,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciw35au3y00ad54pvpxdycu3f" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciw37tmby00acaopvy2y4fss5" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -400,7 +460,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciw35atx9001s54pvb3ta7tjp" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciw37tm4b0001aopvvunwhbcn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -456,7 +516,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciw35atv7000854pv27rrs1lx" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciw37tm4x000caopvk1ndn3t8" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -518,105 +578,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciw35au3s00a354pv3ypvlfmz" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-华为交换机命令释义" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/14/华为交换机命令释义/" class="article-date">
-  <time datetime="2016-09-14T06:35:20.000Z" itemprop="datePublished">2016-09-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/14/华为交换机命令释义/">华为交换机命令释义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>批量创建 vlan</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vlan batch 1 t0 100 105 to 108 1023</span><br><span class="line">一次性创建 vlan 1 - vlan2 ，vlan 105 - vlan 108 ，以及 vlan 1023</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">命令</th>
-<th style="text-align:left">释义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">sysname</td>
-<td style="text-align:left">改设备名</td>
-</tr>
-<tr>
-<td style="text-align:left">save</td>
-<td style="text-align:left">保存配置</td>
-</tr>
-<tr>
-<td style="text-align:left">system-view</td>
-<td style="text-align:left">进入系统试图</td>
-</tr>
-<tr>
-<td style="text-align:left">display current-configuration</td>
-<td style="text-align:left">查看当前配置</td>
-</tr>
-<tr>
-<td style="text-align:left">stp mode stp</td>
-<td style="text-align:left">设置 STP 模式为 STP</td>
-</tr>
-<tr>
-<td style="text-align:left">stp instance 0 root primary</td>
-<td style="text-align:left">指定该交换机为根桥</td>
-</tr>
-<tr>
-<td style="text-align:left">stp enable</td>
-<td style="text-align:left">开启 STP</td>
-</tr>
-<tr>
-<td style="text-align:left">http server enable</td>
-<td style="text-align:left">使能 HTTP 服务功能，可用 undo http server enable 去使能状态</td>
-</tr>
-<tr>
-<td style="text-align:left">interface Eth-Trunk1</td>
-<td style="text-align:left">建立链路聚合 1</td>
-</tr>
-<tr>
-<td style="text-align:left">prot link-type trunk</td>
-<td style="text-align:left">链路聚合后的模式</td>
-</tr>
-<tr>
-<td style="text-align:left">port trunk allow-pass vlan 2 to 200</td>
-<td style="text-align:left">允许通过 vlan 标签</td>
-</tr>
-</tbody>
-</table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciw35au3x00ab54pv73qqv22p" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciw37tmbs009zaopv5yx47et6" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -668,6 +630,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
           </li>
         
@@ -681,10 +647,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/26/JobTracker-和-TaskTracker-概述/">JobTracker 和 TaskTracker 概述</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/浅谈-JobTracker-和-TaskTracker/">浅谈 JobTracker 和 TaskTracker</a>
           </li>
         
       </ul>

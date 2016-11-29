@@ -82,6 +82,60 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库镜像-主备切换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/11/数据库镜像-主备切换/" class="article-date">
+  <time datetime="2016-11-11T06:04:59.000Z" itemprop="datePublished">2016-11-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/11/数据库镜像-主备切换/">数据库镜像-主备切换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>高性能状态-主备切换（主机服务停止）</li>
+</ol>
+<p>主机服务停止，镜像（备机）上执行下列命令后备机状态会变为：<strong>主机 挂起/正在还原…</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER FORCE_SERVICE_ALLOW_DATA_LOSS;</span><br></pre></td></tr></table></figure></p>
+<p>此时如原主机再启动服务，会显示挂起状态。执行下列命令后状态会变为：<strong>镜像 已同步/正在还原…</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER RESUME;</span><br></pre></td></tr></table></figure></p>
+<p>如果要从原镜像机（即现在的主机）手动切换回镜像状态，需执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER SAFETY FULL;</span><br></pre></td></tr></table></figure></p>
+<p>即将运行模式改为高安全，这时状态就会变回最初的状态（即原始的主机和备机）</p>
+<ol>
+<li>高性能状态下-主备切换（主机网络断开）<br>在原始的主机、备机状态下，将主机网络断开，在备机（镜像）上执行下列命令同样可以实现主备切换：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER FORCE_SERVICE_ALLOW_DATA_LOSS;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>但是此时的备机（镜像）虽然成为了主机，其运行模式为高安全模式，需要手动切换到高性能模式下。然后将主机联网后，在主机上执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER RESUME;</span><br></pre></td></tr></table></figure></p>
+<p>此时主机变为镜像机（镜像，已同步/正在还原…）</p>
+<p>高安全模式下，将原主机服务停止，镜像机自动转为主机，但运行模式为高安全模式，此时镜像（相对于现在为主机）是不能调整运行模式的。即不能从高安全调整为高性能模式。只有当原主机网络连通或服务开始运行后在镜像（相对于现在为主机）才可以调整运行模式，同时这时也不允许强制执行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/11/11/数据库镜像-主备切换/" data-id="ciw37tmc200akaopv2ka1ydub" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CentOS-系统时间与现在时间相差8小时解决方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/" class="article-date">
@@ -119,7 +173,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/" data-id="ciw35atvo000i54pvgzgaffga" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/11/10/CentOS-系统时间与现在时间相差8小时解决方法/" data-id="ciw37tm56000jaopv3sbhlfpq" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -165,7 +219,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/27/CREATE-INDEX/" data-id="ciw35atvl000f54pvywi4hpmw" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/27/CREATE-INDEX/" data-id="ciw37tm54000haopvpx72oflj" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -210,7 +264,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/27/数据库中聚簇索引和非聚簇索引的区别/" data-id="ciw35au4200al54pvzfjpcwj6" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/27/数据库中聚簇索引和非聚簇索引的区别/" data-id="ciw37tmc100aiaopvstzukx4v" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -268,7 +322,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/27/用-SQL-建立索引的方法/" data-id="ciw35au4h00bc54pvyr8uclhn" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/27/用-SQL-建立索引的方法/" data-id="ciw37tmcc00b4aopvgbdkjm2c" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -312,7 +366,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/24/索引的填充因子/" data-id="ciw35au4k00bh54pvho1gp0t6" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/24/索引的填充因子/" data-id="ciw37tmce00baaopvrgac02y9" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -354,7 +408,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/22/Nagios-服务组定义/" data-id="ciw35au0g005c54pvh08jg7l6" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/22/Nagios-服务组定义/" data-id="ciw37tm92005faopvanp0tnlz" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -414,7 +468,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本命令/" data-id="ciw35au4400an54pvg1e3ni3k" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本命令/" data-id="ciw37tmc400aoaopv2wzcfybd" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -470,7 +524,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本配置/" data-id="ciw35au4800av54pvrwvosozt" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本配置/" data-id="ciw37tmc500aqaopvqlk8ha45" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -525,67 +579,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="ciw35au4000ag54pvftu5ojc8" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-日志序列号和还原计划" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/11/日志序列号和还原计划/" class="article-date">
-  <time datetime="2016-10-11T08:21:22.000Z" itemprop="datePublished">2016-10-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/11/日志序列号和还原计划/">日志序列号和还原计划</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Microsoft SQL Server 事物日志中每个记录都由一个唯一的日志序列号（LSN）标识，如果 LSN2 大于 LSN1，则 LSN2 所标识的日志记录描述的更改发生在日志记录 LSN1 描述的更改之后。</p>
-<p>顺序还原期间，还原完整备份后，数据被还原到进行备份的时间点相对应的 LSN，利用差异和日志备份可以将还原的数据库推到稍后的时间，该时间与一个更高的 LSN 相对应。</p>
-<p>还原计划中，最重要的日志序列号（LSN）是第一个和最后一个 LSN。</p>
-<ol>
-<li>first_lsn或FirstLSN：备份集中第一个或最早日志记录的日志序列号。对于数据备份和差异备份，第一个 LSN 标识的是需要此备份执行恢复的最早日志记录，对于日志备份，第一个 LSN 标识的是备份中包含的第一个日志记录。</li>
-<li>last_lsn或LastLSN：备份集之后的下一条日志记录的序列号。最后一个 LSN 标识的是备份结束后的下一个日志记录。对于数据备份和差异备份（以及包含大容量日志操作的日志备份）。必须至少前滚到此 LSN，否则，还原期间复制的数据会出现不一致。对于日志备份，它包含的日志记录最多到（但不包含）此LSN。</li>
-</ol>
-<h3 id="日志序列号和数据备份或差异备份"><a href="#日志序列号和数据备份或差异备份" class="headerlink" title="日志序列号和数据备份或差异备份"></a>日志序列号和数据备份或差异备份</h3><p>对于数据备份或差异备份，first_lsn 和 last_lsn 之间的日志数据包含在备份中，这使得使用该备份（而无需日志备份）就可以恢复到 last_lsn。</p>
-<p>对于数据备份或差异备份，如果按还原顺序使用备份，则 last_lsn 可能是最早的恢复点，如果需要更早的恢复点，则必须使用更早的备份。</p>
-<p>当计划在还原数据备份或差异备份后使用哪个日志备份前滚时，通常将从该数据备份或差异备份之后的第一个日志备份开始，检查备份的属性时，你就会发现这样一个日志备份，其 first_lsn 小于或等于数据备份或差异备份中的 last_lsn，并且 last_lsn 大于数据备份或者差异备份中的 last_lsn。</p>
-<h3 id="日志序列号和日志链中的日志备份"><a href="#日志序列号和日志链中的日志备份" class="headerlink" title="日志序列号和日志链中的日志备份"></a>日志序列号和日志链中的日志备份</h3><p>新的日志链将随顺序局创建后的第一个完整数据库备份而启动，或在从简单恢复模式切换到完整或大容量日志恢复模式后启动。</p>
-<p>first_lsn 和 last_lsn 用于将日志备份连成一个连续的序列（即日志链）。可以使用连续的日志备份序列前滚数据库（可以从最近的数据库备份或者差异备份前滚，也可以从丢失或损坏的数据库备份和差异备份的早期备份前滚）。</p>
-<p>在日志备份中，first_lsn 是备份中第一个日志记录的 LSN，从此日志记录开始，日志备份最多包含到 LSN 为 last_lsn 的日志记录（但不包含该日志记录）。而且仅当早期备份（Backup_A）中的最后一个日志记录的 LSN 大于或等于后期备份（Backup_B）的第一个日志记录的 LSN 时，这两个日志备份才是连续的；也就是 Backup_A.last_lsn &gt;= Backup_B.first_lsn。如果不是这样，这两个备份之间将存在空白。</p>
-<p>这些 LSN 之间关系的意义如下：</p>
-<ul>
-<li>A.last_lsn = B.last_lsn：则 B 通常是紧跟着 A 后进行的日志备份</li>
-<li>A.last_lsn &gt; B.last_lsn：存在重叠。重叠通常是由于创建仅复制日志备份或在时点还原后备份第一个日志引起的。重叠可能会涉及不同的恢复分叉。</li>
-</ul>
-<h3 id="日志链断开的原因"><a href="#日志链断开的原因" class="headerlink" title="日志链断开的原因"></a>日志链断开的原因</h3><p>通常，SQL Server 数据库引擎会防止日志备份序列中出现空白，从而使日志链保持完整。但是，如果数据库管理员先将恢复模式更改为简单恢复模式，然后再将其改回完整或者大容量日志恢复模式，会使日志链断开。</p>
-<p>由于日志链已断开，因此无法在涉及简单恢复模式的恢复模式中前滚。更改到完整或大容量日志恢复模式后，应使用新的差异基准或差异基准集。此外，也可以使用差异备份填补空白。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="ciw35au4900ax54pvmrhtweln" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="ciw37tmbz00aeaopv76ct94x5" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -637,6 +631,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
           </li>
         
@@ -650,10 +648,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/26/JobTracker-和-TaskTracker-概述/">JobTracker 和 TaskTracker 概述</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/浅谈-JobTracker-和-TaskTracker/">浅谈 JobTracker 和 TaskTracker</a>
           </li>
         
       </ul>
