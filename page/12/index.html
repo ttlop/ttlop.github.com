@@ -82,6 +82,63 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Shell-中花括号的用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/23/Shell-中花括号的用法/" class="article-date">
+  <time datetime="2016-06-23T09:04:52.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/Shell-中花括号的用法/">Shell 中花括号的用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="var"><a href="#var" class="headerlink" title="${var}"></a>${var}</h3><p><strong>当变量名和后面的内容都是变量命名所允许的内容时，这个时候直接使用$var是不行的，得用{}把变量名括起来。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo &quot;Legion$var&quot;</span><br><span class="line">Legionlookback</span><br><span class="line">[root@localhost ~]# echo &quot;$varLegion&quot;</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# echo &quot;$&#123;var&#125;Legion&quot;</span><br><span class="line">lookbackLegion</span><br></pre></td></tr></table></figure>
+<h3 id="var-string"><a href="#var-string" class="headerlink" title="${var:-string}"></a>${var:-string}</h3><p><strong>当变量var值为空时${var:-a}会把a作为值返回，当变量不为空时，${var:-a}会把var的值作为结果返回</strong><br>注意：表达式并会不修改变量var的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# var=lookbak</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">lookbak</span><br></pre></td></tr></table></figure>
+<h3 id="var-string-1"><a href="#var-string-1" class="headerlink" title="${var:+string}"></a>${var:+string}</h3><p><strong>${var:+a}的替换规则跟上面相反，即当变量var的值不为空的时候将值替换成a，当变量var为空时则不替换</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:+a&#125;</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:+a&#125;</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+<h3 id="var-string-2"><a href="#var-string-2" class="headerlink" title="${var:=string}"></a>${var:=string}</h3><p><strong>当变量var的值为空时，${var:=a}会将其赋值为a，且变量var也被赋值是a了，则${var:=a}的值就是变量var的值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=b&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# var=lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=a&#125;</span><br><span class="line">lookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var:=b&#125;</span><br><span class="line">lookback</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">lookback</span><br></pre></td></tr></table></figure>
+<h3 id="var-string-3"><a href="#var-string-3" class="headerlink" title="${var:?string}"></a>${var:?string}</h3><p><strong>若变量var不为空，则用变量var的值来替换 ${var:?string}；若变量var为空，则把string输出到标准错误中，并从脚本中退出，我们可利用此特性来检查是否设置了变量的值。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat 123.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">var=lookback</span><br><span class="line">echo $&#123;var:?Legion&#125;</span><br><span class="line"></span><br><span class="line">var=&quot;&quot;</span><br><span class="line">echo $&#123;var:?Legion&#125;</span><br><span class="line">echo test</span><br><span class="line">[root@localhost ~]# ./123.sh </span><br><span class="line">lookback</span><br><span class="line">./123.sh: line 7: var: Legion</span><br><span class="line">[root@localhost ~]# echo $?</span><br><span class="line">1</span><br><span class="line">[root@localhost ~]# echo $?</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+<h3 id="var-pattern-、-var-pattern"><a href="#var-pattern-、-var-pattern" class="headerlink" title="${var%pattern}、${var%%pattern}"></a>${var%pattern}、${var%%pattern}</h3><p><strong>${variable%pattern}，shell在variable中查找，看是否有给定的pattern模式结尾，如果是，就从命令行把variable中的内容去掉右边最短的匹配模式</strong><br><strong>${variable%%pattern}，shell在variable中查找，看是否有给定的pattern模式结尾，如果是，就从命令行把variable中的内容去掉右边最长的匹配模式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookbacklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var%b*&#125;</span><br><span class="line">lookbacklookbacklook</span><br><span class="line">[root@localhost ~]# echo $&#123;var%*b*&#125;</span><br><span class="line">lookbacklookbacklook</span><br><span class="line">[root@localhost ~]# echo $&#123;var%%b*&#125;</span><br><span class="line">look</span><br></pre></td></tr></table></figure>
+<h3 id="var-pattern-、-var-pattern-1"><a href="#var-pattern-、-var-pattern-1" class="headerlink" title="${var#pattern}、${var##pattern}"></a>${var#pattern}、${var##pattern}</h3><p><strong>${variable#pattern}，shell在variable中查找，看是否有给定的pattern模式开始，如果是，就从命令行把variable中的内容去掉左边最短的匹配模式</strong><br><strong>${variable#pattern}，shell在variable中查找，看是否有给定的pattern模式开始，如果是，就从命令行把variable中的内容去掉左边最长的匹配模式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=lookbacklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var#*b&#125;</span><br><span class="line">acklookbacklookback</span><br><span class="line">[root@localhost ~]# echo $&#123;var##*b&#125;</span><br><span class="line">ack</span><br><span class="line">[root@localhost ~]# echo $var</span><br><span class="line">lookbacklookbacklookback</span><br></pre></td></tr></table></figure>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><p><strong>a的位置可以使用变量名或者一个命令，并不一定只能是常量。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# var=&quot;&quot;</span><br><span class="line">You have new mail in /var/spool/mail/root</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-a&#125;</span><br><span class="line">a</span><br><span class="line">[root@localhost ~]# a=Legion</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-$a&#125;</span><br><span class="line">Legion</span><br><span class="line">[root@localhost ~]# echo $&#123;var:-$(date +%F)&#125;</span><br><span class="line">2016-06-24</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-3-和-1-n"><a href="#1-2-3-和-1-n" class="headerlink" title="{1,2,3}和{1..n}"></a>{1,2,3}和{1..n}</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost tmp]# ls -al</span><br><span class="line">total 8</span><br><span class="line">drwxrwxrwt.  9 root root 4096 Jun 24 03:58 .</span><br><span class="line">dr-xr-xr-x. 17 root root 4096 Apr  8 11:03 ..</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .font-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .ICE-unix</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-httpd.service-uSB35m</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-mariadb.service-stR07S</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .Test-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .X11-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .XIM-unix</span><br><span class="line">[root@localhost tmp]# touch &#123;a,b,c&#125;_testFile</span><br><span class="line">[root@localhost tmp]# touch &#123;1..3&#125;testFile</span><br><span class="line">[root@localhost tmp]# ls -al</span><br><span class="line">total 8</span><br><span class="line">drwxrwxrwt.  9 root root 4096 Jun 24 11:23 .</span><br><span class="line">dr-xr-xr-x. 17 root root 4096 Apr  8 11:03 ..</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 1testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 2testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 3testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 a_testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 b_testFile</span><br><span class="line">-rw-r--r--.  1 root root    0 Jun 24 11:23 c_testFile</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .font-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .ICE-unix</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-httpd.service-uSB35m</span><br><span class="line">drwx------.  3 root root   16 May 16 09:55 systemd-private-8ce4243438d84be9b664ffcaa5766c48-mariadb.service-stR07S</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .Test-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .X11-unix</span><br><span class="line">drwxrwxrwt.  2 root root    6 Apr  8 10:30 .XIM-unix</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="ciw3a9lic007mgppvazx96vk7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux之cut命令的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/23/Linux之cut命令的用法/" class="article-date">
@@ -117,7 +174,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="ciw38jzkp004jcgpvtffothij" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="ciw3a9lfq004jgppv216a5wod" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +219,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="ciw38jzgu0019cgpvcn56t0tc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="ciw3a9lch0019gppvr47natyp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +277,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="ciw38jzk1003xcgpvqtbrnqnk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="ciw3a9lf5003xgppvyu9xi97a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,7 +325,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="ciw38jzh3001ecgpvirhb7b96" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="ciw3a9lco001egppv95lqhp89" class="article-share-link">Share</a>
       
       
     </footer>
@@ -316,7 +373,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="ciw38jzng007pcgpvsrq22xem" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="ciw3a9lid007pgppv2yiwukp6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -404,7 +461,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="ciw38jzni007rcgpvnux04odo" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="ciw3a9lih007ugppv6jpk5u4b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,7 +513,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="ciw38jzlb0057cgpvux3ii6ba" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="ciw3a9lgc0057gppv5w1904vz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +559,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciw38jzld005acgpvc25zz0qo" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciw3a9lge005agppvzgvhu36f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -566,52 +623,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciw38jzl50050cgpvzjn389gv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-什么是-Web-框架" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/17/什么是-Web-框架/" class="article-date">
-  <time datetime="2016-06-17T01:47:23.000Z" itemprop="datePublished">2016-06-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Web/">Web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/17/什么是-Web-框架/">什么是 Web 框架?</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Web 应用框架，或者简单的说是 “Web 框架”，其实是建立 Web 应用的一种方式。从简单的博客系统到复杂的 AJAX 应用，Web 上每个页面都是通过代码来产生的。很多人热衷于学习 Web 框架技术，但并不理解什么是 Web 框架，或者它们是如何工作的。这里，我们将探讨反复被忽略的 Web 框架基础的话题。阅读完这篇文章，你应该对什么是 Web 框架以及它们为什么会存在有更深的认识。这会让你学习一个新的 Web 框架变的简单的多，还会让你使用不同的框架的时候作出明智的选择。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/17/什么是-Web-框架/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciw38jzpr00accgpvxvzjmjxr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciw3a9lg70050gppvj1or9myb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -663,6 +675,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
           </li>
         
@@ -676,10 +692,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/JobTracker-和-TaskTracker-概述/">JobTracker 和 TaskTracker 概述</a>
           </li>
         
       </ul>

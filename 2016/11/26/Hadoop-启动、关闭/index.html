@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="hadoop 启动 停止">
-<meta property="og:updated_time" content="2016-11-26T02:22:27.568Z">
+<meta property="og:updated_time" content="2016-11-30T01:41:26.667Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop 启动、关闭">
 <meta name="twitter:description" content="hadoop 启动 停止">
@@ -122,12 +122,14 @@ var _hmt = _hmt || [];
 <ol>
 <li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，所有的 YARN processes 可以使用单一的脚本来启动</li>
 </ol>
+<p>YARN 是从 MapReduce 中分离出来的，负责资源管理与任务调度。运行于 MapReduce 之上，提供了高可用性、高扩展性。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
 <p>也可以逐个节点来启动：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/yarn --daemon start resourcemanager    #使用如下命令运行指定的资源管理程序</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon start nodemanager   #在每个yarn节点启动NodeManager</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon start proxyserver</span><br></pre></td></tr></table></figure>
 <ol>
 <li>在指定的服务器运行如下命令启动 MapReduce JobHistory Server</li>
 </ol>
+<p>开启历史服务器，才能在 Web 中查看任务运行（注意，这里是查看，默认是全部会记录，只有开启后才能查看）。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/mapred --daemon start historyserver</span><br></pre></td></tr></table></figure>
 <h2 id="Hadoop-ShutDown"><a href="#Hadoop-ShutDown" class="headerlink" title="Hadoop ShutDown"></a>Hadoop ShutDown</h2><ol>
 <li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，使用如下命令停止所有的 HDFS processes</li>
@@ -149,7 +151,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="ciw38jzhg001ncgpv7gb2rss2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="ciw3a9lcz001ngppv0mx80m9y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,6 +216,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
           </li>
         
@@ -227,10 +233,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/JobTracker-和-TaskTracker-概述/">JobTracker 和 TaskTracker 概述</a>
           </li>
         
       </ul>
