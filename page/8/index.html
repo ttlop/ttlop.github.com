@@ -82,6 +82,94 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-LinuxAwk-引用外部变量" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/05/LinuxAwk-引用外部变量/" class="article-date">
+  <time datetime="2016-08-05T07:11:51.000Z" itemprop="datePublished">2016-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/05/LinuxAwk-引用外部变量/">LinuxAwk 引用外部变量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有时候我们需要在使用 awk 的过程中引入外部变量，可以通过这种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -v a=111 &apos;&#123;print a&#125;&apos; yourfile</span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $access_url | awk -v a=$count &apos;&#123;if($1&gt;=a) print $2&#125;&apos;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>例子中 $access_url 和 $count 都是我们在其它地方定义过的变量，在 awk 中我们引用了 a 这个外部变量。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/05/LinuxAwk-引用外部变量/" data-id="ciwngsjp20044mapvtfj5bpaz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LinuxShell-命令运行符号-区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/04/LinuxShell-命令运行符号-区别/" class="article-date">
+  <time datetime="2016-08-04T08:21:15.000Z" itemprop="datePublished">2016-08-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/04/LinuxShell-命令运行符号-区别/">LinuxShell 命令运行符号 &amp; ; &amp;&amp; 区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="三个命令同时执行"><a href="#三个命令同时执行" class="headerlink" title="三个命令同时执行"></a>三个命令同时执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 &amp; echo 2 &amp; echo 3</span><br><span class="line">[1] 26124</span><br><span class="line">[2] 26125</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h3 id="不管前面的命令执行成功没有，后面的命令继续执行"><a href="#不管前面的命令执行成功没有，后面的命令继续执行" class="headerlink" title="不管前面的命令执行成功没有，后面的命令继续执行"></a>不管前面的命令执行成功没有，后面的命令继续执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 ; echo 2 ; echo 3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">[1]-  完成                  echo 1</span><br><span class="line">[2]+  完成                  echo 2</span><br></pre></td></tr></table></figure>
+<h3 id="只有前面的命令执行成功，后面命令才继续执行"><a href="#只有前面的命令执行成功，后面命令才继续执行" class="headerlink" title="只有前面的命令执行成功，后面命令才继续执行"></a>只有前面的命令执行成功，后面命令才继续执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 &amp;&amp; echo 2 &amp;&amp; echo 3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="ciwngsjpe004jmapvt02r2q6r" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux-shell-多进程实现（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/04/Linux-shell-多进程实现（一）/" class="article-date">
@@ -117,7 +205,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="ciw3a9le8002ygppv2c04l9ai" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="ciwngsjo70032mapv93ipnrxu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +251,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="ciw3a9lhx0070gppvsxo4zbxm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="ciwngsjrc0075mapvacv08m5c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -223,7 +311,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="ciw3a9lif007rgppvycdvk9fk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="ciwngsjru007zmapvrkbp4464" class="article-share-link">Share</a>
       
       
     </footer>
@@ -271,7 +359,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/Linux-apache-access-log-Analy/" data-id="ciw3a9le1002pgppvple2c8xh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/Linux-apache-access-log-Analy/" data-id="ciwngsjnx002tmapvlmb6w147" class="article-share-link">Share</a>
       
       
     </footer>
@@ -314,7 +402,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="ciw3a9lbv000ugppv0m1kn7ed" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="ciwngsjlg000umapvamhuc7ri" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,7 +447,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="ciw3a9lkb00aegppvdcfhvvg0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="ciwngsjtq00aomapv1zphs6oc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -409,7 +497,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="ciw3a9lje008ygppvfiny39r7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="ciwngsjsm008ymapvmpggnyeu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,102 +544,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="ciw3a9lel003dgppvc05duez7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LinuxShell-sed-进阶" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/22/LinuxShell-sed-进阶/" class="article-date">
-  <time datetime="2016-07-22T01:31:57.000Z" itemprop="datePublished">2016-07-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/22/LinuxShell-sed-进阶/">LinuxShell sed 进阶</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在使用 sed 编辑器的基本命令时，有一个局限，即 sed 编辑器命令只对单行数据执行操作。在 sed 编辑器读取数据流时，它会基于换行符的位置将数据分成行。sed 编辑器一次一行地处理数据行–在一个文本行上运行定义好的脚本命令，然后移到下一行重复这个过程。如果需要在跨多行的数据上执行特定的操作，sed 编辑器包含的 3 个可用来处理多行文本的特殊命令。</p>
-<ul>
-<li>N：将数据流中的下一行加进来创建一个多行组来处理</li>
-<li>D：删除多行组中的一行</li>
-<li>P：打印多行组中的一行</li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/22/LinuxShell-sed-进阶/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="ciw3a9lfg0045gppvxy8zxfqg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-SMB-配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/20/Linux-SMB-配置/" class="article-date">
-  <time datetime="2016-07-20T04:47:28.000Z" itemprop="datePublished">2016-07-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/20/Linux-SMB-配置/">Linux SMB 配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果要在 Linux 以及 Windows 之间互相传文件，使用 SMB 共享的方式是一个比较不错的方法，下面记录一下了下步骤。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/20/Linux-SMB-配置/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="ciw3a9ldx002kgppvv4nfhnw6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="ciwngsjoh003hmapvynr4xcc9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -575,7 +568,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -590,7 +583,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -603,6 +596,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/13/HTTP-协议基础/">HTTP 协议基础</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
           </li>
         
@@ -612,14 +613,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
           </li>
         
       </ul>

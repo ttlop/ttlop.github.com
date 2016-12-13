@@ -82,6 +82,269 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Zabbix-监控-Centos-7-系统下的-Mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" class="article-date">
+  <time datetime="2016-05-14T06:52:09.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/">Zabbix 监控 Centos 7 系统下的 Mysql</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-数据库配置"><a href="#1-数据库配置" class="headerlink" title="1. 数据库配置"></a>1. 数据库配置</h3><h4 id="1-1-登陆数据库，查看账号信息"><a href="#1-1-登陆数据库，查看账号信息" class="headerlink" title="1.1 登陆数据库，查看账号信息"></a>1.1 登陆数据库，查看账号信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 17107</span><br><span class="line">Server version: 5.5.47-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| Host                  | User | Password                                  |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">| localhost             | root | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">| localhost.localdomain | root |                                           |</span><br><span class="line">| 127.0.0.1             | root |                                           |</span><br><span class="line">| ::1                   | root |                                           |</span><br><span class="line">| localhost             |      |                                           |</span><br><span class="line">| localhost.localdomain |      |                                           |</span><br><span class="line">+-----------------------+------+-------------------------------------------+</span><br><span class="line">6 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h4 id="1-2-删掉空账号，新建监控账号"><a href="#1-2-删掉空账号，新建监控账号" class="headerlink" title="1.2 删掉空账号，新建监控账号"></a>1.2 删掉空账号，新建监控账号</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; drop user <span class="string">''</span>@<span class="string">'localhost'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">''</span>@<span class="string">'localhost.localdomain'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'localhost.localdomain'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'127.0.0.1'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; drop user <span class="string">'root'</span>@<span class="string">'::1'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">| Host      | User | Password                                  |</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">| localhost | root | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; grant usage on *.* to <span class="string">'zabbix'</span>@<span class="string">'localhost'</span> identified by <span class="string">'zabbix'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; select Host,User,Password from mysql.user;</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">| Host      | User   | Password                                  |</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">| localhost | root   | *061D3C4B7865576967B271343220E635D5F48F91 |</span><br><span class="line">| localhost | zabbix | *DEEF4D7D88CD046ECA02A80393B7780A63E7E789 |</span><br><span class="line">+-----------+--------+-------------------------------------------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
+<h4 id="1-3-测试数据库账号是否正常"><a href="#1-3-测试数据库账号是否正常" class="headerlink" title="1.3 测试数据库账号是否正常"></a>1.3 测试数据库账号是否正常</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost zabbix]<span class="comment"># mysql -u zabbix -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 17137</span><br><span class="line">Server version: 5.5.47-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; status;</span><br><span class="line">--------------</span><br><span class="line">mysql  Ver 15.1 Distrib 5.5.47-MariaDB, <span class="keyword">for</span> Linux (x86_64) using readline 5.1</span><br><span class="line"></span><br><span class="line">Connection id:		17137</span><br><span class="line">Current database:	</span><br><span class="line">Current user:		zabbix@localhost</span><br><span class="line">SSL:			Not <span class="keyword">in</span> use</span><br><span class="line">Current pager:		stdout</span><br><span class="line">Using outfile:		<span class="string">''</span></span><br><span class="line">Using delimiter:	;</span><br><span class="line">Server:			MariaDB</span><br><span class="line">Server version:		5.5.47-MariaDB MariaDB Server</span><br><span class="line">Protocol version:	10</span><br><span class="line">Connection:		Localhost via UNIX socket</span><br><span class="line">Server characterset:	latin1</span><br><span class="line">Db     characterset:	latin1</span><br><span class="line">Client characterset:	utf8</span><br><span class="line">Conn.  characterset:	utf8</span><br><span class="line">UNIX socket:		/var/lib/mysql/mysql.sock</span><br><span class="line">Uptime:			1 day 3 hours 47 min 2 sec</span><br><span class="line"></span><br><span class="line">Threads: 2  Questions: 48301  Slow queries: 0  Opens: 15  Flush tables: 2  Open tables: 41  Queries per second avg: 0.482</span><br><span class="line">--------------</span><br></pre></td></tr></table></figure>
+<h3 id="2-配置文件修改"><a href="#2-配置文件修改" class="headerlink" title="2. 配置文件修改"></a>2. 配置文件修改</h3><h4 id="2-1-修改-my-cnf-文件（-etc-zabbix目录）"><a href="#2-1-修改-my-cnf-文件（-etc-zabbix目录）" class="headerlink" title="2.1 修改 .my.cnf 文件（/etc/zabbix目录）"></a>2.1 修改 <strong>.my.cnf</strong> 文件（/etc/zabbix目录）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line">host=localhost</span><br><span class="line">user=zabbix</span><br><span class="line">password=zabbix</span><br><span class="line">[mysqladmin]</span><br><span class="line">host=localhost</span><br><span class="line">user=zabbix</span><br><span class="line">password=zabbix</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-修改-userparameter-mysql-cnf-文件（-etc-zabbix-zabbix-agentd-d目录）"><a href="#2-2-修改-userparameter-mysql-cnf-文件（-etc-zabbix-zabbix-agentd-d目录）" class="headerlink" title="2.2 修改 userparameter_mysql.cnf 文件（/etc/zabbix/zabbix_agentd.d目录）"></a>2.2 修改 <strong>userparameter_mysql.cnf</strong> 文件（/etc/zabbix/zabbix_agentd.d目录）</h4><blockquote>
+<p>主要关注 <strong>HOME</strong> 变量值是否是上面 <strong>.my.cnf</strong> 文件目录，且以下配置文件仅支持 <strong>linux</strong> 系统，在 <strong>Cenots 7</strong> 系统下进行调试过，<strong>windows</strong> 不支持。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># For all the following commands HOME should be set to the directory that has .my.cnf file with password information.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Flexible parameter to grab global variables. On the frontend side, use keys like mysql.status[Com_insert].</span></span><br><span class="line"><span class="comment"># Key syntax is mysql.status[variable].</span></span><br><span class="line">UserParameter=mysql.status[*],<span class="built_in">echo</span> <span class="string">"show global status where Variable_name='<span class="variable">$1</span>';"</span> | HOME=/etc/zabbix mysql -N | awk <span class="string">'&#123;print $$2&#125;'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Flexible parameter to determine database or table size. On the frontend side, use keys like mysql.size[zabbix,history,data].</span></span><br><span class="line"><span class="comment"># Key syntax is mysql.size[&lt;database&gt;,&lt;table&gt;,&lt;type&gt;].</span></span><br><span class="line"><span class="comment"># Database may be a database name or "all". Default is "all".</span></span><br><span class="line"><span class="comment"># Table may be a table name or "all". Default is "all".</span></span><br><span class="line"><span class="comment"># Type may be "data", "index", "free" or "both". Both is a sum of data and index. Default is "both".</span></span><br><span class="line"><span class="comment"># Database is mandatory if a table is specified. Type may be specified always.</span></span><br><span class="line"><span class="comment"># Returns value in bytes.</span></span><br><span class="line"><span class="comment"># 'sum' on data_length or index_length alone needed when we are getting this information for whole database instead of a single table</span></span><br><span class="line">UserParameter=mysql.size[*],<span class="built_in">echo</span> <span class="string">"select sum(<span class="variable">$(case "$3" in both|"")</span> echo "</span>data_length+index_length<span class="string">";; data|index) echo "</span><span class="variable">$3_length</span><span class="string">";; free) echo "</span>data_free<span class="string">";; esac)) from information_schema.tables<span class="variable">$([[ "$1" = "all" || ! "$1" ]] || echo " where table_schema='$1'")</span><span class="variable">$([[ "$2" = "all" || ! "$2" ]] || echo "and table_name='$2'")</span>;"</span> | HOME=/etc/zabbix mysql -N</span><br><span class="line"></span><br><span class="line">UserParameter=mysql.ping,HOME=/etc/zabbix mysqladmin ping | grep -c alive</span><br><span class="line">UserParameter=mysql.version,mysql -V</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-测试本机-zabbix-agent-是否可以正确获取到数据"><a href="#2-3-测试本机-zabbix-agent-是否可以正确获取到数据" class="headerlink" title="2.3 测试本机 zabbix-agent 是否可以正确获取到数据"></a>2.3 测试本机 <strong>zabbix-agent</strong> 是否可以正确获取到数据</h4><blockquote>
+<p>注意看最后几行结果是否如下所示</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zabbix_agent -p</span><br><span class="line">mysql.status                                  [t|]</span><br><span class="line">mysql.size                                    [t|73728]</span><br><span class="line">mysql.ping                                    [t|1]</span><br><span class="line">mysql.version                                 [t|mysql  Ver 15.1 Distrib 5.5.47-MariaDB, <span class="keyword">for</span> Linux (x86_64) using readline 5.1]</span><br></pre></td></tr></table></figure>
+<h4 id="2-4-测试-zabbix-server-是否可以获取到-zabbix-agent-端数据"><a href="#2-4-测试-zabbix-server-是否可以获取到-zabbix-agent-端数据" class="headerlink" title="2.4 测试 zabbix-server 是否可以获取到 zabbix-agent 端数据"></a>2.4 测试 <strong>zabbix-server</strong> 是否可以获取到 <strong>zabbix-agent</strong> 端数据</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@Zabbix3 ttlop]<span class="comment"># zabbix_get -s 192.168.1.202 -p 10050 -k "mysql.status[Bytes_received]"</span></span><br></pre></td></tr></table></figure>
+<p>至此，如可以获取到值，说明配置正常，如需要监控别的项目，修改客户端 <strong>userparameter_mysql.conf</strong> 文件即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="ciwngsjt7009umapv4fzmx4z7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Mysql-权限" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/14/Mysql-权限/" class="article-date">
+  <time datetime="2016-05-14T03:27:51.000Z" itemprop="datePublished">2016-05-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mysql/">Mysql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/14/Mysql-权限/">Mysql 权限</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>show privileges 显示服务器支持的权限</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">权限级别</th>
+<th style="text-align:left">权限</th>
+<th style="text-align:left">权限说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">alter</td>
+<td style="text-align:left">To alter the table</td>
+</tr>
+<tr>
+<td style="text-align:left">存储过程</td>
+<td style="text-align:left">alter routine</td>
+<td style="text-align:left">To alter or drop stored functions/procedures</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表或索引</td>
+<td style="text-align:left">create</td>
+<td style="text-align:left">To create new databases and tables</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">create routine</td>
+<td style="text-align:left">To use CREATE FUNCTION/PROCEDURE</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">create temporary tables</td>
+<td style="text-align:left">To use CREATE TEMPORARY TABLE</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">create user</td>
+<td style="text-align:left">To create new users</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">create view</td>
+<td style="text-align:left">To create new views</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">delete</td>
+<td style="text-align:left">To delete existing rows</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库或表</td>
+<td style="text-align:left">drop</td>
+<td style="text-align:left">To drop databases, tables, and views</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">event</td>
+<td style="text-align:left">To create, alter, drop and execute events</td>
+</tr>
+<tr>
+<td style="text-align:left">存储过程</td>
+<td style="text-align:left">execute</td>
+<td style="text-align:left">To execute stored routines</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器主机上的文件访问</td>
+<td style="text-align:left">file</td>
+<td style="text-align:left">To read and write files on the server</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表或存储过程</td>
+<td style="text-align:left">grant option</td>
+<td style="text-align:left">To give to other users those privileges you possess</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">index</td>
+<td style="text-align:left">To create or drop indexes</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">insert</td>
+<td style="text-align:left">To insert data into tables</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库</td>
+<td style="text-align:left">lock tables</td>
+<td style="text-align:left">To use LOCK TABLES (together with SELECT privilege)</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">process</td>
+<td style="text-align:left">To view the plain text of currently executing queries</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">proxy</td>
+<td style="text-align:left">To make proxy user possible</td>
+</tr>
+<tr>
+<td style="text-align:left">数据库、表</td>
+<td style="text-align:left">references</td>
+<td style="text-align:left">To have references on tables</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">reload</td>
+<td style="text-align:left">To reload or refresh tables, logs and privileges，例如flush status</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">replication client</td>
+<td style="text-align:left">To ask where the slave or master servers are</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">replication slave</td>
+<td style="text-align:left">To read binary log events from the master</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">select</td>
+<td style="text-align:left">To retrieve rows from table</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">show database</td>
+<td style="text-align:left">To see all databases with SHOW DATABASES</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">show view</td>
+<td style="text-align:left">To see views with SHOW CREATE VIEW</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">shutdown</td>
+<td style="text-align:left">To shut down the server</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">super</td>
+<td style="text-align:left">To use KILL thread, SET GLOBAL, CHANGE MASTER, etc.</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">trigger</td>
+<td style="text-align:left">To use triggers</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">create tablespace</td>
+<td style="text-align:left">To create/alter/drop tablespaces</td>
+</tr>
+<tr>
+<td style="text-align:left">表</td>
+<td style="text-align:left">update</td>
+<td style="text-align:left">To update existing rows</td>
+</tr>
+<tr>
+<td style="text-align:left">服务器管理</td>
+<td style="text-align:left">usage</td>
+<td style="text-align:left">No privileges - allow connect only</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="ciwngsjps0053mapv7syklxeq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Mysql-mysql-user" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/13/Mysql-mysql-user/" class="article-date">
@@ -128,7 +391,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="ciw3a9lg3004vgppvwiqedrpy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="ciwngsjpr0050mapvq9bbd1tf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +436,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciw3a9lbr000rgppvaw7nhi4z" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="ciwngsjlb000rmapvb8nzxpsm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -234,7 +497,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciw3a9ljs009kgppv6zm1k20o" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="ciwngsjt4009smapv3ivr7lwc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +562,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciw3a9ljl0098gppvs19wyxla" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="ciwngsjsw009imapvzl9u7czs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -523,7 +786,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="ciw3a9ljq009ggppvlupfu27s" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="ciwngsjsz009nmapvgvz87fxt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -614,7 +877,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="ciw3a9ljw009qgppv67ytwm9k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="ciwngsjtc00a2mapv5avth4j3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -659,7 +922,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="ciw3a9ljp009fgppvf2fxmgmg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="ciwngsjt0009omapvob6il7ha" class="article-share-link">Share</a>
       
       
     </footer>
@@ -704,97 +967,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="ciw3a9ljh0093gppvsfq02hqh" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Value-mapping-值映射" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-Value-mapping-值映射/" class="article-date">
-  <time datetime="2016-05-06T02:39:27.000Z" itemprop="datePublished">2016-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/06/Zabbix-Value-mapping-值映射/">Zabbix Value mapping 值映射</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为了显示更人性化的数据，在使用过程中，我们可以将获取到得数据映射为一个字符串。比如，我们写脚本监控 MYSQL 是否在运行中，一般返回0表示数据库挂了，1表示数据库正常，还有各种各样的监控都是返回0,1,2,3这样的数据，监控页上显示的全是数据字，完全不知道是什么意思，这个使用我们可以使用 zabbix 的值映射。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/06/Zabbix-Value-mapping-值映射/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Value-mapping-值映射/" data-id="ciw3a9lji0095gppvsfr2f8k3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Simple-check-简单检测" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-Simple-check-简单检测/" class="article-date">
-  <time datetime="2016-05-06T01:59:06.000Z" itemprop="datePublished">2016-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/06/Zabbix-Simple-check-简单检测/">Zabbix Simple check 简单检测</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Simple check 通常用来检查远程未安装代理或者客户端的服务。使用 simple check，被监控客户端无需安装 zabbix agent，zabbix server 直接使用 simple check 来收集数据，基本上都是用来检测远程服务器某端口是否在监听。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/06/Zabbix-Simple-check-简单检测/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Simple-check-简单检测/" data-id="ciw3a9ljb008tgppvbb1eyfq6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-Triggers-触发器/" data-id="ciwngsjsv009fmapv3r3zuqy6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -818,7 +991,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -833,7 +1006,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -846,6 +1019,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/13/HTTP-协议基础/">HTTP 协议基础</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
           </li>
         
@@ -855,14 +1036,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
           </li>
         
       </ul>

@@ -82,6 +82,116 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Nagios-安装好无法启动问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/20/Nagios-安装好无法启动问题汇总/" class="article-date">
+  <time datetime="2016-06-20T08:48:17.000Z" itemprop="datePublished">2016-06-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/20/Nagios-安装好无法启动问题汇总/">Nagios - 安装好无法启动问题汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>提示 <strong>qh: Failed to init socket ‘/usr/local/nagios/var/rw/nagios.qh’</strong></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1466408082] Nagios 4.1.1 starting... (PID=22890)</span><br><span class="line">[1466408082] Local time is Mon Jun 20 15:34:42 CST 2016</span><br><span class="line">[1466408082] LOG VERSION: 2.0</span><br><span class="line">[1466408082] qh: Failed to init socket &apos;/usr/local/nagios/var/rw/nagios.qh&apos;. bind() failed: No such file or directory</span><br><span class="line">[1466408082] Error: Failed to initialize query handler. Aborting</span><br></pre></td></tr></table></figure>
+<p>如下步骤即可解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/nagios/var/rw</span><br><span class="line">chown nagios:nagios /usr/local/nagios/var/rw</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciwngsjq1005fmapvjnzqhxu0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Nagios-Installing-Nagios-Core-From-Source" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" class="article-date">
+  <time datetime="2016-06-20T06:10:44.000Z" itemprop="datePublished">2016-06-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/">Nagios - Installing Nagios Core From Source</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><p>For RHEL/CentOS users:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget httpd php gcc glibc glibc-common gd gd-devel make net-snmp</span><br></pre></td></tr></table></figure>
+<h3 id="Download-Nagios-Core-and-Nagios-Plugins-Tarballs"><a href="#Download-Nagios-Core-and-Nagios-Plugins-Tarballs" class="headerlink" title="Download Nagios Core and Nagios Plugins Tarballs"></a>Download Nagios Core and Nagios Plugins Tarballs</h3><p>For all systems, run the following commands in your terminal:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.1.1.tar.gz</span><br><span class="line">wget http://nagios-plugins.org/download/nagios-plugins-2.1.1.tar.gz</span><br></pre></td></tr></table></figure>
+<h3 id="Adding-the-Nagios-User-and-Group"><a href="#Adding-the-Nagios-User-and-Group" class="headerlink" title="Adding the Nagios User and Group"></a>Adding the Nagios User and Group</h3><p>Next add the appropriate user and group for the Nagios process the run:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd nagios</span><br><span class="line">groupadd nagcmd</span><br><span class="line">usermod -a -G nagcmd nagios</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-Core-Installation"><a href="#Nagios-Core-Installation" class="headerlink" title="Nagios Core Installation"></a>Nagios Core Installation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf nagios-4.1.1.tar.gz</span><br><span class="line">tar zxvf nagios-plugins-2.1.1.tar.gz</span><br></pre></td></tr></table></figure>
+<p><strong>Change to the New Nagios directory and install the packages:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd nagios-4.1.1</span><br></pre></td></tr></table></figure>
+<p><strong>For RHEL/CentOS users:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-command-group=nagcmd</span><br></pre></td></tr></table></figure>
+<p><strong>All systems:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">make all</span><br><span class="line">make install</span><br><span class="line">make install-init</span><br><span class="line">make install-config</span><br><span class="line">make install-commandmode</span><br><span class="line">make instlal-webconf</span><br><span class="line"></span><br><span class="line">cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/</span><br><span class="line">chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers</span><br><span class="line"></span><br><span class="line">/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg</span><br><span class="line">/etc/init.d/nagios start</span><br></pre></td></tr></table></figure>
+<p><strong>For RHEL/CentOS users:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/httpd start</span><br></pre></td></tr></table></figure>
+<h3 id="Create-a-Default-User-for-Web-Access"><a href="#Create-a-Default-User-for-Web-Access" class="headerlink" title="Create a Default User for Web Access."></a>Create a Default User for Web Access.</h3><p>Add a default user for Web Interface Access:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-Plugin-Installation"><a href="#Nagios-Plugin-Installation" class="headerlink" title="Nagios Plugin Installation"></a>Nagios Plugin Installation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp/nagios-plugins-2.1.1</span><br><span class="line">./configure --with-nagios-user=nagios --with-nagios-group=nagios</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-Service-Setup"><a href="#Nagios-Service-Setup" class="headerlink" title="Nagios Service Setup"></a>Nagios Service Setup</h3><p>The following commands will register the Nagios daemon to be run upon system startup.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add nagios</span><br><span class="line">chkconfig --level 35 nagios on</span><br><span class="line"></span><br><span class="line">chkconfig --add httpd</span><br><span class="line">chkconfig --level 35 httpd on</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-Web-Interface"><a href="#Nagios-Web-Interface" class="headerlink" title="Nagios Web Interface"></a>Nagios Web Interface</h3><p>After correctly following the procedures you should now be abel to access your Nagios Core installation from a web browser.</p>
+<p>Simply use the following:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://&lt;your.nagios.server.ip&gt;/nagios</span><br></pre></td></tr></table></figure>
+<p>And log in with credentials you chose when adding the nagiosadmin user to the htpasswd.users file.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciwngsjpt0055mapv0nxq27rv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-什么是-Web-框架" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/17/什么是-Web-框架/" class="article-date">
@@ -117,7 +227,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciw3a9lk900a9gppv7pppgcev" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciwngsjtn00ajmapvcis2733d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +272,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciw3a9lg2004tgppvqzws7m6b" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciwngsjpq004ymapvvls51xen" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +369,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciw3a9lfv004ngppv27vya382" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciwngsjpm004smapvy9o607l3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -304,7 +414,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciw3a9lfy004pgppvr5wjod2u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciwngsjpo004wmapvopp3gvwj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -356,7 +466,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciw3a9lkg00amgppvvphzkamu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciwngsjtu00awmapvs40fbzia" class="article-share-link">Share</a>
       
       
     </footer>
@@ -401,7 +511,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciw3a9ljx009sgppvx5az9cag" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciwngsjtd00a4mapvc03291ce" class="article-share-link">Share</a>
       
       
     </footer>
@@ -446,7 +556,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciw3a9lhz0072gppvmbwr1qbv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciwngsjrd0077mapvmd4fu01l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -499,99 +609,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="ciw3a9lju009ogppvsvo8z528" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-windows-性能计数器使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/06/Zabbix-windows-性能计数器使用/" class="article-date">
-  <time datetime="2016-06-06T03:09:27.000Z" itemprop="datePublished">2016-06-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/06/Zabbix-windows-性能计数器使用/">Zabbix windows 性能计数器使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>windows 下的性能计数器让 zabbix 监控更加轻松，直接获取性能计数器的数值即可完成 windows 监控。性能计数器如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perf_counter[\234(_Total)\1402]</span><br></pre></td></tr></table></figure>
-<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perf_counter[&quot;\LogicalDisk(_Total)\Disk Transfers/sec&quot;,300]</span><br></pre></td></tr></table></figure></p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/06/Zabbix-windows-性能计数器使用/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="ciw3a9llh00cqgppvzn2x9d6h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-Monitor-Redis" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/03/Zabbix-Monitor-Redis/" class="article-date">
-  <time datetime="2016-06-03T05:18:23.000Z" itemprop="datePublished">2016-06-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/03/Zabbix-Monitor-Redis/">Zabbix Monitor Redis</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>Redis</strong> 有一个内建的状态页，对于想了解 <strong>Redis</strong> 的状态以及监控 <strong>Redis</strong> 非常有帮助，下面我们进行了一些配置来实现通过 <strong>Zabbix</strong> 监控 <strong>Redis</strong>。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/03/Zabbix-Monitor-Redis/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="ciw3a9lj8008ogppv94o8irhh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="ciwngsjt9009xmapvzxmbwnhr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -615,7 +633,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -630,7 +648,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -643,6 +661,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/13/HTTP-协议基础/">HTTP 协议基础</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
           </li>
         
@@ -652,14 +678,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
           </li>
         
       </ul>

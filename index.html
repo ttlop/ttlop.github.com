@@ -82,6 +82,144 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-HTTP-请求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/13/HTTP-请求/" class="article-date">
+  <time datetime="2016-12-13T11:35:55.000Z" itemprop="datePublished">2016-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最常用请求：</p>
+<ol>
+<li>GET：请求获取由Request-URL所标识的资源</li>
+<li>POST：在Request-URL所标识的资源后附加新的数据。例如：文件上传、提交表单</li>
+</ol>
+<p>都是为了实现服务器端的交互。用到的协议规则：</p>
+<p>GET请求：</p>
+<ol>
+<li>第一行：方法 路径 协议版本（例如：GET / HTTP/1.1）</li>
+<li>第二行：可以处理哪些类型的数据（例如：Accept: text/html, application/xhtml+xml, <em>/</em>）</li>
+<li>第三行：可以接收的语言区域（例如：Accept-Language: zh-CN）</li>
+<li>第四行：浏览器的客户端版本号</li>
+<li>第五行：可以接收的编码格式（例如：Accept-Encoding: gzip, deflate）</li>
+<li>第六行：表示访问的主机IP或者域名：Host</li>
+<li>第七行：长连接（例如：Connection: Keep-Alive），由于每次传输都是建立TCP连接，消耗资源，所有有了长连接的机制，节省资源</li>
+<li>第八行：Cookie（浏览器发送给服务器的内容）<br>。。。</li>
+</ol>
+<p>POST请求：</p>
+<ol>
+<li>第一行：方法 路径 协议版本（例如：POST / HTTP/1.1）</li>
+<li>第二行：请求使用的方式（例如：x-requested-with: XMLHttpRequest）</li>
+<li>第三行：可以接收的语言区域（例如：Accept-Language: zh-CN）</li>
+<li>第四行：浏览器的请求来源，（例如：Referer: <a href="http://www.baidu.com/等）" target="_blank" rel="external">http://www.baidu.com/等）</a></li>
+<li>第五行：Accept 可以处理哪些类型的数据<br>。。。</li>
+</ol>
+<p>响应：</p>
+<ol>
+<li>第一行：协议版本</li>
+</ol>
+<p>不常用请求：<br>HEAD OPTIONS PUT DELETE TRACE</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-请求/" data-id="ciwngsjmf001jmapvnonp9237" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-HTTP-协议基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/13/HTTP-协议基础/" class="article-date">
+  <time datetime="2016-12-13T11:10:18.000Z" itemprop="datePublished">2016-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/13/HTTP-协议基础/">HTTP 协议基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HTTP作为应用层协议，更加关注的是内容本身，即需要传输的内容。</p>
+<p><strong>特点：</strong></p>
+<ol>
+<li><p>明文传输，安全性差。</p>
+</li>
+<li><p>无状态协议。</p>
+</li>
+<li><p>应用层协议，标准化协议1.1版本。</p>
+</li>
+</ol>
+<p>每个页面会对应一个或多个请求。</p>
+<p><strong>主要构成：</strong></p>
+<ol>
+<li><p>请求</p>
+</li>
+<li><p>响应</p>
+</li>
+</ol>
+<p>均包含协议头、协议正文。</p>
+<p><strong>举例：</strong></p>
+<ol>
+<li><p>打电话：发起一个通话的请求</p>
+</li>
+<li><p>响应：通话成功 占线 停机 不接听 。。。</p>
+</li>
+</ol>
+<p>200：标准的成功响应码<br>302：重定向<br>404：页面不存在<br>。。。</p>
+<p>通常来说1、2、3开头的响应均表示请求是成功的，4开头的表示请求存在问题，5开头的表示服务端存在问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="ciwngsjmc001hmapvt7auup44" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-运行-Hadoop-伪分布式实例" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/29/运行-Hadoop-伪分布式实例/" class="article-date">
@@ -134,7 +272,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="ciw3a9ll500bsgppvhmn31aqv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="ciwngsjun00c5mapv9xo2z0it" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +358,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="ciw3a9ld0001qgppv4u9kcn4j" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="ciwngsjmv001umapvxm4n957f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,7 +440,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="ciw3a9lbl000mgppvkktrhrt6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="ciwngsjl3000mmapvjzo422fz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -356,7 +494,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="ciw3a9lcx001mgppv7quskn98" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="ciwngsjmn001qmapvpykcgiwz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -545,7 +683,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="ciw3a9ld4001rgppvk0e30rac" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="ciwngsjmy001vmapv41nsarhc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -606,7 +744,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="ciw3a9lds002fgppv6lhq1jz5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="ciwngsjnn002jmapva5id6s74" class="article-share-link">Share</a>
       
       
     </footer>
@@ -653,7 +791,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="ciw3a9lkv00bdgppvpupfx95v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="ciwngsjub00bnmapv4pgb7gnu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -722,150 +860,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="ciw3a9lct001jgppvvx9puj68" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Hadoop-启动、关闭" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/26/Hadoop-启动、关闭/" class="article-date">
-  <time datetime="2016-11-26T01:08:50.000Z" itemprop="datePublished">2016-11-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/26/Hadoop-启动、关闭/">Hadoop 启动、关闭</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="适用版本"><a href="#适用版本" class="headerlink" title="适用版本"></a>适用版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop]# hadoop version</span><br><span class="line">Hadoop 3.0.0-alpha1</span><br><span class="line">Source code repository https://git-wip-us.apache.org/repos/asf/hadoop.git -r a990d2ebcd6de5d7dc2d3684930759b0f0ea4dc3</span><br><span class="line">Compiled by andrew on 2016-08-30T07:02Z</span><br><span class="line">Compiled with protoc 2.5.0</span><br><span class="line">From source with checksum f3a9644139eac17acbb91bfce7f68e2</span><br><span class="line">This command was run using /usr/local/hadoop/share/hadoop/common/hadoop-common-3.0.0-alpha1.jar</span><br></pre></td></tr></table></figure>
-<h2 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h2><p><a href="http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File" target="_blank" rel="external">http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File</a></p>
-<h2 id="Hadoop-Startup"><a href="#Hadoop-Startup" class="headerlink" title="Hadoop Startup"></a>Hadoop Startup</h2><ol>
-<li>要启动 Hadooop cluster，需要同时启动 HDFS 和 YARN cluster.<br>第一次打开 HDFS，它必须先格式化它。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs namenode -format</span><br></pre></td></tr></table></figure>
-<ol>
-<li>如果 etc/hadoop/workers 与 ssh 信任已经配置好了，所有的 HDFS processes 可以使用单一的脚本来启动</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/start-dfs.sh   #在NameNode 节点运行</span><br></pre></td></tr></table></figure>
-<p>也可以逐个节点来启动：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs --daemon start namenode   #Start HDFS NameNode</span><br><span class="line">$HADOOP_HOME/bin/hdfs --daemon start datanode   #Start HDFS DataNode</span><br></pre></td></tr></table></figure>
-<ol>
-<li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，所有的 YARN processes 可以使用单一的脚本来启动</li>
-</ol>
-<p>YARN 是从 MapReduce 中分离出来的，负责资源管理与任务调度。运行于 MapReduce 之上，提供了高可用性、高扩展性。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-<p>也可以逐个节点来启动：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/yarn --daemon start resourcemanager    #使用如下命令运行指定的资源管理程序</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon start nodemanager   #在每个yarn节点启动NodeManager</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon start proxyserver</span><br></pre></td></tr></table></figure>
-<ol>
-<li>在指定的服务器运行如下命令启动 MapReduce JobHistory Server</li>
-</ol>
-<p>开启历史服务器，才能在 Web 中查看任务运行（注意，这里是查看，默认是全部会记录，只有开启后才能查看）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/mapred --daemon start historyserver</span><br></pre></td></tr></table></figure>
-<h2 id="Hadoop-ShutDown"><a href="#Hadoop-ShutDown" class="headerlink" title="Hadoop ShutDown"></a>Hadoop ShutDown</h2><ol>
-<li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，使用如下命令停止所有的 HDFS processes</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/stop-dfs.sh    #在 NameNode 节点运行</span><br></pre></td></tr></table></figure>
-<p>同启动的时候一样，也可以逐个节点停止：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs --daemon stop namenode    # 在 NameNode 节点运行</span><br><span class="line">$HADOOP_HOME/bin/hdfs --daemon stop datanode    # 在 DataNode 节点运行</span><br></pre></td></tr></table></figure>
-<ol>
-<li>如果 etc/hadoop/workers 与 SSH 信任已经配置好可，使用如下命令停止所有 YARN processes</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/stop-yarn.sh</span><br></pre></td></tr></table></figure>
-<p>也可以逐个节点停止：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/yarn --daemon stop resourcemanager</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon stop nodemanager</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon stop proxyserver</span><br></pre></td></tr></table></figure>
-<ol>
-<li>停止 MapReduce JobHistory Server</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/mapred --daemon stop historyserver</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="ciw3a9lcz001ngppv0mx80m9y" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SSH-无密码登录节点" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/25/SSH-无密码登录节点/" class="article-date">
-  <time datetime="2016-11-25T07:29:47.000Z" itemprop="datePublished">2016-11-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/25/SSH-无密码登录节点/">SSH 无密码登录节点</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在配置 Hadoop 的过程中一个必要的步骤是配置 Mster 节点可以无密码 SSH 登录到各个 Slave 节点上。</p>
-<p>如下说明配置步骤：</p>
-<ol>
-<li>生成 Master 节点的公匙（在 Master 节点的终端中执行）</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh		#如果没有该目录，先执行一次 ssh localhost</span><br><span class="line">rm -rf ./id_rsa*	#删除之前生成的公钥（如果有）</span><br><span class="line">ssh-keygen -t rsa	#一直按回车就可以</span><br></pre></td></tr></table></figure>
-<ol>
-<li>配置 Master 节点可以无密码 SSH 本机（在 Master 节点的终端中执行）</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ./id_rsa.pub &gt;&gt;./authorized_keys</span><br></pre></td></tr></table></figure>
-<p>完成后可执行 ssh Master 验证一下（可能需要输入 yes，成功后执行 exit 返回原来的终端）。</p>
-<ol>
-<li>在 Master 节点将公钥传送到各个 Slave 节点</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/id_rsa.pub root@slave1:/root/</span><br></pre></td></tr></table></figure>
-<ol>
-<li>在 Slave 节点上，将 Master SSH 公匙加入授权</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.ssh		#如果不存在该文件夹需要先创建，若存在则忽略</span><br><span class="line">cat ~/id_rsa.pub &gt;&gt;~/.ssh/authorized_keys	</span><br><span class="line">rm ~/id_rsa.pub		#用完就可以删除了</span><br></pre></td></tr></table></figure>
-<p>如果有其它 slave 节点，也要执行将 Master 公匙传送到其它 Slave 节点并授权的步骤。</p>
-<hr>
-<p>至此，在 Master 节点上就可以无密码 SSH 到各个 Slave 节点了。可以在 Master 节点上执行如下命令进行检验：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh slave1</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="ciw3a9li8007fgppv6nd95bc7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="ciwngsjml001nmapvruz9krub" class="article-share-link">Share</a>
       
       
     </footer>
@@ -889,7 +884,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -904,7 +899,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -917,6 +912,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/13/HTTP-协议基础/">HTTP 协议基础</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
           </li>
         
@@ -926,14 +929,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
           </li>
         
       </ul>

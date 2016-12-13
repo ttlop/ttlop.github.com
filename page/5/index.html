@@ -82,6 +82,151 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-虚拟化中的-SR-IOV" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/30/虚拟化中的-SR-IOV/" class="article-date">
+  <time datetime="2016-08-30T02:10:15.000Z" itemprop="datePublished">2016-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/30/虚拟化中的-SR-IOV/">虚拟化中的 SR-IOV</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>虚拟化环境中有很多的硬件加速技术，这些技术标准来源于行业内的领导者或各种组织机构，但是在实际项目落地时又有哪些会被启用呢？无论想启用哪些加速功能，势必需要硬件的支持，这就导致在一些项目前期的调研或者 POC 环境里不太容易实现，毕竟有些要求是十分昂贵和苛刻的，比如 RDMA。相对于一些需要资金投入的技术来说，SRIOV 无疑是比较亲民易于实现的，今天我们采用 Hyper-V 环境来进行说明。</p>
+<p>SRIOV，即单根虚拟化，Inter 在早期为了支持虚拟化环境，在 CPU 和 PCI 总线上提供了三层虚拟化技术，它们分别是：</p>
+<ol>
+<li><p>基于处理器的虚拟化技术 VT-x</p>
+</li>
+<li><p>基于 PCI 总线实现的 IO 虚拟化技术 VT-d</p>
+</li>
+<li><p>基于网络的虚拟化技术 VT-c</p>
+</li>
+</ol>
+<p>从 SRIOV 的中文字面不难理解，它属于 VT-d 技术的一个分支，要实现 SRIOV 功能，前提条件就是你的网卡首先要支持 SRIOV，你的主板支持 VT-d 技术（支持 VT-d 自然也就支持 SRIOV）</p>
+<p>那么 SRIOV 究竟是干嘛用的，上一张架构图来看看吧：</p>
+<p><img src="/myimages/43637752_1.jpg" alt="图片描述"></p>
+<p>以上图为例逐个解释关键词：</p>
+<ol>
+<li><p>PF 就是物理网卡所支持的一项 PCI 功能，PF 可以扩展出若干个 VF</p>
+</li>
+<li><p>VF 是支持 SRIOV 的物理网卡所虚拟出的一个“网卡”或者说虚拟出的一个实例，它会以一个独立网卡的形式呈现出来，每一个 VF 有他自己独享的 PCI 配置区域，并且可能与其它 VF 共享着同一个物理资源</p>
+</li>
+<li><p>PF miniport driver 即 PF 驱动是工作于 Hyper-V 虚拟化平台父区域的，并在 VF 之前最先加载</p>
+</li>
+<li><p>VF miniport driver 即 VF 驱动是工作与 Hyper-V 虚拟化平台子区域的，需要注意的是 VF 与 PF 之间是隔离的，任何经由VF 驱动或所执行的结果都不会影响其它 VF 或 PF</p>
+</li>
+<li><p>Network Interface Card 即物理网卡，在启用 SRIOV 之后会产生若干 vport，物理 NIC 所要做的就是转发 physical port 与 vport 之间的流量。</p>
+</li>
+<li><p>physical port 顾名思义就是物理网口，在 SRIOV 场景中 physical port 充当一个面向对外的网络媒介</p>
+</li>
+<li><p>VPort 是个抽象出来的接口，类似于物理网口，它被映射给每个 VF 或者 PF。</p>
+</li>
+</ol>
+<p>通过以上架构的描述可以看出，启用 SRIOV 之后，物理 NIC 将通过 VF 与虚拟机（VF driver）进行数据交互，这样一来可以跳过中间的虚拟化堆栈（即 VMM）层，以达到近乎于物理环境的性能，这一点也是 SRIOV 最大的价值所在，它有别于以往虚拟机通过仿真设备和虚拟化层进行流量传递的情况。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="ciwngsjuk00c0mapvhrzdin9r" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Hyper-V-网络配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/30/Hyper-V-网络配置/" class="article-date">
+  <time datetime="2016-08-30T01:50:45.000Z" itemprop="datePublished">2016-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hyper-V/">Hyper-V</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/30/Hyper-V-网络配置/">Hyper-V 网络配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Hyper-V-虚拟交换机类型"><a href="#1-Hyper-V-虚拟交换机类型" class="headerlink" title="1. Hyper-V 虚拟交换机类型"></a>1. Hyper-V 虚拟交换机类型</h3><ul>
+<li>外部虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间、虚拟机与物理机之间、虚拟机和外部网络之间的通信。<br>生产环境不勾选“允许管理操作系统共享此网络适配器”，勾选之后会为主机创建虚拟网卡，会实现物理主机与外部网络的通信，容易将物理主机暴露在外。不勾选“允许管理操作系统共享此网络适配器”，则在创建虚拟交换机后会将相应绑定的网络的 IP 地址等信息清空，该网卡不会被配置任何 IP，只是用来通信。勾选“允许管理操作系统共享此网络适配器”，则在创建虚拟交换机后，会多出一块虚拟网卡，其原网卡的IP地址等信息都会被配置到相应的虚拟网卡上面。<br>除非物理主机只有一块物理网卡，否则不推荐使用。</p>
+<ul>
+<li>内部虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间、虚拟机和物理机之间的通信，不需要物理网卡，因为不提供对外部网络的访问。<br>在单一服务器上，用来构建主机和虚拟机之间的通信，不推荐使用。</p>
+<ul>
+<li>专用虚拟类型</li>
+</ul>
+<p>可以实现虚拟机之间的通信，不需要物理网卡。<br>除了在单一服务器上构建实验环境，极少使用。</p>
+<h3 id="2-Hyper-V-主机网络最佳实践配置"><a href="#2-Hyper-V-主机网络最佳实践配置" class="headerlink" title="2. Hyper-V 主机网络最佳实践配置"></a>2. Hyper-V 主机网络最佳实践配置</h3><ul>
+<li>一块网卡用于工作负载，为虚拟机提供对外服务。</li>
+</ul>
+<p>该网卡绑定到外部虚拟交换机，不勾选“允许管理操作系统共享此网络适配器”，也就无法启用“VLAN ID”，其上的虚拟机与主机完全隔离。该虚拟交换机可以支持多个VLAN间的通信。</p>
+<ul>
+<li><p>一块网卡用于管理物理主机，如连接到域等。该网卡不绑定到任何虚拟交换机，只用作管理网络。</p>
+</li>
+<li><p>一块网卡用于在线迁移、群集心跳、群集共享(CSV)等。</p>
+</li>
+</ul>
+<p>由于虚拟机做群集时候的心跳也使用该网卡，所以也需要将该网卡绑定到外部虚拟交换机，单独VLAN，与物理服务器其他网卡隔离</p>
+<p>该VSwitch选中“允许管理操作系统共享此网络适配器”，因为物理机和虚拟机的心跳都需要使用该网卡。不选中的话该网卡会无法配置IP，选中的话会出来一块虚拟网卡，用来配置心跳网络的IP</p>
+<h3 id="3-VLAN配置"><a href="#3-VLAN配置" class="headerlink" title="3. VLAN配置"></a>3. VLAN配置</h3><ul>
+<li>在虚拟交换机上设置VLAN ID，必须启用“允许管理操作系统共享此网络适配器”，不推荐使用。</li>
+</ul>
+<p>优点：不再需要为每个VM单独设置VLAN ID，改变虚拟交换机上的VLAN ID，其所连接的所有VM的VLAN ID都会随之自动改变。</p>
+<p>缺点：需要为每个VLAN创建不同的外部虚拟网络，由于一个外部虚拟网络需要绑定到一块物理网卡，所以当需要的VLAN数量大于物理网卡的数量时，该方法不可行。虚拟机在不同主机之间迁移时，需要保证每个主机上都有相同的外部虚拟网络(多个)。 </p>
+<ul>
+<li>在每个VM上单独设置VLAN ID，物理交换机上启用trunk模式。</li>
+</ul>
+<p>优点：一个物理网卡就可以支持多个VLAN的通信，保证每个主机上都有一个相同的外部虚拟网络即可。</p>
+<p>缺点：会产生网络流量瓶颈，建议使用Teaming</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="ciwngsjn90026mapv1qd7hyzm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Hyper-V-3中-虚拟机CPU竞争机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" class="article-date">
@@ -131,7 +276,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="ciw3a9lde001zgppvpzp9fdqv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="ciwngsjn50022mapv078gfyte" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +332,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="ciw3a9lik007zgppvh3gq6gwc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="ciwngsjrx0084mapvvswcv2y5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -233,7 +378,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="ciw3a9leb0031gppvyj6cw5r5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="ciwngsjoa0037mapv2k6pemjv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -326,7 +471,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="ciw3a9lbe000egppvkxanqjdp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="ciwngsjku000emapv1dl5utew" class="article-share-link">Share</a>
       
       
     </footer>
@@ -384,7 +529,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="ciw3a9lb3000agppvrqki9782" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="ciwngsjkk000amapvm558wfy6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,7 +572,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="ciw3a9lk500a2gppvcwfeaxrh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="ciwngsjtj00acmapvk6b6bhdt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -472,7 +617,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="ciw3a9lhu006tgppvxfdslmm1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="ciwngsjr6006xmapv2qqiipe0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -517,177 +662,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="ciw3a9lhr006ogppvteh1bqhy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-String-字符串类型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/13/PHP-String-字符串类型/" class="article-date">
-  <time datetime="2016-08-13T01:56:14.000Z" itemprop="datePublished">2016-08-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/13/PHP-String-字符串类型/">PHP String 字符串类型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>一个字符串可以用 4 种方式表达：</p>
-<ul>
-<li>单引号</li>
-<li>双引号</li>
-<li>heredoc 语法结构</li>
-<li>nowdoc 语法结构（PHP 5.3.0起）</li>
-</ul>
-<h4 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h4><p>定义一个字符串的最简单的方法是用单引号把它包围起来（字符’）。<br>要表达一个单引号自身，需要在它的前面加个反斜线（\）来转义。要表达一个反斜线本身，则用两个反斜线（\）。其它任何方式的反斜线都会被当成反斜线本身：也就是说如果想使用其它转义序列例如 \r 或 \n，并不待变任何特殊含义，就单纯是这两个字符本身。</p>
-<h4 id="双引号"><a href="#双引号" class="headerlink" title="双引号"></a>双引号</h4><p>如果字符串是包围在双引号（”）中，PHP 将对一些特殊的字符进行解析：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">序列</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">\n</td>
-<td style="text-align:left">换行（ASCII 字符集中的 LF 或 0x0A(10)）</td>
-</tr>
-<tr>
-<td style="text-align:left">\r</td>
-<td style="text-align:left">回车（ASCII 字符集中的 CR 或 0x0D(13)）</td>
-</tr>
-<tr>
-<td style="text-align:left">\t</td>
-<td style="text-align:left">水平制表符（ASCII 字符集中的 HT 或 0x09(9)）</td>
-</tr>
-<tr>
-<td style="text-align:left">\v</td>
-<td style="text-align:left">垂直制表符（ASCII 字符集中的 VT 或 0x0B(11）（PHP 5.2.5起）</td>
-</tr>
-<tr>
-<td style="text-align:left">\e</td>
-<td style="text-align:left">Escape（ASCII 字符集中的 ESC 或（0x1B(27)））（PHP 5.4.0起）</td>
-</tr>
-<tr>
-<td style="text-align:left">\f</td>
-<td style="text-align:left">换页（ASCII 字符集中的 FF 或 0x0C(12)）（PHP 5.2.5起）</td>
-</tr>
-<tr>
-<td style="text-align:left">\</td>
-<td style="text-align:left">反斜线</td>
-</tr>
-<tr>
-<td style="text-align:left">\$</td>
-<td style="text-align:left">美元标记</td>
-</tr>
-<tr>
-<td style="text-align:left">\”</td>
-<td style="text-align:left">双引号</td>
-</tr>
-<tr>
-<td style="text-align:left">[0-7]{1,3}</td>
-<td style="text-align:left">符合该正则表达式序列的是一个以八进制方式来表达的字符</td>
-</tr>
-<tr>
-<td style="text-align:left">\x[0-9A-Fa-f]{1,2}</td>
-<td style="text-align:left">符合该正则表达式序列的是一个以十六进制方式来表达的字符</td>
-</tr>
-</tbody>
-</table>
-<p>和单引号字符串一样，转义任何其它字符都会导致反斜线被显示出来。用双引号定义的字符串最重要的特征是变量会被解析。</p>
-<h4 id="Heredoc-结构"><a href="#Heredoc-结构" class="headerlink" title="Heredoc 结构"></a>Heredoc 结构</h4><p>第三种表达字符串的方法是用 heredoc 语法结构：&lt;&lt;&lt;。在该字符串之后要提供一个标识然后换行。接下来是字符串本身，最后要用前面定义的标识符作为结束标志。结束时所引用的标识符必须在该行的第一列，而且，标识符的命名也要像其它标签一些遵守 PHP 的规则：只能包含字母、数字和下划线，并且必须以字母和下划线作为开头。<br>Heredoc 结构就像没有使用双引号的双引号字符串，这就是说在 heredoc 结构中单引号不用被转义，但上下文中列出的转义序列还可以使用。变量将被替换，但在 heredoc 结构中含有复杂的变量时要格外小心。</p>
-<h4 id="Nowdoc-结构"><a href="#Nowdoc-结构" class="headerlink" title="Nowdoc 结构"></a>Nowdoc 结构</h4><p>就像 heredoc 结构类似于双引号字符串，Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很像 heredoc 结构，但是 nowdoc 不进行解析操作。这种操作很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义。<br>一个 nowdoc 结构也用和 heredoc 结构一样的标记 &lt;&lt;&lt;，但是跟在后面的标识符要用单引号括起来，即 &lt;&lt;&lt;’EOT’。Heredoc 结构的所有规则也同样适用于 nowdoc 结构，尤其是结束标识符的规则。</p>
-<h3 id="变量解析"><a href="#变量解析" class="headerlink" title="变量解析"></a>变量解析</h3><p>当字符串用双引号或 heredoc 结构定义时，其中的变量将会被解析。</p>
-<p>这里共有两种语法规则：简单规则、复杂规则。简单的语法规则是最常用和最方便的，它用最少的代码在一个 string 中嵌入一个变量，一个 array 的之，或一个 object 的属性。复杂规则越发的显著标记是用花括号包围的表达式。</p>
-<h4 id="简明语法"><a href="#简明语法" class="headerlink" title="简明语法"></a>简明语法</h4><p>当 PHP 解析器遇到一个美元符号（$）时，它会和其它很多解析器一样，去组合尽量多的标识以形成一个合法的变量名，可以用花括号来明确变量名的界线。</p>
-<h4 id="复杂（花括号）语法"><a href="#复杂（花括号）语法" class="headerlink" title="复杂（花括号）语法"></a>复杂（花括号）语法</h4><p>复杂语法不是因为其语法复杂而的名，而是因为它可以使用复杂的表达式。<br>任何具有 string 表达的标量变量，数组单元或对象属性都可使用此语法。只需简单的像在 string 以外的地方那样卸出表达式，然后用花括号 { 和 } 把它括起来即可。由于 { 无法被转义，只有 $ 紧挨着 { 时才会被识别。可以用 {\$ 来表达 {$。</p>
-<h3 id="存取和修改字符串中的字符"><a href="#存取和修改字符串中的字符" class="headerlink" title="存取和修改字符串中的字符"></a>存取和修改字符串中的字符</h3><p>string 中的字符可以通过一个从 0 开始的下标，用类似 array 结构中方括号包含对应的数字来访问和修改，比如 $str[42]。可以把 string 当成字符组成的 array。</p>
-<p>注：超出字符串长度的下标将会拉长该字符串并以空格填充。非整数类型下标会被转换成整数。非法下标类型（如-负数下标）会产生一个 E_NOTICE 姐别错误，负数下标读取字符串返回空字符串。写入时只用到赋值字符串的第一个字符。用空字符串赋值则赋给的值是 NULL 字符。</p>
-<p>字符串可用 ‘.’（点）运算符连接起来。</p>
-<h3 id="字符串类型详解"><a href="#字符串类型详解" class="headerlink" title="字符串类型详解"></a>字符串类型详解</h3><p>PHP 中的 string 实现方式是<strong>一个由字节组成的数组再加上一个整数指明缓冲长度</strong>。并无如何将字节转换成字符的信息。字符串由什么值来组成并无限制。<br>字符串类型的此特性解释了为什么 PHP 中没有单独的 “byte”类型-已经用字符串来代替了。返回非文本值的函数-例如从网络套接字读取的任意数据-仍会返回字符串。<br>由于 PHP 并不指明字符串的编码，那字符串到底是怎样编码的呢？答案是字符串会被按照该脚本文件相同的编码方式来编码。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="ciw3a9lgu005ugppvr6n2r4f3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-boolean-布尔类型" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/12/PHP-boolean-布尔类型/" class="article-date">
-  <time datetime="2016-08-12T06:02:43.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/PHP-boolean-布尔类型/">PHP boolean 布尔类型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是一个最简单的类型，可以为 <strong>TRUE</strong> 或 <strong>FALSE</strong>。如果要指定一个布尔值，使用关键字 <strong>TRUE</strong> 或 <strong>FALSE</strong> 即可，不区分大小写。通常运算符所返回的 <strong>boolean</strong> 值结果会被传递给流程控制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// == 是一个操作符，它检测两个变量是否相等，并返回一个布尔值</span><br><span class="line">if($action == &quot;show_version&quot;)&#123;</span><br><span class="line">	echo &quot;The version is 1.23&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以明确使用 <strong>(bool)</strong> 或者 <strong>(boolean)</strong> 来强制转换一个值为 <strong>boolean</strong>。大多数情况下不需要强制转换，因为当运算符，函数或流程控制结果需要一个 <strong>boolean</strong> 参数时，该值会被自动转换。</p>
-<p>当转换为 <strong>boolean</strong> 时，以下值被认为是 <strong>FALSE</strong>：</p>
-<ul>
-<li>布尔值 FALSE 本身</li>
-<li>整型值 0（零）</li>
-<li>浮点型值 0.0（零）</li>
-<li>空字符串以及字符串”0”</li>
-<li>不包括任何元素的数组</li>
-<li>不包括任何成员变量的对象（PHP 4.0适用）</li>
-<li>特殊类型 NULL（包括尚未赋值的变量）</li>
-<li>从空标记生成的 SimpleXML 对象</li>
-</ul>
-<p>所有其它值都被认为是 <strong>TRUE</strong>（包括任何资源）。<br>注：-1 和其它非零值（无论正负）都被认为是 <strong>TRUE</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_boolean.php </span><br><span class="line">&lt;?php</span><br><span class="line">var_dump((bool) &quot;&quot;);</span><br><span class="line">var_dump((bool) 1);</span><br><span class="line">var_dump((bool) -2);</span><br><span class="line">var_dump((bool) &quot;foo&quot;);</span><br><span class="line">var_dump((bool) 2.3e5);</span><br><span class="line">var_dump((bool) array(12));</span><br><span class="line">var_dump((bool) array());</span><br><span class="line">var_dump((bool) &quot;false&quot;);</span><br><span class="line">var_dump((bool) false);</span><br><span class="line">?&gt;</span><br><span class="line">[root@mail ~]# php php_boolean.php </span><br><span class="line">bool(false)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(true)</span><br><span class="line">bool(false)</span><br><span class="line">bool(true)</span><br><span class="line">bool(false)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="ciw3a9lgw005wgppv6btvik28" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="ciwngsjr4006tmapvcjs69hs8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -711,7 +686,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
   </div>
 
@@ -726,7 +701,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -739,6 +714,14 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/13/HTTP-协议基础/">HTTP 协议基础</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
           </li>
         
@@ -748,14 +731,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-Yarn/">Hadoop Yarn</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/">Hadoop 新 MapReduce 框架 Yarn 详解</a>
           </li>
         
       </ul>
