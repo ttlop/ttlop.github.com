@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,49 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" class="article-date">
+  <time datetime="2016-09-20T06:02:16.000Z" itemprop="datePublished">2016-09-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/">华为交换机对通过 SNMP 访问交换机的用户的 ACL 控制配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需求：仅允许来自指定IP的 SNMP 用户访问交换机</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;HUAWEI&gt;system-view </span><br><span class="line">Enter system view, return user view with Ctrl+Z.</span><br><span class="line"># 定义基本访问控制列表和子规则</span><br><span class="line">[HUAWEI]acl number 2000 match-order config </span><br><span class="line">[HUAWEI-acl-basic-2000]rule 1 permit source 192.168.200.91 0</span><br><span class="line">[HUAWEI-acl-basic-2000]rule 2 deny source any</span><br><span class="line">[HUAWEI-acl-basic-2000]quit</span><br><span class="line"># 应用访问控制列表</span><br><span class="line">[HUAWEI]snmp-agent community read cipher public acl 2000</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciz4xr7qv00avgfpvrcxthugw" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-ACL-match-order-中的-config-和-auto-的应用区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -129,7 +172,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciwngsjju0001mapvvmriat0u" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciz4xr7gp0001gfpvslos0h7v" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -185,7 +228,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciwngsjkt000cmapvwc4bdmk2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciz4xr7hh000agfpvar3g7ces" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -247,7 +290,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciwngsjtm00ahmapvtyw2ow19" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciz4xr7qn00ajgfpvrf6vw4p3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -345,7 +388,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciwngsjtr00armapvnu0alavv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciz4xr7qu00atgfpvq90n5mfq" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -405,7 +448,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciwngsjrv0081mapvhvn1fzvh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciz4xr7ox0083gfpvygjul0ah" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -483,7 +526,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciwngsjlj000vmapvu2385wgq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciz4xr7ij000vgfpvkk9mfv10" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -537,7 +580,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="ciwngsjln000zmapvfuagsvzn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="ciz4xr7io000zgfpv0h73cl88" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -583,7 +626,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="ciwngsjmj001mmapvfk50w467" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="ciz4xr7ji001mgfpvrwxip6f1" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -628,55 +671,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="ciwngsjry0086mapvsmvuq8gd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" class="article-date">
-  <time datetime="2016-09-02T03:40:20.000Z" itemprop="datePublished">2016-09-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Windows/">Windows</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/">Windows 服务管理器出现 Winrm 协商身份验证错误解决办法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="情况一"><a href="#情况一" class="headerlink" title="情况一"></a>情况一</h3><ul>
-<li>管理机安装系统：<strong>Windows Server 2012 R2 Datacenter</strong> </li>
-<li>被管理机安装系统：<strong>Microsoft Hyper-V Server 2012 R2</strong></li>
-<li>提示错误：<strong>Winrm 协商身份验证错误</strong></li>
-<li>解决办法：<br>在管理机 powershell 模式下执行如下代码:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-item wsman:localhost\client\trustedhosts –value *</span><br></pre></td></tr></table></figure>
-<p>然后我们再回到客户端，右键刷新即可（注意防火墙是否开启）。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="ciwngsjs00089mapvo8ycot0d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="ciz4xr7p00088gfpv16xj0a8c" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -698,7 +693,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -715,7 +710,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -723,9 +718,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
+          </li>
         
           <li>
             <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
@@ -743,10 +742,6 @@ var _hmt = _hmt || [];
             <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
           </li>
         
-          <li>
-            <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -759,8 +754,8 @@ var _hmt = _hmt || [];
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 XiaoYong Hu<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

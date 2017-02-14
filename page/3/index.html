@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,48 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Nagios-服务组定义" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/22/Nagios-服务组定义/" class="article-date">
+  <time datetime="2016-10-22T09:17:07.000Z" itemprop="datePublished">2016-10-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/22/Nagios-服务组定义/">Nagios 服务组定义</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前做了主机组，但现在想对部分服务进行分组。在网上找了半天都没有相关教程，查看官方文档，但是照着做了半天都不成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">define servicegroup&#123;          </span><br><span class="line">        servicegroup_name       servicegroup_name(*)         </span><br><span class="line">        alias                   alias(*)         </span><br><span class="line">        members                 services        </span><br><span class="line">        servicegroup_members    servicegroups       </span><br><span class="line">        notes                   note_string         </span><br><span class="line">        notes_url               url         </span><br><span class="line">        action_url              url       </span><br><span class="line">        ...        </span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure></p>
+<p>后来经排查发现是我的members定义格式有问题，以下是正确方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">1.# vim nagios.cfg     </span><br><span class="line">    </span><br><span class="line">cfg_file=/usr/local/nagios/etc/objects/servicegroups.cfg  #添加这一行    </span><br><span class="line">    </span><br><span class="line">2.在/usr/local/nagios/etc/objects/下建立servicegroups.cfg文件    </span><br><span class="line">    </span><br><span class="line">3.# vim servicegroups.cfg    </span><br><span class="line">    </span><br><span class="line"># check web   </span><br><span class="line">define servicegroup&#123;   </span><br><span class="line">    servicegroup_name       check_web   </span><br><span class="line">    alias                   check_web   </span><br><span class="line">    members                 155,check_w1,156,check_w2,157,check_w3   </span><br><span class="line">    &#125;   </span><br><span class="line">    </span><br><span class="line">#注意：members  这里要写成：主机1，服务，主机2，服务...的形式，我之前就是这里出错了。      </span><br><span class="line">    </span><br><span class="line">4.# checknagios   #检测配置文件   </span><br><span class="line">    </span><br><span class="line">5.# service nagios restart</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/10/22/Nagios-服务组定义/" data-id="ciz4xr7n5005ogfpvlfcxbjj3" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-数据库镜像-基本命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -132,7 +174,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本命令/" data-id="ciwngsju000b6mapvix5rb3jl" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本命令/" data-id="ciz4xr7r300b8gfpv9hzkts5b" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -188,7 +230,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本配置/" data-id="ciwngsju400bbmapv278m5ppe" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/19/数据库镜像-基本配置/" data-id="ciz4xr7r600bdgfpv7qa1db9w" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -243,7 +285,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="ciwngsjtw00aymapvw50acb86" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/恢复路径/" data-id="ciz4xr7qy00b0gfpvujhf5n4z" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -303,7 +345,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="ciwngsju500bdmapvewbyft6h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/日志序列号和还原计划/" data-id="ciz4xr7r700bfgfpvyhbd4dd7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -353,7 +395,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="ciwngsjrf007amapv7zkjjaba" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" data-id="ciz4xr7oe007cgfpvzgk5gk06" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -391,7 +433,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="ciwngsjuh00bvmapvkvefda2r" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="ciz4xr7rj00bxgfpvfxe96kbf" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -442,7 +484,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciwngsju200b8mapvwy0ivgkd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/10/09/数据库镜像-基本概念/" data-id="ciz4xr7r400bagfpvfk30vsn4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -488,7 +530,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciwngsjly0017mapv4vwe3jem" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/28/Centos-下转发-DNS-服务器的架设/" data-id="ciz4xr7ix0017gfpvx7d55mvw" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -531,50 +573,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciwngsjpx0057mapvpxd94mo1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" class="article-date">
-  <time datetime="2016-09-20T06:02:16.000Z" itemprop="datePublished">2016-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/">华为交换机对通过 SNMP 访问交换机的用户的 ACL 控制配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需求：仅允许来自指定IP的 SNMP 用户访问交换机</p>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;HUAWEI&gt;system-view </span><br><span class="line">Enter system view, return user view with Ctrl+Z.</span><br><span class="line"># 定义基本访问控制列表和子规则</span><br><span class="line">[HUAWEI]acl number 2000 match-order config </span><br><span class="line">[HUAWEI-acl-basic-2000]rule 1 permit source 192.168.200.91 0</span><br><span class="line">[HUAWEI-acl-basic-2000]rule 2 deny source any</span><br><span class="line">[HUAWEI-acl-basic-2000]quit</span><br><span class="line"># 应用访问控制列表</span><br><span class="line">[HUAWEI]snmp-agent community read cipher public acl 2000</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciwngsjtt00atmapv4s3sbvrq" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciz4xr7mw0059gfpvnazo4cj7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -596,7 +595,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -613,7 +612,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -621,9 +620,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
+          </li>
         
           <li>
             <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
@@ -641,10 +644,6 @@ var _hmt = _hmt || [];
             <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
           </li>
         
-          <li>
-            <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -657,8 +656,8 @@ var _hmt = _hmt || [];
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 XiaoYong Hu<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

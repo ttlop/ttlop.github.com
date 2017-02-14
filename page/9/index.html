@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,53 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Linux-大量-TIME-WAIT-解决办法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" class="article-date">
+  <time datetime="2016-07-28T06:22:09.000Z" itemprop="datePublished">2016-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/28/Linux-大量-TIME-WAIT-解决办法/">Linux 大量 TIME_WAIT 解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用以下语句看服务器的 TCP 状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost httpd]# netstat -ant | awk &apos;/^tcp/ &#123;print $6&#125;&apos; | sort | uniq -c | sort -n</span><br><span class="line">      1 CLOSING</span><br><span class="line">      7 LISTEN</span><br><span class="line">     15 SYN_RECV</span><br><span class="line">     24 FIN_WAIT1</span><br><span class="line">     34 FIN_WAIT2</span><br><span class="line">     68 LAST_ACK</span><br><span class="line">    120 ESTABLISHED</span><br><span class="line">   1115 TIME_WAIT</span><br></pre></td></tr></table></figure>
+<p>通过调整内核参数解决</p>
+<p>vim /etc/sysctl.conf</p>
+<p>编辑文件，加入以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_syncookies = 1 ; 开启 SYN Cookies，当出现 SYN 等待队列溢出时，启用 cookie 来处理</span><br><span class="line">net.ipv4.tcp_tw_reuse = 1 ; 开启重用，允许将 TIME_WAIT sockets 重新用于新的 TCP 连接</span><br><span class="line">net.ipv4.tcp_tw_recycle = 1 ; 开启 TCP 连接中 TIME_WAIT sockets 的快速回收</span><br><span class="line">net.ipv4.tcp_fin_timeout = 30 ; 修改系统默认的 TIME_OUT 时间</span><br></pre></td></tr></table></figure>
+<p>TIME_WAIT 的默认时间是 2倍的 MLS，即 240 秒，最低为 30 秒，最高为 300 秒。MLS 是 TCP 片在网上的最长存活时间。TIME_WAIT的主要作用是保证关闭的TCP端口不立即被使用。因为当网络存在延迟时，可能当某个端口被关闭后，网络中还有一些重传的TCP片在发向这个端口，如果这个端口立即建立新的TCP连接，则可能会有影响。所以使用2倍的MSL时间来限制这个端口立即被使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="ciz4xr7lf003hgfpv4st53lh9" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-LinuxShell-sed-进阶" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -122,7 +169,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="ciwngsjpc004gmapvu9trox47" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="ciz4xr7m70049gfpvbn2l6iy0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -167,7 +214,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="ciwngsjns002omapvgkkwibcd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="ciz4xr7kw002tgfpvfvqkxrn9" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -212,7 +259,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="ciwngsjna0027mapvpgj7xqex" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/20/Intofiy-Rsync-实现-Linux-文件实时同步/" data-id="ciz4xr7kb0026gfpv52ax7m9u" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -257,7 +304,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/19/Linux-inode-block-与硬盘容量关系/" data-id="ciwngsjo2002ymapv95zasljz" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/19/Linux-inode-block-与硬盘容量关系/" data-id="ciz4xr7l1002ygfpvdhf30qoj" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -302,7 +349,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="ciwngsjpf004lmapvh2k3nn7j" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/16/LinuxShell-正则表达式/" data-id="ciz4xr7mh004ogfpvvsj8p8y7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -349,7 +396,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="ciwngsjo50030mapv3u56y82r" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/15/Linux-inotify/" data-id="ciz4xr7l40030gfpvgf8mc688" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -395,7 +442,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/15/Hexo-博客添加图片、音乐、视频/" data-id="ciwngsjn1001ymapv69tlr2fn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/15/Hexo-博客添加图片、音乐、视频/" data-id="ciz4xr7k0001vgfpv4xt2pwrv" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -440,7 +487,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/14/Centos-7-连接-SAS-磁盘阵列-DS3512/" data-id="ciwngsjls0013mapvw663p7l2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/14/Centos-7-连接-SAS-磁盘阵列-DS3512/" data-id="ciz4xr7iv0015gfpvirm73e6g" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -485,56 +532,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/14/lspci-命令详解/" data-id="ciwngsjtk00aemapvanco7f7e" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-fdisk-结果介绍" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/13/Linux-fdisk-结果介绍/" class="article-date">
-  <time datetime="2016-07-13T01:57:58.000Z" itemprop="datePublished">2016-07-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/13/Linux-fdisk-结果介绍/">Linux fdisk 结果介绍</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>电脑硬盘在逻辑上被划分为磁道、柱面以及扇区。</p>
-<ul>
-<li>硬盘由很多盘片(platter)组成，每个盘片的每个面都有一个可读写磁头，如果有 N 个盘片，就有 2N 个面，对应 2N 个磁头（heads），从 0、1、2 开始编号（有些硬盘第一个或最后一个盘片只有一个磁头）；</li>
-<li>每个盘片被划分成若干个同心圆磁道（逻辑上的，不可见），每个盘片的划分规则通常是一样的。这样每个盘片的半径均为固定值 R 的同心圆在逻辑上形成了一个以电机主轴为轴的柱面（cylinders）,从外至里编号为 0、1、2。</li>
-<li>每个盘片上的每个磁道又被划分为几十个扇区（sector），通常的容量是 512 byte，并按照一定规则拜年话为 1、2、3。形成 cylinders <em> heads </em> sector 个扇区。这三个参数即是硬盘的物理参数。</li>
-</ul>
-<p>我们进行硬盘分区时，最小单位是柱面，分隔完之后进行格式化必须考虑 block 的大小，它是磁盘记录的最小单位，是由数个扇区组成，所以大小通常为 n*512Bytes，例如 4K。</p>
-<p>所以我们可以明确的是，block 是文件系统的抽象，不是磁盘本身的属性。扇区大小则是磁盘的物理属性，它是磁盘设备寻址的最小单元。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line"></span><br><span class="line">Disk /dev/sda: 120.0 GB, 120034123776 bytes         #磁盘的名称、大小</span><br><span class="line">255 heads, 63 sectors/track, 14593 cylinders        #磁头、扇区、柱面数量</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes    #每个柱面的大小</span><br><span class="line"></span><br><span class="line">### 注：</span><br><span class="line">柱面大小 = 扇区大小 * 每一个磁道扇区数量 * 盘面数量 = 512 bytes * 63 * 255 = 8225280 bytes</span><br><span class="line">硬盘大小 = 柱面大小 * 柱面数量 = 8225280 bytes * 14593</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sda1   *           1          13      104391   83  Linux</span><br><span class="line">/dev/sda2              14        4092    32764567+  82  Linux swap / Solaris</span><br><span class="line">/dev/sda3            4093       14593    84349282+  83  Linux</span><br><span class="line"></span><br><span class="line">### 注：由于硬盘分区最小单位是柱面，所以有如下结论</span><br><span class="line">/dev/sda1 大小 = 柱面数量 * 柱面大小 = 13 * 8225280 bytes   与下面使用 df 命令查看的结果相近</span><br><span class="line">/dev/sda3 大小 = 柱面数量 * 柱面大小 = 10501 * 8225280 bytes </span><br><span class="line"></span><br><span class="line">Disk /dev/sdb: 1000.2 GB, 1000204886016 bytes</span><br><span class="line">255 heads, 63 sectors/track, 121601 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1   *           1       63741   511999551   83  Linux</span><br><span class="line">/dev/sdb2           63742      121601   464760450   83  Linux</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# df -h</span><br><span class="line">文件系统              容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda3              78G   23G   52G  31% /</span><br><span class="line">/dev/sdb2             430G  636M  407G   1% /data</span><br><span class="line">/dev/sdb1             473G  218M  449G   1% /log</span><br><span class="line">/dev/sda1              99M   19M   76M  20% /boot</span><br><span class="line">tmpfs                 7.9G     0  7.9G   0% /dev/shm</span><br><span class="line">[root@localhost ~]# df -l</span><br><span class="line">文件系统               1K-块        已用     可用 已用% 挂载点</span><br><span class="line">/dev/sda3             81705912  23914364  53574084  31% /</span><br><span class="line">/dev/sdb2            450205576    650432 426317124   1% /data</span><br><span class="line">/dev/sdb1            495962916    222980 470139960   1% /log</span><br><span class="line">/dev/sda1               101086     18585     77282  20% /boot</span><br><span class="line">tmpfs                  8196780         0   8196780   0% /dev/shm</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# df -i</span><br><span class="line">文件系统               Inode (I)已用 (I)可用 (I)已用% 挂载点</span><br><span class="line">/dev/sda3            21102592   79233 21023359    1% /</span><br><span class="line">/dev/sdb2            116195328     758 116194570    1% /data</span><br><span class="line">/dev/sdb1            128024576      14 128024562    1% /log</span><br><span class="line">/dev/sda1              26104      41   26063    1% /boot</span><br><span class="line">tmpfs                2049195       1 2049194    1% /dev/shm</span><br><span class="line"></span><br><span class="line">### 注：由于每一个 block 都需要一个 inode，所有有一下结论</span><br><span class="line">/dev/sda1 inode 数量 = 硬盘大小 / block 大小 = 13 * 8225280 bytes / 4096 bytes   与 df -i 结果相近</span><br><span class="line">/dev/sda3 inode 数量 = 硬盘大小 / block 大小 = 10501 * 8225280 bytes / 4096 bytes</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/13/Linux-fdisk-结果介绍/" data-id="ciwngsjnz002vmapvsnk72kh3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/14/lspci-命令详解/" data-id="ciz4xr7qk00aegfpvpzis358x" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -556,7 +554,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -573,7 +571,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -581,9 +579,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
+          </li>
         
           <li>
             <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
@@ -601,10 +603,6 @@ var _hmt = _hmt || [];
             <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
           </li>
         
-          <li>
-            <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -617,8 +615,8 @@ var _hmt = _hmt || [];
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 XiaoYong Hu<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

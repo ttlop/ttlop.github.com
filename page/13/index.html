@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,58 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Nagios-使用问题解决" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/21/Nagios-使用问题解决/" class="article-date">
+  <time datetime="2016-06-21T06:54:45.000Z" itemprop="datePublished">2016-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/21/Nagios-使用问题解决/">Nagios 使用问题解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="通过-Web-界面修改某个服务时报错"><a href="#通过-Web-界面修改某个服务时报错" class="headerlink" title="通过 Web 界面修改某个服务时报错"></a>通过 Web 界面修改某个服务时报错</h3><p>例如对某个服务进行临时修改，或者不让它发出警告，Web 页面上都有这样的设置，但是常常会有错误信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Could not open command file &apos;/usr/local/nagios/var/rw/nagios.cmd&apos; for update!</span><br><span class="line">The permissions on the external command file and/or directory may be incorrect. </span><br><span class="line">Read the FAQs on how to setup proper permissions.</span><br><span class="line">An error occurred while attempting to commit your command for processing.</span><br></pre></td></tr></table></figure>
+<p>关于这部分在 <strong>nagios.cfg</strong> 中有下面的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># EXTERNAL COMMAND FILE</span><br><span class="line"># This is the file that Nagios checks for external command requests.</span><br><span class="line"># It is also where the command CGI will write commands that are submitted</span><br><span class="line"># by users, so it must be writeable by the user that the web server</span><br><span class="line"># is running as (usually &apos;nobody&apos;).  Permissions should be set at the </span><br><span class="line"># directory level instead of on the file, as the file is deleted every</span><br><span class="line"># time its contents are processed.</span><br><span class="line">这段话的核心意思是 apache 的运行用户要有对文件的写的权限，权限应该设置在目录上，因为每次文件的内容被处理后文件就会删除</span><br><span class="line"></span><br><span class="line">command_file=/usr/local/nagios/var/rw/nagios.cmd</span><br></pre></td></tr></table></figure>
+<p>本来应该是将 <strong>httpd</strong> 的运行用户 <strong>apache</strong> 添加到 <strong>nagcmd</strong> 组就可以了的，但是这个却不行，因为 <strong>rw</strong> 这个目录下的 <strong>nagios.cmd</strong> 文件在每次 <strong>nagios</strong> 服务重启的时候会重新生成，并且权限会自动变成：prw-rw—-</p>
+<p>我们可以用这种方法来解决：</p>
+<ol>
+<li>usermod -a -G nagcmd apache  ##将 httpd 的运行用户 apche 添加到组 nagcmd 中</li>
+<li>chown -R nagios.nagcmd /usr/local/nagios/var/rw  ##修改 rw 的所属用户和所属组</li>
+<li>chmod g+s /use/local/nagios/var/rw  ##设置 rw 目录下的文件都具有和该目录所属的组相同的组</li>
+</ol>
+<p>此后重启 nagios 服务，依然可以通过 Web 界面修改服务属性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="ciz4xr7mz005egfpv36r7dqhl" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Nagios-安装好无法启动问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -118,7 +170,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciwngsjq1005fmapvjnzqhxu0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="ciz4xr7n0005hgfpvvnfqrehi" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -182,7 +234,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciwngsjpt0055mapv0nxq27rv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="ciz4xr7mu0057gfpvdjoptmxy" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -227,7 +279,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciwngsjtn00ajmapvcis2733d" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="ciz4xr7qp00algfpviwwp1i0m" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -272,7 +324,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciwngsjpq004ymapvvls51xen" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="ciz4xr7mq0050gfpv8e0ymy8r" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -369,7 +421,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciwngsjpm004smapvy9o607l3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="ciz4xr7mj004qgfpv869hv9bn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -414,7 +466,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciwngsjpo004wmapvopp3gvwj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="ciz4xr7mn004wgfpvxy53oc48" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -466,7 +518,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciwngsjtu00awmapvs40fbzia" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="ciz4xr7qx00aygfpvcw0ehhhs" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -511,7 +563,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciwngsjtd00a4mapvc03291ce" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="ciz4xr7qm00aggfpvcvdzo0rc" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -556,60 +608,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciwngsjrd0077mapvmd4fu01l" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-监控-windows-进程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/07/Zabbix-监控-windows-进程/" class="article-date">
-  <time datetime="2016-06-07T05:31:49.000Z" itemprop="datePublished">2016-06-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 监控进程的数量</span><br><span class="line">proc.num[&lt;name&gt;,&lt;user&gt;,&lt;state&gt;,&lt;cmdline&gt;]</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>name 进程名字</p>
-</li>
-<li><p>user 运行进程的用户名</p>
-</li>
-<li><p>state 进程的状态 all(default)、run、sleep、zomb</p>
-</li>
-<li><p>cmdline 进程名中包含的字符</p>
-</li>
-</ul>
-<p><strong>On Windows, only name and user are supported.</strong></p>
-<h3 id="Item-Keys"><a href="#Item-Keys" class="headerlink" title="Item Keys"></a>Item Keys</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proc.num[ChuanAPI.Winfrm.exe]</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="ciwngsjt9009xmapvzxmbwnhr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/14/Postfix-configuration-files/" data-id="ciz4xr7od0079gfpvb9oesva7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -631,7 +630,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -648,7 +647,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
   </div>
 
@@ -656,9 +655,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
+          </li>
         
           <li>
             <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
@@ -676,10 +679,6 @@ var _hmt = _hmt || [];
             <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
           </li>
         
-          <li>
-            <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/">Centos 7 LVM 磁盘扩容</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -692,8 +691,8 @@ var _hmt = _hmt || [];
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 XiaoYong Hu<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
