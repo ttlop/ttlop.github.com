@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="zabbix 监控 windows cpu 使用率">
-<meta property="og:updated_time" content="2017-02-15T05:12:10.268Z">
+<meta property="og:updated_time" content="2017-02-15T05:13:52.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zabbix 监控 Windows 的 CPU 百分比">
 <meta name="twitter:description" content="zabbix 监控 windows cpu 使用率">
@@ -109,22 +109,16 @@ var _hmt = _hmt || [];
       
         <p>Zabbix 自带的模块没有 CPU 使用率（百分比）这个监控项，我们可以通过添加计数器的方式实现 CPU 百分比的监控。</p>
 <p>在 Zabbix 的 WEB 端进行模板配置添加 CPU 百分比监控项目</p>
-<ol>
-<li>配置–模块–选择对应的模板–项目–创建项目</li>
-</ol>
+<p>*. 配置–模块–选择对应的模板–项目–创建项目</p>
 <p>名称：CPU 百分比<br>键值：perf_counter[\Processor(_Total)\% Processor Time]<br>数据类型：数字的（浮点）<br>单位：%<br>数据更新间隔（秒）：30<br>应用集：CPU</p>
-<ol>
-<li><p>添加图形显示</p>
-</li>
-<li><p>添加触发器CPU百分之85报警</p>
-</li>
-</ol>
+<p>*. 添加图形显示</p>
+<p>*. 添加触发器CPU百分之85报警</p>
 <p>表达式：{Windows 2008 R2:perf_counter[\Processor(_Total)\% Processor Time].avg(5m)}&gt;85</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" data-id="ciz6fvba4009wdkpvczbqdy84" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" data-id="ciz6i5snd009yhzpvvlcmsl70" class="article-share-link">Share</a>
       
       
     </footer>

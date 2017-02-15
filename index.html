@@ -110,22 +110,16 @@ var _hmt = _hmt || [];
       
         <p>Zabbix 自带的模块没有 CPU 使用率（百分比）这个监控项，我们可以通过添加计数器的方式实现 CPU 百分比的监控。</p>
 <p>在 Zabbix 的 WEB 端进行模板配置添加 CPU 百分比监控项目</p>
-<ol>
-<li>配置–模块–选择对应的模板–项目–创建项目</li>
-</ol>
+<p>*. 配置–模块–选择对应的模板–项目–创建项目</p>
 <p>名称：CPU 百分比<br>键值：perf_counter[\Processor(_Total)\% Processor Time]<br>数据类型：数字的（浮点）<br>单位：%<br>数据更新间隔（秒）：30<br>应用集：CPU</p>
-<ol>
-<li><p>添加图形显示</p>
-</li>
-<li><p>添加触发器CPU百分之85报警</p>
-</li>
-</ol>
+<p>*. 添加图形显示</p>
+<p>*. 添加触发器CPU百分之85报警</p>
 <p>表达式：{Windows 2008 R2:perf_counter[\Processor(_Total)\% Processor Time].avg(5m)}&gt;85</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" data-id="ciz6fvba4009wdkpvczbqdy84" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" data-id="ciz6i5snd009yhzpvvlcmsl70" class="article-share-link">Share</a>
       
       
     </footer>
@@ -175,7 +169,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/" data-id="ciz6fvb5z0044dkpv7gbw004h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/" data-id="ciz6i5sj10041hzpvk6wvr0p4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -245,7 +239,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/12/13/HTTP-请求/" data-id="ciz6fvb36001jdkpv35zirxci" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-请求/" data-id="ciz6i5sgo001jhzpvn2l3bxlz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -313,7 +307,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="ciz6fvb33001hdkpvftb24der" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="ciz6i5sgm001hhzpv9ce5t739" class="article-share-link">Share</a>
       
       
     </footer>
@@ -375,7 +369,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="ciz6fvbbi00c3dkpvw0otd0p8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="ciz6i5son00c3hzpvcra9rsp4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -461,7 +455,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="ciz6fvb3n001udkpvdku6loek" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="ciz6i5sh3001uhzpvsmoarpnt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -543,7 +537,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="ciz6fvb1t000mdkpv63g75jv3" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="ciz6i5sfi000mhzpv1im4uhzb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -597,7 +591,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="ciz6fvb3f001qdkpvareb8zzn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="ciz6i5sgw001qhzpv95taazqp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -786,7 +780,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="ciz6fvb3s001vdkpv06p65kpm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="ciz6i5sh6001vhzpvjla9y443" class="article-share-link">Share</a>
       
       
     </footer>
@@ -847,7 +841,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="ciz6fvb4g002jdkpvlli7nq5v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="ciz6i5sht002jhzpviq6b3ybm" class="article-share-link">Share</a>
       
       
     </footer>
