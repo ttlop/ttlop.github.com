@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,49 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Nagios-check-http-Invalid-option-SSL-is-not-available" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" class="article-date">
+  <time datetime="2016-09-26T06:42:34.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nagios/">Nagios</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/">Nagios check_http Invalid option - SSL is not available</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="环境检测-openssl"><a href="#环境检测-openssl" class="headerlink" title="环境检测 - openssl"></a>环境检测 - openssl</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost libexec]# yum install openssl openssl-devel</span><br><span class="line">已加载插件：fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.cn99.com</span><br><span class="line"> * extras: mirrors.cn99.com</span><br><span class="line"> * updates: mirrors.163.com</span><br><span class="line">软件包 1:openssl-1.0.1e-51.el7_2.5.x86_64 已安装并且是最新版本</span><br><span class="line">软件包 1:openssl-devel-1.0.1e-51.el7_2.5.x86_64 已安装并且是最新版本</span><br><span class="line">无须任何处理</span><br><span class="line">[root@localhost libexec]# whereis openssl</span><br><span class="line">openssl: /usr/bin/openssl /usr/lib64/openssl /usr/include/openssl /usr/share/man/man1/openssl.1ssl.gz</span><br></pre></td></tr></table></figure>
+<h3 id="编译安装-指定-openssl-路径"><a href="#编译安装-指定-openssl-路径" class="headerlink" title="编译安装 - 指定 openssl 路径"></a>编译安装 - 指定 openssl 路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-nagios-user=nagios --with-nagios-group=nagios --with-openssl=/usr/bin/openssl</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="检测-切换到-usr-local-nagios-libexec-目录"><a href="#检测-切换到-usr-local-nagios-libexec-目录" class="headerlink" title="检测 - 切换到 /usr/local/nagios/libexec/ 目录"></a>检测 - 切换到 /usr/local/nagios/libexec/ 目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./check_http -H api.jpush.cn -u /v3/push -S</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/26/Nagios-check-http-Invalid-option-SSL-is-not-available/" data-id="ciz6fvb6t0059dkpvirwu78v8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -115,7 +158,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciz4xr7qv00avgfpvrcxthugw" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/华为交换机对通过-SNMP-访问交换机的用户的-ACL-控制配置/" data-id="ciz6fvbaq00audkpvzjcqdjm1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +215,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciz4xr7gp0001gfpvslos0h7v" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/ACL-match-order-中的-config-和-auto-的应用区别/" data-id="ciz6fvb0l0001dkpv2jl15aax" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,7 +271,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciz4xr7hh000agfpvar3g7ces" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/20/Authentication-password-与-scheme-区别/" data-id="ciz6fvb1d000adkpvokl8b839" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,7 +333,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciz4xr7qn00ajgfpvrf6vw4p3" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/14/交换机链路聚合/" data-id="ciz6fvbaj00ahdkpvexs6q1ah" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +431,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciz4xr7qu00atgfpvq90n5mfq" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/14/华为交换机命令释义/" data-id="ciz6fvbap00ardkpv48g6vl3y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -448,7 +491,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciz4xr7ox0083gfpvygjul0ah" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/14/VRRP-协议/" data-id="ciz6fvb8q0083dkpvakbu6jtu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -526,7 +569,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciz4xr7ij000vgfpvkk9mfv10" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="ciz6fvb27000vdkpv3xk6en8z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -580,7 +623,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="ciz4xr7io000zgfpv0h73cl88" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="ciz6fvb2b000zdkpvd2xclspp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -626,52 +669,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="ciz4xr7ji001mgfpvrwxip6f1" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Windows-NIC-组合" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/02/Windows-NIC-组合/" class="article-date">
-  <time datetime="2016-09-02T07:03:00.000Z" itemprop="datePublished">2016-09-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Windows/">Windows</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/02/Windows-NIC-组合/">Windows NIC 组合</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>NIC 组合即 NIC Teaming，也有被称为”网卡绑定”，此技术是 Windows Server 2012/2012 R2 的内置功能，可以为用户提供具有冗余和容错功能的网络适配器，NIC组合允许一次性绑定最多 32 个网卡接口成一个逻辑组，供用户使用。当组中某一个网卡发生故障时，组合中依然存活的网卡还可以正常使用。值得称道的是，NIC 组合技术对网卡厂商没有硬性要求，这是一种通用的技术。并且在特定前提下，NIC 组合还可以实现带宽叠加的效果。 </p>
-        
-          <p class="article-more-link">
-            <a href="/2016/09/02/Windows-NIC-组合/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="ciz4xr7p00088gfpv16xj0a8c" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="ciz6fvb3b001mdkpvdk2s53r6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -693,7 +691,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -718,9 +716,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/">Zabbix 监控 Windows 的 CPU 百分比</a>
+          </li>
         
           <li>
             <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
@@ -738,10 +740,6 @@ var _hmt = _hmt || [];
             <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
           </li>
         
-          <li>
-            <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -755,7 +753,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

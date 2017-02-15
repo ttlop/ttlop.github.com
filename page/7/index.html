@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,53 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-PHP-json-decode-函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/06/PHP-json-decode-函数/" class="article-date">
+  <time datetime="2016-08-06T08:21:13.000Z" itemprop="datePublished">2016-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/06/PHP-json-decode-函数/">PHP json_decode() 函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>(PHP 5 &gt;= 5.2.0, PECL json &gt;= 1.2.0, PHP 7)</p>
+<p>json_decode — Decodes a JSON string</p>
+<p>json_decode 是 PHP 5.2.0 之后新增的一个 PHP 内置函数，其作用是对 JSON 格式的字符串进行编码</p>
+<h3 id="语法规则"><a href="#语法规则" class="headerlink" title="语法规则"></a>语法规则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mixed json_decode ( string $json [, bool $assoc = false [, int $depth = 512 [, int $options = 0 ]]] )</span><br></pre></td></tr></table></figure>
+<p>json_decode 接受一个 JSON 格式的字符串并且把它转换为 PHP 变量 ,当该参数$assoc为 TRUE 时，将返回 array 否则返回 object 。 </p>
+<p>当遇到 <em>json<strong> 无法解码的字符串时，返回 </strong>NULL*</em>。因此我们可以进行如下的操作判断是否解码成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if($JsonFlowDictionaryResult !== null)&#123;</span><br><span class="line">                echo &quot;返回代码：&quot; . $JsonFlowDictionaryResult[&quot;code&quot;] ;</span><br><span class="line">                echo &quot; 返回原因：&quot; . $JsonFlowDictionaryResult[&quot;action&quot;] . &quot;\n&quot;;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">                echo &quot;json_decode 解析失败.\n&quot;;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="ciz6fvb7t006ldkpvonquasjm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-PHP-file-get-contents-函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -115,7 +162,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="ciz4xr7nu006dgfpvwswp02rm" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="ciz6fvb7o006ddkpvifrrfnxx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +219,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="ciz4xr7nz006lgfpvt9i7j08i" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="ciz6fvb7u006ndkpvxxmnazwk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -241,7 +288,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="ciz4xr7o3006sgfpvqvni8nkz" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="ciz6fvb7x006sdkpvkp94v9h1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -306,7 +353,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="ciz4xr7o2006qgfpvdh7q8ysh" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="ciz6fvb7v006qdkpv2tjdm3zc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -376,7 +423,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="ciz4xr7nr0068gfpv17uo2kri" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-explode-函数/" data-id="ciz6fvb7k0066dkpvcce0d01l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -440,7 +487,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-fgets-函数/" data-id="ciz4xr7nt006bgfpvrg3dejg9" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-fgets-函数/" data-id="ciz6fvb7n006bdkpv6r3p9vos" class="article-share-link">Share</a>
       
       
     </footer>
@@ -500,7 +547,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-feof-函数/" data-id="ciz4xr7ni0066gfpvndbnheej" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-feof-函数/" data-id="ciz6fvb7l0068dkpvei31aldr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -621,7 +668,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-fopen-函数/" data-id="ciz4xr7nw006ggfpvt1ogipw8" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-fopen-函数/" data-id="ciz6fvb7q006gdkpvc09bposa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -663,53 +710,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/Linux-apache-access-log-Analy-2/" data-id="ciz4xr7kq002lgfpvt8n8jwnh" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LinuxShell-双引号的妙用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/05/LinuxShell-双引号的妙用/" class="article-date">
-  <time datetime="2016-08-05T07:31:45.000Z" itemprop="datePublished">2016-08-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/05/LinuxShell-双引号的妙用/">LinuxShell 双引号的妙用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果我们需要脚本将读取到的内容按照内容实际的格式展示给我们，那么加上双引号是一个不错的选择，什么意思呢，我们来看例子。</p>
-<h3 id="例子一：不加双引号"><a href="#例子一：不加双引号" class="headerlink" title="例子一：不加双引号"></a>例子一：不加双引号</h3><p>我们分别在函数外和函数内显示变量内容的时候不使用双引号，可以看出格式是不正确的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat testh2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">function Flagment_Log()&#123;</span><br><span class="line">        ReqPerSecTotal=2</span><br><span class="line">        FlagmentLog=`tail -n $ReqPerSecTotal /var/log/httpd/access_log`</span><br><span class="line">        echo &quot;$FlagmentLog&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a=`Flagment_Log`</span><br><span class="line">echo $a</span><br><span class="line">[root@localhost ~]# ./testh2.sh </span><br><span class="line">113.57.100.162 - - [05/Aug/2016:15:38:49 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot; 122.189.126.29 - - [05/Aug/2016:15:38:49 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat testh2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">function Flagment_Log()&#123;</span><br><span class="line">        ReqPerSecTotal=2</span><br><span class="line">        FlagmentLog=`tail -n $ReqPerSecTotal /var/log/httpd/access_log`</span><br><span class="line">        echo $FlagmentLog</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a=`Flagment_Log`</span><br><span class="line">echo &quot;$a&quot;</span><br><span class="line">[root@localhost ~]# ./testh2.sh </span><br><span class="line">223.156.95.247 - - [05/Aug/2016:15:39:40 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot; 113.247.9.85 - - [05/Aug/2016:15:39:40 +0800] &quot;POST /index.html HTTP/1.1&quot; 404 208 &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="例子二：加双引号"><a href="#例子二：加双引号" class="headerlink" title="例子二：加双引号"></a>例子二：加双引号</h3><p>我们分别在函数外和函数内显示变量内容的时候使用双引号。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat testh2.sh </span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">function Flagment_Log()&#123;</span><br><span class="line">        ReqPerSecTotal=2</span><br><span class="line">        FlagmentLog=`tail -n $ReqPerSecTotal /var/log/httpd/access_log`</span><br><span class="line">        echo &quot;$FlagmentLog&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a=`Flagment_Log`</span><br><span class="line">echo &quot;$a&quot;</span><br><span class="line">[root@localhost ~]# ./testh2.sh </span><br><span class="line">125.39.51.250 - - [05/Aug/2016:15:38:19 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot;</span><br><span class="line">122.189.126.8 - - [05/Aug/2016:15:38:19 +0800] &quot;POST /index.php HTTP/1.1&quot; 302 - &quot;-&quot; &quot;Mozilla/5.0 (Linux; Android)&quot;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/05/LinuxShell-双引号的妙用/" data-id="ciz4xr7me004jgfpvp5dem8pt" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/08/06/Linux-apache-access-log-Analy-2/" data-id="ciz6fvb4n002qdkpv7fdwxnb5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -731,7 +732,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -756,9 +757,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/">Zabbix 监控 Windows 的 CPU 百分比</a>
+          </li>
         
           <li>
             <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
@@ -776,10 +781,6 @@ var _hmt = _hmt || [];
             <a href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
           </li>
         
-          <li>
-            <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -793,7 +794,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
