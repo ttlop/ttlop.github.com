@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,84 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Centos-7-安装-postfix" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/08/Centos-7-安装-postfix/" class="article-date">
+  <time datetime="2016-09-08T03:11:41.000Z" itemprop="datePublished">2016-09-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/08/Centos-7-安装-postfix/">Centos 7 安装 postfix</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装没什么好说的，无非是卸载 sendmail，安装 postfix 即可。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ol>
+<li>/etc/postfix/main.cf 配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/postfix/main.cf | grep -v ^# | grep -v ^$</span><br><span class="line">queue_directory = /var/spool/postfix</span><br><span class="line">command_directory = /usr/sbin</span><br><span class="line">daemon_directory = /usr/libexec/postfix</span><br><span class="line">data_directory = /var/lib/postfix</span><br><span class="line">mail_owner = postfix</span><br><span class="line">myhostname = mail.ttlop.cn</span><br><span class="line">mydomain = ttlop.cn</span><br><span class="line">myorigin = $mydomain</span><br><span class="line">inet_interfaces = $myhostname</span><br><span class="line">inet_protocols = all</span><br><span class="line">mydestination = $myhostname, $mydomain, localhost.$mydomain, localhost</span><br><span class="line">unknown_local_recipient_reject_code = 550</span><br><span class="line">mynetworks = 192.168.16.0/24, 127.0.0.0/8, 192.168.200.91/32</span><br><span class="line">alias_maps = hash:/etc/aliases</span><br><span class="line">alias_database = hash:/etc/aliases</span><br><span class="line"> </span><br><span class="line">  </span><br><span class="line">debug_peer_level = 2</span><br><span class="line">debugger_command =</span><br><span class="line">	 PATH=/bin:/usr/bin:/usr/local/bin:/usr/X11R6/bin</span><br><span class="line">	 ddd $daemon_directory/$process_name $process_id &amp; sleep 5</span><br><span class="line">sendmail_path = /usr/sbin/sendmail.postfix</span><br><span class="line">newaliases_path = /usr/bin/newaliases.postfix</span><br><span class="line">mailq_path = /usr/bin/mailq.postfix</span><br><span class="line">setgid_group = postdrop</span><br><span class="line">html_directory = no</span><br><span class="line">manpage_directory = /usr/share/man</span><br><span class="line">sample_directory = /usr/share/doc/postfix-2.10.1/samples</span><br><span class="line">readme_directory = /usr/share/doc/postfix-2.10.1/README_FILES</span><br></pre></td></tr></table></figure>
+<ol>
+<li>/etc/hostname 配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/hostname </span><br><span class="line">mail.ttlop.cn</span><br></pre></td></tr></table></figure>
+<ol>
+<li>/etc/hosts 配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/hosts</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">192.168.16.115	mail.ttlop.cn	mail</span><br></pre></td></tr></table></figure>
+<ol>
+<li>/etc/resolv.conf 配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat /etc/resolv.conf </span><br><span class="line"># Generated by NetworkManager</span><br><span class="line">search ttlop.cn</span><br><span class="line">nameserver 222.246.129.80</span><br></pre></td></tr></table></figure>
+<ol>
+<li>域名解析配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# nslookup</span><br><span class="line">&gt; set q=mx</span><br><span class="line">&gt; ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">ttlop.cn	mail exchanger = 1 mail.ttlop.cn.</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br><span class="line">&gt; set q=a</span><br><span class="line">&gt; mail.ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">Name:	mail.ttlop.cn</span><br><span class="line">Address: 222.240.236.201</span><br><span class="line">&gt; set q=txt</span><br><span class="line">&gt; ttlop.cn</span><br><span class="line">Server:		222.246.129.80</span><br><span class="line">Address:	222.246.129.80#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">ttlop.cn	text = &quot;v=spf1 ipv4:58.20.58.192/27 ipv4:58.20.58.224/27 ipv4:222.240.240.240/28 ipv4:222.240.236.192/28 ~all&quot;</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br></pre></td></tr></table></figure>
+<ol>
+<li>防火墙配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-service=smtp --permanent</span><br><span class="line">systemctl restart firewalld</span><br></pre></td></tr></table></figure>
+<p>至此配置完成。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ol>
+<li><p>测试内外网 smtp 端口是否开放</p>
+</li>
+<li><p>测试邮件是否可以发出：echo “Mail Content” | mail -s “Mail Subject” 18675850419@wo.cn，建议先从 wo 邮箱往这边发送测试邮件</p>
+</li>
+<li><p>查看 /var/log/maillog、postqueue -p 等信息确认发送是否正常</p>
+</li>
+<li><p>测试邮件是否可以收到，如果当前操作均在 root 下进行，可以直接在 wo 邮箱中发送邮件到 root@ttlop.cn，通过在服务器命令行输入 mail 来确认是否可以收到邮件</p>
+</li>
+</ol>
+<hr>
+<p>至此测试完成，实际环境中发现发送到 qq 邮箱的邮件均被拒绝，建议多用几个邮箱帐号来测试，有时环境搭建正常，但依然会出现邮件发不出去的情况。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/09/08/Centos-7-安装-postfix/" data-id="cj1q1ks4i000vrbpvqxi5ow9i" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Centos-7-更改-hostname" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -126,7 +204,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="cj1q0818u001bdbpvp23f1v7y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/07/Centos-7-更改-hostname/" data-id="cj1q1ks4m000zrbpvo9r5jc2m" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -172,7 +250,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="cj1q0819h001qdbpvvu0ib6iw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/03/HYPER-V-中的处理器兼容性模式/" data-id="cj1q1ks5j001mrbpvoukp95vq" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -217,7 +295,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="cj1q081ev0084dbpvw6s94gxr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-NIC-组合/" data-id="cj1q1ksay008brbpvhhxpnf7k" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -265,7 +343,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="cj1q081ex0086dbpvh1rxuk39" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/09/02/Windows-Server-2012-R2-Datacenter-服务管理器出现-Winrm-协商身份验证错误解决办法/" data-id="cj1q1ksb0008erbpvatj624yl" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -336,7 +414,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="cj1q081hf00bwdbpvvme4kxp8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/虚拟化中的-SR-IOV/" data-id="cj1q1ksdl00cbrbpvzjhlbuwz" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -410,7 +488,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="cj1q081a80029dbpv2d7nmbb8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/30/Hyper-V-网络配置/" data-id="cj1q1ks690026rbpv8cyn00v2" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -469,7 +547,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="cj1q081a60028dbpv457cizo0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Hyper-V-3中-虚拟机CPU竞争机制/" data-id="cj1q1ks660023rbpv5y059zhp" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -525,7 +603,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="cj1q081et0081dbpvnucf7sav" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="cj1q1ksba008jrbpvkql4ife2" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -571,100 +649,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cj1q081b8003bdbpva11v0i3c" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Bat-的变量与命令-set-的用法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/24/Bat-的变量与命令-set-的用法/" class="article-date">
-  <time datetime="2016-08-24T03:44:28.000Z" itemprop="datePublished">2016-08-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Bat/">Bat</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/24/Bat-的变量与命令-set-的用法/">Bat 的变量与命令 set 的用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="set-功能一览"><a href="#set-功能一览" class="headerlink" title="set 功能一览"></a>set 功能一览</h3><ul>
-<li><p>[设置变量]<br>格式：set 变量名=变量值<br>详细：被设定的变量以 %变量名% 引用</p>
-</li>
-<li><p>[取消变量]<br>格式：set 变量名=<br>详细：取消后的变量名若被引用 %变量名% 将为空</p>
-</li>
-<li><p>[展示变量]<br>格式：set 变量名<br>详细：展示以变量名开头的所有变量及值</p>
-</li>
-<li><p>[列出变量]<br>格式：set</p>
-</li>
-<li><p>[计算器]<br>格式：set /a 表达式<br>示例：set /a 1+2*3 输出 7</p>
-</li>
-<li><p>[设置变量为表达式计算后的值]<br>set /a a=1+2<br>注意区分：set a=1+2</p>
-</li>
-<li><p>[设置变量为用户输入的值]<br>set /P a=</p>
-</li>
-</ul>
-<h3 id="预定义的变量"><a href="#预定义的变量" class="headerlink" title="预定义的变量"></a>预定义的变量</h3><p>下面是一些已经被底层定义好可以直接使用的变量：不会出现在 set 显示的变量列表中。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">%CD%</td>
-<td style="text-align:left">当前目录字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">%DATA%</td>
-<td style="text-align:left">用跟 DATE 命令同样的格式表示当前日期</td>
-</tr>
-<tr>
-<td style="text-align:left">%TIME%</td>
-<td style="text-align:left">用跟 TIME 命令同样的格式表示当前时间</td>
-</tr>
-<tr>
-<td style="text-align:left">%RANDOM%</td>
-<td style="text-align:left">表示0到32767之间的任意十进制数字</td>
-</tr>
-<tr>
-<td style="text-align:left">%ERRORLEVEL%</td>
-<td style="text-align:left">表示当前 ERRORLEVEL 数值</td>
-</tr>
-<tr>
-<td style="text-align:left">%PATH%</td>
-<td style="text-align:left">当前的环境变量，以分号隔开的路径列表</td>
-</tr>
-</tbody>
-</table>
-<h3 id="扩展变量"><a href="#扩展变量" class="headerlink" title="扩展变量"></a>扩展变量</h3><p>@ 与 $i 相关的变量（bat参数或者for循环的%i）<br>@ 与 %VAR% 相关的变量</p>
-<p>|变量|含义|<br>|%0|脚本的路径名|<br>|%~x0|当前脚本后缀|<br>|%~n0|当前脚本文件名，不包含后缀|<br>|%~nx0|当前脚本文件名，注意跟%0区分|<br>|%~dp0|当前脚本工作目录<br>|%VAR:str1=str2%|会将VAR中的str1替换为str2，如str2为空可以起到删除效果，str1可以加*通配符|<br>|%VAR:~0,-2%|提取VAR变量的所有字符，除了最后两个|<br>|%VAR:~2%|提取VAR变量除前两个外的所有字符|<br>|%VAR:~-2%|提取VAR变量的最后两个字符|<br>|%VAR:~2,5%|提取从第2个字符开始的5个字符|</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cj1q0817r000fdbpvme9rrj8x" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cj1q1ks770035rbpvo0x0snf9" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -686,7 +671,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -711,9 +696,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/20/Python模块初识及用户输入打印/">Python模块初识及用户输入打印</a>
+          </li>
         
           <li>
             <a href="/2017/04/20/Python-编码/">Python 编码</a>
@@ -731,10 +720,6 @@ var _hmt = _hmt || [];
             <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
           </li>
         
-          <li>
-            <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -748,7 +733,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

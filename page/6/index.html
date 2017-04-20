@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,99 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Bat-的变量与命令-set-的用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/24/Bat-的变量与命令-set-的用法/" class="article-date">
+  <time datetime="2016-08-24T03:44:28.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Bat/">Bat</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/24/Bat-的变量与命令-set-的用法/">Bat 的变量与命令 set 的用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="set-功能一览"><a href="#set-功能一览" class="headerlink" title="set 功能一览"></a>set 功能一览</h3><ul>
+<li><p>[设置变量]<br>格式：set 变量名=变量值<br>详细：被设定的变量以 %变量名% 引用</p>
+</li>
+<li><p>[取消变量]<br>格式：set 变量名=<br>详细：取消后的变量名若被引用 %变量名% 将为空</p>
+</li>
+<li><p>[展示变量]<br>格式：set 变量名<br>详细：展示以变量名开头的所有变量及值</p>
+</li>
+<li><p>[列出变量]<br>格式：set</p>
+</li>
+<li><p>[计算器]<br>格式：set /a 表达式<br>示例：set /a 1+2*3 输出 7</p>
+</li>
+<li><p>[设置变量为表达式计算后的值]<br>set /a a=1+2<br>注意区分：set a=1+2</p>
+</li>
+<li><p>[设置变量为用户输入的值]<br>set /P a=</p>
+</li>
+</ul>
+<h3 id="预定义的变量"><a href="#预定义的变量" class="headerlink" title="预定义的变量"></a>预定义的变量</h3><p>下面是一些已经被底层定义好可以直接使用的变量：不会出现在 set 显示的变量列表中。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%CD%</td>
+<td style="text-align:left">当前目录字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">%DATA%</td>
+<td style="text-align:left">用跟 DATE 命令同样的格式表示当前日期</td>
+</tr>
+<tr>
+<td style="text-align:left">%TIME%</td>
+<td style="text-align:left">用跟 TIME 命令同样的格式表示当前时间</td>
+</tr>
+<tr>
+<td style="text-align:left">%RANDOM%</td>
+<td style="text-align:left">表示0到32767之间的任意十进制数字</td>
+</tr>
+<tr>
+<td style="text-align:left">%ERRORLEVEL%</td>
+<td style="text-align:left">表示当前 ERRORLEVEL 数值</td>
+</tr>
+<tr>
+<td style="text-align:left">%PATH%</td>
+<td style="text-align:left">当前的环境变量，以分号隔开的路径列表</td>
+</tr>
+</tbody>
+</table>
+<h3 id="扩展变量"><a href="#扩展变量" class="headerlink" title="扩展变量"></a>扩展变量</h3><p>@ 与 $i 相关的变量（bat参数或者for循环的%i）<br>@ 与 %VAR% 相关的变量</p>
+<p>|变量|含义|<br>|%0|脚本的路径名|<br>|%~x0|当前脚本后缀|<br>|%~n0|当前脚本文件名，不包含后缀|<br>|%~nx0|当前脚本文件名，注意跟%0区分|<br>|%~dp0|当前脚本工作目录<br>|%VAR:str1=str2%|会将VAR中的str1替换为str2，如str2为空可以起到删除效果，str1可以加*通配符|<br>|%VAR:~0,-2%|提取VAR变量的所有字符，除了最后两个|<br>|%VAR:~2%|提取VAR变量除前两个外的所有字符|<br>|%VAR:~-2%|提取VAR变量的最后两个字符|<br>|%VAR:~2,5%|提取从第2个字符开始的5个字符|</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cj1q1ks3u000erbpv5k786kpj" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Bat-之-for-循环" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -130,7 +223,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cj1q0817p000ddbpv5xjhx0o2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cj1q1ks3r000crbpv84tiorhf" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -173,7 +266,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cj1q081gg00a8dbpvr5ddav3v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cj1q1kscn00aqrbpv9q3cfabd" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -218,7 +311,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cj1q081e3006vdbpv2f46xfrk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cj1q1ksa60070rbpvuwy2c7sn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -263,7 +356,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cj1q081e0006rdbpvngxgu13y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cj1q1ksa3006vrbpvs5jfa5b1" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -377,7 +470,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cj1q081da005zdbpv64cnkjdg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cj1q1ks9h0064rbpvfw5ktmlg" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -433,7 +526,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cj1q081dc0061dbpvoxt6c3po" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cj1q1ks9d005zrbpvn0ex2p9d" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -492,7 +585,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cj1q081e5006ydbpv78essrie" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cj1q1ksa90075rbpv9d5rkmhx" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -539,7 +632,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cj1q081e4006wdbpvloue7jh9" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cj1q1ksa70072rbpv7n1fgy7g" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -589,52 +682,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cj1q081e1006sdbpvhseul24d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-Array-数组" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/09/PHP-Array-数组/" class="article-date">
-  <time datetime="2016-08-09T08:29:02.000Z" itemprop="datePublished">2016-08-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/09/PHP-Array-数组/">PHP Array 数组</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>PHP</strong> 中的数组实际上是一个有序映射。映射是一种把 <em>values</em> 关联到 <em>keys</em> 的类型。此类型在很多方面做了优化，因此可以可以把它当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性。由于数组元素的值也可以是另一个数组，所以树形结构和多维数组也是允许的。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/09/PHP-Array-数组/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cj1q081d7005wdbpvbfzxknob" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cj1q1ksa5006xrbpvzjushxas" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -656,7 +704,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -681,9 +729,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/20/Python模块初识及用户输入打印/">Python模块初识及用户输入打印</a>
+          </li>
         
           <li>
             <a href="/2017/04/20/Python-编码/">Python 编码</a>
@@ -701,10 +753,6 @@ var _hmt = _hmt || [];
             <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
           </li>
         
-          <li>
-            <a href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -718,7 +766,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
