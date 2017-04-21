@@ -82,6 +82,52 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux-下访问-Windows-共享目录的配置方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" class="article-date">
+  <time datetime="2016-08-26T03:29:29.000Z" itemprop="datePublished">2016-08-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/">Linux 下访问 Windows 共享目录的配置方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Linux-下安装-samba-client-客户端"><a href="#1-Linux-下安装-samba-client-客户端" class="headerlink" title="1. Linux 下安装 samba-client 客户端"></a>1. Linux 下安装 samba-client 客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install samba-client</span><br></pre></td></tr></table></figure>
+<h3 id="2-Linux-下只能装-cifs-utils-软件包"><a href="#2-Linux-下只能装-cifs-utils-软件包" class="headerlink" title="2. Linux 下只能装 cifs-utils 软件包"></a>2. Linux 下只能装 cifs-utils 软件包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install cifs-utils</span><br></pre></td></tr></table></figure>
+<h3 id="3-Linux-下创建挂载点"><a href="#3-Linux-下创建挂载点" class="headerlink" title="3. Linux 下创建挂载点"></a>3. Linux 下创建挂载点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /mnt/AutoBackup</span><br></pre></td></tr></table></figure>
+<h3 id="4-挂载-Windows-上的共享目录"><a href="#4-挂载-Windows-上的共享目录" class="headerlink" title="4. 挂载 Windows 上的共享目录"></a>4. 挂载 Windows 上的共享目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t cifs -o username=&quot;administrator&quot;,password=&apos;xxx&apos; //192.168.200.1/D$/AutoBackup /mnt/AutosBackup/</span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果挂载成功，则可以进入 /mnt/Autobackup 下，查看上面的 windows 共享文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cj1r7b2zn00355spvqgo0ndqv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Bat-的变量与命令-set-的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/24/Bat-的变量与命令-set-的用法/" class="article-date">
@@ -165,7 +211,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cj1q1n1in000esrpvjr2om42n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cj1r7b2wb000e5spv46bfcwpe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -223,7 +269,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cj1q1n1ik000csrpvf52o22h8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cj1r7b2w9000c5spv42511rye" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,7 +312,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cj1q1n1rh00agsrpvv89anl3a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cj1r7b35700ap5spvhjtp2nuf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -311,7 +357,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cj1q1n1p30072srpvgyuv6b1l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cj1r7b32o006z5spvgf7csisg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -356,7 +402,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cj1q1n1oz006vsrpv4joe32o0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cj1r7b32l006u5spvvjl3dlem" class="article-share-link">Share</a>
       
       
     </footer>
@@ -470,7 +516,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cj1q1n1oc0066srpvdzd6x931" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cj1r7b31v00615spvaxaxs2ue" class="article-share-link">Share</a>
       
       
     </footer>
@@ -526,7 +572,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cj1q1n1o90061srpv7idgnnse" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cj1r7b32500635spv0vwi001x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -585,7 +631,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cj1q1n1p40074srpv4uvq0zbc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cj1r7b32w00795spv1b47k2hc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -632,57 +678,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cj1q1n1p20070srpvaoqgivz3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-循环读取文件每行记录处理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/PHP-循环读取文件每行记录处理/" class="article-date">
-  <time datetime="2016-08-11T02:44:03.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/PHP-循环读取文件每行记录处理/">PHP 循环读取文件每行记录处理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>日常工作中，经常有这样的任务，需要自动读取文件中的信息并处理，此处涉及到这几个函数：</p>
-<ul>
-<li>file_exists：判断文件是否存在</li>
-<li>fopen：打开文件，返回文件指针</li>
-<li>feof：检测是否已经达到文件末尾eof，如是返回TRUE</li>
-<li>fgets：从文件指针中读取一行</li>
-<li>explode：把字符串打散为数组</li>
-<li>fclose：关闭文件，释放文件指针</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        $UserInfo = explode(&quot; &quot;, $line);</span><br><span class="line">                        echo &quot;用户名：$UserInfo[0] &quot;;</span><br><span class="line">                        echo &quot;密码：$UserInfo[1]&quot;;</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cj1q1n1p0006xsrpvaqjbfccp" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cj1r7b32q00725spvyrwnm25s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -734,6 +730,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/21/Python-变量、基本数据类型/">Python 变量、基本数据类型</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/20/Python模块初识及用户输入打印/">Python模块初识及用户输入打印</a>
           </li>
         
@@ -747,10 +747,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/">Zabbix 监控 Windows 的 CPU 百分比</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/">Linux 访问 Windows 共享文件夹的两种方法</a>
           </li>
         
       </ul>
