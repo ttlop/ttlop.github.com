@@ -82,6 +82,92 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Hadoop-安装教程-单机-伪分布式配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" class="article-date">
+  <time datetime="2016-11-29T07:35:26.000Z" itemprop="datePublished">2016-11-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/">Hadoop 安装教程-单机/伪分布式配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 系统版本</span><br><span class="line">[root@slave3 hadoop]# cat /etc/redhat-release </span><br><span class="line">CentOS Linux release 7.2.1511 (Core) </span><br><span class="line"></span><br><span class="line"># 本机IP：192.168.1.43</span><br><span class="line"></span><br><span class="line"># 本机HostName：slave3</span><br><span class="line"></span><br><span class="line"># 使用 yum -y update 更新系统</span><br></pre></td></tr></table></figure>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><strong>主机名修改及Host修改</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname slave3</span><br><span class="line">vim /etc/hosts # 最后增加一行 192.168.1.43	slave3</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>安装常用软件及java</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install java-1.8.0-openjdk*</span><br><span class="line">yum install wget vim net-tools</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>确认java安装目录</strong></li>
+</ul>
+<p>通过 whereis java 以及 ls -l 的方式定位 java 安装目录，这里是<br>/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-1.b15.el7_2.x86_64<br>具体可以参考：<a href="http://ttlop.com/2016/11/25/%E6%9F%A5%E6%89%BE%E9%80%9A%E8%BF%87Yum%E5%AE%89%E8%A3%85%E7%9A%84Java%E7%9A%84%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84/">http://ttlop.com/2016/11/25/%E6%9F%A5%E6%89%BE%E9%80%9A%E8%BF%87Yum%E5%AE%89%E8%A3%85%E7%9A%84Java%E7%9A%84%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84/</a></p>
+<ul>
+<li><strong>hadoop下载及配置</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 下载</span><br><span class="line">wget http://apache.fayea.com/hadoop/common/hadoop-3.0.0-alpha1/hadoop-3.0.0-alpha1.tar.gz</span><br><span class="line"># 解压</span><br><span class="line">tar zxvf hadoop-3.0.0-alpha1.tar.gz</span><br><span class="line"># 移动</span><br><span class="line">mv hadoop-3.0.0-alpha1 /usr/local/hadoop</span><br><span class="line"># 修改权限及确认</span><br><span class="line">cd /usr/local &amp;&amp; chown -R root.root hadoop &amp;&amp; ls -l hadoop &amp;&amp; cd hadoop &amp;&amp; ls -al</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>SSH 权限修改</strong></li>
+</ul>
+<p>通过ssh-keygen 及 authorized_keys 文件修改SSH登录权限。<br>具体可以参考：<a href="http://ttlop.com/2016/11/25/SSH-%E6%97%A0%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%E8%8A%82%E7%82%B9/">http://ttlop.com/2016/11/25/SSH-%E6%97%A0%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%E8%8A%82%E7%82%B9/</a></p>
+<ul>
+<li><strong>关闭防火墙即selinux</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 这里为测试环境，我们将安全选项都关闭</span><br><span class="line">setenforce 8</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>配置修改</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># PATH 修改（当前终端有效）</span><br><span class="line">export PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin</span><br><span class="line"># hadoop 中 JAVA_HOME修改</span><br><span class="line">vim /usr/local/hadoop/etc/hadoop/hadoop-env.sh</span><br><span class="line">增加  export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-1.b15.el7_2.x86_64</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>单机配置测试</strong></li>
+</ul>
+<p>Hadoop 默认模式为非分布式模式，无需进行其它配置即可运行。非分布式即单 Java 进程，方便进行调试。<br>以下面为例，我们选择运行 grep 例子，我们将 input 文件夹中的所有文件作为输入，筛选当前符合正则表达式 dfs[a-z.]+ 的单词并统计出现的次数，最后输出结果到 output 文件夹中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop</span><br><span class="line">mkdir ./input</span><br><span class="line">cp ./etc/hadoop/*.xml ./input   # 将配置文件作为输入文件</span><br><span class="line">./bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar grep ./input ./output &apos;dfs[a-z.]+&apos;</span><br><span class="line">cat ./output/*  # 查看运行结果</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>伪分布式配置</strong></li>
+</ul>
+<p>Hadoop 可以在单节点上以伪分布式的方式运行，Hadoop 进程以分离的 java 进程来运行，节点既作为 NameNode 也作为 DataNode，同时，读取的是 HDFS 中的文件。</p>
+<p>Hadoop 的配置文件位于 $HADOOP_HOME/etc/hadoop中，伪分布式需要修改2个配置文件 core-site.xml和hdfs-site.xml。Hadoop 的配置文件是 xml 格式，每个配置以声明 property 的 name 和 value 的方式来实现。<br>如下是修改后的 core-site.xml文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">             &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;file:/home/hadoop/tmp&lt;/value&gt;</span><br><span class="line">             &lt;description&gt;Abase for other temporary directories.&lt;/description&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">             &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如下是修改后的 hdfs-site.xml文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">             &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">             &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;file:/home/hadoop/tmp/dfs/name&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">             &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;file:/home/hadoop/tmp/dfs/data&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<p>配置完成后，执行 NameNode 的格式化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs namenode -format</span><br></pre></td></tr></table></figure>
+<p>接着开启 NameNode 和 DataNode 守护进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-dfs.sh</span><br></pre></td></tr></table></figure>
+<p>启动完成后，可以通过命令 jps 来判断是否成功启动，若成功启动则会列出如下进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@slave3 dfs]# jps</span><br><span class="line">50290 SecondaryNameNode</span><br><span class="line">50617 Jps</span><br><span class="line">50090 DataNode</span><br><span class="line">49995 NameNode</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="cj1skn810001ue7pvlqepp3eo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Centos-7-LVM-磁盘扩容" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/29/Centos-7-LVM-磁盘扩容/" class="article-date">
@@ -154,7 +240,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="cj1r7b2wi000m5spviubtxjat" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="cj1skn7z7000je7pvlkzne223" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +294,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="cj1r7b2y2001n5spvn40i18hh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="cj1skn80s001qe7pvp93jk8nr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -397,7 +483,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="cj1r7b2yf001v5spv59mcvlt2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="cj1skn814001ve7pvaea61bed" class="article-share-link">Share</a>
       
       
     </footer>
@@ -458,7 +544,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="cj1r7b2z5002j5spvl76fa5vb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="cj1skn81y002oe7pvvhzd2ciq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -505,7 +591,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="cj1r7b35x00bu5spvwckhdrr4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="cj1skn88m00bee7pvfbvde9jy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -574,7 +660,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="cj1r7b2y4001q5spve93q6u6g" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="cj1skn80q001ne7pvlwofzpi0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -654,7 +740,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="cj1r7b2y8001r5spvr37i4cv2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="cj1skn80x001re7pv467cnryf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -717,7 +803,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="cj1r7b336007r5spvofxcq6c5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="cj1skn863007ue7pvakqutsd8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -767,61 +853,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/查找通过Yum安装的Java的安装路径/" data-id="cj1r7b35v00bq5spvppmkiq7q" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据库镜像-主备切换" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/11/数据库镜像-主备切换/" class="article-date">
-  <time datetime="2016-11-11T06:04:59.000Z" itemprop="datePublished">2016-11-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/11/数据库镜像-主备切换/">数据库镜像-主备切换</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>高性能状态-主备切换（主机服务停止）</li>
-</ol>
-<p>主机服务停止，镜像（备机）上执行下列命令后备机状态会变为：<strong>主机 挂起/正在还原…</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER FORCE_SERVICE_ALLOW_DATA_LOSS;</span><br></pre></td></tr></table></figure></p>
-<p>此时如原主机再启动服务，会显示挂起状态。执行下列命令后状态会变为：<strong>镜像 已同步/正在还原…</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER RESUME;</span><br></pre></td></tr></table></figure></p>
-<p>如果要从原镜像机（即现在的主机）手动切换回镜像状态，需执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER SAFETY FULL;</span><br></pre></td></tr></table></figure></p>
-<p>即将运行模式改为高安全，这时状态就会变回最初的状态（即原始的主机和备机）</p>
-<ol>
-<li>高性能状态下-主备切换（主机网络断开）<br>在原始的主机、备机状态下，将主机网络断开，在备机（镜像）上执行下列命令同样可以实现主备切换：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER FORCE_SERVICE_ALLOW_DATA_LOSS;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>但是此时的备机（镜像）虽然成为了主机，其运行模式为高安全模式，需要手动切换到高性能模式下。然后将主机联网后，在主机上执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE &lt;DatabaseName&gt; SET PARTNER RESUME;</span><br></pre></td></tr></table></figure></p>
-<p>此时主机变为镜像机（镜像，已同步/正在还原…）</p>
-<p>高安全模式下，将原主机服务停止，镜像机自动转为主机，但运行模式为高安全模式，此时镜像（相对于现在为主机）是不能调整运行模式的。即不能从高安全调整为高性能模式。只有当原主机网络连通或服务开始运行后在镜像（相对于现在为主机）才可以调整运行模式，同时这时也不允许强制执行。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/11/数据库镜像-主备切换/" data-id="cj1r7b35n00be5spvrfn775ia" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/25/查找通过Yum安装的Java的安装路径/" data-id="cj1skn88j00bae7pvp33kskjm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -873,6 +905,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/22/Python-编码转换/">Python 编码转换</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/21/Python-变量、基本数据类型/">Python 变量、基本数据类型</a>
           </li>
         
@@ -886,10 +922,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/03/16/华为S系列交换机配置SSH登录/">华为S系列交换机配置SSH登录</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/">Zabbix 监控 Windows 的 CPU 百分比</a>
           </li>
         
       </ul>

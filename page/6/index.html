@@ -82,6 +82,62 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Windows-2012-下通过命令行管理磁盘" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/" class="article-date">
+  <time datetime="2016-08-27T06:21:34.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Windows/">Windows</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/Windows-2012-下通过命令行管理磁盘/">Windows 2012 下通过命令行管理磁盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Windows 2012 包含一个名为 Diskpart.exe 的命令行实用程序，用来管理服务器的磁盘子系统。要使用此命令，只需要打开命令提示符窗口，并输入 DiskPart.exe 命令即可。Windows 将进入 Diskpart Shell 界面。在这个界面中，可以使用各种命令来管理磁盘子系统。</p>
+<h3 id="命令用法"><a href="#命令用法" class="headerlink" title="命令用法"></a>命令用法</h3><p>Diskpart 命令格式，按照动词-名词的语法。动词告诉 Windows 要执行什么动作，名词告诉 Windows 要执行动作的对象，例如：</p>
+<ol>
+<li><p>List Disk：显示服务器上安装的所有物理硬盘</p>
+</li>
+<li><p>select disk 0：选中硬盘0，0为使用 list disk 命令后列出的磁盘编号</p>
+</li>
+<li><p>list volume：显示选中的硬盘每个 volume 的情况</p>
+</li>
+<li><p>select volume 1：选中指定的 volume</p>
+</li>
+<li><p>format fs=ntfs Label=MyHperDisk：格式化选定的volume</p>
+</li>
+<li><p>Assign Letter=F：分配盘符为 F</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/27/Windows-2012-下通过命令行管理磁盘/" data-id="cj1skn86f008ce7pvapfg1u33" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux-下访问-Windows-共享目录的配置方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" class="article-date">
@@ -118,7 +174,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cj1r7b2zn00355spvqgo0ndqv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/26/Linux-下访问-Windows-共享目录的配置方法/" data-id="cj1skn82f0035e7pvczl4zvlz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -211,7 +267,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cj1r7b2wb000e5spv46bfcwpe" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-的变量与命令-set-的用法/" data-id="cj1skn7z1000ee7pv9ts3ogbc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -269,7 +325,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cj1r7b2w9000c5spv42511rye" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/24/Bat-之-for-循环/" data-id="cj1skn7yz000ce7pvbicehj5q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -312,7 +368,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cj1r7b35700ap5spvhjtp2nuf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/19/inotify-报错-upper-limit-on-inotify-watches-reached/" data-id="cj1skn87y00ace7pvf2lrwf3b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -357,7 +413,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cj1r7b32o006z5spvgf7csisg" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-流程控制/" data-id="cj1skn85j006ze7pv1msasbnf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -402,7 +458,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cj1r7b32l006u5spvvjl3dlem" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-常量/" data-id="cj1skn85g006ue7pvs3l01uos" class="article-share-link">Share</a>
       
       
     </footer>
@@ -516,7 +572,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cj1r7b31v00615spvaxaxs2ue" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/13/PHP-String-字符串类型/" data-id="cj1skn84p0061e7pvoq2kvpjy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -572,7 +628,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cj1r7b32500635spv0vwi001x" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-boolean-布尔类型/" data-id="cj1skn84y0063e7pvpb0t5xiu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -631,54 +687,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cj1r7b32w00795spv1b47k2hc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-的-feof-方法需要注意的地方" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" class="article-date">
-  <time datetime="2016-08-11T07:36:38.000Z" itemprop="datePublished">2016-08-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/11/PHP-的-feof-方法需要注意的地方/">PHP 的 feof() 方法需要注意的地方</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>写过这样的一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>其中当读文件到结尾的时候，结果总会比期望的多出来一个元素：bool(false)。</p>
-<p>按说，如果读取到文件最后一行，<strong>feof</strong> 函数会返回 <strong>TRUE</strong>，然后 <strong>while</strong> 循环就退出了，为什么不是呢？</p>
-<p>先看例子，我们在代码中添加一个判断：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"># 读取用户列表文件</span><br><span class="line">function GetUserInfo($file)&#123;</span><br><span class="line">        if(file_exists($file))&#123;</span><br><span class="line">                $file_handle = fopen($file,&quot;r&quot;);</span><br><span class="line">                while(!feof($file_handle))&#123;</span><br><span class="line">                        $line = fgets($file_handle);</span><br><span class="line">                        if(feof($file_handle))&#123;</span><br><span class="line">                                break;</span><br><span class="line">                        &#125;</span><br><span class="line">                        var_dump($line);</span><br><span class="line">                &#125;</span><br><span class="line">                fclose($file_handle);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">GetUserInfo(&quot;/root/user.list&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>这是因为 <strong>feof</strong> 函数在处理纯文本文件的时候处理到最后一行后，<strong>feof($file_handle)</strong> 将不会返回 <strong>True</strong>，此时循环继续，使用 <strong>fgets</strong> 继续读取文件，由于 <strong>fgets</strong> 获取不到数据，返回 <strong>false</strong>，所以我们使用 <strong>var_dump</strong> 可以看到打印了一个布尔类型的值，解决办法是使用 <strong>fgets</strong> 后再次使用 <strong>feof</strong> 判断文件是否结束，此时可以正确判定文件是否已到末尾。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cj1r7b32q00725spvyrwnm25s" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cj1skn85n0074e7pvp9yff8uk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -730,6 +739,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/22/Python-编码转换/">Python 编码转换</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/21/Python-变量、基本数据类型/">Python 变量、基本数据类型</a>
           </li>
         
@@ -743,10 +756,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/03/16/华为S系列交换机配置SSH登录/">华为S系列交换机配置SSH登录</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/">Zabbix 监控 Windows 的 CPU 百分比</a>
           </li>
         
       </ul>
