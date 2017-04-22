@@ -111,7 +111,7 @@ var _hmt = _hmt || [];
         <p><strong>要点：(Python 2.x版本)</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">	编码</span><br><span class="line">unicode ----&gt;  UTF-8</span><br><span class="line">	解码</span><br><span class="line">UTF-8   ----&gt;  unicode</span><br><span class="line"></span><br><span class="line">	编码</span><br><span class="line">unicode ----&gt;  GBK</span><br><span class="line">	解码</span><br><span class="line">GBK   ----&gt;  unicode</span><br></pre></td></tr></table></figure>
 <p>因此若想将UTF-8编码转换为GBK编码，需要经过先解码成unicode，再编码成GBK的过程</p>
-<p>在 Python 3.x 版本中，可以直接将UTF-8编码为GBK，且移出了unicode编码。</p>
+<p>在 Python 3.x 版本中，可以直接将UTF-8编码为GBK，且移除了unicode编码。</p>
 <p><strong>示例：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/evn python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">#由于windows DOS窗口默认使用GBK编码方式，如直接打印会出现乱码</span><br><span class="line">print(&apos;胡肖勇&apos;)</span><br><span class="line"></span><br><span class="line">#进行解码、编码过程,可以正常打印</span><br><span class="line">str = &apos;胡肖勇&apos;</span><br><span class="line">tmp_unicode = str.decode(&apos;UTF-8&apos;)</span><br><span class="line">tmp_gbk = tmp_unicode.encode(&apos;GBK&apos;)</span><br><span class="line">print(tmp_gbk)</span><br><span class="line"></span><br><span class="line">print(tmp_unicode)</span><br><span class="line"># Windows 比较人性化的设计是如果转换为unicode编码后，如果终端需要GBK编码，会自动将unicode编码为GBK。</span><br><span class="line"># Python 3.x版本中是不可以的，因为移除了unicode编码。</span><br></pre></td></tr></table></figure>
 <p><strong>示例运行结果：</strong></p>
@@ -120,7 +120,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/22/Python-编码转换/" data-id="cj1sl9qze007eo1pvit4g3ctl" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/22/Python-编码转换/" data-id="cj1slbiyt007hpdpv2pdfmu2u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +173,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/21/Python-变量、基本数据类型/" data-id="cj1sl9qzb0079o1pvampm52a1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/21/Python-变量、基本数据类型/" data-id="cj1slbiyp007cpdpvwsykl8wj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/20/Python模块初识及用户输入打印/" data-id="cj1sl9qzf007go1pvllxcj1m1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/20/Python模块初识及用户输入打印/" data-id="cj1slbiyu007jpdpv9nk371vk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,7 +258,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/20/Python-编码/" data-id="cj1sl9qzd007bo1pvgpaicvcc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/20/Python-编码/" data-id="cj1slbiyr007epdpv3cbr2ts0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -315,7 +315,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/03/16/华为S系列交换机配置SSH登录/" data-id="cj1sl9r1z00awo1pvxm5kzpqr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/03/16/华为S系列交换机配置SSH登录/" data-id="cj1slbj1z00axpdpvd6na2qo1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -362,7 +362,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" data-id="cj1sl9r1c009yo1pvo6b4l4v6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" data-id="cj1slbj1b00a4pdpvy12w7mnl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -412,7 +412,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/" data-id="cj1sl9qx30047o1pvv7hszes7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/" data-id="cj1slbiv80044pdpvdrkkgbe5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -482,7 +482,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/12/13/HTTP-请求/" data-id="cj1sl9quf001lo1pvhfqv7cc6" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-请求/" data-id="cj1slbirj001jpdpvuvgfvpuc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -550,7 +550,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="cj1sl9quc001jo1pvvhkvfa9i" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="cj1slbirf001hpdpvyasoiqqk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -612,7 +612,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="cj1sl9r2t00c7o1pv8abwa1rn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="cj1slbj3300cbpdpvzt06mu8g" class="article-share-link">Share</a>
       
       
     </footer>
