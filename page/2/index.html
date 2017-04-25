@@ -82,6 +82,68 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-运行-Hadoop-伪分布式实例" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/29/运行-Hadoop-伪分布式实例/" class="article-date">
+  <time datetime="2016-11-29T08:57:36.000Z" itemprop="datePublished">2016-11-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/29/运行-Hadoop-伪分布式实例/">运行 Hadoop 伪分布式实例</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>伪分布式读取的是 HDFS 上的数据，要使用 HDFS，首先需要在 HDFS 中创建用户目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@slave3 ~]# hdfs dfs -mkdir -p /user/root</span><br></pre></td></tr></table></figure>
+<p>接着将 ./etc/hadoop 中的 xml 文件作为输入文件复制到分布式文件系统中，即将 /usr/local/hadoop/etc/hadoop 复制到分布式文件系统中的 /user/root/input 中。我们使用的是 root 用户，并且已创建相应的用户目录 /user/root，因此在此命令中就可以使用香断路径如 input，其对应的绝对路径就是 /user/root/input：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@slave3 ~]# hdfs dfs -mkdir input</span><br><span class="line">[root@slave3 ~]# hdfs dfs -put /usr/local/hadoop/etc/hadoop/*.xml input</span><br></pre></td></tr></table></figure>
+<p>复制完成后，可以通过如下命令查看文件列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@slave3 ~]# hdfs dfs -ls input</span><br><span class="line">Found 8 items</span><br><span class="line">-rw-r--r--   1 root supergroup       4436 2016-11-30 01:05 input/capacity-scheduler.xml</span><br><span class="line">-rw-r--r--   1 root supergroup       1111 2016-11-30 01:05 input/core-site.xml</span><br><span class="line">-rw-r--r--   1 root supergroup       9683 2016-11-30 01:05 input/hadoop-policy.xml</span><br><span class="line">-rw-r--r--   1 root supergroup       1177 2016-11-30 01:05 input/hdfs-site.xml</span><br><span class="line">-rw-r--r--   1 root supergroup        620 2016-11-30 01:05 input/httpfs-site.xml</span><br><span class="line">-rw-r--r--   1 root supergroup       3518 2016-11-30 01:05 input/kms-acls.xml</span><br><span class="line">-rw-r--r--   1 root supergroup       5933 2016-11-30 01:05 input/kms-site.xml</span><br><span class="line">-rw-r--r--   1 root supergroup        690 2016-11-30 01:05 input/yarn-site.xml</span><br></pre></td></tr></table></figure>
+<p>伪分布式云新 MapReduce 作业的方式跟单击模式相同，区别在于伪分布式读取的是 HDFS 中的文件（可以将单机目录中创建的本地 input 文件夹，输出结果 output 文件夹都删掉来验证这一点）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@slave3 hadoop]# hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0-alpha1.jar grep input output &apos;dfs[a-z.]+&apos;</span><br></pre></td></tr></table></figure>
+<p>查看运行结果的命令（查看的是位于 HDFS 中的输出结果）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@slave3 hadoop]# hdfs dfs -cat output/*</span><br><span class="line">1	dfsadmin</span><br><span class="line">1	dfs.replication</span><br><span class="line">1	dfs.namenode.name.dir</span><br><span class="line">1	dfs.datanode.data.dir</span><br></pre></td></tr></table></figure>
+<p>我们也可以将运行结果取回本地：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@slave3 hadoop]# rm -rf ./output   # 先删除本地的 output 文件夹（如果存在的话）</span><br><span class="line">[root@slave3 hadoop]# hdfs dfs -get output ./output   # 将 HDFS 上的 output 文件夹拷贝到本机</span><br><span class="line">[root@slave3 hadoop]# cat ./output/*</span><br><span class="line">1	dfsadmin</span><br><span class="line">1	dfs.replication</span><br><span class="line">1	dfs.namenode.name.dir</span><br><span class="line">1	dfs.datanode.data.dir</span><br></pre></td></tr></table></figure>
+<p>运行 Hadoop 程序时，为了防止覆盖结果，程序指定的输出目录（如 output）不能存在，否则会提示错误，因此运行前需要先删除输出目录。</p>
+<p>上述通过 start-dfs.sh 启动 Hadoop，仅仅是启动了 MapReduce 环境，我们也可以启动 YARN，让 YARN 来负责资源管理与任务调度。这里需要修改 mapred-site.xml 和 yarn-site.xml 两个配置文件：</p>
+<p>mapred-site.xml 配置文件修改如下：（mapred-site.xml是从mapred-site.template拷贝过来的）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">             &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">              &lt;name&gt;mapreduce.admin.user.env&lt;/name&gt;</span><br><span class="line">	      &lt;value&gt;HADOOP_MAPRED_HOME=$HADOOP_COMMON_HOME&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">              &lt;name&gt;yarn.app.mapreduce.am.env&lt;/name&gt;</span><br><span class="line">              &lt;value&gt;HADOOP_MAPRED_HOME=$HADOOP_COMMON_HOME&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>yarn-site.xml 配置文件修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">             &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>然后就可以启动 YARN 了（当然需要先执行 start-dfs.sh）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start-yarn.sh</span><br><span class="line">mapred --daemon start historyserver  #开启历史任务查看</span><br></pre></td></tr></table></figure>
+<p>启动 YARN 之后，运行实例的方法还是一样的，仅仅是资源管理方式、任务调度不同。观察日志信息可以发现，不启用 YARN 时，是 <strong>mapred.LocalJobRunner</strong> 在跑任务，启用 YARN 之后，是 YARN 在跑任务。启动 YARN 有个好处是可以通过 Web 界面查看任务的运行情况。</p>
+<p>但 YARN 主要是为集群提供更好的资源管理与任务调度，然而这在单机上体现不出价值，反而会使程序跑的稍慢些。因此在单机上是否开启 YARN 就看实际情况了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="cj1x61kd700c5zhpv07dtot0e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Hadoop-安装教程-单机-伪分布式配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" class="article-date">
@@ -158,7 +220,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="cj1x5l77r001usmpv1o9uadrv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="cj1x61k5f0020zhpvzralttvn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -240,7 +302,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="cj1x5l75y000msmpvaelskapn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="cj1x61k3j000nzhpv5cn22bmy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +356,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="cj1x5l77h001nsmpv5w5fij3c" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="cj1x61k5d001xzhpvoqba3hs2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -483,7 +545,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="cj1x5l77y001ysmpvzyt7adzs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="cj1x61k5j0021zhpvw8pqvubp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -544,7 +606,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="cj1x5l78l002jsmpv4ohj3ts1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="cj1x61k65002ozhpvldybh4az" class="article-share-link">Share</a>
       
       
     </footer>
@@ -591,7 +653,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="cj1x5l7fh00bwsmpvsaldqt10" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="cj1x61kcy00bqzhpvy9xqm1zu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -660,7 +722,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="cj1x5l77j001qsmpvufo2136h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="cj1x61k55001szhpvhpzpjw63" class="article-share-link">Share</a>
       
       
     </footer>
@@ -740,7 +802,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="cj1x5l77o001rsmpv8jkxvxhs" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="cj1x61k58001vzhpvpqqg10l0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -803,57 +865,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="cj1x5l7cj007rsmpvrwq0mzm2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-查找通过Yum安装的Java的安装路径" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/25/查找通过Yum安装的Java的安装路径/" class="article-date">
-  <time datetime="2016-11-25T03:46:47.000Z" itemprop="datePublished">2016-11-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Centos-7/">Centos 7</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/25/查找通过Yum安装的Java的安装路径/">查找通过Yum安装的Java的安装路径</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>很多需要 Javac 的程序依赖于 JAVA_HOME 环境变量。<br>如果是手工下载源码安装的JDK，很容易知道 JAVA_HOME 的目录，那么 YUM 安装的 JDK，不需要配置 PATH，因为已经使用软链接做好了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@bogon hadoop]# echo $PATH</span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin</span><br><span class="line">[root@bogon hadoop]# javac -version</span><br><span class="line">javac 1.8.0_111</span><br></pre></td></tr></table></figure>
-<ol>
-<li>YUM 安装 JDK</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y java*</span><br></pre></td></tr></table></figure>
-<ol>
-<li>查找 JAVA_HOME</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@bogon hadoop]# whereis javac</span><br><span class="line">javac: /usr/bin/javac /usr/share/man/man1/javac.1.gz</span><br><span class="line">[root@bogon hadoop]# ls -l /usr/bin/javac</span><br><span class="line">lrwxrwxrwx. 1 root root 23 11月 23 12:11 /usr/bin/javac -&gt; /etc/alternatives/javac</span><br><span class="line">[root@bogon hadoop]# ls -l /etc/alternatives/javac</span><br><span class="line">lrwxrwxrwx. 1 root root 70 11月 23 12:11 /etc/alternatives/javac -&gt; /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-1.b15.el7_2.x86_64/bin/javac</span><br><span class="line">[root@bogon hadoop]# whereis java</span><br><span class="line">java: /usr/bin/java /usr/lib/java /etc/java /usr/share/java /usr/share/man/man1/java.1.gz</span><br><span class="line">[root@bogon hadoop]# ls -l /usr/bin/java</span><br><span class="line">lrwxrwxrwx. 1 root root 22 11月 23 12:07 /usr/bin/java -&gt; /etc/alternatives/java</span><br><span class="line">[root@bogon hadoop]# ls -l /etc/alternatives/java</span><br><span class="line">lrwxrwxrwx. 1 root root 73 11月 23 12:07 /etc/alternatives/java -&gt; /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.111-1.b15.el7_2.x86_64/jre/bin/java</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/25/查找通过Yum安装的Java的安装路径/" data-id="cj1x5l7fe00brsmpv3cujaagd" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/25/SSH-无密码登录节点/" data-id="cj1x61ka6007pzhpvtvu804eg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -905,6 +917,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/25/Python-字符串类型功能解析/">Python 字符串类型功能解析</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/22/Python-编码转换/">Python 编码转换</a>
           </li>
         
@@ -918,10 +934,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/04/20/Python-编码/">Python 编码</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/16/华为S系列交换机配置SSH登录/">华为S系列交换机配置SSH登录</a>
           </li>
         
       </ul>

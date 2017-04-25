@@ -82,6 +82,65 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP-类型简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/12/PHP-类型简介/" class="article-date">
+  <time datetime="2016-08-12T05:52:06.000Z" itemprop="datePublished">2016-08-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/PHP/">PHP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/12/PHP-类型简介/">PHP 类型简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHP 支持 8 种原始数据类型。</p>
+<h4 id="标量类型"><a href="#标量类型" class="headerlink" title="标量类型"></a>标量类型</h4><ul>
+<li>boolean（布尔型）</li>
+<li>integer（整型）</li>
+<li>float（浮点型，也称作 double）</li>
+<li>string（字符串）</li>
+</ul>
+<h4 id="复合类型"><a href="#复合类型" class="headerlink" title="复合类型"></a>复合类型</h4><ul>
+<li>array（数组）</li>
+<li>object（对象）</li>
+</ul>
+<h4 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h4><ul>
+<li>resource（资源）</li>
+<li>NULL（无类型）</li>
+</ul>
+<hr>
+<p>变量的类型通常不是主动设定的，确切的说是由 <strong>PHP</strong> 根据该变量使用的上下文在运行时决定的。</p>
+<p>如果想查看某个表达式的值和类型，可以使用 <strong>var_dump()</strong> 函数。如果只是想得到一个易读懂的类型的表达式方式用于调试，用 <strong>gettype()</strong> 函数。要查看某个类型不要用 <strong>gettype()</strong>，而用 <strong>is_type</strong> 函数，以下是范例及执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# cat php_type.php </span><br><span class="line">&lt;?php</span><br><span class="line">$a_bool = TRUE;</span><br><span class="line">$a_str = &quot;foo&quot;;</span><br><span class="line">$a_str2 = &apos;foo&apos;;</span><br><span class="line">$an_int = 12;</span><br><span class="line"></span><br><span class="line">echo gettype($a_bool) . &quot;\n&quot;;</span><br><span class="line">echo gettype($a_str) . &quot;\n&quot;;</span><br><span class="line"></span><br><span class="line">if(is_int($an_int))&#123;</span><br><span class="line">	$an_int += 4;</span><br><span class="line">	echo $an_int . &quot;\n&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(is_string($a_bool))&#123;</span><br><span class="line">	echo &quot;String: $a_bool \n&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;Not String: $a_bool \n&quot;;</span><br><span class="line">&#125;</span><br><span class="line">[root@mail ~]# php php_type.php </span><br><span class="line">boolean</span><br><span class="line">string</span><br><span class="line">16</span><br><span class="line">Not String: 1</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/12/PHP-类型简介/" data-id="cj1x61k9n006yzhpv8twbp96h" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PHP-的-feof-方法需要注意的地方" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/11/PHP-的-feof-方法需要注意的地方/" class="article-date">
@@ -119,7 +178,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cj1x5l7c80077smpvo2zkg5qb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-的-feof-方法需要注意的地方/" data-id="cj1x61k9m006wzhpvzf24pmuc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +228,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cj1x5l7c1006xsmpvhbxkylvc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/11/PHP-循环读取文件每行记录处理/" data-id="cj1x61k9j006szhpvfg4ovcss" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +273,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cj1x5l7ba005ysmpvws9mz24y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-Array-数组/" data-id="cj1x61k8p005wzhpvfmo72gp8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,7 +317,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="cj1x5l7bu006ismpv9qxwaq27" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/PHP-http-build-query-函数/" data-id="cj1x61k99006ezhpv4gmxy7y1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -303,7 +362,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="cj1x5l74w0002smpvy0itikt1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/09/Apache-ab-命令原理/" data-id="cj1x61k270001zhpviq312l92" class="article-share-link">Share</a>
       
       
     </footer>
@@ -350,7 +409,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cj1x5l7bv006lsmpvrnlvz06m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-json-decode-函数/" data-id="cj1x61k9d006jzhpve9toe2gt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -393,7 +452,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="cj1x5l7bq006dsmpvo41metan" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-file-get-contents-函数/" data-id="cj1x61k98006bzhpvyaq8huzx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -450,7 +509,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="cj1x5l7bw006nsmpv41mx7pvw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-strlen-函数/" data-id="cj1x61k9e006kzhpvtud2lvnb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -519,72 +578,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="cj1x5l7bz006ssmpv6ak2qiux" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PHP-strpos-函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/06/PHP-strpos-函数/" class="article-date">
-  <time datetime="2016-08-06T07:02:46.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/PHP-strpos-函数/">PHP strpos() 函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="定义和用法"><a href="#定义和用法" class="headerlink" title="定义和用法"></a>定义和用法</h3><p>strpos() 函数查找字符串在另一个字符串中第一次出现的位置，大小写敏感。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strpos(string,find,start)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">string</td>
-<td style="text-align:left">必须，规定要搜索的字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">find</td>
-<td style="text-align:left">必须，规定要查找的字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">start</td>
-<td style="text-align:left">可选，规定在何时开始搜索</td>
-</tr>
-</tbody>
-</table>
-<h3 id="技术细节"><a href="#技术细节" class="headerlink" title="技术细节"></a>技术细节</h3><p>返回值：返回字符串在另一个字符串中第一次出现的位置，如果没有找到字符串则返回 FALSE。字符串位置从 0 开始，不是从 1 开始。<br>PHP版本：4+。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/06/PHP-strpos-函数/" data-id="cj1x5l7by006qsmpval5uu6ri" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/06/PHP-trim-函数/" data-id="cj1x61k9g006ozhpviw33cwr0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -636,6 +630,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/25/Python-字符串类型功能解析/">Python 字符串类型功能解析</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/22/Python-编码转换/">Python 编码转换</a>
           </li>
         
@@ -649,10 +647,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/04/20/Python-编码/">Python 编码</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/16/华为S系列交换机配置SSH登录/">华为S系列交换机配置SSH登录</a>
           </li>
         
       </ul>
