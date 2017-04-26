@@ -82,6 +82,76 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux-文件权限" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/05/Linux-文件权限/" class="article-date">
+  <time datetime="2016-07-05T03:50:51.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/05/Linux-文件权限/">Linux 文件权限</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Linux-的安全性"><a href="#1-Linux-的安全性" class="headerlink" title="1. Linux 的安全性"></a>1. Linux 的安全性</h3><p>Linux 安全系统的核心是用户帐号。每个能进去 Linux 系统的用户都会被分配一个唯一的用户帐号。用户对系统上对象的访问权限取决于他们登入系统时用的帐号。<br>用户权限是通过创建用户时分配的用户ID（UID）来跟踪的。UID是个数值，每个用户都有个唯一的UID，但在登录系统时不使用UID而是登录名。<br>Linux 系统使用特定的文件和工具来跟踪和管理系统上的用户帐号。</p>
+<h4 id="1-1-etc-passwd-文件"><a href="#1-1-etc-passwd-文件" class="headerlink" title="1.1 /etc/passwd 文件"></a>1.1 /etc/passwd 文件</h4><p>Linux 系统使用一个专门的文件来将用户的登录名匹配到对应的UID值。这个文件就是 /etc/passwd 文件。/etc/passwd 文件的字段包含了如下信息：登录用户名、用户密码、UID、GID、备注字段、用户HOME目录位置、用户默认Shell。</p>
+<h4 id="1-2-添加新用户"><a href="#1-2-添加新用户" class="headerlink" title="1.2 添加新用户"></a>1.2 添加新用户</h4><p>添加新用户到 Linux 系统的工具是 useradd。这个命令提供了一次性创建新用户帐户及设置用户 HOME 目录结构的简便方法。useradd 命令使用系统的默认值以及命令行参数来设置用户帐户。可以用 useradd 的命令加 -D 参数来查看你的 linux 系统的系统默认值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@host-001 ~]# /usr/sbin/useradd -D</span><br><span class="line">GROUP=100</span><br><span class="line">HOME=/home</span><br><span class="line">INACTIVE=-1</span><br><span class="line">EXPIRE=</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">SKEL=/etc/skel</span><br><span class="line">CREATE_MAIL_SPOOL=yes</span><br></pre></td></tr></table></figure>
+<p>-D 参数显示了在创建新用户时如果你不在命令行指定的话 useradd 命令将使用的默认值。</p>
+<h4 id="1-3-删除用户"><a href="#1-3-删除用户" class="headerlink" title="1.3 删除用户"></a>1.3 删除用户</h4><p>如果想从系统中删除用户，userdel 可以满足这个需求。默认情况下，userdel 命令会只删除 /etc/passwd 文件中的用户信息，而加上 -r 参数，userdel 会删除用户的 HOME 目录以及 mail 目录。</p>
+<h4 id="1-4-修改用户"><a href="#1-4-修改用户" class="headerlink" title="1.4 修改用户"></a>1.4 修改用户</h4><ul>
+<li>usermod</li>
+</ul>
+<p>usermod 命令是用户帐户修改工具中最为强大的一个，它能用来修改 /etc/passwd 文件中的大部分字段，只需用与想修改的字段对应的命令行参数就可以了。参数大部分跟 useradd 命令的参数一样，比如 -c 用来修改备注字段，-e 用来修改过期日期，-g 用来修改默认的登录组，-l 用来修改用户帐户的登录名，-L 用来锁定帐户，-p 用来修改帐户的密码，-U 用来解除帐户锁定。</p>
+<ul>
+<li>passwd 和 chpasswd</li>
+</ul>
+<p>改变用户密码的一个简便方法就是用 passwd 命令。如果只用 passwd 命令，它会改变你自己的密码。系统上的任何用户都能改变它自己的密码，但只有 root 用户才有权限改变别人的密码。-e 选项能强制用户下次登录时修改密码。<br>如果需要为系统中的大量用户来修改密码，chpasswd 命令能让事情简单许多。chpasswd 命令能从标准输入自动读取登录名和密码对列表，给密码加密，然后为用户帐户设置。</p>
+<ul>
+<li>chsh、chfn 和 chage</li>
+</ul>
+<p>chsh 用来快速修改默认的用户登录 shell，使用时必须用 shell 的全路径名作为参数，不能只用 shell 名。<br>chfn 命令提供了在 /etc/passwd 文件的备注字段中存储信息的标准方法。<br>chage 命令用来帮助管理用户帐户的有效期。chage 命令中好用的功能是设置帐户过期日期。通过它，你就能创建临时用户了。</p>
+<h3 id="2-使用-Linux-组"><a href="#2-使用-Linux-组" class="headerlink" title="2. 使用 Linux 组"></a>2. 使用 Linux 组</h3><p>用户帐户在控制单个用户安全性方面很管用，组权限用户则允许多个用户共享一组公用的权限来访问系统上的对象，比如文件、目录或设备等。<br>每个组都有一个唯一的GID，在系统上这是一个唯一的数值。</p>
+<h4 id="2-1-etc-group-文件"><a href="#2-1-etc-group-文件" class="headerlink" title="2.1 /etc/group 文件"></a>2.1 /etc/group 文件</h4><p>类似用户帐户信息，/etc/group 文件包含系统上用到的每个组的信息。</p>
+<ul>
+<li>创建新组</li>
+</ul>
+<p>groupadd 命令用来在系统上穿件新组。创建新组时，默认没有用户属于该组。可以用 usermod 命令来添加用户到组。</p>
+<ul>
+<li>修改组</li>
+</ul>
+<p>groupmod 命令可以修改已有组的GID或组名，修改组名时，GID和组成员不会变，只有组名会改变。由于所有的安全权限都是基于GID的，可以随意改变组名而不影响文件的安全性。</p>
+<h3 id="3-理解文件权限"><a href="#3-理解文件权限" class="headerlink" title="3. 理解文件权限"></a>3. 理解文件权限</h3><h4 id="3-1-使用文件权限符"><a href="#3-1-使用文件权限符" class="headerlink" title="3.1 使用文件权限符"></a>3.1 使用文件权限符</h4><p>可以用 ls 命令用来查看 Linux 系统上的文件、目录和设备的权限。</p>
+<h4 id="3-2-默认文件权限"><a href="#3-2-默认文件权限" class="headerlink" title="3.2 默认文件权限"></a>3.2 默认文件权限</h4><p>umask 命令用来设置用户创建文件和目录的默认权限。touch 命令用分配给我的用户帐户的默认权限创建了这个文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/07/05/Linux-文件权限/" data-id="cj1yb4brx003u01pvp72f2tvo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux-定位系统环境变量" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/05/Linux-定位系统环境变量/" class="article-date">
@@ -122,7 +192,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/05/Linux-定位系统环境变量/" data-id="cj1x61k75003qzhpvzk6h0i6j" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/05/Linux-定位系统环境变量/" data-id="cj1yb4brp003k01pvq04rl2sb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,7 +237,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/01/Linux-GNU-工具链/" data-id="cj1x61k68002rzhpvksp8xa9a" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/01/Linux-GNU-工具链/" data-id="cj1yb4bqw002l01pv6pjmhli4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +288,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/01/Linux-是什么/" data-id="cj1x61k7c003yzhpvkfsca8s8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/01/Linux-是什么/" data-id="cj1yb4brw003r01pvw2wx65gh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -278,7 +348,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Rsync-同步常用命令/" data-id="cj1x61ka3007lzhpvs5dd67sy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/30/Rsync-同步常用命令/" data-id="cj1yb4buu007v01pv7xt02wic" class="article-share-link">Share</a>
       
       
     </footer>
@@ -324,7 +394,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Rsync-安装使用详解/" data-id="cj1x61ka4007nzhpvt19hmw4h" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/30/Rsync-安装使用详解/" data-id="cj1yb4buw007x01pvjsuv4s6l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -371,7 +441,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" data-id="cj1x61k4o001gzhpv3ip2ijx5" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" data-id="cj1yb4bpc001c01pvmntfn0ji" class="article-share-link">Share</a>
       
       
     </footer>
@@ -421,7 +491,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="cj1x61k8e005fzhpv6ll49td1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="cj1yb4bt6005j01pv19lndsj2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -474,7 +544,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="cj1x61k8b005azhpv03cil9ci" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="cj1yb4bt2005c01pvil1blqqg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -529,63 +599,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="cj1x61ka9007uzhpvgohu4n4e" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Shell-中中括号的用法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/24/Shell-中中括号的用法/" class="article-date">
-  <time datetime="2016-06-24T03:37:10.000Z" itemprop="datePublished">2016-06-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/24/Shell-中中括号的用法/">Shell 中中括号的用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="单中括号"><a href="#单中括号" class="headerlink" title="单中括号"></a>单中括号</h3><ol>
-<li><p>bash 的内部命令，[ 和 test 是等同的。如果我们不用绝对路径指明，通常我们用的都是 bash 自带的命令。if/test 结构中的左中括号都是调用 test 的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。</p>
-</li>
-<li><p>Test 和 [] 中可用的比较运算符只有 == 和 !=，两者都是用于比较字符串的，不可用于整数比较，整数比较只能使用 -eq、-gt这种形式。无论是字符串比较还是整数比较都不支持大于号小于号。如果实在想用，对于字符串比较可以使用转义形式。[] 中的逻辑与和逻辑或使用 -a 和 -o 表示。</p>
-</li>
-</ol>
-<h3 id="双中括号"><a href="#双中括号" class="headerlink" title="双中括号"></a>双中括号</h3><ol>
-<li><p>bash 的关键字，并不是一个命令。[[]]结构比[]更加通用。在[[和]]之间所有的字符都不会发生文件名扩展或者单词分隔，但是会发生参数扩展和命令替换。</p>
-</li>
-<li><p>支持字符串的模式匹配，使用 =~ 操作符甚至支持 shell 的正则表达式。字符串比较时可以把右边作为一个模式，而不仅仅是一个字符串，比如 [[ hello == hell? ]]，结果为真。[[]]中匹配字符串或通配符，不需要引号。</p>
-</li>
-<li><p>使用[[…]]条件判断结构，而不是[…]，能够防止脚本中的许多逻辑错误。比如 &amp;&amp;、||、&lt; 和 &gt; 操作符能够正常存在于 [[]]条件判断结构中。</p>
-</li>
-<li><p>bash 把双括号中的表达式看作一个单独的元素，并返回一个退出状态码。</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="cj1x61ka8007szhpvq7oe9upj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="cj1yb4bv1008501pvkd00jepi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -637,6 +651,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/26/Python-列表类型功能解析/">Python 列表类型功能解析</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/25/Python-字符串类型功能解析/">Python 字符串类型功能解析</a>
           </li>
         
@@ -650,10 +668,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/04/20/Python模块初识及用户输入打印/">Python模块初识及用户输入打印</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/20/Python-编码/">Python 编码</a>
           </li>
         
       </ul>

@@ -82,6 +82,49 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-LinuxShell-命令运行符号-区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/04/LinuxShell-命令运行符号-区别/" class="article-date">
+  <time datetime="2016-08-04T08:21:15.000Z" itemprop="datePublished">2016-08-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/04/LinuxShell-命令运行符号-区别/">LinuxShell 命令运行符号 &amp; ; &amp;&amp; 区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="三个命令同时执行"><a href="#三个命令同时执行" class="headerlink" title="三个命令同时执行"></a>三个命令同时执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 &amp; echo 2 &amp; echo 3</span><br><span class="line">[1] 26124</span><br><span class="line">[2] 26125</span><br><span class="line">3</span><br><span class="line">1</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<h3 id="不管前面的命令执行成功没有，后面的命令继续执行"><a href="#不管前面的命令执行成功没有，后面的命令继续执行" class="headerlink" title="不管前面的命令执行成功没有，后面的命令继续执行"></a>不管前面的命令执行成功没有，后面的命令继续执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 ; echo 2 ; echo 3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">[1]-  完成                  echo 1</span><br><span class="line">[2]+  完成                  echo 2</span><br></pre></td></tr></table></figure>
+<h3 id="只有前面的命令执行成功，后面命令才继续执行"><a href="#只有前面的命令执行成功，后面命令才继续执行" class="headerlink" title="只有前面的命令执行成功，后面命令才继续执行"></a>只有前面的命令执行成功，后面命令才继续执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mail ~]# echo 1 &amp;&amp; echo 2 &amp;&amp; echo 3</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/08/04/LinuxShell-命令运行符号-区别/" data-id="cj1yb4bsl004l01pviiw4xaqy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Linux-shell-多进程实现（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/04/Linux-shell-多进程实现（一）/" class="article-date">
@@ -117,7 +160,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="cj1x61k6p0036zhpvdly25edf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/04/Linux-shell-多进程实现（一）/" data-id="cj1yb4bra003201pvngzqmf5t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +206,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="cj1x61k9q0070zhpv1fqex06e" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/08/02/PHP-预定义变量/" data-id="cj1yb4buf007701pvs6corn9c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -223,7 +266,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cj1x61kah0084zhpv682a8l7p" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/TCP-连接的状态/" data-id="cj1yb4bvk008m01pvxtkl3a96" class="article-share-link">Share</a>
       
       
     </footer>
@@ -271,7 +314,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/30/Linux-apache-access-log-Analy/" data-id="cj1x61k6c002wzhpv74ci300l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/30/Linux-apache-access-log-Analy/" data-id="cj1yb4br1002t01pvzhbsaboc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -314,7 +357,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="cj1x61k3s000wzhpv6z47jck8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/29/Centos-7-安装-memcache-及-安装-php-扩展/" data-id="cj1yb4bok000u01pvs0xe8yt4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,7 +402,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="cj1x61kc800ajzhpvq8s7vono" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/29/使用-Apachetop-实时监测-web-服务器运行状态/" data-id="cj1yb4bx400av01pvvquk972b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -409,7 +452,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="cj1x61kb70096zhpvrj2fxehm" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/28/Zabbix-TCP-连接数监控/" data-id="cj1yb4bw1009g01pvdq1vc42f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,7 +499,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="cj1x61k70003nzhpv4fbqcp5f" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/28/Linux-大量-TIME-WAIT-解决办法/" data-id="cj1yb4brl003h01pv6di8wm1q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -506,52 +549,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="cj1x61k7o004czhpvzutvymjt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Linux-SMB-配置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/20/Linux-SMB-配置/" class="article-date">
-  <time datetime="2016-07-20T04:47:28.000Z" itemprop="datePublished">2016-07-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/20/Linux-SMB-配置/">Linux SMB 配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果要在 Linux 以及 Windows 之间互相传文件，使用 SMB 共享的方式是一个比较不错的方法，下面记录一下了下步骤。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/07/20/Linux-SMB-配置/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/07/20/Linux-SMB-配置/" data-id="cj1x61k69002tzhpv7noea8t7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/07/22/LinuxShell-sed-进阶/" data-id="cj1yb4bse004b01pvb234cdvg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -603,6 +601,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/26/Python-列表类型功能解析/">Python 列表类型功能解析</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/25/Python-字符串类型功能解析/">Python 字符串类型功能解析</a>
           </li>
         
@@ -616,10 +618,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/04/20/Python模块初识及用户输入打印/">Python模块初识及用户输入打印</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/20/Python-编码/">Python 编码</a>
           </li>
         
       </ul>
