@@ -82,6 +82,76 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-HTTP-请求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/13/HTTP-请求/" class="article-date">
+  <time datetime="2016-12-13T11:35:55.000Z" itemprop="datePublished">2016-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/13/HTTP-请求/">HTTP 请求</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最常用请求：</p>
+<ol>
+<li>GET：请求获取由Request-URL所标识的资源</li>
+<li>POST：在Request-URL所标识的资源后附加新的数据。例如：文件上传、提交表单</li>
+</ol>
+<p>都是为了实现服务器端的交互。用到的协议规则：</p>
+<p>GET请求：</p>
+<ol>
+<li>第一行：方法 路径 协议版本（例如：GET / HTTP/1.1）</li>
+<li>第二行：可以处理哪些类型的数据（例如：Accept: text/html, application/xhtml+xml, <em>/</em>）</li>
+<li>第三行：可以接收的语言区域（例如：Accept-Language: zh-CN）</li>
+<li>第四行：浏览器的客户端版本号</li>
+<li>第五行：可以接收的编码格式（例如：Accept-Encoding: gzip, deflate）</li>
+<li>第六行：表示访问的主机IP或者域名：Host</li>
+<li>第七行：长连接（例如：Connection: Keep-Alive），由于每次传输都是建立TCP连接，消耗资源，所有有了长连接的机制，节省资源</li>
+<li>第八行：Cookie（浏览器发送给服务器的内容）<br>。。。</li>
+</ol>
+<p>POST请求：</p>
+<ol>
+<li>第一行：方法 路径 协议版本（例如：POST / HTTP/1.1）</li>
+<li>第二行：请求使用的方式（例如：x-requested-with: XMLHttpRequest）</li>
+<li>第三行：可以接收的语言区域（例如：Accept-Language: zh-CN）</li>
+<li>第四行：浏览器的请求来源，（例如：Referer: <a href="http://www.baidu.com/等）" target="_blank" rel="external">http://www.baidu.com/等）</a></li>
+<li>第五行：Accept 可以处理哪些类型的数据<br>。。。</li>
+</ol>
+<p>响应：</p>
+<ol>
+<li>第一行：协议版本</li>
+</ol>
+<p>不常用请求：<br>HEAD OPTIONS PUT DELETE TRACE</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-请求/" data-id="cj202kugr001j1mpv2pbkvuud" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-HTTP-协议基础" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/13/HTTP-协议基础/" class="article-date">
@@ -140,7 +210,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="cj1ycy7fc001ekupv372fp8a1" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="cj202kugo001h1mpv1lw3dfky" class="article-share-link">Share</a>
       
       
     </footer>
@@ -202,7 +272,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="cj1ycy7nx00cekupv3yrd5fkk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="cj202kupd00cp1mpv317ucxc6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +358,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="cj1ycy7g0001ukupv8afbjius" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="cj202kuh5001u1mpvbd2yaacl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -370,7 +440,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="cj1ycy7e7000mkupvpsl1fxvh" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="cj202kufh000m1mpv8yd2op47" class="article-share-link">Share</a>
       
       
     </footer>
@@ -424,7 +494,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="cj1ycy7fs001qkupvbtsrqar4" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="cj202kugy001q1mpvnquzqpaf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -613,7 +683,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="cj1ycy7g3001vkupvyk21f3qj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="cj202kuh8001v1mpv6lwbg5d3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -674,7 +744,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="cj1ycy7gv002jkupvh89h4f88" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="cj202kuhz002j1mpvck4y3fnz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -721,7 +791,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="cj1ycy7nn00bxkupvurfdngzt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/浅谈-JobTracker-和-TaskTracker/" data-id="cj202kup500cd1mpvkqwcxn0x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -790,87 +860,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="cj1ycy7fq001nkupvz9mc3wva" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Hadoop-启动、关闭" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/26/Hadoop-启动、关闭/" class="article-date">
-  <time datetime="2016-11-26T01:08:50.000Z" itemprop="datePublished">2016-11-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/26/Hadoop-启动、关闭/">Hadoop 启动、关闭</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="适用版本"><a href="#适用版本" class="headerlink" title="适用版本"></a>适用版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master hadoop]# hadoop version</span><br><span class="line">Hadoop 3.0.0-alpha1</span><br><span class="line">Source code repository https://git-wip-us.apache.org/repos/asf/hadoop.git -r a990d2ebcd6de5d7dc2d3684930759b0f0ea4dc3</span><br><span class="line">Compiled by andrew on 2016-08-30T07:02Z</span><br><span class="line">Compiled with protoc 2.5.0</span><br><span class="line">From source with checksum f3a9644139eac17acbb91bfce7f68e2</span><br><span class="line">This command was run using /usr/local/hadoop/share/hadoop/common/hadoop-common-3.0.0-alpha1.jar</span><br></pre></td></tr></table></figure>
-<h2 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h2><p><a href="http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File" target="_blank" rel="external">http://hadoop.apache.org/docs/r3.0.0-alpha1/hadoop-project-dist/hadoop-common/ClusterSetup.html#Slaves_File</a></p>
-<h2 id="Hadoop-Startup"><a href="#Hadoop-Startup" class="headerlink" title="Hadoop Startup"></a>Hadoop Startup</h2><ol>
-<li>要启动 Hadooop cluster，需要同时启动 HDFS 和 YARN cluster.<br>第一次打开 HDFS，它必须先格式化它。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs namenode -format</span><br></pre></td></tr></table></figure>
-<ol>
-<li>如果 etc/hadoop/workers 与 ssh 信任已经配置好了，所有的 HDFS processes 可以使用单一的脚本来启动</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/start-dfs.sh   #在NameNode 节点运行</span><br></pre></td></tr></table></figure>
-<p>也可以逐个节点来启动：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs --daemon start namenode   #Start HDFS NameNode</span><br><span class="line">$HADOOP_HOME/bin/hdfs --daemon start datanode   #Start HDFS DataNode</span><br></pre></td></tr></table></figure>
-<ol>
-<li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，所有的 YARN processes 可以使用单一的脚本来启动</li>
-</ol>
-<p>YARN 是从 MapReduce 中分离出来的，负责资源管理与任务调度。运行于 MapReduce 之上，提供了高可用性、高扩展性。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
-<p>也可以逐个节点来启动：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/yarn --daemon start resourcemanager    #使用如下命令运行指定的资源管理程序</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon start nodemanager   #在每个yarn节点启动NodeManager</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon start proxyserver</span><br></pre></td></tr></table></figure>
-<ol>
-<li>在指定的服务器运行如下命令启动 MapReduce JobHistory Server</li>
-</ol>
-<p>开启历史服务器，才能在 Web 中查看任务运行（注意，这里是查看，默认是全部会记录，只有开启后才能查看）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/mapred --daemon start historyserver</span><br></pre></td></tr></table></figure>
-<h2 id="Hadoop-ShutDown"><a href="#Hadoop-ShutDown" class="headerlink" title="Hadoop ShutDown"></a>Hadoop ShutDown</h2><ol>
-<li>如果 etc/hadoop/workers 与 SSH 信任已经配置好了，使用如下命令停止所有的 HDFS processes</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/stop-dfs.sh    #在 NameNode 节点运行</span><br></pre></td></tr></table></figure>
-<p>同启动的时候一样，也可以逐个节点停止：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/hdfs --daemon stop namenode    # 在 NameNode 节点运行</span><br><span class="line">$HADOOP_HOME/bin/hdfs --daemon stop datanode    # 在 DataNode 节点运行</span><br></pre></td></tr></table></figure>
-<ol>
-<li>如果 etc/hadoop/workers 与 SSH 信任已经配置好可，使用如下命令停止所有 YARN processes</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/sbin/stop-yarn.sh</span><br></pre></td></tr></table></figure>
-<p>也可以逐个节点停止：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/yarn --daemon stop resourcemanager</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon stop nodemanager</span><br><span class="line">$HADOOP_HOME/bin/yarn --daemon stop proxyserver</span><br></pre></td></tr></table></figure>
-<ol>
-<li>停止 MapReduce JobHistory Server</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$HADOOP_HOME/bin/mapred --daemon stop historyserver</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-启动、关闭/" data-id="cj1ycy7fx001rkupv9mf8enyi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-MapReduce/" data-id="cj202kugv001n1mpvnokxbbf8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -922,6 +912,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/27/Python-编码补充/">Python 编码补充</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/26/Python-列表类型功能解析/">Python 列表类型功能解析</a>
           </li>
         
@@ -935,10 +929,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/04/21/Python-变量、基本数据类型/">Python 变量、基本数据类型</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/20/Python模块初识及用户输入打印/">Python模块初识及用户输入打印</a>
           </li>
         
       </ul>
