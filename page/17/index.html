@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,128 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Zabbix-配置第三方邮件服务器实现邮件预警" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" class="article-date">
+  <time datetime="2016-05-19T07:27:58.000Z" itemprop="datePublished">2016-05-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/">Zabbix 配置第三方邮件服务器实现邮件预警</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Media-Types-Configuration"><a href="#Media-Types-Configuration" class="headerlink" title="Media Types Configuration"></a>Media Types Configuration</h3><p>我们使用联通的 <strong>wo</strong> 邮箱发送报警邮件到 <strong>qq</strong> 邮箱</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Item</th>
+<th style="text-align:left">Value</th>
+<th style="text-align:left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Name</td>
+<td style="text-align:left">Email</td>
+<td style="text-align:left">媒介名称，自定义设置</td>
+</tr>
+<tr>
+<td style="text-align:left">Type</td>
+<td style="text-align:left">Email</td>
+<td style="text-align:left">本篇文章我们以 Email 为例</td>
+</tr>
+<tr>
+<td style="text-align:left">SMTP server</td>
+<td style="text-align:left">smtp.wo.cn</td>
+<td style="text-align:left">smtp服务器地址，我们使用联通的</td>
+</tr>
+<tr>
+<td style="text-align:left">SMTP server port</td>
+<td style="text-align:left">25</td>
+<td style="text-align:left">smtp连接端口</td>
+</tr>
+<tr>
+<td style="text-align:left">SMTP helo</td>
+<td style="text-align:left">smtp.wo.cn</td>
+<td style="text-align:left">smtp helo值，通常是顶级域名，这个地方需要输入 smtp.wo.cn</td>
+</tr>
+<tr>
+<td style="text-align:left">SMTP email</td>
+<td style="text-align:left">18675850419@wo.cn</td>
+<td style="text-align:left">发件人地址</td>
+</tr>
+<tr>
+<td style="text-align:left">Connection security</td>
+<td style="text-align:left">None</td>
+<td style="text-align:left">是否加密，这里选择 None</td>
+</tr>
+<tr>
+<td style="text-align:left">Authentication</td>
+<td style="text-align:left">Normal password</td>
+<td style="text-align:left">认证方式，这里选择 Normal password</td>
+</tr>
+<tr>
+<td style="text-align:left">Username</td>
+<td style="text-align:left">18675850419@wo.cn</td>
+<td style="text-align:left">输入 wo 邮箱账号，必须要加后缀部分</td>
+</tr>
+<tr>
+<td style="text-align:left">Password</td>
+<td style="text-align:left">xxxx</td>
+<td style="text-align:left">输入对应的 wo 邮箱密码</td>
+</tr>
+<tr>
+<td style="text-align:left">Enabled</td>
+<td style="text-align:left">勾选</td>
+<td style="text-align:left">勾选启用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Users-Configuration"><a href="#Users-Configuration" class="headerlink" title="Users Configuration"></a>Users Configuration</h3><ol>
+<li><p>这里我们配置系统默认的 <strong>Admin</strong> 账户，在 <strong>Media</strong> 页添加上一步新增的介质</p>
+</li>
+<li><p>需要配置 <strong>Send to</strong>，其后填写接收报警信息的邮件地址，此处我填写我的 <strong>411383444@qq.com</strong> 邮箱</p>
+</li>
+</ol>
+<h3 id="Actions-Configuration"><a href="#Actions-Configuration" class="headerlink" title="Actions Configuration"></a>Actions Configuration</h3><ol>
+<li><p>这里我们配置系统默认的 <strong>Report problems to Zabbix administors</strong> action</p>
+</li>
+<li><p>需要勾选 <strong>Action</strong> 页的 <strong>Enabled</strong>，如需要，也请一并勾选 <strong>Recovery message</strong></p>
+</li>
+</ol>
+<blockquote>
+<p>注意: 配置的第三方邮件服务器时常发生预警邮件发送失败的情况,后面将专门使用一章来介绍使用本地的邮件服务器发送预警邮件.</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/" data-id="cj2199m8y00aooapv41e8p7k4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Zabbix-Template-Windows-2008-R2-IIS-Servers" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -204,7 +326,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="cj216sbhz009sxrpvefj2nna2" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/19/Zabbix-Template-Windows-2008-R2-IIS-Servers/" data-id="cj2199m8a009soapvzae7r0g9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,7 +380,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="cj216sbic00abxrpvd57r9p3o" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/14/Zabbix-监控-Centos-7-系统下的-Mysql/" data-id="cj2199m8q00acoapv4z44vd60" class="article-share-link">Share</a>
       
       
     </footer>
@@ -467,7 +589,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cj216sbem0055xrpvpzp9h353" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/14/Mysql-权限/" data-id="cj2199m4x0055oapvjxygc2iq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -523,7 +645,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="cj216sbel0052xrpvu2sar4jz" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/13/Mysql-mysql-user/" data-id="cj2199m4v0052oapvs5hpxw86" class="article-share-link">Share</a>
       
       
     </footer>
@@ -568,7 +690,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="cj216sb9w000rxrpvsmgvvh2u" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/12/Centos-7-关闭-SELinux/" data-id="cj2199m0d000roapvz9h6tf88" class="article-share-link">Share</a>
       
       
     </footer>
@@ -629,7 +751,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="cj216sbia00a8xrpv8ldd2kh2" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-的-system-cpu-load-与-CPU-使用率/" data-id="cj2199m8p00aboapvnqhkj3jc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -694,7 +816,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="cj216sbi2009wxrpvy8190179" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/11/Zabbix-agent-在-Windows-上安装部署/" data-id="cj2199m8i00a0oapv6reicnvk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -918,7 +1040,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cj216sbi600a3xrpvzvmwarn7" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/07/Zabbix-事件/" data-id="cj2199m8l00a4oapv8ohk6lmw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1009,52 +1131,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cj216sbih00aixrpv67y5kmqa" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-单位符号-Unit-symbols" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/06/Zabbix-单位符号-Unit-symbols/" class="article-date">
-  <time datetime="2016-05-06T07:42:36.000Z" itemprop="datePublished">2016-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/06/Zabbix-单位符号-Unit-symbols/">Zabbix 单位符号 Unit symbols</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在 zabbix 里面，我们不需要使用大数字，例如可以不使用 86400 来表示一天，这个数字不容易理解也容易出错，用什么办法可以解决呢？我们使用单位来简化，例如简化 zabbix 触发器表达式或者 item key。所以，我们可以使用 1d 来取代 86400 ，’d’ 就是单位后缀，表示天。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/06/Zabbix-单位符号-Unit-symbols/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/06/Zabbix-单位符号-Unit-symbols/" data-id="cj216sbi800a4xrpv3i74li2i" class="article-share-link">Partager</a>
+      <a data-url="http://ttlop.com/2016/05/06/Zabbix-触发器表达式详解/" data-id="cj2199m8w00akoapv7ay4y83y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1076,7 +1153,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -1101,9 +1178,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/28/Python-元组补充/">Python 元组补充</a>
+          </li>
         
           <li>
             <a href="/2017/04/28/Python-列表补充/">Python 列表补充</a>
@@ -1121,10 +1202,6 @@ var _hmt = _hmt || [];
             <a href="/2017/04/25/Python-字符串类型功能解析/">Python 字符串类型功能解析</a>
           </li>
         
-          <li>
-            <a href="/2017/04/22/Python-编码转换/">Python 编码转换</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1138,7 +1215,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 XiaoYong Hu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

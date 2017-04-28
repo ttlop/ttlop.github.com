@@ -15,18 +15,18 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="utf-8">
   
-  <title>电池串联和并联区别 | 运维生存时间</title>
+  <title>Python 元组补充 | 运维生存时间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="电池串联并联区别">
+  <meta name="description" content="python 元组特性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="电池串联和并联区别">
-<meta property="og:url" content="http://ttlop.com/2016/10/11/电池串联和并联区别/index.html">
+<meta property="og:title" content="Python 元组补充">
+<meta property="og:url" content="http://ttlop.com/2017/04/28/Python-元组补充/index.html">
 <meta property="og:site_name" content="运维生存时间">
-<meta property="og:description" content="电池串联并联区别">
-<meta property="og:updated_time" content="2016-10-11T01:23:32.426Z">
+<meta property="og:description" content="python 元组特性">
+<meta property="og:updated_time" content="2017-04-28T03:05:46.891Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="电池串联和并联区别">
-<meta name="twitter:description" content="电池串联并联区别">
+<meta name="twitter:title" content="Python 元组补充">
+<meta name="twitter:description" content="python 元组特性">
   
     <link rel="alternate" href="/atom.xml" title="运维生存时间" type="application/atom+xml">
   
@@ -81,12 +81,16 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-电池串联和并联区别" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Python-元组补充" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/11/电池串联和并联区别/" class="article-date">
-  <time datetime="2016-10-11T01:12:38.000Z" itemprop="datePublished">2016-10-11</time>
+    <a href="/2017/04/28/Python-元组补充/" class="article-date">
+  <time datetime="2017-04-28T03:04:34.000Z" itemprop="datePublished">2017-04-28</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -95,7 +99,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      电池串联和并联区别
+      Python 元组补充
     </h1>
   
 
@@ -103,13 +107,15 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>并联：电池之间正和正、负和负并排连接在一起。并联电池的电压是每个子电池电压的最大值，输出的电量是电池组最弱子电池的N倍（N为子电池的数量）。<br>串联：电池之间正和负串在一起连接。串联电池的电压是每个子电池电压的总和，输出功率（即串联后的电量）与单个电磁电池的容量相关。</p>
-<p>因为无论串联，还是并联电池组的输出电量都与电池组中的最弱电池有关，所以要求电池组中要选用新旧程度和性能尽可能接近的子电池，不然电池组中的性能好（或新的）子电池就要对弱的子电池做功，从而减少整个电池组的效能，也不利于最好子电池的寿命。</p>
+        <p><strong>代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line"># 元组的元素不可被修改，but元组的元素的元素可被修改</span><br><span class="line">t = (11, 22, [&apos;alex&apos;, &#123;&quot;k1&quot;:&quot;v1&quot;&#125;])</span><br><span class="line">print(t)</span><br><span class="line">t[2].append(&quot;xxx&quot;)</span><br><span class="line">print(t)</span><br></pre></td></tr></table></figure>
+<p><strong>执行</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ttlop\AppData\Local\Programs\Python\Python36\python.exe C:/Users/ttlop/PycharmProjects/q1_day2/c10.py</span><br><span class="line">(11, 22, [&apos;alex&apos;, &#123;&apos;k1&apos;: &apos;v1&apos;&#125;])</span><br><span class="line">(11, 22, [&apos;alex&apos;, &#123;&apos;k1&apos;: &apos;v1&apos;&#125;, &apos;xxx&apos;])</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/10/11/电池串联和并联区别/" data-id="cj2199ma100cdoapvnt8r52th" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/28/Python-元组补充/" data-id="cj2199m6m007hoapvya0jqh9w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -118,19 +124,10 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2016/10/11/RESTORE-HEADERONLY-Transact-SQL/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          RESTORE HEADERONLY (Transact-SQL)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/10/09/数据库镜像-基本概念/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/04/28/Python-列表补充/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">数据库镜像-基本概念</div>
+      <div class="article-nav-title">Python 列表补充</div>
     </a>
   
 </nav>
