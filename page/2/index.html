@@ -82,6 +82,63 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-华为S系列交换机配置SSH登录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/16/华为S系列交换机配置SSH登录/" class="article-date">
+  <time datetime="2017-03-16T04:22:36.000Z" itemprop="datePublished">2017-03-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HUAWEI/">HUAWEI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/16/华为S系列交换机配置SSH登录/">华为S系列交换机配置SSH登录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>配置思路</strong></p>
+<ul>
+<li>配置VTY用户界面</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">system-view</span><br><span class="line">user-interface vty 0 4</span><br><span class="line">authentication-mode aaa</span><br><span class="line">protocol inbound ssh</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建SSH用户，并配置其认证方式为Password认证</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">aaa</span><br><span class="line">local-user client001 password cipher xxxxxx</span><br><span class="line">local-user client001 privilege level 3</span><br><span class="line">local-user client001 service-type ssh</span><br><span class="line">quit</span><br><span class="line">ssh user client001 authentication-type password</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使能Stelnet服务器功能</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stelnet server enable</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置SSH用户服务方式为STelnet</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user client001 service-type stelnet</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2017/03/16/华为S系列交换机配置SSH登录/" data-id="cj21g9brx00b8m2pv4n3wytz1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Zabbix-监控-Windows-的-CPU-百分比" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" class="article-date">
@@ -119,7 +176,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" data-id="cj2199m8t00agoapvlh0a9eqf" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/02/15/Zabbix-监控-Windows-的-CPU-百分比/" data-id="cj21g9brf00agm2pv6spyqf0p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +226,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/" data-id="cj2199m450044oapvb0xqb35k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/02/14/Linux-访问-Windows-共享文件夹的两种方法/" data-id="cj21g9bmp0044m2pvp9hz2bue" class="article-share-link">Share</a>
       
       
     </footer>
@@ -239,7 +296,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/12/13/HTTP-请求/" data-id="cj2199m1d001hoapv90vspmle" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-请求/" data-id="cj21g9bjt001jm2pv6yxk26qc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,7 +364,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="cj2199m1b001eoapvi9tqnt7r" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/12/13/HTTP-协议基础/" data-id="cj21g9bjq001hm2pvd075kacy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -369,7 +426,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="cj2199ma900cnoapv9n3w37rn" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/运行-Hadoop-伪分布式实例/" data-id="cj21g9bsu00cmm2pvx4qqddj4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -455,7 +512,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="cj2199m1z001uoapv08r0m4k7" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Hadoop-安装教程-单机-伪分布式配置/" data-id="cj21g9bkj001um2pv4v0cnvnc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -537,7 +594,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="cj2199m04000joapviyemm1ay" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/29/Centos-7-LVM-磁盘扩容/" data-id="cj21g9bii000mm2pvsp8hd56i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -591,7 +648,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="cj2199m1r001qoapvaj7tu1dy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-Yarn/" data-id="cj21g9bk4001qm2pv37ovkxze" class="article-share-link">Share</a>
       
       
     </footer>
@@ -780,68 +837,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="cj2199m22001voapvo87h5psx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JobTracker-和-TaskTracker-概述" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/26/JobTracker-和-TaskTracker-概述/" class="article-date">
-  <time datetime="2016-11-26T05:57:46.000Z" itemprop="datePublished">2016-11-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hadoop/">Hadoop</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/26/JobTracker-和-TaskTracker-概述/">JobTracker 和 TaskTracker 概述</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Hadoop MapReduce 采用 Master/Slave 结构。</p>
-<ul>
-<li>Master：整个集群的全局管理者，功能包括：作业管理、状态监控和任务调度等，即 MapReduce 中的 JobTracker。</li>
-<li>Slave：负责任务的执行和任务状态的回报，即 MapReduce 中的 TaskTracker。</li>
-</ul>
-<h3 id="JobTracker-剖析"><a href="#JobTracker-剖析" class="headerlink" title="JobTracker 剖析"></a>JobTracker 剖析</h3><ol>
-<li>概述：JobTracker 是一个后台服务进程，启动之后，会一直监听并接受来自各个 TaskTracker 发送的心跳信息，包括资源使用情况和任务运行情况等信息。</li>
-<li>功能：</li>
-</ol>
-<ul>
-<li>作业控制：在 hadoop 中每个应用程序被表示成一个作业，每个作业又被分成多个任务，JobTracker 的作业控制模块则负责作业的分解和状态监控。最重要的是状态监控：主要包括TaskTracker状态监控、作业状态监控和任务状态监控。主要作用：容错和为任务调度提供决策依据。</li>
-<li>资源管理</li>
-</ul>
-<h3 id="TaskTracker-剖析"><a href="#TaskTracker-剖析" class="headerlink" title="TaskTracker 剖析"></a>TaskTracker 剖析</h3><ol>
-<li>概述：TaskTracker 是 JobTracker 和 Task 之间的桥梁，一方面，从 JobTracker 接受并执行各种命令：运行任务、提交任务、杀死任务等；另一方面，将本地节点上各个任务的状态通过心跳周期性汇报给 JobTracker。TaskTracker与JobTracker和Task之间采用RPC协议进行通信。</li>
-<li>功能：</li>
-</ol>
-<ul>
-<li>汇报心跳：Tracker周期性将所有节点上各种信息通过心跳机制汇报给JobTracker。这些信息包括两部分：<br>a. 机器级别信息：节点健康情况、资源使用情况等<br>b. 任务级别信息：任务执行进度、任务运行状态等</li>
-<li>执行命令：JobTracker 会给 TaskTracker 下达各种命令，主要包括：启动任务、提交任务、杀死任务、杀死作业和重新初始化。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/11/26/JobTracker-和-TaskTracker-概述/" data-id="cj2199m2p002joapvzx9fxhxj" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/11/26/Hadoop-新-MapReduce-框架-Yarn-详解/" data-id="cj21g9bkm001vm2pvbtdexdb4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -893,6 +889,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/28/Python-字典补充/">Python 字典补充</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/28/Python-元组补充/">Python 元组补充</a>
           </li>
         
@@ -906,10 +906,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/04/26/Python-列表类型功能解析/">Python 列表类型功能解析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/25/Python-字符串类型功能解析/">Python 字符串类型功能解析</a>
           </li>
         
       </ul>

@@ -82,6 +82,54 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Shell-按行遍历文件内容" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/22/Shell-按行遍历文件内容/" class="article-date">
+  <time datetime="2016-06-22T05:58:57.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/22/Shell-按行遍历文件内容/">Shell 按行遍历文件内容</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-使用-for-循环"><a href="#1-使用-for-循环" class="headerlink" title="1. 使用 for 循环"></a>1. 使用 for 循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">for i in `cat $1`;</span><br><span class="line">do</span><br><span class="line">        echo &quot;$i&quot;;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="2-使用-while-方法1"><a href="#2-使用-while-方法1" class="headerlink" title="2. 使用 while 方法1"></a>2. 使用 while 方法1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cat $1 | while read line</span><br><span class="line">do</span><br><span class="line">	echo $line</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用-while-方法2"><a href="#3-使用-while-方法2" class="headerlink" title="3. 使用 while 方法2"></a>3. 使用 while 方法2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while read line</span><br><span class="line">do</span><br><span class="line">	echo $line</span><br><span class="line">done &lt; $1</span><br></pre></td></tr></table></figure>
+<h3 id="4-awk"><a href="#4-awk" class="headerlink" title="4. awk"></a>4. awk</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">awk &apos;&#123;print $0&#125;&apos; $1</span><br></pre></td></tr></table></figure>
+<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>for 逐行读和 while 逐行读是有区别的，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat file</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333 444 555</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat file | while read line; do echo $line; done</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333 444 555</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for line in `cat $1`; do echo $line; done</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333</span><br><span class="line">444</span><br><span class="line">555</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="cj21g9bq3008im2pvfow7p47g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Shell-语法简介" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/22/Shell-语法简介/" class="article-date">
@@ -160,7 +208,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cj2199m7j008joapvgae9w6t0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/22/Shell-语法简介/" data-id="cj21g9bq5008km2pve5i04uqt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +260,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cj2199m54005eoapvjds7ln5t" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/21/Nagios-使用问题解决/" data-id="cj21g9bno005em2pvq5ez2cjq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,7 +306,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cj2199m56005hoapvqm9rg11v" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-安装好无法启动问题汇总/" data-id="cj21g9bnq005hm2pv73xqs572" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +370,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cj2199m510059oapv5ch1jray" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/20/Nagios-Installing-Nagios-Core-From-Source/" data-id="cj21g9bnk0057m2pvlvgz5fxc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -367,7 +415,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cj2199m9a00b7oapvw2bl0sfc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/17/什么是-Web-框架/" data-id="cj21g9brt00b1m2pvuw8al0r3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -412,7 +460,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cj2199m4u0050oapvi0s9zg1e" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/16/MikroTik-基于-IPv6-的-6to4-通道/" data-id="cj21g9bne0050m2pvfqxo368w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -509,7 +557,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cj2199m4p004uoapvhv09ezua" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-删除阻塞进程-sp-who/" data-id="cj21g9bna004um2pvm0mf5k0k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -554,7 +602,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cj2199m4s004yoapvwaugjbre" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/Microsoft-SQL-Server-进程的阻塞与死锁检查/" data-id="cj21g9bnc004ym2pvoxgli1kz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -606,52 +654,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cj2199m9f00beoapve0sfrecw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Zabbix-配置本地邮件服务器实现邮件报警" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" class="article-date">
-  <time datetime="2016-06-14T07:34:33.000Z" itemprop="datePublished">2016-06-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/">Zabbix 配置本地邮件服务器实现邮件报警</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前面我们介绍了 <a href="http://ttlop.com/2016/05/19/Zabbix-配置第三方邮件服务器实现邮件预警/">Zabbix 配置第三方邮件服务器使用邮件报警</a> 的过程，发现连通性不甚理想，本章我们将一步步介绍如何配置本地的邮件服务器来发送报警邮件。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/14/Zabbix-配置本地邮件服务器实现邮件报警/" data-id="cj2199m8x00amoapvd26zfap2" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/15/客户端请求-WEB-流程/" data-id="cj21g9bs200bgm2pvsrxr0ky7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -703,6 +706,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/28/Python-字典补充/">Python 字典补充</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/28/Python-元组补充/">Python 元组补充</a>
           </li>
         
@@ -716,10 +723,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/04/26/Python-列表类型功能解析/">Python 列表类型功能解析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/25/Python-字符串类型功能解析/">Python 字符串类型功能解析</a>
           </li>
         
       </ul>

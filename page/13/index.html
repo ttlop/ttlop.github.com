@@ -82,6 +82,53 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Find-atime-ctime-mtime-用法与区别总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" class="article-date">
+  <time datetime="2016-06-30T03:28:49.000Z" itemprop="datePublished">2016-06-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/">Find atime ctime mtime 用法与区别总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="atime、ctime和mtime"><a href="#atime、ctime和mtime" class="headerlink" title="atime、ctime和mtime"></a>atime、ctime和mtime</h2><p>atime 是指 access time，即文件被读取或者执行的时间，修改文件是不会改变 access time 的。</p>
+<p>ctime 即 change time 文件状态改变时间，指文件的节点被修改的时间。</p>
+<p>mtime 即 modify time，指文件内容被修改的时间。</p>
+<h2 id="find-mtime-中的参数-n"><a href="#find-mtime-中的参数-n" class="headerlink" title="find  -mtime 中的参数 n"></a>find  -mtime 中的参数 n</h2><p>find . -mtime n 中的n指的是 24<em>n，+n、-n、n分别表示大于、小于等于24</em>n。</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># 最后一次修改发生在 n+1 天以前，距离当前时间为 (n+1)*24 小时</span><br><span class="line">[root@host-001 ezagooDomainResolv]# find . -mtime +1  -name &quot;2016*&quot;</span><br><span class="line">./20160627-203001</span><br><span class="line">./20160627-210001</span><br><span class="line">./20160627-213001</span><br><span class="line">./20160627-170001</span><br><span class="line">./20160627-173001</span><br><span class="line">./20160627-180001</span><br><span class="line">./20160627-183001</span><br><span class="line">./20160627-190001</span><br><span class="line">./20160627-193001</span><br><span class="line">./20160627-200001</span><br><span class="line">./20160627-220001</span><br><span class="line">./20160627-223001</span><br><span class="line">./20160627-230001</span><br><span class="line">./20160627-233001</span><br><span class="line">./20160628-000001</span><br><span class="line">./20160628-003001</span><br><span class="line">./20160628-010001</span><br><span class="line">./20160628-013001</span><br><span class="line">./20160628-020001</span><br><span class="line">./20160628-023001</span><br><span class="line">./20160628-030001</span><br><span class="line">./20160628-033001</span><br><span class="line">./20160628-040001</span><br><span class="line">./20160628-043001</span><br><span class="line">./20160628-050001</span><br><span class="line">./20160628-053001</span><br><span class="line">./20160628-060001</span><br><span class="line">./20160628-063001</span><br><span class="line">./20160628-070001</span><br><span class="line">./20160628-073001</span><br><span class="line">./20160628-080002</span><br><span class="line">./20160628-083001</span><br><span class="line">./20160628-090001</span><br><span class="line">./20160628-093001</span><br><span class="line">./20160628-100001</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"># 最后一次修改发生在 n 天以内，距离当前时间为 n*24 小时以内</span><br><span class="line">[root@host-001 ezagooDomainResolv]# find . -mtime -1  -name &quot;2016*&quot;</span><br><span class="line">./20160630-080001</span><br><span class="line">./20160630-093001</span><br><span class="line">./20160630-110001</span><br><span class="line">./20160630-120001</span><br><span class="line">./20160630-130001</span><br><span class="line">./20160629-140001</span><br><span class="line">./20160629-150001</span><br><span class="line">./20160629-160001</span><br><span class="line">./20160629-170001</span><br><span class="line">./20160629-180001</span><br><span class="line">./20160629-190001</span><br><span class="line">./20160629-200001</span><br><span class="line">./20160629-210001</span><br><span class="line">./20160629-220001</span><br><span class="line">./20160629-230001</span><br><span class="line">./20160630-000002</span><br><span class="line">./20160630-010001</span><br><span class="line">./20160630-020001</span><br><span class="line">./20160630-030001</span><br><span class="line">./20160630-040001</span><br><span class="line">./20160630-050001</span><br><span class="line">./20160630-060001</span><br><span class="line">./20160630-070001</span><br><span class="line">./20160630-083001</span><br><span class="line">./20160630-100001</span><br><span class="line">./20160630-103001</span><br><span class="line">./20160630-113001</span><br><span class="line">./20160630-123001</span><br><span class="line">./20160630-133001</span><br><span class="line">./20160629-143001</span><br><span class="line">./20160629-153001</span><br><span class="line">./20160629-163001</span><br><span class="line">./20160629-173001</span><br><span class="line">./20160629-183001</span><br><span class="line">./20160629-193001</span><br><span class="line">./20160629-203001</span><br><span class="line">./20160629-213001</span><br><span class="line">./20160629-223001</span><br><span class="line">./20160629-233001</span><br><span class="line">./20160630-003001</span><br><span class="line">./20160630-013001</span><br><span class="line">./20160630-023001</span><br><span class="line">./20160630-033001</span><br><span class="line">./20160630-043001</span><br><span class="line">./20160630-053001</span><br><span class="line">./20160630-063001</span><br><span class="line">./20160630-073001</span><br><span class="line">./20160630-090001</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/30/Find-atime-ctime-mtime-用法与区别总结/" data-id="cj21g9bjk001cm2pvt7lfnrst" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Nagios-服务监控与报警时间间隔" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/25/Nagios-服务监控与报警时间间隔/" class="article-date">
@@ -122,7 +169,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="cj2199m58005moapv67g3q5ki" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/25/Nagios-服务监控与报警时间间隔/" data-id="cj21g9bnr005jm2pve4k22j4x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -175,7 +222,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="cj2199m52005coapv3k4cgv87" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Nagios-主机监控与报警时间间隔/" data-id="cj21g9bnn005cm2pvjzcxthw4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -230,7 +277,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="cj2199m76008boapvzd5e27qy" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中小括号的用法/" data-id="cj21g9bpt008dm2pv4nohsubg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -286,7 +333,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="cj2199m720086oapvft61dd7k" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/24/Shell-中中括号的用法/" data-id="cj21g9bpq008am2pvyotvp8x5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -343,7 +390,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="cj2199m78008eoapv5iljy5yu" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Shell-中花括号的用法/" data-id="cj21g9bq1008fm2pv3h1wromq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +435,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="cj2199m4m004qoapvylhg3f3y" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux之cut命令的用法/" data-id="cj21g9bn7004qm2pvbclsiigj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -433,7 +480,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="cj2199m100017oapvthexfvfr" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Crontab-定时执行任务-命令格式与详细例子/" data-id="cj21g9bjf0019m2pvt2ig2wc3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -491,7 +538,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="cj2199m3x003zoapvio04txwl" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Linux-获取当前正在执行脚本的绝对路径/" data-id="cj21g9bmk0041m2pv9ripdtpy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -539,55 +586,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="cj2199m1h001joapvwzfprujj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Shell-按行遍历文件内容" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/22/Shell-按行遍历文件内容/" class="article-date">
-  <time datetime="2016-06-22T05:58:57.000Z" itemprop="datePublished">2016-06-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/22/Shell-按行遍历文件内容/">Shell 按行遍历文件内容</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-使用-for-循环"><a href="#1-使用-for-循环" class="headerlink" title="1. 使用 for 循环"></a>1. 使用 for 循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">for i in `cat $1`;</span><br><span class="line">do</span><br><span class="line">        echo &quot;$i&quot;;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="2-使用-while-方法1"><a href="#2-使用-while-方法1" class="headerlink" title="2. 使用 while 方法1"></a>2. 使用 while 方法1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cat $1 | while read line</span><br><span class="line">do</span><br><span class="line">	echo $line</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="3-使用-while-方法2"><a href="#3-使用-while-方法2" class="headerlink" title="3. 使用 while 方法2"></a>3. 使用 while 方法2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while read line</span><br><span class="line">do</span><br><span class="line">	echo $line</span><br><span class="line">done &lt; $1</span><br></pre></td></tr></table></figure>
-<h3 id="4-awk"><a href="#4-awk" class="headerlink" title="4. awk"></a>4. awk</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">awk &apos;&#123;print $0&#125;&apos; $1</span><br></pre></td></tr></table></figure>
-<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>for 逐行读和 while 逐行读是有区别的，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat file</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333 444 555</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat file | while read line; do echo $line; done</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333 444 555</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for line in `cat $1`; do echo $line; done</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">333</span><br><span class="line">444</span><br><span class="line">555</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/22/Shell-按行遍历文件内容/" data-id="cj2199m7h008goapv4tqv1zvi" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/23/Find-查找最近修改的文件/" data-id="cj21g9bjo001em2pvdokytg70" class="article-share-link">Share</a>
       
       
     </footer>
@@ -639,6 +638,10 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
+            <a href="/2017/04/28/Python-字典补充/">Python 字典补充</a>
+          </li>
+        
+          <li>
             <a href="/2017/04/28/Python-元组补充/">Python 元组补充</a>
           </li>
         
@@ -652,10 +655,6 @@ var _hmt = _hmt || [];
         
           <li>
             <a href="/2017/04/26/Python-列表类型功能解析/">Python 列表类型功能解析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/04/25/Python-字符串类型功能解析/">Python 字符串类型功能解析</a>
           </li>
         
       </ul>
