@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <meta property="og:url" content="http://ttlop.com/2017/04/28/Python-字典补充/index.html">
 <meta property="og:site_name" content="运维生存时间">
 <meta property="og:description" content="python 方法">
-<meta property="og:updated_time" content="2017-04-28T06:20:53.987Z">
+<meta property="og:updated_time" content="2017-04-28T06:37:36.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 字典补充">
 <meta name="twitter:description" content="python 方法">
@@ -111,11 +111,15 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">li = [11, 22, 33]</span><br><span class="line"># 由于列表是不存在键的，因此在使用dict创建字典传入列表是需要使用enumerate方法</span><br><span class="line">new_dict = dict(enumerate(li))</span><br><span class="line">print(new_dict)</span><br></pre></td></tr></table></figure>
 <p><strong>执行</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ttlop\AppData\Local\Programs\Python\Python36\python.exe C:/Users/ttlop/PycharmProjects/q1_day2/c12.py</span><br><span class="line">&#123;0: 11, 1: 22, 2: 33&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>代码2</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"># 通过fromkeys创建时，如果设置的值为一个列表，则创建的所有键指向同一个地址空间</span><br><span class="line">n1 = dict.fromkeys([&quot;k1&quot;, &quot;k2&quot;, &quot;k3&quot;], [])</span><br><span class="line">print(n1)</span><br><span class="line">n1[&apos;k1&apos;].append(&quot;xxx&quot;)</span><br><span class="line">print(n1)</span><br><span class="line"></span><br><span class="line">n2 = &#123;&quot;k1&quot;:[], &quot;k2&quot;:[], &quot;k3&quot;:[]&#125;</span><br><span class="line">print(n2)</span><br><span class="line">n2[&apos;k1&apos;].append(&quot;xxx&quot;)</span><br><span class="line">print(n2)</span><br></pre></td></tr></table></figure>
+<p><strong>执行</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ttlop\AppData\Local\Programs\Python\Python36\python.exe C:/Users/ttlop/PycharmProjects/q1_day2/c13.py</span><br><span class="line">&#123;&apos;k1&apos;: [], &apos;k2&apos;: [], &apos;k3&apos;: []&#125;</span><br><span class="line">&#123;&apos;k1&apos;: [&apos;xxx&apos;], &apos;k2&apos;: [&apos;xxx&apos;], &apos;k3&apos;: [&apos;xxx&apos;]&#125;</span><br><span class="line">&#123;&apos;k1&apos;: [], &apos;k2&apos;: [], &apos;k3&apos;: []&#125;</span><br><span class="line">&#123;&apos;k1&apos;: [&apos;xxx&apos;], &apos;k2&apos;: [], &apos;k3&apos;: []&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/28/Python-字典补充/" data-id="cj21g9bp9007mm2pvw8tokdlt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/28/Python-字典补充/" data-id="cj21gutfz007msnpvfn5jmae3" class="article-share-link">Share</a>
       
       
     </footer>

@@ -112,11 +112,15 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"></span><br><span class="line">li = [11, 22, 33]</span><br><span class="line"># 由于列表是不存在键的，因此在使用dict创建字典传入列表是需要使用enumerate方法</span><br><span class="line">new_dict = dict(enumerate(li))</span><br><span class="line">print(new_dict)</span><br></pre></td></tr></table></figure>
 <p><strong>执行</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ttlop\AppData\Local\Programs\Python\Python36\python.exe C:/Users/ttlop/PycharmProjects/q1_day2/c12.py</span><br><span class="line">&#123;0: 11, 1: 22, 2: 33&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>代码2</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># -*- coding: UTF-8 -*-</span><br><span class="line"># 通过fromkeys创建时，如果设置的值为一个列表，则创建的所有键指向同一个地址空间</span><br><span class="line">n1 = dict.fromkeys([&quot;k1&quot;, &quot;k2&quot;, &quot;k3&quot;], [])</span><br><span class="line">print(n1)</span><br><span class="line">n1[&apos;k1&apos;].append(&quot;xxx&quot;)</span><br><span class="line">print(n1)</span><br><span class="line"></span><br><span class="line">n2 = &#123;&quot;k1&quot;:[], &quot;k2&quot;:[], &quot;k3&quot;:[]&#125;</span><br><span class="line">print(n2)</span><br><span class="line">n2[&apos;k1&apos;].append(&quot;xxx&quot;)</span><br><span class="line">print(n2)</span><br></pre></td></tr></table></figure>
+<p><strong>执行</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\ttlop\AppData\Local\Programs\Python\Python36\python.exe C:/Users/ttlop/PycharmProjects/q1_day2/c13.py</span><br><span class="line">&#123;&apos;k1&apos;: [], &apos;k2&apos;: [], &apos;k3&apos;: []&#125;</span><br><span class="line">&#123;&apos;k1&apos;: [&apos;xxx&apos;], &apos;k2&apos;: [&apos;xxx&apos;], &apos;k3&apos;: [&apos;xxx&apos;]&#125;</span><br><span class="line">&#123;&apos;k1&apos;: [], &apos;k2&apos;: [], &apos;k3&apos;: []&#125;</span><br><span class="line">&#123;&apos;k1&apos;: [&apos;xxx&apos;], &apos;k2&apos;: [], &apos;k3&apos;: []&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/28/Python-字典补充/" data-id="cj21g9bp9007mm2pvw8tokdlt" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/28/Python-字典补充/" data-id="cj21gutfz007msnpvfn5jmae3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -160,7 +164,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/28/Python-元组补充/" data-id="cj21g9bp4007cm2pvclgomfvb" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/28/Python-元组补充/" data-id="cj21gutfu007csnpv1wad5bq4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -204,7 +208,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/28/Python-列表补充/" data-id="cj21g9bp6007hm2pv3963barc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/28/Python-列表补充/" data-id="cj21gutfw007hsnpvvfv6q8ng" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +255,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/27/Python-编码补充/" data-id="cj21g9bpe007tm2pvouwew0xc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/27/Python-编码补充/" data-id="cj21gutg4007tsnpvjxz7gr6r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -292,7 +296,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/26/Python-列表类型功能解析/" data-id="cj21g9bp5007em2pvjrv7ffih" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/26/Python-列表类型功能解析/" data-id="cj21gutfv007esnpvyotkn2j3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -333,7 +337,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/25/Python-字符串类型功能解析/" data-id="cj21g9bpb007om2pv95gyiwdw" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/25/Python-字符串类型功能解析/" data-id="cj21gutg1007osnpvng7uw1u5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -381,7 +385,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/22/Python-编码转换/" data-id="cj21g9bpf007vm2pv7qembr8n" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/22/Python-编码转换/" data-id="cj21gutg5007vsnpvqho8iw4x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -434,7 +438,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/21/Python-变量、基本数据类型/" data-id="cj21g9bp8007jm2pvw41v7t5l" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/21/Python-变量、基本数据类型/" data-id="cj21gutfy007jsnpvq5588w02" class="article-share-link">Share</a>
       
       
     </footer>
@@ -476,7 +480,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/20/Python模块初识及用户输入打印/" data-id="cj21g9bpg007xm2pv9jkbms31" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/20/Python模块初识及用户输入打印/" data-id="cj21gutg6007xsnpv2szgr43w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -519,7 +523,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2017/04/20/Python-编码/" data-id="cj21g9bpc007rm2pv9ng7lw0m" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2017/04/20/Python-编码/" data-id="cj21gutg2007rsnpvx61jj41v" class="article-share-link">Share</a>
       
       
     </footer>
