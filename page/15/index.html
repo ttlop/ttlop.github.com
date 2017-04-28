@@ -69,9 +69,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ttlop.com"></form>
@@ -81,6 +81,59 @@ var _hmt = _hmt || [];
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Zabbix-监控-windows-进程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/07/Zabbix-监控-windows-进程/" class="article-date">
+  <time datetime="2016-06-07T05:31:49.000Z" itemprop="datePublished">2016-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Zabbix/">Zabbix</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/07/Zabbix-监控-windows-进程/">Zabbix 监控 windows 进程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 监控进程的数量</span><br><span class="line">proc.num[&lt;name&gt;,&lt;user&gt;,&lt;state&gt;,&lt;cmdline&gt;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>name 进程名字</p>
+</li>
+<li><p>user 运行进程的用户名</p>
+</li>
+<li><p>state 进程的状态 all(default)、run、sleep、zomb</p>
+</li>
+<li><p>cmdline 进程名中包含的字符</p>
+</li>
+</ul>
+<p><strong>On Windows, only name and user are supported.</strong></p>
+<h3 id="Item-Keys"><a href="#Item-Keys" class="headerlink" title="Item Keys"></a>Item Keys</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proc.num[ChuanAPI.Winfrm.exe]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ttlop.com/2016/06/07/Zabbix-监控-windows-进程/" data-id="cj216sbif00agxrpvsfj9gfgc" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Zabbix-windows-性能计数器使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -119,7 +172,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cj21595zt00dthupvph2f9j1x" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/06/Zabbix-windows-性能计数器使用/" data-id="cj216sbka00dwxrpv3kljz0et" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -164,7 +217,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cj21595vt009ehupvjdkzrpa8" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Zabbix-Monitor-Redis/" data-id="cj216sbhn009dxrpvzmpj2w83" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -209,7 +262,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cj21595u0007vhupv5dp1m21g" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/03/Redis/" data-id="cj216sbgj007xxrpvmf0h1k7b" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -254,7 +307,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cj21595vm0096hupvsmcyf7m0" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/02/Zabbix-Monitor-Nginx/" data-id="cj216sbhm009axrpvdanjxlsq" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -299,7 +352,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cj21595rm005thupv9mnplkwv" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-nginx-status/" data-id="cj216sbf1005txrpvszqxrrbr" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -390,7 +443,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="cj21595rh005ohupv1vnnf8ah" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/06/01/Nginx-Location-Configuration/" data-id="cj216sbez005rxrpvr9v6rv2s" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -461,7 +514,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cj21595vg008zhupvqohqh4zk" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/31/Zabbix-CPU-类型-Key/" data-id="cj216sbhh0090xrpvsziwi0in" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -508,7 +561,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cj21595rj005rhupvbsqsy32i" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-FastCGI-运行原理/" data-id="cj216sbex005oxrpvbuh248ra" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -554,54 +607,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cj21595ro005whupvcc7r2gn7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" class="article-date">
-  <time datetime="2016-05-25T03:07:56.000Z" itemprop="datePublished">2016-05-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/">Microsoft SQL Server SET NOCOUNT ON 的含义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>每次我们在使用查询分析器调试SQL语句的时候，通常会看到一些信息，提醒我们当前有多少个行受到了影响，这是些什么信息？在我们调用的时候这些信息有用吗？是否可以关闭呢？ </p>
-<p>答案是这些信息在我们的客户端的应用程序中是没有用的，这些信息是存储过程中的每个语句的DONE_IN_PROC 信息。 </p>
-<p>我们可以利用SET NOCOUNT 来控制这些信息，以达到提高程序性能的目的。</p>
-        
-          <p class="article-more-link">
-            <a href="/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ttlop.com/2016/05/25/Microsoft-SQL-Server-SET-NOCOUNT-ON-的含义/" data-id="cj21595qe004qhupvx2tcwsjc" class="article-share-link">Share</a>
+      <a data-url="http://ttlop.com/2016/05/28/Nginx-的进程模型/" data-id="cj216sbf2005wxrpvs6jejcll" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -623,7 +629,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Apache/">Apache</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Bat/">Bat</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Centos-7/">Centos 7</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/HUAWEI/">HUAWEI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hyper-V/">Hyper-V</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Iptables/">Iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-SQL-Server/">Microsoft SQL Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MikroTik/">MikroTik</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/">Mysql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nagios/">Nagios</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/">PHP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Postfix/">Postfix</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Zabbix/">Zabbix</a></li></ul>
     </div>
@@ -648,9 +654,13 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/04/28/Python-列表补充/">Python 列表补充</a>
+          </li>
         
           <li>
             <a href="/2017/04/27/Python-编码补充/">Python 编码补充</a>
@@ -668,10 +678,6 @@ var _hmt = _hmt || [];
             <a href="/2017/04/22/Python-编码转换/">Python 编码转换</a>
           </li>
         
-          <li>
-            <a href="/2017/04/21/Python-变量、基本数据类型/">Python 变量、基本数据类型</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -685,7 +691,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 XiaoYong Hu<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
